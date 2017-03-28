@@ -34,6 +34,11 @@ public class ListOverlay<OV extends JsonOverlay<?>> extends JsonOverlay<Collecti
         reset();
     }
 
+    @Override
+    public boolean isMissing() {
+        return super.isMissing() || !getJson().isArray();
+    }
+
     private void reset() {
         super.set(store.getOverlays());
     }

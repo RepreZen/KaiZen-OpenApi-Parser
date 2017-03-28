@@ -20,6 +20,11 @@ public class BooleanOverlay extends JsonOverlay<Boolean> {
     }
 
     @Override
+    public boolean isMissing() {
+        return super.isMissing() || !getJson().isBoolean();
+    }
+
+    @Override
     public Boolean fromJson() {
         JsonNode json = getJson();
         return json.isBoolean() ? json.booleanValue() : null;

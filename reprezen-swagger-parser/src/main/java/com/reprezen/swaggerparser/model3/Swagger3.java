@@ -1,12 +1,25 @@
 package com.reprezen.swaggerparser.model3;
 
+import com.reprezen.swaggerparser.Swagger;
+import com.reprezen.swaggerparser.model3.Callback;
+import com.reprezen.swaggerparser.model3.ExternalDocs;
+import com.reprezen.swaggerparser.model3.Header;
+import com.reprezen.swaggerparser.model3.Info;
+import com.reprezen.swaggerparser.model3.Link;
+import com.reprezen.swaggerparser.model3.Parameter;
+import com.reprezen.swaggerparser.model3.Path;
+import com.reprezen.swaggerparser.model3.RequestBody;
+import com.reprezen.swaggerparser.model3.Response;
+import com.reprezen.swaggerparser.model3.Schema;
+import com.reprezen.swaggerparser.model3.SecurityRequirement;
+import com.reprezen.swaggerparser.model3.SecurityScheme;
+import com.reprezen.swaggerparser.model3.Server;
+import com.reprezen.swaggerparser.model3.SwaggerObject;
+import com.reprezen.swaggerparser.model3.Tag;
+import com.reprezen.swaggerparser.val.ValidationResults;
 import java.util.Collection;
 import java.util.Map;
-
 import javax.annotation.Generated;
-
-import com.reprezen.swaggerparser.Swagger;
-import com.reprezen.swaggerparser.val.ValidationResults;
 
 public interface Swagger3 extends SwaggerObject, Swagger {
 

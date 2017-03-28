@@ -20,6 +20,11 @@ public class StringOverlay extends JsonOverlay<String> {
     }
 
     @Override
+    public boolean isMissing() {
+        return super.isMissing() || !getJson().isTextual();
+    }
+
+    @Override
     public String fromJson() {
         JsonNode json = getJson();
         return json.isTextual() ? json.textValue() : null;

@@ -28,6 +28,11 @@ public class ObjectOverlay<OO extends ObjectOverlay<OO>> extends JsonOverlay<OO>
     }
 
     @Override
+    public boolean isMissing() {
+        return super.isMissing() || !getJson().isObject();
+    }
+
+    @Override
     public JsonNode toJson() {
         return getJson(); // TODO fix this
     }

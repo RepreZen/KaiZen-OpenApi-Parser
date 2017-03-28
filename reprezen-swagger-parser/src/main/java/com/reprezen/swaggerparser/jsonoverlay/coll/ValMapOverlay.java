@@ -45,6 +45,11 @@ public class ValMapOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Map
         super.set(getFromStore());
     }
 
+    @Override
+    public boolean isMissing() {
+        return super.isMissing() || !getJson().isObject();
+    }
+
     private Map<String, V> getFromStore() {
         values.clear();
         for (Entry<String, OV> entry : store.getOverlayMap().entrySet()) {

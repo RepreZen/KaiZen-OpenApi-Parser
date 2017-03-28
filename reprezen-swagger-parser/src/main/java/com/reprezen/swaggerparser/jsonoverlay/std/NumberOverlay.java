@@ -24,6 +24,11 @@ public class NumberOverlay extends JsonOverlay<Number> {
     }
 
     @Override
+    public boolean isMissing() {
+        return super.isMissing() || !getJson().isNumber();
+    }
+
+    @Override
     public Number fromJson() {
         JsonNode json = getJson();
         if (json.isBigDecimal()) {

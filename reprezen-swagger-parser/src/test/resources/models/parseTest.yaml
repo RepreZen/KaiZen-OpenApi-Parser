@@ -1,0 +1,340 @@
+openapi: 3.0.0
+info:
+  title: Ha ha!
+  description: description
+  termsOfService: termsOfService
+  contact:
+    name: name
+    url: url
+    email: email
+    x-foo: foo
+  license:
+    name: name
+    url: url
+    x-foo: foo
+  version: version
+  x-foo: foo
+servers: &id001
+- url: url
+  description: description
+  variables:
+    var1:
+      enum:
+      - string
+      - number
+      default: string
+      description: description
+      x-foo: foo
+    var2:
+      enum:
+      - string
+      - number
+      default: string
+      description: description
+      x-foo: foo
+    x-foo: foo
+  x-foo: foo
+- url: url2
+  description: description2
+  x-foo: foo
+paths:
+  /foo:
+    summary: summary
+    description: description
+    get:
+      tags:
+      - foo
+      - bar
+      summary: summary
+      description: description
+      externalDocs:
+        description: description
+        url: url
+        x-foo: foo
+      operationId: operationId
+      parameters: &id002
+      - name: name
+        in: in
+        description: description
+        required: true
+        deprecated: false
+        allowEmptyValue: true
+        style: style
+        explode: true
+        allowReserved: true
+        examples:
+        - example
+        - 10
+        - 5.5
+        example: example
+        content:
+          application/json:
+            schema:
+              title: title
+            examples:
+            - x
+            - y
+            - z
+            example: 10
+            encoding:
+              fooEncoding:
+                contentType: contentType
+                Headers:
+                  foo: foo
+                  bar: bar
+                style: style
+                explode: true
+                x-foo: foo
+            x-foo: foo
+        x-foo: foo
+      requestBody:
+      - description: description
+        required: ture
+        content:
+          application/json:
+            schema:
+              title: title
+          text/plain:
+            schema:
+              title: title
+        required: true
+      - description: description
+        required: ture
+        content:
+          application/json:
+            schema:
+              title: title
+          text/plain:
+            schema:
+              title: title
+        required: true
+      responses:
+        default:
+          description: description
+          headers:
+            xxx:
+              description: description
+            yyy:
+              description: description
+          content:
+            application/json:
+              schema:
+                title: title
+          links:
+            name:
+              href: href
+              operationId: operationId
+              parameters: 
+                param1: xxxx
+                param2: yyyy
+              headers:
+                foo: foo
+                bar: bar
+              description: description
+              x-foo: foo
+        200:
+          description: description
+      callbacks:
+        xxx:
+          expr1: 
+            summary: summary
+            description: description
+            get:
+              summary: summary
+              operationId: operationId
+          expr2:
+            summary: summary
+            description: description
+            get:
+              operationId: operationid
+        yyy:
+          expr1: 
+            summary: summary
+            description: description
+            get:
+              summary: summary
+              operationId: operationId
+          expr2:
+            summary: summary
+            description: description
+            get:
+              operationId: operationid
+      deprecated: false
+      security:
+        sec1: [a, b, c]
+        sec2: []
+      servers: *id001
+      x-foo: foo
+    x-foo: foo
+    parameters: *id002
+  x-foo: foo
+components:
+  schemas:
+    schema1:
+      title: title
+      multipleOf: 3.5
+      maximum: 15000000000000000000000000000000000000.0
+      exclusiveMaximum: true
+      minimum: -3333333333333333333333333333333333333333333333333333
+      exclusiveMinimum: false
+      maxLength: 100
+      minLength: 20
+      pattern: "\\d\\d\\d-xyzzy"
+      maxItems: 30
+      minItems: 43
+      uniqueItems: true
+      maxProperties: 30
+      minProperties: 15
+      required: 
+        - x
+        - "y"
+        - z
+      enum: [ a, b, c]
+      type: object
+      allOf:
+        - type: object
+        - type: object
+      oneOf:
+        - type: object
+        - type: object
+      anyOf:
+        - type: object
+        - type: object
+      not:
+        type: object
+      items:
+        type: object
+      properties:
+        a:
+          type: string
+        b:
+          type: string
+        c:
+          type: string
+      description: description
+      format: format
+      default: xyzzy
+      nullable: true
+      discriminator: foo
+      readOnly: true
+      writeOnly: false
+      xml:
+        name: name
+        namespace: namespace
+        prefix: prefix
+        attribute: true
+        wrapped: false
+      externalDocs:
+        description: description
+        url: url
+      example: xxx
+      examples:
+        - 1.0
+        - true
+        - null
+        - xyzzy
+      deprecated: true
+      x-foo: foo
+    schema2:
+      title: title
+  responses: 
+    resp1:
+      description: description
+    resp2:
+      description: description
+  parameters: 
+    param1:
+      name: name
+      in: in
+    param2:
+      name: name
+      in: in
+  examples:
+    example1: null
+    example2: xyzzy
+  requestBodies: 
+    reqBody1:
+      description: description
+    reqBody2:
+      description: description
+  headers:
+    header1:
+      description: description
+    header2:
+      description: description
+  securitySchemes: 
+    scheme1:
+      type: apiKey
+      description: description
+      name: name
+      in: query
+      scheme: http
+      bearerFormat: bearerFormat
+      openIdConnectUrl: openIdConnect
+      x-foo: foo
+    scheme2:
+      type: oauth2
+      description: description
+      name: name
+      in: query
+      scheme: http
+      bearerFormat: bearerFormat
+      flow: 
+        implicit:
+          authorizationUrl: authorizationUrl
+          tokenUrl: tokenUrl
+          refreshUrl: refreshUrl
+          scopes:
+            xxx: xxx
+            yyy: yyy
+            x-foo: []
+          x-foo: foo
+        password:
+          authorizationUrl: authorizationUrl
+          tokenUrl: tokenUrl
+          refreshUrl: refreshUrl
+          scopes:
+            xxx: xxx
+            yyy: yyy
+            x-foo: []
+          x-foo: foo
+        clientCredentials:
+          authorizationUrl: authorizationUrl
+          tokenUrl: tokenUrl
+          refreshUrl: refreshUrl
+          scopes:
+            xxx: xxx
+            yyy: yyy
+            x-foo: []
+          x-foo: foo
+        authorizationCode:
+          authorizationUrl: authorizationUrl
+          tokenUrl: tokenUrl
+          refreshUrl: refreshUrl
+          scopes:
+            xxx: xxx
+            yyy: yyy
+            x-foo: []
+          x-foo: foo
+        x-foo: foo
+      openIdConnectUrl: openIdConnect
+      x-foo: foo
+  links: 
+    link1: 
+      href: href
+    link2:
+      href: href
+  callbacks:
+    cb1:
+      expr1: 
+        summary: summary
+      expr2:
+        summary: summary
+  x-foo: foo
+security: []
+tags: []
+externalDocs:
+  description: description
+  url: url
+  x-foo: foo
+x-foo: foo

@@ -45,11 +45,11 @@ import com.reprezen.swaggerparser.test.JsonTreeWalker.WalkMethod;
  */
 
 @RunWith(Parameterized.class)
-public class ParseTester extends Assert {
+public class BigParseTest extends Assert {
 
     @Parameters
     public static Collection<Object[]> resources() {
-        return Arrays.asList(new Object[][] { new URL[] { ParseTester.class.getResource("/models/parseTest.yaml") } });
+        return Arrays.asList(new Object[][] { new URL[] { BigParseTest.class.getResource("/models/parseTest.yaml") } });
     }
 
     @Parameter

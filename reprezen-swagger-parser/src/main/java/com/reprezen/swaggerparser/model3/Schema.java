@@ -252,6 +252,13 @@ public interface Schema extends SwaggerObject {
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     void removeProperty(String name);
 
+    // AdditionalPropertiesSchema
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    Schema getAdditionalPropertiesSchema();
+
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    void setAdditionalPropertiesSchema(Schema additionalPropertiesSchema);
+
     // AdditionalProperties
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     Boolean getAdditionalProperties();

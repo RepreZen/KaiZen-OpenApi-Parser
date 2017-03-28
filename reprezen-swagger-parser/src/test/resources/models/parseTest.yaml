@@ -211,6 +211,7 @@ components:
           type: string
         c:
           type: string
+      additionalProperties: true
       description: description
       format: format
       default: xyzzy
@@ -237,6 +238,8 @@ components:
       x-foo: foo
     schema2:
       title: title
+      additionalProperties:
+        type: integer
   responses: 
     resp1:
       description: description

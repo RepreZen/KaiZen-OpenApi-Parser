@@ -596,11 +596,13 @@ types:
         plural: Properties
         type: Schema
         structure: map
-      additionalProperties:
+      additionalPropertiesSchema:
         name: AdditionalPropertiesSchema
+        parentPath: additionalProperties
         type: Schema
-      additionalProperties:
+      additionalPropertiesBoolean:
         name: AdditionalProperties
+        parentPath: additionalProperties
         type: Boolean
       description:
         name: Description

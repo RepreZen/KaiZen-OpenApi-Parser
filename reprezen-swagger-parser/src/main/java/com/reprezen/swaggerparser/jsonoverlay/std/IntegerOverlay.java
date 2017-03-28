@@ -20,6 +20,11 @@ public class IntegerOverlay extends JsonOverlay<Integer> {
     }
 
     @Override
+    public boolean isMissing() {
+        return super.isMissing() || !getJson().isIntegralNumber();
+    }
+
+    @Override
     public Integer fromJson() {
         JsonNode json = getJson();
         return json.isInt() ? json.intValue() : null;

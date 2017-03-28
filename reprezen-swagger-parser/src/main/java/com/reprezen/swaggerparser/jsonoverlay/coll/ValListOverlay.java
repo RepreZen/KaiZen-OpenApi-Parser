@@ -41,6 +41,11 @@ public class ValListOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Co
         reset();
     }
 
+    @Override
+    public boolean isMissing() {
+        return super.isMissing() || !getJson().isArray();
+    }
+
     private void reset() {
         values.clear();
         for (OV overlay : store.getOverlays()) {

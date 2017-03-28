@@ -1,11 +1,10 @@
 package com.reprezen.swaggerparser.impl3;
 
-import java.util.Collection;
-import java.util.Map;
-
-import javax.annotation.Generated;
-
 import com.fasterxml.jackson.databind.JsonNode;
+import com.reprezen.swaggerparser.impl3.OperationImpl;
+import com.reprezen.swaggerparser.impl3.ParameterImpl;
+import com.reprezen.swaggerparser.impl3.ServerImpl;
+import com.reprezen.swaggerparser.impl3.SwaggerObjectImpl;
 import com.reprezen.swaggerparser.jsonoverlay.JsonOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.JsonOverlayFactory;
 import com.reprezen.swaggerparser.jsonoverlay.coll.ListOverlay;
@@ -17,6 +16,9 @@ import com.reprezen.swaggerparser.model3.Operation;
 import com.reprezen.swaggerparser.model3.Parameter;
 import com.reprezen.swaggerparser.model3.Path;
 import com.reprezen.swaggerparser.model3.Server;
+import java.util.Collection;
+import java.util.Map;
+import javax.annotation.Generated;
 
 public class PathImpl extends SwaggerObjectImpl implements Path {
 
@@ -114,25 +116,19 @@ public class PathImpl extends SwaggerObjectImpl implements Path {
     private StringOverlay summary = registerField("summary", "summary", null, new StringOverlay("summary", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay description = registerField("description", "description", null,
-            new StringOverlay("description", this));
+    private StringOverlay description = registerField("description", "description", null, new StringOverlay("description", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<OperationImpl> operations = registerField("", "operations",
-            "get|put|post|delete|options|head|patch|trace", new MapOverlay<OperationImpl>("", this,
-                    OperationImpl.factory, "get|put|post|delete|options|head|patch|trace"));
+    private MapOverlay<OperationImpl> operations = registerField("", "operations", "get|put|post|delete|options|head|patch|trace", new MapOverlay<OperationImpl>("", this, OperationImpl.factory, "get|put|post|delete|options|head|patch|trace"));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private ListOverlay<ServerImpl> servers = registerField("servers", "servers", null,
-            new ListOverlay<ServerImpl>("servers", this, ServerImpl.factory));
+    private ListOverlay<ServerImpl> servers = registerField("servers", "servers", null, new ListOverlay<ServerImpl>("servers", this, ServerImpl.factory));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private ListOverlay<ParameterImpl> parameters = registerField("parameters", "parameters", null,
-            new ListOverlay<ParameterImpl>("parameters", this, ParameterImpl.factory));
+    private ListOverlay<ParameterImpl> parameters = registerField("parameters", "parameters", null, new ListOverlay<ParameterImpl>("parameters", this, ParameterImpl.factory));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object, AnyObjectOverlay> extensions = registerField("", "extensions", "x-.*",
-            new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.*"));
+    private ValMapOverlay<Object,AnyObjectOverlay> extensions = registerField("", "extensions", "x-.*", new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.*"));
 
     // Summary
     @Override
@@ -183,8 +179,8 @@ public class PathImpl extends SwaggerObjectImpl implements Path {
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     public void setOperations(Map<String, ? extends Operation> operations) {
         @SuppressWarnings("unchecked")
-        Map<String, OperationImpl> implOperations = (Map<String, OperationImpl>) operations;
-        this.operations.set(implOperations);
+            Map<String,OperationImpl> implOperations = (Map<String, OperationImpl>) operations;
+            this.operations.set(implOperations);
     }
 
     @Override
@@ -216,8 +212,8 @@ public class PathImpl extends SwaggerObjectImpl implements Path {
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     public void setServers(Collection<? extends Server> servers) {
         @SuppressWarnings("unchecked")
-        Collection<ServerImpl> implServers = (Collection<ServerImpl>) servers;
-        this.servers.set(implServers);
+            Collection<ServerImpl> implServers = (Collection<ServerImpl>) servers;
+            this.servers.set(implServers);
     }
 
     @Override
@@ -255,8 +251,8 @@ public class PathImpl extends SwaggerObjectImpl implements Path {
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     public void setParameters(Collection<? extends Parameter> parameters) {
         @SuppressWarnings("unchecked")
-        Collection<ParameterImpl> implParameters = (Collection<ParameterImpl>) parameters;
-        this.parameters.set(implParameters);
+            Collection<ParameterImpl> implParameters = (Collection<ParameterImpl>) parameters;
+            this.parameters.set(implParameters);
     }
 
     @Override
@@ -316,10 +312,10 @@ public class PathImpl extends SwaggerObjectImpl implements Path {
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     public static JsonOverlayFactory<PathImpl> factory = new JsonOverlayFactory<PathImpl>() {
-        @Override
-        public PathImpl create(String key, JsonNode json, JsonOverlay<?> parent) {
-            return isEmptyRecursive(parent, PathImpl.class) ? null : new PathImpl(key, json, parent);
-        }
-    };
+    @Override
+    public PathImpl create(String key, JsonNode json, JsonOverlay<?> parent) {
+        return isEmptyRecursive(parent, PathImpl.class) ? null : new PathImpl(key, json, parent);
+    }
+};
 
 }

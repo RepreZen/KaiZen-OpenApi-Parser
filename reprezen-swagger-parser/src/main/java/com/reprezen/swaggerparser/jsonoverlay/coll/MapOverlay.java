@@ -41,6 +41,11 @@ public class MapOverlay<OV extends JsonOverlay<?>> extends JsonOverlay<Map<Strin
         reset();
     }
 
+    @Override
+    public boolean isMissing() {
+        return super.isMissing() || !getJson().isObject();
+    }
+
     private void reset() {
         super.set(store.getOverlayMap());
     }

@@ -1,124 +1,129 @@
-package com.reprezen.swaggerparser.impl3;
+package com.reprezen.swaggerparser.ovl3;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.reprezen.swaggerparser.impl3.SwaggerObjectImpl;
 import com.reprezen.swaggerparser.jsonoverlay.JsonOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.JsonOverlayFactory;
 import com.reprezen.swaggerparser.jsonoverlay.coll.ValMapOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.std.AnyObjectOverlay;
-import com.reprezen.swaggerparser.jsonoverlay.std.BooleanOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.std.StringOverlay;
-import com.reprezen.swaggerparser.model3.EncodingProperty;
+import com.reprezen.swaggerparser.model3.Contact;
+import com.reprezen.swaggerparser.model3.Info;
+import com.reprezen.swaggerparser.model3.License;
+import com.reprezen.swaggerparser.ovl3.ContactImpl;
+import com.reprezen.swaggerparser.ovl3.LicenseImpl;
+import com.reprezen.swaggerparser.ovl3.SwaggerObjectImpl;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public class EncodingPropertyImpl extends SwaggerObjectImpl implements EncodingProperty {
+public class InfoImpl extends SwaggerObjectImpl implements Info {
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public EncodingPropertyImpl(String key, JsonNode json, JsonOverlay<?> parent) {
+    public InfoImpl(String key, JsonNode json, JsonOverlay<?> parent) {
         super(key, json, parent);
     }
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public EncodingPropertyImpl(String key, JsonOverlay<?> parent) {
+    public InfoImpl(String key, JsonOverlay<?> parent) {
         super(key, parent);
     }
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay contentType = registerField("contentType", "contentType", null, new StringOverlay("contentType", this));
+    private StringOverlay title = registerField("title", "title", null, new StringOverlay("title", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<String,StringOverlay> headers = registerField("Headers", "headers", null, new ValMapOverlay<String, StringOverlay>("Headers", this, StringOverlay.factory, null));
+    private StringOverlay description = registerField("description", "description", null, new StringOverlay("description", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay style = registerField("style", "style", null, new StringOverlay("style", this));
+    private StringOverlay termsOfService = registerField("termsOfService", "termsOfService", null, new StringOverlay("termsOfService", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private BooleanOverlay explode = registerField("explode", "explode", null, new BooleanOverlay("explode", this));
+    private ContactImpl contact = registerField("contact", "contact", null, ContactImpl.factory.create("contact", this));
+
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    private LicenseImpl license = registerField("license", "license", null, LicenseImpl.factory.create("license", this));
+
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    private StringOverlay verion = registerField("version", "verion", null, new StringOverlay("version", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     private ValMapOverlay<Object,AnyObjectOverlay> extensions = registerField("", "extensions", "x-.*", new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.*"));
 
-    // ContentType
+    // Title
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public String getContentType() {
-        return contentType.get();
+    public String getTitle() {
+        return title.get();
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setContentType(String contentType) {
-        this.contentType.set(contentType);
+    public void setTitle(String title) {
+        this.title.set(title);
     }
 
-    // Header
+    // Description
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public Map<String, String> getHeaders() {
-        return headers.get();
-    }
-
-    @Override
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public boolean hasHeader(String name) {
-        return headers.containsKey(name);
+    public String getDescription() {
+        return description.get();
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public String getHeader(String name) {
-        return headers.get(name);
+    public void setDescription(String description) {
+        this.description.set(description);
+    }
+
+    // TermsOfService
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public String getTermsOfService() {
+        return termsOfService.get();
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setHeaders(Map<String, String> headers) {
-        this.headers.set(headers);
+    public void setTermsOfService(String termsOfService) {
+        this.termsOfService.set(termsOfService);
+    }
+
+    // Contact
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public Contact getContact() {
+        return contact;
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setHeader(String name, String header) {
-        headers.set(name, header);
+    public void setContact(Contact contact) {
+        this.contact.set((ContactImpl) contact);
+    }
+
+    // License
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public License getLicense() {
+        return license;
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void removeHeader(String name) {
-        headers.remove(name);
+    public void setLicense(License license) {
+        this.license.set((LicenseImpl) license);
     }
 
-    // Style
+    // Verion
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public String getStyle() {
-        return style.get();
-    }
-
-    @Override
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setStyle(String style) {
-        this.style.set(style);
-    }
-
-    // Explode
-    @Override
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public Boolean getExplode() {
-        return explode.get();
+    public String getVerion() {
+        return verion.get();
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public boolean isExplode() {
-        return explode.get() != null ? explode.get() : false;
-    }
-
-    @Override
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setExplode(Boolean explode) {
-        this.explode.set(explode);
+    public void setVerion(String verion) {
+        this.verion.set(verion);
     }
 
     // Extension
@@ -159,10 +164,10 @@ public class EncodingPropertyImpl extends SwaggerObjectImpl implements EncodingP
     }
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public static JsonOverlayFactory<EncodingPropertyImpl> factory = new JsonOverlayFactory<EncodingPropertyImpl>() {
+    public static JsonOverlayFactory<InfoImpl> factory = new JsonOverlayFactory<InfoImpl>() {
     @Override
-    public EncodingPropertyImpl create(String key, JsonNode json, JsonOverlay<?> parent) {
-        return isEmptyRecursive(parent, EncodingPropertyImpl.class) ? null : new EncodingPropertyImpl(key, json, parent);
+    public InfoImpl create(String key, JsonNode json, JsonOverlay<?> parent) {
+        return isEmptyRecursive(parent, InfoImpl.class) ? null : new InfoImpl(key, json, parent);
     }
 };
 

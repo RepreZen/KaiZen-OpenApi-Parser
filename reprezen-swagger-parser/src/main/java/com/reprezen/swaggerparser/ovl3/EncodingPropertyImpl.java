@@ -1,122 +1,124 @@
-package com.reprezen.swaggerparser.impl3;
+package com.reprezen.swaggerparser.ovl3;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.reprezen.swaggerparser.impl3.SwaggerObjectImpl;
 import com.reprezen.swaggerparser.jsonoverlay.JsonOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.JsonOverlayFactory;
 import com.reprezen.swaggerparser.jsonoverlay.coll.ValMapOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.std.AnyObjectOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.std.BooleanOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.std.StringOverlay;
-import com.reprezen.swaggerparser.model3.Xml;
+import com.reprezen.swaggerparser.model3.EncodingProperty;
+import com.reprezen.swaggerparser.ovl3.SwaggerObjectImpl;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public class XmlImpl extends SwaggerObjectImpl implements Xml {
+public class EncodingPropertyImpl extends SwaggerObjectImpl implements EncodingProperty {
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public XmlImpl(String key, JsonNode json, JsonOverlay<?> parent) {
+    public EncodingPropertyImpl(String key, JsonNode json, JsonOverlay<?> parent) {
         super(key, json, parent);
     }
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public XmlImpl(String key, JsonOverlay<?> parent) {
+    public EncodingPropertyImpl(String key, JsonOverlay<?> parent) {
         super(key, parent);
     }
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay name = registerField("name", "name", null, new StringOverlay("name", this));
+    private StringOverlay contentType = registerField("contentType", "contentType", null, new StringOverlay("contentType", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay namespace = registerField("namespace", "namespace", null, new StringOverlay("namespace", this));
+    private ValMapOverlay<String,StringOverlay> headers = registerField("Headers", "headers", null, new ValMapOverlay<String, StringOverlay>("Headers", this, StringOverlay.factory, null));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay prefix = registerField("prefix", "prefix", null, new StringOverlay("prefix", this));
+    private StringOverlay style = registerField("style", "style", null, new StringOverlay("style", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private BooleanOverlay attribute = registerField("attribute", "attribute", null, new BooleanOverlay("attribute", this));
-
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private BooleanOverlay wrapped = registerField("wrapped", "wrapped", null, new BooleanOverlay("wrapped", this));
+    private BooleanOverlay explode = registerField("explode", "explode", null, new BooleanOverlay("explode", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     private ValMapOverlay<Object,AnyObjectOverlay> extensions = registerField("", "extensions", "x-.*", new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.*"));
 
-    // Name
+    // ContentType
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public String getName() {
-        return name.get();
+    public String getContentType() {
+        return contentType.get();
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setName(String name) {
-        this.name.set(name);
+    public void setContentType(String contentType) {
+        this.contentType.set(contentType);
     }
 
-    // Namespace
+    // Header
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public String getNamespace() {
-        return namespace.get();
-    }
-
-    @Override
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setNamespace(String namespace) {
-        this.namespace.set(namespace);
-    }
-
-    // Prefix
-    @Override
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public String getPrefix() {
-        return prefix.get();
+    public Map<String, String> getHeaders() {
+        return headers.get();
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setPrefix(String prefix) {
-        this.prefix.set(prefix);
-    }
-
-    // Attribute
-    @Override
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public Boolean getAttribute() {
-        return attribute.get();
+    public boolean hasHeader(String name) {
+        return headers.containsKey(name);
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public boolean isAttribute() {
-        return attribute.get() != null ? attribute.get() : false;
+    public String getHeader(String name) {
+        return headers.get(name);
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setAttribute(Boolean attribute) {
-        this.attribute.set(attribute);
-    }
-
-    // Wrapped
-    @Override
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public Boolean getWrapped() {
-        return wrapped.get();
+    public void setHeaders(Map<String, String> headers) {
+        this.headers.set(headers);
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public boolean isWrapped() {
-        return wrapped.get() != null ? wrapped.get() : false;
+    public void setHeader(String name, String header) {
+        headers.set(name, header);
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setWrapped(Boolean wrapped) {
-        this.wrapped.set(wrapped);
+    public void removeHeader(String name) {
+        headers.remove(name);
+    }
+
+    // Style
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public String getStyle() {
+        return style.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public void setStyle(String style) {
+        this.style.set(style);
+    }
+
+    // Explode
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public Boolean getExplode() {
+        return explode.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public boolean isExplode() {
+        return explode.get() != null ? explode.get() : false;
+    }
+
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public void setExplode(Boolean explode) {
+        this.explode.set(explode);
     }
 
     // Extension
@@ -157,10 +159,10 @@ public class XmlImpl extends SwaggerObjectImpl implements Xml {
     }
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public static JsonOverlayFactory<XmlImpl> factory = new JsonOverlayFactory<XmlImpl>() {
+    public static JsonOverlayFactory<EncodingPropertyImpl> factory = new JsonOverlayFactory<EncodingPropertyImpl>() {
     @Override
-    public XmlImpl create(String key, JsonNode json, JsonOverlay<?> parent) {
-        return isEmptyRecursive(parent, XmlImpl.class) ? null : new XmlImpl(key, json, parent);
+    public EncodingPropertyImpl create(String key, JsonNode json, JsonOverlay<?> parent) {
+        return isEmptyRecursive(parent, EncodingPropertyImpl.class) ? null : new EncodingPropertyImpl(key, json, parent);
     }
 };
 

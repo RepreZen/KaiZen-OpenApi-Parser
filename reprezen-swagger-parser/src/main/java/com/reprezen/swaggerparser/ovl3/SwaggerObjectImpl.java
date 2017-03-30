@@ -1,4 +1,4 @@
-package com.reprezen.swaggerparser.impl3;
+package com.reprezen.swaggerparser.ovl3;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.reprezen.swaggerparser.jsonoverlay.JsonOverlay;

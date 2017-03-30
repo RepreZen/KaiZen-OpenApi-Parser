@@ -1,9 +1,6 @@
-package com.reprezen.swaggerparser.impl3;
+package com.reprezen.swaggerparser.ovl3;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.reprezen.swaggerparser.impl3.MediaTypeImpl;
-import com.reprezen.swaggerparser.impl3.SchemaImpl;
-import com.reprezen.swaggerparser.impl3.SwaggerObjectImpl;
 import com.reprezen.swaggerparser.jsonoverlay.JsonOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.JsonOverlayFactory;
 import com.reprezen.swaggerparser.jsonoverlay.coll.MapOverlay;
@@ -15,6 +12,9 @@ import com.reprezen.swaggerparser.jsonoverlay.std.StringOverlay;
 import com.reprezen.swaggerparser.model3.MediaType;
 import com.reprezen.swaggerparser.model3.Parameter;
 import com.reprezen.swaggerparser.model3.Schema;
+import com.reprezen.swaggerparser.ovl3.MediaTypeImpl;
+import com.reprezen.swaggerparser.ovl3.SchemaImpl;
+import com.reprezen.swaggerparser.ovl3.SwaggerObjectImpl;
 import java.util.Collection;
 import java.util.Map;
 import javax.annotation.Generated;

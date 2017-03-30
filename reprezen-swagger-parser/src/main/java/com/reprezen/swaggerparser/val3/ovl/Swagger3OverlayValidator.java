@@ -1,9 +1,9 @@
-package com.reprezen.swaggerparser.val3.overlay;
+package com.reprezen.swaggerparser.val3.ovl;
 
 import static com.reprezen.swaggerparser.val.Messages.m;
 
-import com.reprezen.swaggerparser.impl3.Swagger3Impl;
 import com.reprezen.swaggerparser.model3.Swagger3;
+import com.reprezen.swaggerparser.ovl3.Swagger3Impl;
 import com.reprezen.swaggerparser.val.ImplValidator;
 import com.reprezen.swaggerparser.val.ObjectValidator;
 import com.reprezen.swaggerparser.val.ValidationResults;

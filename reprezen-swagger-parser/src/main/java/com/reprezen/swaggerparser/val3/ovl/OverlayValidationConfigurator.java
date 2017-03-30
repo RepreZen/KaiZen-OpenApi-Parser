@@ -1,4 +1,4 @@
-package com.reprezen.swaggerparser.val3.overlay;
+package com.reprezen.swaggerparser.val3.ovl;
 
 import com.google.inject.TypeLiteral;
 import com.reprezen.swaggerparser.model3.Contact;

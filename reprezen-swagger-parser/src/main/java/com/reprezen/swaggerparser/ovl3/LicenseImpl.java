@@ -1,73 +1,61 @@
-package com.reprezen.swaggerparser.impl3;
+package com.reprezen.swaggerparser.ovl3;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.reprezen.swaggerparser.impl3.PathImpl;
-import com.reprezen.swaggerparser.impl3.SwaggerObjectImpl;
 import com.reprezen.swaggerparser.jsonoverlay.JsonOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.JsonOverlayFactory;
-import com.reprezen.swaggerparser.jsonoverlay.coll.MapOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.coll.ValMapOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.std.AnyObjectOverlay;
-import com.reprezen.swaggerparser.model3.Callback;
-import com.reprezen.swaggerparser.model3.Path;
+import com.reprezen.swaggerparser.jsonoverlay.std.StringOverlay;
+import com.reprezen.swaggerparser.model3.License;
+import com.reprezen.swaggerparser.ovl3.SwaggerObjectImpl;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public class CallbackImpl extends SwaggerObjectImpl implements Callback {
+public class LicenseImpl extends SwaggerObjectImpl implements License {
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public CallbackImpl(String key, JsonNode json, JsonOverlay<?> parent) {
+    public LicenseImpl(String key, JsonNode json, JsonOverlay<?> parent) {
         super(key, json, parent);
     }
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public CallbackImpl(String key, JsonOverlay<?> parent) {
+    public LicenseImpl(String key, JsonOverlay<?> parent) {
         super(key, parent);
     }
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<PathImpl> callbackPaths = registerField("", "callbackPaths", "(?!x-).*", new MapOverlay<PathImpl>("", this, PathImpl.factory, "(?!x-).*"));
+    private StringOverlay name = registerField("name", "name", null, new StringOverlay("name", this));
+
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    private StringOverlay url = registerField("url", "url", null, new StringOverlay("url", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     private ValMapOverlay<Object,AnyObjectOverlay> extensions = registerField("", "extensions", "x-.*", new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.*"));
 
-    // CallbackPath
+    // Name
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public Map<String, ? extends Path> getCallbackPaths() {
-        return callbackPaths.get();
+    public String getName() {
+        return name.get();
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public boolean hasCallbackPath(String expression) {
-        return callbackPaths.containsKey(expression);
+    public void setName(String name) {
+        this.name.set(name);
+    }
+
+    // Url
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public String getUrl() {
+        return url.get();
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public Path getCallbackPath(String expression) {
-        return callbackPaths.get(expression);
-    }
-
-    @Override
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setCallbackPaths(Map<String, ? extends Path> callbackPaths) {
-        @SuppressWarnings("unchecked")
-            Map<String,PathImpl> implCallbackPaths = (Map<String, PathImpl>) callbackPaths;
-            this.callbackPaths.set(implCallbackPaths);
-    }
-
-    @Override
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setCallbackPath(String expression, Path callbackPath) {
-        callbackPaths.set(expression, (PathImpl) callbackPath);
-    }
-
-    @Override
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void removeCallbackPath(String expression) {
-        callbackPaths.remove(expression);
+    public void setUrl(String url) {
+        this.url.set(url);
     }
 
     // Extension
@@ -108,10 +96,10 @@ public class CallbackImpl extends SwaggerObjectImpl implements Callback {
     }
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public static JsonOverlayFactory<CallbackImpl> factory = new JsonOverlayFactory<CallbackImpl>() {
+    public static JsonOverlayFactory<LicenseImpl> factory = new JsonOverlayFactory<LicenseImpl>() {
     @Override
-    public CallbackImpl create(String key, JsonNode json, JsonOverlay<?> parent) {
-        return isEmptyRecursive(parent, CallbackImpl.class) ? null : new CallbackImpl(key, json, parent);
+    public LicenseImpl create(String key, JsonNode json, JsonOverlay<?> parent) {
+        return isEmptyRecursive(parent, LicenseImpl.class) ? null : new LicenseImpl(key, json, parent);
     }
 };
 

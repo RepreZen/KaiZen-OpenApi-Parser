@@ -7,10 +7,10 @@ import java.net.URI;
 import java.net.URL;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.reprezen.swaggerparser.impl3.Swagger3Impl;
 import com.reprezen.swaggerparser.jsonoverlay.JsonLoader;
 import com.reprezen.swaggerparser.jsonoverlay.ResolutionBase;
 import com.reprezen.swaggerparser.jsonoverlay.Resolver;
+import com.reprezen.swaggerparser.ovl3.Swagger3Impl;
 
 public class SwaggerParser {
 

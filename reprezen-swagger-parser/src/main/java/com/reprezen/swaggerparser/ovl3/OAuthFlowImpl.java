@@ -1,157 +1,157 @@
-package com.reprezen.swaggerparser.impl3;
+package com.reprezen.swaggerparser.ovl3;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.reprezen.swaggerparser.impl3.SwaggerObjectImpl;
 import com.reprezen.swaggerparser.jsonoverlay.JsonOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.JsonOverlayFactory;
 import com.reprezen.swaggerparser.jsonoverlay.coll.ValMapOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.std.AnyObjectOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.std.StringOverlay;
-import com.reprezen.swaggerparser.model3.Link;
+import com.reprezen.swaggerparser.model3.OAuthFlow;
+import com.reprezen.swaggerparser.ovl3.SwaggerObjectImpl;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public class LinkImpl extends SwaggerObjectImpl implements Link {
+public class OAuthFlowImpl extends SwaggerObjectImpl implements OAuthFlow {
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public LinkImpl(String key, JsonNode json, JsonOverlay<?> parent) {
+    public OAuthFlowImpl(String key, JsonNode json, JsonOverlay<?> parent) {
         super(key, json, parent);
     }
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public LinkImpl(String key, JsonOverlay<?> parent) {
+    public OAuthFlowImpl(String key, JsonOverlay<?> parent) {
         super(key, parent);
     }
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay href = registerField("href", "href", null, new StringOverlay("href", this));
+    private StringOverlay authorizationUrl = registerField("authorizationUrl", "authorizationUrl", null, new StringOverlay("authorizationUrl", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay operationId = registerField("operationId", "operationId", null, new StringOverlay("operationId", this));
+    private StringOverlay tokenUrl = registerField("tokenUrl", "tokenUrl", null, new StringOverlay("tokenUrl", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<String,StringOverlay> parameters = registerField("parameters", "parameters", null, new ValMapOverlay<String, StringOverlay>("parameters", this, StringOverlay.factory, null));
+    private StringOverlay refreshUrl = registerField("refreshUrl", "refreshUrl", null, new StringOverlay("refreshUrl", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<String,StringOverlay> headers = registerField("headers", "headers", null, new ValMapOverlay<String, StringOverlay>("headers", this, StringOverlay.factory, null));
+    private ValMapOverlay<String,StringOverlay> scopes = registerField("scopes", "scopes", "(?!x-).*", new ValMapOverlay<String, StringOverlay>("scopes", this, StringOverlay.factory, "(?!x-).*"));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay description = registerField("description", "description", null, new StringOverlay("description", this));
+    private ValMapOverlay<Object,AnyObjectOverlay> scopesExtensions = registerField("scopes", "scopesExtensions", "x-.*", new ValMapOverlay<Object, AnyObjectOverlay>("scopes", this, AnyObjectOverlay.factory, "x-.*"));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     private ValMapOverlay<Object,AnyObjectOverlay> extensions = registerField("", "extensions", "x-.*", new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.*"));
 
-    // Href
+    // AuthorizationUrl
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public String getHref() {
-        return href.get();
+    public String getAuthorizationUrl() {
+        return authorizationUrl.get();
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setHref(String href) {
-        this.href.set(href);
+    public void setAuthorizationUrl(String authorizationUrl) {
+        this.authorizationUrl.set(authorizationUrl);
     }
 
-    // OperationId
+    // TokenUrl
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public String getOperationId() {
-        return operationId.get();
-    }
-
-    @Override
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setOperationId(String operationId) {
-        this.operationId.set(operationId);
-    }
-
-    // Parameter
-    @Override
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public Map<String, String> getParameters() {
-        return parameters.get();
+    public String getTokenUrl() {
+        return tokenUrl.get();
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public boolean hasParameter(String name) {
-        return parameters.containsKey(name);
+    public void setTokenUrl(String tokenUrl) {
+        this.tokenUrl.set(tokenUrl);
+    }
+
+    // RefreshUrl
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public String getRefreshUrl() {
+        return refreshUrl.get();
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public String getParameter(String name) {
-        return parameters.get(name);
+    public void setRefreshUrl(String refreshUrl) {
+        this.refreshUrl.set(refreshUrl);
+    }
+
+    // Scope
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, String> getScopes() {
+        return scopes.get();
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setParameters(Map<String, String> parameters) {
-        this.parameters.set(parameters);
+    public boolean hasScope(String name) {
+        return scopes.containsKey(name);
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setParameter(String name, String parameter) {
-        parameters.set(name, parameter);
+    public String getScope(String name) {
+        return scopes.get(name);
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void removeParameter(String name) {
-        parameters.remove(name);
-    }
-
-    // Header
-    @Override
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public Map<String, String> getHeaders() {
-        return headers.get();
+    public void setScopes(Map<String, String> scopes) {
+        this.scopes.set(scopes);
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public boolean hasHeader(String name) {
-        return headers.containsKey(name);
+    public void setScope(String name, String scope) {
+        scopes.set(name, scope);
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public String getHeader(String name) {
-        return headers.get(name);
+    public void removeScope(String name) {
+        scopes.remove(name);
+    }
+
+    // ScopesExtension
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Object> getScopesExtensions() {
+        return scopesExtensions.get();
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setHeaders(Map<String, String> headers) {
-        this.headers.set(headers);
+    public boolean hasScopesExtension(String name) {
+        return scopesExtensions.containsKey(name);
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setHeader(String name, String header) {
-        headers.set(name, header);
+    public Object getScopesExtension(String name) {
+        return scopesExtensions.get(name);
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void removeHeader(String name) {
-        headers.remove(name);
-    }
-
-    // Description
-    @Override
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public String getDescription() {
-        return description.get();
+    public void setScopesExtensions(Map<String, Object> scopesExtensions) {
+        this.scopesExtensions.set(scopesExtensions);
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setDescription(String description) {
-        this.description.set(description);
+    public void setScopesExtension(String name, Object scopesExtension) {
+        scopesExtensions.set(name, scopesExtension);
+    }
+
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public void removeScopesExtension(String name) {
+        scopesExtensions.remove(name);
     }
 
     // Extension
@@ -192,10 +192,10 @@ public class LinkImpl extends SwaggerObjectImpl implements Link {
     }
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public static JsonOverlayFactory<LinkImpl> factory = new JsonOverlayFactory<LinkImpl>() {
+    public static JsonOverlayFactory<OAuthFlowImpl> factory = new JsonOverlayFactory<OAuthFlowImpl>() {
     @Override
-    public LinkImpl create(String key, JsonNode json, JsonOverlay<?> parent) {
-        return isEmptyRecursive(parent, LinkImpl.class) ? null : new LinkImpl(key, json, parent);
+    public OAuthFlowImpl create(String key, JsonNode json, JsonOverlay<?> parent) {
+        return isEmptyRecursive(parent, OAuthFlowImpl.class) ? null : new OAuthFlowImpl(key, json, parent);
     }
 };
 

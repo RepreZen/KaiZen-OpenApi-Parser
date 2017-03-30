@@ -1,157 +1,146 @@
-package com.reprezen.swaggerparser.impl3;
+package com.reprezen.swaggerparser.ovl3;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.reprezen.swaggerparser.impl3.SwaggerObjectImpl;
 import com.reprezen.swaggerparser.jsonoverlay.JsonOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.JsonOverlayFactory;
+import com.reprezen.swaggerparser.jsonoverlay.coll.MapOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.coll.ValMapOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.std.AnyObjectOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.std.StringOverlay;
-import com.reprezen.swaggerparser.model3.OAuthFlow;
+import com.reprezen.swaggerparser.model3.Server;
+import com.reprezen.swaggerparser.model3.ServerVariable;
+import com.reprezen.swaggerparser.ovl3.ServerVariableImpl;
+import com.reprezen.swaggerparser.ovl3.SwaggerObjectImpl;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public class OAuthFlowImpl extends SwaggerObjectImpl implements OAuthFlow {
+public class ServerImpl extends SwaggerObjectImpl implements Server {
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public OAuthFlowImpl(String key, JsonNode json, JsonOverlay<?> parent) {
+    public ServerImpl(String key, JsonNode json, JsonOverlay<?> parent) {
         super(key, json, parent);
     }
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public OAuthFlowImpl(String key, JsonOverlay<?> parent) {
+    public ServerImpl(String key, JsonOverlay<?> parent) {
         super(key, parent);
     }
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay authorizationUrl = registerField("authorizationUrl", "authorizationUrl", null, new StringOverlay("authorizationUrl", this));
+    private StringOverlay url = registerField("url", "url", null, new StringOverlay("url", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay tokenUrl = registerField("tokenUrl", "tokenUrl", null, new StringOverlay("tokenUrl", this));
+    private StringOverlay description = registerField("description", "description", null, new StringOverlay("description", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay refreshUrl = registerField("refreshUrl", "refreshUrl", null, new StringOverlay("refreshUrl", this));
+    private MapOverlay<ServerVariableImpl> serverVariables = registerField("variables", "serverVariables", "(?!x-)[a-zA-Z0-9\\._-]+", new MapOverlay<ServerVariableImpl>("variables", this, ServerVariableImpl.factory, "(?!x-)[a-zA-Z0-9\\._-]+"));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<String,StringOverlay> scopes = registerField("scopes", "scopes", "(?!x-).*", new ValMapOverlay<String, StringOverlay>("scopes", this, StringOverlay.factory, "(?!x-).*"));
-
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object,AnyObjectOverlay> scopesExtensions = registerField("scopes", "scopesExtensions", "x-.*", new ValMapOverlay<Object, AnyObjectOverlay>("scopes", this, AnyObjectOverlay.factory, "x-.*"));
+    private ValMapOverlay<Object,AnyObjectOverlay> variablesExtensions = registerField("variables", "variablesExtensions", "x-.*", new ValMapOverlay<Object, AnyObjectOverlay>("variables", this, AnyObjectOverlay.factory, "x-.*"));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     private ValMapOverlay<Object,AnyObjectOverlay> extensions = registerField("", "extensions", "x-.*", new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.*"));
 
-    // AuthorizationUrl
+    // Url
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public String getAuthorizationUrl() {
-        return authorizationUrl.get();
+    public String getUrl() {
+        return url.get();
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setAuthorizationUrl(String authorizationUrl) {
-        this.authorizationUrl.set(authorizationUrl);
+    public void setUrl(String url) {
+        this.url.set(url);
     }
 
-    // TokenUrl
+    // Description
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public String getTokenUrl() {
-        return tokenUrl.get();
-    }
-
-    @Override
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setTokenUrl(String tokenUrl) {
-        this.tokenUrl.set(tokenUrl);
-    }
-
-    // RefreshUrl
-    @Override
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public String getRefreshUrl() {
-        return refreshUrl.get();
+    public String getDescription() {
+        return description.get();
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setRefreshUrl(String refreshUrl) {
-        this.refreshUrl.set(refreshUrl);
+    public void setDescription(String description) {
+        this.description.set(description);
     }
 
-    // Scope
+    // ServerVariable
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public Map<String, String> getScopes() {
-        return scopes.get();
-    }
-
-    @Override
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public boolean hasScope(String name) {
-        return scopes.containsKey(name);
+    public Map<String, ? extends ServerVariable> getServerVariables() {
+        return serverVariables.get();
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public String getScope(String name) {
-        return scopes.get(name);
+    public boolean hasServerVariable(String name) {
+        return serverVariables.containsKey(name);
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setScopes(Map<String, String> scopes) {
-        this.scopes.set(scopes);
+    public ServerVariable getServerVariable(String name) {
+        return serverVariables.get(name);
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setScope(String name, String scope) {
-        scopes.set(name, scope);
+    public void setServerVariables(Map<String, ? extends ServerVariable> serverVariables) {
+        @SuppressWarnings("unchecked")
+            Map<String,ServerVariableImpl> implServerVariables = (Map<String, ServerVariableImpl>) serverVariables;
+            this.serverVariables.set(implServerVariables);
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void removeScope(String name) {
-        scopes.remove(name);
-    }
-
-    // ScopesExtension
-    @Override
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public Map<String, Object> getScopesExtensions() {
-        return scopesExtensions.get();
+    public void setServerVariable(String name, ServerVariable serverVariable) {
+        serverVariables.set(name, (ServerVariableImpl) serverVariable);
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public boolean hasScopesExtension(String name) {
-        return scopesExtensions.containsKey(name);
+    public void removeServerVariable(String name) {
+        serverVariables.remove(name);
+    }
+
+    // VariablesExtension
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Object> getVariablesExtensions() {
+        return variablesExtensions.get();
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public Object getScopesExtension(String name) {
-        return scopesExtensions.get(name);
+    public boolean hasVariablesExtension(String name) {
+        return variablesExtensions.containsKey(name);
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setScopesExtensions(Map<String, Object> scopesExtensions) {
-        this.scopesExtensions.set(scopesExtensions);
+    public Object getVariablesExtension(String name) {
+        return variablesExtensions.get(name);
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setScopesExtension(String name, Object scopesExtension) {
-        scopesExtensions.set(name, scopesExtension);
+    public void setVariablesExtensions(Map<String, Object> variablesExtensions) {
+        this.variablesExtensions.set(variablesExtensions);
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void removeScopesExtension(String name) {
-        scopesExtensions.remove(name);
+    public void setVariablesExtension(String name, Object variablesExtension) {
+        variablesExtensions.set(name, variablesExtension);
+    }
+
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public void removeVariablesExtension(String name) {
+        variablesExtensions.remove(name);
     }
 
     // Extension
@@ -192,10 +181,10 @@ public class OAuthFlowImpl extends SwaggerObjectImpl implements OAuthFlow {
     }
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public static JsonOverlayFactory<OAuthFlowImpl> factory = new JsonOverlayFactory<OAuthFlowImpl>() {
+    public static JsonOverlayFactory<ServerImpl> factory = new JsonOverlayFactory<ServerImpl>() {
     @Override
-    public OAuthFlowImpl create(String key, JsonNode json, JsonOverlay<?> parent) {
-        return isEmptyRecursive(parent, OAuthFlowImpl.class) ? null : new OAuthFlowImpl(key, json, parent);
+    public ServerImpl create(String key, JsonNode json, JsonOverlay<?> parent) {
+        return isEmptyRecursive(parent, ServerImpl.class) ? null : new ServerImpl(key, json, parent);
     }
 };
 

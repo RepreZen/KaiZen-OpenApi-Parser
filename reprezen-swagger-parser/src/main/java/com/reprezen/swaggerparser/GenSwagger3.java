@@ -16,8 +16,8 @@ public class GenSwagger3 {
                 "-p", "com.reprezen.swaggerparser", //
                 "-i", "model3", //
                 "-I", "model3", //
-                "-c", "impl3", //
-                "-C", "impl3" //
+                "-c", "ovl3", //
+                "-C", "ovl3" //
                 // , "-n" // uncomment to run in no-preserve mode
         });
     }

@@ -1,64 +1,90 @@
-package com.reprezen.swaggerparser.impl3;
+package com.reprezen.swaggerparser.ovl3;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.reprezen.swaggerparser.impl3.ContactImpl;
-import com.reprezen.swaggerparser.impl3.LicenseImpl;
-import com.reprezen.swaggerparser.impl3.SwaggerObjectImpl;
 import com.reprezen.swaggerparser.jsonoverlay.JsonOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.JsonOverlayFactory;
+import com.reprezen.swaggerparser.jsonoverlay.coll.ValListOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.coll.ValMapOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.std.AnyObjectOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.std.StringOverlay;
-import com.reprezen.swaggerparser.model3.Contact;
-import com.reprezen.swaggerparser.model3.Info;
-import com.reprezen.swaggerparser.model3.License;
+import com.reprezen.swaggerparser.model3.ServerVariable;
+import com.reprezen.swaggerparser.ovl3.SwaggerObjectImpl;
+import java.util.Collection;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public class InfoImpl extends SwaggerObjectImpl implements Info {
+public class ServerVariableImpl extends SwaggerObjectImpl implements ServerVariable {
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public InfoImpl(String key, JsonNode json, JsonOverlay<?> parent) {
+    public ServerVariableImpl(String key, JsonNode json, JsonOverlay<?> parent) {
         super(key, json, parent);
     }
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public InfoImpl(String key, JsonOverlay<?> parent) {
+    public ServerVariableImpl(String key, JsonOverlay<?> parent) {
         super(key, parent);
     }
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay title = registerField("title", "title", null, new StringOverlay("title", this));
+    private ValListOverlay<String, StringOverlay> enumValues = registerField("enum", "enumValues", null, new ValListOverlay<String, StringOverlay>("enum", this, StringOverlay.factory));;
+
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    private StringOverlay defaultValue = registerField("default", "defaultValue", null, new StringOverlay("default", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     private StringOverlay description = registerField("description", "description", null, new StringOverlay("description", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay termsOfService = registerField("termsOfService", "termsOfService", null, new StringOverlay("termsOfService", this));
-
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private ContactImpl contact = registerField("contact", "contact", null, ContactImpl.factory.create("contact", this));
-
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private LicenseImpl license = registerField("license", "license", null, LicenseImpl.factory.create("license", this));
-
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay verion = registerField("version", "verion", null, new StringOverlay("version", this));
-
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     private ValMapOverlay<Object,AnyObjectOverlay> extensions = registerField("", "extensions", "x-.*", new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.*"));
 
-    // Title
+    // EnumValue
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public String getTitle() {
-        return title.get();
+    public Collection<String> getEnumValues() {
+        return enumValues.get();
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setTitle(String title) {
-        this.title.set(title);
+    public String getEnumValue(int index) {
+        return enumValues.get(index);
+    }
+
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public void setEnumValues(Collection<String> enumValues) {
+        this.enumValues.set((Collection<String>) enumValues);
+    }
+
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public void setEnumValue(int index, String enumValue) {
+        enumValues.set(index, enumValue);
+    }
+
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public void addEnumValue(String enumValue) {
+        enumValues.add(enumValue);
+    }
+
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public void removeEnumValue(int index) {
+        enumValues.remove(index);
+    }
+
+    // Default
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public String getDefault() {
+        return defaultValue.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public void setDefault(String defaultValue) {
+        this.defaultValue.set(defaultValue);
     }
 
     // Description
@@ -72,58 +98,6 @@ public class InfoImpl extends SwaggerObjectImpl implements Info {
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     public void setDescription(String description) {
         this.description.set(description);
-    }
-
-    // TermsOfService
-    @Override
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public String getTermsOfService() {
-        return termsOfService.get();
-    }
-
-    @Override
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setTermsOfService(String termsOfService) {
-        this.termsOfService.set(termsOfService);
-    }
-
-    // Contact
-    @Override
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public Contact getContact() {
-        return contact;
-    }
-
-    @Override
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setContact(Contact contact) {
-        this.contact.set((ContactImpl) contact);
-    }
-
-    // License
-    @Override
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public License getLicense() {
-        return license;
-    }
-
-    @Override
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setLicense(License license) {
-        this.license.set((LicenseImpl) license);
-    }
-
-    // Verion
-    @Override
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public String getVerion() {
-        return verion.get();
-    }
-
-    @Override
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setVerion(String verion) {
-        this.verion.set(verion);
     }
 
     // Extension
@@ -164,10 +138,10 @@ public class InfoImpl extends SwaggerObjectImpl implements Info {
     }
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public static JsonOverlayFactory<InfoImpl> factory = new JsonOverlayFactory<InfoImpl>() {
+    public static JsonOverlayFactory<ServerVariableImpl> factory = new JsonOverlayFactory<ServerVariableImpl>() {
     @Override
-    public InfoImpl create(String key, JsonNode json, JsonOverlay<?> parent) {
-        return isEmptyRecursive(parent, InfoImpl.class) ? null : new InfoImpl(key, json, parent);
+    public ServerVariableImpl create(String key, JsonNode json, JsonOverlay<?> parent) {
+        return isEmptyRecursive(parent, ServerVariableImpl.class) ? null : new ServerVariableImpl(key, json, parent);
     }
 };
 

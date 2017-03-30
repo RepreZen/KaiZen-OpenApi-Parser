@@ -1,4 +1,4 @@
-package com.reprezen.swaggerparser.impl3;
+package com.reprezen.swaggerparser.ovl3;
 
 import java.util.Collection;
 import java.util.Map;

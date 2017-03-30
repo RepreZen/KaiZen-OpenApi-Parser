@@ -1,29 +1,32 @@
-package com.reprezen.swaggerparser.impl3;
+package com.reprezen.swaggerparser.ovl3;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.reprezen.swaggerparser.impl3.MediaTypeImpl;
-import com.reprezen.swaggerparser.impl3.SwaggerObjectImpl;
 import com.reprezen.swaggerparser.jsonoverlay.JsonOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.JsonOverlayFactory;
 import com.reprezen.swaggerparser.jsonoverlay.coll.MapOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.coll.ValMapOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.std.AnyObjectOverlay;
-import com.reprezen.swaggerparser.jsonoverlay.std.BooleanOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.std.StringOverlay;
+import com.reprezen.swaggerparser.model3.Header;
+import com.reprezen.swaggerparser.model3.Link;
 import com.reprezen.swaggerparser.model3.MediaType;
-import com.reprezen.swaggerparser.model3.RequestBody;
+import com.reprezen.swaggerparser.model3.Response;
+import com.reprezen.swaggerparser.ovl3.HeaderImpl;
+import com.reprezen.swaggerparser.ovl3.LinkImpl;
+import com.reprezen.swaggerparser.ovl3.MediaTypeImpl;
+import com.reprezen.swaggerparser.ovl3.SwaggerObjectImpl;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public class RequestBodyImpl extends SwaggerObjectImpl implements RequestBody {
+public class ResponseImpl extends SwaggerObjectImpl implements Response {
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public RequestBodyImpl(String key, JsonNode json, JsonOverlay<?> parent) {
+    public ResponseImpl(String key, JsonNode json, JsonOverlay<?> parent) {
         super(key, json, parent);
     }
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public RequestBodyImpl(String key, JsonOverlay<?> parent) {
+    public ResponseImpl(String key, JsonOverlay<?> parent) {
         super(key, parent);
     }
 
@@ -31,10 +34,13 @@ public class RequestBodyImpl extends SwaggerObjectImpl implements RequestBody {
     private StringOverlay description = registerField("description", "description", null, new StringOverlay("description", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    private MapOverlay<HeaderImpl> headers = registerField("headers", "headers", null, new MapOverlay<HeaderImpl>("headers", this, HeaderImpl.factory, null));
+
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     private MapOverlay<MediaTypeImpl> contentMediaTypes = registerField("content", "contentMediaTypes", null, new MapOverlay<MediaTypeImpl>("content", this, MediaTypeImpl.factory, null));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private BooleanOverlay required = registerField("required", "required", null, new BooleanOverlay("required", this));
+    private MapOverlay<LinkImpl> links = registerField("links", "links", null, new MapOverlay<LinkImpl>("links", this, LinkImpl.factory, null));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     private ValMapOverlay<Object,AnyObjectOverlay> extensions = registerField("", "extensions", "x-.*", new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.*"));
@@ -50,6 +56,45 @@ public class RequestBodyImpl extends SwaggerObjectImpl implements RequestBody {
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     public void setDescription(String description) {
         this.description.set(description);
+    }
+
+    // Header
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, ? extends Header> getHeaders() {
+        return headers.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public boolean hasHeader(String name) {
+        return headers.containsKey(name);
+    }
+
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public Header getHeader(String name) {
+        return headers.get(name);
+    }
+
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public void setHeaders(Map<String, ? extends Header> headers) {
+        @SuppressWarnings("unchecked")
+            Map<String,HeaderImpl> implHeaders = (Map<String, HeaderImpl>) headers;
+            this.headers.set(implHeaders);
+    }
+
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public void setHeader(String name, Header header) {
+        headers.set(name, (HeaderImpl) header);
+    }
+
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public void removeHeader(String name) {
+        headers.remove(name);
     }
 
     // ContentMediaType
@@ -91,23 +136,43 @@ public class RequestBodyImpl extends SwaggerObjectImpl implements RequestBody {
         contentMediaTypes.remove(name);
     }
 
-    // Required
+    // Link
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public Boolean getRequired() {
-        return required.get();
+    public Map<String, ? extends Link> getLinks() {
+        return links.get();
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public boolean isRequired() {
-        return required.get() != null ? required.get() : false;
+    public boolean hasLink(String name) {
+        return links.containsKey(name);
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setRequired(Boolean required) {
-        this.required.set(required);
+    public Link getLink(String name) {
+        return links.get(name);
+    }
+
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public void setLinks(Map<String, ? extends Link> links) {
+        @SuppressWarnings("unchecked")
+            Map<String,LinkImpl> implLinks = (Map<String, LinkImpl>) links;
+            this.links.set(implLinks);
+    }
+
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public void setLink(String name, Link link) {
+        links.set(name, (LinkImpl) link);
+    }
+
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public void removeLink(String name) {
+        links.remove(name);
     }
 
     // Extension
@@ -148,10 +213,10 @@ public class RequestBodyImpl extends SwaggerObjectImpl implements RequestBody {
     }
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public static JsonOverlayFactory<RequestBodyImpl> factory = new JsonOverlayFactory<RequestBodyImpl>() {
+    public static JsonOverlayFactory<ResponseImpl> factory = new JsonOverlayFactory<ResponseImpl>() {
     @Override
-    public RequestBodyImpl create(String key, JsonNode json, JsonOverlay<?> parent) {
-        return isEmptyRecursive(parent, RequestBodyImpl.class) ? null : new RequestBodyImpl(key, json, parent);
+    public ResponseImpl create(String key, JsonNode json, JsonOverlay<?> parent) {
+        return isEmptyRecursive(parent, ResponseImpl.class) ? null : new ResponseImpl(key, json, parent);
     }
 };
 

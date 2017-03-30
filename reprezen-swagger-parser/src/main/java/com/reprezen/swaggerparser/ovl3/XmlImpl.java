@@ -1,27 +1,26 @@
-package com.reprezen.swaggerparser.impl3;
+package com.reprezen.swaggerparser.ovl3;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.reprezen.swaggerparser.impl3.ExternalDocsImpl;
-import com.reprezen.swaggerparser.impl3.SwaggerObjectImpl;
 import com.reprezen.swaggerparser.jsonoverlay.JsonOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.JsonOverlayFactory;
 import com.reprezen.swaggerparser.jsonoverlay.coll.ValMapOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.std.AnyObjectOverlay;
+import com.reprezen.swaggerparser.jsonoverlay.std.BooleanOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.std.StringOverlay;
-import com.reprezen.swaggerparser.model3.ExternalDocs;
-import com.reprezen.swaggerparser.model3.Tag;
+import com.reprezen.swaggerparser.model3.Xml;
+import com.reprezen.swaggerparser.ovl3.SwaggerObjectImpl;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public class TagImpl extends SwaggerObjectImpl implements Tag {
+public class XmlImpl extends SwaggerObjectImpl implements Xml {
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public TagImpl(String key, JsonNode json, JsonOverlay<?> parent) {
+    public XmlImpl(String key, JsonNode json, JsonOverlay<?> parent) {
         super(key, json, parent);
     }
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public TagImpl(String key, JsonOverlay<?> parent) {
+    public XmlImpl(String key, JsonOverlay<?> parent) {
         super(key, parent);
     }
 
@@ -29,10 +28,16 @@ public class TagImpl extends SwaggerObjectImpl implements Tag {
     private StringOverlay name = registerField("name", "name", null, new StringOverlay("name", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay description = registerField("description", "description", null, new StringOverlay("description", this));
+    private StringOverlay namespace = registerField("namespace", "namespace", null, new StringOverlay("namespace", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private ExternalDocsImpl externalDocs = registerField("externalDocs", "externalDocs", null, ExternalDocsImpl.factory.create("externalDocs", this));
+    private StringOverlay prefix = registerField("prefix", "prefix", null, new StringOverlay("prefix", this));
+
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    private BooleanOverlay attribute = registerField("attribute", "attribute", null, new BooleanOverlay("attribute", this));
+
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    private BooleanOverlay wrapped = registerField("wrapped", "wrapped", null, new BooleanOverlay("wrapped", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     private ValMapOverlay<Object,AnyObjectOverlay> extensions = registerField("", "extensions", "x-.*", new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.*"));
@@ -50,30 +55,68 @@ public class TagImpl extends SwaggerObjectImpl implements Tag {
         this.name.set(name);
     }
 
-    // Description
+    // Namespace
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public String getDescription() {
-        return description.get();
+    public String getNamespace() {
+        return namespace.get();
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setDescription(String description) {
-        this.description.set(description);
+    public void setNamespace(String namespace) {
+        this.namespace.set(namespace);
     }
 
-    // ExternalDocs
+    // Prefix
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public ExternalDocs getExternalDocs() {
-        return externalDocs;
+    public String getPrefix() {
+        return prefix.get();
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setExternalDocs(ExternalDocs externalDocs) {
-        this.externalDocs.set((ExternalDocsImpl) externalDocs);
+    public void setPrefix(String prefix) {
+        this.prefix.set(prefix);
+    }
+
+    // Attribute
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public Boolean getAttribute() {
+        return attribute.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public boolean isAttribute() {
+        return attribute.get() != null ? attribute.get() : false;
+    }
+
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public void setAttribute(Boolean attribute) {
+        this.attribute.set(attribute);
+    }
+
+    // Wrapped
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public Boolean getWrapped() {
+        return wrapped.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public boolean isWrapped() {
+        return wrapped.get() != null ? wrapped.get() : false;
+    }
+
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public void setWrapped(Boolean wrapped) {
+        this.wrapped.set(wrapped);
     }
 
     // Extension
@@ -114,10 +157,10 @@ public class TagImpl extends SwaggerObjectImpl implements Tag {
     }
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public static JsonOverlayFactory<TagImpl> factory = new JsonOverlayFactory<TagImpl>() {
+    public static JsonOverlayFactory<XmlImpl> factory = new JsonOverlayFactory<XmlImpl>() {
     @Override
-    public TagImpl create(String key, JsonNode json, JsonOverlay<?> parent) {
-        return isEmptyRecursive(parent, TagImpl.class) ? null : new TagImpl(key, json, parent);
+    public XmlImpl create(String key, JsonNode json, JsonOverlay<?> parent) {
+        return isEmptyRecursive(parent, XmlImpl.class) ? null : new XmlImpl(key, json, parent);
     }
 };
 

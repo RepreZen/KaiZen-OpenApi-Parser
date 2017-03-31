@@ -23,7 +23,6 @@ import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Queues;
 import com.reprezen.swaggerparser.SwaggerParser;
-import com.reprezen.swaggerparser.impl3.Swagger3Impl;
 import com.reprezen.swaggerparser.jsonoverlay.JsonOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.coll.CollectionOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.coll.CollectionStore;
@@ -33,6 +32,7 @@ import com.reprezen.swaggerparser.jsonoverlay.coll.ObjectOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.coll.ValListOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.coll.ValMapOverlay;
 import com.reprezen.swaggerparser.model3.Swagger3;
+import com.reprezen.swaggerparser.ovl3.Swagger3Impl;
 import com.reprezen.swaggerparser.test.JsonTreeWalker.PathKey;
 import com.reprezen.swaggerparser.test.JsonTreeWalker.WalkMethod;
 
@@ -59,7 +59,7 @@ public class BigParseTest extends Assert {
     public void test() throws JsonProcessingException, IOException {
         Object parsedYaml = new Yaml().load(modelUrl.openStream());
         JsonNode tree = new YAMLMapper().convertValue(parsedYaml, JsonNode.class);
-        final Swagger3 model = (Swagger3) SwaggerParser.parse(modelUrl, false);
+        final Swagger3 model = (Swagger3) new SwaggerParser().parse(modelUrl, false);
         Predicate<JsonNode> valueNodePredicate = new Predicate<JsonNode>() {
             @Override
             public boolean apply(JsonNode node) {

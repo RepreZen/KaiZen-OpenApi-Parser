@@ -36,10 +36,10 @@ public class OAuthFlowImpl extends SwaggerObjectImpl implements OAuthFlow {
     private ValMapOverlay<String,StringOverlay> scopes = registerField("scopes", "scopes", "(?!x-).*", new ValMapOverlay<String, StringOverlay>("scopes", this, StringOverlay.factory, "(?!x-).*"));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object,AnyObjectOverlay> scopesExtensions = registerField("scopes", "scopesExtensions", "x-.*", new ValMapOverlay<Object, AnyObjectOverlay>("scopes", this, AnyObjectOverlay.factory, "x-.*"));
+    private ValMapOverlay<Object,AnyObjectOverlay> scopesExtensions = registerField("scopes", "scopesExtensions", "x-.+", new ValMapOverlay<Object, AnyObjectOverlay>("scopes", this, AnyObjectOverlay.factory, "x-.+"));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object,AnyObjectOverlay> extensions = registerField("", "extensions", "x-.*", new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.*"));
+    private ValMapOverlay<Object,AnyObjectOverlay> extensions = registerField("", "extensions", "x-.+", new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+"));
 
     // AuthorizationUrl
     @Override

@@ -6,6 +6,7 @@ import com.reprezen.swaggerparser.jsonoverlay.JsonOverlayFactory;
 import com.reprezen.swaggerparser.jsonoverlay.coll.ValListOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.coll.ValMapOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.std.AnyObjectOverlay;
+import com.reprezen.swaggerparser.jsonoverlay.std.PrimitiveOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.std.StringOverlay;
 import com.reprezen.swaggerparser.model3.ServerVariable;
 import com.reprezen.swaggerparser.ovl3.SwaggerObjectImpl;
@@ -26,45 +27,45 @@ public class ServerVariableImpl extends SwaggerObjectImpl implements ServerVaria
     }
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private ValListOverlay<String, StringOverlay> enumValues = registerField("enum", "enumValues", null, new ValListOverlay<String, StringOverlay>("enum", this, StringOverlay.factory));;
+    private ValListOverlay<Object, PrimitiveOverlay> enumValues = registerField("enum", "enumValues", null, new ValListOverlay<Object, PrimitiveOverlay>("enum", this, PrimitiveOverlay.factory));;
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay defaultValue = registerField("default", "defaultValue", null, new StringOverlay("default", this));
+    private PrimitiveOverlay defaultValue = registerField("default", "defaultValue", null, new PrimitiveOverlay("default", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     private StringOverlay description = registerField("description", "description", null, new StringOverlay("description", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object,AnyObjectOverlay> extensions = registerField("", "extensions", "x-.*", new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.*"));
+    private ValMapOverlay<Object,AnyObjectOverlay> extensions = registerField("", "extensions", "x-.+", new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+"));
 
     // EnumValue
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public Collection<String> getEnumValues() {
+    public Collection<Object> getEnumValues() {
         return enumValues.get();
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public String getEnumValue(int index) {
+    public Object getEnumValue(int index) {
         return enumValues.get(index);
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setEnumValues(Collection<String> enumValues) {
-        this.enumValues.set((Collection<String>) enumValues);
+    public void setEnumValues(Collection<Object> enumValues) {
+        this.enumValues.set((Collection<Object>) enumValues);
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setEnumValue(int index, String enumValue) {
+    public void setEnumValue(int index, Object enumValue) {
         enumValues.set(index, enumValue);
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void addEnumValue(String enumValue) {
+    public void addEnumValue(Object enumValue) {
         enumValues.add(enumValue);
     }
 
@@ -77,13 +78,13 @@ public class ServerVariableImpl extends SwaggerObjectImpl implements ServerVaria
     // Default
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public String getDefault() {
+    public Object getDefault() {
         return defaultValue.get();
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setDefault(String defaultValue) {
+    public void setDefault(Object defaultValue) {
         this.defaultValue.set(defaultValue);
     }
 

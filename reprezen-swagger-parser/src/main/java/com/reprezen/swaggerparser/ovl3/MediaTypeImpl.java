@@ -42,7 +42,7 @@ public class MediaTypeImpl extends SwaggerObjectImpl implements MediaType {
     private MapOverlay<EncodingPropertyImpl> encodingProperties = registerField("encoding", "encodingProperties", null, new MapOverlay<EncodingPropertyImpl>("encoding", this, EncodingPropertyImpl.factory, null));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object,AnyObjectOverlay> extensions = registerField("", "extensions", "x-.*", new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.*"));
+    private ValMapOverlay<Object,AnyObjectOverlay> extensions = registerField("", "extensions", "x-.+", new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+"));
 
     // Schema
     @Override

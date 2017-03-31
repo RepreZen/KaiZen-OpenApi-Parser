@@ -43,7 +43,7 @@ public class ResponseImpl extends SwaggerObjectImpl implements Response {
     private MapOverlay<LinkImpl> links = registerField("links", "links", null, new MapOverlay<LinkImpl>("links", this, LinkImpl.factory, null));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object,AnyObjectOverlay> extensions = registerField("", "extensions", "x-.*", new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.*"));
+    private ValMapOverlay<Object,AnyObjectOverlay> extensions = registerField("", "extensions", "x-.+", new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+"));
 
     // Description
     @Override

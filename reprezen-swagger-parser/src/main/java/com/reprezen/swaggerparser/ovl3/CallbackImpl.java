@@ -29,7 +29,7 @@ public class CallbackImpl extends SwaggerObjectImpl implements Callback {
     private MapOverlay<PathImpl> callbackPaths = registerField("", "callbackPaths", "(?!x-).*", new MapOverlay<PathImpl>("", this, PathImpl.factory, "(?!x-).*"));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object,AnyObjectOverlay> extensions = registerField("", "extensions", "x-.*", new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.*"));
+    private ValMapOverlay<Object,AnyObjectOverlay> extensions = registerField("", "extensions", "x-.+", new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+"));
 
     // CallbackPath
     @Override

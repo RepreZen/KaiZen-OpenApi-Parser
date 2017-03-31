@@ -185,8 +185,8 @@ public class SchemaImpl extends SwaggerObjectImpl implements Schema {
             new BooleanOverlay("deprecated", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object, AnyObjectOverlay> extensions = registerField("", "extensions", "x-.*",
-            new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.*"));
+    private ValMapOverlay<Object, AnyObjectOverlay> extensions = registerField("", "extensions", "x-.+",
+            new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+"));
 
     // Title
     @Override

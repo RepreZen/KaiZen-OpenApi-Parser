@@ -1,29 +1,28 @@
 package com.reprezen.swaggerparser.model3;
 
-import com.reprezen.swaggerparser.model3.SecurityParameter;
 import com.reprezen.swaggerparser.model3.SwaggerObject;
-import java.util.Map;
+import java.util.Collection;
 import javax.annotation.Generated;
 
-public interface SecurityRequirement extends SwaggerObject {
+public interface SecurityParameter extends SwaggerObject {
 
-    // Requirement
+    // Parameter
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    Map<String, ? extends SecurityParameter> getRequirements();
-
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    boolean hasRequirement(String name);
+    Collection<String> getParameters();
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    SecurityParameter getRequirement(String name);
+    String getParameter(int index);
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    void setRequirements(Map<String, ? extends SecurityParameter> requirements);
+    void setParameters(Collection<String> parameters);
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    void setRequirement(String name, SecurityParameter requirement);
+    void setParameter(int index, String parameter);
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    void removeRequirement(String name);
+    void addParameter(String parameter);
+
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    void removeParameter(int index);
 
 }

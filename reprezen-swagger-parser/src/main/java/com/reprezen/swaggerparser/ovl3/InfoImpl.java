@@ -43,10 +43,10 @@ public class InfoImpl extends SwaggerObjectImpl implements Info {
     private LicenseImpl license = registerField("license", "license", null, LicenseImpl.factory.create("license", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay verion = registerField("version", "verion", null, new StringOverlay("version", this));
+    private StringOverlay version = registerField("version", "version", null, new StringOverlay("version", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object,AnyObjectOverlay> extensions = registerField("", "extensions", "x-.*", new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.*"));
+    private ValMapOverlay<Object,AnyObjectOverlay> extensions = registerField("", "extensions", "x-.+", new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+"));
 
     // Title
     @Override
@@ -113,17 +113,17 @@ public class InfoImpl extends SwaggerObjectImpl implements Info {
         this.license.set((LicenseImpl) license);
     }
 
-    // Verion
+    // Version
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public String getVerion() {
-        return verion.get();
+    public String getVersion() {
+        return version.get();
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setVerion(String verion) {
-        this.verion.set(verion);
+    public void setVersion(String version) {
+        this.version.set(version);
     }
 
     // Extension

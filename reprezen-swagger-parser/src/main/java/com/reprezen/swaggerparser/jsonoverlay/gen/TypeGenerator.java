@@ -44,6 +44,8 @@ import com.reprezen.swaggerparser.jsonoverlay.std.AnyObjectOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.std.BooleanOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.std.IntegerOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.std.NumberOverlay;
+import com.reprezen.swaggerparser.jsonoverlay.std.Primitive;
+import com.reprezen.swaggerparser.jsonoverlay.std.PrimitiveOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.std.StringOverlay;
 import com.reprezen.swaggerparser.val.ValidationResults;
 import com.reprezen.swaggerparser.val.ValidationResults.Severity;
@@ -131,6 +133,7 @@ public abstract class TypeGenerator {
                 Integer.class, //
                 Number.class, //
                 Boolean.class, //
+                Primitive.class, //
                 Object.class);
         for (Class<?> cls : autos) {
             results.add(cls.getSimpleName());
@@ -153,6 +156,7 @@ public abstract class TypeGenerator {
                 IntegerOverlay.class, //
                 NumberOverlay.class, //
                 BooleanOverlay.class, //
+                PrimitiveOverlay.class, //
                 AnyObjectOverlay.class, //
                 ListOverlay.class, //
                 ValListOverlay.class, //
@@ -290,6 +294,7 @@ public abstract class TypeGenerator {
         case "Integer":
         case "Number":
         case "Boolean":
+        case "Primitive":
             return type + "Overlay";
         case "Object":
             return "AnyObjectOverlay";
@@ -304,6 +309,7 @@ public abstract class TypeGenerator {
         case "Integer":
         case "Number":
         case "Boolean":
+        case "Primitive":
         case "Object":
             return true;
         default:

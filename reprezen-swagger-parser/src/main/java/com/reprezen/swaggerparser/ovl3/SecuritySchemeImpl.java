@@ -56,13 +56,13 @@ public class SecuritySchemeImpl extends SwaggerObjectImpl implements SecuritySch
     private OAuthFlowImpl authorizationCodeOAuthFlow = registerField("flow/authorizationCode", "authorizationCodeOAuthFlow", null, OAuthFlowImpl.factory.create("flow/authorizationCode", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object,AnyObjectOverlay> oAuthFlowsExtensions = registerField("flow", "oAuthFlowsExtensions", "x-.*", new ValMapOverlay<Object, AnyObjectOverlay>("flow", this, AnyObjectOverlay.factory, "x-.*"));
+    private ValMapOverlay<Object,AnyObjectOverlay> oAuthFlowsExtensions = registerField("flow", "oAuthFlowsExtensions", "x-.+", new ValMapOverlay<Object, AnyObjectOverlay>("flow", this, AnyObjectOverlay.factory, "x-.+"));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     private StringOverlay openIdConnectUrl = registerField("openIdConnectUrl", "openIdConnectUrl", null, new StringOverlay("openIdConnectUrl", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object,AnyObjectOverlay> extensions = registerField("", "extensions", "x-.*", new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.*"));
+    private ValMapOverlay<Object,AnyObjectOverlay> extensions = registerField("", "extensions", "x-.+", new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+"));
 
     // Type
     @Override

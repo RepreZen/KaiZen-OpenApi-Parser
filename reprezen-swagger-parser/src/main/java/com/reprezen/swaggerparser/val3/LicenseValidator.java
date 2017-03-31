@@ -7,9 +7,10 @@ import com.reprezen.swaggerparser.val.ValidationResults;
 public class LicenseValidator extends ObjectValidatorBase<License> {
 
     @Override
-    public void validateModel(License info, ValidationResults results) {
-        // TODO Auto-generated method stub
-
+    public void validateModel(License license, ValidationResults results) {
+        validateString(license.getName(), results, true, null, "name");
+        validateUrl(license.getUrl(), results, false, "url");
+        validateExtensions(license.getExtensions(), results);
     }
 
 }

@@ -43,12 +43,12 @@ public interface Info extends SwaggerObject {
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     void setLicense(License license);
 
-    // Verion
+    // Version
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    String getVerion();
+    String getVersion();
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    void setVerion(String verion);
+    void setVersion(String version);
 
     // Extension
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")

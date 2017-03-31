@@ -161,8 +161,9 @@ paths:
               operationId: operationid
       deprecated: false
       security:
-        sec1: [a, b, c]
-        sec2: []
+        - sec1: [a, b, c]
+          sec2: []
+        - sec3: []
       servers: *id001
       x-foo: foo
     x-foo: foo

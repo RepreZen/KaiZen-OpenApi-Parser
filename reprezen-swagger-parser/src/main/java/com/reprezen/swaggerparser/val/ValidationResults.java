@@ -78,8 +78,10 @@ public class ValidationResults {
     public <T extends JsonOverlay<?>> void validateWithCrumb(String crumb, Validator<T> validator, T object) {
         List<String> priorCrumbs = crumbs;
         try {
-            crumbs = Lists.newArrayList(priorCrumbs);
-            crumbs.add(crumb);
+            if (crumb != null) {
+                crumbs = Lists.newArrayList(priorCrumbs);
+                crumbs.add(crumb);
+            }
             validator.validate(object, this);
         } finally {
             crumbs = priorCrumbs;
@@ -89,8 +91,10 @@ public class ValidationResults {
     public void withCrumb(String crumb, Runnable code) {
         List<String> priorCrumbs = crumbs;
         try {
-            crumbs = Lists.newArrayList(priorCrumbs);
-            crumbs.add(crumb);
+            if (crumb != null) {
+                crumbs = Lists.newArrayList(priorCrumbs);
+                crumbs.add(crumb);
+            }
             code.run();
         } finally {
             crumbs = priorCrumbs;

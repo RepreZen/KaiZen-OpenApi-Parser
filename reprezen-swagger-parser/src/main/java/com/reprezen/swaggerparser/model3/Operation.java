@@ -187,22 +187,22 @@ public interface Operation extends SwaggerObject {
 
     // SecurityRequirement
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    Map<String, ? extends SecurityRequirement> getSecurityRequirements();
+    Collection<? extends SecurityRequirement> getSecurityRequirements();
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    boolean hasSecurityRequirement(String name);
+    SecurityRequirement getSecurityRequirement(int index);
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    SecurityRequirement getSecurityRequirement(String name);
+    void setSecurityRequirements(Collection<? extends SecurityRequirement> securityRequirements);
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    void setSecurityRequirements(Map<String, ? extends SecurityRequirement> securityRequirements);
+    void setSecurityRequirement(int index, SecurityRequirement securityRequirement);
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    void setSecurityRequirement(String name, SecurityRequirement securityRequirement);
+    void addSecurityRequirement(SecurityRequirement securityRequirement);
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    void removeSecurityRequirement(String name);
+    void removeSecurityRequirement(int index);
 
     // Server
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")

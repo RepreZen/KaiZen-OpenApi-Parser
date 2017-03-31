@@ -67,25 +67,25 @@ public class OperationImpl extends SwaggerObjectImpl implements Operation {
     private MapOverlay<ResponseImpl> responses = registerField("responses", "responses", "default|(\\d\\d\\d)", new MapOverlay<ResponseImpl>("responses", this, ResponseImpl.factory, "default|(\\d\\d\\d)"));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object,AnyObjectOverlay> responsesExtensions = registerField("responses", "responsesExtensions", "x-.*", new ValMapOverlay<Object, AnyObjectOverlay>("responses", this, AnyObjectOverlay.factory, "x-.*"));
+    private ValMapOverlay<Object,AnyObjectOverlay> responsesExtensions = registerField("responses", "responsesExtensions", "x-.+", new ValMapOverlay<Object, AnyObjectOverlay>("responses", this, AnyObjectOverlay.factory, "x-.+"));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     private MapOverlay<CallbackImpl> callbacks = registerField("callbacks", "callbacks", "(?!x-)[a-zA-Z0-9\\._-]+", new MapOverlay<CallbackImpl>("callbacks", this, CallbackImpl.factory, "(?!x-)[a-zA-Z0-9\\._-]+"));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object,AnyObjectOverlay> callbacksExtensions = registerField("callbacks", "callbacksExtensions", "x-.*", new ValMapOverlay<Object, AnyObjectOverlay>("callbacks", this, AnyObjectOverlay.factory, "x-.*"));
+    private ValMapOverlay<Object,AnyObjectOverlay> callbacksExtensions = registerField("callbacks", "callbacksExtensions", "x-.+", new ValMapOverlay<Object, AnyObjectOverlay>("callbacks", this, AnyObjectOverlay.factory, "x-.+"));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     private BooleanOverlay deprecated = registerField("deprecated", "deprecated", null, new BooleanOverlay("deprecated", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<SecurityRequirementImpl> securityRequirements = registerField("security", "securityRequirements", null, new MapOverlay<SecurityRequirementImpl>("security", this, SecurityRequirementImpl.factory, null));
+    private ListOverlay<SecurityRequirementImpl> securityRequirements = registerField("security", "securityRequirements", null, new ListOverlay<SecurityRequirementImpl>("security", this, SecurityRequirementImpl.factory));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     private ListOverlay<ServerImpl> servers = registerField("servers", "servers", null, new ListOverlay<ServerImpl>("servers", this, ServerImpl.factory));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object,AnyObjectOverlay> extensions = registerField("", "extensions", "x-.*", new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.*"));
+    private ValMapOverlay<Object,AnyObjectOverlay> extensions = registerField("", "extensions", "x-.+", new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+"));
 
     // Tag
     @Override
@@ -428,40 +428,40 @@ public class OperationImpl extends SwaggerObjectImpl implements Operation {
     // SecurityRequirement
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public Map<String, ? extends SecurityRequirement> getSecurityRequirements() {
+    public Collection<? extends SecurityRequirement> getSecurityRequirements() {
         return securityRequirements.get();
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public boolean hasSecurityRequirement(String name) {
-        return securityRequirements.containsKey(name);
+    public SecurityRequirement getSecurityRequirement(int index) {
+        return securityRequirements.get(index);
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public SecurityRequirement getSecurityRequirement(String name) {
-        return securityRequirements.get(name);
-    }
-
-    @Override
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setSecurityRequirements(Map<String, ? extends SecurityRequirement> securityRequirements) {
+    public void setSecurityRequirements(Collection<? extends SecurityRequirement> securityRequirements) {
         @SuppressWarnings("unchecked")
-            Map<String,SecurityRequirementImpl> implSecurityRequirements = (Map<String, SecurityRequirementImpl>) securityRequirements;
+            Collection<SecurityRequirementImpl> implSecurityRequirements = (Collection<SecurityRequirementImpl>) securityRequirements;
             this.securityRequirements.set(implSecurityRequirements);
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setSecurityRequirement(String name, SecurityRequirement securityRequirement) {
-        securityRequirements.set(name, (SecurityRequirementImpl) securityRequirement);
+    public void setSecurityRequirement(int index, SecurityRequirement securityRequirement) {
+        securityRequirements.set(index, (SecurityRequirementImpl) securityRequirement);
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void removeSecurityRequirement(String name) {
-        securityRequirements.remove(name);
+    public void addSecurityRequirement(SecurityRequirement securityRequirement) {
+        securityRequirements.add((SecurityRequirementImpl) securityRequirement);
+    }
+
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public void removeSecurityRequirement(int index) {
+        securityRequirements.remove(index);
     }
 
     // Server

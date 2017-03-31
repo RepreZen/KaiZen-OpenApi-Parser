@@ -3,11 +3,12 @@ package com.reprezen.swaggerparser.ovl3;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.reprezen.swaggerparser.jsonoverlay.JsonOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.JsonOverlayFactory;
-import com.reprezen.swaggerparser.jsonoverlay.coll.ValListOverlay;
-import com.reprezen.swaggerparser.jsonoverlay.std.StringOverlay;
+import com.reprezen.swaggerparser.jsonoverlay.coll.MapOverlay;
+import com.reprezen.swaggerparser.model3.SecurityParameter;
 import com.reprezen.swaggerparser.model3.SecurityRequirement;
+import com.reprezen.swaggerparser.ovl3.SecurityParameterImpl;
 import com.reprezen.swaggerparser.ovl3.SwaggerObjectImpl;
-import java.util.Collection;
+import java.util.Map;
 import javax.annotation.Generated;
 
 public class SecurityRequirementImpl extends SwaggerObjectImpl implements SecurityRequirement {
@@ -23,43 +24,45 @@ public class SecurityRequirementImpl extends SwaggerObjectImpl implements Securi
     }
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private ValListOverlay<String, StringOverlay> requirements = registerField("", "requirements", null, new ValListOverlay<String, StringOverlay>("", this, StringOverlay.factory));;
+    private MapOverlay<SecurityParameterImpl> requirements = registerField("", "requirements", null, new MapOverlay<SecurityParameterImpl>("", this, SecurityParameterImpl.factory, null));
 
     // Requirement
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public Collection<String> getRequirements() {
+    public Map<String, ? extends SecurityParameter> getRequirements() {
         return requirements.get();
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public String getRequirement(int index) {
-        return requirements.get(index);
+    public boolean hasRequirement(String name) {
+        return requirements.containsKey(name);
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setRequirements(Collection<String> requirements) {
-        this.requirements.set((Collection<String>) requirements);
+    public SecurityParameter getRequirement(String name) {
+        return requirements.get(name);
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setRequirement(int index, String requirement) {
-        requirements.set(index, requirement);
+    public void setRequirements(Map<String, ? extends SecurityParameter> requirements) {
+        @SuppressWarnings("unchecked")
+            Map<String,SecurityParameterImpl> implRequirements = (Map<String, SecurityParameterImpl>) requirements;
+            this.requirements.set(implRequirements);
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void addRequirement(String requirement) {
-        requirements.add(requirement);
+    public void setRequirement(String name, SecurityParameter requirement) {
+        requirements.set(name, (SecurityParameterImpl) requirement);
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void removeRequirement(int index) {
-        requirements.remove(index);
+    public void removeRequirement(String name) {
+        requirements.remove(name);
     }
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")

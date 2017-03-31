@@ -9,29 +9,29 @@ public interface ServerVariable extends SwaggerObject {
 
     // EnumValue
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    Collection<String> getEnumValues();
+    Collection<Object> getEnumValues();
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    String getEnumValue(int index);
+    Object getEnumValue(int index);
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    void setEnumValues(Collection<String> enumValues);
+    void setEnumValues(Collection<Object> enumValues);
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    void setEnumValue(int index, String enumValue);
+    void setEnumValue(int index, Object enumValue);
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    void addEnumValue(String enumValue);
+    void addEnumValue(Object enumValue);
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     void removeEnumValue(int index);
 
     // Default
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    String getDefault();
+    Object getDefault();
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    void setDefault(String defaultValue);
+    void setDefault(Object defaultValue);
 
     // Description
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")

@@ -16,9 +16,7 @@ public class ServerValidator extends ObjectValidatorBase<Server> {
 
     @Override
     public void validateModel(Server server, ValidationResults results) {
-        // can't use validateUrl to validate URL syntax because of potential variable templates in the value
-        validateString(server.getUrl(), results, false, null, "url");
-        validateString(server.getDescription(), results, false, null, "description");
+        validateUrl(server.getUrl(), results, false, "url", true);
         validateMap(server.getServerVariables(), results, false, "variables", NAME_REGEX, serverVariableValidator);
         validateExtensions(server.getExtensions(), results);
     }

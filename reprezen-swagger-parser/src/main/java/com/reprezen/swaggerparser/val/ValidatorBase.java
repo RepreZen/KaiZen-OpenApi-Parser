@@ -42,12 +42,17 @@ public abstract class ValidatorBase<T> implements Validator<T> {
         });
     }
 
-    public void validateUrl(final String value, final ValidationResults results, boolean required, String crumb) {
+    public void validateUrl(String value, ValidationResults results, boolean required, String crumb) {
+        validateUrl(value, results, required, crumb, false);
+    }
+
+    public void validateUrl(final String value, final ValidationResults results, boolean required, String crumb,
+            final boolean allowVars) {
         validateString(value, results, required, null, crumb);
         results.withCrumb(crumb, new Runnable() {
             @Override
             public void run() {
-                checkUrl(value, results);
+                checkUrl(value, results, allowVars);
             }
         });
     }
@@ -124,7 +129,7 @@ public abstract class ValidatorBase<T> implements Validator<T> {
         });
     }
 
-    private void checkUrl(String url, ValidationResults results) {
+    private void checkUrl(String url, ValidationResults results, boolean allowVars) {
         // TODO implement this
     }
 

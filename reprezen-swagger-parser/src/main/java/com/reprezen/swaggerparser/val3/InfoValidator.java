@@ -18,8 +18,6 @@ public class InfoValidator extends ObjectValidatorBase<Info> {
     @Override
     public void validateModel(Info info, ValidationResults results) {
         validateString(info.getTitle(), results, true, null, "title");
-        validateString(info.getDescription(), results, false, null, "description");
-        validateString(info.getTermsOfService(), results, false, null, "termsOfServices");
         validateField(info.getContact(), results, true, "contact", contactValidator);
         validateField(info.getLicense(), results, false, "license", licenseValidator);
         validateString(info.getVersion(), results, true, null, "version");

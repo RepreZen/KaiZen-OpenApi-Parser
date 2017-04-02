@@ -45,6 +45,11 @@
 		<artifactId>commons-lang3</artifactId>
 		<version>3.5</version>
 	</dependency>
+	<dependency>
+		<groupId>com.google.inject</groupId>
+		<artifactId>guice</artifactId>
+		<version>4.1.0</version>
+	</dependency>
     </dependencies>
     <properties>
     	<maven.compiler.source>1.7</maven.compiler.source>

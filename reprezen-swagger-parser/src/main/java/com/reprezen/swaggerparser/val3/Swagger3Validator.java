@@ -62,7 +62,7 @@ public class Swagger3Validator extends ObjectValidatorBase<Swagger3> {
             public void run() {
                 validateString(swagger.getOpenApi(), results, true, "3\\.\\d+(\\.\\d+)?", "openapi");
                 validateField(swagger.getInfo(), results, true, "info", infoValidator);
-                validateList(swagger.getServers(), results, false, "servers", serverValidator);
+                validateList(swagger.getServers(), swagger.hasServers(), results, false, "servers", serverValidator);
                 validateMap(swagger.getPaths(), results, true, "paths", EXT_REGEX, pathValidator);
                 validateMap(swagger.getPathsExtensions(), results, false, "paths", PATH_REGEX, null);
                 validateMap(swagger.getSchemas(), results, false, "collections/schemas", NAME_REGEX, schemaValidator);
@@ -80,9 +80,9 @@ public class Swagger3Validator extends ObjectValidatorBase<Swagger3> {
                 validateMap(swagger.getCallbacks(), results, false, "collections/callbacks", NAME_REGEX,
                         callbackValidator);
                 validateMap(swagger.getComponentsExtensions(), results, false, "collections", EXT_REGEX, null);
-                validateList(swagger.getSecurityRequirements(), results, false, "security",
-                        securityRequirementValidator);
-                validateList(swagger.getTags(), results, false, "tags", tagValidator);
+                validateList(swagger.getSecurityRequirements(), swagger.hasSecurityRequirements(), results, false,
+                        "security", securityRequirementValidator);
+                validateList(swagger.getTags(), swagger.hasTags(), results, false, "tags", tagValidator);
                 validateField(swagger.getExternalDocs(), results, false, "externalDocs", externalDocsValidator);
                 validateExtensions(swagger.getExtensions(), results);
             }

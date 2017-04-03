@@ -19,6 +19,9 @@ public interface Operation extends SwaggerObject {
     Collection<String> getTags();
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    boolean hasTags();
+
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     String getTag(int index);
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
@@ -66,6 +69,9 @@ public interface Operation extends SwaggerObject {
     Collection<? extends Parameter> getParameters();
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    boolean hasParameters();
+
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     Parameter getParameter(int index);
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
@@ -83,6 +89,9 @@ public interface Operation extends SwaggerObject {
     // RequestBody
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     Collection<? extends RequestBody> getRequestBodies();
+
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    boolean hasRequestBodies();
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     RequestBody getRequestBody(int index);
@@ -190,6 +199,9 @@ public interface Operation extends SwaggerObject {
     Collection<? extends SecurityRequirement> getSecurityRequirements();
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    boolean hasSecurityRequirements();
+
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     SecurityRequirement getSecurityRequirement(int index);
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
@@ -207,6 +219,9 @@ public interface Operation extends SwaggerObject {
     // Server
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     Collection<? extends Server> getServers();
+
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    boolean hasServers();
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     Server getServer(int index);

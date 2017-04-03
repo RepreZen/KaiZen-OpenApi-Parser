@@ -122,6 +122,9 @@ public interface Schema extends SwaggerObject {
     Collection<String> getRequiredFields();
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    boolean hasRequiredFields();
+
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     String getRequiredField(int index);
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
@@ -139,6 +142,9 @@ public interface Schema extends SwaggerObject {
     // Enum
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     Collection<Object> getEnums();
+
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    boolean hasEnums();
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     Object getEnum(int index);
@@ -167,6 +173,9 @@ public interface Schema extends SwaggerObject {
     Collection<? extends Schema> getAllOfSchemass();
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    boolean hasAllOfSchemass();
+
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     Schema getAllOfSchemas(int index);
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
@@ -186,6 +195,9 @@ public interface Schema extends SwaggerObject {
     Collection<? extends Schema> getOneOfSchemass();
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    boolean hasOneOfSchemass();
+
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     Schema getOneOfSchemas(int index);
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
@@ -203,6 +215,9 @@ public interface Schema extends SwaggerObject {
     // AnyOfSchemas
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     Collection<? extends Schema> getAnyOfSchemass();
+
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    boolean hasAnyOfSchemass();
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     Schema getAnyOfSchemas(int index);
@@ -344,6 +359,9 @@ public interface Schema extends SwaggerObject {
     // Example
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     Collection<Object> getExamples();
+
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    boolean hasExamples();
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     Object getExample(int index);

@@ -204,6 +204,12 @@ public class PathImpl extends SwaggerObjectImpl implements Path {
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public boolean hasServers() {
+        return !servers.isMissing();
+    }
+
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     public Server getServer(int index) {
         return servers.get(index);
     }
@@ -239,6 +245,12 @@ public class PathImpl extends SwaggerObjectImpl implements Path {
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     public Collection<? extends Parameter> getParameters() {
         return parameters.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public boolean hasParameters() {
+        return !parameters.isMissing();
     }
 
     @Override

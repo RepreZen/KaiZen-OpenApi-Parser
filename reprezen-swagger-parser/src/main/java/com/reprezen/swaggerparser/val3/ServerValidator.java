@@ -16,6 +16,7 @@ public class ServerValidator extends ObjectValidatorBase<Server> {
 
     @Override
     public void validateModel(Server server, ValidationResults results) {
+        // no validation for: description
         validateUrl(server.getUrl(), results, false, "url", true);
         validateMap(server.getServerVariables(), results, false, "variables", NAME_REGEX, serverVariableValidator);
         validateExtensions(server.getExtensions(), results);

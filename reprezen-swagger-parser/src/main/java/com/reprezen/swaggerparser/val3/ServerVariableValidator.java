@@ -38,7 +38,7 @@ public class ServerVariableValidator extends ObjectValidatorBase<ServerVariable>
             results.withCrumb(crumb, new Runnable() {
                 @Override
                 public void run() {
-                    Messages.m.msg("BadPrimtive|Invalid primtive value", String.valueOf(primitive),
+                    Messages.m.msg("BadPrimitive|Invalid primitive value", String.valueOf(primitive),
                             (primitive != null ? primitive.getClass() : NullType.class).getName());
                 }
             });

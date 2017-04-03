@@ -96,6 +96,12 @@ public class OperationImpl extends SwaggerObjectImpl implements Operation {
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public boolean hasTags() {
+        return !tags.isMissing();
+    }
+
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     public String getTag(int index) {
         return tags.get(index);
     }
@@ -185,6 +191,12 @@ public class OperationImpl extends SwaggerObjectImpl implements Operation {
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public boolean hasParameters() {
+        return !parameters.isMissing();
+    }
+
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     public Parameter getParameter(int index) {
         return parameters.get(index);
     }
@@ -220,6 +232,12 @@ public class OperationImpl extends SwaggerObjectImpl implements Operation {
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     public Collection<? extends RequestBody> getRequestBodies() {
         return requestBodies.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public boolean hasRequestBodies() {
+        return !requestBodies.isMissing();
     }
 
     @Override
@@ -434,6 +452,12 @@ public class OperationImpl extends SwaggerObjectImpl implements Operation {
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public boolean hasSecurityRequirements() {
+        return !securityRequirements.isMissing();
+    }
+
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     public SecurityRequirement getSecurityRequirement(int index) {
         return securityRequirements.get(index);
     }
@@ -469,6 +493,12 @@ public class OperationImpl extends SwaggerObjectImpl implements Operation {
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     public Collection<? extends Server> getServers() {
         return servers.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public boolean hasServers() {
+        return !servers.isMissing();
     }
 
     @Override

@@ -34,6 +34,12 @@ public class SecurityParameterImpl extends SwaggerObjectImpl implements Security
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public boolean hasParameters() {
+        return !parameters.isMissing();
+    }
+
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     public String getParameter(int index) {
         return parameters.get(index);
     }

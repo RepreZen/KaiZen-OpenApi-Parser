@@ -180,6 +180,7 @@ public class ImplGenerator extends TypeGenerator {
     private Members getCollectionMethods(Field field) {
         Members methods = new Members();
         String getDecl = t("public Collection<${collType}> get${plural}()", field);
+        String hasDecl = t("public boolean has${plural}()", field);
         String iGetDecl = t("public ${type} get${name}(int index)", field);
         String setDecl = t("public void set${plural}(Collection<${collType}> ${lcPlural})", field);
         String iSetDecl = t("public void set${name}(int index, ${type} ${lcName})", field);
@@ -189,6 +190,8 @@ public class ImplGenerator extends TypeGenerator {
 
         // Collection<T> getFoos() => foos.get()
         methods.add(getDecl, code(field, "return ${lcPlural}.get();"));
+        // boolean hasFoos() => !foos.isMissing()
+        methods.add(hasDecl, code(field, "return !${lcPlural}.isMissing();"));
         // T getFoo(int index) => foos.get(index)
         methods.add(iGetDecl, code(field, "return ${lcPlural}.get(index);"));
         if (isScalarType(field)) {

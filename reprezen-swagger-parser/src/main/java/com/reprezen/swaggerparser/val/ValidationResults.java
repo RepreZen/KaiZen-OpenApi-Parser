@@ -46,12 +46,24 @@ public class ValidationResults {
         items.add(new ValidationItem(INFO, msg, crumbs));
     }
 
+    public void addInfo(String msg, String crumb) {
+        items.add(new ValidationItem(INFO, msg, crumbs, crumb));
+    }
+
     public void addWarning(String msg) {
         items.add(new ValidationItem(WARNING, msg, crumbs));
     }
 
+    public void addWarning(String msg, String crumb) {
+        items.add(new ValidationItem(WARNING, msg, crumbs, crumb));
+    }
+
     public void addError(String msg) {
         items.add(new ValidationItem(ERROR, msg, crumbs));
+    }
+
+    public void addError(String msg, String crumb) {
+        items.add(new ValidationItem(ERROR, msg, crumbs, crumb));
     }
 
     public void add(ValidationResults results) {
@@ -79,8 +91,7 @@ public class ValidationResults {
         List<String> priorCrumbs = crumbs;
         try {
             if (crumb != null) {
-                crumbs = Lists.newArrayList(priorCrumbs);
-                crumbs.add(crumb);
+                crumbs = appendCrumb(crumb, priorCrumbs);
             }
             validator.validate(object, this);
         } finally {
@@ -91,13 +102,20 @@ public class ValidationResults {
     public void withCrumb(String crumb, Runnable code) {
         List<String> priorCrumbs = crumbs;
         try {
-            if (crumb != null) {
-                crumbs = Lists.newArrayList(priorCrumbs);
-                crumbs.add(crumb);
-            }
+            crumbs = appendCrumb(crumb, priorCrumbs);
             code.run();
         } finally {
             crumbs = priorCrumbs;
+        }
+    }
+
+    private static List<String> appendCrumb(String crumb, List<String> existingCrumbs) {
+        if (crumb != null) {
+            List<String> newCrumbs = Lists.newArrayList(existingCrumbs);
+            newCrumbs.add(crumb);
+            return newCrumbs;
+        } else {
+            return existingCrumbs;
         }
     }
 
@@ -111,6 +129,10 @@ public class ValidationResults {
             this.severity = severity;
             this.msg = msg;
             this.crumbs = crumbs;
+        }
+
+        public ValidationItem(Severity severity, String msg, List<String> crumbs, String crumb) {
+            this(severity, msg, appendCrumb(crumb, crumbs));
         }
 
         public Severity getSeverity() {

@@ -12,6 +12,9 @@ public interface ServerVariable extends SwaggerObject {
     Collection<Object> getEnumValues();
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    boolean hasEnumValues();
+
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     Object getEnumValue(int index);
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")

@@ -47,6 +47,12 @@ public class ServerVariableImpl extends SwaggerObjectImpl implements ServerVaria
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public boolean hasEnumValues() {
+        return !enumValues.isMissing();
+    }
+
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     public Object getEnumValue(int index) {
         return enumValues.get(index);
     }

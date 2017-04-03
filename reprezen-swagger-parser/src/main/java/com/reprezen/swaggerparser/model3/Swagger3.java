@@ -50,6 +50,9 @@ public interface Swagger3 extends SwaggerObject, Swagger {
     Collection<? extends Server> getServers();
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    boolean hasServers();
+
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     Server getServer(int index);
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
@@ -297,6 +300,9 @@ public interface Swagger3 extends SwaggerObject, Swagger {
     Collection<? extends SecurityRequirement> getSecurityRequirements();
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    boolean hasSecurityRequirements();
+
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     SecurityRequirement getSecurityRequirement(int index);
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
@@ -314,6 +320,9 @@ public interface Swagger3 extends SwaggerObject, Swagger {
     // Tag
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     Collection<? extends Tag> getTags();
+
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    boolean hasTags();
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     Tag getTag(int index);

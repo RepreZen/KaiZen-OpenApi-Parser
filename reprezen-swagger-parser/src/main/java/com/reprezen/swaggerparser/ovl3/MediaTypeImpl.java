@@ -66,6 +66,12 @@ public class MediaTypeImpl extends SwaggerObjectImpl implements MediaType {
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public boolean hasExamples() {
+        return !examples.isMissing();
+    }
+
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     public Object getExample(int index) {
         return examples.get(index);
     }

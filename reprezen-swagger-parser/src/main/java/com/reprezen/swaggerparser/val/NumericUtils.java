@@ -8,6 +8,23 @@ import com.google.common.collect.Maps;
 
 public class NumericUtils {
 
+    public static boolean isNumeric(Object obj) {
+        return NumericType.of(obj) != null;
+    }
+
+    public static boolean isIntegral(Object obj) {
+        switch (NumericType.of(obj)) {
+        case BIG_INTEGER:
+        case BYTE:
+        case INTEGER:
+        case LONG:
+        case SHORT:
+            return true;
+        default:
+            return false;
+        }
+    }
+
     public static <T extends Number> T zero(T value) {
         Number result;
         switch (NumericType.of(value)) {
@@ -114,7 +131,7 @@ public class NumericUtils {
             types.put(cls, type);
         }
 
-        public static NumericType of(Number value) {
+        public static NumericType of(Object value) {
             return value != null ? types.get(value.getClass()) : null;
         }
     }

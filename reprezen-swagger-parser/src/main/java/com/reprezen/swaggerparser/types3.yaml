@@ -580,15 +580,15 @@ types:
         name: Type
         type: String
       allOf:
-        name: AllOfSchemas
+        name: AllOfSchema
         type: Schema
         structure: collection
       oneOf:
-        name: OneOfSchemas
+        name: OneOfSchema
         type: Schema
         structure: collection
       anyOf:
-        name: AnyOfSchemas
+        name: AnyOfSchema
         type: Schema
         structure: collection
       not:

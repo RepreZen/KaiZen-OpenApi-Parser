@@ -166,6 +166,63 @@ public abstract class ValidatorBase<T> implements Validator<T> {
         validateMap(extensions, results, false, crumb, null, null);
     }
 
+    public void validateFormat(String format, String type, ValidationResults results, String crumb) {
+        if (format != null && type != null) {
+            String normalType = null;
+            switch (format) {
+            case "int32":
+            case "int64":
+                normalType = "integer";
+                break;
+            case "float":
+            case "double":
+                normalType = "number";
+                break;
+            case "byte":
+            case "binary":
+            case "date":
+            case "date-time":
+            case "password":
+                normalType = "string";
+                break;
+            }
+            if (normalType != null && !type.equals(normalType)) {
+                results.addWarning(m.msg("WrongTypeFormat|OpenAPI-defined format used with nonstandard type", format,
+                        type, normalType), crumb);
+            }
+        }
+    }
+
+    public void validateDefault(Object defaultValue, String type, ValidationResults results, String crumb) {
+        if (defaultValue != null && type != null) {
+            boolean ok = false;
+            switch (type) {
+            case "string":
+                ok = defaultValue instanceof String;
+                break;
+            case "number":
+                ok = NumericUtils.isNumeric(defaultValue);
+                break;
+            case "integer":
+                ok = NumericUtils.isIntegral(defaultValue);
+                break;
+            case "boolean":
+                ok = defaultValue instanceof Boolean;
+                break;
+            case "object":
+                ok = defaultValue instanceof Map<?, ?>;
+                break;
+            case "array":
+                ok = defaultValue instanceof Collection<?>;
+                break;
+            }
+            if (!ok) {
+                results.addError(m.msg("WrongTypeValue|Value is incompatible with schema type", type, defaultValue),
+                        crumb);
+            }
+        }
+    }
+
     private void checkMissing(boolean required, final Object value, final ValidationResults results,
             final String crumb) {
         if (required && isMissing(value)) {

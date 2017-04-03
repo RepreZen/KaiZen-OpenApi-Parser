@@ -23,7 +23,10 @@ public class SwaggerObjectImpl extends ObjectOverlay<SwaggerObjectImpl> implemen
 
     @Override
     public SwaggerObject getParent() {
-        return (SwaggerObject) getParentOverlay();
+        JsonOverlay<?> parent = getParentOverlay();
+        while (parent != null && !(parent instanceof SwaggerObject)) {
+            parent = parent.getParentOverlay();
+        }
+        return (SwaggerObject) parent;
     }
-
 }

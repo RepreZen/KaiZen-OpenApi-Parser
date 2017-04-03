@@ -1,6 +1,12 @@
 package com.reprezen.swaggerparser.ovl3;
 
+import java.util.Collection;
+import java.util.Map;
+
+import javax.annotation.Generated;
+
 import com.fasterxml.jackson.databind.JsonNode;
+import com.google.common.base.Optional;
 import com.reprezen.swaggerparser.jsonoverlay.JsonOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.JsonOverlayFactory;
 import com.reprezen.swaggerparser.jsonoverlay.coll.ListOverlay;
@@ -15,13 +21,6 @@ import com.reprezen.swaggerparser.jsonoverlay.std.StringOverlay;
 import com.reprezen.swaggerparser.model3.ExternalDocs;
 import com.reprezen.swaggerparser.model3.Schema;
 import com.reprezen.swaggerparser.model3.Xml;
-import com.reprezen.swaggerparser.ovl3.ExternalDocsImpl;
-import com.reprezen.swaggerparser.ovl3.SchemaImpl;
-import com.reprezen.swaggerparser.ovl3.SwaggerObjectImpl;
-import com.reprezen.swaggerparser.ovl3.XmlImpl;
-import java.util.Collection;
-import java.util.Map;
-import javax.annotation.Generated;
 
 public class SchemaImpl extends SwaggerObjectImpl implements Schema {
 
@@ -29,9 +28,9 @@ public class SchemaImpl extends SwaggerObjectImpl implements Schema {
     public Optional<JsonOverlay<?>> getFieldValue(String path) throws IllegalArgumentException, IllegalAccessException {
         if (path.equals("additionalProperties")) {
             if (additionalPropertiesSchema != null && !additionalPropertiesSchema.isMissing()) {
-                return Optional.<JsonOverlay<?>>of(additionalPropertiesSchema);
+                return Optional.<JsonOverlay<?>> of(additionalPropertiesSchema);
             } else if (additionalProperties != null && !additionalProperties.isMissing()) {
-                return Optional.<JsonOverlay<?>>of(additionalProperties);
+                return Optional.<JsonOverlay<?>> of(additionalProperties);
             } else {
                 return Optional.absent();
             }
@@ -54,25 +53,30 @@ public class SchemaImpl extends SwaggerObjectImpl implements Schema {
     private StringOverlay title = registerField("title", "title", null, new StringOverlay("title", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private NumberOverlay multipleOf = registerField("multipleOf", "multipleOf", null, new NumberOverlay("multipleOf", this));
+    private NumberOverlay multipleOf = registerField("multipleOf", "multipleOf", null,
+            new NumberOverlay("multipleOf", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     private NumberOverlay maximum = registerField("maximum", "maximum", null, new NumberOverlay("maximum", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private BooleanOverlay exclusiveMaximum = registerField("exclusiveMaximum", "exclusiveMaximum", null, new BooleanOverlay("exclusiveMaximum", this));
+    private BooleanOverlay exclusiveMaximum = registerField("exclusiveMaximum", "exclusiveMaximum", null,
+            new BooleanOverlay("exclusiveMaximum", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     private NumberOverlay minimum = registerField("minimum", "minimum", null, new NumberOverlay("minimum", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private BooleanOverlay exclusiveMinimum = registerField("exclusiveMinimum", "exclusiveMinimum", null, new BooleanOverlay("exclusiveMinimum", this));
+    private BooleanOverlay exclusiveMinimum = registerField("exclusiveMinimum", "exclusiveMinimum", null,
+            new BooleanOverlay("exclusiveMinimum", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private IntegerOverlay maxLength = registerField("maxLength", "maxLength", null, new IntegerOverlay("maxLength", this));
+    private IntegerOverlay maxLength = registerField("maxLength", "maxLength", null,
+            new IntegerOverlay("maxLength", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private IntegerOverlay minLength = registerField("minLength", "minLength", null, new IntegerOverlay("minLength", this));
+    private IntegerOverlay minLength = registerField("minLength", "minLength", null,
+            new IntegerOverlay("minLength", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     private StringOverlay pattern = registerField("pattern", "pattern", null, new StringOverlay("pattern", this));
@@ -84,85 +88,105 @@ public class SchemaImpl extends SwaggerObjectImpl implements Schema {
     private IntegerOverlay minItems = registerField("minItems", "minItems", null, new IntegerOverlay("minItems", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private BooleanOverlay uniqueItems = registerField("uniqueItems", "uniqueItems", null, new BooleanOverlay("uniqueItems", this));
+    private BooleanOverlay uniqueItems = registerField("uniqueItems", "uniqueItems", null,
+            new BooleanOverlay("uniqueItems", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private IntegerOverlay maxProperties = registerField("maxProperties", "maxProperties", null, new IntegerOverlay("maxProperties", this));
+    private IntegerOverlay maxProperties = registerField("maxProperties", "maxProperties", null,
+            new IntegerOverlay("maxProperties", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private IntegerOverlay minProperties = registerField("minProperties", "minProperties", null, new IntegerOverlay("minProperties", this));
+    private IntegerOverlay minProperties = registerField("minProperties", "minProperties", null,
+            new IntegerOverlay("minProperties", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private ValListOverlay<String, StringOverlay> requiredFields = registerField("required", "requiredFields", null, new ValListOverlay<String, StringOverlay>("required", this, StringOverlay.factory));;
+    private ValListOverlay<String, StringOverlay> requiredFields = registerField("required", "requiredFields", null,
+            new ValListOverlay<String, StringOverlay>("required", this, StringOverlay.factory));;
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private ValListOverlay<Object, AnyObjectOverlay> enums = registerField("enum", "enums", null, new ValListOverlay<Object, AnyObjectOverlay>("enum", this, AnyObjectOverlay.factory));;
+    private ValListOverlay<Object, AnyObjectOverlay> enums = registerField("enum", "enums", null,
+            new ValListOverlay<Object, AnyObjectOverlay>("enum", this, AnyObjectOverlay.factory));;
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     private StringOverlay type = registerField("type", "type", null, new StringOverlay("type", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private ListOverlay<SchemaImpl> allOfSchemass = registerField("allOf", "allOfSchemass", null, new ListOverlay<SchemaImpl>("allOf", this, SchemaImpl.factory));
+    private ListOverlay<SchemaImpl> allOfSchemas = registerField("allOf", "allOfSchemas", null,
+            new ListOverlay<SchemaImpl>("allOf", this, SchemaImpl.factory));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private ListOverlay<SchemaImpl> oneOfSchemass = registerField("oneOf", "oneOfSchemass", null, new ListOverlay<SchemaImpl>("oneOf", this, SchemaImpl.factory));
+    private ListOverlay<SchemaImpl> oneOfSchemas = registerField("oneOf", "oneOfSchemas", null,
+            new ListOverlay<SchemaImpl>("oneOf", this, SchemaImpl.factory));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private ListOverlay<SchemaImpl> anyOfSchemass = registerField("anyOf", "anyOfSchemass", null, new ListOverlay<SchemaImpl>("anyOf", this, SchemaImpl.factory));
+    private ListOverlay<SchemaImpl> anyOfSchemas = registerField("anyOf", "anyOfSchemas", null,
+            new ListOverlay<SchemaImpl>("anyOf", this, SchemaImpl.factory));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     private SchemaImpl notSchema = registerField("not", "notSchema", null, SchemaImpl.factory.create("not", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private SchemaImpl itemsSchema = registerField("items", "itemsSchema", null, SchemaImpl.factory.create("items", this));
+    private SchemaImpl itemsSchema = registerField("items", "itemsSchema", null,
+            SchemaImpl.factory.create("items", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<SchemaImpl> properties = registerField("properties", "properties", null, new MapOverlay<SchemaImpl>("properties", this, SchemaImpl.factory, null));
+    private MapOverlay<SchemaImpl> properties = registerField("properties", "properties", null,
+            new MapOverlay<SchemaImpl>("properties", this, SchemaImpl.factory, null));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private SchemaImpl additionalPropertiesSchema = registerField("additionalProperties", "additionalPropertiesSchema", null, SchemaImpl.factory.create("additionalProperties", this));
+    private SchemaImpl additionalPropertiesSchema = registerField("additionalProperties", "additionalPropertiesSchema",
+            null, SchemaImpl.factory.create("additionalProperties", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private BooleanOverlay additionalProperties = registerField("additionalProperties", "additionalProperties", null, new BooleanOverlay("additionalProperties", this));
+    private BooleanOverlay additionalProperties = registerField("additionalProperties", "additionalProperties", null,
+            new BooleanOverlay("additionalProperties", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay description = registerField("description", "description", null, new StringOverlay("description", this));
+    private StringOverlay description = registerField("description", "description", null,
+            new StringOverlay("description", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     private StringOverlay format = registerField("format", "format", null, new StringOverlay("format", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private AnyObjectOverlay defaultValue = registerField("default", "defaultValue", null, new AnyObjectOverlay("default", this));
+    private AnyObjectOverlay defaultValue = registerField("default", "defaultValue", null,
+            new AnyObjectOverlay("default", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     private BooleanOverlay nullable = registerField("nullable", "nullable", null, new BooleanOverlay("nullable", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay discriminator = registerField("discriminator", "discriminator", null, new StringOverlay("discriminator", this));
+    private StringOverlay discriminator = registerField("discriminator", "discriminator", null,
+            new StringOverlay("discriminator", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     private BooleanOverlay readOnly = registerField("readOnly", "readOnly", null, new BooleanOverlay("readOnly", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private BooleanOverlay writeOnly = registerField("writeOnly", "writeOnly", null, new BooleanOverlay("writeOnly", this));
+    private BooleanOverlay writeOnly = registerField("writeOnly", "writeOnly", null,
+            new BooleanOverlay("writeOnly", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     private XmlImpl xml = registerField("xml", "xml", null, XmlImpl.factory.create("xml", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private ExternalDocsImpl externalDocs = registerField("externalDocs", "externalDocs", null, ExternalDocsImpl.factory.create("externalDocs", this));
+    private ExternalDocsImpl externalDocs = registerField("externalDocs", "externalDocs", null,
+            ExternalDocsImpl.factory.create("externalDocs", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private ValListOverlay<Object, AnyObjectOverlay> examples = registerField("examples", "examples", null, new ValListOverlay<Object, AnyObjectOverlay>("examples", this, AnyObjectOverlay.factory));;
+    private ValListOverlay<Object, AnyObjectOverlay> examples = registerField("examples", "examples", null,
+            new ValListOverlay<Object, AnyObjectOverlay>("examples", this, AnyObjectOverlay.factory));;
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     private AnyObjectOverlay example = registerField("example", "example", null, new AnyObjectOverlay("example", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private BooleanOverlay deprecated = registerField("deprecated", "deprecated", null, new BooleanOverlay("deprecated", this));
+    private BooleanOverlay deprecated = registerField("deprecated", "deprecated", null,
+            new BooleanOverlay("deprecated", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object,AnyObjectOverlay> extensions = registerField("", "extensions", "x-.+", new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+"));
+    private ValMapOverlay<Object, AnyObjectOverlay> extensions = registerField("", "extensions", "x-.+",
+            new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+"));
 
     // Title
     @Override
@@ -386,7 +410,7 @@ public class SchemaImpl extends SwaggerObjectImpl implements Schema {
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     public void setRequiredFields(Collection<String> requiredFields) {
-        this.requiredFields.set((Collection<String>) requiredFields);
+        this.requiredFields.set(requiredFields);
     }
 
     @Override
@@ -429,7 +453,7 @@ public class SchemaImpl extends SwaggerObjectImpl implements Schema {
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     public void setEnums(Collection<Object> enums) {
-        this.enums.set((Collection<Object>) enums);
+        this.enums.set(enums);
     }
 
     @Override
@@ -463,139 +487,139 @@ public class SchemaImpl extends SwaggerObjectImpl implements Schema {
         this.type.set(type);
     }
 
-    // AllOfSchemas
+    // AllOfSchema
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public Collection<? extends Schema> getAllOfSchemass() {
-        return allOfSchemass.get();
+    public Collection<? extends Schema> getAllOfSchemas() {
+        return allOfSchemas.get();
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public boolean hasAllOfSchemass() {
-        return !allOfSchemass.isMissing();
+    public boolean hasAllOfSchemas() {
+        return !allOfSchemas.isMissing();
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public Schema getAllOfSchemas(int index) {
-        return allOfSchemass.get(index);
+    public Schema getAllOfSchema(int index) {
+        return allOfSchemas.get(index);
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setAllOfSchemass(Collection<? extends Schema> allOfSchemass) {
+    public void setAllOfSchemas(Collection<? extends Schema> allOfSchemas) {
         @SuppressWarnings("unchecked")
-            Collection<SchemaImpl> implAllOfSchemass = (Collection<SchemaImpl>) allOfSchemass;
-            this.allOfSchemass.set(implAllOfSchemass);
+        Collection<SchemaImpl> implAllOfSchemas = (Collection<SchemaImpl>) allOfSchemas;
+        this.allOfSchemas.set(implAllOfSchemas);
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setAllOfSchemas(int index, Schema allOfSchemas) {
-        allOfSchemass.set(index, (SchemaImpl) allOfSchemas);
+    public void setAllOfSchema(int index, Schema allOfSchema) {
+        allOfSchemas.set(index, (SchemaImpl) allOfSchema);
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void addAllOfSchemas(Schema allOfSchemas) {
-        allOfSchemass.add((SchemaImpl) allOfSchemas);
+    public void addAllOfSchema(Schema allOfSchema) {
+        allOfSchemas.add((SchemaImpl) allOfSchema);
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void removeAllOfSchemas(int index) {
-        allOfSchemass.remove(index);
+    public void removeAllOfSchema(int index) {
+        allOfSchemas.remove(index);
     }
 
-    // OneOfSchemas
+    // OneOfSchema
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public Collection<? extends Schema> getOneOfSchemass() {
-        return oneOfSchemass.get();
-    }
-
-    @Override
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public boolean hasOneOfSchemass() {
-        return !oneOfSchemass.isMissing();
+    public Collection<? extends Schema> getOneOfSchemas() {
+        return oneOfSchemas.get();
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public Schema getOneOfSchemas(int index) {
-        return oneOfSchemass.get(index);
+    public boolean hasOneOfSchemas() {
+        return !oneOfSchemas.isMissing();
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setOneOfSchemass(Collection<? extends Schema> oneOfSchemass) {
+    public Schema getOneOfSchema(int index) {
+        return oneOfSchemas.get(index);
+    }
+
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public void setOneOfSchemas(Collection<? extends Schema> oneOfSchemas) {
         @SuppressWarnings("unchecked")
-            Collection<SchemaImpl> implOneOfSchemass = (Collection<SchemaImpl>) oneOfSchemass;
-            this.oneOfSchemass.set(implOneOfSchemass);
+        Collection<SchemaImpl> implOneOfSchemas = (Collection<SchemaImpl>) oneOfSchemas;
+        this.oneOfSchemas.set(implOneOfSchemas);
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setOneOfSchemas(int index, Schema oneOfSchemas) {
-        oneOfSchemass.set(index, (SchemaImpl) oneOfSchemas);
+    public void setOneOfSchema(int index, Schema oneOfSchema) {
+        oneOfSchemas.set(index, (SchemaImpl) oneOfSchema);
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void addOneOfSchemas(Schema oneOfSchemas) {
-        oneOfSchemass.add((SchemaImpl) oneOfSchemas);
+    public void addOneOfSchema(Schema oneOfSchema) {
+        oneOfSchemas.add((SchemaImpl) oneOfSchema);
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void removeOneOfSchemas(int index) {
-        oneOfSchemass.remove(index);
+    public void removeOneOfSchema(int index) {
+        oneOfSchemas.remove(index);
     }
 
-    // AnyOfSchemas
+    // AnyOfSchema
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public Collection<? extends Schema> getAnyOfSchemass() {
-        return anyOfSchemass.get();
-    }
-
-    @Override
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public boolean hasAnyOfSchemass() {
-        return !anyOfSchemass.isMissing();
+    public Collection<? extends Schema> getAnyOfSchemas() {
+        return anyOfSchemas.get();
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public Schema getAnyOfSchemas(int index) {
-        return anyOfSchemass.get(index);
+    public boolean hasAnyOfSchemas() {
+        return !anyOfSchemas.isMissing();
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setAnyOfSchemass(Collection<? extends Schema> anyOfSchemass) {
+    public Schema getAnyOfSchema(int index) {
+        return anyOfSchemas.get(index);
+    }
+
+    @Override
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    public void setAnyOfSchemas(Collection<? extends Schema> anyOfSchemas) {
         @SuppressWarnings("unchecked")
-            Collection<SchemaImpl> implAnyOfSchemass = (Collection<SchemaImpl>) anyOfSchemass;
-            this.anyOfSchemass.set(implAnyOfSchemass);
+        Collection<SchemaImpl> implAnyOfSchemas = (Collection<SchemaImpl>) anyOfSchemas;
+        this.anyOfSchemas.set(implAnyOfSchemas);
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setAnyOfSchemas(int index, Schema anyOfSchemas) {
-        anyOfSchemass.set(index, (SchemaImpl) anyOfSchemas);
+    public void setAnyOfSchema(int index, Schema anyOfSchema) {
+        anyOfSchemas.set(index, (SchemaImpl) anyOfSchema);
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void addAnyOfSchemas(Schema anyOfSchemas) {
-        anyOfSchemass.add((SchemaImpl) anyOfSchemas);
+    public void addAnyOfSchema(Schema anyOfSchema) {
+        anyOfSchemas.add((SchemaImpl) anyOfSchema);
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void removeAnyOfSchemas(int index) {
-        anyOfSchemass.remove(index);
+    public void removeAnyOfSchema(int index) {
+        anyOfSchemas.remove(index);
     }
 
     // NotSchema
@@ -647,8 +671,8 @@ public class SchemaImpl extends SwaggerObjectImpl implements Schema {
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     public void setProperties(Map<String, ? extends Schema> properties) {
         @SuppressWarnings("unchecked")
-            Map<String,SchemaImpl> implProperties = (Map<String, SchemaImpl>) properties;
-            this.properties.set(implProperties);
+        Map<String, SchemaImpl> implProperties = (Map<String, SchemaImpl>) properties;
+        this.properties.set(implProperties);
     }
 
     @Override
@@ -852,7 +876,7 @@ public class SchemaImpl extends SwaggerObjectImpl implements Schema {
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     public void setExamples(Collection<Object> examples) {
-        this.examples.set((Collection<Object>) examples);
+        this.examples.set(examples);
     }
 
     @Override
@@ -944,10 +968,10 @@ public class SchemaImpl extends SwaggerObjectImpl implements Schema {
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     public static JsonOverlayFactory<SchemaImpl> factory = new JsonOverlayFactory<SchemaImpl>() {
-    @Override
-    public SchemaImpl create(String key, JsonNode json, JsonOverlay<?> parent) {
-        return isEmptyRecursive(parent, SchemaImpl.class) ? null : new SchemaImpl(key, json, parent);
-    }
-};
+        @Override
+        public SchemaImpl create(String key, JsonNode json, JsonOverlay<?> parent) {
+            return isEmptyRecursive(parent, SchemaImpl.class) ? null : new SchemaImpl(key, json, parent);
+        }
+    };
 
 }

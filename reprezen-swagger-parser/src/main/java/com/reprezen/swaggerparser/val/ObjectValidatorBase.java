@@ -6,11 +6,11 @@ public abstract class ObjectValidatorBase<T> extends ValidatorBase<T> {
     @Inject
     private ImplValidator<T> implValidator;
 
-    public abstract void validateModel(T info, ValidationResults results);
+    public abstract void validateObject(T object, ValidationResults results);
 
     @Override
     public void validate(T value, ValidationResults results) {
-        validateModel(value, results);
+        validateObject(value, results);
         implValidator.validateImpl(value, results);
     }
 

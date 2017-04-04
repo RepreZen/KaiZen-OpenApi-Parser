@@ -37,9 +37,19 @@ public abstract class ValidatorBase<T> implements Validator<T> {
     }
 
     public void validateString(final String value, final ValidationResults results, final boolean required,
+            final String crumb) {
+        validateString(value, results, required, (Pattern) null, crumb);
+    }
+
+    public void validateString(final String value, final ValidationResults results, final boolean required,
             final String pattern, final String crumb) {
+        validateString(value, results, required, Pattern.compile(pattern), crumb);
+    }
+
+    public void validateString(final String value, final ValidationResults results, final boolean required,
+            final Pattern pattern, final String crumb) {
         checkMissing(required, value, results, crumb);
-        if (value != null && !value.matches(pattern)) {
+        if (value != null && !pattern.matcher(value).matches()) {
             results.addError(m.msg("PatternMatchFail|String value does not match required pattern", value, pattern),
                     crumb);
         }
@@ -56,12 +66,12 @@ public abstract class ValidatorBase<T> implements Validator<T> {
 
     public void validateUrl(final String value, final ValidationResults results, boolean required, String crumb,
             final boolean allowVars, final Severity severity) {
-        validateString(value, results, required, null, crumb);
+        validateString(value, results, required, (Pattern) null, crumb);
         checkUrl(value, results, allowVars, severity, crumb);
     }
 
     public void validateEmail(final String value, final ValidationResults results, boolean required, String crumb) {
-        validateString(value, results, required, null, crumb);
+        validateString(value, results, required, (Pattern) null, crumb);
         checkEmail(value, results, crumb);
     }
 

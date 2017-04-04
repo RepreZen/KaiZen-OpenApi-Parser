@@ -13,10 +13,10 @@ public class SecuritySchemeValidator extends ObjectValidatorBase<SecurityScheme>
     private Validator<OAuthFlow> oauthFlowValidator;
 
     @Override
-    public void validateModel(SecurityScheme securityScheme, ValidationResults results) {
+    public void validateObject(SecurityScheme securityScheme, ValidationResults results) {
         // no validation for: description, bearerFormat
         validateString(securityScheme.getType(), results, true, "apiKey|http|oauth2|openIdConnect", "type");
-        validateString(securityScheme.getName(), results, true, null, "name");
+        validateString(securityScheme.getName(), results, true, "name");
         validateString(securityScheme.getIn(), results, true, "query|header", "in");
         // TODO Q: Spec says 'flow' is required, but it's just a map of OAuthFlow objects, none of which is noted as
         // required. What's the real requirement here?

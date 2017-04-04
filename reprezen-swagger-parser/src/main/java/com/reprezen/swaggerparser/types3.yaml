@@ -323,8 +323,6 @@ types:
           - String id
       requestBody:
         name: RequestBody
-        plural: RequestBodies
-        structure: collection
       responses:
         name: Response
         structure: map
@@ -413,7 +411,7 @@ types:
         structure: map
       headers:
         name: Header
-        type: String
+        type: Header
         structure: map
       description:
         name: Description

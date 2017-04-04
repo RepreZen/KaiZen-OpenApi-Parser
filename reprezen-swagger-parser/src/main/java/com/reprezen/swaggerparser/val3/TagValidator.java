@@ -10,11 +10,11 @@ import com.reprezen.swaggerparser.val.Validator;
 public class TagValidator extends ObjectValidatorBase<Tag> {
 
     @Inject
-    Validator<ExternalDocs> externalDocsValidator;
+    private Validator<ExternalDocs> externalDocsValidator;
 
     @Override
-    public void validateModel(Tag tag, ValidationResults results) {
-        validateString(tag.getName(), results, true, null, "name");
+    public void validateObject(Tag tag, ValidationResults results) {
+        validateString(tag.getName(), results, true, "name");
         validateField(tag.getExternalDocs(), results, false, "externalDocs", externalDocsValidator);
         validateExtensions(tag.getExtensions(), results);
     }

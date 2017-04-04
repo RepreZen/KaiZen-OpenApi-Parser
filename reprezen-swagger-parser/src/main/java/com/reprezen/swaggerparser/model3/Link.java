@@ -1,5 +1,6 @@
 package com.reprezen.swaggerparser.model3;
 
+import com.reprezen.swaggerparser.model3.Header;
 import com.reprezen.swaggerparser.model3.SwaggerObject;
 import java.util.Map;
 import javax.annotation.Generated;
@@ -41,19 +42,19 @@ public interface Link extends SwaggerObject {
 
     // Header
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    Map<String, String> getHeaders();
+    Map<String, ? extends Header> getHeaders();
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     boolean hasHeader(String name);
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    String getHeader(String name);
+    Header getHeader(String name);
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    void setHeaders(Map<String, String> headers);
+    void setHeaders(Map<String, ? extends Header> headers);
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    void setHeader(String name, String header);
+    void setHeader(String name, Header header);
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     void removeHeader(String name);

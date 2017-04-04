@@ -18,7 +18,7 @@ public class SchemaValidator extends ObjectValidatorBase<Schema> {
     private Validator<ExternalDocs> externalDocsValidator;
 
     @Override
-    public void validateModel(Schema schema, ValidationResults results) {
+    public void validateObject(Schema schema, ValidationResults results) {
         // no validation for: title, description, maximum, exclusiveMaximum, minimum exclusiveMinimum, uniqueItems,
         // nullable, example, deprecated
         validatePositive(schema.getMultipleOf(), results, false, "multipleOf");

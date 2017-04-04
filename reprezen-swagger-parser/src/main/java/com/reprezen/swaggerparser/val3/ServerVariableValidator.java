@@ -10,7 +10,7 @@ import com.reprezen.swaggerparser.val.ValidationResults;
 public class ServerVariableValidator extends ObjectValidatorBase<ServerVariable> {
 
     @Override
-    public void validateModel(final ServerVariable variable, final ValidationResults results) {
+    public void validateObject(final ServerVariable variable, final ValidationResults results) {
         results.withCrumb("enum", new Runnable() {
             @Override
             public void run() {
@@ -26,7 +26,7 @@ public class ServerVariableValidator extends ObjectValidatorBase<ServerVariable>
                 checkPrimitive(variable.getDefault(), results, "default");
             }
         });
-        validateString(variable.getDescription(), results, false, null, "description");
+        validateString(variable.getDescription(), results, false, "description");
     }
 
     private void checkPrimitive(Object primitive, ValidationResults results, int index) {

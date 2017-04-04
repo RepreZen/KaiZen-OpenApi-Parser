@@ -16,11 +16,11 @@ public class InfoValidator extends ObjectValidatorBase<Info> {
     private Validator<License> licenseValidator;
 
     @Override
-    public void validateModel(Info info, ValidationResults results) {
-        validateString(info.getTitle(), results, true, null, "title");
+    public void validateObject(Info info, ValidationResults results) {
+        validateString(info.getTitle(), results, true, "title");
         validateField(info.getContact(), results, true, "contact", contactValidator);
         validateField(info.getLicense(), results, false, "license", licenseValidator);
-        validateString(info.getVersion(), results, true, null, "version");
+        validateString(info.getVersion(), results, true, "version");
         validateExtensions(info.getExtensions(), results);
     }
 }

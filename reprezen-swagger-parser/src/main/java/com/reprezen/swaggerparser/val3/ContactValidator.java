@@ -7,7 +7,7 @@ import com.reprezen.swaggerparser.val.ValidationResults;
 public class ContactValidator extends ObjectValidatorBase<Contact> {
 
     @Override
-    public void validateModel(Contact contact, ValidationResults results) {
+    public void validateObject(Contact contact, ValidationResults results) {
         validateUrl(contact.getUrl(), results, false, "url");
         validateEmail(contact.getEmail(), results, false, "email");
         validateExtensions(contact.getExtensions(), results);

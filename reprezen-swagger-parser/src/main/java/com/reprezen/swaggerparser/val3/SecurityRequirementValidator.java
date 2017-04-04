@@ -14,7 +14,7 @@ import com.reprezen.swaggerparser.val.ValidationResults;
 public class SecurityRequirementValidator extends ObjectValidatorBase<SecurityRequirement> {
 
     @Override
-    public void validateModel(SecurityRequirement securityRequirement, ValidationResults results) {
+    public void validateObject(SecurityRequirement securityRequirement, ValidationResults results) {
         Swagger3 model = securityRequirement.getModel();
         Set<String> definedSchemes = model.getSecuritySchemes().keySet();
         for (Entry<String, ? extends SecurityParameter> entry : securityRequirement.getRequirements().entrySet()) {

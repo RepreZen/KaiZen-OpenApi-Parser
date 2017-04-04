@@ -88,25 +88,10 @@ public interface Operation extends SwaggerObject {
 
     // RequestBody
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    Collection<? extends RequestBody> getRequestBodies();
+    RequestBody getRequestBody();
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    boolean hasRequestBodies();
-
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    RequestBody getRequestBody(int index);
-
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    void setRequestBodies(Collection<? extends RequestBody> requestBodies);
-
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    void setRequestBody(int index, RequestBody requestBody);
-
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    void addRequestBody(RequestBody requestBody);
-
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    void removeRequestBody(int index);
+    void setRequestBody(RequestBody requestBody);
 
     // Response
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")

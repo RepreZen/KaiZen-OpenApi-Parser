@@ -7,9 +7,10 @@ import com.reprezen.swaggerparser.val.ValidationResults;
 public class ExternalDocsValidator extends ObjectValidatorBase<ExternalDocs> {
 
     @Override
-    public void validateModel(ExternalDocs info, ValidationResults results) {
-        // TODO Auto-generated method stub
-
+    public void validateObject(ExternalDocs externalDocs, ValidationResults results) {
+        // no validation for: description
+        validateUrl(externalDocs.getUrl(), results, true, "externalDocs");
+        validateExtensions(externalDocs.getExtensions(), results);
     }
 
 }

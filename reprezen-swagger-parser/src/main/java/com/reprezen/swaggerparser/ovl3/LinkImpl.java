@@ -3,10 +3,13 @@ package com.reprezen.swaggerparser.ovl3;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.reprezen.swaggerparser.jsonoverlay.JsonOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.JsonOverlayFactory;
+import com.reprezen.swaggerparser.jsonoverlay.coll.MapOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.coll.ValMapOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.std.AnyObjectOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.std.StringOverlay;
+import com.reprezen.swaggerparser.model3.Header;
 import com.reprezen.swaggerparser.model3.Link;
+import com.reprezen.swaggerparser.ovl3.HeaderImpl;
 import com.reprezen.swaggerparser.ovl3.SwaggerObjectImpl;
 import java.util.Map;
 import javax.annotation.Generated;
@@ -33,7 +36,7 @@ public class LinkImpl extends SwaggerObjectImpl implements Link {
     private ValMapOverlay<String,StringOverlay> parameters = registerField("parameters", "parameters", null, new ValMapOverlay<String, StringOverlay>("parameters", this, StringOverlay.factory, null));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<String,StringOverlay> headers = registerField("headers", "headers", null, new ValMapOverlay<String, StringOverlay>("headers", this, StringOverlay.factory, null));
+    private MapOverlay<HeaderImpl> headers = registerField("headers", "headers", null, new MapOverlay<HeaderImpl>("headers", this, HeaderImpl.factory, null));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     private StringOverlay description = registerField("description", "description", null, new StringOverlay("description", this));
@@ -107,7 +110,7 @@ public class LinkImpl extends SwaggerObjectImpl implements Link {
     // Header
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public Map<String, String> getHeaders() {
+    public Map<String, ? extends Header> getHeaders() {
         return headers.get();
     }
 
@@ -119,20 +122,22 @@ public class LinkImpl extends SwaggerObjectImpl implements Link {
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public String getHeader(String name) {
+    public Header getHeader(String name) {
         return headers.get(name);
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setHeaders(Map<String, String> headers) {
-        this.headers.set(headers);
+    public void setHeaders(Map<String, ? extends Header> headers) {
+        @SuppressWarnings("unchecked")
+            Map<String,HeaderImpl> implHeaders = (Map<String, HeaderImpl>) headers;
+            this.headers.set(implHeaders);
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setHeader(String name, String header) {
-        headers.set(name, header);
+    public void setHeader(String name, Header header) {
+        headers.set(name, (HeaderImpl) header);
     }
 
     @Override

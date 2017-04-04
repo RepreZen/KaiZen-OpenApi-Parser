@@ -61,7 +61,7 @@ public class OperationImpl extends SwaggerObjectImpl implements Operation {
     private ListOverlay<ParameterImpl> parameters = registerField("parameters", "parameters", null, new ListOverlay<ParameterImpl>("parameters", this, ParameterImpl.factory));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private ListOverlay<RequestBodyImpl> requestBodies = registerField("requestBody", "requestBodies", null, new ListOverlay<RequestBodyImpl>("requestBody", this, RequestBodyImpl.factory));
+    private RequestBodyImpl requestBody = registerField("requestBody", "requestBody", null, RequestBodyImpl.factory.create("requestBody", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     private MapOverlay<ResponseImpl> responses = registerField("responses", "responses", "default|(\\d\\d\\d)", new MapOverlay<ResponseImpl>("responses", this, ResponseImpl.factory, "default|(\\d\\d\\d)"));
@@ -230,46 +230,14 @@ public class OperationImpl extends SwaggerObjectImpl implements Operation {
     // RequestBody
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public Collection<? extends RequestBody> getRequestBodies() {
-        return requestBodies.get();
+    public RequestBody getRequestBody() {
+        return requestBody;
     }
 
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public boolean hasRequestBodies() {
-        return !requestBodies.isMissing();
-    }
-
-    @Override
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public RequestBody getRequestBody(int index) {
-        return requestBodies.get(index);
-    }
-
-    @Override
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setRequestBodies(Collection<? extends RequestBody> requestBodies) {
-        @SuppressWarnings("unchecked")
-            Collection<RequestBodyImpl> implRequestBodies = (Collection<RequestBodyImpl>) requestBodies;
-            this.requestBodies.set(implRequestBodies);
-    }
-
-    @Override
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void setRequestBody(int index, RequestBody requestBody) {
-        requestBodies.set(index, (RequestBodyImpl) requestBody);
-    }
-
-    @Override
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void addRequestBody(RequestBody requestBody) {
-        requestBodies.add((RequestBodyImpl) requestBody);
-    }
-
-    @Override
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    public void removeRequestBody(int index) {
-        requestBodies.remove(index);
+    public void setRequestBody(RequestBody requestBody) {
+        this.requestBody.set((RequestBodyImpl) requestBody);
     }
 
     // Response

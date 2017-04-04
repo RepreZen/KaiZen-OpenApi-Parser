@@ -49,14 +49,14 @@ public class Swagger3Validator extends ObjectValidatorBase<Swagger3> {
     @Inject
     private Validator<Callback> callbackValidator;
     @Inject
-    Validator<SecurityRequirement> securityRequirementValidator;
+    private Validator<SecurityRequirement> securityRequirementValidator;
     @Inject
-    Validator<Tag> tagValidator;
+    private Validator<Tag> tagValidator;
     @Inject
-    Validator<ExternalDocs> externalDocsValidator;
+    private Validator<ExternalDocs> externalDocsValidator;
 
     @Override
-    public void validateModel(final Swagger3 swagger, final ValidationResults results) {
+    public void validateObject(final Swagger3 swagger, final ValidationResults results) {
         results.withCrumb("model", new Runnable() {
             @Override
             public void run() {

@@ -7,9 +7,12 @@ import com.reprezen.swaggerparser.val.ValidationResults;
 public class EncodingPropertyValidator extends ObjectValidatorBase<EncodingProperty> {
 
     @Override
-    public void validateModel(EncodingProperty info, ValidationResults results) {
-        // TODO Auto-generated method stub
-
+    public void validateObject(EncodingProperty encodingProperty, ValidationResults results) {
+        // no validation for: contentType, explode
+        // TODO Q: spec says "Headers" (capitalized) for peroperty name -assuming it's a typo
+        validateMap(encodingProperty.getHeaders(), results, false, "headers", Regexes.NOEXT_REGEX, null);
+        validateString(encodingProperty.getStyle(), results, false, Regexes.STYLE_REGEX, "style");
+        validateExtensions(encodingProperty.getExtensions(), results);
     }
 
 }

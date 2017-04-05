@@ -54,7 +54,7 @@ public abstract class ValidatorBase<T> implements Validator<T> {
     public void validateString(final String value, final ValidationResults results, final boolean required,
             final Pattern pattern, final String crumb) {
         checkMissing(required, value, results, crumb);
-        if (value != null && !pattern.matcher(value).matches()) {
+        if (value != null && pattern != null && !pattern.matcher(value).matches()) {
             results.addError(m.msg("PatternMatchFail|String value does not match required pattern", value, pattern),
                     crumb);
         }
@@ -143,7 +143,9 @@ public abstract class ValidatorBase<T> implements Validator<T> {
     public <F> void validateField(final F value, final ValidationResults results, final boolean required,
             final String crumb, final Validator<F> validator) {
         checkMissing(required, value, results, crumb);
-        validator.validate(value, results, crumb);
+        if (!isMissing(value)) {
+            validator.validate(value, results, crumb);
+        }
     }
 
     public <V> void validateList(final Collection<? extends V> value, final boolean isPresent,

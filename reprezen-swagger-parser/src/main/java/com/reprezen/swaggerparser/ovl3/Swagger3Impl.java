@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.annotation.Generated;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.google.inject.Inject;
 import com.reprezen.swaggerparser.jsonoverlay.JsonOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.JsonOverlayFactory;
 import com.reprezen.swaggerparser.jsonoverlay.coll.ListOverlay;
@@ -36,7 +37,8 @@ public class Swagger3Impl extends SwaggerObjectImpl implements Swagger3 {
 
     private ValidationResults validationResults = null;
 
-    private Validator<Swagger3> validator = null;
+    @Inject
+    private Validator<Swagger3> validator;
 
     @Override
     public void validate() {

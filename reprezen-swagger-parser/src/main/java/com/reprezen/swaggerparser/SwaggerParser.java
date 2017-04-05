@@ -7,12 +7,26 @@ import java.net.URI;
 import java.net.URL;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import com.reprezen.swaggerparser.jsonoverlay.JsonLoader;
 import com.reprezen.swaggerparser.jsonoverlay.ResolutionBase;
 import com.reprezen.swaggerparser.jsonoverlay.Resolver;
 import com.reprezen.swaggerparser.ovl3.Swagger3Impl;
+import com.reprezen.swaggerparser.val3.ValidationConfigurator;
+import com.reprezen.swaggerparser.val3.ovl.OverlayValidationConfigurator;
 
 public class SwaggerParser {
+
+    private Injector injector;
+
+    public SwaggerParser() {
+        this(new OverlayValidationConfigurator());
+    }
+
+    public SwaggerParser(ValidationConfigurator validationConfigurator) {
+        this.injector = Guice.createInjector(validationConfigurator);
+    }
 
     public Swagger parse(String spec, URL resolutionBase) {
         return parse(spec, resolutionBase, true);
@@ -62,6 +76,7 @@ public class SwaggerParser {
             JsonNode tree = ResolutionBase.get(resolutionBase.toString()).getJson();
             if (isVersion3(tree)) {
                 Swagger3Impl model = new Swagger3Impl(null, tree, null);
+                injector.injectMembers(model);
                 if (validate) {
                     model.validate();
                 }

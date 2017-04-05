@@ -60,11 +60,11 @@ public class Swagger3Validator extends ObjectValidatorBase<Swagger3> {
         results.withCrumb("model", new Runnable() {
             @Override
             public void run() {
-                validateString(swagger.getOpenApi(), results, true, "3\\.\\d+(\\.\\d+)?", "openapi");
+                validateString(swagger.getOpenApi(), results, true, "3\\.\\d+(\\.\\d+.*)?", "openapi");
                 validateField(swagger.getInfo(), results, true, "info", infoValidator);
                 validateList(swagger.getServers(), swagger.hasServers(), results, false, "servers", serverValidator);
-                validateMap(swagger.getPaths(), results, true, "paths", EXT_REGEX, pathValidator);
-                validateMap(swagger.getPathsExtensions(), results, false, "paths", PATH_REGEX, null);
+                validateMap(swagger.getPaths(), results, true, "paths", PATH_REGEX, pathValidator);
+                validateMap(swagger.getPathsExtensions(), results, false, "paths", EXT_REGEX, null);
                 validateMap(swagger.getSchemas(), results, false, "collections/schemas", NAME_REGEX, schemaValidator);
                 validateMap(swagger.getResponses(), results, false, "collections/responses", NAME_REGEX,
                         responseValidator);

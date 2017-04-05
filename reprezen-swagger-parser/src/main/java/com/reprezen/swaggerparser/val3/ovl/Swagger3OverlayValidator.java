@@ -1,7 +1,5 @@
 package com.reprezen.swaggerparser.val3.ovl;
 
-import static com.reprezen.swaggerparser.val.Messages.m;
-
 import com.reprezen.swaggerparser.model3.Swagger3;
 import com.reprezen.swaggerparser.ovl3.Swagger3Impl;
 import com.reprezen.swaggerparser.val.ImplValidator;
@@ -13,7 +11,6 @@ public class Swagger3OverlayValidator extends ObjectValidator<Swagger3Impl> impl
     @Override
     public void validate(Swagger3Impl overlay, ValidationResults results) {
         super.validate(overlay, results);
-        results.addInfo(m.msg("Ha!"));
     }
 
     @Override

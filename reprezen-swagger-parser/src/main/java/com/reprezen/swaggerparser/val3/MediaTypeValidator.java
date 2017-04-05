@@ -23,7 +23,7 @@ public class MediaTypeValidator extends ObjectValidatorBase<MediaType> {
     public void validateObject(MediaType mediaType, ValidationResults results) {
         // no validation for: example, examples
         // TODO Q: Should schema be required in media type?
-        validateField(mediaType.getSchema(), results, true, "schema", schemaValidator);
+        validateField(mediaType.getSchema(), results, false, "schema", schemaValidator);
         validateMap(mediaType.getEncodingProperties(), results, false, "encoding", Regexes.NOEXT_NAME_REGEX,
                 encodingPropertyValidator);
         checkEncodingPropsAreProps(mediaType, results);

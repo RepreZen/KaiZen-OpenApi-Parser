@@ -20,6 +20,7 @@ import com.reprezen.swaggerparser.model3.Response;
 import com.reprezen.swaggerparser.model3.Schema;
 import com.reprezen.swaggerparser.model3.SecurityRequirement;
 import com.reprezen.swaggerparser.model3.SecurityScheme;
+import com.reprezen.swaggerparser.model3.Server;
 import com.reprezen.swaggerparser.model3.ServerVariable;
 import com.reprezen.swaggerparser.model3.Swagger3;
 import com.reprezen.swaggerparser.model3.Tag;
@@ -66,6 +67,8 @@ public abstract class ValidationConfigurator extends AbstractModule {
         }).to(SecurityRequirementValidator.class);
         bind(new TypeLiteral<Validator<SecurityScheme>>() {
         }).to(SecuritySchemeValidator.class);
+        bind(new TypeLiteral<Validator<Server>>() {
+        }).to(ServerValidator.class);
         bind(new TypeLiteral<Validator<ServerVariable>>() {
         }).to(ServerVariableValidator.class);
         bind(new TypeLiteral<Validator<Swagger3>>() {

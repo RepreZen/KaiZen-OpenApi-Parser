@@ -36,7 +36,7 @@ public class ParameterValidator extends ObjectValidatorBase<Parameter> {
     }
 
     private void checkPathParam(Parameter parameter, ValidationResults results) {
-        if (parameter.getIn().equals("path") && parameter.getName() != null) {
+        if (parameter.getIn() != null && parameter.getIn().equals("path") && parameter.getName() != null) {
             String path = getPathString(parameter);
             if (path != null) {
                 if (!path.matches(".*/\\{" + parameter.getName() + "\\}(/.*)?")) {

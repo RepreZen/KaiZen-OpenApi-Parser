@@ -5,6 +5,8 @@ import static com.reprezen.swaggerparser.val.NumericUtils.le;
 import static com.reprezen.swaggerparser.val.NumericUtils.lt;
 import static com.reprezen.swaggerparser.val.NumericUtils.zero;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -12,10 +14,13 @@ import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 import javax.print.attribute.standard.Severity;
 
 import com.google.common.collect.Sets;
 import com.reprezen.swaggerparser.jsonoverlay.JsonOverlay;
+import com.reprezen.swaggerparser.val.swagger.parser.fake.scheme.Handler;
 
 public abstract class ValidatorBase<T> implements Validator<T> {
 
@@ -67,12 +72,16 @@ public abstract class ValidatorBase<T> implements Validator<T> {
     public void validateUrl(final String value, final ValidationResults results, boolean required, String crumb,
             final boolean allowVars, final Severity severity) {
         validateString(value, results, required, (Pattern) null, crumb);
-        checkUrl(value, results, allowVars, severity, crumb);
+        if (value != null) {
+            checkUrl(value, results, allowVars, severity, crumb);
+        }
     }
 
     public void validateEmail(final String value, final ValidationResults results, boolean required, String crumb) {
         validateString(value, results, required, (Pattern) null, crumb);
-        checkEmail(value, results, crumb);
+        if (value != null) {
+            checkEmail(value, results, crumb);
+        }
     }
 
     public <N extends Number> void validatePositive(final N value, final ValidationResults results,
@@ -246,12 +255,60 @@ public abstract class ValidatorBase<T> implements Validator<T> {
         }
     }
 
+    public static final String SPECIAL_SCHEME = Handler.class.getPackage().getName()
+            .substring(ValidatorBase.class.getPackage().getName().length() + 1);
+    private static boolean specialSchemeInited = false;
+
     private void checkUrl(String url, ValidationResults results, boolean allowVars, Severity severity, String crumb) {
-        // TODO implement this
+        // TODO Q: Any help from spec in being able to validate URLs with vars? E.g is our treatment here valid? We
+        // assume vars can only appear where simple text can appear, so handling vars means relacing {.*} with "1" and
+        // testing for URL validity. We use a digit instead of a letter because it covers vars in the port, and
+        // elsewhere digits are always allowed where letters are.
+        String origUrl = url;
+        if (allowVars) {
+            url = url.replaceAll("\\{[^}]+\\}", "1");
+            if (url.startsWith("1:")) {
+                // "1" is not a valid scheme name, so we need to replace it with special scheme, for which we provide a
+                // do-nothing protocol handler implementation
+                url = SPECIAL_SCHEME + url.substring(1);
+                if (!specialSchemeInited) {
+                    // register protocol handler for special scheme
+                    initSpecialScheme();
+                }
+            }
+        }
+        try {
+            new URL(url);
+        } catch (MalformedURLException e) {
+            results.addError(m.msg("BadUrl|Invalid URL", origUrl, e.toString()), crumb);
+        }
+    }
+
+    private void initSpecialScheme() {
+        String prop = "java.protocol.handler.pkgs";
+        String former = System.getProperty(prop);
+        try {
+            System.setProperty(prop, ValidatorBase.class.getPackage().getName());
+            new URL(SPECIAL_SCHEME + ":");
+        } catch (MalformedURLException e) {
+        } finally {
+            if (former != null) {
+                System.setProperty(prop, former);
+            } else {
+                System.getProperties().remove(prop);
+            }
+        }
+        specialSchemeInited = true;
     }
 
     private void checkEmail(String email, ValidationResults results, String crumb) {
-        // TODO implement this
+        try {
+            InternetAddress addr = new InternetAddress();
+            addr.setAddress(email);
+            addr.validate();
+        } catch (AddressException e) {
+            results.addError(m.msg("BadEmail|Invalid email address", email, e.toString()), crumb);
+        }
     }
 
     private boolean isMissing(Object value) {

@@ -61,11 +61,11 @@ public class SchemaValidator extends ObjectValidatorBase<Schema> {
                 results.addError(m.msg("DiscNotProp|The discriminator is not a property of this schema", discriminator),
                         crumb);
             }
-        }
-        if (!schema.getRequiredFields().contains(discriminator)) {
-            results.addError(
-                    m.msg("DiscNotReq|The discriminator property is not required in this schema", discriminator),
-                    crumb);
+            if (!schema.getRequiredFields().contains(discriminator)) {
+                results.addError(
+                        m.msg("DiscNotReq|The discriminator property is not required in this schema", discriminator),
+                        crumb);
+            }
         }
     }
 

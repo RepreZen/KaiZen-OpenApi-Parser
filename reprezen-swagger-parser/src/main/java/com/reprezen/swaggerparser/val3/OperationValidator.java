@@ -37,8 +37,8 @@ public class OperationValidator extends ObjectValidatorBase<Operation> {
         // no validation for: tags, description, deprecated
         checkSummaryLength(operation, results);
         validateField(operation.getExternalDocs(), results, false, "externalDocs", externalDocsValidator);
-        // TODO Q: Not marked as required in spec
-        validateString(operation.getOperationId(), results, true, "operationId");
+        // TODO Q: Not marked as required in spec, but spec says they all must be unique within the API. Seems like it should be required.
+        validateString(operation.getOperationId(), results, false, "operationId");
         validateList(operation.getParameters(), operation.hasParameters(), results, false, "parameters",
                 parameterValidator);
         validateField(operation.getRequestBody(), results, false, "requestBody", requestBodyValidator);

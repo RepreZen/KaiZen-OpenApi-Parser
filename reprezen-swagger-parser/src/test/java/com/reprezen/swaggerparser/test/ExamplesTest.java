@@ -36,8 +36,10 @@ public class ExamplesTest extends Assert {
     public static Collection<URL> findExamples() throws IOException {
         Collection<URL> examples = Lists.newArrayList();
         Deque<URL> dirs = Queues.newArrayDeque();
-        dirs.add(new URL(String.format("https://api.github.com/repos/%s/contents/%s?ref=%s", SPEC_REPO, EXAMPLES_ROOT,
-                EXAMPLES_BRANCH)));
+        String auth = System.getenv("GITHUB_AUTH") != null ? System.getenv("GITHUB_AUTH") + "@" : "";
+        String request = String.format("https://%sapi.github.com/repos/%s/contents/%s?ref=%s", auth, SPEC_REPO,
+                EXAMPLES_ROOT, EXAMPLES_BRANCH);
+        dirs.add(new URL(request));
         while (!dirs.isEmpty()) {
             URL url = dirs.remove();
             String json = IOUtils.toString(url, Charsets.UTF_8);
@@ -51,7 +53,6 @@ public class ExamplesTest extends Assert {
                 } else if (type.equals("file") && (path.endsWith(".yaml") || path.endsWith(".json"))) {
                     String downloadUrl = result.get("download_url").asText();
                     examples.add(new URL(downloadUrl));
-                    // return examples;
                 }
             }
         }
@@ -65,6 +66,7 @@ public class ExamplesTest extends Assert {
     public void exampleCanBeParsed() throws IOException {
         Swagger3 model = (Swagger3) new SwaggerParser().parse(exampleUrl);
         System.out.println(model.isValid());
+        System.out.println(IOUtils.toString(exampleUrl, Charsets.UTF_8));
         for (ValidationItem item : model.getValidationItems()) {
             System.out.println(item);
         }

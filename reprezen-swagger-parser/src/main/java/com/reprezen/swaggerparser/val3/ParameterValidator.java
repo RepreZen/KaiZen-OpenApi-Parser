@@ -3,6 +3,7 @@ package com.reprezen.swaggerparser.val3;
 import static com.reprezen.swaggerparser.val.Messages.m;
 
 import com.google.inject.Inject;
+import com.reprezen.swaggerparser.model3.Header;
 import com.reprezen.swaggerparser.model3.MediaType;
 import com.reprezen.swaggerparser.model3.Parameter;
 import com.reprezen.swaggerparser.model3.Path;
@@ -22,8 +23,9 @@ public class ParameterValidator extends ObjectValidatorBase<Parameter> {
     @Override
     public void validateObject(Parameter parameter, ValidationResults results) {
         // no validations for: description, deprecated, allowEmptyValue, explode, example, examples
-        validateString(parameter.getName(), results, true, "name");
-        validateString(parameter.getIn(), results, true, Regexes.PARAM_IN_REGEX, "in");
+        boolean isHeader = parameter instanceof Header;
+        validateString(parameter.getName(), results, !isHeader, "name");
+        validateString(parameter.getIn(), results, !isHeader, Regexes.PARAM_IN_REGEX, "in");
         checkPathParam(parameter, results);
         checkRequired(parameter, results);
         validateString(parameter.getStyle(), results, false, Regexes.STYLE_REGEX, "style");

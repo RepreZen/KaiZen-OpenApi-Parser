@@ -29,7 +29,7 @@ public class SecuritySchemeValidator extends ObjectValidatorBase<SecurityScheme>
         validateString(securityScheme.getName(), results, true, "name");
         validateString(securityScheme.getIn(), results, true, "query|header", "in");
         // TODO Q: Spec says 'flow' is required, but it's just a map of OAuthFlow objects, none of which is noted as
-//         required. What's the real requirement here? Is anything required if type != oauth2
+        // required. What's the real requirement here? Is anything required if type != oauth2
         validateField(securityScheme.getImplicitOAuthFlow(), results, false, "flow.implicit", oauthFlowValidator);
         validateExtensions(securityScheme.getOAuthFlowsExtensions(), results, "flow");
         // TODO Q: is this really required if type != openIdConnect?

@@ -19,11 +19,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.annotation.Generated;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.github.javaparser.JavaParser;
@@ -33,6 +35,7 @@ import com.github.javaparser.ast.body.BodyDeclaration;
 import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.TypeDeclaration;
+import com.github.javaparser.ast.comments.Comment;
 import com.github.javaparser.ast.expr.AnnotationExpr;
 import com.github.javaparser.ast.nodeTypes.NodeWithAnnotations;
 import com.google.common.base.Function;
@@ -87,6 +90,7 @@ public abstract class TypeGenerator {
         String declaration = getTypeDeclaration(type, suffix);
         SimpleJavaGenerator gen = new SimpleJavaGenerator(getPackage(), declaration);
         if (existing != null) {
+            copyFileComment(gen, existing);
             addManualMethods(gen, existing);
         }
         requireTypes(getImports(type));
@@ -238,6 +242,13 @@ public abstract class TypeGenerator {
             e.printStackTrace();
             System.exit(1);
             return null;
+        }
+    }
+
+    private void copyFileComment(SimpleJavaGenerator gen, CompilationUnit existing) {
+        Optional<Comment> fileComment = existing.getComment();
+        if (fileComment.isPresent()) {
+            gen.setFileComment(fileComment.get().toString());
         }
     }
 

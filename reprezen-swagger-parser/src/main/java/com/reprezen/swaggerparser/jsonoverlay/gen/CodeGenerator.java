@@ -126,6 +126,9 @@ public class CodeGenerator {
             if (cmd.hasOption('t')) {
                 typeDataFile = new File(cmd.getOptionValue('t'));
             }
+            if (cmd.hasOption('d')) {
+                topDir = new File(cmd.getOptionValue('d'));
+            }
             if (cmd.hasOption('i')) {
                 interfaceDir = new File(cmd.getOptionValue('i'));
             }

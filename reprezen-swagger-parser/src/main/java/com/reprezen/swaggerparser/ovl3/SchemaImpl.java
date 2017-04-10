@@ -420,7 +420,7 @@ public class SchemaImpl extends SwaggerObjectImpl implements Schema {
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     public void setRequiredFields(Collection<String> requiredFields) {
-        this.requiredFields.set(requiredFields);
+        this.requiredFields.set((Collection<String>) requiredFields);
     }
 
     @Override
@@ -463,7 +463,7 @@ public class SchemaImpl extends SwaggerObjectImpl implements Schema {
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     public void setEnums(Collection<Object> enums) {
-        this.enums.set(enums);
+        this.enums.set((Collection<Object>) enums);
     }
 
     @Override
@@ -886,7 +886,7 @@ public class SchemaImpl extends SwaggerObjectImpl implements Schema {
     @Override
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     public void setExamples(Collection<Object> examples) {
-        this.examples.set(examples);
+        this.examples.set((Collection<Object>) examples);
     }
 
     @Override

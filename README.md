@@ -128,6 +128,9 @@ All packages are currently prefixed by `com.reprezen.`
   implemented so far. More needed
 
 
+## License
+RepreZen Swagger Parser is provided under the Eclipse Public License (https://www.eclipse.org/legal/epl-v10.html)
+
 ## Contributing
 
 We welcome serious contributors. However, we are at an early and

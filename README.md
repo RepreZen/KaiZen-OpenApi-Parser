@@ -14,8 +14,8 @@ Feature highlights include:
   `JsonNode` objects, rather than deserializing to internal POJOs.
   
 * **Read/Write API** - All aspects of a model may be interrogated and
-  modified through the API. We also provide fluent builders for all
-  API object types. API provides bidirectional navigation through the
+  modified. We also provide fluent builders for all
+  model object types. We provide bidirectional navigation throughout the
   model, and every object that is a property value of its containing
   object (whether as a named field or a map entry) knows its own key.
   
@@ -25,10 +25,13 @@ Feature highlights include:
   
 * **Separate, extensible validation** - All validation beyond base
   JSON/YAML parsing is performed after the initial parse, and it can
-  be disabled for speed. API-level validation is separated from
-  injectable implementation-level validation. The latter, for example,
-  is where unrecognized JSON properties can be noted, as these are not
-  visible from the model API.
+  be disabled for speed. Model-level validation (i.e. anything that can
+  be checked with our provided Java API) is separated from
+  injectable implementation-level validation. The latter covers anything
+  that needs to look "under the covers", using methods of the implementation
+  classes that lie outside the model API. For example, this
+  is where unrecognized JSON properties would be noted and flagged, 
+  as they are not visible from the model API.
 
 * **Serialization** - Serialization to JSON or YAML is supported, and
   by default, round-tripping will not cause any reordering of model
@@ -45,6 +48,7 @@ Feature highlights include:
   create interfaces and implementation classes. Member-level
   `@Generated` annotations make it possible to augment the generated
   sources with manual code that is preserved during re-generation.
+  
 * **Flexible Reference Handling** - References are detected and
   resolved after JSON/YAML parsing but before model-level parsing. All
   JSON references are processed, resulting in effective inlining for
@@ -134,9 +138,11 @@ RepreZen Swagger Parser is provided under the Eclipse Public License (https://ww
 ## Contributing
 
 We welcome serious contributors. However, we are at an early and
-fast-changing phase in this project, so coordination with
-collaborators is paricularly important.
+fast-changing phase in this project, so we recommend coordinating
+with us before diving into a juicy bit of coding. This might spare 
+you the frustration of finding that some sweeping low-level change
+has rendered your efforts unusable.
 
 If you would like to work with us, please drop us a line at
-info@reprezen.com and let us know where you would like to focus,
-before forking the repo and picking off an open issue.
+info@reprezen.com, or piggy-back on a new issue if you have
+a suggestion or want to report a bug or omission.

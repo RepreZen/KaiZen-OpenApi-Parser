@@ -10,11 +10,6 @@
  *******************************************************************************/
 package com.reprezen.swaggerparser.ovl3;
 
-import java.util.Collection;
-import java.util.Map;
-
-import javax.annotation.Generated;
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.inject.Inject;
 import com.reprezen.swaggerparser.jsonoverlay.JsonOverlay;
@@ -39,9 +34,28 @@ import com.reprezen.swaggerparser.model3.SecurityScheme;
 import com.reprezen.swaggerparser.model3.Server;
 import com.reprezen.swaggerparser.model3.Swagger3;
 import com.reprezen.swaggerparser.model3.Tag;
+import com.reprezen.swaggerparser.ovl3.CallbackImpl;
+import com.reprezen.swaggerparser.ovl3.ExternalDocsImpl;
+import com.reprezen.swaggerparser.ovl3.HeaderImpl;
+import com.reprezen.swaggerparser.ovl3.InfoImpl;
+import com.reprezen.swaggerparser.ovl3.LinkImpl;
+import com.reprezen.swaggerparser.ovl3.ParameterImpl;
+import com.reprezen.swaggerparser.ovl3.PathImpl;
+import com.reprezen.swaggerparser.ovl3.RequestBodyImpl;
+import com.reprezen.swaggerparser.ovl3.ResponseImpl;
+import com.reprezen.swaggerparser.ovl3.SchemaImpl;
+import com.reprezen.swaggerparser.ovl3.SecurityRequirementImpl;
+import com.reprezen.swaggerparser.ovl3.SecuritySchemeImpl;
+import com.reprezen.swaggerparser.ovl3.ServerImpl;
+import com.reprezen.swaggerparser.ovl3.SwaggerObjectImpl;
+import com.reprezen.swaggerparser.ovl3.TagImpl;
 import com.reprezen.swaggerparser.val.ValidationResults;
 import com.reprezen.swaggerparser.val.ValidationResults.Severity;
 import com.reprezen.swaggerparser.val.Validator;
+import com.reprezen.swaggerparser.val3.Swagger3Validator;
+import java.util.Collection;
+import java.util.Map;
+import javax.annotation.Generated;
 
 public class Swagger3Impl extends SwaggerObjectImpl implements Swagger3 {
 
@@ -93,79 +107,55 @@ public class Swagger3Impl extends SwaggerObjectImpl implements Swagger3 {
     private InfoImpl info = registerField("info", "info", null, InfoImpl.factory.create("info", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private ListOverlay<ServerImpl> servers = registerField("servers", "servers", null,
-            new ListOverlay<ServerImpl>("servers", this, ServerImpl.factory));
+    private ListOverlay<ServerImpl> servers = registerField("servers", "servers", null, new ListOverlay<ServerImpl>("servers", this, ServerImpl.factory));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<PathImpl> paths = registerField("paths", "paths", "/.+",
-            new MapOverlay<PathImpl>("paths", this, PathImpl.factory, "/.+"));
+    private MapOverlay<PathImpl> paths = registerField("paths", "paths", "/.+", new MapOverlay<PathImpl>("paths", this, PathImpl.factory, "/.+"));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object, AnyObjectOverlay> pathsExtensions = registerField("paths", "pathsExtensions", "x-.+",
-            new ValMapOverlay<Object, AnyObjectOverlay>("paths", this, AnyObjectOverlay.factory, "x-.+"));
+    private ValMapOverlay<Object,AnyObjectOverlay> pathsExtensions = registerField("paths", "pathsExtensions", "x-.+", new ValMapOverlay<Object, AnyObjectOverlay>("paths", this, AnyObjectOverlay.factory, "x-.+"));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<SchemaImpl> schemas = registerField("components/schemas", "schemas", "[a-zA-Z0-9\\._-]+",
-            new MapOverlay<SchemaImpl>("components/schemas", this, SchemaImpl.factory, "[a-zA-Z0-9\\._-]+"));
+    private MapOverlay<SchemaImpl> schemas = registerField("components/schemas", "schemas", "[a-zA-Z0-9\\._-]+", new MapOverlay<SchemaImpl>("components/schemas", this, SchemaImpl.factory, "[a-zA-Z0-9\\._-]+"));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<ResponseImpl> responses = registerField("components/responses", "responses", "[a-zA-Z0-9\\._-]+",
-            new MapOverlay<ResponseImpl>("components/responses", this, ResponseImpl.factory, "[a-zA-Z0-9\\._-]+"));
+    private MapOverlay<ResponseImpl> responses = registerField("components/responses", "responses", "[a-zA-Z0-9\\._-]+", new MapOverlay<ResponseImpl>("components/responses", this, ResponseImpl.factory, "[a-zA-Z0-9\\._-]+"));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<ParameterImpl> parameters = registerField("components/parameters", "parameters",
-            "[a-zA-Z0-9\\._-]+",
-            new MapOverlay<ParameterImpl>("components/parameters", this, ParameterImpl.factory, "[a-zA-Z0-9\\._-]+"));
+    private MapOverlay<ParameterImpl> parameters = registerField("components/parameters", "parameters", "[a-zA-Z0-9\\._-]+", new MapOverlay<ParameterImpl>("components/parameters", this, ParameterImpl.factory, "[a-zA-Z0-9\\._-]+"));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object, AnyObjectOverlay> examples = registerField("components/examples", "examples",
-            "[a-zA-Z0-9\\._-]+", new ValMapOverlay<Object, AnyObjectOverlay>("components/examples", this,
-                    AnyObjectOverlay.factory, "[a-zA-Z0-9\\._-]+"));
+    private ValMapOverlay<Object,AnyObjectOverlay> examples = registerField("components/examples", "examples", "[a-zA-Z0-9\\._-]+", new ValMapOverlay<Object, AnyObjectOverlay>("components/examples", this, AnyObjectOverlay.factory, "[a-zA-Z0-9\\._-]+"));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<RequestBodyImpl> requestBodies = registerField("components/requestBodies", "requestBodies",
-            "[a-zA-Z0-9\\._-]+", new MapOverlay<RequestBodyImpl>("components/requestBodies", this,
-                    RequestBodyImpl.factory, "[a-zA-Z0-9\\._-]+"));
+    private MapOverlay<RequestBodyImpl> requestBodies = registerField("components/requestBodies", "requestBodies", "[a-zA-Z0-9\\._-]+", new MapOverlay<RequestBodyImpl>("components/requestBodies", this, RequestBodyImpl.factory, "[a-zA-Z0-9\\._-]+"));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<HeaderImpl> headers = registerField("components/headers", "headers", "[a-zA-Z0-9\\._-]+",
-            new MapOverlay<HeaderImpl>("components/headers", this, HeaderImpl.factory, "[a-zA-Z0-9\\._-]+"));
+    private MapOverlay<HeaderImpl> headers = registerField("components/headers", "headers", "[a-zA-Z0-9\\._-]+", new MapOverlay<HeaderImpl>("components/headers", this, HeaderImpl.factory, "[a-zA-Z0-9\\._-]+"));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<SecuritySchemeImpl> securitySchemes = registerField("components/securitySchemes",
-            "securitySchemes", "[a-zA-Z0-9\\._-]+", new MapOverlay<SecuritySchemeImpl>("components/securitySchemes",
-                    this, SecuritySchemeImpl.factory, "[a-zA-Z0-9\\._-]+"));
+    private MapOverlay<SecuritySchemeImpl> securitySchemes = registerField("components/securitySchemes", "securitySchemes", "[a-zA-Z0-9\\._-]+", new MapOverlay<SecuritySchemeImpl>("components/securitySchemes", this, SecuritySchemeImpl.factory, "[a-zA-Z0-9\\._-]+"));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<LinkImpl> links = registerField("components/links", "links", "[a-zA-Z0-9\\._-]+",
-            new MapOverlay<LinkImpl>("components/links", this, LinkImpl.factory, "[a-zA-Z0-9\\._-]+"));
+    private MapOverlay<LinkImpl> links = registerField("components/links", "links", "[a-zA-Z0-9\\._-]+", new MapOverlay<LinkImpl>("components/links", this, LinkImpl.factory, "[a-zA-Z0-9\\._-]+"));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<CallbackImpl> callbacks = registerField("components/callbacks", "callbacks",
-            "(?!x-)[a-zA-Z0-9\\._-]+", new MapOverlay<CallbackImpl>("components/callbacks", this, CallbackImpl.factory,
-                    "(?!x-)[a-zA-Z0-9\\._-]+"));
+    private MapOverlay<CallbackImpl> callbacks = registerField("components/callbacks", "callbacks", "(?!x-)[a-zA-Z0-9\\._-]+", new MapOverlay<CallbackImpl>("components/callbacks", this, CallbackImpl.factory, "(?!x-)[a-zA-Z0-9\\._-]+"));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object, AnyObjectOverlay> componentsExtensions = registerField("components",
-            "componentsExtensions", "x-.+",
-            new ValMapOverlay<Object, AnyObjectOverlay>("components", this, AnyObjectOverlay.factory, "x-.+"));
+    private ValMapOverlay<Object,AnyObjectOverlay> componentsExtensions = registerField("components", "componentsExtensions", "x-.+", new ValMapOverlay<Object, AnyObjectOverlay>("components", this, AnyObjectOverlay.factory, "x-.+"));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private ListOverlay<SecurityRequirementImpl> securityRequirements = registerField("security",
-            "securityRequirements", null,
-            new ListOverlay<SecurityRequirementImpl>("security", this, SecurityRequirementImpl.factory));
+    private ListOverlay<SecurityRequirementImpl> securityRequirements = registerField("security", "securityRequirements", null, new ListOverlay<SecurityRequirementImpl>("security", this, SecurityRequirementImpl.factory));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private ListOverlay<TagImpl> tags = registerField("tags", "tags", null,
-            new ListOverlay<TagImpl>("tags", this, TagImpl.factory));
+    private ListOverlay<TagImpl> tags = registerField("tags", "tags", null, new ListOverlay<TagImpl>("tags", this, TagImpl.factory));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private ExternalDocsImpl externalDocs = registerField("externalDocs", "externalDocs", null,
-            ExternalDocsImpl.factory.create("externalDocs", this));
+    private ExternalDocsImpl externalDocs = registerField("externalDocs", "externalDocs", null, ExternalDocsImpl.factory.create("externalDocs", this));
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object, AnyObjectOverlay> extensions = registerField("", "extensions", "x-.+",
-            new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+"));
+    private ValMapOverlay<Object,AnyObjectOverlay> extensions = registerField("", "extensions", "x-.+", new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+"));
 
     // OpenApi
     @Override
@@ -216,8 +206,8 @@ public class Swagger3Impl extends SwaggerObjectImpl implements Swagger3 {
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     public void setServers(Collection<? extends Server> servers) {
         @SuppressWarnings("unchecked")
-        Collection<ServerImpl> implServers = (Collection<ServerImpl>) servers;
-        this.servers.set(implServers);
+            Collection<ServerImpl> implServers = (Collection<ServerImpl>) servers;
+            this.servers.set(implServers);
     }
 
     @Override
@@ -261,8 +251,8 @@ public class Swagger3Impl extends SwaggerObjectImpl implements Swagger3 {
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     public void setPaths(Map<String, ? extends Path> paths) {
         @SuppressWarnings("unchecked")
-        Map<String, PathImpl> implPaths = (Map<String, PathImpl>) paths;
-        this.paths.set(implPaths);
+            Map<String,PathImpl> implPaths = (Map<String, PathImpl>) paths;
+            this.paths.set(implPaths);
     }
 
     @Override
@@ -337,8 +327,8 @@ public class Swagger3Impl extends SwaggerObjectImpl implements Swagger3 {
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     public void setSchemas(Map<String, ? extends Schema> schemas) {
         @SuppressWarnings("unchecked")
-        Map<String, SchemaImpl> implSchemas = (Map<String, SchemaImpl>) schemas;
-        this.schemas.set(implSchemas);
+            Map<String,SchemaImpl> implSchemas = (Map<String, SchemaImpl>) schemas;
+            this.schemas.set(implSchemas);
     }
 
     @Override
@@ -376,8 +366,8 @@ public class Swagger3Impl extends SwaggerObjectImpl implements Swagger3 {
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     public void setResponses(Map<String, ? extends Response> responses) {
         @SuppressWarnings("unchecked")
-        Map<String, ResponseImpl> implResponses = (Map<String, ResponseImpl>) responses;
-        this.responses.set(implResponses);
+            Map<String,ResponseImpl> implResponses = (Map<String, ResponseImpl>) responses;
+            this.responses.set(implResponses);
     }
 
     @Override
@@ -415,8 +405,8 @@ public class Swagger3Impl extends SwaggerObjectImpl implements Swagger3 {
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     public void setParameters(Map<String, ? extends Parameter> parameters) {
         @SuppressWarnings("unchecked")
-        Map<String, ParameterImpl> implParameters = (Map<String, ParameterImpl>) parameters;
-        this.parameters.set(implParameters);
+            Map<String,ParameterImpl> implParameters = (Map<String, ParameterImpl>) parameters;
+            this.parameters.set(implParameters);
     }
 
     @Override
@@ -491,8 +481,8 @@ public class Swagger3Impl extends SwaggerObjectImpl implements Swagger3 {
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     public void setRequestBodies(Map<String, ? extends RequestBody> requestBodies) {
         @SuppressWarnings("unchecked")
-        Map<String, RequestBodyImpl> implRequestBodies = (Map<String, RequestBodyImpl>) requestBodies;
-        this.requestBodies.set(implRequestBodies);
+            Map<String,RequestBodyImpl> implRequestBodies = (Map<String, RequestBodyImpl>) requestBodies;
+            this.requestBodies.set(implRequestBodies);
     }
 
     @Override
@@ -530,8 +520,8 @@ public class Swagger3Impl extends SwaggerObjectImpl implements Swagger3 {
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     public void setHeaders(Map<String, ? extends Header> headers) {
         @SuppressWarnings("unchecked")
-        Map<String, HeaderImpl> implHeaders = (Map<String, HeaderImpl>) headers;
-        this.headers.set(implHeaders);
+            Map<String,HeaderImpl> implHeaders = (Map<String, HeaderImpl>) headers;
+            this.headers.set(implHeaders);
     }
 
     @Override
@@ -569,8 +559,8 @@ public class Swagger3Impl extends SwaggerObjectImpl implements Swagger3 {
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     public void setSecuritySchemes(Map<String, ? extends SecurityScheme> securitySchemes) {
         @SuppressWarnings("unchecked")
-        Map<String, SecuritySchemeImpl> implSecuritySchemes = (Map<String, SecuritySchemeImpl>) securitySchemes;
-        this.securitySchemes.set(implSecuritySchemes);
+            Map<String,SecuritySchemeImpl> implSecuritySchemes = (Map<String, SecuritySchemeImpl>) securitySchemes;
+            this.securitySchemes.set(implSecuritySchemes);
     }
 
     @Override
@@ -608,8 +598,8 @@ public class Swagger3Impl extends SwaggerObjectImpl implements Swagger3 {
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     public void setLinks(Map<String, ? extends Link> links) {
         @SuppressWarnings("unchecked")
-        Map<String, LinkImpl> implLinks = (Map<String, LinkImpl>) links;
-        this.links.set(implLinks);
+            Map<String,LinkImpl> implLinks = (Map<String, LinkImpl>) links;
+            this.links.set(implLinks);
     }
 
     @Override
@@ -647,8 +637,8 @@ public class Swagger3Impl extends SwaggerObjectImpl implements Swagger3 {
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     public void setCallbacks(Map<String, ? extends Callback> callbacks) {
         @SuppressWarnings("unchecked")
-        Map<String, CallbackImpl> implCallbacks = (Map<String, CallbackImpl>) callbacks;
-        this.callbacks.set(implCallbacks);
+            Map<String,CallbackImpl> implCallbacks = (Map<String, CallbackImpl>) callbacks;
+            this.callbacks.set(implCallbacks);
     }
 
     @Override
@@ -723,8 +713,8 @@ public class Swagger3Impl extends SwaggerObjectImpl implements Swagger3 {
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     public void setSecurityRequirements(Collection<? extends SecurityRequirement> securityRequirements) {
         @SuppressWarnings("unchecked")
-        Collection<SecurityRequirementImpl> implSecurityRequirements = (Collection<SecurityRequirementImpl>) securityRequirements;
-        this.securityRequirements.set(implSecurityRequirements);
+            Collection<SecurityRequirementImpl> implSecurityRequirements = (Collection<SecurityRequirementImpl>) securityRequirements;
+            this.securityRequirements.set(implSecurityRequirements);
     }
 
     @Override
@@ -768,8 +758,8 @@ public class Swagger3Impl extends SwaggerObjectImpl implements Swagger3 {
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     public void setTags(Collection<? extends Tag> tags) {
         @SuppressWarnings("unchecked")
-        Collection<TagImpl> implTags = (Collection<TagImpl>) tags;
-        this.tags.set(implTags);
+            Collection<TagImpl> implTags = (Collection<TagImpl>) tags;
+            this.tags.set(implTags);
     }
 
     @Override
@@ -842,10 +832,10 @@ public class Swagger3Impl extends SwaggerObjectImpl implements Swagger3 {
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     public static JsonOverlayFactory<Swagger3Impl> factory = new JsonOverlayFactory<Swagger3Impl>() {
-        @Override
-        public Swagger3Impl create(String key, JsonNode json, JsonOverlay<?> parent) {
-            return isEmptyRecursive(parent, Swagger3Impl.class) ? null : new Swagger3Impl(key, json, parent);
-        }
-    };
+    @Override
+    public Swagger3Impl create(String key, JsonNode json, JsonOverlay<?> parent) {
+        return isEmptyRecursive(parent, Swagger3Impl.class) ? null : new Swagger3Impl(key, json, parent);
+    }
+};
 
 }

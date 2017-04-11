@@ -21,7 +21,7 @@ types:
   - name: Swagger3
     imports: 
       intf:  [ ValidationResults ]
-      impl: [ Swagger3Validator, ValidationResults, Severity ]
+      impl: [ Swagger3Validator, Validator, ValidationResults, Severity, Inject ]
     extendInterfaces: [Swagger]
     fields:
       openapi:
@@ -522,6 +522,8 @@ types:
       *extName: *extDef
 
   - name: Schema
+    imports:
+      impl: [ Optional ]
     fields:
       title:
         name: Title

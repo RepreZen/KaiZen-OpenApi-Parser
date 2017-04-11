@@ -36,10 +36,12 @@ import com.github.javaparser.ast.comments.Comment;
 import com.github.javaparser.ast.expr.AnnotationExpr;
 import com.google.common.base.Charsets;
 import com.google.common.base.Function;
+import com.google.common.base.Optional;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.google.inject.Inject;
 import com.reprezen.swaggerparser.Swagger;
 import com.reprezen.swaggerparser.jsonoverlay.JsonOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.JsonOverlayFactory;
@@ -59,6 +61,7 @@ import com.reprezen.swaggerparser.jsonoverlay.std.PrimitiveOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.std.StringOverlay;
 import com.reprezen.swaggerparser.val.ValidationResults;
 import com.reprezen.swaggerparser.val.ValidationResults.Severity;
+import com.reprezen.swaggerparser.val.Validator;
 import com.reprezen.swaggerparser.val3.Swagger3Validator;
 
 public abstract class TypeGenerator {
@@ -160,9 +163,11 @@ public abstract class TypeGenerator {
                 Generated.class, //
                 Collection.class, //
                 Map.class, //
+                Optional.class, //
                 JsonNode.class, //
                 JsonOverlay.class, //
                 JsonOverlayFactory.class, //
+                Inject.class, //
                 StringOverlay.class, //
                 IntegerOverlay.class, //
                 NumberOverlay.class, //
@@ -173,6 +178,7 @@ public abstract class TypeGenerator {
                 ValListOverlay.class, //
                 MapOverlay.class, //
                 ValMapOverlay.class, //
+                Validator.class, //
                 ValidationResults.class, //
                 Swagger3Validator.class, //
                 Swagger.class, //

@@ -26,6 +26,7 @@ import com.reprezen.swaggerparser.ovl3.Swagger3Impl;
 import com.reprezen.swaggerparser.val3.ValidationConfigurator;
 import com.reprezen.swaggerparser.val3.ovl.OverlayValidationConfigurator;
 
+
 public class SwaggerParser {
 
     private Injector injector;

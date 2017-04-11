@@ -8,7 +8,7 @@
  *  Contributors:
  *     ModelSolv, Inc. - initial API and implementation and/or initial documentation
  *******************************************************************************/
-package com.reprezen.swaggerparser.ovl3;
+package com.reprezen.swaggerparser.impl3;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.reprezen.swaggerparser.jsonoverlay.JsonOverlay;
@@ -33,10 +33,7 @@ public class SwaggerObjectImpl extends ObjectOverlay<SwaggerObjectImpl> implemen
 
     @Override
     public SwaggerObject getParent() {
-        JsonOverlay<?> parent = getParentOverlay();
-        while (parent != null && !(parent instanceof SwaggerObject)) {
-            parent = parent.getParentOverlay();
-        }
-        return (SwaggerObject) parent;
+        return (SwaggerObject) getParentOverlay();
     }
+
 }

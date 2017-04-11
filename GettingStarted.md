@@ -12,6 +12,8 @@ From this directory, you can use:
 * `mvn test` to compile and run tests
 * etc.
 
+### Special Considerations for Tests
+
 If you run tests, please note the following special instructions:
 
 1. Set environment variable `OAS_PARSER_LAX_REQUIRED=true` in order to
@@ -27,6 +29,19 @@ If you run tests, please note the following special instructions:
    examples from the `OAI/OpenAPI-Specification` repo (currently, the
    [`dm/exampless` branch](https://github.com/OAI/OpenAPI-Specification/tree/dm/examples/examples/v3.0), and rate limits are severe for
    unauthenticated requests.
+
+### Regenerating Code
+
+The KaiZen parser generates interfaces and implementation classes for
+all OpeanAPI object types, based on information provided in a
+YAML-based DSL (`types3.yaml`). The git repo always contains
+up-to-date copies of all these generated sources, but if you ever want
+to regenerate them, you need to activate the `gen` maven profile, as
+in:
+
+```
+mvn compile -P gen
+```
 
 ## A Simple Example
 

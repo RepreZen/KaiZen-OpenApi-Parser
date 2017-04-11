@@ -21,7 +21,12 @@ If you run tests, please note the following special instructions:
    succeed. Some of the published examples are missing properties that
    the KaiZen parser treats as required - primarily the `type`
    parameter in `Schema` objects. The environment setting suppresses
-   required property checks.
+   required property checks. 
+   
+   _Note:_ This is a temporary feature that allows tests to pass while
+   we sort out whether our interpretation of `type` as a required 
+   property is correct. This behavior will be moved once either our
+   validator or the example models are fixed.
 
 2. If you expect to frequently run tests, you should set GITHUB_AUTH
    environment variable to your GitHub `username:password`. The

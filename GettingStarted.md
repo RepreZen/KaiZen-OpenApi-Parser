@@ -89,7 +89,7 @@ public class Test {
     }
 
     private static void processModel(URI modelUri, boolean validate) {
-        OpenApi3 model = (OpenApi3) new OpenApiParser().parse(modelUri);
+        OpenApi3 model = (OpenApi3) new OpenApiParser().parse(modelUri, validate);
         System.out.printf("== Model %s\n", modelUri);
         if (!validate || model.isValid()) {
             describeModel(model);

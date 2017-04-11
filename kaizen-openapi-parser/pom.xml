@@ -1,0 +1,98 @@
+<!--
+    Copyright (c) 2017 ModelSolv, Inc. and others.
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License v1.0
+    which accompanies this distribution, and is available at
+    http://www.eclipse.org/legal/epl-v10.html
+    
+    Contributors:
+    ModelSolv, Inc. - initial API and implementation and/or initial documentation
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.reprezen.kaizen</groupId>
+    <artifactId>openapi-parser</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>KaiZen OpenAPI Parser by RepreZen</name>
+    <dependencies>
+	<dependency>
+	    <groupId>com.github.javaparser</groupId>
+	    <artifactId>javaparser-core</artifactId>
+	    <version>2.5.1</version>
+	</dependency>
+	<dependency>
+	    <groupId>com.google.guava</groupId>
+	    <artifactId>guava</artifactId>
+	    <version>15.0</version>
+	</dependency>
+	<dependency>
+	    <groupId>junit</groupId>
+	    <artifactId>junit</artifactId>
+	    <version>4.12</version>
+	</dependency>
+	<dependency>
+	    <groupId>com.fasterxml.jackson.core</groupId>
+	    <artifactId>jackson-databind</artifactId>
+	    <version>2.8.4</version>
+	</dependency>
+	<dependency>
+	    <groupId>commons-cli</groupId>
+	    <artifactId>commons-cli</artifactId>
+	    <version>1.4</version>
+	</dependency>
+	<dependency>
+	    <groupId>com.fasterxml.jackson.dataformat</groupId>
+	    <artifactId>jackson-dataformat-yaml</artifactId>
+	    <version>2.8.4</version>
+	</dependency>
+	<dependency>
+	    <groupId>commons-io</groupId>
+	    <artifactId>commons-io</artifactId>
+	    <version>2.5</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.apache.commons</groupId>
+	    <artifactId>commons-lang3</artifactId>
+	    <version>3.5</version>
+	</dependency>
+	<dependency>
+	    <groupId>com.google.inject</groupId>
+	    <artifactId>guice</artifactId>
+	    <version>4.1.0</version>
+	</dependency>
+	<dependency>
+	    <groupId>javax.mail</groupId>
+	    <artifactId>javax.mail-api</artifactId>
+	    <version>1.5.6</version>
+	</dependency>
+	<dependency>
+	    <groupId>com.sun.mail</groupId>
+	    <artifactId>javax.mail</artifactId>
+	    <version>1.5.6</version>
+	</dependency>
+    </dependencies>
+    <build>
+	<plugins>
+	    <plugin>
+		<groupId>org.codehaus.mojo</groupId>
+		<artifactId>exec-maven-plugin</artifactId>
+		<version>1.6.0</version>
+		<executions>
+		    <execution>
+			<phase>generate-sources</phase>
+			<goals>
+			    <goal>java</goal>
+			</goals>
+		    </execution>
+		</executions>
+		<configuration>
+		    <mainClass>com.reprezen.kaizen.oasparser.GenOpenApi3</mainClass>
+		</configuration>
+	    </plugin>
+	</plugins>
+    </build>
+    <properties>
+	<maven.compiler.source>1.7</maven.compiler.source>
+	<maven.compiler.target>1.7</maven.compiler.target>
+    </properties>
+</project>

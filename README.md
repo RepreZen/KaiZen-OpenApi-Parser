@@ -1,8 +1,8 @@
-# RepreZen Swagger Parser
+# KaiZen OpenAPI Parser
 
 ## Overview ##
 
-The RepreZen Swagger Parser is a Java-based validating parser for
+The KaiZen OpenApi Parser from RepreZen is a Java-based validating parser for
 OpenAPI 3.0 offering full compliance with the
 [OpenAPI 3.0 Specification](https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc0/versions/3.0.md),
 and a highly uniform read/write programming API.
@@ -99,41 +99,41 @@ Feature highlights include:
 _Some of these packages are likely to be refactored out into separate
 component Maven projects._
 
-All packages are currently prefixed by `com.reprezen.`
+All packages are prefixed by `com.reprezen.kaizen`
 
-* `swaggerparser`: Top-level package, directly includes
-  `SwaggerParser` class and some things related to code generation
+* `oasparser`: Top-level package, directly includes
+  `OpenApiParser` class and some things related to code generation
   that will probably move elsewehere.
   
-* `swaggerparser.jsonoverlay`: The JSON Overlay framework underpinning
+* `oasparser.jsonoverlay`: The JSON Overlay framework underpinning
   the parser.
   
-* `swaggerparser.jsonoverlay.std,coll`: Overlay classes for standard
+* `oasparser.jsonoverlay.std,coll`: Overlay classes for standard
   scalar types and collection types, respectively.
   
-* `swaggerparser.jsonoverlay.gen`: Code generators for interfaces and
+* `oasparser.jsonoverlay.gen`: Code generators for interfaces and
   overlay-based implementations of object types
 
-* `swaggerparser.model3`: Generated model interfaces
+* `oasparser.model3`: Generated model interfaces
 
-* `swaggerparser.ovl3`: Generated model implementation classes (using
+* `oasparser.ovl3`: Generated model implementation classes (using
   JSON Overlay)
 
-* `swaggerparser.val`: Base classes for validators, and primitive type
+* `oasparser.val`: Base classes for validators, and primitive type
   validators.
 
-* `swaggerparser.val3`: Model-level validators for all OpenAPI
+* `oasparser.val3`: Model-level validators for all OpenAPI
   objects.
 
-* `swaggerparser.val3.ovl`: Implementation-level validators for
+* `oasparser.val3.ovl`: Implementation-level validators for
   OpenAPI objects.
 
-* `swaggerparser.test`: The handful of tests that have been
+* `oasparser.test`: The handful of tests that have been
   implemented so far. More needed
 
 
 ## License
-RepreZen Swagger Parser is provided under the Eclipse Public License (https://www.eclipse.org/legal/epl-v10.html)
+KaiZen OpenAPI Parser is provided under the Eclipse Public License (https://www.eclipse.org/legal/epl-v10.html)
 
 ## Contributing
 

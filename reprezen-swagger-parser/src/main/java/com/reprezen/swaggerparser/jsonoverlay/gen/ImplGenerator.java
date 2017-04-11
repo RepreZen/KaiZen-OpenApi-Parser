@@ -21,7 +21,6 @@ import org.apache.commons.lang3.StringUtils;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
-import com.reprezen.swaggerparser.impl3.SwaggerObjectImpl;
 import com.reprezen.swaggerparser.jsonoverlay.JsonOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.JsonOverlayFactory;
 import com.reprezen.swaggerparser.jsonoverlay.coll.ListOverlay;
@@ -31,6 +30,7 @@ import com.reprezen.swaggerparser.jsonoverlay.coll.ValMapOverlay;
 import com.reprezen.swaggerparser.jsonoverlay.gen.SimpleJavaGenerator.Member;
 import com.reprezen.swaggerparser.jsonoverlay.gen.TypeData.Field;
 import com.reprezen.swaggerparser.jsonoverlay.gen.TypeData.Type;
+import com.reprezen.swaggerparser.ovl3.SwaggerObjectImpl;
 
 public class ImplGenerator extends TypeGenerator {
 
@@ -190,6 +190,7 @@ public class ImplGenerator extends TypeGenerator {
     private Members getCollectionMethods(Field field) {
         Members methods = new Members();
         String getDecl = t("public Collection<${collType}> get${plural}()", field);
+        String hasDecl = t("public boolean has${plural}()", field);
         String iGetDecl = t("public ${type} get${name}(int index)", field);
         String setDecl = t("public void set${plural}(Collection<${collType}> ${lcPlural})", field);
         String iSetDecl = t("public void set${name}(int index, ${type} ${lcName})", field);
@@ -199,6 +200,8 @@ public class ImplGenerator extends TypeGenerator {
 
         // Collection<T> getFoos() => foos.get()
         methods.add(getDecl, code(field, "return ${lcPlural}.get();"));
+        // boolean hasFoos() => !foos.isMissing()
+        methods.add(hasDecl, code(field, "return !${lcPlural}.isMissing();"));
         // T getFoo(int index) => foos.get(index)
         methods.add(iGetDecl, code(field, "return ${lcPlural}.get(index);"));
         if (isScalarType(field)) {

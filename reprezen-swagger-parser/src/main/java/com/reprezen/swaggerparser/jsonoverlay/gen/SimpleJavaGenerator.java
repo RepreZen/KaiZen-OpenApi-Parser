@@ -28,6 +28,8 @@ public class SimpleJavaGenerator {
     private Set<String> imports = Sets.newHashSet();
     private String declaration;
     private List<Member> members = Lists.newArrayList();
+    private String fileComment;
+
     private static int indentation = 4;
 
     public SimpleJavaGenerator(String pkg, String declaration) {
@@ -69,6 +71,10 @@ public class SimpleJavaGenerator {
         }
     }
 
+    public void setFileComment(String fileComment) {
+        this.fileComment = fileComment;
+    }
+
     public void addImport(String imp) {
         if (imp != null) {
             imports.add(imp);
@@ -76,7 +82,8 @@ public class SimpleJavaGenerator {
     }
 
     public String format() {
-        String result = String.format("package %s;\n\n%s\n\n%s {\n\n", pkg, getImports(), declaration);
+        String result = String.format("%spackage %s;\n\n%s\n\n%s {\n\n", fileComment != null ? fileComment : null, pkg,
+                getImports(), declaration);
         for (Member method : members) {
             result += method.format() + "\n";
         }

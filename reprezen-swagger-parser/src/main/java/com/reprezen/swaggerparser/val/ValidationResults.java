@@ -23,6 +23,7 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Lists;
+import com.reprezen.swaggerparser.jsonoverlay.JsonOverlay;
 
 public class ValidationResults {
 
@@ -49,18 +50,30 @@ public class ValidationResults {
     };
 
     List<ValidationItem> items = Lists.newArrayList();
-    List<String> currentCrumbs = Collections.emptyList();
+    List<String> crumbs = Collections.emptyList();
 
     public void addInfo(String msg) {
-        items.add(new ValidationItem(INFO, msg, currentCrumbs));
+        items.add(new ValidationItem(INFO, msg, crumbs));
+    }
+
+    public void addInfo(String msg, String crumb) {
+        items.add(new ValidationItem(INFO, msg, crumbs, crumb));
     }
 
     public void addWarning(String msg) {
-        items.add(new ValidationItem(WARNING, msg, currentCrumbs));
+        items.add(new ValidationItem(WARNING, msg, crumbs));
+    }
+
+    public void addWarning(String msg, String crumb) {
+        items.add(new ValidationItem(WARNING, msg, crumbs, crumb));
     }
 
     public void addError(String msg) {
-        items.add(new ValidationItem(ERROR, msg, currentCrumbs));
+        items.add(new ValidationItem(ERROR, msg, crumbs));
+    }
+
+    public void addError(String msg, String crumb) {
+        items.add(new ValidationItem(ERROR, msg, crumbs, crumb));
     }
 
     public void add(ValidationResults results) {
@@ -84,12 +97,36 @@ public class ValidationResults {
         return severity;
     }
 
-    public CrumbState withCrumb(String crumb) {
-        return new CrumbState(crumb);
+    public <T extends JsonOverlay<?>> void validateWithCrumb(String crumb, Validator<T> validator, T object) {
+        List<String> priorCrumbs = crumbs;
+        try {
+            if (crumb != null) {
+                crumbs = appendCrumb(crumb, priorCrumbs);
+            }
+            validator.validate(object, this);
+        } finally {
+            crumbs = priorCrumbs;
+        }
     }
 
-    public CrumbState withCrumbs(List<String> crumbs) {
-        return new CrumbState(crumbs);
+    public void withCrumb(String crumb, Runnable code) {
+        List<String> priorCrumbs = crumbs;
+        try {
+            crumbs = appendCrumb(crumb, priorCrumbs);
+            code.run();
+        } finally {
+            crumbs = priorCrumbs;
+        }
+    }
+
+    private static List<String> appendCrumb(String crumb, List<String> existingCrumbs) {
+        if (crumb != null) {
+            List<String> newCrumbs = Lists.newArrayList(existingCrumbs);
+            newCrumbs.add(crumb);
+            return newCrumbs;
+        } else {
+            return existingCrumbs;
+        }
     }
 
     public static class ValidationItem {
@@ -102,6 +139,10 @@ public class ValidationResults {
             this.severity = severity;
             this.msg = msg;
             this.crumbs = crumbs;
+        }
+
+        public ValidationItem(Severity severity, String msg, List<String> crumbs, String crumb) {
+            this(severity, msg, appendCrumb(crumb, crumbs));
         }
 
         public Severity getSeverity() {
@@ -120,28 +161,6 @@ public class ValidationResults {
         public String toString() {
             String label = crumbs != null & !crumbs.isEmpty() ? StringUtils.join(crumbs, '.') + ": " : "";
             return label + msg;
-        }
-    }
-
-    public class CrumbState implements AutoCloseable {
-        private List<String> priorCrumbs;
-
-        public CrumbState(List<String> crumbs) {
-            priorCrumbs = currentCrumbs;
-            currentCrumbs = crumbs;
-        }
-
-        public CrumbState(String crumb) {
-            priorCrumbs = currentCrumbs;
-            if (crumb != null && crumb != Validator.NO_CRUMB) {
-                currentCrumbs = Lists.newArrayList(currentCrumbs);
-                currentCrumbs.add(crumb);
-            }
-        }
-
-        @Override
-        public void close() {
-            currentCrumbs = priorCrumbs;
         }
     }
 }

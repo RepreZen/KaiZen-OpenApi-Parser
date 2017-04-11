@@ -4,11 +4,11 @@ imports:
 defaultExtendInterfaces:
   - SwaggerObject
 decls:
-  - extPat: &extPat "x-.*"
+  - extPat: &extPat "x-.+"
   - noextPat: &noextPat "(?!x-).*"
   - namePat: &namePat "[a-zA-Z0-9\\._-]+"
   - noextNamePat: &noextNamePat "(?!x-)[a-zA-Z0-9\\._-]+"
-  - pathPat: &pathPat "/.*"
+  - pathPat: &pathPat "/.+"
   - extName: &extName extension
   - extDef: &extDef
       name: Extension
@@ -21,7 +21,7 @@ types:
   - name: Swagger3
     imports: 
       intf:  [ ValidationResults ]
-      impl: [ Swagger3Validator, ValidationResults, Severity ]
+      impl: [ Swagger3Validator, Validator, ValidationResults, Severity, Inject ]
     extendInterfaces: [Swagger]
     fields:
       openapi:
@@ -84,10 +84,10 @@ types:
         parentPath: components
       security:
         name: SecurityRequirement
-        structure: map
+        structure: collection
       tags:
         name: Tag
-        structure: map
+        structure: collection
       externalDocs:
         name: ExternalDocs
       *extName: *extDef
@@ -183,7 +183,7 @@ types:
       license:
         name: License
       version:
-        name: Verion
+        name: Version
         type: String
       *extName: *extDef
 
@@ -232,11 +232,11 @@ types:
     fields:
       enum:
         name: EnumValue
-        type: String
+        type: Primitive
         structure: collection
       default:
         name: Default
-        type: String
+        type: Primitive
       description:
         name: Description
         type: String
@@ -323,8 +323,6 @@ types:
           - String id
       requestBody:
         name: RequestBody
-        plural: RequestBodies
-        structure: collection
       responses:
         name: Response
         structure: map
@@ -346,9 +344,7 @@ types:
         type: Boolean
       security:
         name: SecurityRequirement
-        structure: map
-        keyDecls:
-          - String name        
+        structure: collection
       servers:
         name: Server
         structure: collection
@@ -372,10 +368,18 @@ types:
     fields:
       reqirement:
         name: Requirement
+        type: SecurityParameter
+        parentPath: ""
+        structure: map
+
+  - name: SecurityParameter
+    fields:
+      parameter:
+        name: Parameter
         type: String
         parentPath: ""
         structure: collection
-          
+                      
   - name: Response
     fields:
       description:
@@ -407,7 +411,7 @@ types:
         structure: map
       headers:
         name: Header
-        type: String
+        type: Header
         structure: map
       description:
         name: Description
@@ -518,6 +522,8 @@ types:
       *extName: *extDef
 
   - name: Schema
+    imports:
+      impl: [ Optional ]
     fields:
       title:
         name: Title
@@ -574,15 +580,15 @@ types:
         name: Type
         type: String
       allOf:
-        name: AllOfSchemas
+        name: AllOfSchema
         type: Schema
         structure: collection
       oneOf:
-        name: OneOfSchemas
+        name: OneOfSchema
         type: Schema
         structure: collection
       anyOf:
-        name: AnyOfSchemas
+        name: AnyOfSchema
         type: Schema
         structure: collection
       not:

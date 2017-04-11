@@ -17,18 +17,33 @@ import java.net.URI;
 import java.net.URL;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.reprezen.swaggerparser.impl3.Swagger3Impl;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import com.reprezen.swaggerparser.jsonoverlay.JsonLoader;
 import com.reprezen.swaggerparser.jsonoverlay.ResolutionBase;
 import com.reprezen.swaggerparser.jsonoverlay.Resolver;
+import com.reprezen.swaggerparser.ovl3.Swagger3Impl;
+import com.reprezen.swaggerparser.val3.ValidationConfigurator;
+import com.reprezen.swaggerparser.val3.ovl.OverlayValidationConfigurator;
+
 
 public class SwaggerParser {
 
-    public static Swagger parse(String spec, URL resolutionBase) {
+    private Injector injector;
+
+    public SwaggerParser() {
+        this(new OverlayValidationConfigurator());
+    }
+
+    public SwaggerParser(ValidationConfigurator validationConfigurator) {
+        this.injector = Guice.createInjector(validationConfigurator);
+    }
+
+    public Swagger parse(String spec, URL resolutionBase) {
         return parse(spec, resolutionBase, true);
     }
 
-    public static Swagger parse(String spec, URL resolutionBase, boolean validate) {
+    public Swagger parse(String spec, URL resolutionBase, boolean validate) {
         try {
             JsonNode tree = JsonLoader.loadString(resolutionBase, spec);
             ResolutionBase.register(resolutionBase.toString(), tree);
@@ -38,11 +53,11 @@ public class SwaggerParser {
         }
     }
 
-    public static Swagger parse(File specFile) {
+    public Swagger parse(File specFile) {
         return parse(specFile, true);
     }
 
-    public static Swagger parse(File specFile, boolean validate) {
+    public Swagger parse(File specFile, boolean validate) {
         try {
             return parse(specFile.toURI().toURL(), validate);
         } catch (IOException e) {
@@ -50,11 +65,11 @@ public class SwaggerParser {
         }
     }
 
-    public static Swagger parse(URI uri) {
+    public Swagger parse(URI uri) {
         return parse(uri, true);
     }
 
-    public static Swagger parse(URI uri, boolean validate) {
+    public Swagger parse(URI uri, boolean validate) {
         try {
             return parse(uri.toURL(), validate);
         } catch (MalformedURLException e) {
@@ -62,20 +77,21 @@ public class SwaggerParser {
         }
     }
 
-    public static Swagger parse(URL resolutionBase) {
+    public Swagger parse(URL resolutionBase) {
         return parse(resolutionBase, true);
     }
 
-    public static Swagger parse(URL resolutionBase, boolean validate) {
+    public Swagger parse(URL resolutionBase, boolean validate) {
         try {
             Resolver.preresolve(resolutionBase);
             JsonNode tree = ResolutionBase.get(resolutionBase.toString()).getJson();
             if (isVersion3(tree)) {
                 Swagger3Impl model = new Swagger3Impl(null, tree, null);
+                injector.injectMembers(model);
                 if (validate) {
                     model.validate();
                 }
-                return (Swagger) model;
+                return model;
             } else {
                 throw new SwaggerParserException(
                         "Could not determine OpenApi version - missing or invalid 'openapi' or 'swagger' property");
@@ -87,7 +103,7 @@ public class SwaggerParser {
 
     }
 
-    private static boolean isVersion3(JsonNode tree) {
+    private boolean isVersion3(JsonNode tree) {
         JsonNode versionNode = tree.path("openapi");
         return versionNode.isTextual() && versionNode.asText().startsWith("3.");
     }

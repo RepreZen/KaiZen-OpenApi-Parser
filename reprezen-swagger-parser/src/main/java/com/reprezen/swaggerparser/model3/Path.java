@@ -114,6 +114,9 @@ public interface Path extends SwaggerObject {
     Collection<? extends Server> getServers();
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    boolean hasServers();
+
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     Server getServer(int index);
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
@@ -131,6 +134,9 @@ public interface Path extends SwaggerObject {
     // Parameter
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     Collection<? extends Parameter> getParameters();
+
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    boolean hasParameters();
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     Parameter getParameter(int index);

@@ -59,12 +59,16 @@ public class Template {
             return field.getPlural();
         case "lcPlural":
             return field.getLcPlural();
-        case "type":
-            return field.getType();
+        case "type": {
+            String type = field.getType();
+            return "Primitive".equals(type) ? "Object" : type;
+        }
         case "implType":
             return TypeGenerator.getImplType(field);
-        case "collType":
-            return TypeGenerator.getTypeInCollection(field);
+        case "collType": {
+            String type = TypeGenerator.getTypeInCollection(field);
+            return "Primitive".equals(type) ? "Object" : type;
+        }
         case "keyName":
             return field.getKeyName();
         case "id":

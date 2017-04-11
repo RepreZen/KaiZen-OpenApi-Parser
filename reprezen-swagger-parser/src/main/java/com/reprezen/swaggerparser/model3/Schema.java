@@ -132,6 +132,9 @@ public interface Schema extends SwaggerObject {
     Collection<String> getRequiredFields();
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    boolean hasRequiredFields();
+
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     String getRequiredField(int index);
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
@@ -149,6 +152,9 @@ public interface Schema extends SwaggerObject {
     // Enum
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     Collection<Object> getEnums();
+
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    boolean hasEnums();
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     Object getEnum(int index);
@@ -172,62 +178,71 @@ public interface Schema extends SwaggerObject {
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     void setType(String type);
 
-    // AllOfSchemas
+    // AllOfSchema
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    Collection<? extends Schema> getAllOfSchemass();
+    Collection<? extends Schema> getAllOfSchemas();
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    Schema getAllOfSchemas(int index);
+    boolean hasAllOfSchemas();
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    void setAllOfSchemass(Collection<? extends Schema> allOfSchemass);
+    Schema getAllOfSchema(int index);
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    void setAllOfSchemas(int index, Schema allOfSchemas);
+    void setAllOfSchemas(Collection<? extends Schema> allOfSchemas);
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    void addAllOfSchemas(Schema allOfSchemas);
+    void setAllOfSchema(int index, Schema allOfSchema);
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    void removeAllOfSchemas(int index);
-
-    // OneOfSchemas
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    Collection<? extends Schema> getOneOfSchemass();
+    void addAllOfSchema(Schema allOfSchema);
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    Schema getOneOfSchemas(int index);
+    void removeAllOfSchema(int index);
+
+    // OneOfSchema
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    Collection<? extends Schema> getOneOfSchemas();
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    void setOneOfSchemass(Collection<? extends Schema> oneOfSchemass);
+    boolean hasOneOfSchemas();
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    void setOneOfSchemas(int index, Schema oneOfSchemas);
+    Schema getOneOfSchema(int index);
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    void addOneOfSchemas(Schema oneOfSchemas);
+    void setOneOfSchemas(Collection<? extends Schema> oneOfSchemas);
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    void removeOneOfSchemas(int index);
-
-    // AnyOfSchemas
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    Collection<? extends Schema> getAnyOfSchemass();
+    void setOneOfSchema(int index, Schema oneOfSchema);
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    Schema getAnyOfSchemas(int index);
+    void addOneOfSchema(Schema oneOfSchema);
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    void setAnyOfSchemass(Collection<? extends Schema> anyOfSchemass);
+    void removeOneOfSchema(int index);
+
+    // AnyOfSchema
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    Collection<? extends Schema> getAnyOfSchemas();
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    void setAnyOfSchemas(int index, Schema anyOfSchemas);
+    boolean hasAnyOfSchemas();
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    void addAnyOfSchemas(Schema anyOfSchemas);
+    Schema getAnyOfSchema(int index);
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    void removeAnyOfSchemas(int index);
+    void setAnyOfSchemas(Collection<? extends Schema> anyOfSchemas);
+
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    void setAnyOfSchema(int index, Schema anyOfSchema);
+
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    void addAnyOfSchema(Schema anyOfSchema);
+
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    void removeAnyOfSchema(int index);
 
     // NotSchema
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
@@ -354,6 +369,9 @@ public interface Schema extends SwaggerObject {
     // Example
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     Collection<Object> getExamples();
+
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    boolean hasExamples();
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     Object getExample(int index);

@@ -103,6 +103,8 @@ public class InterfaceGenerator extends TypeGenerator {
         Members methods = new Members();
         // Collection<? extends T> getFoos()
         methods.add(t("Collection<${collType}> get${plural}()", field));
+        // boolean hasFoos()
+        methods.add(t("boolean has${plural}()", field));
         // T getFoo(int index)
         methods.add(t("${type} get${name}(int index)", field));
         // void setFoos(Collection<? extends T> foos)

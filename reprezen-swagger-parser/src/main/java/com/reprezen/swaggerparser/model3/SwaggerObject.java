@@ -16,4 +16,7 @@ public interface SwaggerObject {
 
     SwaggerObject getParent();
 
+    boolean isMissing();
+
+    String getKey();
 }

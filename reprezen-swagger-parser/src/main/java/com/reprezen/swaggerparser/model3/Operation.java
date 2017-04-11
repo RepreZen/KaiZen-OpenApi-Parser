@@ -29,6 +29,9 @@ public interface Operation extends SwaggerObject {
     Collection<String> getTags();
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    boolean hasTags();
+
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     String getTag(int index);
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
@@ -76,6 +79,9 @@ public interface Operation extends SwaggerObject {
     Collection<? extends Parameter> getParameters();
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    boolean hasParameters();
+
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     Parameter getParameter(int index);
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
@@ -92,22 +98,10 @@ public interface Operation extends SwaggerObject {
 
     // RequestBody
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    Collection<? extends RequestBody> getRequestBodies();
+    RequestBody getRequestBody();
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    RequestBody getRequestBody(int index);
-
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    void setRequestBodies(Collection<? extends RequestBody> requestBodies);
-
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    void setRequestBody(int index, RequestBody requestBody);
-
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    void addRequestBody(RequestBody requestBody);
-
-    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    void removeRequestBody(int index);
+    void setRequestBody(RequestBody requestBody);
 
     // Response
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
@@ -197,26 +191,32 @@ public interface Operation extends SwaggerObject {
 
     // SecurityRequirement
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    Map<String, ? extends SecurityRequirement> getSecurityRequirements();
+    Collection<? extends SecurityRequirement> getSecurityRequirements();
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    boolean hasSecurityRequirement(String name);
+    boolean hasSecurityRequirements();
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    SecurityRequirement getSecurityRequirement(String name);
+    SecurityRequirement getSecurityRequirement(int index);
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    void setSecurityRequirements(Map<String, ? extends SecurityRequirement> securityRequirements);
+    void setSecurityRequirements(Collection<? extends SecurityRequirement> securityRequirements);
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    void setSecurityRequirement(String name, SecurityRequirement securityRequirement);
+    void setSecurityRequirement(int index, SecurityRequirement securityRequirement);
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
-    void removeSecurityRequirement(String name);
+    void addSecurityRequirement(SecurityRequirement securityRequirement);
+
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    void removeSecurityRequirement(int index);
 
     // Server
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     Collection<? extends Server> getServers();
+
+    @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
+    boolean hasServers();
 
     @Generated("com.reprezen.swaggerparser.jsonoverlay.gen.CodeGenerator")
     Server getServer(int index);

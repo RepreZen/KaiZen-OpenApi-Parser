@@ -88,17 +88,7 @@ paths:
             x-foo: foo
         x-foo: foo
       requestBody:
-      - description: description
-        required: ture
-        content:
-          application/json:
-            schema:
-              title: title
-          text/plain:
-            schema:
-              title: title
-        required: true
-      - description: description
+        description: description
         required: ture
         content:
           application/json:
@@ -128,8 +118,10 @@ paths:
                 param1: xxxx
                 param2: yyyy
               headers:
-                foo: foo
-                bar: bar
+                foo: 
+                  description: description
+                bar:
+                  description: description
               description: description
               x-foo: foo
         200:
@@ -161,8 +153,9 @@ paths:
               operationId: operationid
       deprecated: false
       security:
-        sec1: [a, b, c]
-        sec2: []
+        - sec1: [a, b, c]
+          sec2: []
+        - sec3: []
       servers: *id001
       x-foo: foo
     x-foo: foo

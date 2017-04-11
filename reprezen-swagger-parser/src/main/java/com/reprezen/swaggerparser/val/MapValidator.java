@@ -10,29 +10,23 @@
  *******************************************************************************/
 package com.reprezen.swaggerparser.val;
 
-import com.reprezen.swaggerparser.impl3.SwaggerObjectImpl;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.reprezen.swaggerparser.jsonoverlay.JsonOverlay;
-import com.reprezen.swaggerparser.jsonoverlay.coll.CollectionOverlay;
+import com.reprezen.swaggerparser.jsonoverlay.coll.MapOverlay;
 
-public class MapValidator<OV extends JsonOverlay<?>> extends ListValidator<OV> {
+public class MapValidator<T extends JsonOverlay<?>> extends OverlayValidator<MapOverlay<T>> {
 
-    public <T extends SwaggerObjectImpl, V extends ObjectValidator<T>> MapValidator(Class<T> objectClass,
-            Class<V> objectValidatorClass) {
-        super(objectClass, objectValidatorClass);
-    }
+    private Validator<T> elementValidator;
 
-    public MapValidator(Validator<OV> validator) {
-        super(validator);
+    public MapValidator(Validator<T> elementValidator) {
+        this.elementValidator = elementValidator;
     }
 
     @Override
-    public void validate(CollectionOverlay<OV> object, ValidationResults results) {
-        super.validate(object, results);
+    public void validate(MapOverlay<T> overlay, ValidationResults results) {
+        super.validate(overlay, results, ObjectNode.class);
+        for (T value : overlay.getStore().getOverlays()) {
+            elementValidator.validate(value, results, value.getKey());
+        }
     }
-
-    @Override
-    protected String getElementCrumb(int index, OV overlay) {
-        return "[" + overlay.getKey() + "]";
-    }
-
 }

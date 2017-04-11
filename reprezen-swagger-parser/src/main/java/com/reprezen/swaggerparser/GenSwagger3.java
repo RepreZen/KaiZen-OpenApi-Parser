@@ -22,12 +22,13 @@ public class GenSwagger3 {
     public static void main(String[] args)
             throws JsonParseException, JsonMappingException, IOException, ParseException {
         CodeGenerator.main(new String[] { //
-                "-t", "types3.yaml", //
+                "-t", "src/main/java/com/reprezen/swaggerparser/types3.yaml", //
                 "-p", "com.reprezen.swaggerparser", //
+                "-d", "src/main/java/com/reprezen/swaggerparser", //
                 "-i", "model3", //
                 "-I", "model3", //
-                "-c", "impl3", //
-                "-C", "impl3" //
+                "-c", "ovl3", //
+                "-C", "ovl3", //
                 // , "-n" // uncomment to run in no-preserve mode
         });
     }

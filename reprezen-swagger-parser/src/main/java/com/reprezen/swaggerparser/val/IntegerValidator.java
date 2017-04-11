@@ -10,28 +10,23 @@
  *******************************************************************************/
 package com.reprezen.swaggerparser.val;
 
-import static com.reprezen.swaggerparser.val.Messages.m;
-
-import java.util.Map;
+import java.util.Set;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.google.common.collect.ImmutableMap;
+import com.fasterxml.jackson.databind.node.BigIntegerNode;
+import com.fasterxml.jackson.databind.node.IntNode;
+import com.fasterxml.jackson.databind.node.ShortNode;
+import com.google.common.collect.Sets;
 import com.reprezen.swaggerparser.jsonoverlay.std.IntegerOverlay;
 
-public class IntegerValidator extends Validator<IntegerOverlay> {
+public class IntegerValidator extends OverlayValidator<IntegerOverlay> {
 
-    public static IntegerValidator validator = new IntegerValidator();
+    @SuppressWarnings("unchecked")
+    private static Set<Class<? extends JsonNode>> intTypes = Sets.<Class<? extends JsonNode>> newHashSet( //
+            IntNode.class, ShortNode.class, BigIntegerNode.class);
 
     @Override
     public void validate(IntegerOverlay overlay, ValidationResults results) {
-        JsonNode json = overlay.getJson();
-        if (!json.isMissingNode() && !json.isInt()) {
-            results.addError(m.msg("NotInteger|Value must be an integer", json.getNodeType()));
-        }
-    }
-
-    @Override
-    public Map<? extends Validator<?>, String> getBeforeValidators() {
-        return ImmutableMap.of(OverlayValidator.validator, NO_CRUMB);
+        super.validate(overlay, results, intTypes);
     }
 }

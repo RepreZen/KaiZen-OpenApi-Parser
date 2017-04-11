@@ -16,9 +16,9 @@ import java.io.IOException;
 import java.util.Arrays;
 
 import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
-import org.apache.commons.cli.PosixParser;
 import org.apache.commons.lang3.StringUtils;
 import org.yaml.snakeyaml.Yaml;
 
@@ -122,9 +122,12 @@ public class CodeGenerator {
         public boolean preserve = true;
 
         public Opts(String[] args) throws ParseException {
-            CommandLine cmd = new PosixParser().parse(options, args);
+            CommandLine cmd = new DefaultParser().parse(options,  args); 
             if (cmd.hasOption('t')) {
                 typeDataFile = new File(cmd.getOptionValue('t'));
+            }
+            if (cmd.hasOption('d')) {
+                topDir = new File(cmd.getOptionValue('d'));
             }
             if (cmd.hasOption('i')) {
                 interfaceDir = new File(cmd.getOptionValue('i'));

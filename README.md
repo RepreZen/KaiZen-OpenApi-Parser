@@ -58,6 +58,12 @@ Feature highlights include:
   the API, but full details of references and their resolution status
   are also available.
   
+## Quick Start
+
+The [Getting Started Guide](GettingStarted.md) shows how to build the 
+software locally, and contains a simple sample program that shows how 
+to use the parser.
+  
 ## Current State
 
 * `JsonOverlay` framework is fairly stable and working well.

@@ -71,26 +71,32 @@
 	    <version>1.5.6</version>
 	</dependency>
     </dependencies>
-    <build>
-	<plugins>
-	    <plugin>
-		<groupId>org.codehaus.mojo</groupId>
-		<artifactId>exec-maven-plugin</artifactId>
-		<version>1.6.0</version>
-		<executions>
-		    <execution>
-			<phase>generate-sources</phase>
-			<goals>
-			    <goal>java</goal>
-			</goals>
-		    </execution>
-		</executions>
-		<configuration>
-		    <mainClass>com.reprezen.kaizen.oasparser.GenOpenApi3</mainClass>
-		</configuration>
-	    </plugin>
-	</plugins>
-    </build>
+    <profiles>
+	<profile>
+	    <id>gen</id>
+	    <build>
+		<plugins>
+		    <plugin>
+			<groupId>org.codehaus.mojo</groupId>
+			<artifactId>exec-maven-plugin</artifactId>
+			<version>1.6.0</version>
+			<executions>
+			    <execution>
+				<id>codegen</id>
+				<phase>generate-sources</phase>
+				<goals>
+				    <goal>java</goal>
+				</goals>
+			    </execution>
+			</executions>
+			<configuration>
+			    <mainClass>com.reprezen.kaizen.oasparser.GenOpenApi3</mainClass>
+			</configuration>
+		    </plugin>
+		</plugins>
+	    </build>
+	</profile>
+    </profiles>
     <properties>
 	<maven.compiler.source>1.7</maven.compiler.source>
 	<maven.compiler.target>1.7</maven.compiler.target>

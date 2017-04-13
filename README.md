@@ -150,7 +150,7 @@ you the frustration of finding that some sweeping low-level change
 has rendered your efforts unusable.
 
 If you would like to work with us, please drop us a line at
-api.community@reprezen.com, or open a new issue if you have
+API.Community@RepreZen.com, or open a new issue if you have
 a suggestion or want to report a bug or omission.
 
 ## Resources

@@ -150,5 +150,8 @@ you the frustration of finding that some sweeping low-level change
 has rendered your efforts unusable.
 
 If you would like to work with us, please drop us a line at
-info@reprezen.com, or piggy-back on a new issue if you have
+API.Community@RepreZen.com, or open a new issue if you have
 a suggestion or want to report a bug or omission.
+
+## Resources
+* Blog Post: [Introducing KaiZen OpenAPI 3.0 Parser: fast, flexible Java parsing & validation](http://www.reprezen.com/blog/kaizen-openapi-3_0-parser-swagger-java-open-source)

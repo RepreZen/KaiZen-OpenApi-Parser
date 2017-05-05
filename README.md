@@ -58,7 +58,7 @@ Feature highlights include:
   the API, but full details of references and their resolution status
   are also available.
   
-## Quick Start
+## Quick Start Documentation
 
 The [Getting Started Guide](GettingStarted.md) shows how to build the 
 software locally, and contains a simple sample program that shows how 
@@ -155,3 +155,4 @@ a suggestion or want to report a bug or omission.
 
 ## Resources
 * Blog Post: [Introducing KaiZen OpenAPI 3.0 Parser: fast, flexible Java parsing & validation](http://www.reprezen.com/blog/kaizen-openapi-3_0-parser-swagger-java-open-source)
+* [Getting Started Guide](GettingStarted.md)

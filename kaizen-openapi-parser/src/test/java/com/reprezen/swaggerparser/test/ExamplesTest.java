@@ -37,7 +37,7 @@ import com.reprezen.kaizen.oasparser.val.ValidationResults.ValidationItem;
 public class ExamplesTest extends Assert {
 
     private static final String SPEC_REPO = "OAI/OpenAPI-Specification";
-    private static final String EXAMPLES_BRANCH = "dm/examples";
+    private static final String EXAMPLES_BRANCH = "OpenAPI.next";
     private static final String EXAMPLES_ROOT = "examples/v3.0";
 
     private static ObjectMapper mapper = new ObjectMapper();

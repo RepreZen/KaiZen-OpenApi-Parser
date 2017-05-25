@@ -26,7 +26,7 @@ import com.google.common.collect.Sets;
 public class ResolutionBase {
 
     private static Map<String, ResolutionBase> instances = Maps.newConcurrentMap();
-
+    
     private String urlString;
     private Boolean isValid = null;
     private ResolutionException error = null;

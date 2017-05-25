@@ -127,3 +127,9 @@ public class Test {
 
 }
 ```
+## Get JsonNode of a complete deferenced JsonNode
+```
+Reference.derefAllTree = true; // Awesome on/off switch :)
+OpenApi3 model = (OpenApi3) new OpenApiParser().parse(url, false);
+JsonNode mySchema = ((SchemaImpl)model.getPath("/pets").getPost().getResponse("200").getContentMediaType("application/json").getSchema()).getDereferencedJsonTree();
+```

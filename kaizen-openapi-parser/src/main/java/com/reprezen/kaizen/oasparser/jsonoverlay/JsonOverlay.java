@@ -120,7 +120,7 @@ public abstract class JsonOverlay<V> {
     
     public JsonNode getDereferencedJsonTree() {
     	if (ref != null) {
-            return resolvedJson;
+            return internalDeferenceRecursive(resolvedJson);
         } else {
         	return internalDeferenceRecursive(json);
         }

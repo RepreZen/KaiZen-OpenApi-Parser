@@ -126,7 +126,7 @@ components:
   schemas:
     Pet:
       allOf:
-        - $ref: '#/components/schemas/NewPet'
+        - $ref: './newPet.yaml#/NewPet'
         - required:
           - id
           properties:

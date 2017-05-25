@@ -13,14 +13,10 @@ package com.reprezen.kaizen.oasparser.jsonoverlay;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ContainerNode;
 import com.fasterxml.jackson.databind.node.MissingNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.base.Charsets;
 import com.google.common.collect.Maps;
 
@@ -28,8 +24,6 @@ public class Reference {
 
     private static Map<String, Reference> references = Maps.newHashMap();
 
-    public static boolean derefAllTree = false;
-    
     private String refString;
     private ResolutionBase base;
     private String fragment;
@@ -122,10 +116,7 @@ public class Reference {
             }
             Reference ref = references.get(comprehendedRef);
             if (resolve) {
-            	if (derefAllTree)
-            		ref.resolveAllTree();
-            	else
-            		ref.resolve();
+                ref.resolve();
             }
             return ref;
         } catch (ResolutionException e) {
@@ -204,56 +195,5 @@ public class Reference {
 
     public String getFragnent() {
         return fragment;
-    }
-    
-    private JsonNode recursiveInternalResolveAllTree(JsonNode node) {
-    	if (node.isObject() && node.has("$ref")) {
-    		//Parse reference
-    		node = Reference.get(node.get("$ref").asText(), base, true).getJson();
-    	} else if (node.isContainerNode()) {
-    		if (node.isArray()) {
-    			ArrayNode arrayNode = (ArrayNode)node;
-    			for (int i = 0; i < arrayNode.size(); i++) {
-    				JsonNode expectedChangedNode = this.recursiveInternalResolveAllTree(arrayNode.get(i));
-    				if (arrayNode.get(i) != expectedChangedNode /* Simple check of instance */) {
-    					arrayNode.set(i, expectedChangedNode);
-    				}
-    			}
-    		} else if (node.isObject()) {
-    			ObjectNode objectNode = (ObjectNode)node;
-    			Iterator<String> fieldNameIterator = objectNode.fieldNames();
-    			while (fieldNameIterator.hasNext()) {
-    				String fieldName = fieldNameIterator.next();
-    				JsonNode expectedChangedNode = this.recursiveInternalResolveAllTree(objectNode.get(fieldName));
-    				if (objectNode.get(fieldName) != expectedChangedNode /* Simple check of instance */) {
-    					objectNode.set(fieldName, expectedChangedNode);
-    				}
-    			}
-    		}
-    	}
-    	return node;
-    }
-    
-    public JsonNode resolveAllTree() {
-    	if (!isResolved()) {
-    	try {
-                JsonNode root = base.resolve();
-                if (fragment == null) {
-                    this.json = root;
-                } else {
-                    try {
-                        this.json = this.recursiveInternalResolveAllTree(root.at(fragment.substring(1)));
-                    } catch (IllegalArgumentException e) {
-                        throw new ResolutionException("Failed to resolve JSON pointer", e);
-                    }
-                }
-                isValid = true;
-            } catch (ResolutionException e) {
-                this.error = e;
-                this.isValid = false;
-                this.json = MissingNode.getInstance();
-            }
-    	}
-        return json;
     }
 }

@@ -89,8 +89,9 @@ public abstract class JsonOverlay<V> {
     			Iterator<ResolutionBase> i = ResolutionBase.getAllBases().iterator();
     			while(i.hasNext()) {
     				JsonNode candidate = Reference.get(node.get("$ref").asText(), i.next(), true).getJson();
-    				if (candidate != null && !candidate.isMissingNode())
-    					return candidate;
+    				if (candidate != null && !candidate.isMissingNode()) {
+    					return this.internalDeferenceRecursive(candidate);
+    				}
     			}
         	} else if (node.isContainerNode()) {
         		if (node.isArray()) {

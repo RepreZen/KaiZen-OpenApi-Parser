@@ -65,8 +65,9 @@ public class DerefTest extends Assert {
     	URL modelUrl = DerefTest.class.getResource("/models/petstore-expanded.yaml");
         Object parsedYaml = new Yaml().load(modelUrl.openStream());
         JsonNode tree = new YAMLMapper().convertValue(parsedYaml, JsonNode.class);
-        Reference.derefAllTree = true;
-        final OpenApi3 model = (OpenApi3) new OpenApiParser().parse(modelUrl, false);
+        Reference.derefAllTree = false;
+        final OpenApi3 model = (OpenApi3) new OpenApiParser().parse(modelUrl);
+        model.validate();
         JsonNode anotherReallyImportantImpl = ((ResponseImpl)model.getPath("/pets").getPost().getResponse("200")).getDereferencedJsonTree();
         System.out.println(anotherReallyImportantImpl);
     }

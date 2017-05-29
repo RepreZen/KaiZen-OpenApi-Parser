@@ -1,0 +1,8 @@
+NewPet:
+  required:
+    - name
+  properties:
+    name:
+      type: string
+    tag:
+      type: string    

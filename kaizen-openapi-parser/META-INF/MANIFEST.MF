@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: kaizen-openapi-parser
+Bundle-SymbolicName: kaizen-openapi-parser
+Bundle-Vendor: ModelSolv, Inc. d.b.a. RepreZen
+Bundle-Version: 0.0.1.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Require-Bundle: com.google.inject,
+ com.modelsolv.reprezen.bundles,
+ com.google.guava;bundle-version="[15.0.0,16.0.0)"
+Export-Package: com.reprezen.kaizen.oasparser,
+ com.reprezen.kaizen.oasparser.jsonoverlay,
+ com.reprezen.kaizen.oasparser.jsonoverlay.coll,
+ com.reprezen.kaizen.oasparser.jsonoverlay.gen,
+ com.reprezen.kaizen.oasparser.jsonoverlay.std,
+ com.reprezen.kaizen.oasparser.model3,
+ com.reprezen.kaizen.oasparser.ovl3,
+ com.reprezen.kaizen.oasparser.val,
+ com.reprezen.kaizen.oasparser.val.oasparser.fake.scheme,
+ com.reprezen.kaizen.oasparser.val3,
+ com.reprezen.kaizen.oasparser.val3.ovl

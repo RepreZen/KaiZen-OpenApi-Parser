@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: kaizen-openapi-parser
-Bundle-SymbolicName: kaizen-openapi-parser
+Bundle-Name: openapi-parser
+Bundle-SymbolicName: openapi-parser
 Bundle-Vendor: ModelSolv, Inc. d.b.a. RepreZen
 Bundle-Version: 0.0.1.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7

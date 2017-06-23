@@ -131,14 +131,16 @@ public class NumericUtils {
         LONG(Long.class), //
         SHORT(Short.class);
 
-        private static Map<Class<? extends Number>, NumericType> types = Maps.newHashMap();
+        private static Map<Class<? extends Number>, NumericType> types;
 
         private NumericType(Class<? extends Number> cls) {
             register(cls, this);
         }
 
         private void register(Class<? extends Number> cls, NumericType type) {
-            types.put(cls, type);
+        	if (NumericType.types == null)
+        		NumericType.types = Maps.newHashMap();
+        	types.put(cls, type);
         }
 
         public static NumericType of(Object value) {

@@ -1,0 +1,86 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.reprezen.kaizen</groupId>
+    <artifactId>kaizen-parser.releng</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<properties>
+		<tycho-version>1.0.0</tycho-version>
+		<root-dir>${basedir}/..</root-dir>
+	</properties>
+
+	<repositories>
+		<repository>
+			<id>local-maven-result</id>
+			<url>/Users/tanya/.m2/repository/com/reprezen/kaizen</url>
+			<!--<url>file:${root-dir}/build/maven-repository</url>-->
+		</repository>
+	</repositories>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.reprezen.kaizen</groupId>
+			<artifactId>openapi-parser</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
+	<modules>
+		<module>releng-target</module>
+		<module>p2</module>
+	</modules>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-maven-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<extensions>true</extensions>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>target-platform-configuration</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<pomDependencies>consider</pomDependencies>
+					<target>
+						<artifact>
+							<groupId>com.reprezen.kaizen</groupId>
+							<artifactId>kaizen-parser.target</artifactId>
+							<version>0.0.1-SNAPSHOT</version>
+						</artifact>
+					</target>
+					<environments>
+						<environment>
+							<os>macosx</os>
+							<ws>cocoa</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>win32</os>
+							<ws>win32</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>linux</os>
+							<ws>gtk</ws>
+							<arch>x86_64</arch>
+						</environment>
+					</environments>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-packaging-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<format>'v'yyyyMMdd-HHmm</format>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

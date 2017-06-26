@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<site>
-	<bundle id="com.reprezen.kaizen.openapi-parser" version="0.0.1.qualifier">
-		<category name="kaizen-parser"/>
-	</bundle>
-   <category-def name="kaizen-parser" label="Kaizen-Parser"/>
-</site>

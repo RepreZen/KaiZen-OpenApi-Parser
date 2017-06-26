@@ -114,4 +114,11 @@
       </plugin>
     </plugins>
   </build>
+  
+	<distributionManagement>
+	  <repository>
+	      <id>bintray-repo-openapi-parser</id>
+	      <url>https://api.bintray.com/maven/reprezen/KaiZen-OpenApi-Parser/openapi-parser/;publish=1</url>
+	  </repository>
+	</distributionManagement>  
 </project>

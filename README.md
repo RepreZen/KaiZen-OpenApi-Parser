@@ -65,7 +65,15 @@ Feature highlights include:
 The [Getting Started Guide](GettingStarted.md) shows how to build the 
 software locally, and contains a simple sample program that shows how 
 to use the parser.
-  
+
+## Who's using KaiZen Parser?
+
+Here's a starting list of projects that are currently using KaiZen OpenAPI Parser. If you don't see your project here, please open an issue or pull request to add it:
+
+| Project Link | Description |
+| --- | --- | 
+| [Eclipse Vert.x](http://vertx.io/) | Eclipse Vert.x is a tool-kit for building reactive applications on the JVM. | 
+
 ## Current State
 
 * `JsonOverlay` framework is fairly stable and working well.

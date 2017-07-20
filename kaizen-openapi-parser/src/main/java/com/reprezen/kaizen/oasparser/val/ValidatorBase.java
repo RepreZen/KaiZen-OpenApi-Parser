@@ -54,18 +54,30 @@ public abstract class ValidatorBase<T> implements Validator<T> {
     }
 
     public void validateString(final String value, final ValidationResults results, final boolean required,
-            final String crumb) {
+                               final String crumb) {
         validateString(value, results, required, (Pattern) null, crumb);
     }
 
     public void validateString(final String value, final ValidationResults results, final boolean required,
-            final String pattern, final String crumb) {
+                               final String pattern, final String crumb) {
         validateString(value, results, required, Pattern.compile(pattern), crumb);
     }
 
+    public void validateString(final String value, final ValidationResults results,
+                               final ValidationResults.Severity onMissingSeverity, final boolean required,
+                               final String pattern, final String crumb) {
+        validateString(value, results, onMissingSeverity, required, Pattern.compile(pattern), crumb);
+    }
+
     public void validateString(final String value, final ValidationResults results, final boolean required,
-            final Pattern pattern, final String crumb) {
-        checkMissing(required, value, results, crumb);
+                               final Pattern pattern, final String crumb) {
+        validateString(value, results, ValidationResults.Severity.ERROR, required, pattern, crumb);
+    }
+
+    public void validateString(final String value, final ValidationResults results,
+                               final ValidationResults.Severity onMissingSeverity, final boolean required,
+                               final Pattern pattern, final String crumb) {
+        checkMissing(required, value, results, crumb, onMissingSeverity);
         if (value != null && pattern != null && !pattern.matcher(value).matches()) {
             results.addError(m.msg("PatternMatchFail|String value does not match required pattern", value, pattern),
                     crumb);
@@ -258,8 +270,13 @@ public abstract class ValidatorBase<T> implements Validator<T> {
 
     private void checkMissing(boolean required, final Object value, final ValidationResults results,
             final String crumb) {
+       checkMissing(required, value, results, crumb, ValidationResults.Severity.ERROR);
+    }
+
+    private void checkMissing(boolean required, final Object value, final ValidationResults results,
+                              final String crumb, final ValidationResults.Severity onMissingSeverity) {
         if (required && !laxRequired && isMissing(value)) {
-            results.addError(m.msg("MissingField|Required field is missing", crumb), crumb);
+            results.add(m.msg("MissingField|Required field is missing", crumb), crumb, onMissingSeverity);
         }
     }
 

@@ -17,16 +17,25 @@
       <configuration>
        <artifacts>
         <artifact>
-         <id>com.reprezen.kaizen:com.reprezen.kaizen.openapi-parser:0.0.1-SNAPSHOT</id>
+         <id>com.reprezen.kaizen:openapi-parser:0.0.1.201706292057</id>
         </artifact>
        </artifacts>
-       <compressSite>true</compressSite>
+       <compressSite>false</compressSite>
+       <!--<destinationDirectory>repository/updates/0.0.1/0.0.1.201706292057</destinationDirectory>-->
       </configuration>
      </execution>
     </executions>
    </plugin>
   </plugins>
  </build>
+ 
+<repositories>
+    <repository>
+      <id>KaiZen-OpenApi-Parser-Repo</id> 
+      <name>KaiZen-OpenApi-Parser Repo</name>
+      <url>https://dl.bintray.com/reprezen/KaiZen-OpenApi-Parser/</url>
+    </repository>
+  </repositories>
 
  <pluginRepositories>
   <pluginRepository>

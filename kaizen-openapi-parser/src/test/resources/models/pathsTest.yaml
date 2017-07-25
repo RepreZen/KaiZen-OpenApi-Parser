@@ -1,0 +1,19 @@
+openapi: "3.0.0"
+info:
+  title: Simple API overview
+  version: v2
+paths:
+  /:
+    get:
+      operationId: listVersionsv2
+      summary: List API versions
+      responses:
+        200:
+          description: Ok          
+  /v2:
+    get:
+      operationId: getVersionDetailsv2
+      summary: Show API version details
+      responses:
+        200:
+          description: Ok

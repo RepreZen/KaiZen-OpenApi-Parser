@@ -8,7 +8,7 @@ decls:
   - noextPat: &noextPat "(?!x-).*"
   - namePat: &namePat "[a-zA-Z0-9\\._-]+"
   - noextNamePat: &noextNamePat "(?!x-)[a-zA-Z0-9\\._-]+"
-  - pathPat: &pathPat "/.+"
+  - pathPat: &pathPat "/.*"
   - extName: &extName extension
   - extDef: &extDef
       name: Extension

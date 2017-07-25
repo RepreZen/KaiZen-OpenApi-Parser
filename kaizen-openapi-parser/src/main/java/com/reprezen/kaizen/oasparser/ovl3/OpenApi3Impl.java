@@ -105,7 +105,7 @@ public class OpenApi3Impl extends OpenApiObjectImpl implements OpenApi3 {
     private ListOverlay<ServerImpl> servers = registerField("servers", "servers", null, new ListOverlay<ServerImpl>("servers", this, ServerImpl.factory));
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<PathImpl> paths = registerField("paths", "paths", "/.+", new MapOverlay<PathImpl>("paths", this, PathImpl.factory, "/.+"));
+    private MapOverlay<PathImpl> paths = registerField("paths", "paths", "/.*", new MapOverlay<PathImpl>("paths", this, PathImpl.factory, "/.*"));
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     private ValMapOverlay<Object,AnyObjectOverlay> pathsExtensions = registerField("paths", "pathsExtensions", "x-.+", new ValMapOverlay<Object, AnyObjectOverlay>("paths", this, AnyObjectOverlay.factory, "x-.+"));

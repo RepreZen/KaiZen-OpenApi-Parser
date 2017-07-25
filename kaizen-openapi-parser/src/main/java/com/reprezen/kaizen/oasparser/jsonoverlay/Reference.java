@@ -12,7 +12,6 @@ package com.reprezen.kaizen.oasparser.jsonoverlay;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.util.Collection;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -22,7 +21,7 @@ import com.google.common.collect.Maps;
 
 public class Reference {
 
-    private static Map<String, Reference> references = Maps.newHashMap();
+    private Map<String, Reference> references = Maps.newHashMap();
 
     private String refString;
     private ResolutionBase base;
@@ -32,7 +31,7 @@ public class Reference {
     private ResolutionException error;
     private String key;
 
-    private Reference(String refString, ResolutionBase base) {
+    /*package*/ Reference(String refString, ResolutionBase base) {
         this.refString = refString;
         int pos = refString.indexOf('#');
         String relUrl = pos < 0 ? refString : refString.substring(0, pos);
@@ -57,73 +56,13 @@ public class Reference {
         this.key = refString;
     }
 
-    private Reference(String refString, ResolutionBase base, ResolutionException e) {
+    /*package*/ Reference(String refString, ResolutionBase base, ResolutionException e) {
         this.refString = refString;
         this.fragment = null;
         this.base = base;
         this.isValid = false;
         this.error = e;
         this.key = String.format("[%s,%s]", refString, base.getUrlString());
-    }
-
-    public static Collection<Reference> getAllReferences() {
-        return references.values();
-    }
-
-    public static String register(JsonNode refStringNode, ResolutionBase base, boolean resolve) {
-        return get(refStringNode, base, resolve).getKey();
-    }
-
-    public static String register(String refString, ResolutionBase base, boolean resolve) {
-        return get(refString, base, resolve).getKey();
-    }
-
-    public static Reference get(String key) {
-        return references.get(key);
-    }
-
-    public static Reference get(JsonNode refNode) {
-        if (refNode.isObject() && refNode.has("$ref") && refNode.has("key")) {
-            return get(refNode.get("key").textValue());
-        } else {
-            return null;
-        }
-    }
-
-    public static Reference get(JsonNode refStringNode, ResolutionBase base, boolean resolve) {
-        if (refStringNode.isTextual()) {
-            return get(refStringNode.textValue(), base, resolve);
-        } else {
-            String badRefString = refStringNode.toString();
-            Reference ref = new Reference(badRefString, base,
-                    new ResolutionException("Non-text $ref property value in JSON reference node"));
-            String key = ref.getKey();
-            if (!references.containsKey(key)) {
-                references.put(key, ref);
-            }
-            return references.get(key);
-        }
-    }
-
-    public static Reference get(String refString, ResolutionBase base, boolean resolve) {
-        try {
-            if (base.isInvalid()) {
-                throw new ResolutionException("Invalid base for reference resolution", base.getError());
-            }
-            String comprehendedRef = base.comprehend(refString);
-            if (!references.containsKey(comprehendedRef)) {
-                references.put(comprehendedRef, new Reference(comprehendedRef, base));
-            }
-            Reference ref = references.get(comprehendedRef);
-            if (resolve) {
-                ref.resolve();
-            }
-            return ref;
-        } catch (ResolutionException e) {
-            Reference ref = new Reference(refString, base, e);
-            references.put(refString, ref);
-            return ref;
-        }
     }
 
     public String getRefString() {

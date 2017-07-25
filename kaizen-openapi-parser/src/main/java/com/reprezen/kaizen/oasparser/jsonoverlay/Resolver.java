@@ -30,21 +30,26 @@ import com.google.common.collect.Sets;
 
 public class Resolver {
 
-    private static Set<ResolutionBase> resolvedBases = Sets.newHashSet();
+    private Set<ResolutionBase> resolvedBases = Sets.newHashSet();
+    private final ReferenceRegistry referenceRegistry;
+    
+    public Resolver(ReferenceRegistry referenceRegistry) {
+       this.referenceRegistry = referenceRegistry;
+    }
 
-    public static void preresolve(String... baseUrls) {
+    public void preresolve(String... baseUrls) {
         for (String url : baseUrls) {
             preresolve(ResolutionBase.of(url, true));
         }
     }
 
-    public static void preresolve(URL... baseUrls) {
+    public void preresolve(URL... baseUrls) {
         for (URL url : baseUrls) {
             preresolve(ResolutionBase.of(url, true));
         }
     }
 
-    public static void preresolve(ResolutionBase base) {
+    public void preresolve(ResolutionBase base) {
         Queue<ResolutionBase> toResolve = Queues.newArrayDeque();
         toResolve.add(base);
         while (!toResolve.isEmpty()) {
@@ -52,16 +57,16 @@ public class Resolver {
         }
     }
 
-    private static Collection<ResolutionBase> preresolveBase(ResolutionBase base) {
+    private Collection<ResolutionBase> preresolveBase(ResolutionBase base) {
         List<ResolutionBase> discoveredBases = Lists.newArrayList();
         if (!resolvedBases.contains(base)) {
             resolvedBases.add(base);
             if (base.isValid()) {
                 for (JsonNode refNode : findReferenceNodes(base.getJson())) {
                     JsonNode refString = refNode.get("$ref");
-                    String key = Reference.register(refString, base, true);
+                    String key = referenceRegistry.register(refString, base, true);
                     ((ObjectNode) refNode).put("key", key);
-                    Reference ref = Reference.get(key);
+                    Reference ref = referenceRegistry.get(key);
                     if (ref.isValid() && !resolvedBases.contains(ref.getBase())) {
                         discoveredBases.add(ref.getBase());
                     }
@@ -71,7 +76,7 @@ public class Resolver {
         return discoveredBases;
     }
 
-    private final static Predicate<JsonNode> refNodeFilter = new Predicate<JsonNode>() {
+    private final Predicate<JsonNode> refNodeFilter = new Predicate<JsonNode>() {
         @Override
         public boolean apply(JsonNode node) {
             // accepting nodes with non-text $ref properties will mean we'll get Reference objects marked as invalid, as
@@ -80,11 +85,11 @@ public class Resolver {
         }
     };
 
-    private static Iterable<JsonNode> findReferenceNodes(JsonNode tree) {
+    private Iterable<JsonNode> findReferenceNodes(JsonNode tree) {
         return Iterables.filter(treeWalk(tree), refNodeFilter);
     }
 
-    private static Iterable<JsonNode> treeWalk(JsonNode tree) {
+    private Iterable<JsonNode> treeWalk(JsonNode tree) {
         final ArrayDeque<JsonNode> toVisit = Queues.newArrayDeque();
         toVisit.add(tree);
         return new Iterable<JsonNode>() {

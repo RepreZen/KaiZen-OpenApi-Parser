@@ -12,6 +12,7 @@ package com.reprezen.kaizen.oasparser.ovl3;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.coll.ObjectOverlay;
 import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
@@ -19,6 +20,10 @@ import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
 
 public class OpenApiObjectImpl extends ObjectOverlay<OpenApiObjectImpl> implements OpenApiObject {
 
+    protected OpenApiObjectImpl(String key, JsonNode json, JsonOverlay<?> parent, ReferenceRegistry referenceRegistry) {
+        super(key, json, parent, referenceRegistry);
+    }
+    
     public OpenApiObjectImpl(String key, JsonNode json, JsonOverlay<?> parent) {
         super(key, json, parent);
     }

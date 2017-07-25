@@ -20,6 +20,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonLoader;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ResolutionBase;
 import com.reprezen.kaizen.oasparser.jsonoverlay.Resolver;
 import com.reprezen.kaizen.oasparser.ovl3.OpenApi3Impl;
@@ -83,10 +84,11 @@ public class OpenApiParser {
 
     public OpenApi parse(URL resolutionBase, boolean validate) {
         try {
-            Resolver.preresolve(resolutionBase);
+            final ReferenceRegistry referenceRegistry = new ReferenceRegistry();
+            new Resolver(referenceRegistry).preresolve(resolutionBase);
             JsonNode tree = ResolutionBase.get(resolutionBase.toString()).getJson();
             if (isVersion3(tree)) {
-                OpenApi3Impl model = new OpenApi3Impl(null, tree, null);
+                OpenApi3Impl model = new OpenApi3Impl(null, tree, null, referenceRegistry);
                 injector.injectMembers(model);
                 if (validate) {
                     model.validate();

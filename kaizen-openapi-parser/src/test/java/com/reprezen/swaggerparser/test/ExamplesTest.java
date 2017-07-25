@@ -36,15 +36,15 @@ import com.reprezen.kaizen.oasparser.val.ValidationResults.ValidationItem;
 @RunWith(Parameterized.class)
 public class ExamplesTest extends Assert {
 
-    private static final String SPEC_REPO = "OAI/OpenAPI-Specification";
-    private static final String EXAMPLES_BRANCH = "OpenAPI.next";
-    private static final String EXAMPLES_ROOT = "examples/v3.0";
+    private static final String SPEC_REPO = "RepreZen/KaiZen-OpenAPI-Editor";
+    private static final String EXAMPLES_BRANCH = "master";
+    private static final String EXAMPLES_ROOT = "com.reprezen.swagedit.openapi3.tests/resources/spec_examples/v3.0";
 
     private static ObjectMapper mapper = new ObjectMapper();
 
-    @Parameters
-    public static Collection<URL> findExamples() throws IOException {
-        Collection<URL> examples = Lists.newArrayList();
+    @Parameters(name = "{index}: {1}")
+    public static Collection<Object[]> findExamples() throws IOException {
+        Collection<Object[]> examples = Lists.newArrayList();
         Deque<URL> dirs = Queues.newArrayDeque();
         String auth = System.getenv("GITHUB_AUTH") != null ? System.getenv("GITHUB_AUTH") + "@" : "";
         String request = String.format("https://%sapi.github.com/repos/%s/contents/%s?ref=%s", auth, SPEC_REPO,
@@ -62,7 +62,7 @@ public class ExamplesTest extends Assert {
                     dirs.add(new URL(resultUrl));
                 } else if (type.equals("file") && (path.endsWith(".yaml") || path.endsWith(".json"))) {
                     String downloadUrl = result.get("download_url").asText();
-                    examples.add(new URL(downloadUrl));
+                    examples.add(new Object[]{new URL(downloadUrl), result.get("name").asText()});
                 }
             }
         }
@@ -71,6 +71,9 @@ public class ExamplesTest extends Assert {
 
     @Parameter
     public URL exampleUrl;
+    
+    @Parameter(1)
+    public String fileName;
 
     @Test
     public void exampleCanBeParsed() throws IOException {

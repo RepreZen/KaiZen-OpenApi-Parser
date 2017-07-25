@@ -54,7 +54,7 @@ types:
         keyPattern: *namePat
       components/examples:
         name: Example
-        type: Object
+        type: Example
         structure: map
         keyPattern: *namePat
       components/requestBodies:
@@ -438,8 +438,9 @@ types:
         name: Schema
       examples:
         name: Example
-        type: Object
-        structure: collection
+        type: Example
+        structure: map
+        keyPattern: *namePat
       example:
         name: Example
         type: Object
@@ -513,8 +514,9 @@ types:
         type: Object
       examples:
         name: Example
-        type: Object
-        structure: collection
+        type: Example
+        structure: map
+        keyPattern: *namePat
       content:
         name: ContentMediaType
         type: MediaType
@@ -637,8 +639,9 @@ types:
         name: ExternalDocs
       examples:
         name: Example
-        type: Object
-        structure: collection
+        type: Example
+        structure: map
+        keyPattern: *namePat
       example:
         name: Example
         type: Object
@@ -664,4 +667,20 @@ types:
       wrapped:
         name: Wrapped
         type: Boolean        
+      *extName: *extDef
+  
+  - name: Example
+    fields:
+      summary:
+        name: Summary
+        type: String
+      description:
+        name: Description
+        type: String
+      value:
+        name: Value
+        type: Object        
+      externalValue:
+        name: ExternalValue
+        type: String
       *extName: *extDef

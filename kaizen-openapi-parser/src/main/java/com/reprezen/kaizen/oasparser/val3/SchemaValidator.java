@@ -60,7 +60,7 @@ public class SchemaValidator extends ObjectValidatorBase<Schema> {
         checkReadWrite(schema, results);
         validateField(schema.getXml(), results, false, "xml", xmlValidator);
         validateField(schema.getExternalDocs(), results, false, "externalDocs", externalDocsValidator);
-        validateList(schema.getExamples(), schema.hasExamples(), results, false, "examples", null);
+        // validateList(schema.getExamples(), schema.hasExamples(), results, false, "examples", null);
         validateExtensions(schema.getExtensions(), results);
     }
 

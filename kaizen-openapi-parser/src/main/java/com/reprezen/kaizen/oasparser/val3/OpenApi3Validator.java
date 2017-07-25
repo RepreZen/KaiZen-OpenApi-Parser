@@ -20,6 +20,7 @@ import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
 import com.reprezen.kaizen.oasparser.model3.Header;
 import com.reprezen.kaizen.oasparser.model3.Info;
 import com.reprezen.kaizen.oasparser.model3.Link;
+import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.Parameter;
 import com.reprezen.kaizen.oasparser.model3.Path;
 import com.reprezen.kaizen.oasparser.model3.RequestBody;
@@ -28,7 +29,6 @@ import com.reprezen.kaizen.oasparser.model3.Schema;
 import com.reprezen.kaizen.oasparser.model3.SecurityRequirement;
 import com.reprezen.kaizen.oasparser.model3.SecurityScheme;
 import com.reprezen.kaizen.oasparser.model3.Server;
-import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.Tag;
 import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
 import com.reprezen.kaizen.oasparser.val.ValidationResults;
@@ -80,7 +80,7 @@ public class OpenApi3Validator extends ObjectValidatorBase<OpenApi3> {
                         responseValidator);
                 validateMap(swagger.getParameters(), results, false, "collections/parameters", NAME_REGEX,
                         parameterValidator);
-                validateMap(swagger.getExamples(), results, false, "collections/examples", NAME_REGEX, null);
+                // validateMap(swagger.getExamples(), results, false, "collections/examples", NAME_REGEX, null);
                 validateMap(swagger.getRequestBodies(), results, false, "collection/requestBodies", NAME_REGEX,
                         requestBodyValidator);
                 validateMap(swagger.getHeaders(), results, false, "collections/headers", NAME_REGEX, headerValidator);

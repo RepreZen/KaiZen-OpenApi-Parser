@@ -405,6 +405,9 @@ types:
       operationId:
         name: OperationId
         type: String
+      operationRef:
+        name: OperationRef
+        type: String
       parameters:
         name: Parameter
         type: String
@@ -416,6 +419,9 @@ types:
       description:
         name: Description
         type: String
+      server:
+        name: Server
+        type: Server
       *extName: *extDef
 
   - name: RequestBody

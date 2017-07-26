@@ -12,16 +12,12 @@ package com.reprezen.kaizen.oasparser.jsonoverlay;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.util.Map;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.MissingNode;
 import com.google.common.base.Charsets;
-import com.google.common.collect.Maps;
 
 public class Reference {
-
-    private Map<String, Reference> references = Maps.newHashMap();
 
     private String refString;
     private ResolutionBase base;
@@ -31,8 +27,11 @@ public class Reference {
     private ResolutionException error;
     private String key;
 
+    private final ResolutionBaseRegistry resolutionBaseRegistry;
+
     /*package*/ Reference(String refString, ResolutionBase base) {
         this.refString = refString;
+        resolutionBaseRegistry = base.getResolutionBaseRegistry();
         int pos = refString.indexOf('#');
         String relUrl = pos < 0 ? refString : refString.substring(0, pos);
         if (relUrl.isEmpty()) {
@@ -40,7 +39,7 @@ public class Reference {
         } else {
             // note re false: if creating a ref with resolution requested, the base will be resolved as a side-effect
             // during ref resolution, so no need to do it now.
-            this.base = ResolutionBase.of(base.comprehend(relUrl), false);
+            this.base = resolutionBaseRegistry.of(base.comprehend(relUrl), false);
         }
         if (pos >= 0) {
             this.fragment = refString.substring(pos);
@@ -58,6 +57,7 @@ public class Reference {
 
     /*package*/ Reference(String refString, ResolutionBase base, ResolutionException e) {
         this.refString = refString;
+        resolutionBaseRegistry = base.getResolutionBaseRegistry();
         this.fragment = null;
         this.base = base;
         this.isValid = false;

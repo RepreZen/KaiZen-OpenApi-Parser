@@ -28,14 +28,14 @@ public class JsonLoader {
 
     private static ObjectMapper jsonMapper = new ObjectMapper();
     private static YAMLMapper yamlMapper = new YAMLMapper();
-    private static Yaml yaml = new Yaml();
+    private Yaml yaml = new Yaml();
 
-    private static Map<String, JsonNode> cache = Maps.newHashMap();
+    private Map<String, JsonNode> cache = Maps.newHashMap();
 
-    private JsonLoader() {
+    public JsonLoader() {
     }
 
-    public static JsonNode load(URL url) throws IOException {
+    public JsonNode load(URL url) throws IOException {
         String urlString = url.toString();
         if (cache.containsKey(urlString)) {
             return cache.get(urlString);
@@ -44,7 +44,7 @@ public class JsonLoader {
         return loadString(url, json);
     }
 
-    public static JsonNode loadString(URL url, String json) throws IOException, JsonProcessingException {
+    public JsonNode loadString(URL url, String json) throws IOException, JsonProcessingException {
         String trimmed = json.trim();
         JsonNode tree;
         if (trimmed.startsWith("{")) {

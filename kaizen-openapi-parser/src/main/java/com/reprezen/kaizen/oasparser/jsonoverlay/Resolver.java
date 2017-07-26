@@ -32,20 +32,22 @@ public class Resolver {
 
     private Set<ResolutionBase> resolvedBases = Sets.newHashSet();
     private final ReferenceRegistry referenceRegistry;
+    private final ResolutionBaseRegistry resolutionBaseRegistry;
     
-    public Resolver(ReferenceRegistry referenceRegistry) {
+    public Resolver(ReferenceRegistry referenceRegistry, ResolutionBaseRegistry resolutionBaseRegistry) {
        this.referenceRegistry = referenceRegistry;
+       this.resolutionBaseRegistry = resolutionBaseRegistry;
     }
 
     public void preresolve(String... baseUrls) {
         for (String url : baseUrls) {
-            preresolve(ResolutionBase.of(url, true));
+            preresolve(resolutionBaseRegistry.of(url, true));
         }
     }
 
     public void preresolve(URL... baseUrls) {
         for (URL url : baseUrls) {
-            preresolve(ResolutionBase.of(url, true));
+            preresolve(resolutionBaseRegistry.of(url, true));
         }
     }
 

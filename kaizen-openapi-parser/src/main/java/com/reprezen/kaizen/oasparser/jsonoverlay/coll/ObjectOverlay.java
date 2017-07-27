@@ -20,9 +20,14 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 
 public class ObjectOverlay<OO extends ObjectOverlay<OO>> extends JsonOverlay<OO> {
 
+    protected ObjectOverlay(String key, JsonNode json, JsonOverlay<?> parent, ReferenceRegistry referenceRegistry) {
+        super(key, json, parent, referenceRegistry);
+    }
+    
     public ObjectOverlay(String key, JsonNode json, JsonOverlay<?> parent) {
         super(key, json, parent);
     }

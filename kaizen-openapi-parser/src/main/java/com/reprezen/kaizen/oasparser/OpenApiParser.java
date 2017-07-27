@@ -20,7 +20,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonLoader;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ResolutionBase;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ResolutionBaseRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.Resolver;
 import com.reprezen.kaizen.oasparser.ovl3.OpenApi3Impl;
 import com.reprezen.kaizen.oasparser.val3.ValidationConfigurator;
@@ -45,9 +46,11 @@ public class OpenApiParser {
 
     public OpenApi parse(String spec, URL resolutionBase, boolean validate) {
         try {
-            JsonNode tree = JsonLoader.loadString(resolutionBase, spec);
-            ResolutionBase.register(resolutionBase.toString(), tree);
-            return parse(resolutionBase, validate);
+            JsonLoader jsonLoader = new JsonLoader();
+            JsonNode tree = jsonLoader.loadString(resolutionBase, spec);
+            ResolutionBaseRegistry resolutionBaseRegistry = new ResolutionBaseRegistry(jsonLoader);
+            resolutionBaseRegistry.register(resolutionBase.toString(), tree);
+            return parse(resolutionBase, validate, resolutionBaseRegistry);
         } catch (IOException e) {
             throw new SwaggerParserException("Failed to parse spec as JSON or YAML", e);
         }
@@ -82,11 +85,16 @@ public class OpenApiParser {
     }
 
     public OpenApi parse(URL resolutionBase, boolean validate) {
+        return parse(resolutionBase, validate, new ResolutionBaseRegistry(new JsonLoader()));
+    }
+    
+    protected OpenApi parse(URL resolutionBase, boolean validate, ResolutionBaseRegistry resolutionBaseRegistry) {
         try {
-            Resolver.preresolve(resolutionBase);
-            JsonNode tree = ResolutionBase.get(resolutionBase.toString()).getJson();
+            ReferenceRegistry referenceRegistry = new ReferenceRegistry();
+            new Resolver(referenceRegistry, resolutionBaseRegistry).preresolve(resolutionBase);
+            JsonNode tree = resolutionBaseRegistry.get(resolutionBase.toString()).getJson();
             if (isVersion3(tree)) {
-                OpenApi3Impl model = new OpenApi3Impl(null, tree, null);
+                OpenApi3Impl model = new OpenApi3Impl(null, tree, null, referenceRegistry);
                 injector.injectMembers(model);
                 if (validate) {
                     model.validate();

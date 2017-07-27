@@ -17,7 +17,7 @@
       <configuration>
        <artifacts>
         <artifact>
-         <id>com.reprezen.kaizen:openapi-parser:0.0.1.201706292057</id>
+         <id>com.reprezen.kaizen:openapi-parser:0.0.1.201707271921</id>
         </artifact>
        </artifacts>
        <compressSite>false</compressSite>

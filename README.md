@@ -7,9 +7,9 @@
 The KaiZen OpenApi Parser from RepreZen is a Java-based validating parser for
 OpenAPI 3.0 offering full compliance with the
 [OpenAPI 3.0 Specification](https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc0/versions/3.0.md),
-and a highly uniform read/write programming API.
+and a highly uniform read/write programming API.  [OpenAPI](http://openapis.org), formerly known as the Swagger specification, is the industry-standard format for machine-readable REST API descriptions.
 
-Feature highlights include:
+Feature highlights of KaiZen OpenAPI Parser include:
 * **High Performance** - Informal testing shows a 3x-4x performance
   improvement over the current Java Swagger 2.0 parser. This is
   largely attributable to a design based on adapting Jackson
@@ -65,7 +65,17 @@ Feature highlights include:
 The [Getting Started Guide](GettingStarted.md) shows how to build the 
 software locally, and contains a simple sample program that shows how 
 to use the parser.
-  
+
+## Who's using KaiZen Parser?
+
+Here's a starting list of projects that are currently using KaiZen OpenAPI Parser. If you don't see your project here, please open an issue or pull request to add it:
+
+| Project Link | Description |
+| --- | --- | 
+| [Eclipse Vert.x](http://vertx.io/) | Eclipse Vert.x is a tool-kit for building reactive applications on the JVM. | 
+| [RepreZen API Studio](http://reprezen.com/OpenAPI) | RepreZen API Studio is an integrated workbench for API design, documentation and development, built on the Eclipse platform. | 
+
+
 ## Current State
 
 * `JsonOverlay` framework is fairly stable and working well.

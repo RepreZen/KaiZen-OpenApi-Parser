@@ -50,7 +50,7 @@ public class OpenApiParser {
             JsonNode tree = jsonLoader.loadString(resolutionBase, spec);
             ResolutionBaseRegistry resolutionBaseRegistry = new ResolutionBaseRegistry(jsonLoader);
             resolutionBaseRegistry.register(resolutionBase.toString(), tree);
-            return parse(resolutionBase, validate);
+            return parse(resolutionBase, validate, resolutionBaseRegistry);
         } catch (IOException e) {
             throw new SwaggerParserException("Failed to parse spec as JSON or YAML", e);
         }
@@ -85,10 +85,12 @@ public class OpenApiParser {
     }
 
     public OpenApi parse(URL resolutionBase, boolean validate) {
+        return parse(resolutionBase, validate, new ResolutionBaseRegistry(new JsonLoader()));
+    }
+    
+    protected OpenApi parse(URL resolutionBase, boolean validate, ResolutionBaseRegistry resolutionBaseRegistry) {
         try {
-            final ReferenceRegistry referenceRegistry = new ReferenceRegistry();
-            JsonLoader jsonLoader = new JsonLoader();
-            ResolutionBaseRegistry resolutionBaseRegistry = new ResolutionBaseRegistry(jsonLoader);
+            ReferenceRegistry referenceRegistry = new ReferenceRegistry();
             new Resolver(referenceRegistry, resolutionBaseRegistry).preresolve(resolutionBase);
             JsonNode tree = resolutionBaseRegistry.get(resolutionBase.toString()).getJson();
             if (isVersion3(tree)) {

@@ -84,7 +84,7 @@ public class OpenApi3Impl extends OpenApiObjectImpl implements OpenApi3 {
     public OpenApi3Impl(String key, JsonNode json, JsonOverlay<?> parent, ReferenceRegistry referenceRegistry) {
         super(key, json, parent, referenceRegistry);
     }
-    
+
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public OpenApi3Impl(String key, JsonNode json, JsonOverlay<?> parent) {
         super(key, json, parent);

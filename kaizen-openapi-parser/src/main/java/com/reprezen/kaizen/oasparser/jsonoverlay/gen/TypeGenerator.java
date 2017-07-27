@@ -29,7 +29,9 @@ import com.github.javaparser.JavaParser;
 import com.github.javaparser.ParseException;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.BodyDeclaration;
+import com.github.javaparser.ast.body.ConstructorDeclaration;
 import com.github.javaparser.ast.body.FieldDeclaration;
+import com.github.javaparser.ast.body.InitializerDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.TypeDeclaration;
 import com.github.javaparser.ast.comments.Comment;
@@ -45,6 +47,7 @@ import com.google.inject.Inject;
 import com.reprezen.kaizen.oasparser.OpenApi;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlayFactory;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.coll.ListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.coll.MapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.coll.ValListOverlay;
@@ -167,6 +170,7 @@ public abstract class TypeGenerator {
                 JsonNode.class, //
                 JsonOverlay.class, //
                 JsonOverlayFactory.class, //
+                ReferenceRegistry.class, //
                 Inject.class, //
                 StringOverlay.class, //
                 IntegerOverlay.class, //
@@ -258,7 +262,7 @@ public abstract class TypeGenerator {
     private void addManualMethods(SimpleJavaGenerator gen, CompilationUnit existing) {
         for (TypeDeclaration type : existing.getTypes()) {
             for (BodyDeclaration member : type.getMembers()) {
-                if (member instanceof MethodDeclaration || member instanceof FieldDeclaration) {
+                if (member instanceof MethodDeclaration || member instanceof FieldDeclaration || member instanceof ConstructorDeclaration) {
                     if (!isGenerated(member)) {
                         gen.addMember(new Member(member.toString(), null).complete(true));
                     }

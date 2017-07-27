@@ -21,7 +21,7 @@ types:
   - name: OpenApi3
     imports: 
       intf:  [ ValidationResults ]
-      impl: [ OpenApi3Validator, Validator, ValidationResults, Severity, Inject ]
+      impl: [ OpenApi3Validator, Validator, ValidationResults, Severity, Inject, ReferenceRegistry ]
     extendInterfaces: [OpenApi]
     fields:
       openapi:

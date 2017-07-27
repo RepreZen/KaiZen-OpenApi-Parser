@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.google.inject.Inject;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlayFactory;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.coll.ListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.coll.MapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.coll.ValMapOverlay;
@@ -78,6 +79,10 @@ public class OpenApi3Impl extends OpenApiObjectImpl implements OpenApi3 {
     @Override
     public Collection<ValidationResults.ValidationItem> getValidationItems() {
         return getValidationResults().getItems();
+    }
+
+    public OpenApi3Impl(String key, JsonNode json, JsonOverlay<?> parent, ReferenceRegistry referenceRegistry) {
+        super(key, json, parent, referenceRegistry);
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

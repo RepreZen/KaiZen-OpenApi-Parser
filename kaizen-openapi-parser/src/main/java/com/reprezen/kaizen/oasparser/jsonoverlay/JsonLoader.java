@@ -20,14 +20,14 @@ import org.yaml.snakeyaml.Yaml;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.google.common.base.Charsets;
 import com.google.common.collect.Maps;
 
 public class JsonLoader {
 
     private static ObjectMapper jsonMapper = new ObjectMapper();
-    private static YAMLMapper yamlMapper = new YAMLMapper();
+    private static ObjectMapper yamlMapper = new ObjectMapper(new YAMLFactory());
     private Yaml yaml = new Yaml();
 
     private Map<String, JsonNode> cache = Maps.newHashMap();

@@ -6,8 +6,12 @@ Bundle-Vendor: ModelSolv, Inc. d.b.a. RepreZen
 Bundle-Version: 0.0.1.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Require-Bundle: com.google.inject,
+ com.google.guava;bundle-version="[15.0.0,16.0.0)",
+ com.fasterxml.jackson.core.jackson-core;bundle-version="2.5.0",
+ com.fasterxml.jackson.core.jackson-databind;bundle-version="2.5.0",
+ com.fasterxml.jackson.dataformat.jackson-dataformat-yaml;bundle-version="2.5.0",
  com.modelsolv.reprezen.bundles,
- com.google.guava;bundle-version="[15.0.0,16.0.0)"
+ org.yaml.snakeyaml;bundle-version="1.14.0"
 Export-Package: com.reprezen.kaizen.oasparser,
  com.reprezen.kaizen.oasparser.jsonoverlay,
  com.reprezen.kaizen.oasparser.jsonoverlay.coll,

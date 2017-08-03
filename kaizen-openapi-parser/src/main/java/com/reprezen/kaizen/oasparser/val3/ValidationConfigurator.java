@@ -15,6 +15,7 @@ import com.google.inject.TypeLiteral;
 import com.reprezen.kaizen.oasparser.model3.Callback;
 import com.reprezen.kaizen.oasparser.model3.Contact;
 import com.reprezen.kaizen.oasparser.model3.EncodingProperty;
+import com.reprezen.kaizen.oasparser.model3.Example;
 import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
 import com.reprezen.kaizen.oasparser.model3.Header;
 import com.reprezen.kaizen.oasparser.model3.Info;
@@ -22,6 +23,7 @@ import com.reprezen.kaizen.oasparser.model3.License;
 import com.reprezen.kaizen.oasparser.model3.Link;
 import com.reprezen.kaizen.oasparser.model3.MediaType;
 import com.reprezen.kaizen.oasparser.model3.OAuthFlow;
+import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.Operation;
 import com.reprezen.kaizen.oasparser.model3.Parameter;
 import com.reprezen.kaizen.oasparser.model3.Path;
@@ -32,7 +34,6 @@ import com.reprezen.kaizen.oasparser.model3.SecurityRequirement;
 import com.reprezen.kaizen.oasparser.model3.SecurityScheme;
 import com.reprezen.kaizen.oasparser.model3.Server;
 import com.reprezen.kaizen.oasparser.model3.ServerVariable;
-import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.Tag;
 import com.reprezen.kaizen.oasparser.model3.Xml;
 import com.reprezen.kaizen.oasparser.val.Validator;
@@ -47,6 +48,8 @@ public abstract class ValidationConfigurator extends AbstractModule {
         }).to(ContactValidator.class);
         bind(new TypeLiteral<Validator<EncodingProperty>>() {
         }).to(EncodingPropertyValidator.class);
+        bind(new TypeLiteral<Validator<Example>>() {
+        }).to(ExampleValidator.class);
         bind(new TypeLiteral<Validator<ExternalDocs>>() {
         }).to(ExternalDocsValidator.class);
         bind(new TypeLiteral<Validator<Header>>() {

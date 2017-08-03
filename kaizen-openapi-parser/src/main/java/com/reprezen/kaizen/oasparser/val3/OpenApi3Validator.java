@@ -80,7 +80,7 @@ public class OpenApi3Validator extends ObjectValidatorBase<OpenApi3> {
                         responseValidator);
                 validateMap(swagger.getParameters(), results, false, "collections/parameters", NAME_REGEX,
                         parameterValidator);
-                // validateMap(swagger.getExamples(), results, false, "collections/examples", NAME_REGEX, null);
+                validateMap(swagger.getExamples(), results, false, "collections/examples", NAME_REGEX, null);
                 validateMap(swagger.getRequestBodies(), results, false, "collection/requestBodies", NAME_REGEX,
                         requestBodyValidator);
                 validateMap(swagger.getHeaders(), results, false, "collections/headers", NAME_REGEX, headerValidator);

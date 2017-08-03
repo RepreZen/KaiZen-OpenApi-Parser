@@ -34,7 +34,7 @@ public class ExampleTest {
 
     @BeforeClass
     public static void beforeClass() {
-        model = (OpenApi3) new OpenApiParser().parse(Resources.getResource("models/examplesTest.yaml"), false);
+        model = (OpenApi3) new OpenApiParser().parse(Resources.getResource("models/examplesTest.yaml"), true);
     }
 
     @Test
@@ -65,4 +65,10 @@ public class ExampleTest {
         assertEquals("First Example", example.getSummary());
         assertEquals("An Example", example.getDescription());
     }
+
+    @Test
+    public void testValidate() {
+        assertTrue(model.isValid());
+    }
+
 }

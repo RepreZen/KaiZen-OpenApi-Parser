@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.google.inject.Inject;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlayFactory;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.coll.ListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.coll.MapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.coll.ValMapOverlay;
@@ -82,6 +83,10 @@ public class OpenApi3Impl extends OpenApiObjectImpl implements OpenApi3 {
         return getValidationResults().getItems();
     }
 
+    public OpenApi3Impl(String key, JsonNode json, JsonOverlay<?> parent, ReferenceRegistry referenceRegistry) {
+        super(key, json, parent, referenceRegistry);
+    }
+
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public OpenApi3Impl(String key, JsonNode json, JsonOverlay<?> parent) {
         super(key, json, parent);
@@ -102,7 +107,7 @@ public class OpenApi3Impl extends OpenApiObjectImpl implements OpenApi3 {
     private ListOverlay<ServerImpl> servers = registerField("servers", "servers", null, new ListOverlay<ServerImpl>("servers", this, ServerImpl.factory));
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<PathImpl> paths = registerField("paths", "paths", "/.+", new MapOverlay<PathImpl>("paths", this, PathImpl.factory, "/.+"));
+    private MapOverlay<PathImpl> paths = registerField("paths", "paths", "/.*", new MapOverlay<PathImpl>("paths", this, PathImpl.factory, "/.*"));
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     private ValMapOverlay<Object,AnyObjectOverlay> pathsExtensions = registerField("paths", "pathsExtensions", "x-.+", new ValMapOverlay<Object, AnyObjectOverlay>("paths", this, AnyObjectOverlay.factory, "x-.+"));

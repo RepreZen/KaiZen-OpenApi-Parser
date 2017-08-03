@@ -8,7 +8,7 @@ decls:
   - noextPat: &noextPat "(?!x-).*"
   - namePat: &namePat "[a-zA-Z0-9\\._-]+"
   - noextNamePat: &noextNamePat "(?!x-)[a-zA-Z0-9\\._-]+"
-  - pathPat: &pathPat "/.+"
+  - pathPat: &pathPat "/.*"
   - extName: &extName extension
   - extDef: &extDef
       name: Extension
@@ -21,7 +21,7 @@ types:
   - name: OpenApi3
     imports: 
       intf:  [ ValidationResults ]
-      impl: [ OpenApi3Validator, Validator, ValidationResults, Severity, Inject ]
+      impl: [ OpenApi3Validator, Validator, ValidationResults, Severity, Inject, ReferenceRegistry ]
     extendInterfaces: [OpenApi]
     fields:
       openapi:
@@ -405,6 +405,9 @@ types:
       operationId:
         name: OperationId
         type: String
+      operationRef:
+        name: OperationRef
+        type: String
       parameters:
         name: Parameter
         type: String
@@ -416,6 +419,9 @@ types:
       description:
         name: Description
         type: String
+      server:
+        name: Server
+        type: Server
       *extName: *extDef
 
   - name: RequestBody

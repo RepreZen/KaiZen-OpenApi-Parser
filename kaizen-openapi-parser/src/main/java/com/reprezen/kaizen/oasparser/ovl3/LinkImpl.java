@@ -9,8 +9,10 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.std.AnyObjectOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.std.StringOverlay;
 import com.reprezen.kaizen.oasparser.model3.Header;
 import com.reprezen.kaizen.oasparser.model3.Link;
+import com.reprezen.kaizen.oasparser.model3.Server;
 import com.reprezen.kaizen.oasparser.ovl3.HeaderImpl;
 import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
+import com.reprezen.kaizen.oasparser.ovl3.ServerImpl;
 import java.util.Map;
 import javax.annotation.Generated;
 
@@ -33,6 +35,9 @@ public class LinkImpl extends OpenApiObjectImpl implements Link {
     private StringOverlay operationId = registerField("operationId", "operationId", null, new StringOverlay("operationId", this));
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    private StringOverlay operationRef = registerField("operationRef", "operationRef", null, new StringOverlay("operationRef", this));
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     private ValMapOverlay<String,StringOverlay> parameters = registerField("parameters", "parameters", null, new ValMapOverlay<String, StringOverlay>("parameters", this, StringOverlay.factory, null));
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -40,6 +45,9 @@ public class LinkImpl extends OpenApiObjectImpl implements Link {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     private StringOverlay description = registerField("description", "description", null, new StringOverlay("description", this));
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    private ServerImpl server = registerField("server", "server", null, ServerImpl.factory.create("server", this));
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     private ValMapOverlay<Object,AnyObjectOverlay> extensions = registerField("", "extensions", "x-.+", new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+"));
@@ -68,6 +76,19 @@ public class LinkImpl extends OpenApiObjectImpl implements Link {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setOperationId(String operationId) {
         this.operationId.set(operationId);
+    }
+
+    // OperationRef
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getOperationRef() {
+        return operationRef.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public void setOperationRef(String operationRef) {
+        this.operationRef.set(operationRef);
     }
 
     // Parameter
@@ -157,6 +178,19 @@ public class LinkImpl extends OpenApiObjectImpl implements Link {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setDescription(String description) {
         this.description.set(description);
+    }
+
+    // Server
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Server getServer() {
+        return server;
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public void setServer(Server server) {
+        this.server.set((ServerImpl) server);
     }
 
     // Extension

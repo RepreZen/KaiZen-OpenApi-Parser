@@ -25,6 +25,8 @@ public abstract class JsonOverlay<V> {
     protected final static JsonNodeFactory jsonFactory = JsonNodeFactory.instance;
     protected final static ObjectMapper mapper = new ObjectMapper();
 
+    private final ReferenceRegistry referenceRegistry;
+
     protected String key;
     private JsonNode json; // need to prevent subclasses from direct access due to reference management
     private JsonNode resolvedJson = null;
@@ -37,6 +39,10 @@ public abstract class JsonOverlay<V> {
         this(key, Optional.fromNullable(value), Optional.<JsonNode> absent(), parent);
     }
 
+    public JsonOverlay(String key, JsonNode json, JsonOverlay<?> parent, ReferenceRegistry referenceRegistry) {
+        this(key, Optional.<V> absent(), Optional.fromNullable(json), parent, referenceRegistry);
+    }
+    
     public JsonOverlay(String key, JsonNode json, JsonOverlay<?> parent) {
         this(key, Optional.<V> absent(), Optional.fromNullable(json), parent);
     }
@@ -46,8 +52,13 @@ public abstract class JsonOverlay<V> {
     }
 
     private JsonOverlay(String key, Optional<V> value, Optional<JsonNode> json, JsonOverlay<?> parent) {
+        this(key, value, json, parent, parent == null?new ReferenceRegistry() : parent.referenceRegistry);
+    }
+    
+    private JsonOverlay(String key, Optional<V> value, Optional<JsonNode> json, JsonOverlay<?> parent, ReferenceRegistry referenceRegistry) {
         this.key = key;
         this.parent = parent;
+        this.referenceRegistry = referenceRegistry;
         if (parent == null) {
             root = this;
         } else {
@@ -100,7 +111,7 @@ public abstract class JsonOverlay<V> {
     public JsonNode getResolvedJson(String key) {
         JsonNode json = getJson(key);
         if (isReferenceNode(json)) {
-            return Reference.get(json.get("key").asText()).getJson();
+            return referenceRegistry.get(json.get("key").asText()).getJson();
         } else {
             return json;
         }
@@ -120,7 +131,7 @@ public abstract class JsonOverlay<V> {
 
     protected void processReference() {
         if (isReferenceNode()) {
-            ref = Reference.get(json.get("key").asText());
+            ref = referenceRegistry.get(json.get("key").asText());
             resolvedJson = ref.getJson();
         }
     }

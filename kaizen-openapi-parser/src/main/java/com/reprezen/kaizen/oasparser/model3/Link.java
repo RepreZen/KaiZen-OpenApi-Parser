@@ -2,6 +2,7 @@ package com.reprezen.kaizen.oasparser.model3;
 
 import com.reprezen.kaizen.oasparser.model3.Header;
 import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
+import com.reprezen.kaizen.oasparser.model3.Server;
 import java.util.Map;
 import javax.annotation.Generated;
 
@@ -20,6 +21,13 @@ public interface Link extends OpenApiObject {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setOperationId(String operationId);
+
+    // OperationRef
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    String getOperationRef();
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    void setOperationRef(String operationRef);
 
     // Parameter
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -65,6 +73,13 @@ public interface Link extends OpenApiObject {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setDescription(String description);
+
+    // Server
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    Server getServer();
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    void setServer(Server server);
 
     // Extension
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

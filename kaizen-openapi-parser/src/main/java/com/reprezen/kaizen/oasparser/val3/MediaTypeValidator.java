@@ -16,6 +16,7 @@ import java.util.Set;
 
 import com.google.inject.Inject;
 import com.reprezen.kaizen.oasparser.model3.EncodingProperty;
+import com.reprezen.kaizen.oasparser.model3.Example;
 import com.reprezen.kaizen.oasparser.model3.MediaType;
 import com.reprezen.kaizen.oasparser.model3.Schema;
 import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
@@ -28,6 +29,8 @@ public class MediaTypeValidator extends ObjectValidatorBase<MediaType> {
     private Validator<Schema> schemaValidator;
     @Inject
     private Validator<EncodingProperty> encodingPropertyValidator;
+    @Inject
+    private Validator<Example> exampleValidator;
 
     @Override
     public void validateObject(MediaType mediaType, ValidationResults results) {
@@ -38,6 +41,7 @@ public class MediaTypeValidator extends ObjectValidatorBase<MediaType> {
                 encodingPropertyValidator);
         checkEncodingPropsAreProps(mediaType, results);
         validateExtensions(mediaType.getExtensions(), results);
+        validateMap(mediaType.getExamples(), results, false, "examples", Regexes.NOEXT_NAME_REGEX, exampleValidator);
     }
 
     void checkEncodingPropsAreProps(MediaType mediaType, ValidationResults results) {

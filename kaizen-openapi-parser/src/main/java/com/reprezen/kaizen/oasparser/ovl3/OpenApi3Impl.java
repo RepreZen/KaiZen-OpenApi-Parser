@@ -11,6 +11,7 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.coll.ValMapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.std.AnyObjectOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.std.StringOverlay;
 import com.reprezen.kaizen.oasparser.model3.Callback;
+import com.reprezen.kaizen.oasparser.model3.Example;
 import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
 import com.reprezen.kaizen.oasparser.model3.Header;
 import com.reprezen.kaizen.oasparser.model3.Info;
@@ -26,6 +27,7 @@ import com.reprezen.kaizen.oasparser.model3.SecurityScheme;
 import com.reprezen.kaizen.oasparser.model3.Server;
 import com.reprezen.kaizen.oasparser.model3.Tag;
 import com.reprezen.kaizen.oasparser.ovl3.CallbackImpl;
+import com.reprezen.kaizen.oasparser.ovl3.ExampleImpl;
 import com.reprezen.kaizen.oasparser.ovl3.ExternalDocsImpl;
 import com.reprezen.kaizen.oasparser.ovl3.HeaderImpl;
 import com.reprezen.kaizen.oasparser.ovl3.InfoImpl;
@@ -120,7 +122,7 @@ public class OpenApi3Impl extends OpenApiObjectImpl implements OpenApi3 {
     private MapOverlay<ParameterImpl> parameters = registerField("components/parameters", "parameters", "[a-zA-Z0-9\\._-]+", new MapOverlay<ParameterImpl>("components/parameters", this, ParameterImpl.factory, "[a-zA-Z0-9\\._-]+"));
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object,AnyObjectOverlay> examples = registerField("components/examples", "examples", "[a-zA-Z0-9\\._-]+", new ValMapOverlay<Object, AnyObjectOverlay>("components/examples", this, AnyObjectOverlay.factory, "[a-zA-Z0-9\\._-]+"));
+    private MapOverlay<ExampleImpl> examples = registerField("components/examples", "examples", "[a-zA-Z0-9\\._-]+", new MapOverlay<ExampleImpl>("components/examples", this, ExampleImpl.factory, "[a-zA-Z0-9\\._-]+"));
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     private MapOverlay<RequestBodyImpl> requestBodies = registerField("components/requestBodies", "requestBodies", "[a-zA-Z0-9\\._-]+", new MapOverlay<RequestBodyImpl>("components/requestBodies", this, RequestBodyImpl.factory, "[a-zA-Z0-9\\._-]+"));
@@ -419,7 +421,7 @@ public class OpenApi3Impl extends OpenApiObjectImpl implements OpenApi3 {
     // Example
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public Map<String, Object> getExamples() {
+    public Map<String, ? extends Example> getExamples() {
         return examples.get();
     }
 
@@ -431,20 +433,22 @@ public class OpenApi3Impl extends OpenApiObjectImpl implements OpenApi3 {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public Object getExample(String name) {
+    public Example getExample(String name) {
         return examples.get(name);
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public void setExamples(Map<String, Object> examples) {
-        this.examples.set(examples);
+    public void setExamples(Map<String, ? extends Example> examples) {
+        @SuppressWarnings("unchecked")
+            Map<String,ExampleImpl> implExamples = (Map<String, ExampleImpl>) examples;
+            this.examples.set(implExamples);
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public void setExample(String name, Object example) {
-        examples.set(name, example);
+    public void setExample(String name, Example example) {
+        examples.set(name, (ExampleImpl) example);
     }
 
     @Override

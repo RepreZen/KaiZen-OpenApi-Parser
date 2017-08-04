@@ -1,5 +1,6 @@
 package com.reprezen.kaizen.oasparser.model3;
 
+import com.reprezen.kaizen.oasparser.model3.Example;
 import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
 import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
 import com.reprezen.kaizen.oasparser.model3.Schema;
@@ -358,25 +359,22 @@ public interface Schema extends OpenApiObject {
 
     // Example
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    Collection<Object> getExamples();
+    Map<String, ? extends Example> getExamples();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    boolean hasExamples();
+    boolean hasExample(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    Object getExample(int index);
+    Example getExample(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    void setExamples(Collection<Object> examples);
+    void setExamples(Map<String, ? extends Example> examples);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    void setExample(int index, Object example);
+    void setExample(String name, Example example);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    void addExample(Object example);
-
-    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    void removeExample(int index);
+    void removeExample(String name);
 
     // Example
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

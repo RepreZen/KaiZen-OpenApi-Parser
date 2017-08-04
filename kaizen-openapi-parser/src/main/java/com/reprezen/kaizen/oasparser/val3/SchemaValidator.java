@@ -13,6 +13,7 @@ package com.reprezen.kaizen.oasparser.val3;
 import static com.reprezen.kaizen.oasparser.val.Messages.m;
 
 import com.google.inject.Inject;
+import com.reprezen.kaizen.oasparser.model3.Example;
 import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
 import com.reprezen.kaizen.oasparser.model3.Schema;
 import com.reprezen.kaizen.oasparser.model3.Xml;
@@ -26,6 +27,8 @@ public class SchemaValidator extends ObjectValidatorBase<Schema> {
     private Validator<Xml> xmlValidator;
     @Inject
     private Validator<ExternalDocs> externalDocsValidator;
+    @Inject
+    private Validator<Example> exampleValidator;
 
     @Override
     public void validateObject(Schema schema, ValidationResults results) {
@@ -60,7 +63,7 @@ public class SchemaValidator extends ObjectValidatorBase<Schema> {
         checkReadWrite(schema, results);
         validateField(schema.getXml(), results, false, "xml", xmlValidator);
         validateField(schema.getExternalDocs(), results, false, "externalDocs", externalDocsValidator);
-        validateList(schema.getExamples(), schema.hasExamples(), results, false, "examples", null);
+        validateMap(schema.getExamples(), results, false, "examples", Regexes.NOEXT_NAME_REGEX, exampleValidator);
         validateExtensions(schema.getExtensions(), results);
     }
 

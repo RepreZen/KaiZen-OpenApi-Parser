@@ -2,6 +2,7 @@ package com.reprezen.kaizen.oasparser.model3;
 
 import com.reprezen.kaizen.oasparser.OpenApi;
 import com.reprezen.kaizen.oasparser.model3.Callback;
+import com.reprezen.kaizen.oasparser.model3.Example;
 import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
 import com.reprezen.kaizen.oasparser.model3.Header;
 import com.reprezen.kaizen.oasparser.model3.Info;
@@ -164,19 +165,19 @@ public interface OpenApi3 extends OpenApiObject, OpenApi {
 
     // Example
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    Map<String, Object> getExamples();
+    Map<String, ? extends Example> getExamples();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasExample(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    Object getExample(String name);
+    Example getExample(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    void setExamples(Map<String, Object> examples);
+    void setExamples(Map<String, ? extends Example> examples);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    void setExample(String name, Object example);
+    void setExample(String name, Example example);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void removeExample(String name);

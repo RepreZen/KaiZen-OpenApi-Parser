@@ -1,0 +1,36 @@
+openapi: "3.0.0"
+info:
+  title: Simple API overview
+  version: v2
+paths:  
+  /v2:
+    get:
+      operationId: getVersionDetailsv2
+      summary: Show API version details
+      responses:
+        200:
+          description: |-
+            200 response
+          content:
+            application/json: 
+              examples:
+                foo:
+                  summary: First Example
+                  description: An Example
+                  value: {
+                    "foo": "bar",
+                    "person": {
+                      "name": "Paul"                      
+                    }
+                  }
+        203:
+          description: |-
+            203 response
+          content:
+            application/json: 
+              example: {
+                "foo": "bar",
+                "person": {
+                  "name": "Paul"                      
+                }
+              }

@@ -4,18 +4,18 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlayFactory;
 import com.reprezen.kaizen.oasparser.jsonoverlay.coll.MapOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.coll.ValListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.coll.ValMapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.std.AnyObjectOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.std.BooleanOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.std.StringOverlay;
+import com.reprezen.kaizen.oasparser.model3.Example;
 import com.reprezen.kaizen.oasparser.model3.MediaType;
 import com.reprezen.kaizen.oasparser.model3.Parameter;
 import com.reprezen.kaizen.oasparser.model3.Schema;
+import com.reprezen.kaizen.oasparser.ovl3.ExampleImpl;
 import com.reprezen.kaizen.oasparser.ovl3.MediaTypeImpl;
 import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
 import com.reprezen.kaizen.oasparser.ovl3.SchemaImpl;
-import java.util.Collection;
 import java.util.Map;
 import javax.annotation.Generated;
 
@@ -65,7 +65,7 @@ public class ParameterImpl extends OpenApiObjectImpl implements Parameter {
     private AnyObjectOverlay example = registerField("example", "example", null, new AnyObjectOverlay("example", this));
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ValListOverlay<Object, AnyObjectOverlay> examples = registerField("examples", "examples", null, new ValListOverlay<Object, AnyObjectOverlay>("examples", this, AnyObjectOverlay.factory));;
+    private MapOverlay<ExampleImpl> examples = registerField("examples", "examples", "[a-zA-Z0-9\\._-]+", new MapOverlay<ExampleImpl>("examples", this, ExampleImpl.factory, "[a-zA-Z0-9\\._-]+"));
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     private MapOverlay<MediaTypeImpl> contentMediaTypes = registerField("content", "contentMediaTypes", null, new MapOverlay<MediaTypeImpl>("content", this, MediaTypeImpl.factory, null));
@@ -249,44 +249,40 @@ public class ParameterImpl extends OpenApiObjectImpl implements Parameter {
     // Example
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public Collection<Object> getExamples() {
+    public Map<String, ? extends Example> getExamples() {
         return examples.get();
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public boolean hasExamples() {
-        return !examples.isMissing();
+    public boolean hasExample(String name) {
+        return examples.containsKey(name);
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public Object getExample(int index) {
-        return examples.get(index);
+    public Example getExample(String name) {
+        return examples.get(name);
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public void setExamples(Collection<Object> examples) {
-        this.examples.set((Collection<Object>) examples);
+    public void setExamples(Map<String, ? extends Example> examples) {
+        @SuppressWarnings("unchecked")
+            Map<String,ExampleImpl> implExamples = (Map<String, ExampleImpl>) examples;
+            this.examples.set(implExamples);
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public void setExample(int index, Object example) {
-        examples.set(index, example);
+    public void setExample(String name, Example example) {
+        examples.set(name, (ExampleImpl) example);
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public void addExample(Object example) {
-        examples.add(example);
-    }
-
-    @Override
-    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public void removeExample(int index) {
-        examples.remove(index);
+    public void removeExample(String name) {
+        examples.remove(name);
     }
 
     // ContentMediaType

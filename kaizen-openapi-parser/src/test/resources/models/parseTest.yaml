@@ -63,18 +63,24 @@ paths:
         explode: true
         allowReserved: true
         examples:
-        - example
-        - 10
-        - 5.5
+          first: 
+            value: example
+          second:
+            value: 10
+          third: 
+            value: 5.5
         example: example
         content:
           application/json:
             schema:
               title: title
             examples:
-            - x
-            - y
-            - z
+              x:
+                value: x
+              y:
+                value: y
+              z:
+                value: z
             example: 10
             encoding:
               fooEncoding:
@@ -223,10 +229,14 @@ components:
         url: url
       example: xxx
       examples:
-        - 1.0
-        - true
-        - null
-        - xyzzy
+        first:
+          value: 1.0
+        second:
+          value: true
+        third:
+          value: null
+        fourth:
+          value: xyzzy
       deprecated: true
       x-foo: foo
     schema2:
@@ -246,8 +256,10 @@ components:
       name: name
       in: in
   examples:
-    example1: null
-    example2: xyzzy
+    example1: 
+      value: null
+    example2: 
+      value: xyzzy
   requestBodies: 
     reqBody1:
       description: description

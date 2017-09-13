@@ -87,7 +87,7 @@ public class Test {
         boolean validate = !(args.length >= 1 && args[0].equals("-n"));
         for (String modelName : Arrays.asList("api-with-examples", "petstore", "petstore-expanded", "uber")) {
             URI modelUri = new URI(
-                    "https://raw.githubusercontent.com/OAI/OpenAPI-Specification/dm/examples/examples/v3.0/" + modelName
+                    "https://raw.githubusercontent.com/RepreZen/KaiZen-OpenAPI-Editor/master/com.reprezen.swagedit.openapi3.tests/resources/spec_examples/v3.0/" + modelName
                             + ".yaml");
             processModel(modelUri, validate);
         }

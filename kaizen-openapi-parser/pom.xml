@@ -179,4 +179,48 @@
 	<maven.compiler.target>1.7</maven.compiler.target>
 	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>	
     </properties>
+      <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <configuration>
+          <archive>
+            <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
+          </archive>
+        </configuration>
+      </plugin>
+		<plugin>
+		  <groupId>org.apache.maven.plugins</groupId>
+		  <artifactId>maven-source-plugin</artifactId>
+		  <executions>
+		    <execution>
+		      <id>attach-sources</id>
+		      <goals>
+		        <goal>jar</goal>
+		      </goals>
+		    </execution>
+		  </executions>
+		</plugin>
+		<plugin>
+		  <groupId>org.apache.maven.plugins</groupId>
+		  <artifactId>maven-javadoc-plugin</artifactId>
+		  <executions>
+		    <execution>
+		      <id>attach-javadocs</id>
+		      <goals>
+		        <goal>jar</goal>
+		      </goals>
+		    </execution>
+		  </executions>
+		</plugin>
+    </plugins>
+  </build>
+  
+	<distributionManagement>
+	  <repository>
+	      <id>bintray-repo-openapi-parser</id>
+	      <url>https://api.bintray.com/maven/reprezen/KaiZen-OpenApi-Parser/openapi-parser/;publish=1</url>
+	  </repository>
+	</distributionManagement>  
 </project>

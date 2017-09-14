@@ -13,7 +13,40 @@
     <groupId>com.reprezen.kaizen</groupId>
     <artifactId>openapi-parser</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>KaiZen OpenAPI Parser by RepreZen</name>
+    <name>${project.groupId}:${project.artifactId}</name>
+    <description>KaiZen OpenAPI Parser by RepreZen</description>
+    <url>https://github.com/RepreZen/KaiZen-OpenAPI-Editor</url>
+    <licenses>
+	<license>
+	    <name>Eclipse Public License - Version 1.0</name>
+	    <url>https://www.eclipse.org/legal/epl-v10.html</url>
+	</license>
+    </licenses>
+    <developers>
+	<developer>
+	    <name>Andy Lowry</name>
+	    <email>andy.lowry@reprezen.com</email>
+	    <organization>RepreZen</organization>
+	    <organizationUrl>https://www.reprezen.com</organizationUrl>
+	</developer>
+	<developer>
+	    <name>Guillaume Hillairet</name>
+	    <email>g.hillairet@gmail.com</email>
+	    <organization>RepreZen</organization>
+	    <organizationUrl>https://www.reprezen.com</organizationUrl>
+	</developer>
+	<developer>
+	    <name>Tatiana Fesenko</name>
+	    <email>tatiana.fesenko@reprezen.com</email>
+	    <organization>RepreZen</organization>
+	    <organizationUrl>https://www.reprezen.com</organizationUrl>
+	</developer>
+    </developers>    
+    <scm>
+	<connection>scm:git:git://github.com/RepreZen/KaiZen-OpenAPI-Parser.git</connection>
+	<developerConnection>scm:git:ssh://github.com:RepreZen/KaiZen-OpenAPI-Parser.git</developerConnection>
+	<url>https://github.com/RepreZen/KaiZen-OpenAPI-Parser/tree/master</url>
+    </scm>
     <dependencies>
 	<dependency>
 	    <groupId>com.github.javaparser</groupId>
@@ -97,8 +130,70 @@
 	    </build>
 	</profile>
     </profiles>
+    <build>
+	<plugins>
+	    <plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-jar-plugin</artifactId>
+		<configuration>
+		    <archive>
+			<manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
+		    </archive>
+		</configuration>
+	    </plugin>
+	    <plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-source-plugin</artifactId>
+		<executions>
+		    <execution>
+			<id>attach-sources</id>
+			<goals>
+			    <goal>jar</goal>
+			</goals>
+		    </execution>
+		</executions>
+	    </plugin>
+	    <plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-javadoc-plugin</artifactId>
+		<executions>
+		    <execution>
+			<id>attach-javadocs</id>
+			<goals>
+			    <goal>jar</goal>
+			</goals>
+		    </execution>
+		</executions>
+	    </plugin>
+	    <plugin>
+		<groupId>org.sonatype.plugins</groupId>
+		<artifactId>nexus-staging-maven-plugin</artifactId>
+		<version>1.6.7</version>
+		<extensions>true</extensions>
+		<configuration>
+		    <serverId>ossrh</serverId>
+		    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+		    <autoReleaseAfterClose>false</autoReleaseAfterClose>
+		</configuration>
+	    </plugin>
+	    <plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-gpg-plugin</artifactId>
+		<executions>
+		    <execution>
+			<id>sign-artifacts</id>
+			<phase>verify</phase>
+			<goals>
+			    <goal>sign</goal>
+			</goals>
+		    </execution>
+		</executions>
+	    </plugin>
+	</plugins>
+    </build>
     <properties>
 	<maven.compiler.source>1.7</maven.compiler.source>
 	<maven.compiler.target>1.7</maven.compiler.target>
+	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>	
     </properties>
 </project>

@@ -1,0 +1,780 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?metadataRepository version='1.1.0'?>
+<repository name='file:/Users/tanya/Documents/workspace/KaiZen-OpenApi-Parser/releng/target/repository - metadata' type='org.eclipse.equinox.internal.p2.metadata.repository.LocalMetadataRepository' version='1.0.0'>
+  <properties size='2'>
+    <property name='p2.timestamp' value='1501184456699'/>
+    <property name='p2.compressed' value='false'/>
+  </properties>
+  <units size='20'>
+    <unit id='junit' version='4.12.0' singleton='false'>
+      <update id='junit' range='[0.0.0,4.12.0)' severity='0'/>
+      <properties size='1'>
+        <property name='org.eclipse.equinox.p2.name' value='junit'/>
+      </properties>
+      <provides size='33'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='junit' version='4.12.0'/>
+        <provided namespace='osgi.bundle' name='junit' version='4.12.0'/>
+        <provided namespace='java.package' name='junit.extensions' version='0.0.0'/>
+        <provided namespace='java.package' name='junit.framework' version='0.0.0'/>
+        <provided namespace='java.package' name='junit.runner' version='0.0.0'/>
+        <provided namespace='java.package' name='junit.textui' version='0.0.0'/>
+        <provided namespace='java.package' name='org.junit' version='0.0.0'/>
+        <provided namespace='java.package' name='org.junit.experimental' version='0.0.0'/>
+        <provided namespace='java.package' name='org.junit.experimental.categories' version='0.0.0'/>
+        <provided namespace='java.package' name='org.junit.experimental.max' version='0.0.0'/>
+        <provided namespace='java.package' name='org.junit.experimental.results' version='0.0.0'/>
+        <provided namespace='java.package' name='org.junit.experimental.runners' version='0.0.0'/>
+        <provided namespace='java.package' name='org.junit.experimental.theories' version='0.0.0'/>
+        <provided namespace='java.package' name='org.junit.experimental.theories.internal' version='0.0.0'/>
+        <provided namespace='java.package' name='org.junit.experimental.theories.suppliers' version='0.0.0'/>
+        <provided namespace='java.package' name='org.junit.internal' version='0.0.0'/>
+        <provided namespace='java.package' name='org.junit.internal.builders' version='0.0.0'/>
+        <provided namespace='java.package' name='org.junit.internal.matchers' version='0.0.0'/>
+        <provided namespace='java.package' name='org.junit.internal.requests' version='0.0.0'/>
+        <provided namespace='java.package' name='org.junit.internal.runners' version='0.0.0'/>
+        <provided namespace='java.package' name='org.junit.internal.runners.model' version='0.0.0'/>
+        <provided namespace='java.package' name='org.junit.internal.runners.rules' version='0.0.0'/>
+        <provided namespace='java.package' name='org.junit.internal.runners.statements' version='0.0.0'/>
+        <provided namespace='java.package' name='org.junit.matchers' version='0.0.0'/>
+        <provided namespace='java.package' name='org.junit.rules' version='0.0.0'/>
+        <provided namespace='java.package' name='org.junit.runner' version='0.0.0'/>
+        <provided namespace='java.package' name='org.junit.runner.manipulation' version='0.0.0'/>
+        <provided namespace='java.package' name='org.junit.runner.notification' version='0.0.0'/>
+        <provided namespace='java.package' name='org.junit.runners' version='0.0.0'/>
+        <provided namespace='java.package' name='org.junit.runners.model' version='0.0.0'/>
+        <provided namespace='java.package' name='org.junit.runners.parameterized' version='0.0.0'/>
+        <provided namespace='java.package' name='org.junit.validator' version='0.0.0'/>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+      </provides>
+      <requires size='2'>
+        <required namespace='java.package' name='org.hamcrest' range='0.0.0' optional='true' greedy='false'/>
+        <required namespace='java.package' name='org.hamcrest.core' range='0.0.0' optional='true' greedy='false'/>
+      </requires>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='junit' version='4.12.0'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: junit&#xA;Bundle-Version: 4.12.0
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
+    <unit id='com.google.inject' version='4.1.0' singleton='false'>
+      <update id='com.google.inject' range='[0.0.0,4.1.0)' severity='0'/>
+      <properties size='4'>
+        <property name='org.eclipse.equinox.p2.name' value='guice'/>
+        <property name='org.eclipse.equinox.p2.description' value='Guice is a lightweight dependency injection framework for Java 6 and above'/>
+        <property name='org.eclipse.equinox.p2.provider' value='Google, Inc.'/>
+        <property name='org.eclipse.equinox.p2.doc.url' value='https://github.com/google/guice'/>
+      </properties>
+      <provides size='9'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.google.inject' version='4.1.0'/>
+        <provided namespace='osgi.bundle' name='com.google.inject' version='4.1.0'/>
+        <provided namespace='java.package' name='com.google.inject' version='1.4.0'/>
+        <provided namespace='java.package' name='com.google.inject.spi' version='1.4.0'/>
+        <provided namespace='java.package' name='com.google.inject.matcher' version='1.4.0'/>
+        <provided namespace='java.package' name='com.google.inject.util' version='1.4.0'/>
+        <provided namespace='java.package' name='com.google.inject.binder' version='1.4.0'/>
+        <provided namespace='java.package' name='com.google.inject.name' version='1.4.0'/>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+      </provides>
+      <requires size='5'>
+        <required namespace='java.package' name='com.google.common.base' range='19.0.0'/>
+        <required namespace='java.package' name='com.google.common.cache' range='19.0.0'/>
+        <required namespace='java.package' name='com.google.common.collect' range='19.0.0'/>
+        <required namespace='java.package' name='javax.inject' range='0.0.0'/>
+        <required namespace='java.package' name='org.aopalliance.intercept' range='0.0.0'/>
+      </requires>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='com.google.inject' version='4.1.0'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: com.google.inject&#xA;Bundle-Version: 4.1.0
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
+    <unit id='file:/Users/tanya/Documents/workspace/KaiZen-OpenApi-Parser/releng/target/repository/category.xml.all' version='1.0.0.8R9u7ocYeU--7735G3G7G5K75'>
+      <properties size='2'>
+        <property name='org.eclipse.equinox.p2.name' value='Maven osgi-bundles'/>
+        <property name='org.eclipse.equinox.p2.type.category' value='true'/>
+      </properties>
+      <provides size='1'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='file:/Users/tanya/Documents/workspace/KaiZen-OpenApi-Parser/releng/target/repository/category.xml.all' version='1.0.0.8R9u7ocYeU--7735G3G7G5K75'/>
+      </provides>
+      <requires size='19'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='junit' range='[4.12.0,4.12.0]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.google.inject' range='[4.1.0,4.1.0]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.reprezen.kaizen.openapi-parser' range='[0.0.1.201707271921,0.0.1.201707271921]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='org.apache.commons.lang3' range='[3.5.0,3.5.0]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.fasterxml.jackson.core.jackson-core' range='[2.8.4,2.8.4]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.google.guava' range='[15.0.0,15.0.0]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.github.javaparser.javaparser-core' range='[2.5.1,2.5.1]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='org.apache.commons.cli' range='[1.4.0,1.4.0]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='org.hamcrest.core' range='[1.3.0,1.3.0]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.sun.mail.javax.mail' range='[1.5.6,1.5.6]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.fasterxml.jackson.core.jackson-databind' range='[2.8.4,2.8.4]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='aopalliance' range='[1.0.0,1.0.0]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='javax.activation' range='[1.1.0,1.1.0]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='org.apache.commons.io' range='[2.5.0,2.5.0]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='javax.inject.javax.inject' range='[1.0.0,1.0.0]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.fasterxml.jackson.dataformat.jackson-dataformat-yaml' range='[2.8.4,2.8.4]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='org.yaml.snakeyaml' range='[1.15.0,1.15.0]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.fasterxml.jackson.core.jackson-annotations' range='[2.8.0,2.8.0]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='javax.mail-api' range='[1.5.6,1.5.6]'/>
+      </requires>
+      <touchpoint id='null' version='0.0.0'/>
+    </unit>
+    <unit id='com.reprezen.kaizen.openapi-parser' version='0.0.1.201707271921' singleton='false'>
+      <update id='com.reprezen.kaizen.openapi-parser' range='[0.0.0,0.0.1.201707271921)' severity='0'/>
+      <properties size='2'>
+        <property name='org.eclipse.equinox.p2.name' value='OpenAPI Parser'/>
+        <property name='org.eclipse.equinox.p2.provider' value='ModelSolv, Inc. d.b.a. RepreZen'/>
+      </properties>
+      <provides size='14'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.reprezen.kaizen.openapi-parser' version='0.0.1.201707271921'/>
+        <provided namespace='osgi.bundle' name='com.reprezen.kaizen.openapi-parser' version='0.0.1.201707271921'/>
+        <provided namespace='java.package' name='com.reprezen.kaizen.oasparser' version='0.0.0'/>
+        <provided namespace='java.package' name='com.reprezen.kaizen.oasparser.jsonoverlay' version='0.0.0'/>
+        <provided namespace='java.package' name='com.reprezen.kaizen.oasparser.jsonoverlay.coll' version='0.0.0'/>
+        <provided namespace='java.package' name='com.reprezen.kaizen.oasparser.jsonoverlay.gen' version='0.0.0'/>
+        <provided namespace='java.package' name='com.reprezen.kaizen.oasparser.jsonoverlay.std' version='0.0.0'/>
+        <provided namespace='java.package' name='com.reprezen.kaizen.oasparser.model3' version='0.0.0'/>
+        <provided namespace='java.package' name='com.reprezen.kaizen.oasparser.ovl3' version='0.0.0'/>
+        <provided namespace='java.package' name='com.reprezen.kaizen.oasparser.val' version='0.0.0'/>
+        <provided namespace='java.package' name='com.reprezen.kaizen.oasparser.val.oasparser.fake.scheme' version='0.0.0'/>
+        <provided namespace='java.package' name='com.reprezen.kaizen.oasparser.val3' version='0.0.0'/>
+        <provided namespace='java.package' name='com.reprezen.kaizen.oasparser.val3.ovl' version='0.0.0'/>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+      </provides>
+      <requires size='3'>
+        <required namespace='osgi.bundle' name='com.google.inject' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='com.modelsolv.reprezen.bundles' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='com.google.guava' range='[15.0.0,16.0.0)'/>
+      </requires>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='com.reprezen.kaizen.openapi-parser' version='0.0.1.201707271921'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: com.reprezen.kaizen.openapi-parser&#xA;Bundle-Version: 0.0.1.201707271921
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
+    <unit id='org.apache.commons.lang3' version='3.5.0' singleton='false'>
+      <update id='org.apache.commons.lang3' range='[0.0.0,3.5.0)' severity='0'/>
+      <properties size='4'>
+        <property name='org.eclipse.equinox.p2.name' value='Apache Commons Lang'/>
+        <property name='org.eclipse.equinox.p2.description' value='Apache Commons Lang, a package of Java utility classes for the  classes that are in java.lang&apos;s hierarchy, or are considered to be so  standard as to justify existence in java.lang.'/>
+        <property name='org.eclipse.equinox.p2.provider' value='The Apache Software Foundation'/>
+        <property name='org.eclipse.equinox.p2.doc.url' value='http://commons.apache.org/proper/commons-lang/'/>
+      </properties>
+      <provides size='15'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='org.apache.commons.lang3' version='3.5.0'/>
+        <provided namespace='osgi.bundle' name='org.apache.commons.lang3' version='3.5.0'/>
+        <provided namespace='java.package' name='org.apache.commons.lang3' version='3.5.0'/>
+        <provided namespace='java.package' name='org.apache.commons.lang3.builder' version='3.5.0'/>
+        <provided namespace='java.package' name='org.apache.commons.lang3.concurrent' version='3.5.0'/>
+        <provided namespace='java.package' name='org.apache.commons.lang3.event' version='3.5.0'/>
+        <provided namespace='java.package' name='org.apache.commons.lang3.exception' version='3.5.0'/>
+        <provided namespace='java.package' name='org.apache.commons.lang3.math' version='3.5.0'/>
+        <provided namespace='java.package' name='org.apache.commons.lang3.mutable' version='3.5.0'/>
+        <provided namespace='java.package' name='org.apache.commons.lang3.reflect' version='3.5.0'/>
+        <provided namespace='java.package' name='org.apache.commons.lang3.text' version='3.5.0'/>
+        <provided namespace='java.package' name='org.apache.commons.lang3.text.translate' version='3.5.0'/>
+        <provided namespace='java.package' name='org.apache.commons.lang3.time' version='3.5.0'/>
+        <provided namespace='java.package' name='org.apache.commons.lang3.tuple' version='3.5.0'/>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+      </provides>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='org.apache.commons.lang3' version='3.5.0'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: org.apache.commons.lang3&#xA;Bundle-Version: 3.5.0
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
+    <unit id='com.fasterxml.jackson.core.jackson-core' version='2.8.4' singleton='false'>
+      <update id='com.fasterxml.jackson.core.jackson-core' range='[0.0.0,2.8.4)' severity='0'/>
+      <properties size='4'>
+        <property name='org.eclipse.equinox.p2.name' value='Jackson-core'/>
+        <property name='org.eclipse.equinox.p2.description' value='Core Jackson abstractions, basic JSON streaming API implementation'/>
+        <property name='org.eclipse.equinox.p2.provider' value='FasterXML'/>
+        <property name='org.eclipse.equinox.p2.doc.url' value='https://github.com/FasterXML/jackson-core'/>
+      </properties>
+      <provides size='12'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.fasterxml.jackson.core.jackson-core' version='2.8.4'/>
+        <provided namespace='osgi.bundle' name='com.fasterxml.jackson.core.jackson-core' version='2.8.4'/>
+        <provided namespace='java.package' name='com.fasterxml.jackson.core' version='2.8.4'/>
+        <provided namespace='java.package' name='com.fasterxml.jackson.core.base' version='2.8.4'/>
+        <provided namespace='java.package' name='com.fasterxml.jackson.core.filter' version='2.8.4'/>
+        <provided namespace='java.package' name='com.fasterxml.jackson.core.format' version='2.8.4'/>
+        <provided namespace='java.package' name='com.fasterxml.jackson.core.io' version='2.8.4'/>
+        <provided namespace='java.package' name='com.fasterxml.jackson.core.json' version='2.8.4'/>
+        <provided namespace='java.package' name='com.fasterxml.jackson.core.sym' version='2.8.4'/>
+        <provided namespace='java.package' name='com.fasterxml.jackson.core.type' version='2.8.4'/>
+        <provided namespace='java.package' name='com.fasterxml.jackson.core.util' version='2.8.4'/>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+      </provides>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='com.fasterxml.jackson.core.jackson-core' version='2.8.4'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: com.fasterxml.jackson.core.jackson-core&#xA;Bundle-Version: 2.8.4
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
+    <unit id='com.google.guava' version='15.0.0' singleton='false'>
+      <update id='com.google.guava' range='[0.0.0,15.0.0)' severity='0'/>
+      <properties size='2'>
+        <property name='org.eclipse.equinox.p2.name' value='Guava: Google Core Libraries for Java'/>
+        <property name='org.eclipse.equinox.p2.description' value='Guava is a suite of core and expanded libraries that include    utility classes, google&apos;s collections, io classes, and much    much more.    Guava has two code dependencies - javax.annotation    per the JSR-305 spec and javax.inject per the JSR-330 spec.'/>
+      </properties>
+      <provides size='18'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.google.guava' version='15.0.0'/>
+        <provided namespace='osgi.bundle' name='com.google.guava' version='15.0.0'/>
+        <provided namespace='java.package' name='com.google.common.net' version='15.0.0'/>
+        <provided namespace='java.package' name='com.google.common.html' version='15.0.0'/>
+        <provided namespace='java.package' name='com.google.common.collect' version='15.0.0'/>
+        <provided namespace='java.package' name='com.google.common.primitives' version='15.0.0'/>
+        <provided namespace='java.package' name='com.google.common.base' version='15.0.0'/>
+        <provided namespace='java.package' name='com.google.common.escape' version='15.0.0'/>
+        <provided namespace='java.package' name='com.google.common.cache' version='15.0.0'/>
+        <provided namespace='java.package' name='com.google.common.eventbus' version='15.0.0'/>
+        <provided namespace='java.package' name='com.google.common.util.concurrent' version='15.0.0'/>
+        <provided namespace='java.package' name='com.google.common.hash' version='15.0.0'/>
+        <provided namespace='java.package' name='com.google.common.io' version='15.0.0'/>
+        <provided namespace='java.package' name='com.google.common.xml' version='15.0.0'/>
+        <provided namespace='java.package' name='com.google.common.reflect' version='15.0.0'/>
+        <provided namespace='java.package' name='com.google.common.math' version='15.0.0'/>
+        <provided namespace='java.package' name='com.google.common.annotations' version='15.0.0'/>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+      </provides>
+      <requires size='3'>
+        <required namespace='java.package' name='javax.annotation' range='0.0.0' optional='true' greedy='false'/>
+        <required namespace='java.package' name='javax.inject' range='0.0.0' optional='true' greedy='false'/>
+        <required namespace='java.package' name='sun.misc' range='0.0.0' optional='true' greedy='false'/>
+      </requires>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='com.google.guava' version='15.0.0'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: com.google.guava&#xA;Bundle-Version: 15.0.0
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
+    <unit id='com.github.javaparser.javaparser-core' version='2.5.1' singleton='false'>
+      <update id='com.github.javaparser.javaparser-core' range='[0.0.0,2.5.1)' severity='0'/>
+      <properties size='1'>
+        <property name='org.eclipse.equinox.p2.name' value='javaparser-core'/>
+      </properties>
+      <provides size='11'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.github.javaparser.javaparser-core' version='2.5.1'/>
+        <provided namespace='osgi.bundle' name='com.github.javaparser.javaparser-core' version='2.5.1'/>
+        <provided namespace='java.package' name='com.github.javaparser' version='0.0.0'/>
+        <provided namespace='java.package' name='com.github.javaparser.ast' version='0.0.0'/>
+        <provided namespace='java.package' name='com.github.javaparser.ast.body' version='0.0.0'/>
+        <provided namespace='java.package' name='com.github.javaparser.ast.comments' version='0.0.0'/>
+        <provided namespace='java.package' name='com.github.javaparser.ast.expr' version='0.0.0'/>
+        <provided namespace='java.package' name='com.github.javaparser.ast.stmt' version='0.0.0'/>
+        <provided namespace='java.package' name='com.github.javaparser.ast.type' version='0.0.0'/>
+        <provided namespace='java.package' name='com.github.javaparser.ast.visitor' version='0.0.0'/>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+      </provides>
+      <requires size='1'>
+        <required namespace='java.package' name='com.github.javaparser.ast.comments' range='0.0.0'/>
+      </requires>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='com.github.javaparser.javaparser-core' version='2.5.1'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: com.github.javaparser.javaparser-core&#xA;Bundle-Version: 2.5.1
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
+    <unit id='org.apache.commons.cli' version='1.4.0' singleton='false'>
+      <update id='org.apache.commons.cli' range='[0.0.0,1.4.0)' severity='0'/>
+      <properties size='4'>
+        <property name='org.eclipse.equinox.p2.name' value='Apache Commons CLI'/>
+        <property name='org.eclipse.equinox.p2.description' value='Apache Commons CLI provides a simple API for presenting, processing and validating a command line interface.'/>
+        <property name='org.eclipse.equinox.p2.provider' value='The Apache Software Foundation'/>
+        <property name='org.eclipse.equinox.p2.doc.url' value='http://commons.apache.org/proper/commons-cli/'/>
+      </properties>
+      <provides size='4'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='org.apache.commons.cli' version='1.4.0'/>
+        <provided namespace='osgi.bundle' name='org.apache.commons.cli' version='1.4.0'/>
+        <provided namespace='java.package' name='org.apache.commons.cli' version='1.4.0'/>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+      </provides>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='org.apache.commons.cli' version='1.4.0'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: org.apache.commons.cli&#xA;Bundle-Version: 1.4.0
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
+    <unit id='org.hamcrest.core' version='1.3.0' singleton='false'>
+      <update id='org.hamcrest.core' range='[0.0.0,1.3.0)' severity='0'/>
+      <properties size='1'>
+        <property name='org.eclipse.equinox.p2.name' value='org.hamcrest.core'/>
+      </properties>
+      <provides size='6'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='org.hamcrest.core' version='1.3.0'/>
+        <provided namespace='osgi.bundle' name='org.hamcrest.core' version='1.3.0'/>
+        <provided namespace='java.package' name='org.hamcrest' version='0.0.0'/>
+        <provided namespace='java.package' name='org.hamcrest.core' version='0.0.0'/>
+        <provided namespace='java.package' name='org.hamcrest.internal' version='0.0.0'/>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+      </provides>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='org.hamcrest.core' version='1.3.0'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: org.hamcrest.core&#xA;Bundle-Version: 1.3.0
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
+    <unit id='com.sun.mail.javax.mail' version='1.5.6' singleton='false'>
+      <update id='com.sun.mail.javax.mail' range='[0.0.0,1.5.6)' severity='0'/>
+      <properties size='4'>
+        <property name='org.eclipse.equinox.p2.name' value='JavaMail API'/>
+        <property name='org.eclipse.equinox.p2.description' value='JavaMail API'/>
+        <property name='org.eclipse.equinox.p2.provider' value='Oracle'/>
+        <property name='org.eclipse.equinox.p2.doc.url' value='http://www.oracle.com'/>
+      </properties>
+      <provides size='16'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.sun.mail.javax.mail' version='1.5.6'/>
+        <provided namespace='osgi.bundle' name='com.sun.mail.javax.mail' version='1.5.6'/>
+        <provided namespace='java.package' name='javax.mail.internet' version='1.5.0'/>
+        <provided namespace='java.package' name='javax.mail.event' version='1.5.0'/>
+        <provided namespace='java.package' name='javax.mail.util' version='1.5.0'/>
+        <provided namespace='java.package' name='javax.mail' version='1.5.0'/>
+        <provided namespace='java.package' name='javax.mail.search' version='1.5.0'/>
+        <provided namespace='java.package' name='com.sun.mail.imap' version='1.5.6'/>
+        <provided namespace='java.package' name='com.sun.mail.imap.protocol' version='1.5.6'/>
+        <provided namespace='java.package' name='com.sun.mail.iap' version='1.5.6'/>
+        <provided namespace='java.package' name='com.sun.mail.pop3' version='1.5.6'/>
+        <provided namespace='java.package' name='com.sun.mail.smtp' version='1.5.6'/>
+        <provided namespace='java.package' name='com.sun.mail.util' version='1.5.6'/>
+        <provided namespace='java.package' name='com.sun.mail.util.logging' version='1.5.6'/>
+        <provided namespace='java.package' name='com.sun.mail.handlers' version='1.5.6'/>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+      </provides>
+      <requires size='24'>
+        <required namespace='java.package' name='com.sun.mail.handlers' range='1.5.0'/>
+        <required namespace='java.package' name='com.sun.mail.iap' range='1.5.0'/>
+        <required namespace='java.package' name='com.sun.mail.imap' range='1.5.0'/>
+        <required namespace='java.package' name='com.sun.mail.imap.protocol' range='1.5.0'/>
+        <required namespace='java.package' name='com.sun.mail.pop3' range='1.5.0'/>
+        <required namespace='java.package' name='com.sun.mail.smtp' range='1.5.0'/>
+        <required namespace='java.package' name='com.sun.mail.util' range='1.5.0'/>
+        <required namespace='java.package' name='com.sun.mail.util.logging' range='1.5.0'/>
+        <required namespace='java.package' name='javax.activation' range='0.0.0'/>
+        <required namespace='java.package' name='javax.crypto' range='0.0.0'/>
+        <required namespace='java.package' name='javax.crypto.spec' range='0.0.0'/>
+        <required namespace='java.package' name='javax.mail' range='1.5.0'/>
+        <required namespace='java.package' name='javax.mail.event' range='1.5.0'/>
+        <required namespace='java.package' name='javax.mail.internet' range='1.5.0'/>
+        <required namespace='java.package' name='javax.mail.search' range='1.5.0'/>
+        <required namespace='java.package' name='javax.mail.util' range='1.5.0'/>
+        <required namespace='java.package' name='javax.net' range='0.0.0'/>
+        <required namespace='java.package' name='javax.net.ssl' range='0.0.0'/>
+        <required namespace='java.package' name='javax.security.auth.callback' range='0.0.0'/>
+        <required namespace='java.package' name='javax.security.auth.x500' range='0.0.0'/>
+        <required namespace='java.package' name='javax.security.sasl' range='0.0.0' optional='true' greedy='false'/>
+        <required namespace='java.package' name='javax.xml.transform' range='0.0.0'/>
+        <required namespace='java.package' name='javax.xml.transform.stream' range='0.0.0'/>
+        <required namespace='java.package' name='sun.security.util' range='0.0.0' optional='true' greedy='false'/>
+      </requires>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='com.sun.mail.javax.mail' version='1.5.6'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: com.sun.mail.javax.mail&#xA;Bundle-Version: 1.5.6
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
+    <unit id='com.fasterxml.jackson.core.jackson-databind' version='2.8.4' singleton='false'>
+      <update id='com.fasterxml.jackson.core.jackson-databind' range='[0.0.0,2.8.4)' severity='0'/>
+      <properties size='4'>
+        <property name='org.eclipse.equinox.p2.name' value='jackson-databind'/>
+        <property name='org.eclipse.equinox.p2.description' value='General data-binding functionality for Jackson: works on core streaming API'/>
+        <property name='org.eclipse.equinox.p2.provider' value='FasterXML'/>
+        <property name='org.eclipse.equinox.p2.doc.url' value='http://github.com/FasterXML/jackson'/>
+      </properties>
+      <provides size='23'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.fasterxml.jackson.core.jackson-databind' version='2.8.4'/>
+        <provided namespace='osgi.bundle' name='com.fasterxml.jackson.core.jackson-databind' version='2.8.4'/>
+        <provided namespace='java.package' name='com.fasterxml.jackson.databind' version='2.8.4'/>
+        <provided namespace='java.package' name='com.fasterxml.jackson.databind.annotation' version='2.8.4'/>
+        <provided namespace='java.package' name='com.fasterxml.jackson.databind.cfg' version='2.8.4'/>
+        <provided namespace='java.package' name='com.fasterxml.jackson.databind.deser' version='2.8.4'/>
+        <provided namespace='java.package' name='com.fasterxml.jackson.databind.deser.impl' version='2.8.4'/>
+        <provided namespace='java.package' name='com.fasterxml.jackson.databind.deser.std' version='2.8.4'/>
+        <provided namespace='java.package' name='com.fasterxml.jackson.databind.exc' version='2.8.4'/>
+        <provided namespace='java.package' name='com.fasterxml.jackson.databind.ext' version='2.8.4'/>
+        <provided namespace='java.package' name='com.fasterxml.jackson.databind.introspect' version='2.8.4'/>
+        <provided namespace='java.package' name='com.fasterxml.jackson.databind.jsonFormatVisitors' version='2.8.4'/>
+        <provided namespace='java.package' name='com.fasterxml.jackson.databind.jsonschema' version='2.8.4'/>
+        <provided namespace='java.package' name='com.fasterxml.jackson.databind.jsontype' version='2.8.4'/>
+        <provided namespace='java.package' name='com.fasterxml.jackson.databind.jsontype.impl' version='2.8.4'/>
+        <provided namespace='java.package' name='com.fasterxml.jackson.databind.module' version='2.8.4'/>
+        <provided namespace='java.package' name='com.fasterxml.jackson.databind.node' version='2.8.4'/>
+        <provided namespace='java.package' name='com.fasterxml.jackson.databind.ser' version='2.8.4'/>
+        <provided namespace='java.package' name='com.fasterxml.jackson.databind.ser.impl' version='2.8.4'/>
+        <provided namespace='java.package' name='com.fasterxml.jackson.databind.ser.std' version='2.8.4'/>
+        <provided namespace='java.package' name='com.fasterxml.jackson.databind.type' version='2.8.4'/>
+        <provided namespace='java.package' name='com.fasterxml.jackson.databind.util' version='2.8.4'/>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+      </provides>
+      <requires size='35'>
+        <required namespace='java.package' name='com.fasterxml.jackson.annotation' range='[2.8.0,3.0.0)'/>
+        <required namespace='java.package' name='com.fasterxml.jackson.core' range='[2.8.0,3.0.0)'/>
+        <required namespace='java.package' name='com.fasterxml.jackson.core.base' range='[2.8.0,3.0.0)'/>
+        <required namespace='java.package' name='com.fasterxml.jackson.core.filter' range='[2.8.0,3.0.0)'/>
+        <required namespace='java.package' name='com.fasterxml.jackson.core.format' range='[2.8.0,3.0.0)'/>
+        <required namespace='java.package' name='com.fasterxml.jackson.core.io' range='[2.8.0,3.0.0)'/>
+        <required namespace='java.package' name='com.fasterxml.jackson.core.json' range='[2.8.0,3.0.0)'/>
+        <required namespace='java.package' name='com.fasterxml.jackson.core.type' range='[2.8.0,3.0.0)'/>
+        <required namespace='java.package' name='com.fasterxml.jackson.core.util' range='[2.8.0,3.0.0)'/>
+        <required namespace='java.package' name='com.fasterxml.jackson.databind' range='[2.8.0,3.0.0)'/>
+        <required namespace='java.package' name='com.fasterxml.jackson.databind.annotation' range='[2.8.0,3.0.0)'/>
+        <required namespace='java.package' name='com.fasterxml.jackson.databind.cfg' range='[2.8.0,3.0.0)'/>
+        <required namespace='java.package' name='com.fasterxml.jackson.databind.deser' range='[2.8.0,3.0.0)'/>
+        <required namespace='java.package' name='com.fasterxml.jackson.databind.deser.impl' range='[2.8.0,3.0.0)'/>
+        <required namespace='java.package' name='com.fasterxml.jackson.databind.deser.std' range='[2.8.0,3.0.0)'/>
+        <required namespace='java.package' name='com.fasterxml.jackson.databind.exc' range='[2.8.0,3.0.0)'/>
+        <required namespace='java.package' name='com.fasterxml.jackson.databind.ext' range='[2.8.0,3.0.0)'/>
+        <required namespace='java.package' name='com.fasterxml.jackson.databind.introspect' range='[2.8.0,3.0.0)'/>
+        <required namespace='java.package' name='com.fasterxml.jackson.databind.jsonFormatVisitors' range='[2.8.0,3.0.0)'/>
+        <required namespace='java.package' name='com.fasterxml.jackson.databind.jsonschema' range='[2.8.0,3.0.0)'/>
+        <required namespace='java.package' name='com.fasterxml.jackson.databind.jsontype' range='[2.8.0,3.0.0)'/>
+        <required namespace='java.package' name='com.fasterxml.jackson.databind.jsontype.impl' range='[2.8.0,3.0.0)'/>
+        <required namespace='java.package' name='com.fasterxml.jackson.databind.node' range='[2.8.0,3.0.0)'/>
+        <required namespace='java.package' name='com.fasterxml.jackson.databind.ser' range='[2.8.0,3.0.0)'/>
+        <required namespace='java.package' name='com.fasterxml.jackson.databind.ser.impl' range='[2.8.0,3.0.0)'/>
+        <required namespace='java.package' name='com.fasterxml.jackson.databind.ser.std' range='[2.8.0,3.0.0)'/>
+        <required namespace='java.package' name='com.fasterxml.jackson.databind.type' range='[2.8.0,3.0.0)'/>
+        <required namespace='java.package' name='com.fasterxml.jackson.databind.util' range='[2.8.0,3.0.0)'/>
+        <required namespace='java.package' name='javax.xml.datatype' range='0.0.0'/>
+        <required namespace='java.package' name='javax.xml.namespace' range='0.0.0'/>
+        <required namespace='java.package' name='javax.xml.parsers' range='0.0.0'/>
+        <required namespace='java.package' name='org.w3c.dom' range='0.0.0'/>
+        <required namespace='java.package' name='org.w3c.dom.bootstrap' range='0.0.0'/>
+        <required namespace='java.package' name='org.w3c.dom.ls' range='0.0.0'/>
+        <required namespace='java.package' name='org.xml.sax' range='0.0.0'/>
+      </requires>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='com.fasterxml.jackson.core.jackson-databind' version='2.8.4'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: com.fasterxml.jackson.core.jackson-databind&#xA;Bundle-Version: 2.8.4
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
+    <unit id='aopalliance' version='1.0.0' singleton='false'>
+      <update id='aopalliance' range='[0.0.0,1.0.0)' severity='0'/>
+      <properties size='1'>
+        <property name='org.eclipse.equinox.p2.name' value='aopalliance'/>
+      </properties>
+      <provides size='5'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='aopalliance' version='1.0.0'/>
+        <provided namespace='osgi.bundle' name='aopalliance' version='1.0.0'/>
+        <provided namespace='java.package' name='org.aopalliance.aop' version='0.0.0'/>
+        <provided namespace='java.package' name='org.aopalliance.intercept' version='0.0.0'/>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+      </provides>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='aopalliance' version='1.0.0'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: aopalliance&#xA;Bundle-Version: 1.0.0
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
+    <unit id='javax.activation' version='1.1.0' singleton='false'>
+      <update id='javax.activation' range='[0.0.0,1.1.0)' severity='0'/>
+      <properties size='1'>
+        <property name='org.eclipse.equinox.p2.name' value='javax.activation'/>
+      </properties>
+      <provides size='6'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='javax.activation' version='1.1.0'/>
+        <provided namespace='osgi.bundle' name='javax.activation' version='1.1.0'/>
+        <provided namespace='java.package' name='com.sun.activation.registries' version='0.0.0'/>
+        <provided namespace='java.package' name='com.sun.activation.viewers' version='0.0.0'/>
+        <provided namespace='java.package' name='javax.activation' version='0.0.0'/>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+      </provides>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='javax.activation' version='1.1.0'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: javax.activation&#xA;Bundle-Version: 1.1.0
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
+    <unit id='org.apache.commons.io' version='2.5.0' singleton='false'>
+      <update id='org.apache.commons.io' range='[0.0.0,2.5.0)' severity='0'/>
+      <properties size='4'>
+        <property name='org.eclipse.equinox.p2.name' value='Apache Commons IO'/>
+        <property name='org.eclipse.equinox.p2.description' value='The Apache Commons IO library contains utility classes, stream implementations, file filters, file comparators, endian transformation classes, and much more.'/>
+        <property name='org.eclipse.equinox.p2.provider' value='The Apache Software Foundation'/>
+        <property name='org.eclipse.equinox.p2.doc.url' value='http://commons.apache.org/proper/commons-io/'/>
+      </properties>
+      <provides size='15'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='org.apache.commons.io' version='2.5.0'/>
+        <provided namespace='osgi.bundle' name='org.apache.commons.io' version='2.5.0'/>
+        <provided namespace='java.package' name='org.apache.commons.io' version='1.4.9999'/>
+        <provided namespace='java.package' name='org.apache.commons.io.comparator' version='1.4.9999'/>
+        <provided namespace='java.package' name='org.apache.commons.io.filefilter' version='1.4.9999'/>
+        <provided namespace='java.package' name='org.apache.commons.io.input' version='1.4.9999'/>
+        <provided namespace='java.package' name='org.apache.commons.io.output' version='1.4.9999'/>
+        <provided namespace='java.package' name='org.apache.commons.io.monitor' version='2.5.0'/>
+        <provided namespace='java.package' name='org.apache.commons.io.serialization' version='2.5.0'/>
+        <provided namespace='java.package' name='org.apache.commons.io' version='2.5.0'/>
+        <provided namespace='java.package' name='org.apache.commons.io.comparator' version='2.5.0'/>
+        <provided namespace='java.package' name='org.apache.commons.io.input' version='2.5.0'/>
+        <provided namespace='java.package' name='org.apache.commons.io.output' version='2.5.0'/>
+        <provided namespace='java.package' name='org.apache.commons.io.filefilter' version='2.5.0'/>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+      </provides>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='org.apache.commons.io' version='2.5.0'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: org.apache.commons.io&#xA;Bundle-Version: 2.5.0
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
+    <unit id='javax.inject.javax.inject' version='1.0.0' singleton='false'>
+      <update id='javax.inject.javax.inject' range='[0.0.0,1.0.0)' severity='0'/>
+      <properties size='1'>
+        <property name='org.eclipse.equinox.p2.name' value='javax.inject.javax.inject'/>
+      </properties>
+      <provides size='4'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='javax.inject.javax.inject' version='1.0.0'/>
+        <provided namespace='osgi.bundle' name='javax.inject.javax.inject' version='1.0.0'/>
+        <provided namespace='java.package' name='javax.inject' version='0.0.0'/>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+      </provides>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='javax.inject.javax.inject' version='1.0.0'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: javax.inject.javax.inject&#xA;Bundle-Version: 1.0.0
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
+    <unit id='com.fasterxml.jackson.dataformat.jackson-dataformat-yaml' version='2.8.4' singleton='false'>
+      <update id='com.fasterxml.jackson.dataformat.jackson-dataformat-yaml' range='[0.0.0,2.8.4)' severity='0'/>
+      <properties size='4'>
+        <property name='org.eclipse.equinox.p2.name' value='Jackson-dataformat-YAML'/>
+        <property name='org.eclipse.equinox.p2.description' value='Support for reading and writing YAML-encoded data via Jackson abstractions.'/>
+        <property name='org.eclipse.equinox.p2.provider' value='FasterXML'/>
+        <property name='org.eclipse.equinox.p2.doc.url' value='https://github.com/FasterXML/jackson'/>
+      </properties>
+      <provides size='5'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.fasterxml.jackson.dataformat.jackson-dataformat-yaml' version='2.8.4'/>
+        <provided namespace='osgi.bundle' name='com.fasterxml.jackson.dataformat.jackson-dataformat-yaml' version='2.8.4'/>
+        <provided namespace='java.package' name='com.fasterxml.jackson.dataformat.yaml' version='2.8.4'/>
+        <provided namespace='java.package' name='com.fasterxml.jackson.dataformat.yaml.snakeyaml.error' version='2.8.4'/>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+      </provides>
+      <requires size='17'>
+        <required namespace='java.package' name='com.fasterxml.jackson.core' range='[2.8.0,3.0.0)'/>
+        <required namespace='java.package' name='com.fasterxml.jackson.core.base' range='[2.8.0,3.0.0)'/>
+        <required namespace='java.package' name='com.fasterxml.jackson.core.format' range='[2.8.0,3.0.0)'/>
+        <required namespace='java.package' name='com.fasterxml.jackson.core.io' range='[2.8.0,3.0.0)'/>
+        <required namespace='java.package' name='com.fasterxml.jackson.core.json' range='[2.8.0,3.0.0)'/>
+        <required namespace='java.package' name='com.fasterxml.jackson.core.util' range='[2.8.0,3.0.0)'/>
+        <required namespace='java.package' name='com.fasterxml.jackson.databind' range='[2.8.0,3.0.0)'/>
+        <required namespace='java.package' name='com.fasterxml.jackson.dataformat.yaml' range='[2.8.0,3.0.0)'/>
+        <required namespace='java.package' name='com.fasterxml.jackson.dataformat.yaml.snakeyaml.error' range='[2.8.0,3.0.0)'/>
+        <required namespace='java.package' name='org.yaml.snakeyaml' range='[1.15.0,2.0.0)'/>
+        <required namespace='java.package' name='org.yaml.snakeyaml.emitter' range='[1.15.0,2.0.0)'/>
+        <required namespace='java.package' name='org.yaml.snakeyaml.error' range='[1.15.0,2.0.0)'/>
+        <required namespace='java.package' name='org.yaml.snakeyaml.events' range='[1.15.0,2.0.0)'/>
+        <required namespace='java.package' name='org.yaml.snakeyaml.nodes' range='[1.15.0,2.0.0)'/>
+        <required namespace='java.package' name='org.yaml.snakeyaml.parser' range='[1.15.0,2.0.0)'/>
+        <required namespace='java.package' name='org.yaml.snakeyaml.reader' range='[1.15.0,2.0.0)'/>
+        <required namespace='java.package' name='org.yaml.snakeyaml.resolver' range='[1.15.0,2.0.0)'/>
+      </requires>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='com.fasterxml.jackson.dataformat.jackson-dataformat-yaml' version='2.8.4'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: com.fasterxml.jackson.dataformat.jackson-dataformat-yaml&#xA;Bundle-Version: 2.8.4
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
+    <unit id='org.yaml.snakeyaml' version='1.15.0' singleton='false'>
+      <update id='org.yaml.snakeyaml' range='[0.0.0,1.15.0)' severity='0'/>
+      <properties size='2'>
+        <property name='org.eclipse.equinox.p2.name' value='SnakeYAML'/>
+        <property name='org.eclipse.equinox.p2.description' value='YAML 1.1 parser and emitter for Java'/>
+      </properties>
+      <provides size='20'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='org.yaml.snakeyaml' version='1.15.0'/>
+        <provided namespace='osgi.bundle' name='org.yaml.snakeyaml' version='1.15.0'/>
+        <provided namespace='java.package' name='org.yaml.snakeyaml' version='1.15.0'/>
+        <provided namespace='java.package' name='org.yaml.snakeyaml.composer' version='1.15.0'/>
+        <provided namespace='java.package' name='org.yaml.snakeyaml.constructor' version='1.15.0'/>
+        <provided namespace='java.package' name='org.yaml.snakeyaml.emitter' version='1.15.0'/>
+        <provided namespace='java.package' name='org.yaml.snakeyaml.error' version='1.15.0'/>
+        <provided namespace='java.package' name='org.yaml.snakeyaml.events' version='1.15.0'/>
+        <provided namespace='java.package' name='org.yaml.snakeyaml.extensions.compactnotation' version='1.15.0'/>
+        <provided namespace='java.package' name='org.yaml.snakeyaml.introspector' version='1.15.0'/>
+        <provided namespace='java.package' name='org.yaml.snakeyaml.nodes' version='1.15.0'/>
+        <provided namespace='java.package' name='org.yaml.snakeyaml.parser' version='1.15.0'/>
+        <provided namespace='java.package' name='org.yaml.snakeyaml.reader' version='1.15.0'/>
+        <provided namespace='java.package' name='org.yaml.snakeyaml.representer' version='1.15.0'/>
+        <provided namespace='java.package' name='org.yaml.snakeyaml.resolver' version='1.15.0'/>
+        <provided namespace='java.package' name='org.yaml.snakeyaml.scanner' version='1.15.0'/>
+        <provided namespace='java.package' name='org.yaml.snakeyaml.serializer' version='1.15.0'/>
+        <provided namespace='java.package' name='org.yaml.snakeyaml.tokens' version='1.15.0'/>
+        <provided namespace='java.package' name='org.yaml.snakeyaml.util' version='1.15.0'/>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+      </provides>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='org.yaml.snakeyaml' version='1.15.0'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: org.yaml.snakeyaml&#xA;Bundle-Version: 1.15.0
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
+    <unit id='com.fasterxml.jackson.core.jackson-annotations' version='2.8.0' singleton='false'>
+      <update id='com.fasterxml.jackson.core.jackson-annotations' range='[0.0.0,2.8.0)' severity='0'/>
+      <properties size='4'>
+        <property name='org.eclipse.equinox.p2.name' value='Jackson-annotations'/>
+        <property name='org.eclipse.equinox.p2.description' value='Core annotations used for value types, used by Jackson data binding package.'/>
+        <property name='org.eclipse.equinox.p2.provider' value='FasterXML'/>
+        <property name='org.eclipse.equinox.p2.doc.url' value='http://github.com/FasterXML/jackson'/>
+      </properties>
+      <provides size='4'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.fasterxml.jackson.core.jackson-annotations' version='2.8.0'/>
+        <provided namespace='osgi.bundle' name='com.fasterxml.jackson.core.jackson-annotations' version='2.8.0'/>
+        <provided namespace='java.package' name='com.fasterxml.jackson.annotation' version='2.8.0'/>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+      </provides>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='com.fasterxml.jackson.core.jackson-annotations' version='2.8.0'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: com.fasterxml.jackson.core.jackson-annotations&#xA;Bundle-Version: 2.8.0
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
+    <unit id='javax.mail-api' version='1.5.6' singleton='false'>
+      <update id='javax.mail-api' range='[0.0.0,1.5.6)' severity='0'/>
+      <properties size='4'>
+        <property name='org.eclipse.equinox.p2.name' value='JavaMail API jar'/>
+        <property name='org.eclipse.equinox.p2.description' value='JavaMail API jar'/>
+        <property name='org.eclipse.equinox.p2.provider' value='Oracle'/>
+        <property name='org.eclipse.equinox.p2.doc.url' value='http://www.oracle.com'/>
+      </properties>
+      <provides size='8'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='javax.mail-api' version='1.5.6'/>
+        <provided namespace='osgi.bundle' name='javax.mail-api' version='1.5.6'/>
+        <provided namespace='java.package' name='javax.mail' version='1.5.0'/>
+        <provided namespace='java.package' name='javax.mail.search' version='1.5.0'/>
+        <provided namespace='java.package' name='javax.mail.util' version='1.5.0'/>
+        <provided namespace='java.package' name='javax.mail.internet' version='1.5.0'/>
+        <provided namespace='java.package' name='javax.mail.event' version='1.5.0'/>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+      </provides>
+      <requires size='9'>
+        <required namespace='java.package' name='com.sun.mail.util' range='0.0.0'/>
+        <required namespace='java.package' name='javax.activation' range='0.0.0'/>
+        <required namespace='java.package' name='javax.mail' range='1.5.0'/>
+        <required namespace='java.package' name='javax.mail.event' range='1.5.0'/>
+        <required namespace='java.package' name='javax.mail.internet' range='1.5.0'/>
+        <required namespace='java.package' name='javax.mail.search' range='1.5.0'/>
+        <required namespace='java.package' name='javax.mail.util' range='1.5.0'/>
+        <required namespace='java.package' name='javax.security.sasl' range='0.0.0' optional='true' greedy='false'/>
+        <required namespace='java.package' name='sun.security.util' range='0.0.0' optional='true' greedy='false'/>
+      </requires>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='javax.mail-api' version='1.5.6'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: javax.mail-api&#xA;Bundle-Version: 1.5.6
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
+  </units>
+</repository>

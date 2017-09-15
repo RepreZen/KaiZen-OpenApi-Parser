@@ -26,14 +26,26 @@ public class SecuritySchemeValidator extends ObjectValidatorBase<SecurityScheme>
     public void validateObject(SecurityScheme securityScheme, ValidationResults results) {
         // no validation for: description, bearerFormat
         validateString(securityScheme.getType(), results, true, "apiKey|http|oauth2|openIdConnect", "type");
-        validateString(securityScheme.getName(), results, true, "name");
-        validateString(securityScheme.getIn(), results, true, "query|header", "in");
-        // TODO Q: Spec says 'flow' is required, but it's just a map of OAuthFlow objects, none of which is noted as
-        // required. What's the real requirement here? Is anything required if type != oauth2
-        validateField(securityScheme.getImplicitOAuthFlow(), results, false, "flow.implicit", oauthFlowValidator);
-        validateExtensions(securityScheme.getOAuthFlowsExtensions(), results, "flow");
-        // TODO Q: is this really required if type != openIdConnect?
-        validateUrl(securityScheme.getOpenIdConnectUrl(), results, true, "openIdConnectUrl");
+        switch (securityScheme.getType()) {
+            case "http":
+            	validateString(securityScheme.getScheme(), results, true, "scheme");
+                // If bearer validate bearerFormat
+                break;
+            case "apiKey":
+                validateString(securityScheme.getName(), results, true, "name");
+                validateString(securityScheme.getIn(), results, true, "query|header|cookie", "in");
+                break;
+            case "oauth2":
+                validateField(securityScheme.getImplicitOAuthFlow(), results, false, "flow.implicit", oauthFlowValidator);
+                validateField(securityScheme.getImplicitOAuthFlow(), results, false, "flow.password", oauthFlowValidator);
+                validateField(securityScheme.getImplicitOAuthFlow(), results, false, "flow.clientCredentials", oauthFlowValidator);
+                validateField(securityScheme.getImplicitOAuthFlow(), results, false, "authorizationCode", oauthFlowValidator);
+                validateExtensions(securityScheme.getOAuthFlowsExtensions(), results, "flow");
+                break;
+            case "openIdConnect":
+                validateUrl(securityScheme.getOpenIdConnectUrl(), results, true, "openIdConnectUrl");
+                break;
+        }
         validateExtensions(securityScheme.getExtensions(), results);
     }
 

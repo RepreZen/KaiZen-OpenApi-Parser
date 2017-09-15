@@ -173,7 +173,8 @@
 		<configuration>
 		    <serverId>ossrh</serverId>
 		    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-		    <autoReleaseAfterClose>false</autoReleaseAfterClose>
+		    <autoReleaseAfterClose>${nexus.autorelease}</autoReleaseAfterClose>
+		    <autoDropAfterRelease>${nexus.autodrop}</autoDropAfterRelease>
 		</configuration>
 	    </plugin>
 	    <plugin>
@@ -194,6 +195,8 @@
     <properties>
 	<maven.compiler.source>1.7</maven.compiler.source>
 	<maven.compiler.target>1.7</maven.compiler.target>
-	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>	
+	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	<nexus.autorelease>false</nexus.autorelease>
+	<nexus.autodrop>true</nexus.autodrop>
     </properties>
 </project>

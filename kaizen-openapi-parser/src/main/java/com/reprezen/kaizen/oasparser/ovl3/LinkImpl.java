@@ -29,9 +29,6 @@ public class LinkImpl extends OpenApiObjectImpl implements Link {
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay href = registerField("href", "href", null, new StringOverlay("href", this));
-
-    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     private StringOverlay operationId = registerField("operationId", "operationId", null, new StringOverlay("operationId", this));
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -51,19 +48,6 @@ public class LinkImpl extends OpenApiObjectImpl implements Link {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     private ValMapOverlay<Object,AnyObjectOverlay> extensions = registerField("", "extensions", "x-.+", new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+"));
-
-    // Href
-    @Override
-    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public String getHref() {
-        return href.get();
-    }
-
-    @Override
-    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public void setHref(String href) {
-        this.href.set(href);
-    }
 
     // OperationId
     @Override

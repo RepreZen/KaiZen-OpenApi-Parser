@@ -399,9 +399,6 @@ types:
 
   - name: Link
     fields:
-      href:
-        name: Href
-        type: String
       operationId:
         name: OperationId
         type: String

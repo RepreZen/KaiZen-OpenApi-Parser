@@ -34,8 +34,6 @@ import com.reprezen.kaizen.oasparser.val.oasparser.fake.scheme.Handler;
 
 public abstract class ValidatorBase<T> implements Validator<T> {
 
-    private static boolean laxRequired = System.getenv("OAS_PARSER_LAX_REQUIRED") != null;
-
     @Override
     public ValidationResults validate(T object) {
         ValidationResults results = new ValidationResults();
@@ -162,7 +160,7 @@ public abstract class ValidatorBase<T> implements Validator<T> {
 
     public <V> void validateList(final Collection<? extends V> value, final boolean isPresent,
             final ValidationResults results, final boolean required, final String crumb, final Validator<V> validator) {
-        if (required && !laxRequired && !isPresent) {
+        if (required && !isPresent) {
             results.addError(m.msg("MissingField|Required field is missing", crumb), crumb);
         }
         if (isPresent && validator != null) {
@@ -258,7 +256,7 @@ public abstract class ValidatorBase<T> implements Validator<T> {
 
     private void checkMissing(boolean required, final Object value, final ValidationResults results,
             final String crumb) {
-        if (required && !laxRequired && isMissing(value)) {
+        if (required && isMissing(value)) {
             results.addError(m.msg("MissingField|Required field is missing", crumb), crumb);
         }
     }

@@ -46,7 +46,7 @@ public class SchemaValidator extends ObjectValidatorBase<Schema> {
         validateList(schema.getEnums(), schema.hasEnums(), results, false, "enum", null);
         validateNonEmpty(schema.getEnums(), schema.hasEnums(), results, "enum");
         validateUnique(schema.getEnums(), results, "enum");
-        validateString(schema.getType(), results, true, "boolean|object|array|number|integer|string", "type");
+        validateString(schema.getType(), results, false, "boolean|object|array|number|integer|string", "type");
         validateList(schema.getAllOfSchemas(), schema.hasAllOfSchemas(), results, false, "allOf", this);
         validateList(schema.getOneOfSchemas(), schema.hasOneOfSchemas(), results, false, "oneOf", this);
         validateList(schema.getAnyOfSchemas(), schema.hasAnyOfSchemas(), results, false, "anyOf", this);

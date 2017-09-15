@@ -52,6 +52,10 @@ public class ValidationResults {
     List<ValidationItem> items = Lists.newArrayList();
     List<String> crumbs = Collections.emptyList();
 
+    public void add(String msg, Severity severity) { items.add(new ValidationItem(severity, msg, crumbs)); }
+
+    public void add(String msg, String crumb, Severity severity) { items.add(new ValidationItem(severity, msg, crumbs, crumb)); }
+
     public void addInfo(String msg) {
         items.add(new ValidationItem(INFO, msg, crumbs));
     }

@@ -28,14 +28,18 @@ public class SecuritySchemeValidator extends ObjectValidatorBase<SecurityScheme>
         validateString(securityScheme.getType(), results, true, "apiKey|http|oauth2|openIdConnect", "type");
         switch (securityScheme.getType()) {
             case "http":
+            	validateString(securityScheme.getScheme(), results, true, "scheme");
                 // If bearer validate bearerFormat
                 break;
             case "apiKey":
                 validateString(securityScheme.getName(), results, true, "name");
-                validateString(securityScheme.getIn(), results, true, "query|header", "in");
+                validateString(securityScheme.getIn(), results, true, "query|header|cookie", "in");
                 break;
             case "oauth2":
                 validateField(securityScheme.getImplicitOAuthFlow(), results, false, "flow.implicit", oauthFlowValidator);
+                validateField(securityScheme.getImplicitOAuthFlow(), results, false, "flow.password", oauthFlowValidator);
+                validateField(securityScheme.getImplicitOAuthFlow(), results, false, "flow.clientCredentials", oauthFlowValidator);
+                validateField(securityScheme.getImplicitOAuthFlow(), results, false, "authorizationCode", oauthFlowValidator);
                 validateExtensions(securityScheme.getOAuthFlowsExtensions(), results, "flow");
                 break;
             case "openIdConnect":

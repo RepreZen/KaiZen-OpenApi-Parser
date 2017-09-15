@@ -8,13 +8,6 @@ import javax.annotation.Generated;
 
 public interface Link extends OpenApiObject {
 
-    // Href
-    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    String getHref();
-
-    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    void setHref(String href);
-
     // OperationId
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     String getOperationId();

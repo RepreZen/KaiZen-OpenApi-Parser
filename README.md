@@ -83,15 +83,16 @@ Here's a starting list of projects that are currently using KaiZen OpenAPI Parse
 * OpenAPI 3.0 type specification, and the generated code passes some
   early tests.
 
-* Both read and write APIs are fully implemented, though not well
-  tested. No builders have been created as yet.
+* Both read and write APIs are mostly implemented, though not well
+  tested. No builders have been created as yet. Visibility into and
+  modification of references is not yet implemented.
 
 * Model-level validation is mostly complete, but requires development
   of extensive tests, as well as a careful inventory of all
   requirements appearing in the specification (noting all uses of
   MUST, SHOULD, etc.) to ensure that validation is complete.
 
-* Serialization has not yet been implemented.
+* Serialization is not yet implemented.
 
 * DI for implementation-level validators exists, but validators need
   to be written. This is likely to be limited to a small number of

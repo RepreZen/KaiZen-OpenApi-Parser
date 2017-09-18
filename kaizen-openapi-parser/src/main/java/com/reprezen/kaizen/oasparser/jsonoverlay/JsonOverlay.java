@@ -10,15 +10,19 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.jsonoverlay;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.MissingNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.base.Optional;
+import com.reprezen.kaizen.oasparser.jsonoverlay.coll.ObjectOverlay;
 
 public abstract class JsonOverlay<V> {
 
@@ -88,12 +92,56 @@ public abstract class JsonOverlay<V> {
     public void set(V value) {
         this.value = value;
     }
+    
+    private JsonNode internalDeferenceRecursive(JsonNode node) {
+    	if (node != null) {
+    		if (node.isObject() && node.has("$ref")) {
+        		//Parse reference
+    			Iterator<ResolutionBase> i = ResolutionBase.getAllBases().iterator();
+    			while(i.hasNext()) {
+    				JsonNode candidate = Reference.get(node.get("$ref").asText(), i.next(), true).getJson();
+    				if (candidate != null && !candidate.isMissingNode()) {
+    					return this.internalDeferenceRecursive(candidate);
+    				}
+    			}
+        	} else if (node.isContainerNode()) {
+        		if (node.isArray()) {
+        			ArrayNode arrayNode = (ArrayNode)node;
+        			for (int i = 0; i < arrayNode.size(); i++) {
+        				JsonNode expectedChangedNode = this.internalDeferenceRecursive(arrayNode.get(i));
+        				if (arrayNode.get(i) != expectedChangedNode /* Simple check of instance */) {
+        					arrayNode.set(i, expectedChangedNode);
+        				}
+        			}
+        		} else if (node.isObject()) {
+        			ObjectNode objectNode = (ObjectNode)node;
+        			Iterator<String> fieldNameIterator = objectNode.fieldNames();
+        			while (fieldNameIterator.hasNext()) {
+        				String fieldName = fieldNameIterator.next();
+        				JsonNode expectedChangedNode = this.internalDeferenceRecursive(objectNode.get(fieldName));
+        				if (objectNode.get(fieldName) != expectedChangedNode /* Simple check of instance */) {
+        					objectNode.set(fieldName, expectedChangedNode);
+        				}
+        			}
+        		}
+        	}
+    	}
+    	return node;
+    }
+    
+    public JsonNode getDereferencedJsonTree() {
+    	if (ref != null) {
+            return internalDeferenceRecursive(resolvedJson);
+        } else {
+        	return internalDeferenceRecursive(json);
+        }
+    }
 
     public JsonNode getJson() {
         if (ref != null) {
             return resolvedJson;
         } else {
-            return json;
+        	return json;
         }
     }
 

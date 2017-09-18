@@ -164,6 +164,13 @@ paths:
         - sec3: []
       servers: *id001
       x-foo: foo
+    post:
+      operationId: updatePetWithForm
+      requestBody:
+        $ref: '#/components/requestBodies/reqBody1'
+      responses:
+        '200':
+          description: Pet updated.
     x-foo: foo
     parameters: *id002
   x-foo: foo
@@ -241,8 +248,16 @@ components:
       x-foo: foo
     schema2:
       title: title
-      additionalProperties:
-        type: integer
+      properties:
+        a:
+          $ref: '#/components/schemas/schema3'
+    schema3:
+      title: schema3
+      properties:
+        a:
+          type: array
+          items:
+            type: number
   responses: 
     resp1:
       description: description
@@ -263,6 +278,10 @@ components:
   requestBodies: 
     reqBody1:
       description: description
+      content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/schema2'
     reqBody2:
       description: description
   headers:

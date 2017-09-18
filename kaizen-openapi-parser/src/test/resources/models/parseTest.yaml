@@ -118,7 +118,7 @@ paths:
                 title: title
           links:
             name:
-              href: href
+              operationRef: operationRef
               operationId: operationId
               parameters: 
                 param1: xxxx
@@ -329,9 +329,9 @@ components:
       x-foo: foo
   links: 
     link1: 
-      href: href
+      operationRef: operationRef
     link2:
-      href: href
+      operationRef: operationRef
   callbacks:
     cb1:
       expr1: 

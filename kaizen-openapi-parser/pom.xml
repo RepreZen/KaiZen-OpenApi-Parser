@@ -129,6 +129,23 @@
 		</plugins>
 	    </build>
 	</profile>
+	<profile>
+	    <id>compile-for-gen</id>
+	    <build>
+		<plugins>
+		    <plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<configuration>
+			    <includes>
+				<include>**/jsonoverlay/**/*</include>
+				<include>**/oasparser/GenOpenApi3.java</include>
+			    </includes>
+			</configuration>
+		    </plugin>
+		</plugins>
+	    </build>
+	</profile>
     </profiles>
     <build>
 	<plugins>

@@ -41,7 +41,7 @@ public class StringOverlay extends JsonOverlay<String> {
     }
 
     @Override
-    public JsonNode toJson() {
+    public JsonNode createJson() {
         return value != null ? jsonFactory.textNode(value) : MissingNode.getInstance();
     }
 

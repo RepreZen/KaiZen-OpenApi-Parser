@@ -41,7 +41,7 @@ public class BooleanOverlay extends JsonOverlay<Boolean> {
     }
 
     @Override
-    public JsonNode toJson() {
+    public JsonNode createJson() {
         return value != null ? jsonFactory.booleanNode(value) : MissingNode.getInstance();
 
     }

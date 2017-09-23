@@ -31,7 +31,6 @@ import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.BodyDeclaration;
 import com.github.javaparser.ast.body.ConstructorDeclaration;
 import com.github.javaparser.ast.body.FieldDeclaration;
-import com.github.javaparser.ast.body.InitializerDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.TypeDeclaration;
 import com.github.javaparser.ast.comments.Comment;
@@ -63,8 +62,8 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.std.Primitive;
 import com.reprezen.kaizen.oasparser.jsonoverlay.std.PrimitiveOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.std.StringOverlay;
 import com.reprezen.kaizen.oasparser.val.ValidationResults;
-import com.reprezen.kaizen.oasparser.val.Validator;
 import com.reprezen.kaizen.oasparser.val.ValidationResults.Severity;
+import com.reprezen.kaizen.oasparser.val.Validator;
 import com.reprezen.kaizen.oasparser.val3.OpenApi3Validator;
 
 public abstract class TypeGenerator {
@@ -231,6 +230,7 @@ public abstract class TypeGenerator {
                 gen.addGeneratedMembers(getFieldMethods(field));
             }
         }
+        gen.addGeneratedMembers(getOtherMembers(type));
     }
 
     protected boolean skipField(Field field) {
@@ -292,6 +292,10 @@ public abstract class TypeGenerator {
     protected Members getFieldMethods(Field field) {
         return new Members();
     }
+    
+    protected Members getOtherMembers(Type type) {
+    	return new Members();
+    }
 
     protected Member addMember(String declaration, Collection<String> code) {
         Member member = new Member(declaration, code);
@@ -300,49 +304,6 @@ public abstract class TypeGenerator {
 
     protected final Member addMember(String declaration) {
         return addMember(declaration, null);
-    }
-
-    protected static String getImplType(Field field) {
-        Type fieldType = field.getContainer().getTypeData().getTypeMap().get(field.getType());
-        return fieldType == null ? getImplType(field.getType()) : getImplType(fieldType);
-    }
-
-    protected static String getImplType(Type type) {
-        return type.isNoGen() ? type.getName() : getImplType(type.getName());
-    }
-
-    protected static String getTypeInCollection(Field field) {
-        String type = field.getType();
-        return isScalarType(field) ? type : "? extends " + type;
-    }
-
-    protected static String getImplType(String type) {
-        switch (type) {
-        case "String":
-        case "Integer":
-        case "Number":
-        case "Boolean":
-        case "Primitive":
-            return type + "Overlay";
-        case "Object":
-            return "AnyObjectOverlay";
-        default:
-            return type + "Impl";
-        }
-    }
-
-    protected static boolean isScalarType(Field field) {
-        switch (field.getType()) {
-        case "String":
-        case "Integer":
-        case "Number":
-        case "Boolean":
-        case "Primitive":
-        case "Object":
-            return true;
-        default:
-            return false;
-        }
     }
 
     protected static class Members extends ArrayList<Member> {

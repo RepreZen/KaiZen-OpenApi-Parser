@@ -197,4 +197,22 @@ public class ObjectOverlay<OO extends ObjectOverlay<OO>> extends JsonOverlay<OO>
 			return lastColon >= 0 ? path.substring(lastColon + 1) : path;
 		}
 	}
+
+	protected static class PropertyAccessors {
+		public PropertyAccessors() {
+		}
+
+		public void add(String path, Getter getter) {
+		}
+	}
+
+	protected static class PropertyAccessor {
+		public PropertyAccessor(String path, Getter getter) {
+
+		}
+	}
+
+	protected interface Getter {
+		public JsonOverlay<?> get();
+	}
 }

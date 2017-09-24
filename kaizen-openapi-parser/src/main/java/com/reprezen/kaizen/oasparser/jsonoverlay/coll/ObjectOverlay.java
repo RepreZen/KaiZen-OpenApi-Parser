@@ -95,7 +95,8 @@ public abstract class ObjectOverlay<OO extends ObjectOverlay<OO>> extends JsonOv
 		private JsonPointerTrie<OverlayGetter> accessorsTrie = new JsonPointerTrie<>();
 
 		public void add(String path, String keyPattern, OverlayGetter getter) {
-			accessorsTrie.add(JsonPointer.compile("/" + path), Pattern.compile("^" + keyPattern + "$"), getter);
+			Pattern pattern = keyPattern != null ? Pattern.compile("^" + keyPattern + "$") : null;
+			accessorsTrie.add(JsonPointer.compile(path.isEmpty() ? "" : "/" + path), pattern, getter);
 		}
 		
 		public Pair<OverlayGetter, JsonPointer> find(JsonPointer path) {

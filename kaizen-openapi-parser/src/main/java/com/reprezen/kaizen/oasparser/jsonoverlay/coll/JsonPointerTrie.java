@@ -41,7 +41,7 @@ public class JsonPointerTrie<T> {
 
 	public Pair<T, JsonPointer> find(JsonPointer path) {
 		if (path.matches()) {
-			return Pair.of(patternMap.get(null), null);
+			return Pair.of(patternMap.get(null), path);
 		} else {
 			String key = path.getMatchingProperty();
 			if (children.containsKey(key)) {
@@ -52,7 +52,7 @@ public class JsonPointerTrie<T> {
 			// pattern-constrained keys. We resolve to that map-like object, and the
 			// remaining path starts with a key into that map.
 			for (Pattern pat : patternMap.keySet()) {
-				if (pat.matcher(key).matches()) {
+				if (pat != null && pat.matcher(key).matches()) {
 					return Pair.of(patternMap.get(pat), path);
 				}
 			}

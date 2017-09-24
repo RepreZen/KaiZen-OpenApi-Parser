@@ -213,6 +213,11 @@ public class ImplGenerator extends TypeGenerator {
 
 	private Members getPropertyAccessorMembers(Type type) {
 		Members members = new Members();
+		if (type.getExtensionOf() != null) {
+			// if this class is an extension of another, then we use that class's property accessors.
+			// N.B. That means that extension object types can't define their own additional properties.
+			return members;
+		}
 		String installDecl = "protected void installPropertyAccessors(PropertyAccessors accessors)";
 		List<String> createCode = Lists.newArrayList();
 		createCode.add("OverlayGetter getter = null;");

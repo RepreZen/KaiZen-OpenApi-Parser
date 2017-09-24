@@ -28,16 +28,16 @@ public class RequestBodyImpl extends OpenApiObjectImpl implements RequestBody {
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay description = registerField("description", "description", null, new StringOverlay("description", this));
+    private StringOverlay description = new StringOverlay("description", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<MediaTypeImpl> contentMediaTypes = registerField("content", "contentMediaTypes", null, new MapOverlay<MediaTypeImpl>("content", this, MediaTypeImpl.factory, null));
+    private MapOverlay<MediaTypeImpl> contentMediaTypes = new MapOverlay<MediaTypeImpl>("content", this, MediaTypeImpl.factory, null);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private BooleanOverlay required = registerField("required", "required", null, new BooleanOverlay("required", this));
+    private BooleanOverlay required = new BooleanOverlay("required", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object,AnyObjectOverlay> extensions = registerField("", "extensions", "x-.+", new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+"));
+    private ValMapOverlay<Object, AnyObjectOverlay> extensions = new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+");
 
     // Description
     @Override
@@ -154,5 +154,19 @@ public class RequestBodyImpl extends OpenApiObjectImpl implements RequestBody {
         return isEmptyRecursive(parent, RequestBodyImpl.class) ? null : new RequestBodyImpl(key, json, parent);
     }
 };
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    protected void installPropertyAccessors(PropertyAccessors accessors) {
+        OverlayGetter getter = null;
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return description;}};
+            accessors.add("description", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return contentMediaTypes;}};
+            accessors.add("content", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return required;}};
+            accessors.add("required", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return extensions;}};
+            accessors.add("", "x-.+", getter);
+    }
 
 }

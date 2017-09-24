@@ -43,49 +43,49 @@ public class OperationImpl extends OpenApiObjectImpl implements Operation {
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ValListOverlay<String, StringOverlay> tags = registerField("tags", "tags", null, new ValListOverlay<String, StringOverlay>("tags", this, StringOverlay.factory));;
+    private ValListOverlay<String, StringOverlay> tags = new ValListOverlay<String, StringOverlay>("tags", this, StringOverlay.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay summary = registerField("summary", "summary", null, new StringOverlay("summary", this));
+    private StringOverlay summary = new StringOverlay("summary", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay description = registerField("description", "description", null, new StringOverlay("description", this));
+    private StringOverlay description = new StringOverlay("description", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ExternalDocsImpl externalDocs = registerField("externalDocs", "externalDocs", null, ExternalDocsImpl.factory.create("externalDocs", this));
+    private ExternalDocsImpl externalDocs = ExternalDocsImpl.factory.create("externalDocs", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay operationId = registerField("operationId", "operationId", null, new StringOverlay("operationId", this));
+    private StringOverlay operationId = new StringOverlay("operationId", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ListOverlay<ParameterImpl> parameters = registerField("parameters", "parameters", null, new ListOverlay<ParameterImpl>("parameters", this, ParameterImpl.factory));
+    private ListOverlay<ParameterImpl> parameters = new ListOverlay<ParameterImpl>("parameters", this, ParameterImpl.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private RequestBodyImpl requestBody = registerField("requestBody", "requestBody", null, RequestBodyImpl.factory.create("requestBody", this));
+    private RequestBodyImpl requestBody = RequestBodyImpl.factory.create("requestBody", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<ResponseImpl> responses = registerField("responses", "responses", "default|(\\d\\d\\d)", new MapOverlay<ResponseImpl>("responses", this, ResponseImpl.factory, "default|(\\d\\d\\d)"));
+    private MapOverlay<ResponseImpl> responses = new MapOverlay<ResponseImpl>("responses", this, ResponseImpl.factory, "default|(\\d\\d\\d)");
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object,AnyObjectOverlay> responsesExtensions = registerField("responses", "responsesExtensions", "x-.+", new ValMapOverlay<Object, AnyObjectOverlay>("responses", this, AnyObjectOverlay.factory, "x-.+"));
+    private ValMapOverlay<Object, AnyObjectOverlay> responsesExtensions = new ValMapOverlay<Object, AnyObjectOverlay>("responses", this, AnyObjectOverlay.factory, "x-.+");
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<CallbackImpl> callbacks = registerField("callbacks", "callbacks", "(?!x-)[a-zA-Z0-9\\._-]+", new MapOverlay<CallbackImpl>("callbacks", this, CallbackImpl.factory, "(?!x-)[a-zA-Z0-9\\._-]+"));
+    private MapOverlay<CallbackImpl> callbacks = new MapOverlay<CallbackImpl>("callbacks", this, CallbackImpl.factory, "(?!x-)[a-zA-Z0-9\\._-]+");
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object,AnyObjectOverlay> callbacksExtensions = registerField("callbacks", "callbacksExtensions", "x-.+", new ValMapOverlay<Object, AnyObjectOverlay>("callbacks", this, AnyObjectOverlay.factory, "x-.+"));
+    private ValMapOverlay<Object, AnyObjectOverlay> callbacksExtensions = new ValMapOverlay<Object, AnyObjectOverlay>("callbacks", this, AnyObjectOverlay.factory, "x-.+");
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private BooleanOverlay deprecated = registerField("deprecated", "deprecated", null, new BooleanOverlay("deprecated", this));
+    private BooleanOverlay deprecated = new BooleanOverlay("deprecated", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ListOverlay<SecurityRequirementImpl> securityRequirements = registerField("security", "securityRequirements", null, new ListOverlay<SecurityRequirementImpl>("security", this, SecurityRequirementImpl.factory));
+    private ListOverlay<SecurityRequirementImpl> securityRequirements = new ListOverlay<SecurityRequirementImpl>("security", this, SecurityRequirementImpl.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ListOverlay<ServerImpl> servers = registerField("servers", "servers", null, new ListOverlay<ServerImpl>("servers", this, ServerImpl.factory));
+    private ListOverlay<ServerImpl> servers = new ListOverlay<ServerImpl>("servers", this, ServerImpl.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object,AnyObjectOverlay> extensions = registerField("", "extensions", "x-.+", new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+"));
+    private ValMapOverlay<Object, AnyObjectOverlay> extensions = new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+");
 
     // Tag
     @Override
@@ -545,5 +545,41 @@ public class OperationImpl extends OpenApiObjectImpl implements Operation {
         return isEmptyRecursive(parent, OperationImpl.class) ? null : new OperationImpl(key, json, parent);
     }
 };
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    protected void installPropertyAccessors(PropertyAccessors accessors) {
+        OverlayGetter getter = null;
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return tags;}};
+            accessors.add("tags", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return summary;}};
+            accessors.add("summary", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return description;}};
+            accessors.add("description", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return externalDocs;}};
+            accessors.add("externalDocs", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return operationId;}};
+            accessors.add("operationId", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return parameters;}};
+            accessors.add("parameters", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return requestBody;}};
+            accessors.add("requestBody", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return responses;}};
+            accessors.add("responses", "default|(\\d\\d\\d)", getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return responsesExtensions;}};
+            accessors.add("responses", "x-.+", getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return callbacks;}};
+            accessors.add("callbacks", "(?!x-)[a-zA-Z0-9\\._-]+", getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return callbacksExtensions;}};
+            accessors.add("callbacks", "x-.+", getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return deprecated;}};
+            accessors.add("deprecated", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return securityRequirements;}};
+            accessors.add("security", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return servers;}};
+            accessors.add("servers", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return extensions;}};
+            accessors.add("", "x-.+", getter);
+    }
 
 }

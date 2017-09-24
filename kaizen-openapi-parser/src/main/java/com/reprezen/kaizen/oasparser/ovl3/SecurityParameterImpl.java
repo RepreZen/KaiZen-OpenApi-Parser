@@ -23,7 +23,7 @@ public class SecurityParameterImpl extends OpenApiObjectImpl implements Security
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ValListOverlay<String, StringOverlay> parameters = registerField("", "parameters", null, new ValListOverlay<String, StringOverlay>("", this, StringOverlay.factory));;
+    private ValListOverlay<String, StringOverlay> parameters = new ValListOverlay<String, StringOverlay>("", this, StringOverlay.factory);
 
     // Parameter
     @Override
@@ -75,5 +75,13 @@ public class SecurityParameterImpl extends OpenApiObjectImpl implements Security
         return isEmptyRecursive(parent, SecurityParameterImpl.class) ? null : new SecurityParameterImpl(key, json, parent);
     }
 };
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    protected void installPropertyAccessors(PropertyAccessors accessors) {
+        OverlayGetter getter = null;
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return parameters;}};
+            accessors.add("", null, getter);
+    }
 
 }

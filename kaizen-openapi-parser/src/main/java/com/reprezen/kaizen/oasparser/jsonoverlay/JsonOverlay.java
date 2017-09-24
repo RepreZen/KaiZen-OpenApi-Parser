@@ -12,6 +12,7 @@ package com.reprezen.kaizen.oasparser.jsonoverlay;
 
 import java.util.Iterator;
 
+import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
@@ -88,6 +89,17 @@ public abstract class JsonOverlay<V> {
 
 	public V get() {
 		return value;
+	}
+
+	public JsonOverlay<?> find(JsonPointer path) {
+		// this implementation suffices for primitive types, but must be overriden in
+		// overlays designed for JSON arrays or objects
+		return isMissing() ? null//
+				: path.matches() ? this : null;
+	}
+
+	public JsonOverlay<?> find(String path) {
+		return find(JsonPointer.compile(path));
 	}
 
 	public void set(V value) {

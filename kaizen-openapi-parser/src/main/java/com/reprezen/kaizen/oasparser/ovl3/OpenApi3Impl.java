@@ -98,61 +98,61 @@ public class OpenApi3Impl extends OpenApiObjectImpl implements OpenApi3 {
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay openApi = registerField("openapi", "openApi", null, new StringOverlay("openapi", this));
+    private StringOverlay openApi = new StringOverlay("openapi", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private InfoImpl info = registerField("info", "info", null, InfoImpl.factory.create("info", this));
+    private InfoImpl info = InfoImpl.factory.create("info", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ListOverlay<ServerImpl> servers = registerField("servers", "servers", null, new ListOverlay<ServerImpl>("servers", this, ServerImpl.factory));
+    private ListOverlay<ServerImpl> servers = new ListOverlay<ServerImpl>("servers", this, ServerImpl.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<PathImpl> paths = registerField("paths", "paths", "/.*", new MapOverlay<PathImpl>("paths", this, PathImpl.factory, "/.*"));
+    private MapOverlay<PathImpl> paths = new MapOverlay<PathImpl>("paths", this, PathImpl.factory, "/.*");
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object,AnyObjectOverlay> pathsExtensions = registerField("paths", "pathsExtensions", "x-.+", new ValMapOverlay<Object, AnyObjectOverlay>("paths", this, AnyObjectOverlay.factory, "x-.+"));
+    private ValMapOverlay<Object, AnyObjectOverlay> pathsExtensions = new ValMapOverlay<Object, AnyObjectOverlay>("paths", this, AnyObjectOverlay.factory, "x-.+");
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<SchemaImpl> schemas = registerField("components/schemas", "schemas", "[a-zA-Z0-9\\._-]+", new MapOverlay<SchemaImpl>("components/schemas", this, SchemaImpl.factory, "[a-zA-Z0-9\\._-]+"));
+    private MapOverlay<SchemaImpl> schemas = new MapOverlay<SchemaImpl>("components/schemas", this, SchemaImpl.factory, "[a-zA-Z0-9\\._-]+");
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<ResponseImpl> responses = registerField("components/responses", "responses", "[a-zA-Z0-9\\._-]+", new MapOverlay<ResponseImpl>("components/responses", this, ResponseImpl.factory, "[a-zA-Z0-9\\._-]+"));
+    private MapOverlay<ResponseImpl> responses = new MapOverlay<ResponseImpl>("components/responses", this, ResponseImpl.factory, "[a-zA-Z0-9\\._-]+");
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<ParameterImpl> parameters = registerField("components/parameters", "parameters", "[a-zA-Z0-9\\._-]+", new MapOverlay<ParameterImpl>("components/parameters", this, ParameterImpl.factory, "[a-zA-Z0-9\\._-]+"));
+    private MapOverlay<ParameterImpl> parameters = new MapOverlay<ParameterImpl>("components/parameters", this, ParameterImpl.factory, "[a-zA-Z0-9\\._-]+");
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<ExampleImpl> examples = registerField("components/examples", "examples", "[a-zA-Z0-9\\._-]+", new MapOverlay<ExampleImpl>("components/examples", this, ExampleImpl.factory, "[a-zA-Z0-9\\._-]+"));
+    private MapOverlay<ExampleImpl> examples = new MapOverlay<ExampleImpl>("components/examples", this, ExampleImpl.factory, "[a-zA-Z0-9\\._-]+");
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<RequestBodyImpl> requestBodies = registerField("components/requestBodies", "requestBodies", "[a-zA-Z0-9\\._-]+", new MapOverlay<RequestBodyImpl>("components/requestBodies", this, RequestBodyImpl.factory, "[a-zA-Z0-9\\._-]+"));
+    private MapOverlay<RequestBodyImpl> requestBodies = new MapOverlay<RequestBodyImpl>("components/requestBodies", this, RequestBodyImpl.factory, "[a-zA-Z0-9\\._-]+");
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<HeaderImpl> headers = registerField("components/headers", "headers", "[a-zA-Z0-9\\._-]+", new MapOverlay<HeaderImpl>("components/headers", this, HeaderImpl.factory, "[a-zA-Z0-9\\._-]+"));
+    private MapOverlay<HeaderImpl> headers = new MapOverlay<HeaderImpl>("components/headers", this, HeaderImpl.factory, "[a-zA-Z0-9\\._-]+");
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<SecuritySchemeImpl> securitySchemes = registerField("components/securitySchemes", "securitySchemes", "[a-zA-Z0-9\\._-]+", new MapOverlay<SecuritySchemeImpl>("components/securitySchemes", this, SecuritySchemeImpl.factory, "[a-zA-Z0-9\\._-]+"));
+    private MapOverlay<SecuritySchemeImpl> securitySchemes = new MapOverlay<SecuritySchemeImpl>("components/securitySchemes", this, SecuritySchemeImpl.factory, "[a-zA-Z0-9\\._-]+");
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<LinkImpl> links = registerField("components/links", "links", "[a-zA-Z0-9\\._-]+", new MapOverlay<LinkImpl>("components/links", this, LinkImpl.factory, "[a-zA-Z0-9\\._-]+"));
+    private MapOverlay<LinkImpl> links = new MapOverlay<LinkImpl>("components/links", this, LinkImpl.factory, "[a-zA-Z0-9\\._-]+");
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<CallbackImpl> callbacks = registerField("components/callbacks", "callbacks", "(?!x-)[a-zA-Z0-9\\._-]+", new MapOverlay<CallbackImpl>("components/callbacks", this, CallbackImpl.factory, "(?!x-)[a-zA-Z0-9\\._-]+"));
+    private MapOverlay<CallbackImpl> callbacks = new MapOverlay<CallbackImpl>("components/callbacks", this, CallbackImpl.factory, "(?!x-)[a-zA-Z0-9\\._-]+");
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object,AnyObjectOverlay> componentsExtensions = registerField("components", "componentsExtensions", "x-.+", new ValMapOverlay<Object, AnyObjectOverlay>("components", this, AnyObjectOverlay.factory, "x-.+"));
+    private ValMapOverlay<Object, AnyObjectOverlay> componentsExtensions = new ValMapOverlay<Object, AnyObjectOverlay>("components", this, AnyObjectOverlay.factory, "x-.+");
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ListOverlay<SecurityRequirementImpl> securityRequirements = registerField("security", "securityRequirements", null, new ListOverlay<SecurityRequirementImpl>("security", this, SecurityRequirementImpl.factory));
+    private ListOverlay<SecurityRequirementImpl> securityRequirements = new ListOverlay<SecurityRequirementImpl>("security", this, SecurityRequirementImpl.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ListOverlay<TagImpl> tags = registerField("tags", "tags", null, new ListOverlay<TagImpl>("tags", this, TagImpl.factory));
+    private ListOverlay<TagImpl> tags = new ListOverlay<TagImpl>("tags", this, TagImpl.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ExternalDocsImpl externalDocs = registerField("externalDocs", "externalDocs", null, ExternalDocsImpl.factory.create("externalDocs", this));
+    private ExternalDocsImpl externalDocs = ExternalDocsImpl.factory.create("externalDocs", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object,AnyObjectOverlay> extensions = registerField("", "extensions", "x-.+", new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+"));
+    private ValMapOverlay<Object, AnyObjectOverlay> extensions = new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+");
 
     // OpenApi
     @Override
@@ -836,5 +836,49 @@ public class OpenApi3Impl extends OpenApiObjectImpl implements OpenApi3 {
         return isEmptyRecursive(parent, OpenApi3Impl.class) ? null : new OpenApi3Impl(key, json, parent);
     }
 };
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    protected void installPropertyAccessors(PropertyAccessors accessors) {
+        OverlayGetter getter = null;
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return openApi;}};
+            accessors.add("openapi", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return info;}};
+            accessors.add("info", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return servers;}};
+            accessors.add("servers", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return paths;}};
+            accessors.add("paths", "/.*", getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return pathsExtensions;}};
+            accessors.add("paths", "x-.+", getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return schemas;}};
+            accessors.add("components/schemas", "[a-zA-Z0-9\\._-]+", getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return responses;}};
+            accessors.add("components/responses", "[a-zA-Z0-9\\._-]+", getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return parameters;}};
+            accessors.add("components/parameters", "[a-zA-Z0-9\\._-]+", getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return examples;}};
+            accessors.add("components/examples", "[a-zA-Z0-9\\._-]+", getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return requestBodies;}};
+            accessors.add("components/requestBodies", "[a-zA-Z0-9\\._-]+", getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return headers;}};
+            accessors.add("components/headers", "[a-zA-Z0-9\\._-]+", getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return securitySchemes;}};
+            accessors.add("components/securitySchemes", "[a-zA-Z0-9\\._-]+", getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return links;}};
+            accessors.add("components/links", "[a-zA-Z0-9\\._-]+", getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return callbacks;}};
+            accessors.add("components/callbacks", "(?!x-)[a-zA-Z0-9\\._-]+", getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return componentsExtensions;}};
+            accessors.add("components", "x-.+", getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return securityRequirements;}};
+            accessors.add("security", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return tags;}};
+            accessors.add("tags", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return externalDocs;}};
+            accessors.add("externalDocs", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return extensions;}};
+            accessors.add("", "x-.+", getter);
+    }
 
 }

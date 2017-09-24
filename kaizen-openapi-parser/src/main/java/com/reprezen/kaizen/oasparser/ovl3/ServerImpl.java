@@ -27,19 +27,19 @@ public class ServerImpl extends OpenApiObjectImpl implements Server {
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay url = registerField("url", "url", null, new StringOverlay("url", this));
+    private StringOverlay url = new StringOverlay("url", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay description = registerField("description", "description", null, new StringOverlay("description", this));
+    private StringOverlay description = new StringOverlay("description", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<ServerVariableImpl> serverVariables = registerField("variables", "serverVariables", "(?!x-)[a-zA-Z0-9\\._-]+", new MapOverlay<ServerVariableImpl>("variables", this, ServerVariableImpl.factory, "(?!x-)[a-zA-Z0-9\\._-]+"));
+    private MapOverlay<ServerVariableImpl> serverVariables = new MapOverlay<ServerVariableImpl>("variables", this, ServerVariableImpl.factory, "(?!x-)[a-zA-Z0-9\\._-]+");
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object,AnyObjectOverlay> variablesExtensions = registerField("variables", "variablesExtensions", "x-.+", new ValMapOverlay<Object, AnyObjectOverlay>("variables", this, AnyObjectOverlay.factory, "x-.+"));
+    private ValMapOverlay<Object, AnyObjectOverlay> variablesExtensions = new ValMapOverlay<Object, AnyObjectOverlay>("variables", this, AnyObjectOverlay.factory, "x-.+");
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object,AnyObjectOverlay> extensions = registerField("", "extensions", "x-.+", new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+"));
+    private ValMapOverlay<Object, AnyObjectOverlay> extensions = new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+");
 
     // Url
     @Override
@@ -187,5 +187,21 @@ public class ServerImpl extends OpenApiObjectImpl implements Server {
         return isEmptyRecursive(parent, ServerImpl.class) ? null : new ServerImpl(key, json, parent);
     }
 };
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    protected void installPropertyAccessors(PropertyAccessors accessors) {
+        OverlayGetter getter = null;
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return url;}};
+            accessors.add("url", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return description;}};
+            accessors.add("description", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return serverVariables;}};
+            accessors.add("variables", "(?!x-)[a-zA-Z0-9\\._-]+", getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return variablesExtensions;}};
+            accessors.add("variables", "x-.+", getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return extensions;}};
+            accessors.add("", "x-.+", getter);
+    }
 
 }

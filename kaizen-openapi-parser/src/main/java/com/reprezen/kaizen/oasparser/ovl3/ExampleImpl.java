@@ -24,19 +24,19 @@ public class ExampleImpl extends OpenApiObjectImpl implements Example {
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay summary = registerField("summary", "summary", null, new StringOverlay("summary", this));
+    private StringOverlay summary = new StringOverlay("summary", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay description = registerField("description", "description", null, new StringOverlay("description", this));
+    private StringOverlay description = new StringOverlay("description", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private AnyObjectOverlay value = registerField("value", "value", null, new AnyObjectOverlay("value", this));
+    private AnyObjectOverlay value = new AnyObjectOverlay("value", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay externalValue = registerField("externalValue", "externalValue", null, new StringOverlay("externalValue", this));
+    private StringOverlay externalValue = new StringOverlay("externalValue", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object,AnyObjectOverlay> extensions = registerField("", "extensions", "x-.+", new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+"));
+    private ValMapOverlay<Object, AnyObjectOverlay> extensions = new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+");
 
     // Summary
     @Override
@@ -134,5 +134,21 @@ public class ExampleImpl extends OpenApiObjectImpl implements Example {
         return isEmptyRecursive(parent, ExampleImpl.class) ? null : new ExampleImpl(key, json, parent);
     }
 };
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    protected void installPropertyAccessors(PropertyAccessors accessors) {
+        OverlayGetter getter = null;
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return summary;}};
+            accessors.add("summary", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return description;}};
+            accessors.add("description", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return value;}};
+            accessors.add("value", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return externalValue;}};
+            accessors.add("externalValue", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return extensions;}};
+            accessors.add("", "x-.+", getter);
+    }
 
 }

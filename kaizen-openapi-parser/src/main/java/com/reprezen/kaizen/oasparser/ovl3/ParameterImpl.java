@@ -32,46 +32,46 @@ public class ParameterImpl extends OpenApiObjectImpl implements Parameter {
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay name = registerField("name", "name", null, new StringOverlay("name", this));
+    private StringOverlay name = new StringOverlay("name", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay in = registerField("in", "in", null, new StringOverlay("in", this));
+    private StringOverlay in = new StringOverlay("in", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay description = registerField("description", "description", null, new StringOverlay("description", this));
+    private StringOverlay description = new StringOverlay("description", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private BooleanOverlay required = registerField("required", "required", null, new BooleanOverlay("required", this));
+    private BooleanOverlay required = new BooleanOverlay("required", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private BooleanOverlay deprecated = registerField("deprecated", "deprecated", null, new BooleanOverlay("deprecated", this));
+    private BooleanOverlay deprecated = new BooleanOverlay("deprecated", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private BooleanOverlay allowEmptyValue = registerField("allowEmptyValue", "allowEmptyValue", null, new BooleanOverlay("allowEmptyValue", this));
+    private BooleanOverlay allowEmptyValue = new BooleanOverlay("allowEmptyValue", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay style = registerField("style", "style", null, new StringOverlay("style", this));
+    private StringOverlay style = new StringOverlay("style", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private BooleanOverlay explode = registerField("explode", "explode", null, new BooleanOverlay("explode", this));
+    private BooleanOverlay explode = new BooleanOverlay("explode", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private BooleanOverlay allowReserved = registerField("allowReserved", "allowReserved", null, new BooleanOverlay("allowReserved", this));
+    private BooleanOverlay allowReserved = new BooleanOverlay("allowReserved", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private SchemaImpl schema = registerField("schema", "schema", null, SchemaImpl.factory.create("schema", this));
+    private SchemaImpl schema = SchemaImpl.factory.create("schema", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private AnyObjectOverlay example = registerField("example", "example", null, new AnyObjectOverlay("example", this));
+    private AnyObjectOverlay example = new AnyObjectOverlay("example", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<ExampleImpl> examples = registerField("examples", "examples", "[a-zA-Z0-9\\._-]+", new MapOverlay<ExampleImpl>("examples", this, ExampleImpl.factory, "[a-zA-Z0-9\\._-]+"));
+    private MapOverlay<ExampleImpl> examples = new MapOverlay<ExampleImpl>("examples", this, ExampleImpl.factory, "[a-zA-Z0-9\\._-]+");
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<MediaTypeImpl> contentMediaTypes = registerField("content", "contentMediaTypes", null, new MapOverlay<MediaTypeImpl>("content", this, MediaTypeImpl.factory, null));
+    private MapOverlay<MediaTypeImpl> contentMediaTypes = new MapOverlay<MediaTypeImpl>("content", this, MediaTypeImpl.factory, null);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object,AnyObjectOverlay> extensions = registerField("", "extensions", "x-.+", new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+"));
+    private ValMapOverlay<Object, AnyObjectOverlay> extensions = new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+");
 
     // Name
     @Override
@@ -368,5 +368,39 @@ public class ParameterImpl extends OpenApiObjectImpl implements Parameter {
         return isEmptyRecursive(parent, ParameterImpl.class) ? null : new ParameterImpl(key, json, parent);
     }
 };
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    protected void installPropertyAccessors(PropertyAccessors accessors) {
+        OverlayGetter getter = null;
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return name;}};
+            accessors.add("name", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return in;}};
+            accessors.add("in", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return description;}};
+            accessors.add("description", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return required;}};
+            accessors.add("required", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return deprecated;}};
+            accessors.add("deprecated", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return allowEmptyValue;}};
+            accessors.add("allowEmptyValue", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return style;}};
+            accessors.add("style", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return explode;}};
+            accessors.add("explode", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return allowReserved;}};
+            accessors.add("allowReserved", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return schema;}};
+            accessors.add("schema", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return example;}};
+            accessors.add("example", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return examples;}};
+            accessors.add("examples", "[a-zA-Z0-9\\._-]+", getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return contentMediaTypes;}};
+            accessors.add("content", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return extensions;}};
+            accessors.add("", "x-.+", getter);
+    }
 
 }

@@ -26,43 +26,43 @@ public class SecuritySchemeImpl extends OpenApiObjectImpl implements SecuritySch
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay type = registerField("type", "type", null, new StringOverlay("type", this));
+    private StringOverlay type = new StringOverlay("type", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay description = registerField("description", "description", null, new StringOverlay("description", this));
+    private StringOverlay description = new StringOverlay("description", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay name = registerField("name", "name", null, new StringOverlay("name", this));
+    private StringOverlay name = new StringOverlay("name", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay in = registerField("in", "in", null, new StringOverlay("in", this));
+    private StringOverlay in = new StringOverlay("in", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay scheme = registerField("scheme", "scheme", null, new StringOverlay("scheme", this));
+    private StringOverlay scheme = new StringOverlay("scheme", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay bearerFormat = registerField("bearerFormat", "bearerFormat", null, new StringOverlay("bearerFormat", this));
+    private StringOverlay bearerFormat = new StringOverlay("bearerFormat", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private OAuthFlowImpl implicitOAuthFlow = registerField("flow/implicit", "implicitOAuthFlow", null, OAuthFlowImpl.factory.create("flow/implicit", this));
+    private OAuthFlowImpl implicitOAuthFlow = OAuthFlowImpl.factory.create("flow/implicit", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private OAuthFlowImpl passwordOAuthFlow = registerField("flow/password", "passwordOAuthFlow", null, OAuthFlowImpl.factory.create("flow/password", this));
+    private OAuthFlowImpl passwordOAuthFlow = OAuthFlowImpl.factory.create("flow/password", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private OAuthFlowImpl clientCredentialsOAuthFlow = registerField("flow/clientCredentials", "clientCredentialsOAuthFlow", null, OAuthFlowImpl.factory.create("flow/clientCredentials", this));
+    private OAuthFlowImpl clientCredentialsOAuthFlow = OAuthFlowImpl.factory.create("flow/clientCredentials", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private OAuthFlowImpl authorizationCodeOAuthFlow = registerField("flow/authorizationCode", "authorizationCodeOAuthFlow", null, OAuthFlowImpl.factory.create("flow/authorizationCode", this));
+    private OAuthFlowImpl authorizationCodeOAuthFlow = OAuthFlowImpl.factory.create("flow/authorizationCode", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object,AnyObjectOverlay> oAuthFlowsExtensions = registerField("flow", "oAuthFlowsExtensions", "x-.+", new ValMapOverlay<Object, AnyObjectOverlay>("flow", this, AnyObjectOverlay.factory, "x-.+"));
+    private ValMapOverlay<Object, AnyObjectOverlay> oAuthFlowsExtensions = new ValMapOverlay<Object, AnyObjectOverlay>("flow", this, AnyObjectOverlay.factory, "x-.+");
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay openIdConnectUrl = registerField("openIdConnectUrl", "openIdConnectUrl", null, new StringOverlay("openIdConnectUrl", this));
+    private StringOverlay openIdConnectUrl = new StringOverlay("openIdConnectUrl", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object,AnyObjectOverlay> extensions = registerField("", "extensions", "x-.+", new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+"));
+    private ValMapOverlay<Object, AnyObjectOverlay> extensions = new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+");
 
     // Type
     @Override
@@ -288,5 +288,37 @@ public class SecuritySchemeImpl extends OpenApiObjectImpl implements SecuritySch
         return isEmptyRecursive(parent, SecuritySchemeImpl.class) ? null : new SecuritySchemeImpl(key, json, parent);
     }
 };
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    protected void installPropertyAccessors(PropertyAccessors accessors) {
+        OverlayGetter getter = null;
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return type;}};
+            accessors.add("type", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return description;}};
+            accessors.add("description", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return name;}};
+            accessors.add("name", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return in;}};
+            accessors.add("in", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return scheme;}};
+            accessors.add("scheme", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return bearerFormat;}};
+            accessors.add("bearerFormat", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return implicitOAuthFlow;}};
+            accessors.add("flow/implicit", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return passwordOAuthFlow;}};
+            accessors.add("flow/password", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return clientCredentialsOAuthFlow;}};
+            accessors.add("flow/clientCredentials", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return authorizationCodeOAuthFlow;}};
+            accessors.add("flow/authorizationCode", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return oAuthFlowsExtensions;}};
+            accessors.add("flow", "x-.+", getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return openIdConnectUrl;}};
+            accessors.add("openIdConnectUrl", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return extensions;}};
+            accessors.add("", "x-.+", getter);
+    }
 
 }

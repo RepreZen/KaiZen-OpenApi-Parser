@@ -29,25 +29,25 @@ public class LinkImpl extends OpenApiObjectImpl implements Link {
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay operationId = registerField("operationId", "operationId", null, new StringOverlay("operationId", this));
+    private StringOverlay operationId = new StringOverlay("operationId", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay operationRef = registerField("operationRef", "operationRef", null, new StringOverlay("operationRef", this));
+    private StringOverlay operationRef = new StringOverlay("operationRef", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<String,StringOverlay> parameters = registerField("parameters", "parameters", null, new ValMapOverlay<String, StringOverlay>("parameters", this, StringOverlay.factory, null));
+    private ValMapOverlay<String, StringOverlay> parameters = new ValMapOverlay<String, StringOverlay>("parameters", this, StringOverlay.factory, null);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<HeaderImpl> headers = registerField("headers", "headers", null, new MapOverlay<HeaderImpl>("headers", this, HeaderImpl.factory, null));
+    private MapOverlay<HeaderImpl> headers = new MapOverlay<HeaderImpl>("headers", this, HeaderImpl.factory, null);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay description = registerField("description", "description", null, new StringOverlay("description", this));
+    private StringOverlay description = new StringOverlay("description", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ServerImpl server = registerField("server", "server", null, ServerImpl.factory.create("server", this));
+    private ServerImpl server = ServerImpl.factory.create("server", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object,AnyObjectOverlay> extensions = registerField("", "extensions", "x-.+", new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+"));
+    private ValMapOverlay<Object, AnyObjectOverlay> extensions = new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+");
 
     // OperationId
     @Override
@@ -221,5 +221,25 @@ public class LinkImpl extends OpenApiObjectImpl implements Link {
         return isEmptyRecursive(parent, LinkImpl.class) ? null : new LinkImpl(key, json, parent);
     }
 };
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    protected void installPropertyAccessors(PropertyAccessors accessors) {
+        OverlayGetter getter = null;
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return operationId;}};
+            accessors.add("operationId", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return operationRef;}};
+            accessors.add("operationRef", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return parameters;}};
+            accessors.add("parameters", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return headers;}};
+            accessors.add("headers", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return description;}};
+            accessors.add("description", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return server;}};
+            accessors.add("server", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return extensions;}};
+            accessors.add("", "x-.+", getter);
+    }
 
 }

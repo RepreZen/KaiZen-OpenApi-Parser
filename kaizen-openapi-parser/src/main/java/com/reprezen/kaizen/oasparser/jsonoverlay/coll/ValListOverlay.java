@@ -14,6 +14,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 
+import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.collect.Maps;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
@@ -87,6 +88,18 @@ public class ValListOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Co
 		store.replace(index, createOverlay(value));
 		reset();
 		invalidate();
+	}
+
+	@Override
+	public JsonOverlay<?> find(JsonPointer path) {
+		if (path.matches()) {
+			return this;
+		} else if (path.mayMatchElement()) {
+			int index = path.getMatchingIndex();
+			return size() > index ? store.get(index).find(path.tail()) : null;
+		} else {
+			return null;
+		}
 	}
 
 	public void clear() {

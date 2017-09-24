@@ -26,10 +26,10 @@ public class CallbackImpl extends OpenApiObjectImpl implements Callback {
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<PathImpl> callbackPaths = registerField("", "callbackPaths", "(?!x-).*", new MapOverlay<PathImpl>("", this, PathImpl.factory, "(?!x-).*"));
+    private MapOverlay<PathImpl> callbackPaths = new MapOverlay<PathImpl>("", this, PathImpl.factory, "(?!x-).*");
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object,AnyObjectOverlay> extensions = registerField("", "extensions", "x-.+", new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+"));
+    private ValMapOverlay<Object, AnyObjectOverlay> extensions = new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+");
 
     // CallbackPath
     @Override
@@ -114,5 +114,15 @@ public class CallbackImpl extends OpenApiObjectImpl implements Callback {
         return isEmptyRecursive(parent, CallbackImpl.class) ? null : new CallbackImpl(key, json, parent);
     }
 };
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    protected void installPropertyAccessors(PropertyAccessors accessors) {
+        OverlayGetter getter = null;
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return callbackPaths;}};
+            accessors.add("", "(?!x-).*", getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return extensions;}};
+            accessors.add("", "x-.+", getter);
+    }
 
 }

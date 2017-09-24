@@ -28,25 +28,25 @@ public class InfoImpl extends OpenApiObjectImpl implements Info {
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay title = registerField("title", "title", null, new StringOverlay("title", this));
+    private StringOverlay title = new StringOverlay("title", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay description = registerField("description", "description", null, new StringOverlay("description", this));
+    private StringOverlay description = new StringOverlay("description", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay termsOfService = registerField("termsOfService", "termsOfService", null, new StringOverlay("termsOfService", this));
+    private StringOverlay termsOfService = new StringOverlay("termsOfService", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ContactImpl contact = registerField("contact", "contact", null, ContactImpl.factory.create("contact", this));
+    private ContactImpl contact = ContactImpl.factory.create("contact", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private LicenseImpl license = registerField("license", "license", null, LicenseImpl.factory.create("license", this));
+    private LicenseImpl license = LicenseImpl.factory.create("license", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay version = registerField("version", "version", null, new StringOverlay("version", this));
+    private StringOverlay version = new StringOverlay("version", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object,AnyObjectOverlay> extensions = registerField("", "extensions", "x-.+", new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+"));
+    private ValMapOverlay<Object, AnyObjectOverlay> extensions = new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+");
 
     // Title
     @Override
@@ -170,5 +170,25 @@ public class InfoImpl extends OpenApiObjectImpl implements Info {
         return isEmptyRecursive(parent, InfoImpl.class) ? null : new InfoImpl(key, json, parent);
     }
 };
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    protected void installPropertyAccessors(PropertyAccessors accessors) {
+        OverlayGetter getter = null;
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return title;}};
+            accessors.add("title", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return description;}};
+            accessors.add("description", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return termsOfService;}};
+            accessors.add("termsOfService", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return contact;}};
+            accessors.add("contact", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return license;}};
+            accessors.add("license", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return version;}};
+            accessors.add("version", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return extensions;}};
+            accessors.add("", "x-.+", getter);
+    }
 
 }

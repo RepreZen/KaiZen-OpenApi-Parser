@@ -27,4 +27,10 @@ public class HeaderImpl extends ParameterImpl implements Header {
     }
 };
 
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    protected void installPropertyAccessors(PropertyAccessors accessors) {
+        OverlayGetter getter = null;
+    }
+
 }

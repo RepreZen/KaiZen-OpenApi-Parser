@@ -13,6 +13,7 @@ package com.reprezen.kaizen.oasparser.jsonoverlay.coll;
 import java.util.Collection;
 import java.util.Collections;
 
+import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlayFactory;
@@ -67,6 +68,18 @@ public class ListOverlay<OV extends JsonOverlay<?>> extends JsonOverlay<Collecti
 		store.set(overlays);
 		reset();
 		invalidate();
+	}
+
+	@Override
+	public JsonOverlay<?> find(JsonPointer path) {
+		if (path.matches()) {
+			return this;
+		} else if (path.mayMatchElement()) {
+			int index = path.getMatchingIndex();
+			return size() > index ? store.get(index).find(path.tail()) : null;
+		} else {
+			return null;
+		}
 	}
 
 	public void clear() {

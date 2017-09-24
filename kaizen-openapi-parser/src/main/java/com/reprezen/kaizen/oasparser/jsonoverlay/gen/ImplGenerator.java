@@ -73,12 +73,10 @@ public class ImplGenerator extends TypeGenerator {
 	protected Members getConstructors(Type type) {
 		Members members = new Members();
 		members.add(t("public ${name}Impl(String key, JsonNode json, JsonOverlay<?> parent)", type), //
-				code("super(key, json, parent);", //
-						"installPropertyAccessors();"));
+				code("super(key, json, parent);"));
 		requireTypes(JsonNode.class, JsonOverlay.class);
 		members.add(t("public ${name}Impl(String key, JsonOverlay<?> parent)", type), //
-				code("super(key, parent);", //
-						"installPropertyAccessors();"));
+				code("super(key, parent);"));
 		return members;
 	}
 
@@ -215,18 +213,17 @@ public class ImplGenerator extends TypeGenerator {
 
 	private Members getPropertyAccessorMembers(Type type) {
 		Members members = new Members();
-		members.add(new Member("PropertyAccessors accessors = new PropertyAccessors();", null));
-		String createDecl = "private void installPropertyAccessors()";
+		String installDecl = "protected void installPropertyAccessors(PropertyAccessors accessors)";
 		List<String> createCode = Lists.newArrayList();
-		createCode.add("Getter getter = null;");
+		createCode.add("OverlayGetter getter = null;");
 		for (Field field : type.getFields().values()) {
 			if (!field.isNoImpl()) {
 				createCode
-						.addAll(code(field, "getter = new Getter(){ public JsonOverlay<?> get(){return ${propName};}};",
-								"this.accessors.add(${qpath}, getter);"));
+						.addAll(code(field, "getter = new OverlayGetter(){ public JsonOverlay<?> get(){return ${propName};}};",
+								"accessors.add(${qpath}, ${qkeyPat}, getter);"));
 			}
 		}
-		members.add(new Member(createDecl, createCode));
+		members.add(new Member(installDecl, createCode).override());
 		return members;
 	}
 

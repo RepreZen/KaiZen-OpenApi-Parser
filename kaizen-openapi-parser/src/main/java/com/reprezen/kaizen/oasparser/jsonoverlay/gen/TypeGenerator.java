@@ -24,6 +24,7 @@ import javax.annotation.Generated;
 
 import org.apache.commons.io.FileUtils;
 
+import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ParseException;
@@ -167,6 +168,7 @@ public abstract class TypeGenerator {
                 Map.class, //
                 Optional.class, //
                 JsonNode.class, //
+                JsonPointer.class, //
                 JsonOverlay.class, //
                 JsonOverlayFactory.class, //
                 ReferenceRegistry.class, //

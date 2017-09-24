@@ -1,12 +1,8 @@
 package com.reprezen.kaizen.oasparser.ovl3;
 
-import java.util.Collection;
-import java.util.Map;
-
-import javax.annotation.Generated;
-
 import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.google.common.base.Optional;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlayFactory;
 import com.reprezen.kaizen.oasparser.jsonoverlay.coll.ListOverlay;
@@ -22,17 +18,24 @@ import com.reprezen.kaizen.oasparser.model3.Example;
 import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
 import com.reprezen.kaizen.oasparser.model3.Schema;
 import com.reprezen.kaizen.oasparser.model3.Xml;
+import com.reprezen.kaizen.oasparser.ovl3.ExampleImpl;
+import com.reprezen.kaizen.oasparser.ovl3.ExternalDocsImpl;
+import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
+import com.reprezen.kaizen.oasparser.ovl3.SchemaImpl;
+import com.reprezen.kaizen.oasparser.ovl3.XmlImpl;
+import java.util.Collection;
+import java.util.Map;
+import javax.annotation.Generated;
 
 public class SchemaImpl extends OpenApiObjectImpl implements Schema {
 
     @Override
     public JsonOverlay<?> find(JsonPointer path) {
-    	if (path.matchesProperty("additionalProperties")) {
-    		return path.tail().matches() ? additionalProperties : additionalPropertiesSchema.find(path.tail());
-    	} else {
-    		return super.find(path);
-    	}
-    	
+        if (path.matchesProperty("additionalProperties")) {
+            return path.tail().matches() ? additionalProperties : additionalPropertiesSchema.find(path.tail());
+        } else {
+            return super.find(path);
+        }
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

@@ -528,7 +528,7 @@ types:
 
   - name: Schema
     imports:
-      impl: [ Optional ]
+      impl: [ Optional, JsonPointer ]
     fields:
       title:
         name: Title

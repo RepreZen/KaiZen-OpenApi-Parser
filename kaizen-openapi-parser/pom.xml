@@ -152,6 +152,40 @@
 		</plugins>
 	    </build>
 	</profile>
+        <profile>
+            <id>sign</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>1.6.0</version>
+                        <executions>
+                            <execution>
+                                <id>remote-sign</id>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <executable>bash</executable>
+                                    <arguments>
+					<argument>${sign.content.script}</argument>
+					<argument>--endpoint</argument>
+                                        <argument>${code.sign.endpoint}</argument>
+                                        <argument>--exclude</argument>
+                                        <argument>*-sources.jar</argument>
+                                        <argument>--exclude</argument>
+                                        <argument>*-javadoc.jar</argument>
+                                        <argument>${project.build.directory}</argument>
+                                    </arguments>
+                                </configuration>
+                                <phase>package</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     </profiles>
     <build>
 	<plugins>

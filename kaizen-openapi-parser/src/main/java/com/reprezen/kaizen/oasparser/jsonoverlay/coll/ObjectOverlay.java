@@ -10,12 +10,17 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.jsonoverlay.coll;
 
+import java.util.List;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import com.fasterxml.jackson.databind.node.MissingNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.google.common.collect.Lists;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 
@@ -43,7 +48,53 @@ public abstract class ObjectOverlay<OO extends ObjectOverlay<OO>> extends JsonOv
 	}
 
 	public JsonNode createJson() {
-		return getJson(); // TODO Fix this
+		ObjectNode obj = JsonNodeFactory.instance.objectNode();
+		List<PropertyAccessor> accessorList = this.accessors.getPropertyAccessors();
+		for (PropertyAccessor accessor : accessorList) {
+			JsonOverlay<?> value = accessor.get();
+			if (value != null && !value.isMissing()) {
+				JsonPointer path = accessor.getPath();
+				JsonNode json = value.createJson();
+				boolean merge = accessor.getKeyPattern() != null;
+				// how to handle property accessors with empty parent path:
+				// - an object property that has a key pattern has its values merged into an
+				//// accumulating object; typically there will be other such accessors, and/or
+				//// other accessors with a non-empty parent path, and the accumulation is the
+				//// final created JSON value
+				// - any other value (not an object, or an object without a key pattern) is
+				//// returned as the overall created JSON value, all by itself. It is an error
+				//// for there to be ANY other accessor in this case
+				if (path.matches()) {
+					if (json.isObject() && merge) {
+						obj.setAll((ObjectNode) json);
+					} else {
+						if (accessorList.size() > 1) {
+							throw new IllegalStateException("Whole-value property accessor may not coexist with other accessors");
+						}
+						return json;
+					}
+				} else {
+					addValueAtPath(obj, json, path, merge);
+				}
+			}
+		}
+		return obj.size() > 0 ? obj : MissingNode.getInstance();
+	}
+
+	private void addValueAtPath(ObjectNode obj, JsonNode value, JsonPointer path, boolean merge) {
+		String key = path.getMatchingProperty();
+		if (!obj.has(key)) {
+			obj.putObject(key);
+		}
+		if (path.tail().matches()) {
+			if (merge && value.isObject()) {
+				((ObjectNode) obj.get(key)).setAll((ObjectNode) value);
+			} else {
+				obj.set(key, value);
+			}
+		} else {
+			addValueAtPath((ObjectNode) obj.get(key), value, path.tail(), merge);
+		}
 	}
 
 	@Override
@@ -76,13 +127,13 @@ public abstract class ObjectOverlay<OO extends ObjectOverlay<OO>> extends JsonOv
 	}
 
 	protected abstract void installPropertyAccessors(PropertyAccessors accessors);
-	
+
 	@Override
 	public JsonOverlay<?> find(JsonPointer path) {
 		if (path.matches()) {
 			return this;
 		} else {
-			Pair<OverlayGetter, JsonPointer> result = accessors.find(path);
+			Pair<PropertyAccessor, JsonPointer> result = accessors.find(path);
 			if (result.getLeft() != null) {
 				return result.getLeft().get().find(result.getRight());
 			} else {
@@ -92,18 +143,51 @@ public abstract class ObjectOverlay<OO extends ObjectOverlay<OO>> extends JsonOv
 	}
 
 	protected static class PropertyAccessors {
-		private JsonPointerTrie<OverlayGetter> accessorsTrie = new JsonPointerTrie<>();
+		private JsonPointerTrie<PropertyAccessor> accessorsTrie = new JsonPointerTrie<>();
+		private List<PropertyAccessor> accessors = Lists.newArrayList();
 
 		public void add(String path, String keyPattern, OverlayGetter getter) {
 			Pattern pattern = keyPattern != null ? Pattern.compile("^" + keyPattern + "$") : null;
-			accessorsTrie.add(JsonPointer.compile(path.isEmpty() ? "" : "/" + path), pattern, getter);
+			JsonPointer pointer = JsonPointer.compile(path.isEmpty() ? "" : "/" + path);
+			PropertyAccessor accessor = new PropertyAccessor(pointer, pattern, getter);
+			accessorsTrie.add(pointer, pattern, accessor);
+			accessors.add(accessor);
 		}
-		
-		public Pair<OverlayGetter, JsonPointer> find(JsonPointer path) {
+
+		public Pair<PropertyAccessor, JsonPointer> find(JsonPointer path) {
 			return accessorsTrie.find(path);
 		}
+
+		public List<PropertyAccessor> getPropertyAccessors() {
+			return accessors;
+		}
 	}
-	
+
+	protected static class PropertyAccessor {
+		private JsonPointer path;
+		private Pattern keyPattern;
+		private OverlayGetter getter;
+
+		public PropertyAccessor(JsonPointer path, Pattern keyPattern, OverlayGetter getter) {
+			super();
+			this.path = path;
+			this.keyPattern = keyPattern;
+			this.getter = getter;
+		}
+
+		public JsonPointer getPath() {
+			return path;
+		}
+
+		public Pattern getKeyPattern() {
+			return keyPattern;
+		}
+
+		public JsonOverlay<?> get() {
+			return getter.get();
+		}
+	}
+
 	protected interface OverlayGetter {
 		public JsonOverlay<?> get();
 	}

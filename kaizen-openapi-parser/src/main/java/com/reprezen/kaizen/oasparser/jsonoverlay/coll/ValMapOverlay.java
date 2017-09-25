@@ -144,7 +144,7 @@ public class ValMapOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Map
 
 	@Override
 	public JsonNode createJson() {
-		return store.toJson();
+		return store.createJson();
 	}
 
 	public void add(String key, V value) {

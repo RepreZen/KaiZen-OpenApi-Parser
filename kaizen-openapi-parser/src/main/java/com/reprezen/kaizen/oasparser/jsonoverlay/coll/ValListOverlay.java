@@ -119,7 +119,7 @@ public class ValListOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Co
 
 	@Override
 	public JsonNode createJson() {
-		return store.toJson();
+		return store.createJson();
 	}
 
 	public void add(V value) {

@@ -16,6 +16,7 @@ import java.util.Map;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.MissingNode;
+import com.google.common.collect.Maps;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlayFactory;
 
@@ -121,6 +122,7 @@ public class NumberOverlay extends JsonOverlay<Number> {
         }
 
         private static void buildTypeMap() {
+        	typeMap = Maps.newHashMap();
             for (NumberType type : NumberType.values()) {
                 typeMap.put(type.cls, type);
             }

@@ -41,6 +41,7 @@ import com.reprezen.kaizen.oasparser.OpenApiParser;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
 import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
+import com.reprezen.kaizen.oasparser.model3.Schema;
 import com.reprezen.kaizen.oasparser.ovl3.OpenApi3Impl;
 
 @RunWith(Enclosed.class)
@@ -114,6 +115,14 @@ public class SimpleSerializationTest extends Assert {
 			assertEquals("changed title", model.toJson().at("/info/title").asText());
 			// verify that cached JSON now has new value
 			assertEquals("changed title", getCachedJson(model).at("/info/title").asText());
+		}
+
+		@Test
+		public void toJsonFollowsRefs() {
+			OpenApi3 model = parseLocalModel("simpleTest");
+			Schema xSchema = model.getSchema("X");
+			assertEquals("#/components/schemas/Y", xSchema.toJson().at("/properties/y/$ref").asText());
+			assertEquals("integer", xSchema.toJson(true).at("/properties/y/type").asText());
 		}
 	}
 

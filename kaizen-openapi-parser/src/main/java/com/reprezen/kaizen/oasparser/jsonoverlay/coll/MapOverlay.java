@@ -114,8 +114,8 @@ public class MapOverlay<OV extends JsonOverlay<?>> extends JsonOverlay<Map<Strin
 	}
 
 	@Override
-	public JsonNode _createJson() {
-		return store.createJson();
+	public JsonNode _createJson(boolean followRefs) {
+		return store.createJson(followRefs);
 	}
 
 	public void set(String key, OV overlay) {

@@ -51,7 +51,7 @@ public class PrimitiveOverlay extends JsonOverlay<Object> {
     }
 
     @Override
-    public JsonNode _createJson() {
+    public JsonNode _createJson(boolean followRefs) {
         if (value instanceof String) {
             return jsonFactory.textNode((String) value);
         } else if (value instanceof BigDecimal) {

@@ -98,8 +98,8 @@ public class ListOverlay<OV extends JsonOverlay<?>> extends JsonOverlay<Collecti
 	}
 
 	@Override
-	public JsonNode _createJson() {
-		return store.createJson();
+	public JsonNode _createJson(boolean followRefs) {
+		return store.createJson(followRefs);
 	}
 
 	public void add(OV overlay) {

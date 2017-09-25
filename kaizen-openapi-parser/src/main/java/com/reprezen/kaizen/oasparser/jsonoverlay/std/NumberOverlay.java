@@ -65,7 +65,7 @@ public class NumberOverlay extends JsonOverlay<Number> {
     }
 
     @Override
-    public JsonNode _createJson() {
+    public JsonNode _createJson(boolean followRefs) {
         if (value != null) {
             NumberType type = NumberType.of(value);
             if (type == null) {

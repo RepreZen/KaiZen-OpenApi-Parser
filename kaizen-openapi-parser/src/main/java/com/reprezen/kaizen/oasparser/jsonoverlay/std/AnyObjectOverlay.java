@@ -36,7 +36,7 @@ public class AnyObjectOverlay extends JsonOverlay<Object> {
     }
 
     @Override
-    public JsonNode _createJson() {
+    public JsonNode _createJson(boolean followRefs) {
         return value != null ? mapper.convertValue(value, JsonNode.class) : MissingNode.getInstance();
     }
 

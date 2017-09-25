@@ -47,21 +47,21 @@ public abstract class ObjectOverlay<OO extends ObjectOverlay<OO>> extends JsonOv
 		return super.isMissing() || !getJson().isObject();
 	}
 
-	public JsonNode _createJson() {
+	public JsonNode _createJson(boolean followRefs) {
 		ObjectNode obj = JsonNodeFactory.instance.objectNode();
 		List<PropertyAccessor> accessorList = this.accessors.getPropertyAccessors();
 		for (PropertyAccessor accessor : accessorList) {
 			JsonOverlay<?> value = accessor.get();
 			if (value != null && !value.isMissing()) {
 				JsonPointer path = accessor.getPath();
-				JsonNode json = value.createJson();
+				JsonNode json = value.createJson(followRefs);
 				boolean merge = accessor.getKeyPattern() != null;
 				// how to handle property accessors with empty parent path:
-				// - an object property that has a key pattern has its values merged into an
+				// * an object property that has a key pattern has its values merged into an
 				//// accumulating object; typically there will be other such accessors, and/or
 				//// other accessors with a non-empty parent path, and the accumulation is the
 				//// final created JSON value
-				// - any other value (not an object, or an object without a key pattern) is
+				// * any other value (not an object, or an object without a key pattern) is
 				//// returned as the overall created JSON value, all by itself. It is an error
 				//// for there to be ANY other accessor in this case
 				if (path.matches()) {
@@ -69,7 +69,8 @@ public abstract class ObjectOverlay<OO extends ObjectOverlay<OO>> extends JsonOv
 						obj.setAll((ObjectNode) json);
 					} else {
 						if (accessorList.size() > 1) {
-							throw new IllegalStateException("Whole-value property accessor may not coexist with other accessors");
+							throw new IllegalStateException(
+									"Whole-value property accessor may not coexist with other accessors");
 						}
 						return json;
 					}

@@ -143,8 +143,8 @@ public class ValMapOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Map
 	}
 
 	@Override
-	public JsonNode _createJson() {
-		return store.createJson();
+	public JsonNode _createJson(boolean followRefs) {
+		return store.createJson(followRefs);
 	}
 
 	public void add(String key, V value) {

@@ -152,26 +152,37 @@ public abstract class JsonOverlay<V> {
 	public abstract V fromJson();
 
 	public JsonNode toJson() {
-		if (jsonIsCurrent) {
+		return toJson(false);
+	}
+	
+	public JsonNode toJson(boolean followRefs) {
+		if (jsonIsCurrent && !followRefs) {
 			return getJson();
 		} else {
-			this.json = createJson();
-			this.jsonIsCurrent = true;
-			return json;
+			JsonNode result = createJson(followRefs);
+			if (!followRefs) {
+				this.json = result;
+				this.jsonIsCurrent = true;
+			}
+			return result;
 		}
 	}
 
 	public JsonNode createJson() {
-		if (isReference()) {
+		return createJson(false);
+	}
+	
+	public JsonNode createJson(boolean followRefs) {
+		if (isReference() && !followRefs) {
 			ObjectNode obj = JsonNodeFactory.instance.objectNode();
 			obj.put("$ref", json.get("$ref").asText());
 			return obj; 
 		} else {
-			return _createJson();
+			return _createJson(followRefs);
 		}
 	}
 	
-	protected abstract JsonNode _createJson();
+	protected abstract JsonNode _createJson(boolean followRefs);
 
 	protected void addToSerialization(String key) {
 		// no-op except for ObjectOverlay

@@ -10,6 +10,8 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.model3;
 
+import com.fasterxml.jackson.databind.JsonNode;
+
 public interface OpenApiObject {
 
     OpenApi3 getModel();
@@ -19,4 +21,8 @@ public interface OpenApiObject {
     boolean isMissing();
 
     String getKey();
+    
+    JsonNode toJson();
+    
+    JsonNode toJson(boolean followRefs);
 }

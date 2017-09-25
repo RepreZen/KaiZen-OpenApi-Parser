@@ -40,6 +40,7 @@ import com.google.common.collect.Queues;
 import com.reprezen.kaizen.oasparser.OpenApiParser;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
 import com.reprezen.kaizen.oasparser.model3.OpenApi3;
+import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
 import com.reprezen.kaizen.oasparser.ovl3.OpenApi3Impl;
 
 @RunWith(Enclosed.class)
@@ -100,17 +101,23 @@ public class SimpleSerializationTest extends Assert {
 
 		@Test
 		public void toJsonNoticesChanges() throws JsonProcessingException {
-			OpenApi3Impl model = (OpenApi3Impl) parseLocalModel("simpleTest");
+			OpenApi3 model = parseLocalModel("simpleTest");
 			assertEquals("simple model", model.getInfo().getTitle());
 			assertEquals("simple model", model.toJson().at("/info/title").asText());
+			// this changes the overlay value but does not refresh cached JSON - just marks
+			// it as out-of-date
 			model.getInfo().setTitle("changed title");
-			assertEquals("changed title", model.getInfo().getTitle());
+			// verify that cached JSON has stale value
 			assertEquals("simple model", getCachedJson(model).at("/info/title").asText());
+			assertEquals("changed title", model.getInfo().getTitle());
+			// this will trigger refresh of JSON
 			assertEquals("changed title", model.toJson().at("/info/title").asText());
+			// verify that cached JSON now has new value
+			assertEquals("changed title", getCachedJson(model).at("/info/title").asText());
 		}
 	}
 
-	private static JsonNode getCachedJson(JsonOverlay<?> overlay) {
+	private static JsonNode getCachedJson(OpenApiObject overlay) {
 		try {
 			Method getJson = JsonOverlay.class.getDeclaredMethod("getJson");
 			getJson.setAccessible(true);

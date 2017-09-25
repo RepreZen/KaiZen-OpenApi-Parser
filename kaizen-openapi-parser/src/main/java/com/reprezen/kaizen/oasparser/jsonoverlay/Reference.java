@@ -131,8 +131,4 @@ public class Reference {
         }
         return json;
     }
-
-    public String getFragnent() {
-        return fragment;
-    }
 }

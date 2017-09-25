@@ -47,7 +47,7 @@ public abstract class ObjectOverlay<OO extends ObjectOverlay<OO>> extends JsonOv
 		return super.isMissing() || !getJson().isObject();
 	}
 
-	public JsonNode createJson() {
+	public JsonNode _createJson() {
 		ObjectNode obj = JsonNodeFactory.instance.objectNode();
 		List<PropertyAccessor> accessorList = this.accessors.getPropertyAccessors();
 		for (PropertyAccessor accessor : accessorList) {

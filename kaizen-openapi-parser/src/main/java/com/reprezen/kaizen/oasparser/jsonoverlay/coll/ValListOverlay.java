@@ -118,7 +118,7 @@ public class ValListOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Co
 	}
 
 	@Override
-	public JsonNode createJson() {
+	public JsonNode _createJson() {
 		return store.createJson();
 	}
 

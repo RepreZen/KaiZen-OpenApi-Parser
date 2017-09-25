@@ -143,7 +143,7 @@ public class ValMapOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Map
 	}
 
 	@Override
-	public JsonNode createJson() {
+	public JsonNode _createJson() {
 		return store.createJson();
 	}
 

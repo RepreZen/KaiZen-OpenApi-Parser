@@ -45,12 +45,11 @@ public class JsonLoader {
     }
 
     public JsonNode loadString(URL url, String json) throws IOException, JsonProcessingException {
-        String trimmed = json.trim();
         JsonNode tree;
-        if (trimmed.startsWith("{")) {
-            tree = jsonMapper.readTree(trimmed);
+        if (json.trim().startsWith("{")) {
+            tree = jsonMapper.readTree(json);
         } else {
-            Object parsedYaml = yaml.load(trimmed); // this handles aliases - YAMLMapper doesn't
+            Object parsedYaml = yaml.load(json); // this handles aliases - YAMLMapper doesn't
             tree = yamlMapper.convertValue(parsedYaml, JsonNode.class);
         }
         if (url != null) {

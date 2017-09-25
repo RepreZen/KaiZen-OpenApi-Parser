@@ -98,7 +98,7 @@ public class ListOverlay<OV extends JsonOverlay<?>> extends JsonOverlay<Collecti
 	}
 
 	@Override
-	public JsonNode createJson() {
+	public JsonNode _createJson() {
 		return store.createJson();
 	}
 

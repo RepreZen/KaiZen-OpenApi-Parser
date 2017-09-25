@@ -41,7 +41,7 @@ public class IntegerOverlay extends JsonOverlay<Integer> {
     }
 
     @Override
-    public JsonNode createJson() {
+    public JsonNode _createJson() {
         return value != null ? jsonFactory.numberNode(value) : MissingNode.getInstance();
     }
 

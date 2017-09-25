@@ -24,6 +24,7 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
@@ -85,31 +86,25 @@ public class SimpleSerializationTest extends Assert {
 		assertTrue(treeEquals(expected, serialized, "[root]"));
 	}
 
-	private boolean treeEquals(JsonNode x, JsonNode y, String path) {
-		System.out.printf("Comparing at %s\n", path);
-		if ((x == null || x.isMissingNode()) == (y == null || y.isMissingNode())) {
-			return true;
+	private boolean treeEquals(JsonNode x, JsonNode y, String path) throws JsonProcessingException {
+		if ((x == null || x.isMissingNode()) != (y == null || y.isMissingNode())) {
+			return false;
 		} else if (x.getClass() != y.getClass()) {
-			System.out.printf("Different classes: %s <> %s\n", x.getClass(), y.getClass());
 			return false;
 		} else {
 			switch (x.getNodeType()) {
 			case ARRAY:
 				if (x.size() != y.size()) {
-					System.out.printf("Different array sizes: %s <> %s\n", x.size(), y.size());
 					return false;
 				}
 				for (int i = 0; i < x.size(); i++) {
 					if (!treeEquals(x.get(i), y.get(i), path + "/" + i)) {
-						System.out.printf("Differences at array position %s\n", i);
+						System.out.printf("Trees differed at path %s/%s\n%s\n%s\n", path, i, mapper.writeValueAsString(x), mapper.writeValueAsString(y));
 						return false;
 					}
 				}
 				return true;
 			case BOOLEAN:
-				if (x.asBoolean() != y.asBoolean()) {
-					System.out.printf("Different boolean values: %s <> %s\n", x.asBoolean(), y.asBoolean());
-				}
 				return x.asBoolean() == y.asBoolean();
 			case NULL:
 				return true;
@@ -131,29 +126,22 @@ public class SimpleSerializationTest extends Assert {
 					xn = x.shortValue();
 					yn = y.shortValue();
 				}
-				if (!xn.equals(yn)) {
-					System.out.printf("Different numeric values: %s <> %s\n", xn, yn);
-				}
+				return xn.equals(yn);
 			case OBJECT:
 				if (x.size() != y.size()) {
-					System.out.printf("Different object sizes: %s <> %s\n", x.size(), y.size());
 					return false;
 				}
 				for (Iterator<String> iter = x.fieldNames(); iter.hasNext();) {
 					String propName = iter.next();
 					if (!treeEquals(x.get(propName), y.get(propName), path + "/" + propName)) {
-						System.out.printf("Different values for property '%s'\n", propName);
+						System.out.printf("Trees differed at path %s/%s\n%s\n%s\n", path, propName, mapper.writeValueAsString(x), mapper.writeValueAsString(y));
 						return false;
 					}
 				}
 				return true;
 			case STRING:
-				if (!x.asText().equals(y.asText())) {
-					System.out.printf("Different string values: '%s' <> '%s'\n", x.asText(), y.asText());
-				}
 				return x.asText().equals(y.asText());
 			default:
-				System.out.printf("Unexpected JsonNode type: %s\n", x.getClass());
 				return false;
 			}
 		}

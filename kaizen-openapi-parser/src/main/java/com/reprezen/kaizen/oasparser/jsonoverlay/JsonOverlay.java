@@ -161,7 +161,17 @@ public abstract class JsonOverlay<V> {
 		}
 	}
 
-	public abstract JsonNode createJson();
+	public JsonNode createJson() {
+		if (isReference()) {
+			ObjectNode obj = JsonNodeFactory.instance.objectNode();
+			obj.put("$ref", json.get("$ref").asText());
+			return obj; 
+		} else {
+			return _createJson();
+		}
+	}
+	
+	protected abstract JsonNode _createJson();
 
 	protected void addToSerialization(String key) {
 		// no-op except for ObjectOverlay

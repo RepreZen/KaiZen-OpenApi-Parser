@@ -42,7 +42,7 @@ public class StringOverlay extends JsonOverlay<String> {
 	}
 
 	@Override
-	public JsonNode createJson() {
+	public JsonNode _createJson() {
 		return value != null ? jsonFactory.textNode(value) : MissingNode.getInstance();
 	}
 

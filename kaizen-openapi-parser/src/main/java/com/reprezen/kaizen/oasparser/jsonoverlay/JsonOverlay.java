@@ -117,7 +117,7 @@ public abstract class JsonOverlay<V> {
 		}
 	}
 
-	public JsonNode getJson() {
+	protected JsonNode getJson() {
 		if (ref != null) {
 			return resolvedJson;
 		} else {

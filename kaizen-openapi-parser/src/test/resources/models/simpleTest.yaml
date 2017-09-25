@@ -1,0 +1,16 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: simple model
+paths: {}
+components:
+  schemas:
+    X:
+      type: object
+      properties:
+        x:
+          type: string
+        y:
+          $ref: "#/components/schemas/Y"
+    Y:
+      type: integer

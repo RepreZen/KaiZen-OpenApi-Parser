@@ -30,19 +30,19 @@ public class MediaTypeImpl extends OpenApiObjectImpl implements MediaType {
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private SchemaImpl schema = registerField("schema", "schema", null, SchemaImpl.factory.create("schema", this));
+    private SchemaImpl schema = SchemaImpl.factory.create("schema", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<ExampleImpl> examples = registerField("examples", "examples", "[a-zA-Z0-9\\._-]+", new MapOverlay<ExampleImpl>("examples", this, ExampleImpl.factory, "[a-zA-Z0-9\\._-]+"));
+    private MapOverlay<ExampleImpl> examples = new MapOverlay<ExampleImpl>("examples", this, ExampleImpl.factory, "[a-zA-Z0-9\\._-]+");
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private AnyObjectOverlay example = registerField("example", "example", null, new AnyObjectOverlay("example", this));
+    private AnyObjectOverlay example = new AnyObjectOverlay("example", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<EncodingPropertyImpl> encodingProperties = registerField("encoding", "encodingProperties", null, new MapOverlay<EncodingPropertyImpl>("encoding", this, EncodingPropertyImpl.factory, null));
+    private MapOverlay<EncodingPropertyImpl> encodingProperties = new MapOverlay<EncodingPropertyImpl>("encoding", this, EncodingPropertyImpl.factory, null);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object,AnyObjectOverlay> extensions = registerField("", "extensions", "x-.+", new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+"));
+    private ValMapOverlay<Object, AnyObjectOverlay> extensions = new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+");
 
     // Schema
     @Override
@@ -192,5 +192,21 @@ public class MediaTypeImpl extends OpenApiObjectImpl implements MediaType {
         return isEmptyRecursive(parent, MediaTypeImpl.class) ? null : new MediaTypeImpl(key, json, parent);
     }
 };
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    protected void installPropertyAccessors(PropertyAccessors accessors) {
+        OverlayGetter getter = null;
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return schema;}};
+            accessors.add("schema", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return examples;}};
+            accessors.add("examples", "[a-zA-Z0-9\\._-]+", getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return example;}};
+            accessors.add("example", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return encodingProperties;}};
+            accessors.add("encoding", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return extensions;}};
+            accessors.add("", "x-.+", getter);
+    }
 
 }

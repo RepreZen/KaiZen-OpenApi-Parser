@@ -111,22 +111,22 @@ public class CollectionStore<OV extends JsonOverlay<?>> {
         }
     }
 
-    public JsonNode toJson() {
-        return isList ? toJsonList() : toJsonMap();
+    public JsonNode createJson(boolean followRefs) {
+        return isList ? createJsonList(followRefs) : createJsonMap(followRefs);
     }
 
-    private JsonNode toJsonList() {
+    private JsonNode createJsonList(boolean followRefs) {
         ArrayNode list = jsonFactory.arrayNode();
         for (OV overlay : overlays.values()) {
-            list.add(overlay.toJson());
+            list.add(overlay.createJson(followRefs));
         }
         return list;
     }
 
-    private JsonNode toJsonMap() {
+    private JsonNode createJsonMap(boolean followRefs) {
         ObjectNode map = jsonFactory.objectNode();
         for (OV overlay : overlays.values()) {
-            map.set(overlay.getKey(), overlay.toJson());
+            map.set(overlay.getKey(), overlay.createJson(followRefs));
         }
         return map;
     }

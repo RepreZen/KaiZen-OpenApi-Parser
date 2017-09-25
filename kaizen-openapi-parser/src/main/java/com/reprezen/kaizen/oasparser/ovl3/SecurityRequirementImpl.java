@@ -24,7 +24,7 @@ public class SecurityRequirementImpl extends OpenApiObjectImpl implements Securi
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<SecurityParameterImpl> requirements = registerField("", "requirements", null, new MapOverlay<SecurityParameterImpl>("", this, SecurityParameterImpl.factory, null));
+    private MapOverlay<SecurityParameterImpl> requirements = new MapOverlay<SecurityParameterImpl>("", this, SecurityParameterImpl.factory, "[a-zA-Z0-9\\._-]+");
 
     // Requirement
     @Override
@@ -72,5 +72,13 @@ public class SecurityRequirementImpl extends OpenApiObjectImpl implements Securi
         return isEmptyRecursive(parent, SecurityRequirementImpl.class) ? null : new SecurityRequirementImpl(key, json, parent);
     }
 };
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    protected void installPropertyAccessors(PropertyAccessors accessors) {
+        OverlayGetter getter = null;
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return requirements;}};
+            accessors.add("", "[a-zA-Z0-9\\._-]+", getter);
+    }
 
 }

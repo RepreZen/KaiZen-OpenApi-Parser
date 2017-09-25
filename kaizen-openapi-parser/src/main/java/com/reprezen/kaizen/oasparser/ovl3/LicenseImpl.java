@@ -24,13 +24,13 @@ public class LicenseImpl extends OpenApiObjectImpl implements License {
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay name = registerField("name", "name", null, new StringOverlay("name", this));
+    private StringOverlay name = new StringOverlay("name", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay url = registerField("url", "url", null, new StringOverlay("url", this));
+    private StringOverlay url = new StringOverlay("url", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object,AnyObjectOverlay> extensions = registerField("", "extensions", "x-.+", new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+"));
+    private ValMapOverlay<Object, AnyObjectOverlay> extensions = new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+");
 
     // Name
     @Override
@@ -102,5 +102,17 @@ public class LicenseImpl extends OpenApiObjectImpl implements License {
         return isEmptyRecursive(parent, LicenseImpl.class) ? null : new LicenseImpl(key, json, parent);
     }
 };
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    protected void installPropertyAccessors(PropertyAccessors accessors) {
+        OverlayGetter getter = null;
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return name;}};
+            accessors.add("name", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return url;}};
+            accessors.add("url", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return extensions;}};
+            accessors.add("", "x-.+", getter);
+    }
 
 }

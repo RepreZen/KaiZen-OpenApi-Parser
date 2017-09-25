@@ -113,22 +113,22 @@ public class PathImpl extends OpenApiObjectImpl implements Path {
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay summary = registerField("summary", "summary", null, new StringOverlay("summary", this));
+    private StringOverlay summary = new StringOverlay("summary", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay description = registerField("description", "description", null, new StringOverlay("description", this));
+    private StringOverlay description = new StringOverlay("description", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<OperationImpl> operations = registerField("", "operations", "get|put|post|delete|options|head|patch|trace", new MapOverlay<OperationImpl>("", this, OperationImpl.factory, "get|put|post|delete|options|head|patch|trace"));
+    private MapOverlay<OperationImpl> operations = new MapOverlay<OperationImpl>("", this, OperationImpl.factory, "get|put|post|delete|options|head|patch|trace");
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ListOverlay<ServerImpl> servers = registerField("servers", "servers", null, new ListOverlay<ServerImpl>("servers", this, ServerImpl.factory));
+    private ListOverlay<ServerImpl> servers = new ListOverlay<ServerImpl>("servers", this, ServerImpl.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ListOverlay<ParameterImpl> parameters = registerField("parameters", "parameters", null, new ListOverlay<ParameterImpl>("parameters", this, ParameterImpl.factory));
+    private ListOverlay<ParameterImpl> parameters = new ListOverlay<ParameterImpl>("parameters", this, ParameterImpl.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object,AnyObjectOverlay> extensions = registerField("", "extensions", "x-.+", new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+"));
+    private ValMapOverlay<Object, AnyObjectOverlay> extensions = new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+");
 
     // Summary
     @Override
@@ -329,5 +329,23 @@ public class PathImpl extends OpenApiObjectImpl implements Path {
         return isEmptyRecursive(parent, PathImpl.class) ? null : new PathImpl(key, json, parent);
     }
 };
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    protected void installPropertyAccessors(PropertyAccessors accessors) {
+        OverlayGetter getter = null;
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return summary;}};
+            accessors.add("summary", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return description;}};
+            accessors.add("description", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return operations;}};
+            accessors.add("", "get|put|post|delete|options|head|patch|trace", getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return servers;}};
+            accessors.add("servers", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return parameters;}};
+            accessors.add("parameters", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return extensions;}};
+            accessors.add("", "x-.+", getter);
+    }
 
 }

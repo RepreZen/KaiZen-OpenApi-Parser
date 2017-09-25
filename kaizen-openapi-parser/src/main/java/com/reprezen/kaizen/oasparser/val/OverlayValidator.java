@@ -32,7 +32,7 @@ public class OverlayValidator<T> extends ValidatorBase<T> {
 
     public void validate(T object, ValidationResults results, Set<Class<? extends JsonNode>> allowedNodeTypes) {
         JsonOverlay<?> overlay = (JsonOverlay<?>) object;
-        JsonNode json = overlay.getJson();
+        JsonNode json = overlay.toJson();
         boolean isValidJsonType = false;
         for (Class<? extends JsonNode> type : allowedNodeTypes) {
             if (type.isAssignableFrom(json.getClass())) {

@@ -10,191 +10,186 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.jsonoverlay.coll;
 
-import java.lang.reflect.Field;
-import java.util.Collections;
-import java.util.Map;
+import java.util.List;
+import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.tuple.Pair;
+
+import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.google.common.base.Optional;
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Multimap;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import com.fasterxml.jackson.databind.node.MissingNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.google.common.collect.Lists;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 
-public class ObjectOverlay<OO extends ObjectOverlay<OO>> extends JsonOverlay<OO> {
+public abstract class ObjectOverlay<OO extends ObjectOverlay<OO>> extends JsonOverlay<OO> {
 
-    protected ObjectOverlay(String key, JsonNode json, JsonOverlay<?> parent, ReferenceRegistry referenceRegistry) {
-        super(key, json, parent, referenceRegistry);
-    }
-    
-    public ObjectOverlay(String key, JsonNode json, JsonOverlay<?> parent) {
-        super(key, json, parent);
-    }
+	private PropertyAccessors accessors = new PropertyAccessors();
 
-    public ObjectOverlay(String key, JsonOverlay<?> parent) {
-        this(key, parent.getJson(key), parent);
-    }
+	protected ObjectOverlay(String key, JsonNode json, JsonOverlay<?> parent, ReferenceRegistry referenceRegistry) {
+		super(key, json, parent, referenceRegistry);
+		installPropertyAccessors(this.accessors);
+	}
 
-    @Override
-    protected Iterable<? extends JsonOverlay<?>> getChildren() {
-        // TODO fix this
-        return Collections.emptyList();
-    }
+	public ObjectOverlay(String key, JsonNode json, JsonOverlay<?> parent) {
+		super(key, json, parent);
+		installPropertyAccessors(this.accessors);
+	}
 
-    @Override
-    public boolean isMissing() {
-        return super.isMissing() || !getJson().isObject();
-    }
+	public ObjectOverlay(String key, JsonOverlay<?> parent) {
+		this(key, parent.getJson(key), parent);
+	}
 
-    @Override
-    public JsonNode toJson() {
-        return getJson(); // TODO fix this
-    }
+	@Override
+	public boolean isMissing() {
+		return super.isMissing() || !getJson().isObject();
+	}
 
-    @Override
-    public OO fromJson() {
-        return (OO) this; // TODO fix this
-    }
+	public JsonNode _createJson(boolean followRefs) {
+		ObjectNode obj = JsonNodeFactory.instance.objectNode();
+		List<PropertyAccessor> accessorList = this.accessors.getPropertyAccessors();
+		for (PropertyAccessor accessor : accessorList) {
+			JsonOverlay<?> value = accessor.get();
+			if (value != null && !value.isMissing()) {
+				JsonPointer path = accessor.getPath();
+				JsonNode json = value.createJson(followRefs);
+				boolean merge = accessor.getKeyPattern() != null;
+				// how to handle property accessors with empty parent path:
+				// * an object property that has a key pattern has its values merged into an
+				//// accumulating object; typically there will be other such accessors, and/or
+				//// other accessors with a non-empty parent path, and the accumulation is the
+				//// final created JSON value
+				// * any other value (not an object, or an object without a key pattern) is
+				//// returned as the overall created JSON value, all by itself. It is an error
+				//// for there to be ANY other accessor in this case
+				if (path.matches()) {
+					if (json.isObject() && merge) {
+						obj.setAll((ObjectNode) json);
+					} else {
+						if (accessorList.size() > 1) {
+							throw new IllegalStateException(
+									"Whole-value property accessor may not coexist with other accessors");
+						}
+						return json;
+					}
+				} else {
+					addValueAtPath(obj, json, path, merge);
+				}
+			}
+		}
+		return obj.size() > 0 ? obj : MissingNode.getInstance();
+	}
 
-    @Override
-    public void set(OO value) {
-        super.set(value);
-    }
+	private void addValueAtPath(ObjectNode obj, JsonNode value, JsonPointer path, boolean merge) {
+		String key = path.getMatchingProperty();
+		if (!obj.has(key)) {
+			obj.putObject(key);
+		}
+		if (path.tail().matches()) {
+			if (merge && value.isObject()) {
+				((ObjectNode) obj.get(key)).setAll((ObjectNode) value);
+			} else {
+				obj.set(key, value);
+			}
+		} else {
+			addValueAtPath((ObjectNode) obj.get(key), value, path.tail(), merge);
+		}
+	}
 
-    protected static <T extends ObjectOverlay<?>> boolean isEmptyRecursive(JsonOverlay<?> obj, Class<T> cls) {
-        while (obj != null) {
-            if (!obj.isMissing()) {
-                return false;
-            } else if (obj.getClass().equals(cls)) {
-                return true;
-            }
-            obj = obj.getParentOverlay();
-        }
-        return false;
-    }
+	@Override
+	public OO fromJson() {
+		// this is never needed - the constructor of any class derived from
+		// ObjectOverlay is expected to consume its JSON object explicitly, so by the
+		// time this is called, this overlay already houses any JSON provided at time fo
+		// instantiation
+		@SuppressWarnings("unchecked")
+		OO result = (OO) this;
+		return result;
+	}
 
-    private static Map<Class<? extends ObjectOverlay<?>>, FieldData> fieldData = Maps.newHashMap();
+	@Override
+	public void set(OO value) {
+		super.set(value);
+		invalidate();
+	}
 
-    protected <T extends JsonOverlay<?>> T registerField(String path, String fieldName, String pattern, T instance) {
-        @SuppressWarnings("unchecked")
-        Class<? extends ObjectOverlay<?>> cls = (Class<? extends ObjectOverlay<?>>) getClass();
-        path = path != null ? path.replaceAll("/", ":") : null;
-        if (!fieldData.containsKey(cls)) {
-            fieldData.put(cls, new FieldData());
-        }
-        try {
-            fieldData.get(cls).add(path, fieldName, pattern, this);
-        } catch (SecurityException e) {
-            // we don't normally need this functionality except in testing, so if security manager blocks us we'll just
-            // proceed normally, and fail later if anyone tries to use the feature
-        } catch (NoSuchFieldException e) {
-            // this one we do care about - it means that the generated code is bogus
-            throw new IllegalStateException(
-                    String.format("Internal error: expected field '%s' in generated class '%s' does not exist",
-                            fieldName, getClass()),
-                    e);
-        }
-        return instance;
-    }
+	protected static <T extends ObjectOverlay<?>> boolean isEmptyRecursive(JsonOverlay<?> obj, Class<T> cls) {
+		while (obj != null) {
+			if (!obj.isMissing()) {
+				return false;
+			} else if (obj.getClass().equals(cls)) {
+				return true;
+			}
+			obj = obj.getParentOverlay();
+		}
+		return false;
+	}
 
-    public Optional<JsonOverlay<?>> getFieldValue(String path) throws IllegalArgumentException, IllegalAccessException {
-        @SuppressWarnings("unchecked")
-        Class<? extends ObjectOverlay<?>> cls = (Class<? extends ObjectOverlay<?>>) getClass();
-        if (fieldData.containsKey(cls)) {
-            return fieldData.get(cls).getFieldValue(path, this);
-        } else {
-            return Optional.absent();
-        }
-    }
+	protected abstract void installPropertyAccessors(PropertyAccessors accessors);
 
-    private static class FieldData {
-        Multimap<String, FieldDataItem> itemsByPath = HashMultimap.create();
+	@Override
+	public JsonOverlay<?> find(JsonPointer path) {
+		if (path.matches()) {
+			return this;
+		} else {
+			Pair<PropertyAccessor, JsonPointer> result = accessors.find(path);
+			if (result.getLeft() != null) {
+				return result.getLeft().get().find(result.getRight());
+			} else {
+				return null;
+			}
+		}
+	}
 
-        public void add(String path, String fieldName, String pattern, ObjectOverlay<?> overlay)
-                throws NoSuchFieldException, SecurityException {
-            itemsByPath.put(path, new FieldDataItem(fieldName, overlay));
-        }
+	protected static class PropertyAccessors {
+		private JsonPointerTrie<PropertyAccessor> accessorsTrie = new JsonPointerTrie<>();
+		private List<PropertyAccessor> accessors = Lists.newArrayList();
 
-        public Optional<JsonOverlay<?>> getFieldValue(String path, ObjectOverlay<?> overlay)
-                throws IllegalArgumentException, IllegalAccessException {
-            if (itemsByPath.containsKey(path)) {
-                for (FieldDataItem item : itemsByPath.get(path)) {
-                    Optional<JsonOverlay<?>> value = item.getFieldValue(path, overlay);
-                    if (value.isPresent()) {
-                        return value;
-                    }
-                }
-            } else {
-                for (FieldDataItem item : itemsByPath.get(removeKey(path))) {
-                    Optional<JsonOverlay<?>> value = item.getFieldValue(path, overlay);
-                    if (value.isPresent()) {
-                        return value;
-                    }
-                }
-            }
-            return Optional.absent();
-        }
+		public void add(String path, String keyPattern, OverlayGetter getter) {
+			Pattern pattern = keyPattern != null ? Pattern.compile("^" + keyPattern + "$") : null;
+			JsonPointer pointer = JsonPointer.compile(path.isEmpty() ? "" : "/" + path);
+			PropertyAccessor accessor = new PropertyAccessor(pointer, pattern, getter);
+			accessorsTrie.add(pointer, pattern, accessor);
+			accessors.add(accessor);
+		}
 
-        private String removeKey(String path) {
-            int lastColon = path.lastIndexOf(':');
-            if (lastColon >= 0) {
-                return path.substring(0, lastColon);
-            } else {
-                return "";
-            }
-        }
-    }
+		public Pair<PropertyAccessor, JsonPointer> find(JsonPointer path) {
+			return accessorsTrie.find(path);
+		}
 
-    private static class FieldDataItem {
-        private Field field;
+		public List<PropertyAccessor> getPropertyAccessors() {
+			return accessors;
+		}
+	}
 
-        public FieldDataItem(String fieldName, ObjectOverlay<?> overlay)
-                throws NoSuchFieldException, SecurityException {
-            super();
-            this.field = findField(overlay, fieldName);
-            this.field.setAccessible(true);
-        }
+	protected static class PropertyAccessor {
+		private JsonPointer path;
+		private Pattern keyPattern;
+		private OverlayGetter getter;
 
-        private Field findField(ObjectOverlay<?> overlay, String fieldName) throws NoSuchFieldException {
-            Class<?> cls = overlay.getClass();
-            NoSuchFieldException nsf = null;
-            while (ObjectOverlay.class.isAssignableFrom(cls)) {
-                try {
-                    return cls.getDeclaredField(fieldName);
-                } catch (NoSuchFieldException e) {
-                    if (nsf == null) {
-                        nsf = e;
-                    }
-                    cls = cls.getSuperclass();
-                }
-            }
-            throw nsf;
-        }
+		public PropertyAccessor(JsonPointer path, Pattern keyPattern, OverlayGetter getter) {
+			super();
+			this.path = path;
+			this.keyPattern = keyPattern;
+			this.getter = getter;
+		}
 
-        public Optional<JsonOverlay<?>> getFieldValue(String path, ObjectOverlay<?> overlay)
-                throws IllegalArgumentException, IllegalAccessException {
-            JsonOverlay<?> fieldValue = (JsonOverlay<?>) field.get(overlay);
-            if (fieldValue != null) {
-                if (fieldValue instanceof MapOverlay || fieldValue instanceof ValMapOverlay) {
-                    String key = getKey(path);
-                    if (key != null) {
-                        CollectionStore<?> store = ((CollectionOverlay<?>) fieldValue).getStore();
-                        JsonOverlay<?> keyedValue = store.getOverlay(key);
-                        if (keyedValue != null) {
-                            return Optional.<JsonOverlay<?>> of(keyedValue);
-                        }
-                    }
-                } else {
-                    return Optional.<JsonOverlay<?>> of(fieldValue);
-                }
-            }
-            return Optional.absent();
-        }
+		public JsonPointer getPath() {
+			return path;
+		}
 
-        private String getKey(String path) {
-            int lastColon = path.lastIndexOf(':');
-            return lastColon >= 0 ? path.substring(lastColon + 1) : path;
-        }
-    }
+		public Pattern getKeyPattern() {
+			return keyPattern;
+		}
+
+		public JsonOverlay<?> get() {
+			return getter.get();
+		}
+	}
+
+	protected interface OverlayGetter {
+		public JsonOverlay<?> get();
+	}
 }

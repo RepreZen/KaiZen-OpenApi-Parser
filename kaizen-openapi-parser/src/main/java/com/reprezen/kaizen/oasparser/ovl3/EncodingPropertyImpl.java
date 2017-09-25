@@ -25,19 +25,19 @@ public class EncodingPropertyImpl extends OpenApiObjectImpl implements EncodingP
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay contentType = registerField("contentType", "contentType", null, new StringOverlay("contentType", this));
+    private StringOverlay contentType = new StringOverlay("contentType", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<String,StringOverlay> headers = registerField("Headers", "headers", null, new ValMapOverlay<String, StringOverlay>("Headers", this, StringOverlay.factory, null));
+    private ValMapOverlay<String, StringOverlay> headers = new ValMapOverlay<String, StringOverlay>("Headers", this, StringOverlay.factory, null);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay style = registerField("style", "style", null, new StringOverlay("style", this));
+    private StringOverlay style = new StringOverlay("style", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private BooleanOverlay explode = registerField("explode", "explode", null, new BooleanOverlay("explode", this));
+    private BooleanOverlay explode = new BooleanOverlay("explode", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object,AnyObjectOverlay> extensions = registerField("", "extensions", "x-.+", new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+"));
+    private ValMapOverlay<Object, AnyObjectOverlay> extensions = new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+");
 
     // ContentType
     @Override
@@ -165,5 +165,21 @@ public class EncodingPropertyImpl extends OpenApiObjectImpl implements EncodingP
         return isEmptyRecursive(parent, EncodingPropertyImpl.class) ? null : new EncodingPropertyImpl(key, json, parent);
     }
 };
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    protected void installPropertyAccessors(PropertyAccessors accessors) {
+        OverlayGetter getter = null;
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return contentType;}};
+            accessors.add("contentType", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return headers;}};
+            accessors.add("Headers", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return style;}};
+            accessors.add("style", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return explode;}};
+            accessors.add("explode", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return extensions;}};
+            accessors.add("", "x-.+", getter);
+    }
 
 }

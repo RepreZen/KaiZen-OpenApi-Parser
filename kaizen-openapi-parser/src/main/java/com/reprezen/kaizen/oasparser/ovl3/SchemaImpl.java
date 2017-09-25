@@ -1,5 +1,6 @@
 package com.reprezen.kaizen.oasparser.ovl3;
 
+import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.base.Optional;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
@@ -29,17 +30,11 @@ import javax.annotation.Generated;
 public class SchemaImpl extends OpenApiObjectImpl implements Schema {
 
     @Override
-    public Optional<JsonOverlay<?>> getFieldValue(String path) throws IllegalArgumentException, IllegalAccessException {
-        if (path.equals("additionalProperties")) {
-            if (additionalPropertiesSchema != null && !additionalPropertiesSchema.isMissing()) {
-                return Optional.<JsonOverlay<?>>of(additionalPropertiesSchema);
-            } else if (additionalProperties != null && !additionalProperties.isMissing()) {
-                return Optional.<JsonOverlay<?>>of(additionalProperties);
-            } else {
-                return Optional.absent();
-            }
+    public JsonOverlay<?> find(JsonPointer path) {
+        if (path.matchesProperty("additionalProperties")) {
+            return path.tail().matches() ? additionalProperties : additionalPropertiesSchema.find(path.tail());
         } else {
-            return super.getFieldValue(path);
+            return super.find(path);
         }
     }
 
@@ -54,118 +49,118 @@ public class SchemaImpl extends OpenApiObjectImpl implements Schema {
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay title = registerField("title", "title", null, new StringOverlay("title", this));
+    private StringOverlay title = new StringOverlay("title", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private NumberOverlay multipleOf = registerField("multipleOf", "multipleOf", null, new NumberOverlay("multipleOf", this));
+    private NumberOverlay multipleOf = new NumberOverlay("multipleOf", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private NumberOverlay maximum = registerField("maximum", "maximum", null, new NumberOverlay("maximum", this));
+    private NumberOverlay maximum = new NumberOverlay("maximum", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private BooleanOverlay exclusiveMaximum = registerField("exclusiveMaximum", "exclusiveMaximum", null, new BooleanOverlay("exclusiveMaximum", this));
+    private BooleanOverlay exclusiveMaximum = new BooleanOverlay("exclusiveMaximum", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private NumberOverlay minimum = registerField("minimum", "minimum", null, new NumberOverlay("minimum", this));
+    private NumberOverlay minimum = new NumberOverlay("minimum", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private BooleanOverlay exclusiveMinimum = registerField("exclusiveMinimum", "exclusiveMinimum", null, new BooleanOverlay("exclusiveMinimum", this));
+    private BooleanOverlay exclusiveMinimum = new BooleanOverlay("exclusiveMinimum", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private IntegerOverlay maxLength = registerField("maxLength", "maxLength", null, new IntegerOverlay("maxLength", this));
+    private IntegerOverlay maxLength = new IntegerOverlay("maxLength", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private IntegerOverlay minLength = registerField("minLength", "minLength", null, new IntegerOverlay("minLength", this));
+    private IntegerOverlay minLength = new IntegerOverlay("minLength", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay pattern = registerField("pattern", "pattern", null, new StringOverlay("pattern", this));
+    private StringOverlay pattern = new StringOverlay("pattern", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private IntegerOverlay maxItems = registerField("maxItems", "maxItems", null, new IntegerOverlay("maxItems", this));
+    private IntegerOverlay maxItems = new IntegerOverlay("maxItems", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private IntegerOverlay minItems = registerField("minItems", "minItems", null, new IntegerOverlay("minItems", this));
+    private IntegerOverlay minItems = new IntegerOverlay("minItems", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private BooleanOverlay uniqueItems = registerField("uniqueItems", "uniqueItems", null, new BooleanOverlay("uniqueItems", this));
+    private BooleanOverlay uniqueItems = new BooleanOverlay("uniqueItems", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private IntegerOverlay maxProperties = registerField("maxProperties", "maxProperties", null, new IntegerOverlay("maxProperties", this));
+    private IntegerOverlay maxProperties = new IntegerOverlay("maxProperties", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private IntegerOverlay minProperties = registerField("minProperties", "minProperties", null, new IntegerOverlay("minProperties", this));
+    private IntegerOverlay minProperties = new IntegerOverlay("minProperties", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ValListOverlay<String, StringOverlay> requiredFields = registerField("required", "requiredFields", null, new ValListOverlay<String, StringOverlay>("required", this, StringOverlay.factory));;
+    private ValListOverlay<String, StringOverlay> requiredFields = new ValListOverlay<String, StringOverlay>("required", this, StringOverlay.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ValListOverlay<Object, AnyObjectOverlay> enums = registerField("enum", "enums", null, new ValListOverlay<Object, AnyObjectOverlay>("enum", this, AnyObjectOverlay.factory));;
+    private ValListOverlay<Object, AnyObjectOverlay> enums = new ValListOverlay<Object, AnyObjectOverlay>("enum", this, AnyObjectOverlay.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay type = registerField("type", "type", null, new StringOverlay("type", this));
+    private StringOverlay type = new StringOverlay("type", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ListOverlay<SchemaImpl> allOfSchemas = registerField("allOf", "allOfSchemas", null, new ListOverlay<SchemaImpl>("allOf", this, SchemaImpl.factory));
+    private ListOverlay<SchemaImpl> allOfSchemas = new ListOverlay<SchemaImpl>("allOf", this, SchemaImpl.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ListOverlay<SchemaImpl> oneOfSchemas = registerField("oneOf", "oneOfSchemas", null, new ListOverlay<SchemaImpl>("oneOf", this, SchemaImpl.factory));
+    private ListOverlay<SchemaImpl> oneOfSchemas = new ListOverlay<SchemaImpl>("oneOf", this, SchemaImpl.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ListOverlay<SchemaImpl> anyOfSchemas = registerField("anyOf", "anyOfSchemas", null, new ListOverlay<SchemaImpl>("anyOf", this, SchemaImpl.factory));
+    private ListOverlay<SchemaImpl> anyOfSchemas = new ListOverlay<SchemaImpl>("anyOf", this, SchemaImpl.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private SchemaImpl notSchema = registerField("not", "notSchema", null, SchemaImpl.factory.create("not", this));
+    private SchemaImpl notSchema = SchemaImpl.factory.create("not", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private SchemaImpl itemsSchema = registerField("items", "itemsSchema", null, SchemaImpl.factory.create("items", this));
+    private SchemaImpl itemsSchema = SchemaImpl.factory.create("items", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<SchemaImpl> properties = registerField("properties", "properties", null, new MapOverlay<SchemaImpl>("properties", this, SchemaImpl.factory, null));
+    private MapOverlay<SchemaImpl> properties = new MapOverlay<SchemaImpl>("properties", this, SchemaImpl.factory, null);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private SchemaImpl additionalPropertiesSchema = registerField("additionalProperties", "additionalPropertiesSchema", null, SchemaImpl.factory.create("additionalProperties", this));
+    private SchemaImpl additionalPropertiesSchema = SchemaImpl.factory.create("additionalProperties", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private BooleanOverlay additionalProperties = registerField("additionalProperties", "additionalProperties", null, new BooleanOverlay("additionalProperties", this));
+    private BooleanOverlay additionalProperties = new BooleanOverlay("additionalProperties", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay description = registerField("description", "description", null, new StringOverlay("description", this));
+    private StringOverlay description = new StringOverlay("description", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay format = registerField("format", "format", null, new StringOverlay("format", this));
+    private StringOverlay format = new StringOverlay("format", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private AnyObjectOverlay defaultValue = registerField("default", "defaultValue", null, new AnyObjectOverlay("default", this));
+    private AnyObjectOverlay defaultValue = new AnyObjectOverlay("default", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private BooleanOverlay nullable = registerField("nullable", "nullable", null, new BooleanOverlay("nullable", this));
+    private BooleanOverlay nullable = new BooleanOverlay("nullable", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay discriminator = registerField("discriminator", "discriminator", null, new StringOverlay("discriminator", this));
+    private StringOverlay discriminator = new StringOverlay("discriminator", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private BooleanOverlay readOnly = registerField("readOnly", "readOnly", null, new BooleanOverlay("readOnly", this));
+    private BooleanOverlay readOnly = new BooleanOverlay("readOnly", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private BooleanOverlay writeOnly = registerField("writeOnly", "writeOnly", null, new BooleanOverlay("writeOnly", this));
+    private BooleanOverlay writeOnly = new BooleanOverlay("writeOnly", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private XmlImpl xml = registerField("xml", "xml", null, XmlImpl.factory.create("xml", this));
+    private XmlImpl xml = XmlImpl.factory.create("xml", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ExternalDocsImpl externalDocs = registerField("externalDocs", "externalDocs", null, ExternalDocsImpl.factory.create("externalDocs", this));
+    private ExternalDocsImpl externalDocs = ExternalDocsImpl.factory.create("externalDocs", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<ExampleImpl> examples = registerField("examples", "examples", "[a-zA-Z0-9\\._-]+", new MapOverlay<ExampleImpl>("examples", this, ExampleImpl.factory, "[a-zA-Z0-9\\._-]+"));
+    private MapOverlay<ExampleImpl> examples = new MapOverlay<ExampleImpl>("examples", this, ExampleImpl.factory, "[a-zA-Z0-9\\._-]+");
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private AnyObjectOverlay example = registerField("example", "example", null, new AnyObjectOverlay("example", this));
+    private AnyObjectOverlay example = new AnyObjectOverlay("example", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private BooleanOverlay deprecated = registerField("deprecated", "deprecated", null, new BooleanOverlay("deprecated", this));
+    private BooleanOverlay deprecated = new BooleanOverlay("deprecated", this);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object,AnyObjectOverlay> extensions = registerField("", "extensions", "x-.+", new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+"));
+    private ValMapOverlay<Object, AnyObjectOverlay> extensions = new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+");
 
     // Title
     @Override
@@ -948,5 +943,87 @@ public class SchemaImpl extends OpenApiObjectImpl implements Schema {
         return isEmptyRecursive(parent, SchemaImpl.class) ? null : new SchemaImpl(key, json, parent);
     }
 };
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    protected void installPropertyAccessors(PropertyAccessors accessors) {
+        OverlayGetter getter = null;
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return title;}};
+            accessors.add("title", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return multipleOf;}};
+            accessors.add("multipleOf", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return maximum;}};
+            accessors.add("maximum", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return exclusiveMaximum;}};
+            accessors.add("exclusiveMaximum", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return minimum;}};
+            accessors.add("minimum", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return exclusiveMinimum;}};
+            accessors.add("exclusiveMinimum", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return maxLength;}};
+            accessors.add("maxLength", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return minLength;}};
+            accessors.add("minLength", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return pattern;}};
+            accessors.add("pattern", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return maxItems;}};
+            accessors.add("maxItems", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return minItems;}};
+            accessors.add("minItems", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return uniqueItems;}};
+            accessors.add("uniqueItems", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return maxProperties;}};
+            accessors.add("maxProperties", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return minProperties;}};
+            accessors.add("minProperties", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return requiredFields;}};
+            accessors.add("required", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return enums;}};
+            accessors.add("enum", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return type;}};
+            accessors.add("type", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return allOfSchemas;}};
+            accessors.add("allOf", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return oneOfSchemas;}};
+            accessors.add("oneOf", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return anyOfSchemas;}};
+            accessors.add("anyOf", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return notSchema;}};
+            accessors.add("not", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return itemsSchema;}};
+            accessors.add("items", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return properties;}};
+            accessors.add("properties", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return additionalPropertiesSchema;}};
+            accessors.add("additionalProperties", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return additionalProperties;}};
+            accessors.add("additionalProperties", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return description;}};
+            accessors.add("description", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return format;}};
+            accessors.add("format", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return defaultValue;}};
+            accessors.add("default", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return nullable;}};
+            accessors.add("nullable", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return discriminator;}};
+            accessors.add("discriminator", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return readOnly;}};
+            accessors.add("readOnly", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return writeOnly;}};
+            accessors.add("writeOnly", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return xml;}};
+            accessors.add("xml", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return externalDocs;}};
+            accessors.add("externalDocs", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return examples;}};
+            accessors.add("examples", "[a-zA-Z0-9\\._-]+", getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return example;}};
+            accessors.add("example", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return deprecated;}};
+            accessors.add("deprecated", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return extensions;}};
+            accessors.add("", "x-.+", getter);
+    }
 
 }

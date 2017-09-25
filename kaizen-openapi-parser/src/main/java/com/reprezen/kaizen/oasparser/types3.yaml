@@ -371,6 +371,7 @@ types:
         type: SecurityParameter
         parentPath: ""
         structure: map
+        keyPattern: *namePat
 
   - name: SecurityParameter
     fields:
@@ -528,7 +529,7 @@ types:
 
   - name: Schema
     imports:
-      impl: [ Optional ]
+      impl: [ Optional, JsonPointer ]
     fields:
       title:
         name: Title

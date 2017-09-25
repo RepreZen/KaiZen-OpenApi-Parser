@@ -103,6 +103,12 @@
 	    <artifactId>javax.mail</artifactId>
 	    <version>1.5.6</version>
 	</dependency>
+	<dependency>
+		<groupId>org.skyscreamer</groupId>
+		<artifactId>jsonassert</artifactId>
+		<version>1.5.0</version>
+		<scope>test</scope>
+	</dependency>
     </dependencies>
     <profiles>
 	<profile>
@@ -124,6 +130,23 @@
 			</executions>
 			<configuration>
 			    <mainClass>com.reprezen.kaizen.oasparser.GenOpenApi3</mainClass>
+			</configuration>
+		    </plugin>
+		</plugins>
+	    </build>
+	</profile>
+	<profile>
+	    <id>compile-for-gen</id>
+	    <build>
+		<plugins>
+		    <plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<configuration>
+			    <includes>
+				<include>**/jsonoverlay/**/*</include>
+				<include>**/oasparser/GenOpenApi3.java</include>
+			    </includes>
 			</configuration>
 		    </plugin>
 		</plugins>

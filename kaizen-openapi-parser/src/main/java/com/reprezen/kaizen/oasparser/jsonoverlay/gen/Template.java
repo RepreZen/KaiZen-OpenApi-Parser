@@ -19,95 +19,104 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.reprezen.kaizen.oasparser.jsonoverlay.gen.TypeData.Field;
+import com.reprezen.kaizen.oasparser.jsonoverlay.gen.TypeData.Structure;
 import com.reprezen.kaizen.oasparser.jsonoverlay.gen.TypeData.Type;
 
 public class Template {
 
-    private static Pattern varPat = Pattern.compile("\\$\\{([a-zA-Z]+|\\d+)\\}");
+	private static Pattern varPat = Pattern.compile("\\$\\{([a-zA-Z]+|\\d+)\\}");
 
-    public static <T> String t(String template, T item, String... args) {
-        Matcher matcher = varPat.matcher(template);
-        StringBuffer result = new StringBuffer();
-        int start = 0;
-        while (matcher.find()) {
-            // would use matcher.appendReplace and matcher.appendTail, but it's way too hard to deal with all the
-            // escaping and quoting. Literal replacement is what I need here. Too bad they don't support that!
-            result.append(template.substring(start, matcher.start()));
-            result.append(replacement(matcher.group(1), item, args));
-            start = matcher.end();
-        }
-        result.append(template.substring(start));
-        return result.toString();
-    }
+	public static <T> String t(String template, T item, String... args) {
+		Matcher matcher = varPat.matcher(template);
+		StringBuffer result = new StringBuffer();
+		int start = 0;
+		while (matcher.find()) {
+			// would use matcher.appendReplace and matcher.appendTail, but it's way too hard
+			// to deal with all the
+			// escaping and quoting. Literal replacement is what I need here. Too bad they
+			// don't support that!
+			result.append(template.substring(start, matcher.start()));
+			result.append(replacement(matcher.group(1), item, args));
+			start = matcher.end();
+		}
+		result.append(template.substring(start));
+		return result.toString();
+	}
 
-    public static <T> List<String> t(final T item, String... templates) {
-        return Lists.transform(Lists.newArrayList(templates), new Function<String, String>() {
-            @Override
-            public String apply(String template) {
-                return t(template, item);
-            }
-        });
-    }
+	public static <T> List<String> t(final T item, String... templates) {
+		return Lists.transform(Lists.newArrayList(templates), new Function<String, String>() {
+			@Override
+			public String apply(String template) {
+				return t(template, item);
+			}
+		});
+	}
 
-    private static String replacement(String var, Field field, String[] args) {
-        switch (var) {
-        case "name":
-            return field.getName();
-        case "lcName":
-            return field.getLcName();
-        case "plural":
-            return field.getPlural();
-        case "lcPlural":
-            return field.getLcPlural();
-        case "type": {
-            String type = field.getType();
-            return "Primitive".equals(type) ? "Object" : type;
-        }
-        case "implType":
-            return TypeGenerator.getImplType(field);
-        case "collType": {
-            String type = TypeGenerator.getTypeInCollection(field);
-            return "Primitive".equals(type) ? "Object" : type;
-        }
-        case "keyName":
-            return field.getKeyName();
-        case "id":
-            return field.getId();
-        case "qid":
-            return quote(field.getId());
-        case "qpath":
-            return quote(field.getParentPath());
-        case "qkeyPat":
-            return quote(field.getKeyPattern());
-        case "boolDefault":
-            return String.valueOf(field.getBoolDefault());
-        default:
-            return args[Integer.valueOf(var)];
-        }
-    }
+	private static String replacement(String var, Field field, String[] args) {
+		switch (var) {
+		case "name":
+			return field.getName();
+		case "lcName":
+			return field.getLcName();
+		case "plural":
+			return field.getPlural();
+		case "lcPlural":
+			return field.getLcPlural();
+		case "type": {
+			String type = field.getType();
+			return "Primitive".equals(type) ? "Object" : type;
+		}
+		case "implType":
+			return field.getImplType();
+		case "collType": {
+			String type = field.getTypeInCollection();
+			return "Primitive".equals(type) ? "Object" : type;
+		}
+		case "keyName":
+			return field.getKeyName();
+		case "id":
+			return field.getId();
+		case "qid":
+			return quote(field.getId());
+		case "qpath":
+			return quote(field.getParentPath());
+		case "qkeyPat":
+			return quote(field.getKeyPattern());
+		case "boolDefault":
+			return String.valueOf(field.getBoolDefault());
+		case "propName":
+			return field.getPropertyName();
+		case "propType":
+			return field.getPropertyType();
+		case "propCons":
+			return field.getPropertyNew();
+		default:
+			return args[Integer.valueOf(var)];
+		}
+	}
 
-    private static String replacement(String var, Type type, String[] args) {
-        switch (var) {
-        case "name":
-            return type.getName();
-        case "implName":
-            return TypeGenerator.getImplType(type);
-        default:
-            return args[Integer.valueOf(var)];
-        }
-    }
+	private static String replacement(String var, Type type, String[] args) {
+		switch (var) {
+		case "name":
+			return type.getName();
+		case "implName":
+			return type.getImplType();
+		default:
+			return args[Integer.valueOf(var)];
+		}
+	}
 
-    private static String replacement(String var, Object item, String[] args) {
-        if (item instanceof Field) {
-            return replacement(var, (Field) item, args);
-        } else if (item instanceof Type) {
-            return replacement(var, (Type) item, args);
-        } else {
-            throw new UnsupportedOperationException();
-        }
-    }
+	private static String replacement(String var, Object item, String[] args) {
+		if (item instanceof Field) {
+			return replacement(var, (Field) item, args);
+		} else if (item instanceof Type) {
+			return replacement(var, (Type) item, args);
+		} else {
+			throw new UnsupportedOperationException();
+		}
+	}
 
-    private static String quote(String s) {
-        return s != null ? "\"" + StringEscapeUtils.escapeJava(s) + "\"" : "null";
-    }
+	private static String quote(String s) {
+		return s != null ? "\"" + StringEscapeUtils.escapeJava(s) + "\"" : "null";
+	}
 }

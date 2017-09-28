@@ -8,12 +8,10 @@
  *  Contributors:
  *     ModelSolv, Inc. - initial API and implementation and/or initial documentation
  *******************************************************************************/
-package com.reprezen.kaizen.oasparser.jsonoverlay.std;
+package com.reprezen.kaizen.oasparser.jsonoverlay;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.MissingNode;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlayFactory;
 
 public class AnyObjectOverlay extends JsonOverlay<Object> {
 

@@ -8,7 +8,7 @@
  *  Contributors:
  *     ModelSolv, Inc. - initial API and implementation and/or initial documentation
  *******************************************************************************/
-package com.reprezen.kaizen.oasparser.jsonoverlay.coll;
+package com.reprezen.kaizen.oasparser.jsonoverlay;
 
 import java.util.Map;
 import java.util.regex.Pattern;

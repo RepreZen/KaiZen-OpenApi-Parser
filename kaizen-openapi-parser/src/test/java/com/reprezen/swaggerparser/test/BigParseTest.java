@@ -29,7 +29,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import com.google.common.base.Predicate;
 import com.reprezen.kaizen.oasparser.OpenApiParser;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IJsonOverlay;
 import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.ovl3.OpenApi3Impl;
 import com.reprezen.swaggerparser.test.JsonTreeWalker.WalkMethod;
@@ -67,7 +67,7 @@ public class BigParseTest extends Assert {
 		WalkMethod valueChecker = new WalkMethod() {
 			@Override
 			public void run(JsonNode node, JsonPointer path) {
-				JsonOverlay<?> overlay = ((OpenApi3Impl) model).find(path);
+				IJsonOverlay<?> overlay = ((OpenApi3Impl) model).find(path);
 				assertNotNull("No overlay object found for path: " + path, overlay);
 				Object fromJson = getValue(node);
 				String msg = String.format("Wrong overlay value for path '%s': expected '%s', got '%s'", path, fromJson,

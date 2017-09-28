@@ -8,14 +8,11 @@
  *  Contributors:
  *     ModelSolv, Inc. - initial API and implementation and/or initial documentation
  *******************************************************************************/
-package com.reprezen.kaizen.oasparser.jsonoverlay.std;
+package com.reprezen.kaizen.oasparser.jsonoverlay;
 
 import java.util.Collection;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlayFactory;
-import com.reprezen.kaizen.oasparser.jsonoverlay.coll.ValListOverlay;
 
 public class StringListOverlay extends ValListOverlay<String, StringOverlay> {
 

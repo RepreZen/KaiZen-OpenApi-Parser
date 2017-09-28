@@ -50,10 +50,10 @@ public class SchemaValidator extends ObjectValidatorBase<Schema> {
         validateList(schema.getAllOfSchemas(), schema.hasAllOfSchemas(), results, false, "allOf", this);
         validateList(schema.getOneOfSchemas(), schema.hasOneOfSchemas(), results, false, "oneOf", this);
         validateList(schema.getAnyOfSchemas(), schema.hasAnyOfSchemas(), results, false, "anyOf", this);
-        if (schema.getNotSchema() != null && !schema.getNotSchema().isMissing()) {
+        if (schema.getNotSchema() != null && schema.getNotSchema().isPresent()) {
             validate(schema.getNotSchema(), results, "not");
         }
-        if (schema.getItemsSchema() != null && !schema.getItemsSchema().isMissing()) {
+        if (schema.getItemsSchema() != null && schema.getItemsSchema().isPresent()) {
             validate(schema.getItemsSchema(), results, "items");
         }
         validateMap(schema.getProperties(), results, false, "properties", Regexes.NOEXT_NAME_REGEX, this);

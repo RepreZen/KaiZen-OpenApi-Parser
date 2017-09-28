@@ -10,19 +10,11 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.model3;
 
-import com.fasterxml.jackson.databind.JsonNode;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IObjectOverlay;
 
-public interface OpenApiObject {
+public interface OpenApiObject<VI> extends IObjectOverlay<VI> {
 
-    OpenApi3 getModel();
+	OpenApi3 getModel();
 
-    OpenApiObject getParent();
-
-    boolean isMissing();
-
-    String getKey();
-    
-    JsonNode toJson();
-    
-    JsonNode toJson(boolean followRefs);
+	OpenApiObject<?> getParentObject();
 }

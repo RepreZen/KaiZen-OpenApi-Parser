@@ -1,5 +1,5 @@
 /*******************************************************************************
- *  Copyright (c) 2017 ModelSolv, Inc. and others.
+	 *  Copyright (c) 2017 ModelSolv, Inc. and others.
  *  All rights reserved. This program and the accompanying materials
  *  are made available under the terms of the Eclipse Public License v1.0
  *  which accompanies this distribution, and is available at
@@ -8,13 +8,10 @@
  *  Contributors:
  *     ModelSolv, Inc. - initial API and implementation and/or initial documentation
  *******************************************************************************/
-package com.reprezen.kaizen.oasparser.jsonoverlay.std;
+package com.reprezen.kaizen.oasparser.jsonoverlay;
 
-import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.MissingNode;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlayFactory;
 
 public class StringOverlay extends JsonOverlay<String> {
 
@@ -31,8 +28,8 @@ public class StringOverlay extends JsonOverlay<String> {
 	}
 
 	@Override
-	public boolean isMissing() {
-		return super.isMissing() || !getJson().isTextual();
+	public boolean isPresent() {
+		return super.isPresent() && getJson().isTextual();
 	}
 
 	@Override

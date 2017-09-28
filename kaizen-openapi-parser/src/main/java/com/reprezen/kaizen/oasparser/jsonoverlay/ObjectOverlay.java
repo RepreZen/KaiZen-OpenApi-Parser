@@ -8,7 +8,7 @@
  *  Contributors:
  *     ModelSolv, Inc. - initial API and implementation and/or initial documentation
  *******************************************************************************/
-package com.reprezen.kaizen.oasparser.jsonoverlay.coll;
+package com.reprezen.kaizen.oasparser.jsonoverlay;
 
 import java.util.List;
 import java.util.regex.Pattern;
@@ -21,10 +21,8 @@ import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.MissingNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.collect.Lists;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 
-public abstract class ObjectOverlay<OO extends ObjectOverlay<OO>> extends JsonOverlay<OO> {
+public abstract class ObjectOverlay<VI, V extends IObjectOverlay<VI>> extends JsonOverlay<VI> {
 
 	private PropertyAccessors accessors = new PropertyAccessors();
 
@@ -43,8 +41,8 @@ public abstract class ObjectOverlay<OO extends ObjectOverlay<OO>> extends JsonOv
 	}
 
 	@Override
-	public boolean isMissing() {
-		return super.isMissing() || !getJson().isObject();
+	public boolean isPresent() {
+		return super.isPresent() && getJson().isObject();
 	}
 
 	public JsonNode _createJson(boolean followRefs) {
@@ -52,7 +50,7 @@ public abstract class ObjectOverlay<OO extends ObjectOverlay<OO>> extends JsonOv
 		List<PropertyAccessor> accessorList = this.accessors.getPropertyAccessors();
 		for (PropertyAccessor accessor : accessorList) {
 			JsonOverlay<?> value = accessor.get();
-			if (value != null && !value.isMissing()) {
+			if (value != null && value.isPresent()) {
 				JsonPointer path = accessor.getPath();
 				JsonNode json = value.createJson(followRefs);
 				boolean merge = accessor.getKeyPattern() != null;
@@ -99,30 +97,30 @@ public abstract class ObjectOverlay<OO extends ObjectOverlay<OO>> extends JsonOv
 	}
 
 	@Override
-	public OO fromJson() {
+	public VI fromJson() {
 		// this is never needed - the constructor of any class derived from
 		// ObjectOverlay is expected to consume its JSON object explicitly, so by the
 		// time this is called, this overlay already houses any JSON provided at time fo
 		// instantiation
 		@SuppressWarnings("unchecked")
-		OO result = (OO) this;
+		VI result = (VI) this;
 		return result;
 	}
 
 	@Override
-	public void set(OO value) {
+	public void set(VI value) {
 		super.set(value);
 		invalidate();
 	}
 
-	protected static <T extends ObjectOverlay<?>> boolean isEmptyRecursive(JsonOverlay<?> obj, Class<T> cls) {
+	protected static <T extends ObjectOverlay<?, ?>> boolean isEmptyRecursive(JsonOverlay<?> obj, Class<T> cls) {
 		while (obj != null) {
-			if (!obj.isMissing()) {
+			if (obj.isPresent()) {
 				return false;
 			} else if (obj.getClass().equals(cls)) {
 				return true;
 			}
-			obj = obj.getParentOverlay();
+			obj = (JsonOverlay<?>) obj.getParent();
 		}
 		return false;
 	}
@@ -130,7 +128,7 @@ public abstract class ObjectOverlay<OO extends ObjectOverlay<OO>> extends JsonOv
 	protected abstract void installPropertyAccessors(PropertyAccessors accessors);
 
 	@Override
-	public JsonOverlay<?> find(JsonPointer path) {
+	public IJsonOverlay<?> find(JsonPointer path) {
 		if (path.matches()) {
 			return this;
 		} else {

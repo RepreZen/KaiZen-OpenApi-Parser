@@ -1,15 +1,11 @@
 package com.reprezen.kaizen.oasparser.model3;
 
-import com.reprezen.kaizen.oasparser.model3.Example;
-import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
-import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
-import com.reprezen.kaizen.oasparser.model3.Schema;
-import com.reprezen.kaizen.oasparser.model3.Xml;
 import java.util.Collection;
 import java.util.Map;
+
 import javax.annotation.Generated;
 
-public interface Schema extends OpenApiObject {
+public interface Schema extends OpenApiObject<Schema> {
 
     // Title
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

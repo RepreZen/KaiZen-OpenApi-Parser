@@ -11,7 +11,7 @@
 package com.reprezen.kaizen.oasparser.val;
 
 import com.fasterxml.jackson.databind.node.BooleanNode;
-import com.reprezen.kaizen.oasparser.jsonoverlay.std.BooleanOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.BooleanOverlay;
 
 public class BooleanValidator extends OverlayValidator<BooleanOverlay> {
 

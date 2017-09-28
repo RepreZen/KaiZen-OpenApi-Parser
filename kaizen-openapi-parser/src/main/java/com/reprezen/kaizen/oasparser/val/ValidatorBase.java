@@ -153,7 +153,7 @@ public abstract class ValidatorBase<T> implements Validator<T> {
     public <F> void validateField(final F value, final ValidationResults results, final boolean required,
             final String crumb, final Validator<F> validator) {
         checkMissing(required, value, results, crumb);
-        if (!isMissing(value)) {
+        if (isPresent(value)) {
             validator.validate(value, results, crumb);
         }
     }
@@ -256,7 +256,7 @@ public abstract class ValidatorBase<T> implements Validator<T> {
 
     private void checkMissing(boolean required, final Object value, final ValidationResults results,
             final String crumb) {
-        if (required && isMissing(value)) {
+        if (required && !isPresent(value)) {
             results.addError(m.msg("MissingField|Required field is missing", crumb), crumb);
         }
     }
@@ -323,7 +323,7 @@ public abstract class ValidatorBase<T> implements Validator<T> {
         }
     }
 
-    private boolean isMissing(Object value) {
-        return value instanceof JsonOverlay ? ((JsonOverlay<?>) value).isMissing() : value == null;
+    private boolean isPresent(Object value) {
+        return value instanceof JsonOverlay ? ((JsonOverlay<?>) value).isPresent() : value != null;
     }
 }

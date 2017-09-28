@@ -8,14 +8,12 @@
  *  Contributors:
  *     ModelSolv, Inc. - initial API and implementation and/or initial documentation
  *******************************************************************************/
-package com.reprezen.kaizen.oasparser.jsonoverlay.std;
+package com.reprezen.kaizen.oasparser.jsonoverlay;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlayFactory;
 
 public class PrimitiveOverlay extends JsonOverlay<Object> {
 
@@ -32,8 +30,8 @@ public class PrimitiveOverlay extends JsonOverlay<Object> {
     }
 
     @Override
-    public boolean isMissing() {
-        return super.isMissing() || !getJson().isValueNode();
+    public boolean isPresent() {
+        return super.isPresent() && getJson().isValueNode();
     }
 
     @Override

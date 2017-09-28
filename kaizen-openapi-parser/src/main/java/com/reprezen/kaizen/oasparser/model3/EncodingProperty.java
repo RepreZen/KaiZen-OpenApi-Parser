@@ -1,10 +1,10 @@
 package com.reprezen.kaizen.oasparser.model3;
 
-import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
 import java.util.Map;
+
 import javax.annotation.Generated;
 
-public interface EncodingProperty extends OpenApiObject {
+public interface EncodingProperty extends OpenApiObject<EncodingProperty> {
 
     // ContentType
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

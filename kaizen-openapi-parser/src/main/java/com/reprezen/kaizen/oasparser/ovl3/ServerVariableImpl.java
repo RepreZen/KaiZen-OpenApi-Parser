@@ -1,20 +1,21 @@
 package com.reprezen.kaizen.oasparser.ovl3;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlayFactory;
-import com.reprezen.kaizen.oasparser.jsonoverlay.coll.ValListOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.coll.ValMapOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.std.AnyObjectOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.std.PrimitiveOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.std.StringOverlay;
-import com.reprezen.kaizen.oasparser.model3.ServerVariable;
-import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
 import java.util.Collection;
 import java.util.Map;
+
 import javax.annotation.Generated;
 
-public class ServerVariableImpl extends OpenApiObjectImpl implements ServerVariable {
+import com.fasterxml.jackson.databind.JsonNode;
+import com.reprezen.kaizen.oasparser.jsonoverlay.AnyObjectOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlayFactory;
+import com.reprezen.kaizen.oasparser.jsonoverlay.PrimitiveOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ValListOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ValMapOverlay;
+import com.reprezen.kaizen.oasparser.model3.ServerVariable;
+
+public class ServerVariableImpl extends OpenApiObjectImpl<ServerVariable,ServerVariableImpl> implements ServerVariable {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public ServerVariableImpl(String key, JsonNode json, JsonOverlay<?> parent) {
@@ -48,7 +49,7 @@ public class ServerVariableImpl extends OpenApiObjectImpl implements ServerVaria
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean hasEnumValues() {
-        return !enumValues.isMissing();
+        return enumValues.isPresent();
     }
 
     @Override

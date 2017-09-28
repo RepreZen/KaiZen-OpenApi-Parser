@@ -8,7 +8,7 @@
  *  Contributors:
  *     ModelSolv, Inc. - initial API and implementation and/or initial documentation
  *******************************************************************************/
-package com.reprezen.kaizen.oasparser.jsonoverlay.coll;
+package com.reprezen.kaizen.oasparser.jsonoverlay;
 
 import java.util.AbstractMap.SimpleEntry;
 import java.util.Collection;
@@ -19,8 +19,6 @@ import java.util.Map.Entry;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlayFactory;
 
 public class CollectionData<OV extends JsonOverlay<?>> {
 
@@ -50,7 +48,7 @@ public class CollectionData<OV extends JsonOverlay<?>> {
     public static <OV extends JsonOverlay<?>> CollectionData<OV> of(JsonNode json, final JsonOverlay<?> parent,
             final JsonOverlayFactory<OV> factory) {
         if (json.isArray()) {
-            return new CollectionData<OV>(Iterables.transform(JsonOverlay.iterable(json.elements()),
+			return new CollectionData<OV>(Iterables.transform(JsonOverlay.iterable(json.elements()),
                     new Function<JsonNode, Entry<String, OV>>() {
                         @Override
                         public Entry<String, OV> apply(JsonNode element) {

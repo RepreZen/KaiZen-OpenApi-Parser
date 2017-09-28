@@ -12,7 +12,7 @@ package com.reprezen.kaizen.oasparser.val;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.coll.ValMapOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ValMapOverlay;
 
 public class ValMapValidator<T extends JsonOverlay<?>> extends OverlayValidator<ValMapOverlay<?, T>> {
 

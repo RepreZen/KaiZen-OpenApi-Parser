@@ -13,7 +13,7 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ValMapOverlay;
 import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
 import com.reprezen.kaizen.oasparser.model3.Tag;
 
-public class TagImpl extends OpenApiObjectImpl<Tag, TagImpl> implements Tag {
+public class TagImpl extends OpenApiObjectImpl<Tag> implements Tag {
 
 	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
 	public TagImpl(String key, JsonNode json, JsonOverlay<?> parent) {

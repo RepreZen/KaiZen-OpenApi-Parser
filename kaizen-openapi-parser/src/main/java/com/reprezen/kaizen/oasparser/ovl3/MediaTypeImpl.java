@@ -15,7 +15,7 @@ import com.reprezen.kaizen.oasparser.model3.Example;
 import com.reprezen.kaizen.oasparser.model3.MediaType;
 import com.reprezen.kaizen.oasparser.model3.Schema;
 
-public class MediaTypeImpl extends OpenApiObjectImpl<MediaType, MediaTypeImpl> implements MediaType {
+public class MediaTypeImpl extends OpenApiObjectImpl<MediaType> implements MediaType {
 
 	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
 	public MediaTypeImpl(String key, JsonNode json, JsonOverlay<?> parent) {

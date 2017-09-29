@@ -15,7 +15,7 @@ import com.reprezen.kaizen.oasparser.model3.Header;
 import com.reprezen.kaizen.oasparser.model3.Link;
 import com.reprezen.kaizen.oasparser.model3.Server;
 
-public class LinkImpl extends OpenApiObjectImpl<Link, LinkImpl> implements Link {
+public class LinkImpl extends OpenApiObjectImpl<Link> implements Link {
 
 	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
 	public LinkImpl(String key, JsonNode json, JsonOverlay<?> parent) {

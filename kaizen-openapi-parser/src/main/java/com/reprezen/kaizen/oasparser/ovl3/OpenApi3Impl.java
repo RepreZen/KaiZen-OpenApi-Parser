@@ -35,7 +35,7 @@ import com.reprezen.kaizen.oasparser.val.ValidationResults;
 import com.reprezen.kaizen.oasparser.val.ValidationResults.Severity;
 import com.reprezen.kaizen.oasparser.val.Validator;
 
-public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3, OpenApi3Impl> implements OpenApi3 {
+public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3> implements OpenApi3 {
 
 	private ValidationResults validationResults = null;
 

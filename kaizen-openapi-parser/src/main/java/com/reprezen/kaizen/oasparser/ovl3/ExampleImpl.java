@@ -12,7 +12,7 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ValMapOverlay;
 import com.reprezen.kaizen.oasparser.model3.Example;
 
-public class ExampleImpl extends OpenApiObjectImpl<Example, ExampleImpl> implements Example {
+public class ExampleImpl extends OpenApiObjectImpl<Example> implements Example {
 
 	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
 	public ExampleImpl(String key, JsonNode json, JsonOverlay<?> parent) {

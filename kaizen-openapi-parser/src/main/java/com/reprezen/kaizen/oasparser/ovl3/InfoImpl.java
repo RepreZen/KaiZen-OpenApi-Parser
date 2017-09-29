@@ -14,7 +14,7 @@ import com.reprezen.kaizen.oasparser.model3.Contact;
 import com.reprezen.kaizen.oasparser.model3.Info;
 import com.reprezen.kaizen.oasparser.model3.License;
 
-public class InfoImpl extends OpenApiObjectImpl<Info, InfoImpl> implements Info {
+public class InfoImpl extends OpenApiObjectImpl<Info> implements Info {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public InfoImpl(String key, JsonNode json, JsonOverlay<?> parent) {

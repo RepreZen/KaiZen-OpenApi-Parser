@@ -6,14 +6,13 @@ import javax.annotation.Generated;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.reprezen.kaizen.oasparser.jsonoverlay.AnyObjectOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.IObjectOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlayFactory;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ValMapOverlay;
 import com.reprezen.kaizen.oasparser.model3.Contact;
 
-public class ContactImpl extends OpenApiObjectImpl<Contact, IObjectOverlay<Contact>> implements Contact {
+public class ContactImpl extends OpenApiObjectImpl<Contact> implements Contact {
 
 	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
 	public ContactImpl(String key, JsonNode json, JsonOverlay<?> parent) {

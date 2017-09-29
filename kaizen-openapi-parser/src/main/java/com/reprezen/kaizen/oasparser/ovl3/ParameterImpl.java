@@ -17,7 +17,7 @@ import com.reprezen.kaizen.oasparser.model3.MediaType;
 import com.reprezen.kaizen.oasparser.model3.Parameter;
 import com.reprezen.kaizen.oasparser.model3.Schema;
 
-public class ParameterImpl extends OpenApiObjectImpl<Parameter, ParameterImpl> implements Parameter {
+public class ParameterImpl extends OpenApiObjectImpl<Parameter> implements Parameter {
 
 	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
 	public ParameterImpl(String key, JsonNode json, JsonOverlay<?> parent) {

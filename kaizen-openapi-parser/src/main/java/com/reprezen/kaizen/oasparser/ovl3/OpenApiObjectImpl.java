@@ -20,8 +20,8 @@ import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
 //import com.reprezen.swaggerparser.model3.OpenApi3;
 
-public abstract class OpenApiObjectImpl<VI, V extends IObjectOverlay<VI>> extends ObjectOverlay<VI, V>
-		implements OpenApiObject<VI> {
+public abstract class OpenApiObjectImpl<V extends IObjectOverlay<V>> extends ObjectOverlay<V>
+		implements OpenApiObject<V> {
 
 	protected OpenApiObjectImpl(String key, JsonNode json, JsonOverlay<?> parent, ReferenceRegistry referenceRegistry) {
 		super(key, json, parent, referenceRegistry);

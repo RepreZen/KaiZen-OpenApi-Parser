@@ -18,7 +18,7 @@ import com.reprezen.kaizen.oasparser.model3.Parameter;
 import com.reprezen.kaizen.oasparser.model3.Path;
 import com.reprezen.kaizen.oasparser.model3.Server;
 
-public class PathImpl extends OpenApiObjectImpl<Path, PathImpl> implements Path {
+public class PathImpl extends OpenApiObjectImpl<Path> implements Path {
 
 	@Override
 	public Operation getGet() {

@@ -12,7 +12,7 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ValMapOverlay;
 import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
 
-public class ExternalDocsImpl extends OpenApiObjectImpl<ExternalDocs, ExternalDocsImpl> implements ExternalDocs {
+public class ExternalDocsImpl extends OpenApiObjectImpl<ExternalDocs> implements ExternalDocs {
 
 	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
 	public ExternalDocsImpl(String key, JsonNode json, JsonOverlay<?> parent) {

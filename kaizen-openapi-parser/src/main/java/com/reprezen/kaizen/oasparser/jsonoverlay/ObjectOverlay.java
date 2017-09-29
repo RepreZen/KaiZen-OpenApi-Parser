@@ -22,7 +22,7 @@ import com.fasterxml.jackson.databind.node.MissingNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.collect.Lists;
 
-public abstract class ObjectOverlay<VI, V extends IObjectOverlay<VI>> extends JsonOverlay<VI> {
+public abstract class ObjectOverlay<V extends IObjectOverlay<V>> extends JsonOverlay<V> {
 
 	private PropertyAccessors accessors = new PropertyAccessors();
 
@@ -97,23 +97,23 @@ public abstract class ObjectOverlay<VI, V extends IObjectOverlay<VI>> extends Js
 	}
 
 	@Override
-	public VI fromJson() {
+	public V fromJson() {
 		// this is never needed - the constructor of any class derived from
 		// ObjectOverlay is expected to consume its JSON object explicitly, so by the
 		// time this is called, this overlay already houses any JSON provided at time fo
 		// instantiation
 		@SuppressWarnings("unchecked")
-		VI result = (VI) this;
+		V result = (V) this;
 		return result;
 	}
 
 	@Override
-	public void set(VI value) {
+	public void set(V value) {
 		super.set(value);
 		invalidate();
 	}
 
-	protected static <T extends ObjectOverlay<?, ?>> boolean isEmptyRecursive(JsonOverlay<?> obj, Class<T> cls) {
+	protected static <T extends ObjectOverlay<?>> boolean isEmptyRecursive(JsonOverlay<?> obj, Class<T> cls) {
 		while (obj != null) {
 			if (obj.isPresent()) {
 				return false;

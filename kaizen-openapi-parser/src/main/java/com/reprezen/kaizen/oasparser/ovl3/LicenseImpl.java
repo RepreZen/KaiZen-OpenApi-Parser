@@ -11,7 +11,7 @@ import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public class LicenseImpl extends OpenApiObjectImpl<License, LicenseImpl> implements License {
+public class LicenseImpl extends OpenApiObjectImpl<License> implements License {
 
 	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
 	public LicenseImpl(String key, JsonNode json, JsonOverlay<?> parent) {

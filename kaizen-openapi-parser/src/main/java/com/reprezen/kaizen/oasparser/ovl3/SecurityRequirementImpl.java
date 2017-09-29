@@ -11,7 +11,7 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import com.reprezen.kaizen.oasparser.model3.SecurityParameter;
 import com.reprezen.kaizen.oasparser.model3.SecurityRequirement;
 
-public class SecurityRequirementImpl extends OpenApiObjectImpl<SecurityRequirement, SecurityRequirementImpl>
+public class SecurityRequirementImpl extends OpenApiObjectImpl<SecurityRequirement>
 		implements SecurityRequirement {
 
 	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

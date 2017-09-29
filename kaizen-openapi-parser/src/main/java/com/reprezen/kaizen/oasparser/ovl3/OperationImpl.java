@@ -24,7 +24,7 @@ import com.reprezen.kaizen.oasparser.model3.Response;
 import com.reprezen.kaizen.oasparser.model3.SecurityRequirement;
 import com.reprezen.kaizen.oasparser.model3.Server;
 
-public class OperationImpl extends OpenApiObjectImpl<Operation, OperationImpl> implements Operation {
+public class OperationImpl extends OpenApiObjectImpl<Operation> implements Operation {
 
 	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
 	public OperationImpl(String key, JsonNode json, JsonOverlay<?> parent) {

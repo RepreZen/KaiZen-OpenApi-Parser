@@ -15,7 +15,7 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ValListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ValMapOverlay;
 import com.reprezen.kaizen.oasparser.model3.ServerVariable;
 
-public class ServerVariableImpl extends OpenApiObjectImpl<ServerVariable,ServerVariableImpl> implements ServerVariable {
+public class ServerVariableImpl extends OpenApiObjectImpl<ServerVariable> implements ServerVariable {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public ServerVariableImpl(String key, JsonNode json, JsonOverlay<?> parent) {

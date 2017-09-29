@@ -24,7 +24,7 @@ import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
 import com.reprezen.kaizen.oasparser.model3.Schema;
 import com.reprezen.kaizen.oasparser.model3.Xml;
 
-public class SchemaImpl extends OpenApiObjectImpl<Schema, SchemaImpl> implements Schema {
+public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
 
 	@Override
 	public IJsonOverlay<?> find(JsonPointer path) {

@@ -15,7 +15,7 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ValMapOverlay;
 import com.reprezen.kaizen.oasparser.model3.MediaType;
 import com.reprezen.kaizen.oasparser.model3.RequestBody;
 
-public class RequestBodyImpl extends OpenApiObjectImpl<RequestBody, RequestBodyImpl> implements RequestBody {
+public class RequestBodyImpl extends OpenApiObjectImpl<RequestBody> implements RequestBody {
 
 	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
 	public RequestBodyImpl(String key, JsonNode json, JsonOverlay<?> parent) {

@@ -13,7 +13,7 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ValMapOverlay;
 import com.reprezen.kaizen.oasparser.model3.EncodingProperty;
 
-public class EncodingPropertyImpl extends OpenApiObjectImpl<EncodingProperty, EncodingPropertyImpl>
+public class EncodingPropertyImpl extends OpenApiObjectImpl<EncodingProperty>
 		implements EncodingProperty {
 
 	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

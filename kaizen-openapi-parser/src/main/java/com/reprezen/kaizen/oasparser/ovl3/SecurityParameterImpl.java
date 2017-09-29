@@ -11,7 +11,7 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ValListOverlay;
 import com.reprezen.kaizen.oasparser.model3.SecurityParameter;
 
-public class SecurityParameterImpl extends OpenApiObjectImpl<SecurityParameter, SecurityParameterImpl>
+public class SecurityParameterImpl extends OpenApiObjectImpl<SecurityParameter>
 		implements SecurityParameter {
 
 	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

@@ -16,7 +16,7 @@ import com.reprezen.kaizen.oasparser.model3.Link;
 import com.reprezen.kaizen.oasparser.model3.MediaType;
 import com.reprezen.kaizen.oasparser.model3.Response;
 
-public class ResponseImpl extends OpenApiObjectImpl<Response, ResponseImpl> implements Response {
+public class ResponseImpl extends OpenApiObjectImpl<Response> implements Response {
 
 	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
 	public ResponseImpl(String key, JsonNode json, JsonOverlay<?> parent) {

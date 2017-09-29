@@ -12,7 +12,7 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ValMapOverlay;
 import com.reprezen.kaizen.oasparser.model3.OAuthFlow;
 
-public class OAuthFlowImpl extends OpenApiObjectImpl<OAuthFlow, OAuthFlowImpl> implements OAuthFlow {
+public class OAuthFlowImpl extends OpenApiObjectImpl<OAuthFlow> implements OAuthFlow {
 
 	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
 	public OAuthFlowImpl(String key, JsonNode json, JsonOverlay<?> parent) {

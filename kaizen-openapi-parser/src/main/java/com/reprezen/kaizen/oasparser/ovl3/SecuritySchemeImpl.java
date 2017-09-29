@@ -13,7 +13,7 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ValMapOverlay;
 import com.reprezen.kaizen.oasparser.model3.OAuthFlow;
 import com.reprezen.kaizen.oasparser.model3.SecurityScheme;
 
-public class SecuritySchemeImpl extends OpenApiObjectImpl<SecurityScheme, SecuritySchemeImpl>
+public class SecuritySchemeImpl extends OpenApiObjectImpl<SecurityScheme>
 		implements SecurityScheme {
 
 	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

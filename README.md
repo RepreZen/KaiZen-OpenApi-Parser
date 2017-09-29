@@ -92,7 +92,7 @@ Here's a starting list of projects that are currently using KaiZen OpenAPI Parse
   requirements appearing in the specification (noting all uses of
   MUST, SHOULD, etc.) to ensure that validation is complete.
 
-* Serialization is not yet implemented.
+* Serialization is partially implemented.
 
 * DI for implementation-level validators exists, but validators need
   to be written. This is likely to be limited to a small number of

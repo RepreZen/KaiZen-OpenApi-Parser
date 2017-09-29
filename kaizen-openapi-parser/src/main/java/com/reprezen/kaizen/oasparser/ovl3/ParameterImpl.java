@@ -1,13 +1,13 @@
 package com.reprezen.kaizen.oasparser.ovl3;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.reprezen.kaizen.oasparser.jsonoverlay.AnyObjectOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.BooleanOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlayFactory;
-import com.reprezen.kaizen.oasparser.jsonoverlay.coll.MapOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.coll.ValMapOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.std.AnyObjectOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.std.BooleanOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.std.StringOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ValMapOverlay;
 import com.reprezen.kaizen.oasparser.model3.Example;
 import com.reprezen.kaizen.oasparser.model3.MediaType;
 import com.reprezen.kaizen.oasparser.model3.Parameter;
@@ -19,7 +19,7 @@ import com.reprezen.kaizen.oasparser.ovl3.SchemaImpl;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public class ParameterImpl extends OpenApiObjectImpl implements Parameter {
+public class ParameterImpl extends OpenApiObjectImpl<Parameter> implements Parameter {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public ParameterImpl(String key, JsonNode json, JsonOverlay<?> parent) {

@@ -4,7 +4,7 @@ import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public interface OAuthFlow extends OpenApiObject {
+public interface OAuthFlow extends OpenApiObject<OAuthFlow> {
 
     // AuthorizationUrl
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

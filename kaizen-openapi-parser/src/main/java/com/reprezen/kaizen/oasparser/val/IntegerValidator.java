@@ -17,7 +17,7 @@ import com.fasterxml.jackson.databind.node.BigIntegerNode;
 import com.fasterxml.jackson.databind.node.IntNode;
 import com.fasterxml.jackson.databind.node.ShortNode;
 import com.google.common.collect.Sets;
-import com.reprezen.kaizen.oasparser.jsonoverlay.std.IntegerOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IntegerOverlay;
 
 public class IntegerValidator extends OverlayValidator<IntegerOverlay> {
 

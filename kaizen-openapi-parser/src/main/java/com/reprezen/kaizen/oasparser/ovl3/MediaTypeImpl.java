@@ -1,11 +1,11 @@
 package com.reprezen.kaizen.oasparser.ovl3;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.reprezen.kaizen.oasparser.jsonoverlay.AnyObjectOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlayFactory;
-import com.reprezen.kaizen.oasparser.jsonoverlay.coll.MapOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.coll.ValMapOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.std.AnyObjectOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ValMapOverlay;
 import com.reprezen.kaizen.oasparser.model3.EncodingProperty;
 import com.reprezen.kaizen.oasparser.model3.Example;
 import com.reprezen.kaizen.oasparser.model3.MediaType;
@@ -17,7 +17,7 @@ import com.reprezen.kaizen.oasparser.ovl3.SchemaImpl;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public class MediaTypeImpl extends OpenApiObjectImpl implements MediaType {
+public class MediaTypeImpl extends OpenApiObjectImpl<MediaType> implements MediaType {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public MediaTypeImpl(String key, JsonNode json, JsonOverlay<?> parent) {

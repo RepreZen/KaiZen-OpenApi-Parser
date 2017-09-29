@@ -1,12 +1,12 @@
 package com.reprezen.kaizen.oasparser.ovl3;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.reprezen.kaizen.oasparser.jsonoverlay.AnyObjectOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlayFactory;
-import com.reprezen.kaizen.oasparser.jsonoverlay.coll.MapOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.coll.ValMapOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.std.AnyObjectOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.std.StringOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ValMapOverlay;
 import com.reprezen.kaizen.oasparser.model3.Server;
 import com.reprezen.kaizen.oasparser.model3.ServerVariable;
 import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
@@ -14,7 +14,7 @@ import com.reprezen.kaizen.oasparser.ovl3.ServerVariableImpl;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public class ServerImpl extends OpenApiObjectImpl implements Server {
+public class ServerImpl extends OpenApiObjectImpl<Server> implements Server {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public ServerImpl(String key, JsonNode json, JsonOverlay<?> parent) {

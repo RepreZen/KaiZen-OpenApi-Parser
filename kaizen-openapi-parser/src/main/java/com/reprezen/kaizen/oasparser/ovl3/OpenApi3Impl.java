@@ -2,14 +2,14 @@ package com.reprezen.kaizen.oasparser.ovl3;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.inject.Inject;
+import com.reprezen.kaizen.oasparser.jsonoverlay.AnyObjectOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlayFactory;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
-import com.reprezen.kaizen.oasparser.jsonoverlay.coll.ListOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.coll.MapOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.coll.ValMapOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.std.AnyObjectOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.std.StringOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ValMapOverlay;
 import com.reprezen.kaizen.oasparser.model3.Callback;
 import com.reprezen.kaizen.oasparser.model3.Example;
 import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
@@ -50,7 +50,7 @@ import java.util.Collection;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public class OpenApi3Impl extends OpenApiObjectImpl implements OpenApi3 {
+public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3> implements OpenApi3 {
 
     private ValidationResults validationResults = null;
 
@@ -190,7 +190,7 @@ public class OpenApi3Impl extends OpenApiObjectImpl implements OpenApi3 {
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean hasServers() {
-        return !servers.isMissing();
+        return servers.isPresent();
     }
 
     @Override
@@ -699,7 +699,7 @@ public class OpenApi3Impl extends OpenApiObjectImpl implements OpenApi3 {
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean hasSecurityRequirements() {
-        return !securityRequirements.isMissing();
+        return securityRequirements.isPresent();
     }
 
     @Override
@@ -744,7 +744,7 @@ public class OpenApi3Impl extends OpenApiObjectImpl implements OpenApi3 {
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean hasTags() {
-        return !tags.isMissing();
+        return tags.isPresent();
     }
 
     @Override

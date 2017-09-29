@@ -8,16 +8,9 @@
  *  Contributors:
  *     ModelSolv, Inc. - initial API and implementation and/or initial documentation
  *******************************************************************************/
-package com.reprezen.kaizen.oasparser.val;
+package com.reprezen.kaizen.oasparser.jsonoverlay;
 
-import com.fasterxml.jackson.databind.node.TextNode;
-import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
+public interface CollectionOverlay<OV extends JsonOverlay<?>> {
 
-public class StringValidator extends OverlayValidator<StringOverlay> {
-
-    @Override
-    public void validate(StringOverlay overlay, ValidationResults results) {
-        super.validate(overlay, results, TextNode.class);
-    }
-
+    public CollectionStore<OV> getStore();
 }

@@ -5,7 +5,7 @@ import com.reprezen.kaizen.oasparser.model3.ServerVariable;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public interface Server extends OpenApiObject {
+public interface Server extends OpenApiObject<Server> {
 
     // Url
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

@@ -1,13 +1,13 @@
 package com.reprezen.kaizen.oasparser.ovl3;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.reprezen.kaizen.oasparser.jsonoverlay.AnyObjectOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlayFactory;
-import com.reprezen.kaizen.oasparser.jsonoverlay.coll.ListOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.coll.MapOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.coll.ValMapOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.std.AnyObjectOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.std.StringOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ValMapOverlay;
 import com.reprezen.kaizen.oasparser.model3.Operation;
 import com.reprezen.kaizen.oasparser.model3.Parameter;
 import com.reprezen.kaizen.oasparser.model3.Path;
@@ -20,7 +20,7 @@ import java.util.Collection;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public class PathImpl extends OpenApiObjectImpl implements Path {
+public class PathImpl extends OpenApiObjectImpl<Path> implements Path {
 
     @Override
     public Operation getGet() {
@@ -205,7 +205,7 @@ public class PathImpl extends OpenApiObjectImpl implements Path {
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean hasServers() {
-        return !servers.isMissing();
+        return servers.isPresent();
     }
 
     @Override
@@ -250,7 +250,7 @@ public class PathImpl extends OpenApiObjectImpl implements Path {
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean hasParameters() {
-        return !parameters.isMissing();
+        return parameters.isPresent();
     }
 
     @Override

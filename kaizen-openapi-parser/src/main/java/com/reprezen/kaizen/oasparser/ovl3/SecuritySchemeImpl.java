@@ -1,11 +1,11 @@
 package com.reprezen.kaizen.oasparser.ovl3;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.reprezen.kaizen.oasparser.jsonoverlay.AnyObjectOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlayFactory;
-import com.reprezen.kaizen.oasparser.jsonoverlay.coll.ValMapOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.std.AnyObjectOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.std.StringOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ValMapOverlay;
 import com.reprezen.kaizen.oasparser.model3.OAuthFlow;
 import com.reprezen.kaizen.oasparser.model3.SecurityScheme;
 import com.reprezen.kaizen.oasparser.ovl3.OAuthFlowImpl;
@@ -13,7 +13,7 @@ import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public class SecuritySchemeImpl extends OpenApiObjectImpl implements SecurityScheme {
+public class SecuritySchemeImpl extends OpenApiObjectImpl<SecurityScheme> implements SecurityScheme {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public SecuritySchemeImpl(String key, JsonNode json, JsonOverlay<?> parent) {

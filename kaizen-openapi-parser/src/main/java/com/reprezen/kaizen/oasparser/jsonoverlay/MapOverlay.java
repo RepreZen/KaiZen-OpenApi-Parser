@@ -8,7 +8,7 @@
  *  Contributors:
  *     ModelSolv, Inc. - initial API and implementation and/or initial documentation
  *******************************************************************************/
-package com.reprezen.kaizen.oasparser.jsonoverlay.coll;
+package com.reprezen.kaizen.oasparser.jsonoverlay;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -16,8 +16,6 @@ import java.util.Map;
 
 import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlayFactory;
 
 public class MapOverlay<OV extends JsonOverlay<?>> extends JsonOverlay<Map<String, OV>>
 		implements CollectionOverlay<OV> {
@@ -53,8 +51,8 @@ public class MapOverlay<OV extends JsonOverlay<?>> extends JsonOverlay<Map<Strin
 	}
 
 	@Override
-	public boolean isMissing() {
-		return super.isMissing() || !getJson().isObject();
+	public boolean isPresent() {
+		return super.isPresent() && getJson().isObject();
 	}
 
 	private void reset() {
@@ -87,7 +85,7 @@ public class MapOverlay<OV extends JsonOverlay<?>> extends JsonOverlay<Map<Strin
 	}
 
 	@Override
-	public JsonOverlay<?> find(JsonPointer path) {
+	public IJsonOverlay<?> find(JsonPointer path) {
 		if (path.matches()) {
 			return this;
 		} else if (path.mayMatchProperty()) {

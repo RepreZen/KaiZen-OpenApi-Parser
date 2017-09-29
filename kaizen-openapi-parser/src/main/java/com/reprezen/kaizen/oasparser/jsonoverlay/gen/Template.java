@@ -19,7 +19,6 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.reprezen.kaizen.oasparser.jsonoverlay.gen.TypeData.Field;
-import com.reprezen.kaizen.oasparser.jsonoverlay.gen.TypeData.Structure;
 import com.reprezen.kaizen.oasparser.jsonoverlay.gen.TypeData.Type;
 
 public class Template {

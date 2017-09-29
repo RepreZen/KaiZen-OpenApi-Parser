@@ -126,7 +126,7 @@ public class SimpleSerializationTest extends Assert {
 		}
 	}
 
-	private static JsonNode getCachedJson(OpenApiObject overlay) {
+	private static <T extends OpenApiObject<T>> JsonNode getCachedJson(T overlay) {
 		try {
 			Method getJson = JsonOverlay.class.getDeclaredMethod("getJson");
 			getJson.setAccessible(true);

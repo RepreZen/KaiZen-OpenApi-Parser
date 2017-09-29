@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public interface Path extends OpenApiObject {
+public interface Path extends OpenApiObject<Path> {
 
     // Summary
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

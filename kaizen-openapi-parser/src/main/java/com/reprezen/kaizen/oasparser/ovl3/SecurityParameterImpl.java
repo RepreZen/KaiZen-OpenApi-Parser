@@ -3,14 +3,14 @@ package com.reprezen.kaizen.oasparser.ovl3;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlayFactory;
-import com.reprezen.kaizen.oasparser.jsonoverlay.coll.ValListOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.std.StringOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ValListOverlay;
 import com.reprezen.kaizen.oasparser.model3.SecurityParameter;
 import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
 import java.util.Collection;
 import javax.annotation.Generated;
 
-public class SecurityParameterImpl extends OpenApiObjectImpl implements SecurityParameter {
+public class SecurityParameterImpl extends OpenApiObjectImpl<SecurityParameter> implements SecurityParameter {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public SecurityParameterImpl(String key, JsonNode json, JsonOverlay<?> parent) {
@@ -35,7 +35,7 @@ public class SecurityParameterImpl extends OpenApiObjectImpl implements Security
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean hasParameters() {
-        return !parameters.isMissing();
+        return parameters.isPresent();
     }
 
     @Override

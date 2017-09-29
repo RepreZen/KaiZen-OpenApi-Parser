@@ -5,7 +5,7 @@ import com.reprezen.kaizen.oasparser.model3.Path;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public interface Callback extends OpenApiObject {
+public interface Callback extends OpenApiObject<Callback> {
 
     // CallbackPath
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

@@ -7,7 +7,7 @@ import com.reprezen.kaizen.oasparser.model3.Schema;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public interface Parameter extends OpenApiObject {
+public interface Parameter extends OpenApiObject<Parameter> {
 
     // Name
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

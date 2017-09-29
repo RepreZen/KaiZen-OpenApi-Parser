@@ -8,7 +8,7 @@
  *  Contributors:
  *     ModelSolv, Inc. - initial API and implementation and/or initial documentation
  *******************************************************************************/
-package com.reprezen.kaizen.oasparser.jsonoverlay.std;
+package com.reprezen.kaizen.oasparser.jsonoverlay;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -17,8 +17,6 @@ import java.util.Map;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.MissingNode;
 import com.google.common.collect.Maps;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlayFactory;
 
 public class NumberOverlay extends JsonOverlay<Number> {
 
@@ -35,8 +33,8 @@ public class NumberOverlay extends JsonOverlay<Number> {
     }
 
     @Override
-    public boolean isMissing() {
-        return super.isMissing() || !getJson().isNumber();
+    public boolean isPresent() {
+        return super.isPresent() && getJson().isNumber();
     }
 
     @Override

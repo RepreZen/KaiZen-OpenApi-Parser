@@ -10,7 +10,7 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val;
 
-import com.reprezen.kaizen.oasparser.jsonoverlay.coll.ValListOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ValListOverlay;
 
 public class ValListValidator<T extends ValListOverlay<?, T>> extends OverlayValidator<ValListOverlay<?, T>> {
 

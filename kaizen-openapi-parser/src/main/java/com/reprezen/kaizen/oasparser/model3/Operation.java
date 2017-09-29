@@ -12,7 +12,7 @@ import java.util.Collection;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public interface Operation extends OpenApiObject {
+public interface Operation extends OpenApiObject<Operation> {
 
     // Tag
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

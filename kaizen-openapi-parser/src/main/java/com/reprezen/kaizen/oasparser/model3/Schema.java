@@ -9,7 +9,7 @@ import java.util.Collection;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public interface Schema extends OpenApiObject {
+public interface Schema extends OpenApiObject<Schema> {
 
     // Title
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

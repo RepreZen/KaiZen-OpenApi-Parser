@@ -20,7 +20,7 @@ import com.fasterxml.jackson.databind.node.MissingNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.base.Optional;
 
-public abstract class JsonOverlay<V> {
+public abstract class JsonOverlay<V> implements IJsonOverlay<V> {
 
 	protected final static JsonNodeFactory jsonFactory = JsonNodeFactory.instance;
 	protected final static ObjectMapper mapper = new ObjectMapper();
@@ -64,7 +64,7 @@ public abstract class JsonOverlay<V> {
 		if (parent == null) {
 			root = this;
 		} else {
-			root = parent.getRoot();
+			root = (JsonOverlay<?>) parent.getRoot();
 		}
 		if (json.isPresent()) {
 			this.json = json.get();
@@ -87,18 +87,22 @@ public abstract class JsonOverlay<V> {
 		}
 	}
 
+	@Override
 	public V get() {
 		return value;
 	}
 
-	public JsonOverlay<?> find(JsonPointer path) {
+	@Override
+	public IJsonOverlay<?> find(JsonPointer path) {
 		// this implementation suffices for primitive types, but must be overriden in
 		// overlays designed for JSON arrays or objects
-		return isMissing() ? null//
-				: path.matches() ? this : null;
+		return isPresent() //
+				? (path.matches() ? this : null) //
+				: null;
 	}
 
-	public JsonOverlay<?> find(String path) {
+	@Override
+	public IJsonOverlay<?> find(String path) {
 		return find(JsonPointer.compile(path));
 	}
 
@@ -125,7 +129,7 @@ public abstract class JsonOverlay<V> {
 		}
 	}
 
-	public JsonNode getJson(String key) {
+	protected JsonNode getJson(String key) {
 		JsonNode json = getJson();
 		if (key.isEmpty()) {
 			return json;
@@ -136,7 +140,7 @@ public abstract class JsonOverlay<V> {
 		}
 	}
 
-	public JsonNode getResolvedJson(String key) {
+	protected JsonNode getResolvedJson(String key) {
 		JsonNode json = getJson(key);
 		if (isReferenceNode(json)) {
 			return referenceRegistry.get(json.get("key").asText()).getJson();
@@ -145,16 +149,18 @@ public abstract class JsonOverlay<V> {
 		}
 	}
 
-	public JsonNode getOriginalJson() {
+	protected JsonNode getOriginalJson() {
 		return json;
 	}
 
-	public abstract V fromJson();
+	protected abstract V fromJson();
 
+	@Override
 	public JsonNode toJson() {
 		return toJson(false);
 	}
-	
+
+	@Override
 	public JsonNode toJson(boolean followRefs) {
 		if (jsonIsCurrent && !followRefs) {
 			return getJson();
@@ -168,20 +174,22 @@ public abstract class JsonOverlay<V> {
 		}
 	}
 
+	@Override
 	public JsonNode createJson() {
 		return createJson(false);
 	}
-	
+
+	@Override
 	public JsonNode createJson(boolean followRefs) {
 		if (isReference() && !followRefs) {
 			ObjectNode obj = JsonNodeFactory.instance.objectNode();
 			obj.put("$ref", json.get("$ref").asText());
-			return obj; 
+			return obj;
 		} else {
 			return _createJson(followRefs);
 		}
 	}
-	
+
 	protected abstract JsonNode _createJson(boolean followRefs);
 
 	protected void addToSerialization(String key) {
@@ -204,43 +212,49 @@ public abstract class JsonOverlay<V> {
 		return json instanceof ObjectNode && json.has("$ref");
 	}
 
+	@Override
 	public boolean isReference() {
 		return ref != null;
 	}
 
+	@Override
 	public Reference getReference() {
 		return ref;
 	}
 
-	public JsonOverlay<?> getParentOverlay() {
+	@Override
+	public IJsonOverlay<?> getParent() {
 		return parent;
 	}
 
-	public JsonOverlay<?> getRoot() {
+	@Override
+	public IJsonOverlay<?> getRoot() {
 		return root != null ? root : this;
 	}
 
+	@Override
 	public String getKey() {
 		return key;
 	}
 
-	public void reparent(JsonOverlay<?> parent, String key) {
+	protected void reparent(JsonOverlay<?> parent, String key) {
 		this.parent = parent;
 		this.root = parent.root;
 		this.key = key;
 	}
 
-	public void deparent() {
+	protected void deparent() {
 		this.parent = null;
 		this.root = null;
 		this.key = null;
 	}
 
-	public boolean isMissing() {
-		return json.isMissingNode();
+	@Override
+	public boolean isPresent() {
+		return !json.isMissingNode();
 	}
 
-	public static <T> Iterable<T> iterable(final Iterator<T> iterator) {
+	public static final <T> Iterable<T> iterable(final Iterator<T> iterator) {
 		return new Iterable<T>() {
 			@Override
 			public Iterator<T> iterator() {

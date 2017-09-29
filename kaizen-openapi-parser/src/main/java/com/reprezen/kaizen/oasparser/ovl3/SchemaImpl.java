@@ -3,17 +3,18 @@ package com.reprezen.kaizen.oasparser.ovl3;
 import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.base.Optional;
+import com.reprezen.kaizen.oasparser.jsonoverlay.AnyObjectOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.BooleanOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IJsonOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IntegerOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlayFactory;
-import com.reprezen.kaizen.oasparser.jsonoverlay.coll.ListOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.coll.MapOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.coll.ValListOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.coll.ValMapOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.std.AnyObjectOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.std.BooleanOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.std.IntegerOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.std.NumberOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.std.StringOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.NumberOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ValListOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ValMapOverlay;
 import com.reprezen.kaizen.oasparser.model3.Example;
 import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
 import com.reprezen.kaizen.oasparser.model3.Schema;
@@ -27,10 +28,10 @@ import java.util.Collection;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public class SchemaImpl extends OpenApiObjectImpl implements Schema {
+public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
 
     @Override
-    public JsonOverlay<?> find(JsonPointer path) {
+    public IJsonOverlay<?> find(JsonPointer path) {
         if (path.matchesProperty("additionalProperties")) {
             return path.tail().matches() ? additionalProperties : additionalPropertiesSchema.find(path.tail());
         } else {
@@ -372,7 +373,7 @@ public class SchemaImpl extends OpenApiObjectImpl implements Schema {
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean hasRequiredFields() {
-        return !requiredFields.isMissing();
+        return requiredFields.isPresent();
     }
 
     @Override
@@ -415,7 +416,7 @@ public class SchemaImpl extends OpenApiObjectImpl implements Schema {
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean hasEnums() {
-        return !enums.isMissing();
+        return enums.isPresent();
     }
 
     @Override
@@ -471,7 +472,7 @@ public class SchemaImpl extends OpenApiObjectImpl implements Schema {
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean hasAllOfSchemas() {
-        return !allOfSchemas.isMissing();
+        return allOfSchemas.isPresent();
     }
 
     @Override
@@ -516,7 +517,7 @@ public class SchemaImpl extends OpenApiObjectImpl implements Schema {
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean hasOneOfSchemas() {
-        return !oneOfSchemas.isMissing();
+        return oneOfSchemas.isPresent();
     }
 
     @Override
@@ -561,7 +562,7 @@ public class SchemaImpl extends OpenApiObjectImpl implements Schema {
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean hasAnyOfSchemas() {
-        return !anyOfSchemas.isMissing();
+        return anyOfSchemas.isPresent();
     }
 
     @Override

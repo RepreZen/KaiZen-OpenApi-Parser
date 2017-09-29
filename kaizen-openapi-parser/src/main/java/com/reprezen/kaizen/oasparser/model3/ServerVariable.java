@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public interface ServerVariable extends OpenApiObject {
+public interface ServerVariable extends OpenApiObject<ServerVariable> {
 
     // EnumValue
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

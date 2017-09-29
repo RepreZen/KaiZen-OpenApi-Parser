@@ -1,9 +1,5 @@
 package com.reprezen.kaizen.oasparser.ovl3;
 
-import java.util.Map;
-
-import javax.annotation.Generated;
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.reprezen.kaizen.oasparser.jsonoverlay.AnyObjectOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
@@ -12,6 +8,10 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ValMapOverlay;
 import com.reprezen.kaizen.oasparser.model3.Callback;
 import com.reprezen.kaizen.oasparser.model3.Path;
+import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
+import com.reprezen.kaizen.oasparser.ovl3.PathImpl;
+import java.util.Map;
+import javax.annotation.Generated;
 
 public class CallbackImpl extends OpenApiObjectImpl<Callback> implements Callback {
 

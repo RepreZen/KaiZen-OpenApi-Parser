@@ -1,8 +1,11 @@
 package com.reprezen.kaizen.oasparser.model3;
 
+import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
+import com.reprezen.kaizen.oasparser.model3.Operation;
+import com.reprezen.kaizen.oasparser.model3.Parameter;
+import com.reprezen.kaizen.oasparser.model3.Server;
 import java.util.Collection;
 import java.util.Map;
-
 import javax.annotation.Generated;
 
 public interface Path extends OpenApiObject<Path> {

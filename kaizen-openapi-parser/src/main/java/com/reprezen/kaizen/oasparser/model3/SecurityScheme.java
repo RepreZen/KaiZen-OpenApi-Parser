@@ -1,7 +1,8 @@
 package com.reprezen.kaizen.oasparser.model3;
 
+import com.reprezen.kaizen.oasparser.model3.OAuthFlow;
+import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
 import java.util.Map;
-
 import javax.annotation.Generated;
 
 public interface SecurityScheme extends OpenApiObject<SecurityScheme> {

@@ -1,7 +1,10 @@
 package com.reprezen.kaizen.oasparser.model3;
 
+import com.reprezen.kaizen.oasparser.model3.Header;
+import com.reprezen.kaizen.oasparser.model3.Link;
+import com.reprezen.kaizen.oasparser.model3.MediaType;
+import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
 import java.util.Map;
-
 import javax.annotation.Generated;
 
 public interface Response extends OpenApiObject<Response> {

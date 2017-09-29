@@ -1,10 +1,5 @@
 package com.reprezen.kaizen.oasparser.ovl3;
 
-import java.util.Collection;
-import java.util.Map;
-
-import javax.annotation.Generated;
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.reprezen.kaizen.oasparser.jsonoverlay.AnyObjectOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
@@ -17,360 +12,340 @@ import com.reprezen.kaizen.oasparser.model3.Operation;
 import com.reprezen.kaizen.oasparser.model3.Parameter;
 import com.reprezen.kaizen.oasparser.model3.Path;
 import com.reprezen.kaizen.oasparser.model3.Server;
+import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
+import com.reprezen.kaizen.oasparser.ovl3.OperationImpl;
+import com.reprezen.kaizen.oasparser.ovl3.ParameterImpl;
+import com.reprezen.kaizen.oasparser.ovl3.ServerImpl;
+import java.util.Collection;
+import java.util.Map;
+import javax.annotation.Generated;
 
 public class PathImpl extends OpenApiObjectImpl<Path> implements Path {
 
-	@Override
-	public Operation getGet() {
-		return operations.get("get");
-	}
+    @Override
+    public Operation getGet() {
+        return operations.get("get");
+    }
 
-	@Override
-	public void setGet(Operation get) {
-		operations.set("get", (OperationImpl) get);
-	}
+    @Override
+    public void setGet(Operation get) {
+        operations.set("get", (OperationImpl) get);
+    }
 
-	@Override
-	public Operation getPut() {
-		return operations.get("put");
-	}
+    @Override
+    public Operation getPut() {
+        return operations.get("put");
+    }
 
-	@Override
-	public void setPut(Operation put) {
-		operations.set("put", (OperationImpl) put);
-	}
+    @Override
+    public void setPut(Operation put) {
+        operations.set("put", (OperationImpl) put);
+    }
 
-	@Override
-	public Operation getPost() {
-		return operations.get("post");
-	}
+    @Override
+    public Operation getPost() {
+        return operations.get("post");
+    }
 
-	@Override
-	public void setPost(Operation post) {
-		operations.set("post", (OperationImpl) post);
-	}
+    @Override
+    public void setPost(Operation post) {
+        operations.set("post", (OperationImpl) post);
+    }
 
-	@Override
-	public Operation getDelete() {
-		return operations.get("delete");
-	}
+    @Override
+    public Operation getDelete() {
+        return operations.get("delete");
+    }
 
-	@Override
-	public void setDelete(Operation delete) {
-		operations.set("delete", (OperationImpl) delete);
-	}
+    @Override
+    public void setDelete(Operation delete) {
+        operations.set("delete", (OperationImpl) delete);
+    }
 
-	@Override
-	public Operation getOptions() {
-		return operations.get("options");
-	}
+    @Override
+    public Operation getOptions() {
+        return operations.get("options");
+    }
 
-	@Override
-	public void setOptions(Operation options) {
-		operations.set("options", (OperationImpl) options);
-	}
+    @Override
+    public void setOptions(Operation options) {
+        operations.set("options", (OperationImpl) options);
+    }
 
-	@Override
-	public Operation getHead() {
-		return operations.get("head");
-	}
+    @Override
+    public Operation getHead() {
+        return operations.get("head");
+    }
 
-	@Override
-	public void setHead(Operation head) {
-		operations.set("head", (OperationImpl) head);
-	}
+    @Override
+    public void setHead(Operation head) {
+        operations.set("head", (OperationImpl) head);
+    }
 
-	@Override
-	public Operation getPatch() {
-		return operations.get("patch");
-	}
+    @Override
+    public Operation getPatch() {
+        return operations.get("patch");
+    }
 
-	@Override
-	public void setPatch(Operation patch) {
-		operations.set("patch", (OperationImpl) patch);
-	}
+    @Override
+    public void setPatch(Operation patch) {
+        operations.set("patch", (OperationImpl) patch);
+    }
 
-	@Override
-	public Operation getTrace() {
-		return operations.get("trace");
-	}
+    @Override
+    public Operation getTrace() {
+        return operations.get("trace");
+    }
 
-	@Override
-	public void setTrace(Operation trace) {
-		operations.set("trace", (OperationImpl) trace);
-	}
+    @Override
+    public void setTrace(Operation trace) {
+        operations.set("trace", (OperationImpl) trace);
+    }
 
-	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-	public PathImpl(String key, JsonNode json, JsonOverlay<?> parent) {
-		super(key, json, parent);
-	}
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public PathImpl(String key, JsonNode json, JsonOverlay<?> parent) {
+        super(key, json, parent);
+    }
 
-	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-	public PathImpl(String key, JsonOverlay<?> parent) {
-		super(key, parent);
-	}
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public PathImpl(String key, JsonOverlay<?> parent) {
+        super(key, parent);
+    }
 
-	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-	private StringOverlay summary = new StringOverlay("summary", this);
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    private StringOverlay summary = new StringOverlay("summary", this);
 
-	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-	private StringOverlay description = new StringOverlay("description", this);
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    private StringOverlay description = new StringOverlay("description", this);
 
-	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-	private MapOverlay<OperationImpl> operations = new MapOverlay<OperationImpl>("", this, OperationImpl.factory,
-			"get|put|post|delete|options|head|patch|trace");
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    private MapOverlay<OperationImpl> operations = new MapOverlay<OperationImpl>("", this, OperationImpl.factory, "get|put|post|delete|options|head|patch|trace");
 
-	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-	private ListOverlay<ServerImpl> servers = new ListOverlay<ServerImpl>("servers", this, ServerImpl.factory);
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    private ListOverlay<ServerImpl> servers = new ListOverlay<ServerImpl>("servers", this, ServerImpl.factory);
 
-	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-	private ListOverlay<ParameterImpl> parameters = new ListOverlay<ParameterImpl>("parameters", this,
-			ParameterImpl.factory);
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    private ListOverlay<ParameterImpl> parameters = new ListOverlay<ParameterImpl>("parameters", this, ParameterImpl.factory);
 
-	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-	private ValMapOverlay<Object, AnyObjectOverlay> extensions = new ValMapOverlay<Object, AnyObjectOverlay>("", this,
-			AnyObjectOverlay.factory, "x-.+");
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    private ValMapOverlay<Object, AnyObjectOverlay> extensions = new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+");
 
-	// Summary
-	@Override
-	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-	public String getSummary() {
-		return summary.get();
-	}
+    // Summary
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getSummary() {
+        return summary.get();
+    }
 
-	@Override
-	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-	public void setSummary(String summary) {
-		this.summary.set(summary);
-	}
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public void setSummary(String summary) {
+        this.summary.set(summary);
+    }
 
-	// Description
-	@Override
-	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-	public String getDescription() {
-		return description.get();
-	}
+    // Description
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getDescription() {
+        return description.get();
+    }
 
-	@Override
-	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-	public void setDescription(String description) {
-		this.description.set(description);
-	}
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public void setDescription(String description) {
+        this.description.set(description);
+    }
 
-	// Operation
-	@Override
-	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-	public Map<String, ? extends Operation> getOperations() {
-		return operations.get();
-	}
+    // Operation
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, ? extends Operation> getOperations() {
+        return operations.get();
+    }
 
-	@Override
-	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-	public boolean hasOperation(String name) {
-		return operations.containsKey(name);
-	}
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public boolean hasOperation(String name) {
+        return operations.containsKey(name);
+    }
 
-	@Override
-	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-	public Operation getOperation(String name) {
-		return operations.get(name);
-	}
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Operation getOperation(String name) {
+        return operations.get(name);
+    }
 
-	@Override
-	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-	public void setOperations(Map<String, ? extends Operation> operations) {
-		@SuppressWarnings("unchecked")
-		Map<String, OperationImpl> implOperations = (Map<String, OperationImpl>) operations;
-		this.operations.set(implOperations);
-	}
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public void setOperations(Map<String, ? extends Operation> operations) {
+        @SuppressWarnings("unchecked")
+            Map<String,OperationImpl> implOperations = (Map<String, OperationImpl>) operations;
+            this.operations.set(implOperations);
+    }
 
-	@Override
-	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-	public void setOperation(String name, Operation operation) {
-		operations.set(name, (OperationImpl) operation);
-	}
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public void setOperation(String name, Operation operation) {
+        operations.set(name, (OperationImpl) operation);
+    }
 
-	@Override
-	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-	public void removeOperation(String name) {
-		operations.remove(name);
-	}
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public void removeOperation(String name) {
+        operations.remove(name);
+    }
 
-	// Server
-	@Override
-	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-	public Collection<? extends Server> getServers() {
-		return servers.get();
-	}
+    // Server
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Collection<? extends Server> getServers() {
+        return servers.get();
+    }
 
-	@Override
-	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-	public boolean hasServers() {
-		return servers.isPresent();
-	}
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public boolean hasServers() {
+        return servers.isPresent();
+    }
 
-	@Override
-	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-	public Server getServer(int index) {
-		return servers.get(index);
-	}
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Server getServer(int index) {
+        return servers.get(index);
+    }
 
-	@Override
-	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-	public void setServers(Collection<? extends Server> servers) {
-		@SuppressWarnings("unchecked")
-		Collection<ServerImpl> implServers = (Collection<ServerImpl>) servers;
-		this.servers.set(implServers);
-	}
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public void setServers(Collection<? extends Server> servers) {
+        @SuppressWarnings("unchecked")
+            Collection<ServerImpl> implServers = (Collection<ServerImpl>) servers;
+            this.servers.set(implServers);
+    }
 
-	@Override
-	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-	public void setServer(int index, Server server) {
-		servers.set(index, (ServerImpl) server);
-	}
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public void setServer(int index, Server server) {
+        servers.set(index, (ServerImpl) server);
+    }
 
-	@Override
-	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-	public void addServer(Server server) {
-		servers.add((ServerImpl) server);
-	}
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public void addServer(Server server) {
+        servers.add((ServerImpl) server);
+    }
 
-	@Override
-	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-	public void removeServer(int index) {
-		servers.remove(index);
-	}
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public void removeServer(int index) {
+        servers.remove(index);
+    }
 
-	// Parameter
-	@Override
-	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-	public Collection<? extends Parameter> getParameters() {
-		return parameters.get();
-	}
+    // Parameter
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Collection<? extends Parameter> getParameters() {
+        return parameters.get();
+    }
 
-	@Override
-	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-	public boolean hasParameters() {
-		return parameters.isPresent();
-	}
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public boolean hasParameters() {
+        return parameters.isPresent();
+    }
 
-	@Override
-	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-	public Parameter getParameter(int index) {
-		return parameters.get(index);
-	}
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Parameter getParameter(int index) {
+        return parameters.get(index);
+    }
 
-	@Override
-	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-	public void setParameters(Collection<? extends Parameter> parameters) {
-		@SuppressWarnings("unchecked")
-		Collection<ParameterImpl> implParameters = (Collection<ParameterImpl>) parameters;
-		this.parameters.set(implParameters);
-	}
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public void setParameters(Collection<? extends Parameter> parameters) {
+        @SuppressWarnings("unchecked")
+            Collection<ParameterImpl> implParameters = (Collection<ParameterImpl>) parameters;
+            this.parameters.set(implParameters);
+    }
 
-	@Override
-	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-	public void setParameter(int index, Parameter parameter) {
-		parameters.set(index, (ParameterImpl) parameter);
-	}
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public void setParameter(int index, Parameter parameter) {
+        parameters.set(index, (ParameterImpl) parameter);
+    }
 
-	@Override
-	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-	public void addParameter(Parameter parameter) {
-		parameters.add((ParameterImpl) parameter);
-	}
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public void addParameter(Parameter parameter) {
+        parameters.add((ParameterImpl) parameter);
+    }
 
-	@Override
-	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-	public void removeParameter(int index) {
-		parameters.remove(index);
-	}
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public void removeParameter(int index) {
+        parameters.remove(index);
+    }
 
-	// Extension
-	@Override
-	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-	public Map<String, Object> getExtensions() {
-		return extensions.get();
-	}
+    // Extension
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Object> getExtensions() {
+        return extensions.get();
+    }
 
-	@Override
-	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-	public boolean hasExtension(String name) {
-		return extensions.containsKey(name);
-	}
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public boolean hasExtension(String name) {
+        return extensions.containsKey(name);
+    }
 
-	@Override
-	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-	public Object getExtension(String name) {
-		return extensions.get(name);
-	}
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Object getExtension(String name) {
+        return extensions.get(name);
+    }
 
-	@Override
-	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-	public void setExtensions(Map<String, Object> extensions) {
-		this.extensions.set(extensions);
-	}
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public void setExtensions(Map<String, Object> extensions) {
+        this.extensions.set(extensions);
+    }
 
-	@Override
-	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-	public void setExtension(String name, Object extension) {
-		extensions.set(name, extension);
-	}
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public void setExtension(String name, Object extension) {
+        extensions.set(name, extension);
+    }
 
-	@Override
-	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-	public void removeExtension(String name) {
-		extensions.remove(name);
-	}
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public void removeExtension(String name) {
+        extensions.remove(name);
+    }
 
-	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-	public static JsonOverlayFactory<PathImpl> factory = new JsonOverlayFactory<PathImpl>() {
-		@Override
-		public PathImpl create(String key, JsonNode json, JsonOverlay<?> parent) {
-			return isEmptyRecursive(parent, PathImpl.class) ? null : new PathImpl(key, json, parent);
-		}
-	};
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public static JsonOverlayFactory<PathImpl> factory = new JsonOverlayFactory<PathImpl>() {
+    @Override
+    public PathImpl create(String key, JsonNode json, JsonOverlay<?> parent) {
+        return isEmptyRecursive(parent, PathImpl.class) ? null : new PathImpl(key, json, parent);
+    }
+};
 
-	@Override
-	@Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-	protected void installPropertyAccessors(PropertyAccessors accessors) {
-		OverlayGetter getter = null;
-		getter = new OverlayGetter() {
-			public JsonOverlay<?> get() {
-				return summary;
-			}
-		};
-		accessors.add("summary", null, getter);
-		getter = new OverlayGetter() {
-			public JsonOverlay<?> get() {
-				return description;
-			}
-		};
-		accessors.add("description", null, getter);
-		getter = new OverlayGetter() {
-			public JsonOverlay<?> get() {
-				return operations;
-			}
-		};
-		accessors.add("", "get|put|post|delete|options|head|patch|trace", getter);
-		getter = new OverlayGetter() {
-			public JsonOverlay<?> get() {
-				return servers;
-			}
-		};
-		accessors.add("servers", null, getter);
-		getter = new OverlayGetter() {
-			public JsonOverlay<?> get() {
-				return parameters;
-			}
-		};
-		accessors.add("parameters", null, getter);
-		getter = new OverlayGetter() {
-			public JsonOverlay<?> get() {
-				return extensions;
-			}
-		};
-		accessors.add("", "x-.+", getter);
-	}
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    protected void installPropertyAccessors(PropertyAccessors accessors) {
+        OverlayGetter getter = null;
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return summary;}};
+            accessors.add("summary", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return description;}};
+            accessors.add("description", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return operations;}};
+            accessors.add("", "get|put|post|delete|options|head|patch|trace", getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return servers;}};
+            accessors.add("servers", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return parameters;}};
+            accessors.add("parameters", null, getter);
+            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return extensions;}};
+            accessors.add("", "x-.+", getter);
+    }
 
 }

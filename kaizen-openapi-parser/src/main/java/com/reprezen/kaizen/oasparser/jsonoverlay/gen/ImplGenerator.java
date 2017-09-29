@@ -66,7 +66,7 @@ public class ImplGenerator extends TypeGenerator {
 
 	private String getSuperType(Type type) {
 		String superType = type.getExtensionOf();
-		return superType != null ? Type.getImplType(superType) : "OpenApiObjectImpl";
+		return superType != null ? Type.getImplType(superType) : t("OpenApiObjectImpl<${name}>",type);
 	}
 
 	@Override
@@ -168,8 +168,8 @@ public class ImplGenerator extends TypeGenerator {
 
 		// Collection<T> getFoos() => foos.get()
 		methods.add(getDecl, code(field, "return ${lcPlural}.get();"));
-		// boolean hasFoos() => !foos.isMissing()
-		methods.add(hasDecl, code(field, "return !${lcPlural}.isMissing();"));
+		// boolean hasFoos() => foos.isPresent()
+		methods.add(hasDecl, code(field, "return ${lcPlural}.isPresent();"));
 		// T getFoo(int index) => foos.get(index)
 		methods.add(iGetDecl, code(field, "return ${lcPlural}.get(index);"));
 		if (field.isScalarType()) {

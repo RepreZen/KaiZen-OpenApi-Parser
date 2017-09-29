@@ -1,7 +1,7 @@
 package com.reprezen.kaizen.oasparser.model3;
 
+import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
 import java.util.Collection;
-
 import javax.annotation.Generated;
 
 public interface SecurityParameter extends OpenApiObject<SecurityParameter> {

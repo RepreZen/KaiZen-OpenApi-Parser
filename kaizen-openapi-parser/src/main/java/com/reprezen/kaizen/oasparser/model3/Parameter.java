@@ -1,7 +1,10 @@
 package com.reprezen.kaizen.oasparser.model3;
 
+import com.reprezen.kaizen.oasparser.model3.Example;
+import com.reprezen.kaizen.oasparser.model3.MediaType;
+import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
+import com.reprezen.kaizen.oasparser.model3.Schema;
 import java.util.Map;
-
 import javax.annotation.Generated;
 
 public interface Parameter extends OpenApiObject<Parameter> {

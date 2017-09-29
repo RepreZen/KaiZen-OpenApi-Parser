@@ -22,7 +22,7 @@ types:
     imports: 
       intf:  [ ValidationResults ]
       impl: [ OpenApi3Validator, Validator, ValidationResults, Severity, Inject, ReferenceRegistry ]
-    extendInterfaces: [OpenApi]
+    extendInterfaces: [OpenApi<OpenApi3>]
     fields:
       openapi:
         name: OpenApi
@@ -529,7 +529,7 @@ types:
 
   - name: Schema
     imports:
-      impl: [ Optional, JsonPointer ]
+      impl: [ Optional, JsonPointer, IJsonOverlay ]
     fields:
       title:
         name: Title

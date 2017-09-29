@@ -92,8 +92,21 @@ Here's a starting list of projects that are currently using KaiZen OpenAPI Parse
   requirements appearing in the specification (noting all uses of
   MUST, SHOULD, etc.) to ensure that validation is complete.
 
-* Serialization is not yet implemented.
-
+* Serialization is partially implemented.
+  - Public method `toJson()` will return a `JsonNode` object
+    representing the model.
+  - Optional boolean arg (default false) controls whether references
+    are followed (true) or left as references (false) in the output.
+  - Reference recursion will break reference-following serialization
+    (even after
+    [Issue 64](https://github.com/RepreZen/KaiZen-OpenApi-Parser/issues/64)
+    is addressed).
+  - Preservation of order of JSON object properties is not yet
+    implemented in all cases.
+  - See
+    [Issue 84](https://github.com/RepreZen/KaiZen-OpenApi-Parser/issues/84)
+    for some indication of what else is planned for serialization. 
+  
 * DI for implementation-level validators exists, but validators need
   to be written. This is likely to be limited to a small number of
   JSON-level validators, namely detecting where incompatible JSON

@@ -36,19 +36,19 @@ public class ValListOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Co
 	public ValListOverlay(String key, Collection<V> values, JsonOverlay<?> parent, JsonOverlayFactory<OV> factory) {
 		this(key, factory, parent);
 		store.init(true, null).load(CollectionData.<V, OV>of(values, factory));
-		reset();
+		reset(false);
 	}
 
 	public ValListOverlay(String key, JsonNode json, JsonOverlay<?> parent, JsonOverlayFactory<OV> factory) {
 		this(key, factory, parent);
 		store.init(true, null).load(CollectionData.of(json, parent, factory));
-		reset();
+		reset(false);
 	}
 
 	public ValListOverlay(String key, JsonOverlay<?> parent, JsonOverlayFactory<OV> factory) {
 		this(key, factory, parent);
 		store.init(true, null).load(CollectionData.of(parent.getResolvedJson(key), parent, factory));
-		reset();
+		reset(false);
 	}
 
 	@Override
@@ -56,12 +56,12 @@ public class ValListOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Co
 		return super.isPresent() && getJson().isArray();
 	}
 
-	private void reset() {
+	private void reset(boolean invalidate) {
 		values.clear();
 		for (OV overlay : store.getOverlays()) {
 			values.put(overlay.getKey(), overlay.get());
 		}
-		super.set(values.values());
+		super.set(values.values(), invalidate);
 	}
 
 	public V get(int index) {
@@ -73,18 +73,17 @@ public class ValListOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Co
 	}
 
 	@Override
-	public void set(Collection<V> values) {
+	public void set(Collection<V> values, boolean invalidate) {
 		store.clear();
 		for (V value : values) {
 			store.add(createOverlay(value));
 		}
-		reset();
-		invalidate();
+		super.set(values, invalidate);
 	}
 
 	public void set(int index, V value) {
 		store.replace(index, createOverlay(value));
-		reset();
+		reset(true);
 		invalidate();
 	}
 
@@ -101,9 +100,10 @@ public class ValListOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Co
 	}
 
 	public void clear() {
-		store.clear();
-		reset();
-		invalidate();
+		if (store.size() > 0) {
+			store.clear();
+			reset(true);
+		}
 	}
 
 	public int size() {
@@ -122,32 +122,27 @@ public class ValListOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Co
 
 	public void add(V value) {
 		store.add(createOverlay(value));
-		reset();
-		invalidate();
+		reset(true);
 	}
 
 	public void add(String key, V value) {
 		store.add(key, createOverlay(value));
-		reset();
-		invalidate();
+		reset(true);
 	}
 
 	public void remove(String key) {
 		store.remove(key);
-		reset();
-		invalidate();
+		reset(true);
 	}
 
 	public void remove(int index) {
 		store.remove(index);
-		reset();
-		invalidate();
+		reset(true);
 	}
 
 	public void replace(String key, V value) {
 		store.replace(key, createOverlay(value));
-		reset();
-		invalidate();
+		reset(true);
 	}
 
 	private OV createOverlay(V value) {

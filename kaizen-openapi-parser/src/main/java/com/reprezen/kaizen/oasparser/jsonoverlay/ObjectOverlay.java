@@ -65,7 +65,7 @@ public abstract class ObjectOverlay<V extends IObjectOverlay<V>> extends JsonOve
 				if (path.matches()) {
 					if (json.isObject() && merge) {
 						obj.setAll((ObjectNode) json);
-					} else {
+					} else if (!merge) {
 						if (accessorList.size() > 1) {
 							throw new IllegalStateException(
 									"Whole-value property accessor may not coexist with other accessors");
@@ -80,6 +80,7 @@ public abstract class ObjectOverlay<V extends IObjectOverlay<V>> extends JsonOve
 		return obj.size() > 0 ? obj
 				: parent != null && parent instanceof ObjectOverlay ? MissingNode.getInstance()
 						: JsonNodeFactory.instance.objectNode();
+
 	}
 
 	private void addValueAtPath(ObjectNode obj, JsonNode value, JsonPointer path, boolean merge) {
@@ -90,7 +91,7 @@ public abstract class ObjectOverlay<V extends IObjectOverlay<V>> extends JsonOve
 		if (path.tail().matches()) {
 			if (merge && value.isObject()) {
 				((ObjectNode) obj.get(key)).setAll((ObjectNode) value);
-			} else {
+			} else if (!value.isMissingNode()) {
 				obj.set(key, value);
 			}
 		} else {

@@ -107,8 +107,14 @@ public abstract class JsonOverlay<V> implements IJsonOverlay<V> {
 	}
 
 	public void set(V value) {
+		set(value, true);
+	}
+
+	protected void set(V value, boolean invalidate) {
 		this.value = value;
-		invalidate();
+		if (invalidate) {
+			invalidate();
+		}
 		if (parent != null) {
 			parent.addToSerialization(key);
 		}
@@ -186,11 +192,15 @@ public abstract class JsonOverlay<V> implements IJsonOverlay<V> {
 			obj.put("$ref", json.get("$ref").asText());
 			return obj;
 		} else {
-			return _createJson(followRefs);
+			return fixCreatedJson(_createJson(followRefs));
 		}
 	}
 
 	protected abstract JsonNode _createJson(boolean followRefs);
+
+	protected JsonNode fixCreatedJson(JsonNode json) {
+		return json;
+	};
 
 	protected void addToSerialization(String key) {
 		// no-op except for ObjectOverlay

@@ -1,6 +1,7 @@
 package com.reprezen.kaizen.oasparser.ovl3;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlayFactory;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
@@ -11,6 +12,11 @@ import java.util.Collection;
 import javax.annotation.Generated;
 
 public class SecurityParameterImpl extends OpenApiObjectImpl<SecurityParameter> implements SecurityParameter {
+
+    @Override
+    protected JsonNode fixCreatedJson(JsonNode json) {
+        return json.isMissingNode() ? JsonNodeFactory.instance.arrayNode() : json;
+    }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public SecurityParameterImpl(String key, JsonNode json, JsonOverlay<?> parent) {

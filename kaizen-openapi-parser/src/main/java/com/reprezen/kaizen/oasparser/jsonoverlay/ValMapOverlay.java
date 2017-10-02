@@ -34,24 +34,24 @@ public class ValMapOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Map
 			String keyPat) {
 		this(key, factory, parent);
 		store.init(false, keyPat).load(CollectionData.of(valueMap, factory));
-		reset();
+		reset(false);
 	}
 
 	public ValMapOverlay(String key, JsonNode json, JsonOverlay<?> parent, JsonOverlayFactory<OV> factory,
 			String keyPat) {
 		this(key, factory, parent);
 		store.init(false, keyPat).load(CollectionData.of(json, parent, factory));
-		reset();
+		reset(false);
 	}
 
 	public ValMapOverlay(String key, JsonOverlay<?> parent, JsonOverlayFactory<OV> factory, String keyPat) {
 		this(key, factory, parent);
 		store.init(false, keyPat).load(CollectionData.of(parent.getResolvedJson(key), parent, factory));
-		reset();
+		reset(false);
 	}
 
-	private void reset() {
-		super.set(getFromStore());
+	private void reset(boolean invalidate) {
+		super.set(getFromStore(), invalidate);
 	}
 
 	@Override
@@ -93,8 +93,7 @@ public class ValMapOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Map
 		for (Entry<String, V> entry : valueMap.entrySet()) {
 			store.add(entry.getKey(), createOverlay(entry.getValue()));
 		}
-		reset();
-		invalidate();
+		reset(true);
 	}
 
 	public void set(String key, V value) {
@@ -109,8 +108,7 @@ public class ValMapOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Map
 
 	public void set(Collection<OV> overlays) {
 		store.set(overlays);
-		reset();
-		invalidate();
+		reset(true);
 	}
 
 	@Override
@@ -126,9 +124,10 @@ public class ValMapOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Map
 	}
 
 	public void clear() {
-		store.clear();
-		reset();
-		invalidate();
+		if (store.size() > 0) {
+			store.clear();
+			reset(true);
+		}
 	}
 
 	public int size() {
@@ -147,32 +146,27 @@ public class ValMapOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Map
 
 	public void add(String key, V value) {
 		store.add(key, createOverlay(value));
-		reset();
-		invalidate();
+		reset(true);
 	}
 
 	public void remove(String key) {
 		store.remove(key);
-		reset();
-		invalidate();
+		reset(true);
 	}
 
 	public void remove(int index) {
 		store.remove(index);
-		reset();
-		invalidate();
+		reset(true);
 	}
 
 	public void replace(String key, V value) {
 		store.replace(key, createOverlay(value));
-		reset();
-		invalidate();
+		reset(true);
 	}
 
 	public void replace(int index, V value) {
 		store.replace(index, factory.create(null, value, parent));
-		reset();
-		invalidate();
+		reset(true);
 	}
 
 	private OV createOverlay(V value) {

@@ -10,6 +10,14 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser;
 
+import com.fasterxml.jackson.databind.JsonNode;
+
 public class OpenApi3Parser extends OpenApiParser {
 
+	@Override
+	protected boolean isVersion3(JsonNode tree) {
+		return true;
+	}
+
+	
 }

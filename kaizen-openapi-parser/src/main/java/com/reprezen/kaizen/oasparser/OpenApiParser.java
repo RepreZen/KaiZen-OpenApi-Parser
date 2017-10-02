@@ -111,7 +111,7 @@ public class OpenApiParser {
 
     }
 
-    private boolean isVersion3(JsonNode tree) {
+    protected boolean isVersion3(JsonNode tree) {
         JsonNode versionNode = tree.path("openapi");
         return versionNode.isTextual() && versionNode.asText().startsWith("3.");
     }

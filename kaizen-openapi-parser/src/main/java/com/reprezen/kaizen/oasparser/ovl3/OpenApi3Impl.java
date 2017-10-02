@@ -1,6 +1,8 @@
 package com.reprezen.kaizen.oasparser.ovl3;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.inject.Inject;
 import com.reprezen.kaizen.oasparser.jsonoverlay.AnyObjectOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
@@ -53,6 +55,13 @@ import javax.annotation.Generated;
 public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3> implements OpenApi3 {
 
     private ValidationResults validationResults = null;
+
+    protected JsonNode fixCreatedJson(JsonNode json) {
+        if (!json.has("paths")) {
+            ((ObjectNode) json).set("paths", JsonNodeFactory.instance.objectNode());
+        }
+        return json;
+    }
 
     @Inject
     private Validator<OpenApi3> validator;

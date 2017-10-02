@@ -21,7 +21,7 @@ types:
   - name: OpenApi3
     imports: 
       intf:  [ ValidationResults ]
-      impl: [ OpenApi3Validator, Validator, ValidationResults, Severity, Inject, ReferenceRegistry ]
+      impl: [ OpenApi3Validator, Validator, ValidationResults, Severity, Inject, ReferenceRegistry, ObjectNode, JsonNodeFactory ]
     extendInterfaces: [OpenApi<OpenApi3>]
     fields:
       openapi:
@@ -374,6 +374,8 @@ types:
         keyPattern: *namePat
 
   - name: SecurityParameter
+    imports:
+      impl: [JsonNodeFactory]
     fields:
       parameter:
         name: Parameter

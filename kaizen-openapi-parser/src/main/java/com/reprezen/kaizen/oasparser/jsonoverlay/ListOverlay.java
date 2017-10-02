@@ -28,19 +28,19 @@ public class ListOverlay<OV extends JsonOverlay<?>> extends JsonOverlay<Collecti
 	public ListOverlay(String key, Collection<OV> overlays, JsonOverlay<?> parent, JsonOverlayFactory<OV> factory) {
 		this(key, factory, parent);
 		store.init(true, null).load(CollectionData.of(overlays));
-		reset();
+		reset(false);
 	}
 
 	public ListOverlay(String key, JsonNode json, JsonOverlay<?> parent, JsonOverlayFactory<OV> factory) {
 		this(key, factory, parent);
 		store.init(true, null).load(CollectionData.of(json, parent, factory));
-		reset();
+		reset(false);
 	}
 
 	public ListOverlay(String key, JsonOverlay<?> parent, JsonOverlayFactory<OV> factory) {
 		this(key, factory, parent);
 		store.init(true, null).load(CollectionData.of(parent.getResolvedJson(key), parent, factory));
-		reset();
+		reset(false);
 	}
 
 	@Override
@@ -48,8 +48,8 @@ public class ListOverlay<OV extends JsonOverlay<?>> extends JsonOverlay<Collecti
 		return super.isPresent() && getJson().isArray();
 	}
 
-	private void reset() {
-		super.set(store.getOverlays());
+	private void reset(boolean invalidate) {
+		super.set(store.getOverlays(), invalidate);
 	}
 
 	@Override
@@ -64,7 +64,7 @@ public class ListOverlay<OV extends JsonOverlay<?>> extends JsonOverlay<Collecti
 	@Override
 	public void set(Collection<OV> overlays) {
 		store.set(overlays);
-		reset();
+		reset(true);
 		invalidate();
 	}
 
@@ -81,9 +81,10 @@ public class ListOverlay<OV extends JsonOverlay<?>> extends JsonOverlay<Collecti
 	}
 
 	public void clear() {
-		store.clear();
-		reset();
-		invalidate();
+		if (store.size() > 0) {
+			store.clear();
+			reset(true);
+		}
 	}
 
 	public int size() {
@@ -102,38 +103,32 @@ public class ListOverlay<OV extends JsonOverlay<?>> extends JsonOverlay<Collecti
 
 	public void add(OV overlay) {
 		store.add(overlay);
-		reset();
-		invalidate();
+		reset(true);
 	}
 
 	public void add(String key, OV overlay) {
 		store.add(key, overlay);
-		reset();
-		invalidate();
+		reset(true);
 	}
 
 	public void remove(String key) {
 		store.remove(key);
-		reset();
-		invalidate();
+		reset(true);
 	}
 
 	public void remove(int index) {
 		store.remove(index);
-		reset();
-		invalidate();
+		reset(true);
 	}
 
 	public void replace(String key, OV overlay) {
 		store.replace(key, overlay);
-		reset();
-		invalidate();
+		reset(true);
 	}
 
 	public void set(int index, OV overlay) {
 		store.replace(index, overlay);
-		reset();
-		invalidate();
+		reset(true);
 	}
 
 	@Override

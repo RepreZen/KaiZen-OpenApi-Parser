@@ -26,6 +26,8 @@ import org.apache.commons.io.FileUtils;
 
 import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ParseException;
 import com.github.javaparser.ast.CompilationUnit;
@@ -174,6 +176,8 @@ public abstract class TypeGenerator {
 				Map.class, //
 				Optional.class, //
 				JsonNode.class, //
+				ObjectNode.class, //
+				JsonNodeFactory.class, //				
 				JsonPointer.class, //
 				JsonOverlay.class, //
 				IJsonOverlay.class, //

@@ -29,25 +29,25 @@ public class MapOverlay<OV extends JsonOverlay<?>> extends JsonOverlay<Map<Strin
 	public MapOverlay(String key, Collection<OV> overlays, JsonOverlay<?> parent, String keyPat) {
 		this(key, parent);
 		store.init(false, keyPat).load(CollectionData.of(overlays));
-		reset();
+		reset(false);
 	}
 
 	public MapOverlay(String key, Map<String, OV> overlayMap, JsonOverlay<?> parent, String keyPat) {
 		this(key, parent);
 		store.init(false, keyPat).load(CollectionData.of(overlayMap));
-		reset();
+		reset(false);
 	}
 
 	public MapOverlay(String key, JsonNode json, JsonOverlay<?> parent, JsonOverlayFactory<OV> factory, String keyPat) {
 		this(key, parent);
 		store.init(false, keyPat).load(CollectionData.of(json, parent, factory));
-		reset();
+		reset(false);
 	}
 
 	public MapOverlay(String key, JsonOverlay<?> parent, JsonOverlayFactory<OV> factory, String keyPat) {
 		this(key, parent);
 		store.init(false, keyPat).load(CollectionData.of(parent.getResolvedJson(key), parent, factory));
-		reset();
+		reset(false);
 	}
 
 	@Override
@@ -55,8 +55,8 @@ public class MapOverlay<OV extends JsonOverlay<?>> extends JsonOverlay<Map<Strin
 		return super.isPresent() && getJson().isObject();
 	}
 
-	private void reset() {
-		super.set(store.getOverlayMap());
+	private void reset(boolean invalidate) {
+		super.set(store.getOverlayMap(), invalidate);
 	}
 
 	public OV get(String key) {
@@ -74,13 +74,12 @@ public class MapOverlay<OV extends JsonOverlay<?>> extends JsonOverlay<Map<Strin
 	@Override
 	public void set(Map<String, OV> overlayMap) {
 		store.set(overlayMap);
-		reset();
-		invalidate();
+		reset(true);
 	}
 
 	public void set(Collection<OV> overlays) {
 		store.set(overlays);
-		reset();
+		reset(true);
 		invalidate();
 	}
 
@@ -97,9 +96,10 @@ public class MapOverlay<OV extends JsonOverlay<?>> extends JsonOverlay<Map<Strin
 	}
 	
 	public void clear() {
-		store.clear();
-		reset();
-		invalidate();
+		if (store.size() > 0) {
+			store.clear();
+			reset(true);
+		}
 	}
 
 	public int size() {
@@ -122,43 +122,37 @@ public class MapOverlay<OV extends JsonOverlay<?>> extends JsonOverlay<Map<Strin
 		} else {
 			store.add(key, overlay);
 		}
-		reset();
-		invalidate();
+		reset(true);
 	}
 
 	public void add(OV overlay) {
 		store.add(overlay);
-		reset();
-		invalidate();
+		reset(true);
 	}
 
 	public void add(String key, OV overlay) {
 		store.add(key, overlay);
-		reset();
-		invalidate();
+		reset(true);
 	}
 
 	public void remove(String key) {
 		store.remove(key);
-		reset();
-		invalidate();
+		reset(true);
 	}
 
 	public void remove(int index) {
 		store.remove(index);
-		reset();
-		invalidate();
+		reset(true);
 	}
 
 	public void replace(String key, OV overlay) {
 		store.replace(key, overlay);
-		reset();
-		invalidate();
+		reset(true);
 	}
 
 	public void replace(int index, OV overlay) {
 		store.replace(index, overlay);
-		reset();
+		reset(true);
 		invalidate();
 	}
 

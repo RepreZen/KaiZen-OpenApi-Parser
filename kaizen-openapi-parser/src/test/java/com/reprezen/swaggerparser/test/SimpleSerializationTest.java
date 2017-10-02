@@ -33,6 +33,8 @@ import org.skyscreamer.jsonassert.JSONCompareMode;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import com.google.common.base.Charsets;
 import com.google.common.collect.Lists;
@@ -92,9 +94,10 @@ public class SimpleSerializationTest extends Assert {
 		@Test
 		public void serializeExample() throws IOException, JSONException {
 			OpenApi3 model = (OpenApi3) new OpenApiParser().parse(exampleUrl);
-			String serialized = mapper.writeValueAsString(((OpenApi3Impl) model).createJson());
-			String expected = mapper.writeValueAsString(yamlMapper.readTree(exampleUrl));
-			JSONAssert.assertEquals(expected, serialized, JSONCompareMode.STRICT);
+			JsonNode serialized = ((OpenApi3Impl) model).createJson();
+			JsonNode expected = yamlMapper.readTree(exampleUrl);
+			JSONAssert.assertEquals(mapper.writeValueAsString(expected), mapper.writeValueAsString(serialized),
+					JSONCompareMode.STRICT);
 		}
 	}
 

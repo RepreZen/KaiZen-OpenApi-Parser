@@ -18,6 +18,7 @@ import java.util.regex.Pattern;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import com.fasterxml.jackson.databind.node.MissingNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
@@ -109,7 +110,11 @@ public class CollectionStore<OV extends JsonOverlay<?>> {
     }
 
     public JsonNode createJson(boolean followRefs) {
-        return isList ? createJsonList(followRefs) : createJsonMap(followRefs);
+    	if (overlays.isEmpty()) {
+    		return MissingNode.getInstance(); 
+    	} else {
+    		return isList ? createJsonList(followRefs) : createJsonMap(followRefs);
+    	}
     }
 
     private JsonNode createJsonList(boolean followRefs) {

@@ -77,7 +77,9 @@ public abstract class ObjectOverlay<V extends IObjectOverlay<V>> extends JsonOve
 				}
 			}
 		}
-		return obj.size() > 0 ? obj : MissingNode.getInstance();
+		return obj.size() > 0 ? obj
+				: parent != null && parent instanceof ObjectOverlay ? MissingNode.getInstance()
+						: JsonNodeFactory.instance.objectNode();
 	}
 
 	private void addValueAtPath(ObjectNode obj, JsonNode value, JsonPointer path, boolean merge) {

@@ -251,6 +251,9 @@ public abstract class JsonOverlay<V> implements IJsonOverlay<V> {
 
 	@Override
 	public boolean isPresent() {
+		if (!jsonIsCurrent) {
+			this.json = createJson();
+		}
 		return !json.isMissingNode();
 	}
 

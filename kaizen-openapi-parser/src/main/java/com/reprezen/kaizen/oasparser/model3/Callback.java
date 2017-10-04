@@ -9,7 +9,7 @@ public interface Callback extends OpenApiObject<Callback> {
 
     // CallbackPath
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    Map<String, ? extends Path> getCallbackPaths();
+    Map<String, Path> getCallbackPaths();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasCallbackPath(String expression);
@@ -18,7 +18,7 @@ public interface Callback extends OpenApiObject<Callback> {
     Path getCallbackPath(String expression);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    void setCallbackPaths(Map<String, ? extends Path> callbackPaths);
+    void setCallbackPaths(Map<String, Path> callbackPaths);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setCallbackPath(String expression, Path callbackPath);

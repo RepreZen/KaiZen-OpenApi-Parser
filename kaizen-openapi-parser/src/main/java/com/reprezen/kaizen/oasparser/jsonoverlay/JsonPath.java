@@ -27,7 +27,7 @@ public class JsonPath {
 	}
 
 	public JsonPath(String path) {
-		this(getSegments(path.split("/")));
+		this(path != null ? getSegments(path.split("/")) : getSegments("*"));
 	}
 
 	public JsonPath(JsonPointer path) {
@@ -73,10 +73,11 @@ public class JsonPath {
 			int index = segment.asInt();
 			if (array.has(index)) {
 				return array.get(index);
-			} else if (array.has(index - 1)) {
+			} else if (index == -1 || array.has(index - 1)) {
+				// tack element onto end of array
 				JsonNode newNode = nextSegment.isString() ? JsonNodeFactory.instance.objectNode()
 						: JsonNodeFactory.instance.arrayNode();
-				array.set(index, newNode);
+				array.set(array.size(), newNode);
 				return newNode;
 			}
 		}
@@ -87,7 +88,8 @@ public class JsonPath {
 		if (container.isObject() && segment.isString()) {
 			((ObjectNode) container).set(segment.asString(), json);
 		} else if (container.isArray() && segment.isInt() && segment.asInt() <= container.size()) {
-			((ArrayNode) container).set(segment.asInt(), json);
+			int index = segment.asInt();
+			((ArrayNode) container).set(index >= 0 ? index : container.size(), json);
 		}
 	}
 
@@ -96,8 +98,14 @@ public class JsonPath {
 		private final Integer integer;
 
 		public Segment(String string) {
-			this.string = string;
-			this.integer = null;
+			// special case - * means append to end of array
+			if (string.equals("*")) {
+				this.string = null;
+				this.integer = -1;
+			} else {
+				this.string = string;
+				this.integer = null;
+			}
 		}
 
 		public Segment(Integer integer) {

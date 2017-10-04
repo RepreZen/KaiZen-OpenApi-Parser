@@ -103,7 +103,7 @@ public interface Parameter extends OpenApiObject<Parameter> {
 
     // Example
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    Map<String, ? extends Example> getExamples();
+    Map<String, Example> getExamples();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasExample(String name);
@@ -112,7 +112,7 @@ public interface Parameter extends OpenApiObject<Parameter> {
     Example getExample(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    void setExamples(Map<String, ? extends Example> examples);
+    void setExamples(Map<String, Example> examples);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setExample(String name, Example example);
@@ -122,7 +122,7 @@ public interface Parameter extends OpenApiObject<Parameter> {
 
     // ContentMediaType
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    Map<String, ? extends MediaType> getContentMediaTypes();
+    Map<String, MediaType> getContentMediaTypes();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasContentMediaType(String name);
@@ -131,7 +131,7 @@ public interface Parameter extends OpenApiObject<Parameter> {
     MediaType getContentMediaType(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    void setContentMediaTypes(Map<String, ? extends MediaType> contentMediaTypes);
+    void setContentMediaTypes(Map<String, MediaType> contentMediaTypes);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setContentMediaType(String name, MediaType contentMediaType);

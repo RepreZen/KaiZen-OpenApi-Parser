@@ -93,7 +93,7 @@ public class OpenApiParser {
 			new Resolver(referenceRegistry, resolutionBaseRegistry).preresolve(resolutionBase);
 			JsonNode tree = resolutionBaseRegistry.get(resolutionBase.toString()).getJson();
 			if (isVersion3(tree)) {
-				OpenApi3Impl model = new OpenApi3Impl(null, tree, null, referenceRegistry);
+				OpenApi3Impl model = new OpenApi3Impl(tree, referenceRegistry);
 				injector.injectMembers(model);
 				if (validate) {
 					model.validate();

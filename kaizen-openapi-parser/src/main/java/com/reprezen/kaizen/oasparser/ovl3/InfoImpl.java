@@ -1,52 +1,58 @@
 package com.reprezen.kaizen.oasparser.ovl3;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.reprezen.kaizen.oasparser.jsonoverlay.AnyObjectOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlayFactory;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ValMapOverlay;
 import com.reprezen.kaizen.oasparser.model3.Contact;
 import com.reprezen.kaizen.oasparser.model3.Info;
 import com.reprezen.kaizen.oasparser.model3.License;
+import com.reprezen.kaizen.oasparser.ovl3.ChildListOverlay;
 import com.reprezen.kaizen.oasparser.ovl3.ContactImpl;
 import com.reprezen.kaizen.oasparser.ovl3.LicenseImpl;
 import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
+import java.util.Collection;
 import java.util.Map;
 import javax.annotation.Generated;
 
 public class InfoImpl extends OpenApiObjectImpl<Info> implements Info {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public InfoImpl(String key, JsonNode json, JsonOverlay<?> parent) {
-        super(key, json, parent);
+    public InfoImpl(JsonNode json, ReferenceRegistry refReg) {
+        super(json, refReg);
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public InfoImpl(String key, JsonOverlay<?> parent) {
-        super(key, parent);
+    public InfoImpl(Info info, ReferenceRegistry refReg) {
+        super(info, refReg);
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay title = new StringOverlay("title", this);
+    private ChildOverlay<String, StringOverlay> title = createChild("title", StringOverlay.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay description = new StringOverlay("description", this);
+    private ChildOverlay<String, StringOverlay> description = createChild("description", StringOverlay.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay termsOfService = new StringOverlay("termsOfService", this);
+    private ChildOverlay<String, StringOverlay> termsOfService = createChild("termsOfService", StringOverlay.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ContactImpl contact = ContactImpl.factory.create("contact", this);
+    private ChildOverlay<Contact, ContactImpl> contact = createChild("contact", ContactImpl.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private LicenseImpl license = LicenseImpl.factory.create("license", this);
+    private ChildOverlay<License, LicenseImpl> license = createChild("license", LicenseImpl.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay version = new StringOverlay("version", this);
+    private ChildOverlay<String, StringOverlay> version = createChild("version", StringOverlay.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object, AnyObjectOverlay> extensions = new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+");
+    private ChildMapOverlay<Object, ObjectOverlay> extensions = createChildMap("", ObjectOverlay.factory, "x-.+");
 
     // Title
     @Override
@@ -91,26 +97,26 @@ public class InfoImpl extends OpenApiObjectImpl<Info> implements Info {
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Contact getContact() {
-        return contact;
+        return contact.get();
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setContact(Contact contact) {
-        this.contact.set((ContactImpl) contact);
+        this.contact.set(contact);
     }
 
     // License
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public License getLicense() {
-        return license;
+        return license.get();
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setLicense(License license) {
-        this.license.set((LicenseImpl) license);
+        this.license.set(license);
     }
 
     // Version
@@ -164,31 +170,21 @@ public class InfoImpl extends OpenApiObjectImpl<Info> implements Info {
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static JsonOverlayFactory<InfoImpl> factory = new JsonOverlayFactory<InfoImpl>() {
+    public static OverlayFactory<Info, InfoImpl> factory = new OverlayFactory<Info, InfoImpl>() {
     @Override
-    public InfoImpl create(String key, JsonNode json, JsonOverlay<?> parent) {
-        return isEmptyRecursive(parent, InfoImpl.class) ? null : new InfoImpl(key, json, parent);
+    protected Class<? super InfoImpl> getOverlayClass() {
+         return InfoImpl.class;
     }
-};
 
     @Override
-    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void installPropertyAccessors(PropertyAccessors accessors) {
-        OverlayGetter getter = null;
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return title;}};
-            accessors.add("title", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return description;}};
-            accessors.add("description", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return termsOfService;}};
-            accessors.add("termsOfService", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return contact;}};
-            accessors.add("contact", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return license;}};
-            accessors.add("license", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return version;}};
-            accessors.add("version", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return extensions;}};
-            accessors.add("", "x-.+", getter);
+    public InfoImpl _create(Info info, ReferenceRegistry refReg) {
+        return new InfoImpl(info, refReg);
     }
+
+    @Override
+    public InfoImpl _create(JsonNode json, ReferenceRegistry refReg) {
+        return new InfoImpl(json, refReg);
+    }
+};
 
 }

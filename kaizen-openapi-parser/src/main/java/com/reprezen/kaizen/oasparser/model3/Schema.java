@@ -171,7 +171,7 @@ public interface Schema extends OpenApiObject<Schema> {
 
     // AllOfSchema
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    Collection<? extends Schema> getAllOfSchemas();
+    Collection<Schema> getAllOfSchemas();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasAllOfSchemas();
@@ -180,7 +180,7 @@ public interface Schema extends OpenApiObject<Schema> {
     Schema getAllOfSchema(int index);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    void setAllOfSchemas(Collection<? extends Schema> allOfSchemas);
+    void setAllOfSchemas(Collection<Schema> allOfSchemas);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setAllOfSchema(int index, Schema allOfSchema);
@@ -193,7 +193,7 @@ public interface Schema extends OpenApiObject<Schema> {
 
     // OneOfSchema
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    Collection<? extends Schema> getOneOfSchemas();
+    Collection<Schema> getOneOfSchemas();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasOneOfSchemas();
@@ -202,7 +202,7 @@ public interface Schema extends OpenApiObject<Schema> {
     Schema getOneOfSchema(int index);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    void setOneOfSchemas(Collection<? extends Schema> oneOfSchemas);
+    void setOneOfSchemas(Collection<Schema> oneOfSchemas);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setOneOfSchema(int index, Schema oneOfSchema);
@@ -215,7 +215,7 @@ public interface Schema extends OpenApiObject<Schema> {
 
     // AnyOfSchema
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    Collection<? extends Schema> getAnyOfSchemas();
+    Collection<Schema> getAnyOfSchemas();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasAnyOfSchemas();
@@ -224,7 +224,7 @@ public interface Schema extends OpenApiObject<Schema> {
     Schema getAnyOfSchema(int index);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    void setAnyOfSchemas(Collection<? extends Schema> anyOfSchemas);
+    void setAnyOfSchemas(Collection<Schema> anyOfSchemas);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setAnyOfSchema(int index, Schema anyOfSchema);
@@ -251,7 +251,7 @@ public interface Schema extends OpenApiObject<Schema> {
 
     // Property
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    Map<String, ? extends Schema> getProperties();
+    Map<String, Schema> getProperties();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasProperty(String name);
@@ -260,7 +260,7 @@ public interface Schema extends OpenApiObject<Schema> {
     Schema getProperty(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    void setProperties(Map<String, ? extends Schema> properties);
+    void setProperties(Map<String, Schema> properties);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setProperty(String name, Schema property);
@@ -359,7 +359,7 @@ public interface Schema extends OpenApiObject<Schema> {
 
     // Example
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    Map<String, ? extends Example> getExamples();
+    Map<String, Example> getExamples();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasExample(String name);
@@ -368,7 +368,7 @@ public interface Schema extends OpenApiObject<Schema> {
     Example getExample(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    void setExamples(Map<String, ? extends Example> examples);
+    void setExamples(Map<String, Example> examples);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setExample(String name, Example example);

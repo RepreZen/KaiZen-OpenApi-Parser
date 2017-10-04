@@ -1,9 +1,11 @@
 package com.reprezen.kaizen.oasparser.ovl3;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlayFactory;
 import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.model3.SecurityParameter;
 import com.reprezen.kaizen.oasparser.model3.SecurityRequirement;
 import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
@@ -14,22 +16,22 @@ import javax.annotation.Generated;
 public class SecurityRequirementImpl extends OpenApiObjectImpl<SecurityRequirement> implements SecurityRequirement {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public SecurityRequirementImpl(String key, JsonNode json, JsonOverlay<?> parent) {
-        super(key, json, parent);
+    public SecurityRequirementImpl(JsonNode json, ReferenceRegistry refReg) {
+        super(json, refReg);
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public SecurityRequirementImpl(String key, JsonOverlay<?> parent) {
-        super(key, parent);
+    public SecurityRequirementImpl(SecurityRequirement securityRequirement, ReferenceRegistry refReg) {
+        super(securityRequirement, refReg);
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<SecurityParameterImpl> requirements = new MapOverlay<SecurityParameterImpl>("", this, SecurityParameterImpl.factory, "[a-zA-Z0-9\\._-]+");
+    private ChildMapOverlay<SecurityParameter, SecurityParameterImpl> requirements = createChildMap("", SecurityParameterImpl.factory, "[a-zA-Z0-9\\._-]+");
 
     // Requirement
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public Map<String, ? extends SecurityParameter> getRequirements() {
+    public Map<String, SecurityParameter> getRequirements() {
         return requirements.get();
     }
 
@@ -47,16 +49,14 @@ public class SecurityRequirementImpl extends OpenApiObjectImpl<SecurityRequireme
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public void setRequirements(Map<String, ? extends SecurityParameter> requirements) {
-        @SuppressWarnings("unchecked")
-            Map<String,SecurityParameterImpl> implRequirements = (Map<String, SecurityParameterImpl>) requirements;
-            this.requirements.set(implRequirements);
+    public void setRequirements(Map<String, SecurityParameter> requirements) {
+        this.requirements.set(requirements);
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setRequirement(String name, SecurityParameter requirement) {
-        requirements.set(name, (SecurityParameterImpl) requirement);
+        requirements.set(name, requirement);
     }
 
     @Override
@@ -66,19 +66,21 @@ public class SecurityRequirementImpl extends OpenApiObjectImpl<SecurityRequireme
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static JsonOverlayFactory<SecurityRequirementImpl> factory = new JsonOverlayFactory<SecurityRequirementImpl>() {
+    public static OverlayFactory<SecurityRequirement, SecurityRequirementImpl> factory = new OverlayFactory<SecurityRequirement, SecurityRequirementImpl>() {
     @Override
-    public SecurityRequirementImpl create(String key, JsonNode json, JsonOverlay<?> parent) {
-        return isEmptyRecursive(parent, SecurityRequirementImpl.class) ? null : new SecurityRequirementImpl(key, json, parent);
+    protected Class<? super SecurityRequirementImpl> getOverlayClass() {
+         return SecurityRequirementImpl.class;
     }
-};
 
     @Override
-    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void installPropertyAccessors(PropertyAccessors accessors) {
-        OverlayGetter getter = null;
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return requirements;}};
-            accessors.add("", "[a-zA-Z0-9\\._-]+", getter);
+    public SecurityRequirementImpl _create(SecurityRequirement securityRequirement, ReferenceRegistry refReg) {
+        return new SecurityRequirementImpl(securityRequirement, refReg);
     }
+
+    @Override
+    public SecurityRequirementImpl _create(JsonNode json, ReferenceRegistry refReg) {
+        return new SecurityRequirementImpl(json, refReg);
+    }
+};
 
 }

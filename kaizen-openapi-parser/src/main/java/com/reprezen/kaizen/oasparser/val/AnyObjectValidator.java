@@ -10,12 +10,12 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val;
 
-import com.reprezen.kaizen.oasparser.jsonoverlay.AnyObjectOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
 
-public class AnyObjectValidator extends OverlayValidator<AnyObjectOverlay> {
+public class AnyObjectValidator extends OverlayValidator<ObjectOverlay> {
 
     @Override
-    public void validate(AnyObjectOverlay overlay, ValidationResults results) {
+    public void validate(ObjectOverlay overlay, ValidationResults results) {
         super.validate(overlay, results);
     }
 

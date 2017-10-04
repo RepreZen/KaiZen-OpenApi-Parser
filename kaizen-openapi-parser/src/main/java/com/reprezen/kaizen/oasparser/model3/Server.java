@@ -23,7 +23,7 @@ public interface Server extends OpenApiObject<Server> {
 
     // ServerVariable
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    Map<String, ? extends ServerVariable> getServerVariables();
+    Map<String, ServerVariable> getServerVariables();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasServerVariable(String name);
@@ -32,7 +32,7 @@ public interface Server extends OpenApiObject<Server> {
     ServerVariable getServerVariable(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    void setServerVariables(Map<String, ? extends ServerVariable> serverVariables);
+    void setServerVariables(Map<String, ServerVariable> serverVariables);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setServerVariable(String name, ServerVariable serverVariable);

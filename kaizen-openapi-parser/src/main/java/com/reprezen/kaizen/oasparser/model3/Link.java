@@ -43,7 +43,7 @@ public interface Link extends OpenApiObject<Link> {
 
     // Header
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    Map<String, ? extends Header> getHeaders();
+    Map<String, Header> getHeaders();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasHeader(String name);
@@ -52,7 +52,7 @@ public interface Link extends OpenApiObject<Link> {
     Header getHeader(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    void setHeaders(Map<String, ? extends Header> headers);
+    void setHeaders(Map<String, Header> headers);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setHeader(String name, Header header);

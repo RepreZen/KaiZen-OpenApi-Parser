@@ -1,46 +1,52 @@
 package com.reprezen.kaizen.oasparser.ovl3;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.reprezen.kaizen.oasparser.jsonoverlay.AnyObjectOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.BooleanOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlayFactory;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ValMapOverlay;
 import com.reprezen.kaizen.oasparser.model3.Xml;
+import com.reprezen.kaizen.oasparser.ovl3.ChildListOverlay;
 import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
+import java.util.Collection;
 import java.util.Map;
 import javax.annotation.Generated;
 
 public class XmlImpl extends OpenApiObjectImpl<Xml> implements Xml {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public XmlImpl(String key, JsonNode json, JsonOverlay<?> parent) {
-        super(key, json, parent);
+    public XmlImpl(JsonNode json, ReferenceRegistry refReg) {
+        super(json, refReg);
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public XmlImpl(String key, JsonOverlay<?> parent) {
-        super(key, parent);
+    public XmlImpl(Xml xml, ReferenceRegistry refReg) {
+        super(xml, refReg);
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay name = new StringOverlay("name", this);
+    private ChildOverlay<String, StringOverlay> name = createChild("name", StringOverlay.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay namespace = new StringOverlay("namespace", this);
+    private ChildOverlay<String, StringOverlay> namespace = createChild("namespace", StringOverlay.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay prefix = new StringOverlay("prefix", this);
+    private ChildOverlay<String, StringOverlay> prefix = createChild("prefix", StringOverlay.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private BooleanOverlay attribute = new BooleanOverlay("attribute", this);
+    private ChildOverlay<Boolean, BooleanOverlay> attribute = createChild("attribute", BooleanOverlay.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private BooleanOverlay wrapped = new BooleanOverlay("wrapped", this);
+    private ChildOverlay<Boolean, BooleanOverlay> wrapped = createChild("wrapped", BooleanOverlay.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object, AnyObjectOverlay> extensions = new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+");
+    private ChildMapOverlay<Object, ObjectOverlay> extensions = createChildMap("", ObjectOverlay.factory, "x-.+");
 
     // Name
     @Override
@@ -157,29 +163,21 @@ public class XmlImpl extends OpenApiObjectImpl<Xml> implements Xml {
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static JsonOverlayFactory<XmlImpl> factory = new JsonOverlayFactory<XmlImpl>() {
+    public static OverlayFactory<Xml, XmlImpl> factory = new OverlayFactory<Xml, XmlImpl>() {
     @Override
-    public XmlImpl create(String key, JsonNode json, JsonOverlay<?> parent) {
-        return isEmptyRecursive(parent, XmlImpl.class) ? null : new XmlImpl(key, json, parent);
+    protected Class<? super XmlImpl> getOverlayClass() {
+         return XmlImpl.class;
     }
-};
 
     @Override
-    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void installPropertyAccessors(PropertyAccessors accessors) {
-        OverlayGetter getter = null;
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return name;}};
-            accessors.add("name", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return namespace;}};
-            accessors.add("namespace", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return prefix;}};
-            accessors.add("prefix", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return attribute;}};
-            accessors.add("attribute", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return wrapped;}};
-            accessors.add("wrapped", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return extensions;}};
-            accessors.add("", "x-.+", getter);
+    public XmlImpl _create(Xml xml, ReferenceRegistry refReg) {
+        return new XmlImpl(xml, refReg);
     }
+
+    @Override
+    public XmlImpl _create(JsonNode json, ReferenceRegistry refReg) {
+        return new XmlImpl(json, refReg);
+    }
+};
 
 }

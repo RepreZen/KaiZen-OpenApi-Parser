@@ -20,7 +20,7 @@ import com.google.common.base.Function;
 import com.google.common.collect.Maps;
 
 public class MapOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Map<String, V>> {
-	private Map<String, OV> overlays = Maps.newLinkedHashMap();
+	private Map<String, IJsonOverlay<V>> overlays = Maps.newLinkedHashMap();
 	private OverlayFactory<V, OV> valueFactory;
 	private Pattern keyPattern;
 
@@ -38,31 +38,57 @@ public class MapOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Map<St
 		super(json, refReg);
 		this.valueFactory = valueFactory;
 		this.keyPattern = keyPattern;
+		setupOverlays(json);
 	}
 
 	@Override
 	protected Map<String, V> fromJson(JsonNode json) {
+		// can't do this since the call from JsonOverlay constructor happens before our
+		// overlays member has been initialized, so we explicitly call it from the json
+		// constructor
+		return null;
+	}
+
+	private void setupOverlays(JsonNode json) {
 		overlays.clear();
 		for (Entry<String, JsonNode> field : iterable(json.fields())) {
 			if (keyPattern == null || keyPattern.matcher(field.getKey()).matches()) {
-				overlays.put(field.getKey(), valueFactory.create(field.getValue(), refReg));
+				IJsonOverlay<V> child = new ChildOverlay<V, OV>(field.getKey(), field.getValue(), valueFactory, refReg);
+				overlays.put(field.getKey(), child);
 			}
 		}
-		return getValueMap();
+		set(getValueMap());
 	}
 
 	@Override
 	public JsonNode toJson() {
 		ObjectNode obj = jsonObject();
-		for (Entry<String, OV> entry : overlays.entrySet()) {
+		for (Entry<String, IJsonOverlay<V>> entry : overlays.entrySet()) {
 			obj.set(entry.getKey(), entry.getValue().toJson());
 		}
 		return obj;
 	}
 
-	private Function<OV, V> valueFunction = new Function<OV, V>() {
+	public boolean containsKey(String name) {
+		return overlays.containsKey(name);
+	}
+
+	public V get(String name) {
+		IJsonOverlay<V> overlay = overlays.get(name);
+		return overlay != null ? overlay.get() : null;
+	}
+
+	public void set(String name, V value) {
+		overlays.put(name, valueFactory.create(value, refReg));
+	}
+
+	public void remove(String name) {
+		overlays.remove(name);
+	}
+
+	private Function<IJsonOverlay<V>, V> valueFunction = new Function<IJsonOverlay<V>, V>() {
 		@Override
-		public V apply(OV overlay) {
+		public V apply(IJsonOverlay<V> overlay) {
 			return overlay.get();
 		}
 	};
@@ -72,8 +98,8 @@ public class MapOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Map<St
 	}
 
 	public static <V, OV extends JsonOverlay<V>> OverlayFactory<Map<String, V>, MapOverlay<V, OV>> getFactory(
-			OverlayFactory<V, OV> valueFactory, Pattern keyPattern) {
-		return new MapOverlayFactory<V, OV>(valueFactory, keyPattern);
+			OverlayFactory<V, OV> valueFactory, String keyPattern) {
+		return new MapOverlayFactory<V, OV>(valueFactory, Pattern.compile("^" + keyPattern + "$"));
 	}
 
 	private static class MapOverlayFactory<V, OV extends JsonOverlay<V>>

@@ -26,7 +26,7 @@ public interface Path extends OpenApiObject<Path> {
 
     // Operation
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    Map<String, ? extends Operation> getOperations();
+    Map<String, Operation> getOperations();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasOperation(String name);
@@ -35,7 +35,7 @@ public interface Path extends OpenApiObject<Path> {
     Operation getOperation(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    void setOperations(Map<String, ? extends Operation> operations);
+    void setOperations(Map<String, Operation> operations);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setOperation(String name, Operation operation);
@@ -101,7 +101,7 @@ public interface Path extends OpenApiObject<Path> {
 
     // Server
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    Collection<? extends Server> getServers();
+    Collection<Server> getServers();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasServers();
@@ -110,7 +110,7 @@ public interface Path extends OpenApiObject<Path> {
     Server getServer(int index);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    void setServers(Collection<? extends Server> servers);
+    void setServers(Collection<Server> servers);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setServer(int index, Server server);
@@ -123,7 +123,7 @@ public interface Path extends OpenApiObject<Path> {
 
     // Parameter
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    Collection<? extends Parameter> getParameters();
+    Collection<Parameter> getParameters();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasParameters();
@@ -132,7 +132,7 @@ public interface Path extends OpenApiObject<Path> {
     Parameter getParameter(int index);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    void setParameters(Collection<? extends Parameter> parameters);
+    void setParameters(Collection<Parameter> parameters);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setParameter(int index, Parameter parameter);

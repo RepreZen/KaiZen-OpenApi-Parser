@@ -68,7 +68,7 @@ public class Template {
 		case "implType":
 			return field.getImplType();
 		case "collType": {
-			String type = field.getTypeInCollection();
+			String type = field.getType();
 			return "Primitive".equals(type) ? "Object" : type;
 		}
 		case "keyName":
@@ -89,6 +89,8 @@ public class Template {
 			return field.getPropertyType();
 		case "propCons":
 			return field.getPropertyNew();
+		case "overlayType":
+			return field.getOverlayType();
 		default:
 			return args[Integer.valueOf(var)];
 		}
@@ -98,6 +100,8 @@ public class Template {
 		switch (var) {
 		case "name":
 			return type.getName();
+		case "lcName":
+			return type.getLcName();
 		case "implName":
 			return type.getImplType();
 		default:

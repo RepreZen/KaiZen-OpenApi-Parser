@@ -16,7 +16,7 @@ public interface RequestBody extends OpenApiObject<RequestBody> {
 
     // ContentMediaType
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    Map<String, ? extends MediaType> getContentMediaTypes();
+    Map<String, MediaType> getContentMediaTypes();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasContentMediaType(String name);
@@ -25,7 +25,7 @@ public interface RequestBody extends OpenApiObject<RequestBody> {
     MediaType getContentMediaType(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    void setContentMediaTypes(Map<String, ? extends MediaType> contentMediaTypes);
+    void setContentMediaTypes(Map<String, MediaType> contentMediaTypes);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setContentMediaType(String name, MediaType contentMediaType);

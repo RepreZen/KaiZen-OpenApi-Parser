@@ -361,9 +361,6 @@ types:
         keyName: expression
       *extName: *extDef
 
-  - name: Header
-    extensionOf: Parameter
-      
   - name: SecurityRequirement
     fields:
       reqirement:
@@ -485,7 +482,7 @@ types:
       *extName: *extDef
 
   - name: Parameter
-    fields:
+    fields: &paramFields
       name:
         name: Name
         type: String
@@ -529,6 +526,10 @@ types:
         structure: map
       *extName: *extDef
 
+  - name: Header
+    # Header is identical to Parameter except in terms of where it's allowed
+    fields: *paramFields
+        
   - name: Schema
     imports:
       impl: [ Optional, JsonPointer, IJsonOverlay ]

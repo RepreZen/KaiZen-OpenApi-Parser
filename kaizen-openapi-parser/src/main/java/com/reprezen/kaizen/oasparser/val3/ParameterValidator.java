@@ -13,12 +13,9 @@ package com.reprezen.kaizen.oasparser.val3;
 import static com.reprezen.kaizen.oasparser.val.Messages.m;
 
 import com.google.inject.Inject;
-import com.reprezen.kaizen.oasparser.model3.Header;
 import com.reprezen.kaizen.oasparser.model3.MediaType;
 import com.reprezen.kaizen.oasparser.model3.Parameter;
-import com.reprezen.kaizen.oasparser.model3.Path;
 import com.reprezen.kaizen.oasparser.model3.Schema;
-import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
 import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
 import com.reprezen.kaizen.oasparser.val.ValidationResults;
 import com.reprezen.kaizen.oasparser.val.Validator;
@@ -34,9 +31,8 @@ public class ParameterValidator extends ObjectValidatorBase<Parameter> {
 	public void validateObject(Parameter parameter, ValidationResults results) {
 		// no validations for: description, deprecated, allowEmptyValue, explode,
 		// example, examples
-		boolean isHeader = parameter instanceof Header;
-		validateString(parameter.getName(), results, !isHeader, "name");
-		validateString(parameter.getIn(), results, !isHeader, Regexes.PARAM_IN_REGEX, "in");
+		validateString(parameter.getName(), results, true, "name");
+		validateString(parameter.getIn(), results, true, Regexes.PARAM_IN_REGEX, "in");
 		checkPathParam(parameter, results);
 		checkRequired(parameter, results);
 		validateString(parameter.getStyle(), results, false, Regexes.STYLE_REGEX, "style");
@@ -81,10 +77,12 @@ public class ParameterValidator extends ObjectValidatorBase<Parameter> {
 	}
 
 	private String getPathString(Parameter parameter) {
-		OpenApiObject<?> parent = (OpenApiObject<?>) parameter.getParentObject();
-		while (parent != null && !(parent instanceof Path)) {
-			parent = (OpenApiObject<?>) parent.getParentObject();
-		}
-		return parent instanceof Path ? parent.getKey() : null;
+		// TODO reimplement
+		// OpenApiObject<?> parent = (OpenApiObject<?>) parameter.getParentObject();
+		// nwhile (parent != null && !(parent instanceof Path)) {
+		// parent = (OpenApiObject<?>) parent.getParentObject();
+		// }
+		// return parent instanceof Path ? parent.getKey() : null;
+		return null;
 	}
 }

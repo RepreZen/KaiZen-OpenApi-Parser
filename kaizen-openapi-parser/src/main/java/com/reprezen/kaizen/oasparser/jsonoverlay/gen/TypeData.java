@@ -120,6 +120,11 @@ public class TypeData {
 			return name;
 		}
 
+		public String getLcName() {
+			String lcName = lcFirst(name);
+			return lcName;
+		}
+
 		public Map<String, Field> getFields() {
 			return fields;
 		}
@@ -155,12 +160,15 @@ public class TypeData {
 			case "Number":
 			case "Boolean":
 			case "Primitive":
-				return typeName + "Overlay";
 			case "Object":
-				return "AnyObjectOverlay";
+				return typeName + "Overlay";
 			default:
 				return typeName + "Impl";
 			}
+		}
+
+		String lcFirst(String s) {
+			return s.substring(0, 1).toLowerCase() + s.substring(1);
 		}
 	}
 
@@ -252,7 +260,7 @@ public class TypeData {
 		}
 
 		public boolean isBoolean() {
-			return type.equals("Boolean");
+			return getType().equals("Boolean");
 		}
 
 		public boolean getBoolDefault() {
@@ -282,44 +290,40 @@ public class TypeData {
 			}
 		}
 
+		private String getOverlayVariant() {
+			switch (structure) {
+			case scalar:
+				return "";
+			case collection:
+				return "List";
+			case map:
+				return "Map";
+			}
+			return null;
+		}
+
 		public String getPropertyName() {
 			return structure == Structure.scalar ? getLcName() : getLcPlural();
 		}
 
 		public String getPropertyType() {
-			switch (structure) {
+			return t("Child${0}Overlay<${type}, ${implType}>", this, getOverlayVariant());
+		}
+
+		public String getPropertyNew() {
+			switch(structure) {
 			case scalar:
-				return getImplType();
+				return t("createChild(${qpath}, ${implType}.factory)", this);
 			case collection:
-				if (isScalarType()) {
-					return t("ValListOverlay<${type}, ${implType}>", this);
-				} else {
-					return t("ListOverlay<${implType}>", this);
-				}
+				return t("createChildList(${qpath}, ${implType}.factory)", this);
 			case map:
-				if (isScalarType()) {
-					return t("ValMapOverlay<${type}, ${implType}>", this);
-				} else {
-					return t("MapOverlay<${implType}>", this);
-				}
+				return t("createChildMap(${qpath}, ${implType}.factory, ${qkeyPat})", this);
 			}
 			return null;
 		}
 
-		public String getPropertyNew() {
-			switch (structure) {
-			case scalar:
-				return t(isScalarType() ? "new ${implType}(${qpath}, this)"
-						: "${implType}.factory.create(${qpath}, this)", this);
-			case collection:
-				return t(isScalarType() ? "new ValListOverlay<${type}, ${implType}>(${qpath}, this, ${implType}.factory)"
-						: "new ListOverlay<${implType}>(${qpath}, this, ${implType}.factory)", this);
-			case map:
-				return t(isScalarType()
-						? "new ValMapOverlay<${type}, ${implType}>(${qpath}, this, ${implType}.factory, ${qkeyPat})"
-						: "new MapOverlay<${implType}>(${qpath}, this, ${implType}.factory, ${qkeyPat})", this);
-			}
-			return null;
+		public String getOverlayType() {
+			return getType() + (isScalarType() ? "Overlay" : "");
 		}
 
 		public String getTypeInCollection() {

@@ -66,7 +66,7 @@ public interface Operation extends OpenApiObject<Operation> {
 
     // Parameter
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    Collection<? extends Parameter> getParameters();
+    Collection<Parameter> getParameters();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasParameters();
@@ -75,7 +75,7 @@ public interface Operation extends OpenApiObject<Operation> {
     Parameter getParameter(int index);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    void setParameters(Collection<? extends Parameter> parameters);
+    void setParameters(Collection<Parameter> parameters);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setParameter(int index, Parameter parameter);
@@ -95,7 +95,7 @@ public interface Operation extends OpenApiObject<Operation> {
 
     // Response
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    Map<String, ? extends Response> getResponses();
+    Map<String, Response> getResponses();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasResponse(String name);
@@ -104,7 +104,7 @@ public interface Operation extends OpenApiObject<Operation> {
     Response getResponse(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    void setResponses(Map<String, ? extends Response> responses);
+    void setResponses(Map<String, Response> responses);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setResponse(String name, Response response);
@@ -133,7 +133,7 @@ public interface Operation extends OpenApiObject<Operation> {
 
     // Callback
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    Map<String, ? extends Callback> getCallbacks();
+    Map<String, Callback> getCallbacks();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasCallback(String name);
@@ -142,7 +142,7 @@ public interface Operation extends OpenApiObject<Operation> {
     Callback getCallback(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    void setCallbacks(Map<String, ? extends Callback> callbacks);
+    void setCallbacks(Map<String, Callback> callbacks);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setCallback(String name, Callback callback);
@@ -181,7 +181,7 @@ public interface Operation extends OpenApiObject<Operation> {
 
     // SecurityRequirement
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    Collection<? extends SecurityRequirement> getSecurityRequirements();
+    Collection<SecurityRequirement> getSecurityRequirements();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasSecurityRequirements();
@@ -190,7 +190,7 @@ public interface Operation extends OpenApiObject<Operation> {
     SecurityRequirement getSecurityRequirement(int index);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    void setSecurityRequirements(Collection<? extends SecurityRequirement> securityRequirements);
+    void setSecurityRequirements(Collection<SecurityRequirement> securityRequirements);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setSecurityRequirement(int index, SecurityRequirement securityRequirement);
@@ -203,7 +203,7 @@ public interface Operation extends OpenApiObject<Operation> {
 
     // Server
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    Collection<? extends Server> getServers();
+    Collection<Server> getServers();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasServers();
@@ -212,7 +212,7 @@ public interface Operation extends OpenApiObject<Operation> {
     Server getServer(int index);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    void setServers(Collection<? extends Server> servers);
+    void setServers(Collection<Server> servers);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setServer(int index, Server server);

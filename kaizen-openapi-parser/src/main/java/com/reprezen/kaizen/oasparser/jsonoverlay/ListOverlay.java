@@ -22,7 +22,7 @@ import com.google.common.collect.Lists;
 public class ListOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Collection<V>> {
 
 	private OverlayFactory<V, OV> itemFactory;
-	private List<OV> overlays = Lists.newLinkedList();
+	private List<IJsonOverlay<V>> overlays = Lists.newLinkedList();
 
 	public ListOverlay(Collection<V> value, OverlayFactory<V, OV> itemFactory, ReferenceRegistry refReg) {
 		super(value, refReg);
@@ -35,29 +35,58 @@ public class ListOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Colle
 	public ListOverlay(JsonNode json, OverlayFactory<V, OV> itemFactory, ReferenceRegistry refReg) {
 		super(json, refReg);
 		this.itemFactory = itemFactory;
+		setupOverlays(json);
 	}
 
 	@Override
 	protected Collection<V> fromJson(JsonNode json) {
+		// can't do this now because it's called from super-constructor (JsonOverlay)
+		// before our overlays member has been initialized, so we do it explicitly in
+		// the json constructor
+		return null;
+	}
+
+	private void setupOverlays(JsonNode json) {
 		overlays.clear();
 		for (JsonNode element : iterable(json.elements())) {
-			overlays.add(itemFactory.create(element, refReg));
+			overlays.add(new ChildOverlay<V, OV>(null, element, itemFactory, refReg));
 		}
-		return getItems();
+		set(getItems());
 	}
 
 	@Override
 	public JsonNode toJson() {
 		ArrayNode array = jsonArray();
-		for (OV overlay : overlays) {
+		for (IJsonOverlay<V> overlay : overlays) {
 			array.add(overlay.toJson());
 		}
 		return array;
 	}
 
-	private Function<OV, V> itemGetter = new Function<OV, V>() {
+	public V get(int index) {
+		IJsonOverlay<V> overlay = overlays.get(index);
+		return overlay != null ? overlay.get() : null;
+	}
+
+	public void set(int index, V value) {
+		overlays.set(index, itemFactory.create(value, refReg));
+	}
+
+	public void add(V value) {
+		overlays.add(itemFactory.create(value, refReg));
+	}
+
+	public void insert(int index, V value) {
+		overlays.add(index, itemFactory.create(value, refReg));
+	}
+
+	public void remove(int index) {
+		overlays.remove(index);
+	}
+
+	private Function<IJsonOverlay<V>, V> itemGetter = new Function<IJsonOverlay<V>, V>() {
 		@Override
-		public V apply(OV overlay) {
+		public V apply(IJsonOverlay<V> overlay) {
 			return overlay.get();
 		}
 	};

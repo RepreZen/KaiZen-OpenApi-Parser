@@ -18,7 +18,7 @@ public interface Response extends OpenApiObject<Response> {
 
     // Header
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    Map<String, ? extends Header> getHeaders();
+    Map<String, Header> getHeaders();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasHeader(String name);
@@ -27,7 +27,7 @@ public interface Response extends OpenApiObject<Response> {
     Header getHeader(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    void setHeaders(Map<String, ? extends Header> headers);
+    void setHeaders(Map<String, Header> headers);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setHeader(String name, Header header);
@@ -37,7 +37,7 @@ public interface Response extends OpenApiObject<Response> {
 
     // ContentMediaType
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    Map<String, ? extends MediaType> getContentMediaTypes();
+    Map<String, MediaType> getContentMediaTypes();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasContentMediaType(String name);
@@ -46,7 +46,7 @@ public interface Response extends OpenApiObject<Response> {
     MediaType getContentMediaType(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    void setContentMediaTypes(Map<String, ? extends MediaType> contentMediaTypes);
+    void setContentMediaTypes(Map<String, MediaType> contentMediaTypes);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setContentMediaType(String name, MediaType contentMediaType);
@@ -56,7 +56,7 @@ public interface Response extends OpenApiObject<Response> {
 
     // Link
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    Map<String, ? extends Link> getLinks();
+    Map<String, Link> getLinks();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasLink(String name);
@@ -65,7 +65,7 @@ public interface Response extends OpenApiObject<Response> {
     Link getLink(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    void setLinks(Map<String, ? extends Link> links);
+    void setLinks(Map<String, Link> links);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setLink(String name, Link link);

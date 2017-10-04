@@ -47,12 +47,12 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.reprezen.kaizen.oasparser.OpenApi;
-import com.reprezen.kaizen.oasparser.jsonoverlay.AnyObjectOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.BooleanOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.IJsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.IntegerOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlayFactory;
+import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.NumberOverlay;
@@ -181,7 +181,7 @@ public abstract class TypeGenerator {
 				JsonPointer.class, //
 				JsonOverlay.class, //
 				IJsonOverlay.class, //
-				JsonOverlayFactory.class, //
+				OverlayFactory.class, //
 				ReferenceRegistry.class, //
 				Inject.class, //
 				StringOverlay.class, //
@@ -189,7 +189,7 @@ public abstract class TypeGenerator {
 				NumberOverlay.class, //
 				BooleanOverlay.class, //
 				PrimitiveOverlay.class, //
-				AnyObjectOverlay.class, //
+				ObjectOverlay.class, //
 				ListOverlay.class, //
 				ValListOverlay.class, //
 				MapOverlay.class, //

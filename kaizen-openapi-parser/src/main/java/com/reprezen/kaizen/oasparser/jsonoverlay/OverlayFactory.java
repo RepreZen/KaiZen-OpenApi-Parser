@@ -10,20 +10,27 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.jsonoverlay;
 
-import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
 
-public interface IJsonOverlay<V> {
+public abstract class OverlayFactory<V, OV extends JsonOverlay<V>> {
 
-	V get();
-	
-	void set(V value);
+	private final Class<? super OV> overlayClass = getOverlayClass();
 
-	IJsonOverlay<?> find(JsonPointer path);
+	public OV create(V value, ReferenceRegistry refReg) {
+		return _create(value, refReg);
+	}
 
-	IJsonOverlay<?> find(String path);
-	
-	JsonNode toJson();
-	
-	boolean isPresent();
+	public OV create(JsonNode json, ReferenceRegistry refReg) {
+		return _create(json, refReg);
+	}
+
+	public boolean isCompatible(JsonOverlay<?> overlay) {
+		return overlayClass.isAssignableFrom(overlay.getClass());
+	}
+
+	protected abstract Class<? super OV> getOverlayClass();
+
+	public abstract OV _create(V value, ReferenceRegistry refReg);
+
+	public abstract OV _create(JsonNode json, ReferenceRegistry refReg);
 }

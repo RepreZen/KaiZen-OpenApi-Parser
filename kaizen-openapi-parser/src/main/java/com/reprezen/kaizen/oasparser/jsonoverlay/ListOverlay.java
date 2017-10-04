@@ -11,128 +11,88 @@
 package com.reprezen.kaizen.oasparser.jsonoverlay;
 
 import java.util.Collection;
-import java.util.Collections;
+import java.util.List;
 
-import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.google.common.base.Function;
+import com.google.common.collect.Collections2;
+import com.google.common.collect.Lists;
 
-public class ListOverlay<OV extends JsonOverlay<?>> extends JsonOverlay<Collection<OV>>
-		implements CollectionOverlay<OV> {
+public class ListOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Collection<V>> {
 
-	private final CollectionStore<OV> store = new CollectionStore<OV>(this);
+	private OverlayFactory<V, OV> itemFactory;
+	private List<OV> overlays = Lists.newLinkedList();
 
-	private ListOverlay(String key, JsonOverlayFactory<OV> factory, JsonOverlay<?> parent) {
-		super(key, (Collection<OV>) null, parent);
-	}
-
-	public ListOverlay(String key, Collection<OV> overlays, JsonOverlay<?> parent, JsonOverlayFactory<OV> factory) {
-		this(key, factory, parent);
-		store.init(true, null).load(CollectionData.of(overlays));
-		reset(false);
-	}
-
-	public ListOverlay(String key, JsonNode json, JsonOverlay<?> parent, JsonOverlayFactory<OV> factory) {
-		this(key, factory, parent);
-		store.init(true, null).load(CollectionData.of(json, parent, factory));
-		reset(false);
-	}
-
-	public ListOverlay(String key, JsonOverlay<?> parent, JsonOverlayFactory<OV> factory) {
-		this(key, factory, parent);
-		store.init(true, null).load(CollectionData.of(parent.getResolvedJson(key), parent, factory));
-		reset(false);
-	}
-
-	@Override
-	public boolean isPresent() {
-		return super.isPresent() && getJson().isArray();
-	}
-
-	private void reset(boolean invalidate) {
-		super.set(store.getOverlays(), invalidate);
-	}
-
-	@Override
-	public Collection<OV> get() {
-		return value;
-	}
-
-	public OV get(int index) {
-		return store.get(index);
-	}
-
-	@Override
-	public void set(Collection<OV> overlays) {
-		store.set(overlays);
-		reset(true);
-		invalidate();
-	}
-
-	@Override
-	public IJsonOverlay<?> find(JsonPointer path) {
-		if (path.matches()) {
-			return this;
-		} else if (path.mayMatchElement()) {
-			int index = path.getMatchingIndex();
-			return size() > index ? store.get(index).find(path.tail()) : null;
-		} else {
-			return null;
+	public ListOverlay(Collection<V> value, OverlayFactory<V, OV> itemFactory, ReferenceRegistry refReg) {
+		super(value, refReg);
+		this.itemFactory = itemFactory;
+		for (V item : value) {
+			overlays.add(itemFactory.create(item, refReg));
 		}
 	}
 
-	public void clear() {
-		if (store.size() > 0) {
-			store.clear();
-			reset(true);
+	public ListOverlay(JsonNode json, OverlayFactory<V, OV> itemFactory, ReferenceRegistry refReg) {
+		super(json, refReg);
+		this.itemFactory = itemFactory;
+	}
+
+	@Override
+	protected Collection<V> fromJson(JsonNode json) {
+		overlays.clear();
+		for (JsonNode element : iterable(json.elements())) {
+			overlays.add(itemFactory.create(element, refReg));
 		}
-	}
-
-	public int size() {
-		return store.size();
+		return getItems();
 	}
 
 	@Override
-	public Collection<OV> fromJson() {
-		return store != null ? store.getOverlays() : Collections.<OV>emptyList();
+	public JsonNode toJson() {
+		ArrayNode array = jsonArray();
+		for (OV overlay : overlays) {
+			array.add(overlay.toJson());
+		}
+		return array;
 	}
 
-	@Override
-	public JsonNode _createJson(boolean followRefs) {
-		return store.createJson(followRefs);
+	private Function<OV, V> itemGetter = new Function<OV, V>() {
+		@Override
+		public V apply(OV overlay) {
+			return overlay.get();
+		}
+	};
+
+	private Collection<V> getItems() {
+		return Collections2.transform(overlays, itemGetter);
 	}
 
-	public void add(OV overlay) {
-		store.add(overlay);
-		reset(true);
+	public static <V, OV extends JsonOverlay<V>> OverlayFactory<Collection<V>, ListOverlay<V, OV>> getFactory(
+			OverlayFactory<V, OV> itemFactory) {
+		return new ListOverlayFactory<V, OV>(itemFactory);
 	}
 
-	public void add(String key, OV overlay) {
-		store.add(key, overlay);
-		reset(true);
-	}
+	private static class ListOverlayFactory<V, OV extends JsonOverlay<V>>
+			extends OverlayFactory<Collection<V>, ListOverlay<V, OV>> {
 
-	public void remove(String key) {
-		store.remove(key);
-		reset(true);
-	}
+		private OverlayFactory<V, OV> itemFactory;
 
-	public void remove(int index) {
-		store.remove(index);
-		reset(true);
-	}
+		public ListOverlayFactory(OverlayFactory<V, OV> itemFactory) {
+			this.itemFactory = itemFactory;
+		}
 
-	public void replace(String key, OV overlay) {
-		store.replace(key, overlay);
-		reset(true);
-	}
+		@Override
+		protected Class<? super ListOverlay<V, OV>> getOverlayClass() {
+			return ListOverlay.class;
+		}
 
-	public void set(int index, OV overlay) {
-		store.replace(index, overlay);
-		reset(true);
-	}
+		@Override
+		public ListOverlay<V, OV> _create(Collection<V> value, ReferenceRegistry refReg) {
+			return new ListOverlay<V, OV>(value, itemFactory, refReg);
+		}
 
-	@Override
-	public CollectionStore<OV> getStore() {
-		return store;
+		@Override
+		public ListOverlay<V, OV> _create(JsonNode json, ReferenceRegistry refReg) {
+			return new ListOverlay<V, OV>(json, itemFactory, refReg);
+		}
 	}
 }

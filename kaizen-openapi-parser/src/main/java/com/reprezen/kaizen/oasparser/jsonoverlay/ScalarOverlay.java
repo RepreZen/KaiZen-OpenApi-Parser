@@ -13,18 +13,20 @@ package com.reprezen.kaizen.oasparser.jsonoverlay;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.MissingNode;
 
-public abstract class JsonOverlayFactory<OV extends JsonOverlay<?>> {
+public abstract class ScalarOverlay<V> extends JsonOverlay<V> {
 
-    public abstract OV create(String key, JsonNode json, JsonOverlay<?> parent);
+	public ScalarOverlay(JsonNode json, ReferenceRegistry refReg) {
+		super(json, refReg);
+	}
 
-    public OV create(String key, JsonOverlay<?> parent) {
-        return create(key, parent.getJson(key), parent);
-    }
+	public ScalarOverlay(V value, ReferenceRegistry refReg) {
+		super(value, refReg);
+	}
 
-    public OV create(String key, Object value, JsonOverlay<?> parent) {
-        OV dummy = create(null, MissingNode.getInstance(), null);
-        Class<?> valClass = value != null ? value.getClass() : Void.class;
-        throw new OverlayException(String.format("Cannot create overlay of type %s from value of type %s",
-                dummy.getClass().getName(), valClass.getName()));
-    };
+	@Override
+	public JsonNode toJson() {
+		return value != null ? _toJson() : MissingNode.getInstance();
+	}
+
+	protected abstract JsonNode _toJson();
 }

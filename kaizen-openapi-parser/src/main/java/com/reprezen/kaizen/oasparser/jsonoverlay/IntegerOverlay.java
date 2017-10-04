@@ -11,51 +11,42 @@
 package com.reprezen.kaizen.oasparser.jsonoverlay;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.MissingNode;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 
-public class IntegerOverlay extends JsonOverlay<Integer> {
+public class IntegerOverlay extends ScalarOverlay<Integer> {
 
-    public IntegerOverlay(String key, Integer value, JsonOverlay<?> parent) {
-        super(key, value, parent);
-    }
+	private IntegerOverlay(Integer value, ReferenceRegistry refReg) {
+		super(value, refReg);
+	}
 
-    public IntegerOverlay(String key, JsonNode json, JsonOverlay<?> parent) {
-        super(key, json, parent);
-    }
+	private IntegerOverlay(JsonNode json, ReferenceRegistry refReg) {
+		super(json, refReg);
+	}
 
-    public IntegerOverlay(String key, JsonOverlay<?> parent) {
-        super(key, parent);
-    }
+	@Override
+	public Integer fromJson(JsonNode json) {
+		return json.isInt() ? json.intValue() : null;
+	}
 
-    @Override
-    public boolean isPresent() {
-        return super.isPresent() && getJson().isIntegralNumber();
-    }
+	@Override
+	public JsonNode _toJson() {
+		return JsonNodeFactory.instance.numberNode(value);
+	}
 
-    @Override
-    public Integer fromJson() {
-        JsonNode json = getJson();
-        return json.isInt() ? json.intValue() : null;
-    }
+	public static OverlayFactory<Integer, IntegerOverlay> factory = new OverlayFactory<Integer, IntegerOverlay>() {
+		@Override
+		protected Class<IntegerOverlay> getOverlayClass() {
+			return IntegerOverlay.class;
+		}
 
-    @Override
-    public JsonNode _createJson(boolean followRefs) {
-        return value != null ? jsonFactory.numberNode(value) : MissingNode.getInstance();
-    }
+		@Override
+		public IntegerOverlay _create(Integer value, ReferenceRegistry refReg) {
+			return new IntegerOverlay(value, refReg);
+		}
 
-    public static JsonOverlayFactory<IntegerOverlay> factory = new JsonOverlayFactory<IntegerOverlay>() {
-        @Override
-        public IntegerOverlay create(String key, JsonNode json, JsonOverlay<?> parent) {
-            return new IntegerOverlay(key, json, parent);
-        }
-
-        @Override
-        public IntegerOverlay create(String key, Object value, JsonOverlay<?> parent) {
-            if (value == null || value instanceof Integer) {
-                return new IntegerOverlay(key, (Integer) value, parent);
-            } else {
-                return super.create(key, value, parent);
-            }
-        }
-    };
+		@Override
+		public IntegerOverlay _create(JsonNode json, ReferenceRegistry refReg) {
+			return new IntegerOverlay(json, refReg);
+		}
+	};
 }

@@ -66,9 +66,9 @@ public class Resolver {
             if (base.isValid()) {
                 for (JsonNode refNode : findReferenceNodes(base.getJson())) {
                     JsonNode refString = refNode.get("$ref");
-                    String key = referenceRegistry.register(refString, base, true);
+                    String key = referenceRegistry.registerRef(refString, base, true);
                     ((ObjectNode) refNode).put("key", key);
-                    Reference ref = referenceRegistry.get(key);
+                    Reference ref = referenceRegistry.getRef(key);
                     if (ref.isValid() && !resolvedBases.contains(ref.getBase())) {
                         discoveredBases.add(ref.getBase());
                     }

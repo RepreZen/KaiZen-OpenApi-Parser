@@ -10,154 +10,96 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.jsonoverlay;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.regex.Pattern;
 
-import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.google.common.base.Function;
+import com.google.common.collect.Maps;
 
-public class MapOverlay<OV extends JsonOverlay<?>> extends JsonOverlay<Map<String, OV>>
-		implements CollectionOverlay<OV> {
+public class MapOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Map<String, V>> {
+	private Map<String, OV> overlays = Maps.newLinkedHashMap();
+	private OverlayFactory<V, OV> valueFactory;
+	private Pattern keyPattern;
 
-	private final CollectionStore<OV> store = new CollectionStore<OV>(this);
-
-	private MapOverlay(String key, JsonOverlay<?> parent) {
-		super(key, (Map<String, OV>) null, parent);
-	}
-
-	public MapOverlay(String key, Collection<OV> overlays, JsonOverlay<?> parent, String keyPat) {
-		this(key, parent);
-		store.init(false, keyPat).load(CollectionData.of(overlays));
-		reset(false);
-	}
-
-	public MapOverlay(String key, Map<String, OV> overlayMap, JsonOverlay<?> parent, String keyPat) {
-		this(key, parent);
-		store.init(false, keyPat).load(CollectionData.of(overlayMap));
-		reset(false);
-	}
-
-	public MapOverlay(String key, JsonNode json, JsonOverlay<?> parent, JsonOverlayFactory<OV> factory, String keyPat) {
-		this(key, parent);
-		store.init(false, keyPat).load(CollectionData.of(json, parent, factory));
-		reset(false);
-	}
-
-	public MapOverlay(String key, JsonOverlay<?> parent, JsonOverlayFactory<OV> factory, String keyPat) {
-		this(key, parent);
-		store.init(false, keyPat).load(CollectionData.of(parent.getResolvedJson(key), parent, factory));
-		reset(false);
-	}
-
-	@Override
-	public boolean isPresent() {
-		return super.isPresent() && getJson().isObject();
-	}
-
-	private void reset(boolean invalidate) {
-		super.set(store.getOverlayMap(), invalidate);
-	}
-
-	public OV get(String key) {
-		return value.get(key);
-	}
-
-	public boolean containsKey(String key) {
-		return value.containsKey(key);
-	}
-
-	public Collection<OV> getValues() {
-		return value.values();
-	}
-
-	@Override
-	public void set(Map<String, OV> overlayMap) {
-		store.set(overlayMap);
-		reset(true);
-	}
-
-	public void set(Collection<OV> overlays) {
-		store.set(overlays);
-		reset(true);
-		invalidate();
-	}
-
-	@Override
-	public IJsonOverlay<?> find(JsonPointer path) {
-		if (path.matches()) {
-			return this;
-		} else if (path.mayMatchProperty()) {
-			String key = path.getMatchingProperty();
-			return containsKey(key) ? store.getOverlay(key).find(path.tail()) : null;
-		} else {
-			return null;
-		}
-	}
-	
-	public void clear() {
-		if (store.size() > 0) {
-			store.clear();
-			reset(true);
+	public MapOverlay(Map<String, V> value, OverlayFactory<V, OV> valueFactory, Pattern keyPattern,
+			ReferenceRegistry refReg) {
+		super(value, refReg);
+		this.valueFactory = valueFactory;
+		this.keyPattern = keyPattern;
+		for (Entry<String, V> entry : value.entrySet()) {
+			overlays.put(entry.getKey(), valueFactory.create(entry.getValue(), refReg));
 		}
 	}
 
-	public int size() {
-		return value.size();
+	public MapOverlay(JsonNode json, OverlayFactory<V, OV> valueFactory, Pattern keyPattern, ReferenceRegistry refReg) {
+		super(json, refReg);
+		this.valueFactory = valueFactory;
+		this.keyPattern = keyPattern;
 	}
 
 	@Override
-	public Map<String, OV> fromJson() {
-		return store != null ? store.getOverlayMap() : Collections.<String, OV>emptyMap();
-	}
-
-	@Override
-	public JsonNode _createJson(boolean followRefs) {
-		return store.createJson(followRefs);
-	}
-
-	public void set(String key, OV overlay) {
-		if (value.containsKey(key)) {
-			store.replace(key, overlay);
-		} else {
-			store.add(key, overlay);
+	protected Map<String, V> fromJson(JsonNode json) {
+		overlays.clear();
+		for (Entry<String, JsonNode> field : iterable(json.fields())) {
+			if (keyPattern == null || keyPattern.matcher(field.getKey()).matches()) {
+				overlays.put(field.getKey(), valueFactory.create(field.getValue(), refReg));
+			}
 		}
-		reset(true);
-	}
-
-	public void add(OV overlay) {
-		store.add(overlay);
-		reset(true);
-	}
-
-	public void add(String key, OV overlay) {
-		store.add(key, overlay);
-		reset(true);
-	}
-
-	public void remove(String key) {
-		store.remove(key);
-		reset(true);
-	}
-
-	public void remove(int index) {
-		store.remove(index);
-		reset(true);
-	}
-
-	public void replace(String key, OV overlay) {
-		store.replace(key, overlay);
-		reset(true);
-	}
-
-	public void replace(int index, OV overlay) {
-		store.replace(index, overlay);
-		reset(true);
-		invalidate();
+		return getValueMap();
 	}
 
 	@Override
-	public CollectionStore<OV> getStore() {
-		return store;
+	public JsonNode toJson() {
+		ObjectNode obj = jsonObject();
+		for (Entry<String, OV> entry : overlays.entrySet()) {
+			obj.set(entry.getKey(), entry.getValue().toJson());
+		}
+		return obj;
+	}
+
+	private Function<OV, V> valueFunction = new Function<OV, V>() {
+		@Override
+		public V apply(OV overlay) {
+			return overlay.get();
+		}
+	};
+
+	private Map<String, V> getValueMap() {
+		return Maps.transformValues(overlays, valueFunction);
+	}
+
+	public static <V, OV extends JsonOverlay<V>> OverlayFactory<Map<String, V>, MapOverlay<V, OV>> getFactory(
+			OverlayFactory<V, OV> valueFactory, Pattern keyPattern) {
+		return new MapOverlayFactory<V, OV>(valueFactory, keyPattern);
+	}
+
+	private static class MapOverlayFactory<V, OV extends JsonOverlay<V>>
+			extends OverlayFactory<Map<String, V>, MapOverlay<V, OV>> {
+
+		private OverlayFactory<V, OV> valueFactory;
+		private Pattern keyPattern;
+
+		public MapOverlayFactory(OverlayFactory<V, OV> valueFactory, Pattern keyPattern) {
+			this.valueFactory = valueFactory;
+			this.keyPattern = keyPattern;
+		}
+
+		@Override
+		protected Class<? super MapOverlay<V, OV>> getOverlayClass() {
+			return MapOverlay.class;
+		}
+
+		@Override
+		public MapOverlay<V, OV> _create(Map<String, V> value, ReferenceRegistry refReg) {
+			return new MapOverlay<V, OV>(value, valueFactory, keyPattern, refReg);
+		}
+
+		@Override
+		public MapOverlay<V, OV> _create(JsonNode json, ReferenceRegistry refReg) {
+			return new MapOverlay<V, OV>(json, valueFactory, keyPattern, refReg);
+		}
 	}
 }

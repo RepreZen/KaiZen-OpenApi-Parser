@@ -23,7 +23,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlayFactory;
+import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ValListOverlay;
@@ -200,7 +200,7 @@ public class ImplGenerator extends TypeGenerator {
 	}
 
 	private Member getFactoryMethod(Type type) {
-		requireTypes(JsonOverlayFactory.class, JsonNode.class);
+		requireTypes(OverlayFactory.class, JsonNode.class);
 		Collection<String> decl = t(type,
 				"public static JsonOverlayFactory<${implName}> factory = new JsonOverlayFactory<${implName}>() {", //
 				"    @Override", //

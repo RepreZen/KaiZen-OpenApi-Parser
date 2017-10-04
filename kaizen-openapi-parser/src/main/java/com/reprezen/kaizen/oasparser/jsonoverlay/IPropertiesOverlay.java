@@ -10,6 +10,6 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.jsonoverlay;
 
-public interface IObjectOverlay<VI> extends IJsonOverlay<VI> {
+public interface IPropertiesOverlay<VI> extends IJsonOverlay<VI> {
 
 }

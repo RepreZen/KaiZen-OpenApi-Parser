@@ -41,7 +41,7 @@ public class ChildOverlay<V, OV extends JsonOverlay<V>> implements IJsonOverlay<
 						throw new IllegalStateException("Referenced object is not compatible with referencing site");
 					}
 				} else {
-					this.overlay = factory.create(json, refReg);
+					this.overlay = factory.create(resolved, refReg);
 					refReg.setOverlay(resolved, overlay);
 				}
 			} else {
@@ -79,6 +79,10 @@ public class ChildOverlay<V, OV extends JsonOverlay<V>> implements IJsonOverlay<
 	public JsonNode toJson() {
 		return overlay.toJson();
 	}
+	
+	public JsonNode toJson(boolean keepEmpty) {
+		return overlay.toJson(keepEmpty);
+	}
 
 	public JsonPath getPath() {
 		return path;
@@ -91,4 +95,10 @@ public class ChildOverlay<V, OV extends JsonOverlay<V>> implements IJsonOverlay<
 	public JsonOverlay<V> getOverlay() {
 		return overlay;
 	}
+
+	@Override
+	public String toString() {
+		String refString = reference != null ? String.format("<%s>", reference.getRefString()) : "";
+		return String.format("Child@%s%s: %s]" , path, refString, overlay);
+	}	
 }

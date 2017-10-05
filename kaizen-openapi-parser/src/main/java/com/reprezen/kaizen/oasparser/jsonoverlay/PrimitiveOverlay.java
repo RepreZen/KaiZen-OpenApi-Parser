@@ -15,7 +15,7 @@ import java.math.BigInteger;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
-public class PrimitiveOverlay extends JsonOverlay<Object> {
+public class PrimitiveOverlay extends ScalarOverlay<Object> {
 
 	private PrimitiveOverlay(JsonNode json, ReferenceRegistry refReg) {
 		super(json, refReg);
@@ -39,7 +39,7 @@ public class PrimitiveOverlay extends JsonOverlay<Object> {
 	}
 
 	@Override
-	public JsonNode toJson() {
+	public JsonNode _toJson() {
 		if (value instanceof String) {
 			return jsonScalar((String) value);
 		} else if (value instanceof BigDecimal) {

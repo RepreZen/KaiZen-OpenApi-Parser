@@ -15,7 +15,8 @@ import javax.annotation.Generated;
 
 public class SecurityParameterImpl extends OpenApiObjectImpl<SecurityParameter> implements SecurityParameter {
 
-    protected JsonNode fixCreatedJson(JsonNode json) {
+    @Override
+    protected JsonNode fixJson(JsonNode json) {
         return json.isMissingNode() ? JsonNodeFactory.instance.arrayNode() : json;
     }
 

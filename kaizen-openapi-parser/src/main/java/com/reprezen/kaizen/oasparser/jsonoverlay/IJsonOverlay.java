@@ -25,5 +25,7 @@ public interface IJsonOverlay<V> {
 	
 	JsonNode toJson();
 	
+	JsonNode toJson(boolean keepEmpty);
+	
 	boolean isPresent();
 }

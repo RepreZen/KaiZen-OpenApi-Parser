@@ -29,7 +29,6 @@ public abstract class JsonOverlay<V> implements IJsonOverlay<V> {
 
 	protected final static ObjectMapper mapper = new ObjectMapper();
 
-	protected boolean isPresent;
 	protected V value = null;
 	protected ReferenceRegistry refReg;
 
@@ -45,10 +44,8 @@ public abstract class JsonOverlay<V> implements IJsonOverlay<V> {
 		this.refReg = refReg;
 		if (json.isPresent()) {
 			this.value = fromJson(json.get());
-			this.isPresent = this.value != null;
 		} else if (value.isPresent()) {
 			this.value = value.get();
-			this.isPresent = this.value != null;
 		}
 	}
 
@@ -59,7 +56,7 @@ public abstract class JsonOverlay<V> implements IJsonOverlay<V> {
 
 	@Override
 	public boolean isPresent() {
-		return isPresent;
+		return value != null;
 	}
 
 	@Override
@@ -85,7 +82,11 @@ public abstract class JsonOverlay<V> implements IJsonOverlay<V> {
 
 	protected abstract V fromJson(JsonNode json);
 
-	public abstract JsonNode toJson();
+	public JsonNode toJson() {
+		return toJson(false);
+	};
+
+	public abstract JsonNode toJson(boolean keepEmpty);
 
 	// some utility classes for overlays
 
@@ -136,7 +137,7 @@ public abstract class JsonOverlay<V> implements IJsonOverlay<V> {
 	protected static ValueNode jsonBoolean(boolean b) {
 		return JsonNodeFactory.instance.booleanNode(b);
 	}
-	
+
 	protected static MissingNode jsonMissing() {
 		return MissingNode.getInstance();
 	}
@@ -149,4 +150,10 @@ public abstract class JsonOverlay<V> implements IJsonOverlay<V> {
 			}
 		};
 	}
+
+	@Override
+	public String toString() {
+		return toJson().toString();
+	}
+
 }

@@ -31,8 +31,9 @@ public class Reference {
 
 	private final ResolutionBaseRegistry resolutionBaseRegistry;
 
-	/* package */ Reference(String refString, ResolutionBase base) {
+	/* package */ Reference(String refString, String canonicalRefString, ResolutionBase base) {
 		this.refString = refString;
+		this.canonRefString = canonicalRefString;
 		resolutionBaseRegistry = base.getResolutionBaseRegistry();
 		int pos = refString.indexOf('#');
 		String relUrl = pos < 0 ? refString : refString.substring(0, pos);
@@ -40,8 +41,7 @@ public class Reference {
 			this.base = base;
 		} else {
 			// note re false: if creating a ref with resolution requested, the base will be
-			// resolved as a side-effect
-			// during ref resolution, so no need to do it now.
+			// resolved as a side-effect during ref resolution, so no need to do it now.
 			this.base = resolutionBaseRegistry.of(base.comprehend(relUrl), false);
 		}
 		if (pos >= 0) {
@@ -57,7 +57,6 @@ public class Reference {
 			} catch (UnsupportedEncodingException e) {
 			}
 		}
-		this.canonRefString = base.getUrlString() + (fragment != null ? fragment : "");
 		this.key = canonRefString;
 	}
 
@@ -75,7 +74,7 @@ public class Reference {
 	public String getRefString() {
 		return refString;
 	}
-	
+
 	public String getCanonicalRefString() {
 		return canonRefString;
 	}

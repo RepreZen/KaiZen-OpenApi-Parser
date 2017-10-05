@@ -21,7 +21,15 @@ public abstract class OverlayFactory<V, OV extends JsonOverlay<V>> {
 	}
 
 	public OV create(JsonNode json, ReferenceRegistry refReg) {
-		return _create(json, refReg);
+		if (refReg.hasOverlay(json)) {
+			@SuppressWarnings("unchecked")
+			OV overlay = (OV) refReg.getOverlay(json);
+			return overlay;
+		} else {
+			OV overlay = _create(json, refReg);
+			refReg.setOverlay(json, overlay);
+			return overlay;
+		}
 	}
 
 	public boolean isCompatible(JsonOverlay<?> overlay) {

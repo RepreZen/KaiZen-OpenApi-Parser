@@ -61,12 +61,12 @@ public class MapOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Map<St
 	}
 
 	@Override
-	public JsonNode toJson() {
+	public JsonNode toJson(boolean keepEmpty) {
 		ObjectNode obj = jsonObject();
 		for (Entry<String, IJsonOverlay<V>> entry : overlays.entrySet()) {
-			obj.set(entry.getKey(), entry.getValue().toJson());
+			obj.set(entry.getKey(), entry.getValue().toJson(true));
 		}
-		return obj;
+		return obj.size() > 0 || keepEmpty ? obj : jsonMissing();
 	}
 
 	public boolean containsKey(String name) {
@@ -95,6 +95,10 @@ public class MapOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Map<St
 
 	private Map<String, V> getValueMap() {
 		return Maps.transformValues(overlays, valueFunction);
+	}
+
+	public Pattern getKeyPattern() {
+		return keyPattern;
 	}
 
 	public static <V, OV extends JsonOverlay<V>> OverlayFactory<Map<String, V>, MapOverlay<V, OV>> getFactory(

@@ -58,9 +58,13 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3> implements OpenApi
 
     private ValidationResults validationResults = null;
 
-    protected JsonNode fixCreatedJson(JsonNode json) {
+    @Override
+    protected JsonNode fixJson(JsonNode json) {
+        if (json.isMissingNode()) {
+            json = jsonObject();
+        }
         if (!json.has("paths")) {
-            ((ObjectNode) json).set("paths", JsonNodeFactory.instance.objectNode());
+            ((ObjectNode) json).putObject("paths");
         }
         return json;
     }

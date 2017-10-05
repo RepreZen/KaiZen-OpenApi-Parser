@@ -67,7 +67,7 @@ public class ReferenceRegistry {
 			}
 			String comprehendedRef = base.comprehend(refString);
 			if (!references.containsKey(comprehendedRef)) {
-				references.put(comprehendedRef, new Reference(comprehendedRef, base));
+				references.put(comprehendedRef, new Reference(refString, comprehendedRef, base));
 			}
 			Reference ref = references.get(comprehendedRef);
 			if (resolve) {

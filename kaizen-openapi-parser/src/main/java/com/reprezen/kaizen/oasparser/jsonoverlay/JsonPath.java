@@ -10,6 +10,7 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.jsonoverlay;
 
+import java.util.Map.Entry;
 import java.util.regex.Pattern;
 
 import com.fasterxml.jackson.core.JsonPointer;
@@ -27,7 +28,7 @@ public class JsonPath {
 	}
 
 	public JsonPath(String path) {
-		this(path != null ? getSegments(path.split("/")) : getSegments("*"));
+		this(path != null && !path.isEmpty() ? getSegments(path.split("/")) : getSegments("*"));
 	}
 
 	public JsonPath(JsonPointer path) {
@@ -35,10 +36,14 @@ public class JsonPath {
 	}
 
 	public void setNode(JsonNode container, JsonNode value) {
+		setNode(container, value, false);
+	}
+
+	public JsonNode setNode(JsonNode container, JsonNode value, boolean merge) {
 		for (int i = 0; i < segments.length - 1; i++) {
 			container = addNode(container, segments[i], segments[i + 1]);
 		}
-		addNode(container, segments[segments.length - 1], value);
+		return addNode(container, segments[segments.length - 1], value, merge);
 	}
 
 	private static Pattern indexPat = Pattern.compile("^[1-9][0-9]*$");
@@ -56,8 +61,8 @@ public class JsonPath {
 	}
 
 	private JsonNode addNode(JsonNode container, Segment segment, Segment nextSegment) {
-		if (container.isObject() && segment.isString()) {
-			ObjectNode obj = (ObjectNode) container;
+		if ((container.isObject() || container.isMissingNode()) && segment.isString()) {
+			ObjectNode obj = getObjectNode(container);
 			String key = segment.asString();
 			if (obj.has(key)) {
 				return obj.get(key);
@@ -66,10 +71,10 @@ public class JsonPath {
 			} else {
 				ArrayNode array = JsonNodeFactory.instance.arrayNode();
 				obj.set(key, array);
-				return array;
+				return obj;
 			}
-		} else if (container.isArray() && segment.isInt()) {
-			ArrayNode array = (ArrayNode) container;
+		} else if ((container.isArray() || container.isMissingNode()) && segment.isInt()) {
+			ArrayNode array = getArrayNode(container);
 			int index = segment.asInt();
 			if (array.has(index)) {
 				return array.get(index);
@@ -78,19 +83,59 @@ public class JsonPath {
 				JsonNode newNode = nextSegment.isString() ? JsonNodeFactory.instance.objectNode()
 						: JsonNodeFactory.instance.arrayNode();
 				array.set(array.size(), newNode);
-				return newNode;
+				return array;
 			}
 		}
 		throw new IllegalStateException("Child path incompatible with existing JSON tree");
 	}
 
-	private void addNode(JsonNode container, Segment segment, JsonNode json) {
-		if (container.isObject() && segment.isString()) {
-			((ObjectNode) container).set(segment.asString(), json);
-		} else if (container.isArray() && segment.isInt() && segment.asInt() <= container.size()) {
-			int index = segment.asInt();
-			((ArrayNode) container).set(index >= 0 ? index : container.size(), json);
+	private JsonNode addNode(JsonNode container, Segment segment, JsonNode json, boolean merge) {
+		if (container.isMissingNode() && segment.isInt() && segment.asInt() == -1) {
+			return json;
+		} else if ((container.isMissingNode() || container.isObject()) && segment.isString()) {
+			ObjectNode obj = getObjectNode(container);
+			if (merge) {
+				if (json.isObject()) {
+					for (Entry<String, JsonNode> field : JsonOverlay.iterable(json.fields())) {
+						obj.set(field.getKey(), field.getValue());
+					}
+				} else {
+					throw new IllegalStateException("Cannot merge into a non-object JsonNode");
+				}
+			} else {
+				obj.set(segment.asString(), json);
+			}
+			return obj;
+		} else if ((container.isMissingNode() || container.isArray()) && segment.isInt()
+				&& segment.asInt() <= container.size()) {
+			ArrayNode array = getArrayNode(container);
+			int index = segment.asInt() >= 0 ? segment.asInt() : array.size();
+			if (index < array.size()) {
+				array.set(index, json);
+			} else {
+				array.add(json);
+			}
+			return array;
+		} else {
+			return container;
 		}
+	}
+
+	private ArrayNode getArrayNode(JsonNode container) {
+		return container.isArray() ? (ArrayNode) container : JsonOverlay.jsonArray();
+	}
+
+	private ObjectNode getObjectNode(JsonNode container) {
+		return container.isObject() ? (ObjectNode) container : JsonOverlay.jsonObject();
+	}
+
+	@Override
+	public String toString() {
+		String path = "";
+		for (Segment segment : segments) {
+			path += segment.toString();
+		}
+		return path.isEmpty() ? "*" : path;
 	}
 
 	private static class Segment {
@@ -128,6 +173,12 @@ public class JsonPath {
 		public Integer asInt() {
 			return integer;
 		}
+
+		@Override
+		public String toString() {
+			return isString() ? "/" + string : "[" + integer + "]";
+		}
+
 	}
 
 }

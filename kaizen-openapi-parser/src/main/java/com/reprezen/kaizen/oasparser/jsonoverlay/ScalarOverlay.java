@@ -24,7 +24,7 @@ public abstract class ScalarOverlay<V> extends JsonOverlay<V> {
 	}
 
 	@Override
-	public JsonNode toJson() {
+	public JsonNode toJson(boolean keepEmpty) {
 		return value != null ? _toJson() : MissingNode.getInstance();
 	}
 

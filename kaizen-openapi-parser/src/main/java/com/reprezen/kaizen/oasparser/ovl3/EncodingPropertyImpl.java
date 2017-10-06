@@ -2,6 +2,7 @@ package com.reprezen.kaizen.oasparser.ovl3;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.reprezen.kaizen.oasparser.jsonoverlay.BooleanOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
@@ -12,7 +13,6 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 import com.reprezen.kaizen.oasparser.model3.EncodingProperty;
-import com.reprezen.kaizen.oasparser.ovl3.ChildListOverlay;
 import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
 import java.util.Collection;
 import java.util.Map;
@@ -21,29 +21,29 @@ import javax.annotation.Generated;
 public class EncodingPropertyImpl extends OpenApiObjectImpl<EncodingProperty> implements EncodingProperty {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public EncodingPropertyImpl(JsonNode json, ReferenceRegistry refReg) {
-        super(json, refReg);
+    public EncodingPropertyImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        super(json, parent, refReg);
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public EncodingPropertyImpl(EncodingProperty encodingProperty, ReferenceRegistry refReg) {
-        super(encodingProperty, refReg);
+    public EncodingPropertyImpl(EncodingProperty encodingProperty, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        super(encodingProperty, parent, refReg);
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> contentType = createChild("contentType", StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> contentType = createChild("contentType", this, StringOverlay.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<String, StringOverlay> headers = createChildMap("Headers", StringOverlay.factory, null);
+    private ChildMapOverlay<String, StringOverlay> headers = createChildMap("Headers", this, StringOverlay.factory, null);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> style = createChild("style", StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> style = createChild("style", this, StringOverlay.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Boolean, BooleanOverlay> explode = createChild("explode", BooleanOverlay.factory);
+    private ChildOverlay<Boolean, BooleanOverlay> explode = createChild("explode", this, BooleanOverlay.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object, ObjectOverlay> extensions = createChildMap("", ObjectOverlay.factory, "x-.+");
+    private ChildMapOverlay<Object, ObjectOverlay> extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
 
     // ContentType
     @Override
@@ -172,13 +172,13 @@ public class EncodingPropertyImpl extends OpenApiObjectImpl<EncodingProperty> im
     }
 
     @Override
-    public EncodingPropertyImpl _create(EncodingProperty encodingProperty, ReferenceRegistry refReg) {
-        return new EncodingPropertyImpl(encodingProperty, refReg);
+    public EncodingPropertyImpl _create(EncodingProperty encodingProperty, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        return new EncodingPropertyImpl(encodingProperty, parent, refReg);
     }
 
     @Override
-    public EncodingPropertyImpl _create(JsonNode json, ReferenceRegistry refReg) {
-        return new EncodingPropertyImpl(json, refReg);
+    public EncodingPropertyImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        return new EncodingPropertyImpl(json, parent, refReg);
     }
 };
 

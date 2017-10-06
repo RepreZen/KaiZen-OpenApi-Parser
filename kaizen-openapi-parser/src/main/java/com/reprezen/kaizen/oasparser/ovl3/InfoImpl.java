@@ -1,6 +1,7 @@
 package com.reprezen.kaizen.oasparser.ovl3;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
@@ -13,7 +14,6 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 import com.reprezen.kaizen.oasparser.model3.Contact;
 import com.reprezen.kaizen.oasparser.model3.Info;
 import com.reprezen.kaizen.oasparser.model3.License;
-import com.reprezen.kaizen.oasparser.ovl3.ChildListOverlay;
 import com.reprezen.kaizen.oasparser.ovl3.ContactImpl;
 import com.reprezen.kaizen.oasparser.ovl3.LicenseImpl;
 import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
@@ -24,35 +24,35 @@ import javax.annotation.Generated;
 public class InfoImpl extends OpenApiObjectImpl<Info> implements Info {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public InfoImpl(JsonNode json, ReferenceRegistry refReg) {
-        super(json, refReg);
+    public InfoImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        super(json, parent, refReg);
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public InfoImpl(Info info, ReferenceRegistry refReg) {
-        super(info, refReg);
+    public InfoImpl(Info info, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        super(info, parent, refReg);
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> title = createChild("title", StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> title = createChild("title", this, StringOverlay.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> description = createChild("description", StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> description = createChild("description", this, StringOverlay.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> termsOfService = createChild("termsOfService", StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> termsOfService = createChild("termsOfService", this, StringOverlay.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Contact, ContactImpl> contact = createChild("contact", ContactImpl.factory);
+    private ChildOverlay<Contact, ContactImpl> contact = createChild("contact", this, ContactImpl.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<License, LicenseImpl> license = createChild("license", LicenseImpl.factory);
+    private ChildOverlay<License, LicenseImpl> license = createChild("license", this, LicenseImpl.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> version = createChild("version", StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> version = createChild("version", this, StringOverlay.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object, ObjectOverlay> extensions = createChildMap("", ObjectOverlay.factory, "x-.+");
+    private ChildMapOverlay<Object, ObjectOverlay> extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
 
     // Title
     @Override
@@ -177,13 +177,13 @@ public class InfoImpl extends OpenApiObjectImpl<Info> implements Info {
     }
 
     @Override
-    public InfoImpl _create(Info info, ReferenceRegistry refReg) {
-        return new InfoImpl(info, refReg);
+    public InfoImpl _create(Info info, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        return new InfoImpl(info, parent, refReg);
     }
 
     @Override
-    public InfoImpl _create(JsonNode json, ReferenceRegistry refReg) {
-        return new InfoImpl(json, refReg);
+    public InfoImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        return new InfoImpl(json, parent, refReg);
     }
 };
 

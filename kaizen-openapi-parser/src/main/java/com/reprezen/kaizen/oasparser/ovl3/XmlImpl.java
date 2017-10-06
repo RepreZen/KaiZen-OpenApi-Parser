@@ -2,6 +2,7 @@ package com.reprezen.kaizen.oasparser.ovl3;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.reprezen.kaizen.oasparser.jsonoverlay.BooleanOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
@@ -12,7 +13,6 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 import com.reprezen.kaizen.oasparser.model3.Xml;
-import com.reprezen.kaizen.oasparser.ovl3.ChildListOverlay;
 import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
 import java.util.Collection;
 import java.util.Map;
@@ -21,32 +21,32 @@ import javax.annotation.Generated;
 public class XmlImpl extends OpenApiObjectImpl<Xml> implements Xml {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public XmlImpl(JsonNode json, ReferenceRegistry refReg) {
-        super(json, refReg);
+    public XmlImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        super(json, parent, refReg);
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public XmlImpl(Xml xml, ReferenceRegistry refReg) {
-        super(xml, refReg);
+    public XmlImpl(Xml xml, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        super(xml, parent, refReg);
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> name = createChild("name", StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> name = createChild("name", this, StringOverlay.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> namespace = createChild("namespace", StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> namespace = createChild("namespace", this, StringOverlay.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> prefix = createChild("prefix", StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> prefix = createChild("prefix", this, StringOverlay.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Boolean, BooleanOverlay> attribute = createChild("attribute", BooleanOverlay.factory);
+    private ChildOverlay<Boolean, BooleanOverlay> attribute = createChild("attribute", this, BooleanOverlay.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Boolean, BooleanOverlay> wrapped = createChild("wrapped", BooleanOverlay.factory);
+    private ChildOverlay<Boolean, BooleanOverlay> wrapped = createChild("wrapped", this, BooleanOverlay.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object, ObjectOverlay> extensions = createChildMap("", ObjectOverlay.factory, "x-.+");
+    private ChildMapOverlay<Object, ObjectOverlay> extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
 
     // Name
     @Override
@@ -170,13 +170,13 @@ public class XmlImpl extends OpenApiObjectImpl<Xml> implements Xml {
     }
 
     @Override
-    public XmlImpl _create(Xml xml, ReferenceRegistry refReg) {
-        return new XmlImpl(xml, refReg);
+    public XmlImpl _create(Xml xml, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        return new XmlImpl(xml, parent, refReg);
     }
 
     @Override
-    public XmlImpl _create(JsonNode json, ReferenceRegistry refReg) {
-        return new XmlImpl(json, refReg);
+    public XmlImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        return new XmlImpl(json, parent, refReg);
     }
 };
 

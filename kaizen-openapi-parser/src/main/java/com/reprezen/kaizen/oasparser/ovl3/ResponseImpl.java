@@ -1,6 +1,7 @@
 package com.reprezen.kaizen.oasparser.ovl3;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
@@ -14,7 +15,6 @@ import com.reprezen.kaizen.oasparser.model3.Header;
 import com.reprezen.kaizen.oasparser.model3.Link;
 import com.reprezen.kaizen.oasparser.model3.MediaType;
 import com.reprezen.kaizen.oasparser.model3.Response;
-import com.reprezen.kaizen.oasparser.ovl3.ChildListOverlay;
 import com.reprezen.kaizen.oasparser.ovl3.HeaderImpl;
 import com.reprezen.kaizen.oasparser.ovl3.LinkImpl;
 import com.reprezen.kaizen.oasparser.ovl3.MediaTypeImpl;
@@ -26,29 +26,29 @@ import javax.annotation.Generated;
 public class ResponseImpl extends OpenApiObjectImpl<Response> implements Response {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public ResponseImpl(JsonNode json, ReferenceRegistry refReg) {
-        super(json, refReg);
+    public ResponseImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        super(json, parent, refReg);
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public ResponseImpl(Response response, ReferenceRegistry refReg) {
-        super(response, refReg);
+    public ResponseImpl(Response response, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        super(response, parent, refReg);
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> description = createChild("description", StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> description = createChild("description", this, StringOverlay.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Header, HeaderImpl> headers = createChildMap("headers", HeaderImpl.factory, null);
+    private ChildMapOverlay<Header, HeaderImpl> headers = createChildMap("headers", this, HeaderImpl.factory, null);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<MediaType, MediaTypeImpl> contentMediaTypes = createChildMap("content", MediaTypeImpl.factory, null);
+    private ChildMapOverlay<MediaType, MediaTypeImpl> contentMediaTypes = createChildMap("content", this, MediaTypeImpl.factory, null);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Link, LinkImpl> links = createChildMap("links", LinkImpl.factory, null);
+    private ChildMapOverlay<Link, LinkImpl> links = createChildMap("links", this, LinkImpl.factory, null);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object, ObjectOverlay> extensions = createChildMap("", ObjectOverlay.factory, "x-.+");
+    private ChildMapOverlay<Object, ObjectOverlay> extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
 
     // Description
     @Override
@@ -219,13 +219,13 @@ public class ResponseImpl extends OpenApiObjectImpl<Response> implements Respons
     }
 
     @Override
-    public ResponseImpl _create(Response response, ReferenceRegistry refReg) {
-        return new ResponseImpl(response, refReg);
+    public ResponseImpl _create(Response response, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        return new ResponseImpl(response, parent, refReg);
     }
 
     @Override
-    public ResponseImpl _create(JsonNode json, ReferenceRegistry refReg) {
-        return new ResponseImpl(json, refReg);
+    public ResponseImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        return new ResponseImpl(json, parent, refReg);
     }
 };
 

@@ -1,6 +1,7 @@
 package com.reprezen.kaizen.oasparser.ovl3;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
@@ -11,7 +12,6 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 import com.reprezen.kaizen.oasparser.model3.Example;
-import com.reprezen.kaizen.oasparser.ovl3.ChildListOverlay;
 import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
 import java.util.Collection;
 import java.util.Map;
@@ -20,29 +20,29 @@ import javax.annotation.Generated;
 public class ExampleImpl extends OpenApiObjectImpl<Example> implements Example {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public ExampleImpl(JsonNode json, ReferenceRegistry refReg) {
-        super(json, refReg);
+    public ExampleImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        super(json, parent, refReg);
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public ExampleImpl(Example example, ReferenceRegistry refReg) {
-        super(example, refReg);
+    public ExampleImpl(Example example, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        super(example, parent, refReg);
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> summary = createChild("summary", StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> summary = createChild("summary", this, StringOverlay.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> description = createChild("description", StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> description = createChild("description", this, StringOverlay.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Object, ObjectOverlay> value = createChild("value", ObjectOverlay.factory);
+    private ChildOverlay<Object, ObjectOverlay> value = createChild("value", this, ObjectOverlay.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> externalValue = createChild("externalValue", StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> externalValue = createChild("externalValue", this, StringOverlay.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object, ObjectOverlay> extensions = createChildMap("", ObjectOverlay.factory, "x-.+");
+    private ChildMapOverlay<Object, ObjectOverlay> extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
 
     // Summary
     @Override
@@ -141,13 +141,13 @@ public class ExampleImpl extends OpenApiObjectImpl<Example> implements Example {
     }
 
     @Override
-    public ExampleImpl _create(Example example, ReferenceRegistry refReg) {
-        return new ExampleImpl(example, refReg);
+    public ExampleImpl _create(Example example, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        return new ExampleImpl(example, parent, refReg);
     }
 
     @Override
-    public ExampleImpl _create(JsonNode json, ReferenceRegistry refReg) {
-        return new ExampleImpl(json, refReg);
+    public ExampleImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        return new ExampleImpl(json, parent, refReg);
     }
 };
 

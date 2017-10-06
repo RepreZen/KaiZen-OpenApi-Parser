@@ -24,16 +24,18 @@ public class ListOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Colle
 	private OverlayFactory<V, OV> itemFactory;
 	private List<IJsonOverlay<V>> overlays = Lists.newLinkedList();
 
-	public ListOverlay(Collection<V> value, OverlayFactory<V, OV> itemFactory, ReferenceRegistry refReg) {
-		super(value, refReg);
+	public ListOverlay(Collection<V> value, JsonOverlay<?> parent, OverlayFactory<V, OV> itemFactory,
+			ReferenceRegistry refReg) {
+		super(value, parent, refReg);
 		this.itemFactory = itemFactory;
 		for (V item : value) {
-			overlays.add(itemFactory.create(item, refReg));
+			overlays.add(itemFactory.create(item, this, refReg));
 		}
 	}
 
-	public ListOverlay(JsonNode json, OverlayFactory<V, OV> itemFactory, ReferenceRegistry refReg) {
-		super(json, refReg);
+	public ListOverlay(JsonNode json, JsonOverlay<?> parent, OverlayFactory<V, OV> itemFactory,
+			ReferenceRegistry refReg) {
+		super(json, parent, refReg);
 		this.itemFactory = itemFactory;
 		setupOverlays(json);
 	}
@@ -49,7 +51,7 @@ public class ListOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Colle
 	private void setupOverlays(JsonNode json) {
 		overlays.clear();
 		for (JsonNode element : iterable(json.elements())) {
-			overlays.add(new ChildOverlay<V, OV>(null, element, itemFactory, refReg));
+			overlays.add(new ChildOverlay<V, OV>(null, element, this, itemFactory, refReg));
 		}
 		set(getItems());
 	}
@@ -69,15 +71,15 @@ public class ListOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Colle
 	}
 
 	public void set(int index, V value) {
-		overlays.set(index, itemFactory.create(value, refReg));
+		overlays.set(index, itemFactory.create(value, this, refReg));
 	}
 
 	public void add(V value) {
-		overlays.add(itemFactory.create(value, refReg));
+		overlays.add(itemFactory.create(value, this, refReg));
 	}
 
 	public void insert(int index, V value) {
-		overlays.add(index, itemFactory.create(value, refReg));
+		overlays.add(index, itemFactory.create(value, this, refReg));
 	}
 
 	public void remove(int index) {
@@ -115,13 +117,13 @@ public class ListOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Colle
 		}
 
 		@Override
-		public ListOverlay<V, OV> _create(Collection<V> value, ReferenceRegistry refReg) {
-			return new ListOverlay<V, OV>(value, itemFactory, refReg);
+		public ListOverlay<V, OV> _create(Collection<V> value, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+			return new ListOverlay<V, OV>(value, parent, itemFactory, refReg);
 		}
 
 		@Override
-		public ListOverlay<V, OV> _create(JsonNode json, ReferenceRegistry refReg) {
-			return new ListOverlay<V, OV>(json, itemFactory, refReg);
+		public ListOverlay<V, OV> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+			return new ListOverlay<V, OV>(json, parent, itemFactory, refReg);
 		}
 	}
 }

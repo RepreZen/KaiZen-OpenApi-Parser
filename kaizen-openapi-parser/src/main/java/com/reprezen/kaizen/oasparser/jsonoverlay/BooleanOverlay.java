@@ -14,12 +14,12 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 public class BooleanOverlay extends ScalarOverlay<Boolean> {
 
-	private BooleanOverlay(Boolean value, ReferenceRegistry refReg) {
-		super(value, refReg);
+	private BooleanOverlay(Boolean value, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+		super(value, parent, refReg);
 	}
 
-	private BooleanOverlay(JsonNode json, ReferenceRegistry refReg) {
-		super(json, refReg);
+	private BooleanOverlay(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+		super(json, parent, refReg);
 	}
 
 	@Override
@@ -39,13 +39,13 @@ public class BooleanOverlay extends ScalarOverlay<Boolean> {
 		}
 
 		@Override
-		public BooleanOverlay _create(Boolean value, ReferenceRegistry refReg) {
-			return new BooleanOverlay(value, refReg);
+		public BooleanOverlay _create(Boolean value, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+			return new BooleanOverlay(value, parent, refReg);
 		}
 
 		@Override
-		public BooleanOverlay _create(JsonNode json, ReferenceRegistry refReg) {
-			return new BooleanOverlay(json, refReg);
+		public BooleanOverlay _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+			return new BooleanOverlay(json, parent, refReg);
 		}
 	};
 }

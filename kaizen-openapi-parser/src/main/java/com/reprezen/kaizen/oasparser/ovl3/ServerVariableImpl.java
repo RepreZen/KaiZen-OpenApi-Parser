@@ -1,6 +1,7 @@
 package com.reprezen.kaizen.oasparser.ovl3;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
@@ -12,7 +13,6 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.PrimitiveOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 import com.reprezen.kaizen.oasparser.model3.ServerVariable;
-import com.reprezen.kaizen.oasparser.ovl3.ChildListOverlay;
 import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
 import java.util.Collection;
 import java.util.Map;
@@ -21,26 +21,26 @@ import javax.annotation.Generated;
 public class ServerVariableImpl extends OpenApiObjectImpl<ServerVariable> implements ServerVariable {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public ServerVariableImpl(JsonNode json, ReferenceRegistry refReg) {
-        super(json, refReg);
+    public ServerVariableImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        super(json, parent, refReg);
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public ServerVariableImpl(ServerVariable serverVariable, ReferenceRegistry refReg) {
-        super(serverVariable, refReg);
+    public ServerVariableImpl(ServerVariable serverVariable, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        super(serverVariable, parent, refReg);
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildListOverlay<Object, PrimitiveOverlay> enumValues = createChildList("enum", PrimitiveOverlay.factory);
+    private ChildListOverlay<Object, PrimitiveOverlay> enumValues = createChildList("enum", this, PrimitiveOverlay.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Object, PrimitiveOverlay> defaultValue = createChild("default", PrimitiveOverlay.factory);
+    private ChildOverlay<Object, PrimitiveOverlay> defaultValue = createChild("default", this, PrimitiveOverlay.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> description = createChild("description", StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> description = createChild("description", this, StringOverlay.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object, ObjectOverlay> extensions = createChildMap("", ObjectOverlay.factory, "x-.+");
+    private ChildMapOverlay<Object, ObjectOverlay> extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
 
     // EnumValue
     @Override
@@ -156,13 +156,13 @@ public class ServerVariableImpl extends OpenApiObjectImpl<ServerVariable> implem
     }
 
     @Override
-    public ServerVariableImpl _create(ServerVariable serverVariable, ReferenceRegistry refReg) {
-        return new ServerVariableImpl(serverVariable, refReg);
+    public ServerVariableImpl _create(ServerVariable serverVariable, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        return new ServerVariableImpl(serverVariable, parent, refReg);
     }
 
     @Override
-    public ServerVariableImpl _create(JsonNode json, ReferenceRegistry refReg) {
-        return new ServerVariableImpl(json, refReg);
+    public ServerVariableImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        return new ServerVariableImpl(json, parent, refReg);
     }
 };
 

@@ -15,7 +15,6 @@ import java.util.Map;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.MissingNode;
 import com.google.common.collect.Maps;
-import com.reprezen.kaizen.oasparser.ovl3.ChildListOverlay;
 
 public abstract class PropertiesOverlay<V extends IPropertiesOverlay<V>> extends JsonOverlay<V> {
 
@@ -23,13 +22,13 @@ public abstract class PropertiesOverlay<V extends IPropertiesOverlay<V>> extends
 
 	private JsonNode initJson;
 
-	protected PropertiesOverlay(JsonNode json, ReferenceRegistry refReg) {
-		super(json, refReg);
+	protected PropertiesOverlay(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+		super(json, parent, refReg);
 		this.initJson = json;
 	}
 
-	public PropertiesOverlay(V value, ReferenceRegistry refReg) {
-		super(value, refReg);
+	public PropertiesOverlay(V value, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+		super(value, parent, refReg);
 		this.initJson = MissingNode.getInstance();
 	}
 
@@ -69,25 +68,26 @@ public abstract class PropertiesOverlay<V extends IPropertiesOverlay<V>> extends
 		super.set(value);
 	}
 
-	protected <VC, OVC extends JsonOverlay<VC>> ChildOverlay<VC, OVC> createChild(String path,
+	protected <VC, OVC extends JsonOverlay<VC>> ChildOverlay<VC, OVC> createChild(String path, JsonOverlay<?> parent,
 			OverlayFactory<VC, OVC> factory) {
-		ChildOverlay<VC, OVC> child = new ChildOverlay<VC, OVC>(path, initJson.at("/" + path), factory, refReg);
+		ChildOverlay<VC, OVC> child = new ChildOverlay<VC, OVC>(path, initJson.at("/" + path), parent, factory, refReg);
 		children.put(path, child);
 		return child;
 	}
 
 	protected <VC, OVC extends JsonOverlay<VC>> ChildMapOverlay<VC, OVC> createChildMap(String path,
-			OverlayFactory<VC, OVC> factory, String keyPattern) {
+			JsonOverlay<?> parent, OverlayFactory<VC, OVC> factory, String keyPattern) {
 		ChildMapOverlay<VC, OVC> child = new ChildMapOverlay<VC, OVC>(path,
-				initJson.at(path.isEmpty() ? "" : "/" + path), MapOverlay.getFactory(factory, keyPattern), refReg);
+				initJson.at(path.isEmpty() ? "" : "/" + path), parent, MapOverlay.getFactory(factory, keyPattern),
+				refReg);
 		children.put(path, child);
 		return child;
 	}
 
 	protected <VC, OVC extends JsonOverlay<VC>> ChildListOverlay<VC, OVC> createChildList(String path,
-			OverlayFactory<VC, OVC> factory) {
+			JsonOverlay<?> parent, OverlayFactory<VC, OVC> factory) {
 		ChildListOverlay<VC, OVC> child = new ChildListOverlay<VC, OVC>(path,
-				initJson.at(path.isEmpty() ? "" : "/" + path), ListOverlay.getFactory(factory), refReg);
+				initJson.at(path.isEmpty() ? "" : "/" + path), parent, ListOverlay.getFactory(factory), refReg);
 		children.put(path, child);
 		return child;
 	}

@@ -313,11 +313,11 @@ public class TypeData {
 		public String getPropertyNew() {
 			switch(structure) {
 			case scalar:
-				return t("createChild(${qpath}, ${implType}.factory)", this);
+				return t("createChild(${qpath}, this, ${implType}.factory)", this);
 			case collection:
-				return t("createChildList(${qpath}, ${implType}.factory)", this);
+				return t("createChildList(${qpath}, this, ${implType}.factory)", this);
 			case map:
-				return t("createChildMap(${qpath}, ${implType}.factory, ${qkeyPat})", this);
+				return t("createChildMap(${qpath}, this, ${implType}.factory, ${qkeyPat})", this);
 			}
 			return null;
 		}

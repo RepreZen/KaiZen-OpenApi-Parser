@@ -24,18 +24,20 @@ public class MapOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Map<St
 	private OverlayFactory<V, OV> valueFactory;
 	private Pattern keyPattern;
 
-	public MapOverlay(Map<String, V> value, OverlayFactory<V, OV> valueFactory, Pattern keyPattern,
-			ReferenceRegistry refReg) {
-		super(value, refReg);
+	public MapOverlay(Map<String, V> value, JsonOverlay<?> parent, OverlayFactory<V, OV> valueFactory,
+			Pattern keyPattern, ReferenceRegistry refReg) {
+		super(value, parent, refReg);
 		this.valueFactory = valueFactory;
 		this.keyPattern = keyPattern;
 		for (Entry<String, V> entry : value.entrySet()) {
-			overlays.put(entry.getKey(), valueFactory.create(entry.getValue(), refReg));
+			overlays.put(entry.getKey(),
+					new ChildOverlay<V, OV>(entry.getKey(), entry.getValue(), this, valueFactory, refReg));
 		}
 	}
 
-	public MapOverlay(JsonNode json, OverlayFactory<V, OV> valueFactory, Pattern keyPattern, ReferenceRegistry refReg) {
-		super(json, refReg);
+	public MapOverlay(JsonNode json, JsonOverlay<?> parent, OverlayFactory<V, OV> valueFactory, Pattern keyPattern,
+			ReferenceRegistry refReg) {
+		super(json, parent, refReg);
 		this.valueFactory = valueFactory;
 		this.keyPattern = keyPattern;
 		setupOverlays(json);
@@ -53,7 +55,8 @@ public class MapOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Map<St
 		overlays.clear();
 		for (Entry<String, JsonNode> field : iterable(json.fields())) {
 			if (keyPattern == null || keyPattern.matcher(field.getKey()).matches()) {
-				IJsonOverlay<V> child = new ChildOverlay<V, OV>(field.getKey(), field.getValue(), valueFactory, refReg);
+				IJsonOverlay<V> child = new ChildOverlay<V, OV>(field.getKey(), field.getValue(), this, valueFactory,
+						refReg);
 				overlays.put(field.getKey(), child);
 			}
 		}
@@ -79,7 +82,7 @@ public class MapOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Map<St
 	}
 
 	public void set(String name, V value) {
-		overlays.put(name, valueFactory.create(value, refReg));
+		overlays.put(name, valueFactory.create(value, this, refReg));
 	}
 
 	public void remove(String name) {
@@ -123,13 +126,13 @@ public class MapOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Map<St
 		}
 
 		@Override
-		public MapOverlay<V, OV> _create(Map<String, V> value, ReferenceRegistry refReg) {
-			return new MapOverlay<V, OV>(value, valueFactory, keyPattern, refReg);
+		public MapOverlay<V, OV> _create(Map<String, V> value, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+			return new MapOverlay<V, OV>(value, parent, valueFactory, keyPattern, refReg);
 		}
 
 		@Override
-		public MapOverlay<V, OV> _create(JsonNode json, ReferenceRegistry refReg) {
-			return new MapOverlay<V, OV>(json, valueFactory, keyPattern, refReg);
+		public MapOverlay<V, OV> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+			return new MapOverlay<V, OV>(json, parent, valueFactory, keyPattern, refReg);
 		}
 	}
 }

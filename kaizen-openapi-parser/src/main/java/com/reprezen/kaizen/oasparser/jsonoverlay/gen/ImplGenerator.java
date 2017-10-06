@@ -21,6 +21,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
@@ -31,7 +32,6 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.gen.SimpleJavaGenerator.Member;
 import com.reprezen.kaizen.oasparser.jsonoverlay.gen.TypeData.Field;
 import com.reprezen.kaizen.oasparser.jsonoverlay.gen.TypeData.Type;
-import com.reprezen.kaizen.oasparser.ovl3.ChildListOverlay;
 import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
 
 public class ImplGenerator extends TypeGenerator {
@@ -72,11 +72,11 @@ public class ImplGenerator extends TypeGenerator {
 	@Override
 	protected Members getConstructors(Type type) {
 		Members members = new Members();
-		members.add(t("public ${implName}(JsonNode json, ReferenceRegistry refReg)", type), //
-				code("super(json, refReg);"));
+		members.add(t("public ${implName}(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg)", type), //
+				code("super(json, parent, refReg);"));
 		requireTypes(JsonNode.class, JsonOverlay.class);
-		members.add(t("public ${implName}(${name} ${lcName}, ReferenceRegistry refReg)", type), //
-				code(t("super(${lcName}, refReg);", type)));
+		members.add(t("public ${implName}(${name} ${lcName}, JsonOverlay<?> parent, ReferenceRegistry refReg)", type), //
+				code(t("super(${lcName}, parent, refReg);", type)));
 		return members;
 	}
 
@@ -191,13 +191,13 @@ public class ImplGenerator extends TypeGenerator {
 				"    }", //
 				"", //
 				"    @Override", //
-				"    public ${implName} _create(${name} ${lcName}, ReferenceRegistry refReg) {", //
-				"        return new ${implName}(${lcName}, refReg);", //
+				"    public ${implName} _create(${name} ${lcName}, JsonOverlay<?> parent, ReferenceRegistry refReg) {", //
+				"        return new ${implName}(${lcName}, parent, refReg);", //
 				"    }", //
 				"", //
 				"    @Override", //
-				"    public ${implName} _create(JsonNode json, ReferenceRegistry refReg) {", //
-				"        return new ${implName}(json, refReg);", //
+				"    public ${implName} _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {", //
+				"        return new ${implName}(json, parent, refReg);", //
 				"    }", //
 				"}");
 		return new Member(StringUtils.join(decl, "\n"), null);

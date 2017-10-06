@@ -16,14 +16,14 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 public class ChildMapOverlay<V, OV extends JsonOverlay<V>> extends ChildOverlay<Map<String, V>, MapOverlay<V, OV>> {
 
-	public ChildMapOverlay(String path, JsonNode json, OverlayFactory<Map<String, V>, MapOverlay<V, OV>> factory,
-			ReferenceRegistry refReg) {
-		super(path, json, factory, refReg);
+	public ChildMapOverlay(String path, JsonNode json, JsonOverlay<?> parent,
+			OverlayFactory<Map<String, V>, MapOverlay<V, OV>> factory, ReferenceRegistry refReg) {
+		super(path, json, parent, factory, refReg);
 	}
 
-	public ChildMapOverlay(String path, Map<String, V> value, OverlayFactory<Map<String, V>, MapOverlay<V, OV>> factory,
-			ReferenceRegistry refReg) {
-		super(path, value, factory, refReg);
+	public ChildMapOverlay(String path, Map<String, V> value, JsonOverlay<?> parent,
+			OverlayFactory<Map<String, V>, MapOverlay<V, OV>> factory, ReferenceRegistry refReg) {
+		super(path, value, parent, factory, refReg);
 	}
 
 	public boolean containsKey(String name) {

@@ -23,30 +23,26 @@ import com.fasterxml.jackson.databind.node.MissingNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
 import com.fasterxml.jackson.databind.node.ValueNode;
-import com.google.common.base.Optional;
 
 public abstract class JsonOverlay<V> implements IJsonOverlay<V> {
 
 	protected final static ObjectMapper mapper = new ObjectMapper();
 
 	protected V value = null;
+	protected JsonOverlay<?> parent;
+
 	protected ReferenceRegistry refReg;
 
-	public JsonOverlay(V value, ReferenceRegistry refReg) {
-		this(Optional.fromNullable(value), Optional.<JsonNode>absent(), refReg);
-	}
-
-	public JsonOverlay(JsonNode json, ReferenceRegistry refReg) {
-		this(Optional.<V>absent(), Optional.fromNullable(json), refReg);
-	}
-
-	private JsonOverlay(Optional<V> value, Optional<JsonNode> json, ReferenceRegistry refReg) {
+	public JsonOverlay(V value, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+		this.value = value;
+		this.parent = parent;
 		this.refReg = refReg;
-		if (json.isPresent()) {
-			this.value = fromJson(json.get());
-		} else if (value.isPresent()) {
-			this.value = value.get();
-		}
+	}
+
+	public JsonOverlay(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+		this.value = fromJson(json);
+		this.parent = parent;
+		this.refReg = refReg;
 	}
 
 	@Override
@@ -80,6 +76,17 @@ public abstract class JsonOverlay<V> implements IJsonOverlay<V> {
 		this.value = value;
 	}
 
+	public JsonOverlay<?> getParent() {
+		return parent;
+	}
+	
+	protected void setParent(JsonOverlay<?> parent) {
+		this.parent = parent;
+	}
+	
+	public JsonOverlay<?> getRoot() {
+		return parent != null ? parent.getRoot() : this;
+	}
 	protected abstract V fromJson(JsonNode json);
 
 	public JsonNode toJson() {

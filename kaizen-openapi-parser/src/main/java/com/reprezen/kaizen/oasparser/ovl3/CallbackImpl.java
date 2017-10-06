@@ -17,20 +17,20 @@ import javax.annotation.Generated;
 public class CallbackImpl extends OpenApiObjectImpl<Callback> implements Callback {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public CallbackImpl(JsonNode json, ReferenceRegistry refReg) {
-        super(json, refReg);
+    public CallbackImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        super(json, parent, refReg);
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public CallbackImpl(Callback callback, ReferenceRegistry refReg) {
-        super(callback, refReg);
+    public CallbackImpl(Callback callback, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        super(callback, parent, refReg);
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Path, PathImpl> callbackPaths = createChildMap("", PathImpl.factory, "(?!x-).*");
+    private ChildMapOverlay<Path, PathImpl> callbackPaths = createChildMap("", this, PathImpl.factory, "(?!x-).*");
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object, ObjectOverlay> extensions = createChildMap("", ObjectOverlay.factory, "x-.+");
+    private ChildMapOverlay<Object, ObjectOverlay> extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
 
     // CallbackPath
     @Override
@@ -114,13 +114,13 @@ public class CallbackImpl extends OpenApiObjectImpl<Callback> implements Callbac
     }
 
     @Override
-    public CallbackImpl _create(Callback callback, ReferenceRegistry refReg) {
-        return new CallbackImpl(callback, refReg);
+    public CallbackImpl _create(Callback callback, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        return new CallbackImpl(callback, parent, refReg);
     }
 
     @Override
-    public CallbackImpl _create(JsonNode json, ReferenceRegistry refReg) {
-        return new CallbackImpl(json, refReg);
+    public CallbackImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        return new CallbackImpl(json, parent, refReg);
     }
 };
 

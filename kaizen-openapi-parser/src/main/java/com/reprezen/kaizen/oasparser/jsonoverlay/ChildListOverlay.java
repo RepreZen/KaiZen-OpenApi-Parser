@@ -8,27 +8,22 @@
  *  Contributors:
  *     ModelSolv, Inc. - initial API and implementation and/or initial documentation
  *******************************************************************************/
-package com.reprezen.kaizen.oasparser.ovl3;
+package com.reprezen.kaizen.oasparser.jsonoverlay;
 
 import java.util.Collection;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 
 public class ChildListOverlay<V, OV extends JsonOverlay<V>> extends ChildOverlay<Collection<V>, ListOverlay<V, OV>> {
 
-	public ChildListOverlay(String path, JsonNode json, OverlayFactory<Collection<V>, ListOverlay<V, OV>> factory,
-			ReferenceRegistry refReg) {
-		super(path, json, factory, refReg);
+	public ChildListOverlay(String path, JsonNode json, JsonOverlay<?> parent,
+			OverlayFactory<Collection<V>, ListOverlay<V, OV>> factory, ReferenceRegistry refReg) {
+		super(path, json, parent, factory, refReg);
 	}
 
-	public ChildListOverlay(String path, Collection<V> value, OverlayFactory<Collection<V>, ListOverlay<V, OV>> factory,
-			ReferenceRegistry refReg) {
-		super(path, value, factory, refReg);
+	public ChildListOverlay(String path, Collection<V> value, JsonOverlay<?> parent,
+			OverlayFactory<Collection<V>, ListOverlay<V, OV>> factory, ReferenceRegistry refReg) {
+		super(path, value, parent, factory, refReg);
 	}
 
 	public V get(int index) {

@@ -16,17 +16,17 @@ import javax.annotation.Generated;
 public class SecurityRequirementImpl extends OpenApiObjectImpl<SecurityRequirement> implements SecurityRequirement {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public SecurityRequirementImpl(JsonNode json, ReferenceRegistry refReg) {
-        super(json, refReg);
+    public SecurityRequirementImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        super(json, parent, refReg);
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public SecurityRequirementImpl(SecurityRequirement securityRequirement, ReferenceRegistry refReg) {
-        super(securityRequirement, refReg);
+    public SecurityRequirementImpl(SecurityRequirement securityRequirement, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        super(securityRequirement, parent, refReg);
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<SecurityParameter, SecurityParameterImpl> requirements = createChildMap("", SecurityParameterImpl.factory, "[a-zA-Z0-9\\._-]+");
+    private ChildMapOverlay<SecurityParameter, SecurityParameterImpl> requirements = createChildMap("", this, SecurityParameterImpl.factory, "[a-zA-Z0-9\\._-]+");
 
     // Requirement
     @Override
@@ -73,13 +73,13 @@ public class SecurityRequirementImpl extends OpenApiObjectImpl<SecurityRequireme
     }
 
     @Override
-    public SecurityRequirementImpl _create(SecurityRequirement securityRequirement, ReferenceRegistry refReg) {
-        return new SecurityRequirementImpl(securityRequirement, refReg);
+    public SecurityRequirementImpl _create(SecurityRequirement securityRequirement, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        return new SecurityRequirementImpl(securityRequirement, parent, refReg);
     }
 
     @Override
-    public SecurityRequirementImpl _create(JsonNode json, ReferenceRegistry refReg) {
-        return new SecurityRequirementImpl(json, refReg);
+    public SecurityRequirementImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        return new SecurityRequirementImpl(json, parent, refReg);
     }
 };
 

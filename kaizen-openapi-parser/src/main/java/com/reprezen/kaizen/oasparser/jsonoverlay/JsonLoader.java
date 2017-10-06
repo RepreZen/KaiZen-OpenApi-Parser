@@ -26,36 +26,36 @@ import com.google.common.collect.Maps;
 
 public class JsonLoader {
 
-    private static ObjectMapper jsonMapper = new ObjectMapper();
-    private static ObjectMapper yamlMapper = new ObjectMapper(new YAMLFactory());
-    private Yaml yaml = new Yaml();
+	private static ObjectMapper jsonMapper = new ObjectMapper();
+	private static ObjectMapper yamlMapper = new ObjectMapper(new YAMLFactory());
+	private Yaml yaml = new Yaml();
 
-    private Map<String, JsonNode> cache = Maps.newHashMap();
+	private Map<String, JsonNode> cache = Maps.newHashMap();
 
-    public JsonLoader() {
-    }
+	public JsonLoader() {
+	}
 
-    public JsonNode load(URL url) throws IOException {
-        String urlString = url.toString();
-        if (cache.containsKey(urlString)) {
-            return cache.get(urlString);
-        }
-        String json = IOUtils.toString(url.openStream(), Charsets.UTF_8);
-        return loadString(url, json);
-    }
+	public JsonNode load(URL url) throws IOException {
+		String urlString = url.toString();
+		if (cache.containsKey(urlString)) {
+			return cache.get(urlString);
+		}
+		String json = IOUtils.toString(url.openStream(), Charsets.UTF_8);
+		return loadString(url, json);
+	}
 
-    public JsonNode loadString(URL url, String json) throws IOException, JsonProcessingException {
-        JsonNode tree;
-        if (json.trim().startsWith("{")) {
-            tree = jsonMapper.readTree(json);
-        } else {
-            Object parsedYaml = yaml.load(json); // this handles aliases - YAMLMapper doesn't
-            tree = yamlMapper.convertValue(parsedYaml, JsonNode.class);
-        }
-        if (url != null) {
-            cache.put(url.toString(), tree);
-        }
-        return tree;
-    }
+	public JsonNode loadString(URL url, String json) throws IOException, JsonProcessingException {
+		JsonNode tree;
+		if (json.trim().startsWith("{")) {
+			tree = jsonMapper.readTree(json);
+		} else {
+			Object parsedYaml = yaml.load(json); // this handles aliases - YAMLMapper doesn't
+			tree = yamlMapper.convertValue(parsedYaml, JsonNode.class);
+		}
+		if (url != null) {
+			cache.put(url.toString(), tree);
+		}
+		return tree;
+	}
 
 }

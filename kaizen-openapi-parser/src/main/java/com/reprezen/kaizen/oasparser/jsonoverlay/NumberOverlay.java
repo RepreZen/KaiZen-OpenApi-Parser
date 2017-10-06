@@ -19,12 +19,12 @@ import com.google.common.collect.Maps;
 
 public class NumberOverlay extends ScalarOverlay<Number> {
 
-	private NumberOverlay(JsonNode json, ReferenceRegistry refReg) {
-		super(json, refReg);
+	private NumberOverlay(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+		super(json, parent, refReg);
 	}
 
-	private NumberOverlay(Number value, ReferenceRegistry refReg) {
-		super(value, refReg);
+	private NumberOverlay(Number value, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+		super(value, parent, refReg);
 	}
 
 	@Override
@@ -88,13 +88,13 @@ public class NumberOverlay extends ScalarOverlay<Number> {
 		}
 
 		@Override
-		public NumberOverlay _create(Number value, ReferenceRegistry refReg) {
-			return new NumberOverlay(value, refReg);
+		public NumberOverlay _create(Number value, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+			return new NumberOverlay(value, parent, refReg);
 		}
 
 		@Override
-		public NumberOverlay _create(JsonNode json, ReferenceRegistry refReg) {
-			return new NumberOverlay(json, refReg);
+		public NumberOverlay _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+			return new NumberOverlay(json, parent, refReg);
 		}
 	};
 

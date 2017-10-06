@@ -17,15 +17,20 @@ public class ChildOverlay<V, OV extends JsonOverlay<V>> implements IJsonOverlay<
 
 	private JsonPath path;
 	private JsonOverlay<V> overlay;
+	private JsonOverlay<?> parent;
 	private Reference reference = null;
 
-	public ChildOverlay(String path, V value, OverlayFactory<V, OV> factory, ReferenceRegistry refReg) {
+	public ChildOverlay(String path, V value, JsonOverlay<?> parent, OverlayFactory<V, OV> factory,
+			ReferenceRegistry refReg) {
 		this.path = new JsonPath(path);
-		this.overlay = factory.create(value, refReg);
+		this.parent = parent;
+		this.overlay = factory.create(value, parent, refReg);
 	}
 
-	public ChildOverlay(String path, JsonNode json, OverlayFactory<V, OV> factory, ReferenceRegistry refReg) {
+	public ChildOverlay(String path, JsonNode json, JsonOverlay<?> parent, OverlayFactory<V, OV> factory,
+			ReferenceRegistry refReg) {
 		this.path = new JsonPath(path);
+		this.parent = parent;
 		if (isReferenceNode(json)) {
 			this.reference = refReg.getRef(json);
 			JsonNode resolved = reference.resolve();
@@ -41,14 +46,16 @@ public class ChildOverlay<V, OV extends JsonOverlay<V>> implements IJsonOverlay<
 						throw new IllegalStateException("Referenced object is not compatible with referencing site");
 					}
 				} else {
-					this.overlay = factory.create(resolved, refReg);
+					// note - since this is a reference, we don't set parent. If there's a way to
+					// navigate to the object directly, that will determine its parent
+					this.overlay = factory.create(resolved, null, refReg);
 					refReg.setOverlay(resolved, overlay);
 				}
 			} else {
 				this.overlay = null;
 			}
 		} else {
-			this.overlay = factory.create(json, refReg);
+			this.overlay = factory.create(json, parent, refReg);
 		}
 	}
 
@@ -76,10 +83,21 @@ public class ChildOverlay<V, OV extends JsonOverlay<V>> implements IJsonOverlay<
 		overlay.set(value);
 	}
 
+	public IJsonOverlay<?> getParent() {
+		// Note: here we return the creator of the childnode, which for a reference is
+		// the holder of the reference. This may not be the same as the parent of the
+		// referenced object, which is available via getOverlay().getParent().
+		return parent;
+	}
+
+	public IJsonOverlay<?> getRoot() {
+		return parent != null ? parent.getParent() : overlay.getRoot();
+	}
+
 	public JsonNode toJson() {
 		return overlay.toJson();
 	}
-	
+
 	public JsonNode toJson(boolean keepEmpty) {
 		return overlay.toJson(keepEmpty);
 	}
@@ -99,6 +117,6 @@ public class ChildOverlay<V, OV extends JsonOverlay<V>> implements IJsonOverlay<
 	@Override
 	public String toString() {
 		String refString = reference != null ? String.format("<%s>", reference.getRefString()) : "";
-		return String.format("Child@%s%s: %s]" , path, refString, overlay);
-	}	
+		return String.format("Child@%s%s: %s]", path, refString, overlay);
+	}
 }

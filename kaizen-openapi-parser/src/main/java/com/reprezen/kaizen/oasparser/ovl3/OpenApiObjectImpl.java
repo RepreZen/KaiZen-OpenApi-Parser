@@ -11,7 +11,10 @@
 package com.reprezen.kaizen.oasparser.ovl3;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.reprezen.kaizen.oasparser.OpenApi;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IJsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.IPropertiesOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
@@ -20,27 +23,26 @@ import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
 public abstract class OpenApiObjectImpl<V extends IPropertiesOverlay<V>> extends PropertiesOverlay<V>
 		implements OpenApiObject<V> {
 
-	protected OpenApiObjectImpl(JsonNode json, ReferenceRegistry refReg) {
-		super(json, refReg);
+	protected OpenApiObjectImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+		super(json, parent, refReg);
 	}
 
-	protected OpenApiObjectImpl(V value, ReferenceRegistry refReg) {
-		super(value, refReg);
+	protected OpenApiObjectImpl(V value, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+		super(value, parent, refReg);
 	}
 
+	@Override
+	public OpenApi<?> getModel() {
+		IJsonOverlay<?> root = getRoot();
+		return root instanceof OpenApi<?> ? (OpenApi<?>) root : null;
+	}
 
-	// TODO reimplement
-	// @Override
-	// public OpenApi3 getModel() {
-	// IJsonOverlay<?> root = getRoot();
-	// return root instanceof OpenApi3 ? (OpenApi3) root : null;
-	// }
-	//
-	// public OpenApiObject<?> getParentObject() {
-	// IJsonOverlay<?> parent = super.getParent();
-	// while (parent != null && !(parent instanceof OpenApiObject)) {
-	// parent = parent.getParent();
-	// }
-	// return (OpenApiObject<?>) parent;
-	// }
+	@Override
+	public OpenApiObject<?> getParentObject() {
+		IJsonOverlay<?> parent = super.getParent();
+		while (parent != null && !(parent instanceof OpenApiObject)) {
+			parent = parent.getParent();
+		}
+		return (OpenApiObject<?>) parent;
+	}
 }

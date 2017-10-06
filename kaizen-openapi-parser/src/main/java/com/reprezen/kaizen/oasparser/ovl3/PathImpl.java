@@ -1,6 +1,7 @@
 package com.reprezen.kaizen.oasparser.ovl3;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
@@ -14,7 +15,6 @@ import com.reprezen.kaizen.oasparser.model3.Operation;
 import com.reprezen.kaizen.oasparser.model3.Parameter;
 import com.reprezen.kaizen.oasparser.model3.Path;
 import com.reprezen.kaizen.oasparser.model3.Server;
-import com.reprezen.kaizen.oasparser.ovl3.ChildListOverlay;
 import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
 import com.reprezen.kaizen.oasparser.ovl3.OperationImpl;
 import com.reprezen.kaizen.oasparser.ovl3.ParameterImpl;
@@ -106,32 +106,32 @@ public class PathImpl extends OpenApiObjectImpl<Path> implements Path {
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public PathImpl(JsonNode json, ReferenceRegistry refReg) {
-        super(json, refReg);
+    public PathImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        super(json, parent, refReg);
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public PathImpl(Path path, ReferenceRegistry refReg) {
-        super(path, refReg);
+    public PathImpl(Path path, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        super(path, parent, refReg);
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> summary = createChild("summary", StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> summary = createChild("summary", this, StringOverlay.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> description = createChild("description", StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> description = createChild("description", this, StringOverlay.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Operation, OperationImpl> operations = createChildMap("", OperationImpl.factory, "get|put|post|delete|options|head|patch|trace");
+    private ChildMapOverlay<Operation, OperationImpl> operations = createChildMap("", this, OperationImpl.factory, "get|put|post|delete|options|head|patch|trace");
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildListOverlay<Server, ServerImpl> servers = createChildList("servers", ServerImpl.factory);
+    private ChildListOverlay<Server, ServerImpl> servers = createChildList("servers", this, ServerImpl.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildListOverlay<Parameter, ParameterImpl> parameters = createChildList("parameters", ParameterImpl.factory);
+    private ChildListOverlay<Parameter, ParameterImpl> parameters = createChildList("parameters", this, ParameterImpl.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object, ObjectOverlay> extensions = createChildMap("", ObjectOverlay.factory, "x-.+");
+    private ChildMapOverlay<Object, ObjectOverlay> extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
 
     // Summary
     @Override
@@ -327,13 +327,13 @@ public class PathImpl extends OpenApiObjectImpl<Path> implements Path {
     }
 
     @Override
-    public PathImpl _create(Path path, ReferenceRegistry refReg) {
-        return new PathImpl(path, refReg);
+    public PathImpl _create(Path path, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        return new PathImpl(path, parent, refReg);
     }
 
     @Override
-    public PathImpl _create(JsonNode json, ReferenceRegistry refReg) {
-        return new PathImpl(json, refReg);
+    public PathImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        return new PathImpl(json, parent, refReg);
     }
 };
 

@@ -1,6 +1,7 @@
 package com.reprezen.kaizen.oasparser.ovl3;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
@@ -11,7 +12,6 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 import com.reprezen.kaizen.oasparser.model3.License;
-import com.reprezen.kaizen.oasparser.ovl3.ChildListOverlay;
 import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
 import java.util.Collection;
 import java.util.Map;
@@ -22,23 +22,23 @@ public class LicenseImpl extends OpenApiObjectImpl<License> implements License {
     JsonNode initJson = jsonMissing();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public LicenseImpl(JsonNode json, ReferenceRegistry refReg) {
-        super(json, refReg);
+    public LicenseImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        super(json, parent, refReg);
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public LicenseImpl(License license, ReferenceRegistry refReg) {
-        super(license, refReg);
+    public LicenseImpl(License license, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        super(license, parent, refReg);
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> name = createChild("name", StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> name = createChild("name", this, StringOverlay.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> url = createChild("url", StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> url = createChild("url", this, StringOverlay.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object, ObjectOverlay> extensions = createChildMap("", ObjectOverlay.factory, "x-.+");
+    private ChildMapOverlay<Object, ObjectOverlay> extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
 
     // Name
     @Override
@@ -111,13 +111,13 @@ public class LicenseImpl extends OpenApiObjectImpl<License> implements License {
     }
 
     @Override
-    public LicenseImpl _create(License license, ReferenceRegistry refReg) {
-        return new LicenseImpl(license, refReg);
+    public LicenseImpl _create(License license, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        return new LicenseImpl(license, parent, refReg);
     }
 
     @Override
-    public LicenseImpl _create(JsonNode json, ReferenceRegistry refReg) {
-        return new LicenseImpl(json, refReg);
+    public LicenseImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        return new LicenseImpl(json, parent, refReg);
     }
 };
 

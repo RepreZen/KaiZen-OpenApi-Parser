@@ -15,12 +15,12 @@ import com.fasterxml.jackson.databind.node.MissingNode;
 
 public abstract class ScalarOverlay<V> extends JsonOverlay<V> {
 
-	public ScalarOverlay(JsonNode json, ReferenceRegistry refReg) {
-		super(json, refReg);
+	public ScalarOverlay(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+		super(json, parent, refReg);
 	}
 
-	public ScalarOverlay(V value, ReferenceRegistry refReg) {
-		super(value, refReg);
+	public ScalarOverlay(V value, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+		super(value, parent, refReg);
 	}
 
 	@Override

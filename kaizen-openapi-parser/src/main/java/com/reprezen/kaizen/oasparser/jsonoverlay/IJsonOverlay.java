@@ -16,16 +16,20 @@ import com.fasterxml.jackson.databind.JsonNode;
 public interface IJsonOverlay<V> {
 
 	V get();
-	
+
 	void set(V value);
 
 	IJsonOverlay<?> find(JsonPointer path);
 
 	IJsonOverlay<?> find(String path);
-	
+
 	JsonNode toJson();
-	
+
 	JsonNode toJson(boolean keepEmpty);
-	
+
 	boolean isPresent();
+	
+	IJsonOverlay<?> getParent();
+	
+	IJsonOverlay<?> getRoot();
 }

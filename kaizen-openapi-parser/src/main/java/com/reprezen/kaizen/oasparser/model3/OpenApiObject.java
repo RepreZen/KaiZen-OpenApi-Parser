@@ -10,12 +10,10 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.model3;
 
+import com.reprezen.kaizen.oasparser.OpenApi;
 import com.reprezen.kaizen.oasparser.jsonoverlay.IPropertiesOverlay;
 
 public interface OpenApiObject<VI> extends IPropertiesOverlay<VI> {
 
-	// TODO reimplement
-	// OpenApi3 getModel();
-	//
-	// OpenApiObject<?> getParentObject();
+	OpenApi<?> getModel();
 }

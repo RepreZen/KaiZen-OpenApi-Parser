@@ -13,6 +13,7 @@ package com.reprezen.kaizen.oasparser.jsonoverlay;
 import java.util.Collection;
 import java.util.List;
 
+import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.google.common.base.Function;
@@ -28,8 +29,10 @@ public class ListOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Colle
 			ReferenceRegistry refReg) {
 		super(value, parent, refReg);
 		this.itemFactory = itemFactory;
-		for (V item : value) {
-			overlays.add(itemFactory.create(item, this, refReg));
+		if (value != null) {
+			for (V item : value) {
+				overlays.add(itemFactory.create(item, this, refReg));
+			}
 		}
 	}
 
@@ -54,6 +57,12 @@ public class ListOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Colle
 			overlays.add(new ChildOverlay<V, OV>(null, element, this, itemFactory, refReg));
 		}
 		set(getItems());
+	}
+
+	@Override
+	public IJsonOverlay<?> _find(JsonPointer path) {
+		int index = path.getMatchingIndex();
+		return overlays.size() > index ? overlays.get(index).find(path.tail()) : null;
 	}
 
 	@Override
@@ -84,6 +93,10 @@ public class ListOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Colle
 
 	public void remove(int index) {
 		overlays.remove(index);
+	}
+
+	public int size() {
+		return overlays.size();
 	}
 
 	private Function<IJsonOverlay<V>, V> itemGetter = new Function<IJsonOverlay<V>, V>() {

@@ -615,10 +615,12 @@ types:
         name: AdditionalPropertiesSchema
         parentPath: additionalProperties
         type: Schema
+        createTest: .isObject() 
       additionalPropertiesBoolean:
         name: AdditionalProperties
         parentPath: additionalProperties
         type: Boolean
+        createTest: .isBoolean()
       description:
         name: Description
         type: String

@@ -55,13 +55,13 @@ public abstract class JsonOverlay<V> implements IJsonOverlay<V> {
 		return value != null;
 	}
 
+	
 	@Override
 	public IJsonOverlay<?> find(JsonPointer path) {
-		// this implementation suffices for primitive types because they have no
-		// children. This must be overridden for overlays designed for JSON arrays or
-		// objects
-		return path.matches() ? this : null;
+		return path.matches() ? this : _find(path);
 	}
+
+	abstract protected IJsonOverlay<?> _find(JsonPointer path);
 
 	@Override
 	public IJsonOverlay<?> find(String path) {

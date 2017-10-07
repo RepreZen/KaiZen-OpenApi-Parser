@@ -11,174 +11,126 @@
 package com.reprezen.kaizen.oasparser.jsonoverlay;
 
 import java.util.Map.Entry;
-import java.util.regex.Pattern;
 
 import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class JsonPath {
 
-	private final Segment[] segments;
-
-	public JsonPath(Segment... segments) {
-		this.segments = segments;
-	}
+	private final JsonPointer path;
+	private final int pathLen;
 
 	public JsonPath(String path) {
-		this(path != null && !path.isEmpty() ? getSegments(path.split("/")) : getSegments("*"));
+		boolean emptyPath = path == null || path.isEmpty();
+		this.path = JsonPointer.compile(emptyPath ? "" : "/" + path);
+		this.pathLen = emptyPath ? 0 : path.split("/").length;
 	}
 
-	public JsonPath(JsonPointer path) {
-		this(path.toString());
-	}
-
-	public void setNode(JsonNode container, JsonNode value) {
-		setNode(container, value, false);
-	}
-
-	public JsonNode setNode(JsonNode container, JsonNode value, boolean merge) {
-		for (int i = 0; i < segments.length - 1; i++) {
-			container = addNode(container, segments[i], segments[i + 1]);
-		}
-		return addNode(container, segments[segments.length - 1], value, merge);
-	}
-
-	private static Pattern indexPat = Pattern.compile("^[1-9][0-9]*$");
-
-	private static Segment[] getSegments(String... rawSegments) {
-		Segment[] segments = new Segment[rawSegments.length];
-		for (int i = 0; i < segments.length; i++) {
-			if (indexPat.matcher(rawSegments[i]).matches()) {
-				segments[i] = new Segment(Integer.parseInt(rawSegments[i]));
+	protected boolean matchesPath(JsonPointer testPath) {
+		JsonPointer ourPath = this.path;
+		while (!ourPath.matches()) {
+			if (!testPath.matchesProperty(ourPath.getMatchingProperty())) {
+				return false;
 			} else {
-				segments[i] = new Segment(rawSegments[i]);
+				ourPath = ourPath.tail();
+				testPath = testPath.tail();
 			}
 		}
-		return segments;
+		return true;
 	}
 
-	private JsonNode addNode(JsonNode container, Segment segment, Segment nextSegment) {
-		if ((container.isObject() || container.isMissingNode()) && segment.isString()) {
-			ObjectNode obj = getObjectNode(container);
-			String key = segment.asString();
-			if (obj.has(key)) {
-				return obj.get(key);
-			} else if (nextSegment.isString()) {
-				return obj.putObject(key);
-			} else {
-				ArrayNode array = JsonNodeFactory.instance.arrayNode();
-				obj.set(key, array);
-				return obj;
-			}
-		} else if ((container.isArray() || container.isMissingNode()) && segment.isInt()) {
-			ArrayNode array = getArrayNode(container);
-			int index = segment.asInt();
-			if (array.has(index)) {
-				return array.get(index);
-			} else if (index == -1 || array.has(index - 1)) {
-				// tack element onto end of array
-				JsonNode newNode = nextSegment.isString() ? JsonNodeFactory.instance.objectNode()
-						: JsonNodeFactory.instance.arrayNode();
-				array.set(array.size(), newNode);
-				return array;
-			}
+	protected JsonPointer tailPath(JsonPointer path) {
+		for (int i = 0; i < pathLen; i++) {
+			path = path.tail();
 		}
-		throw new IllegalStateException("Child path incompatible with existing JSON tree");
+		return path;
 	}
 
-	private JsonNode addNode(JsonNode container, Segment segment, JsonNode json, boolean merge) {
-		if (container.isMissingNode() && segment.isInt() && segment.asInt() == -1) {
-			return json;
-		} else if ((container.isMissingNode() || container.isObject()) && segment.isString()) {
-			ObjectNode obj = getObjectNode(container);
-			if (merge) {
-				if (json.isObject()) {
-					for (Entry<String, JsonNode> field : JsonOverlay.iterable(json.fields())) {
-						obj.set(field.getKey(), field.getValue());
-					}
-				} else {
-					throw new IllegalStateException("Cannot merge into a non-object JsonNode");
-				}
+	public JsonNode setInPath(JsonNode container, JsonNode value) {
+		if (this.path.matches()) {
+			if (container.isMissingNode()) {
+				return value;
+			} else if (canMerge(container, value, null)) {
+				return merge(container, value, null);
+			} else if (canAdd(container, value)) {
+				return add(container, value);
 			} else {
-				obj.set(segment.asString(), json);
+				throw badStructure();
 			}
-			return obj;
-		} else if ((container.isMissingNode() || container.isArray()) && segment.isInt()
-				&& segment.asInt() <= container.size()) {
-			ArrayNode array = getArrayNode(container);
-			int index = segment.asInt() >= 0 ? segment.asInt() : array.size();
-			if (index < array.size()) {
-				array.set(index, json);
-			} else {
-				array.add(json);
-			}
-			return array;
-		} else {
+		} else if (container.isObject() || container.isMissingNode()) {
+			container = container.isMissingNode() ? JsonOverlay.jsonObject() : container;
+			setInPath((ObjectNode) container, this.path, value);
 			return container;
+		} else {
+			throw badStructure();
 		}
 	}
 
-	private ArrayNode getArrayNode(JsonNode container) {
-		return container.isArray() ? (ArrayNode) container : JsonOverlay.jsonArray();
+	private void setInPath(ObjectNode obj, JsonPointer path, JsonNode value) {
+		String key = path.getMatchingProperty();
+		path = path.tail();
+		if (path.matches()) {
+			if (!obj.has(key)) {
+				obj.set(key, value);
+			} else if (canMerge(obj, value, key)) {
+				merge(obj, value, key);
+			} else if (canAdd(obj, value)) {
+				add(obj, value);
+			} else {
+				throw badStructure();
+			}
+		} else {
+			obj = obj.has(key) ? (ObjectNode) obj.get(key) : obj.putObject(key);
+			setInPath(obj, path, value);
+		}
 	}
 
-	private ObjectNode getObjectNode(JsonNode container) {
-		return container.isObject() ? (ObjectNode) container : JsonOverlay.jsonObject();
+	private boolean canMerge(JsonNode container, JsonNode value, String key) {
+		if (!container.isObject() && !container.isMissingNode()) {
+			return false;
+		}
+		ObjectNode obj = container.isMissingNode() ? JsonOverlay.jsonObject() : (ObjectNode) container;
+		if (key != null && obj.has(key) && !obj.get(key).isObject()) {
+			return false;
+		}
+		if (!value.isObject() || value.isMissingNode()) {
+			return false;
+		}
+		return true;
+	}
+
+	private JsonNode merge(JsonNode container, JsonNode value, String key) {
+		ObjectNode into = container.isMissingNode() ? JsonOverlay.jsonObject() : (ObjectNode) container;
+		ObjectNode result = into;
+		if (key != null) {
+			into = into.has(key) ? (ObjectNode) into.get(key) : into.putObject(key);
+		}
+		if (!value.isMissingNode()) {
+			ObjectNode from = (ObjectNode) value;
+			for (Entry<String, JsonNode> field : JsonOverlay.iterable(from.fields())) {
+				into.set(field.getKey(), field.getValue());
+			}
+		}
+		return result;
+	}
+
+	private boolean canAdd(JsonNode container, JsonNode value) {
+		return container.isArray();
+	}
+
+	private JsonNode add(JsonNode container, JsonNode value) {
+		((ArrayNode) container).add(value);
+		return container;
+	}
+
+	private IllegalStateException badStructure() {
+		return new IllegalStateException("Value is incompatible with existing JSON structure");
 	}
 
 	@Override
 	public String toString() {
-		String path = "";
-		for (Segment segment : segments) {
-			path += segment.toString();
-		}
-		return path.isEmpty() ? "*" : path;
+		return path.matches() ? "*" : path.toString();
 	}
-
-	private static class Segment {
-		private final String string;
-		private final Integer integer;
-
-		public Segment(String string) {
-			// special case - * means append to end of array
-			if (string.equals("*")) {
-				this.string = null;
-				this.integer = -1;
-			} else {
-				this.string = string;
-				this.integer = null;
-			}
-		}
-
-		public Segment(Integer integer) {
-			this.integer = integer;
-			this.string = null;
-		}
-
-		public boolean isString() {
-			return string != null;
-		}
-
-		public boolean isInt() {
-			return integer != null;
-		}
-
-		public String asString() {
-			return string;
-		}
-
-		public Integer asInt() {
-			return integer;
-		}
-
-		@Override
-		public String toString() {
-			return isString() ? "/" + string : "[" + integer + "]";
-		}
-
-	}
-
 }

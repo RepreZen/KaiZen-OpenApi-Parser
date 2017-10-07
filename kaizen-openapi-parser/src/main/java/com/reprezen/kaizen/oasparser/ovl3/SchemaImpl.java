@@ -121,10 +121,10 @@ public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
     private ChildMapOverlay<Schema, SchemaImpl> properties = createChildMap("properties", this, SchemaImpl.factory, null);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Schema, SchemaImpl> additionalPropertiesSchema = createChild("additionalProperties", this, SchemaImpl.factory);
+    private ChildOverlay<Schema, SchemaImpl> additionalPropertiesSchema = createChild(initJson.at("/additionalProperties").isObject(), "additionalProperties", this, SchemaImpl.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Boolean, BooleanOverlay> additionalProperties = createChild("additionalProperties", this, BooleanOverlay.factory);
+    private ChildOverlay<Boolean, BooleanOverlay> additionalProperties = createChild(initJson.at("/additionalProperties").isBoolean(), "additionalProperties", this, BooleanOverlay.factory);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     private ChildOverlay<String, StringOverlay> description = createChild("description", this, StringOverlay.factory);

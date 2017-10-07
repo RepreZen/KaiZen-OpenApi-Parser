@@ -10,17 +10,18 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.jsonoverlay;
 
-import java.util.Map;
+import java.util.List;
 
+import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.MissingNode;
-import com.google.common.collect.Maps;
+import com.google.common.collect.Lists;
 
 public abstract class PropertiesOverlay<V extends IPropertiesOverlay<V>> extends JsonOverlay<V> {
 
-	protected Map<String, ChildOverlay<?, ?>> children = Maps.newLinkedHashMap();
+	protected List<ChildOverlay<?, ?>> children = Lists.newArrayList();
 
-	private JsonNode initJson;
+	protected JsonNode initJson;
 
 	protected PropertiesOverlay(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
 		super(json, parent, refReg);
@@ -30,6 +31,19 @@ public abstract class PropertiesOverlay<V extends IPropertiesOverlay<V>> extends
 	public PropertiesOverlay(V value, JsonOverlay<?> parent, ReferenceRegistry refReg) {
 		super(value, parent, refReg);
 		this.initJson = MissingNode.getInstance();
+	}
+
+	@Override
+	public IJsonOverlay<?> _find(JsonPointer path) {
+		for (ChildOverlay<?, ?> child : children) {
+			if (child.matchesPath(path)) {
+				IJsonOverlay<?> found = child.find(child.tailPath(path));
+				if (found != null) {
+					return found;
+				}
+			}
+		}
+		return null;
 	}
 
 	@Override
@@ -45,10 +59,10 @@ public abstract class PropertiesOverlay<V extends IPropertiesOverlay<V>> extends
 	@Override
 	public JsonNode toJson(boolean keepEmpty) {
 		JsonNode obj = jsonMissing();
-		for (ChildOverlay<?, ?> child : children.values()) {
+		for (ChildOverlay<?, ?> child : children) {
 			JsonNode childJson = child.getOverlay().toJson();
 			if (!childJson.isMissingNode()) {
-				obj = child.getPath().setNode(obj, childJson, isMergeable(child.getOverlay()));
+				obj = child.getPath().setInPath(obj, childJson);
 			}
 		}
 		JsonNode result = fixJson(obj);
@@ -59,37 +73,59 @@ public abstract class PropertiesOverlay<V extends IPropertiesOverlay<V>> extends
 		return json;
 	}
 
-	private boolean isMergeable(JsonOverlay<?> child) {
-		return child instanceof MapOverlay<?, ?> && ((MapOverlay<?, ?>) child).getKeyPattern() != null;
-	}
-
 	@Override
 	public void set(V value) {
 		super.set(value);
 	}
 
+	protected <VC, OVC extends JsonOverlay<VC>> ChildOverlay<VC, OVC> createChild(boolean create, String path,
+			JsonOverlay<?> parent, OverlayFactory<VC, OVC> factory) {
+		return create ? createChild(path, parent, factory) : null;
+	}
+
 	protected <VC, OVC extends JsonOverlay<VC>> ChildOverlay<VC, OVC> createChild(String path, JsonOverlay<?> parent,
 			OverlayFactory<VC, OVC> factory) {
+		if (initJson.isMissingNode()) {
+			return null;
+		}
 		ChildOverlay<VC, OVC> child = new ChildOverlay<VC, OVC>(path, initJson.at("/" + path), parent, factory, refReg);
-		children.put(path, child);
+		children.add(child);
 		return child;
+	}
+
+	protected <VC, OVC extends JsonOverlay<VC>> ChildMapOverlay<VC, OVC> createChildMap(boolean create, String path,
+			JsonOverlay<?> parent, OverlayFactory<VC, OVC> factory, String keyPattern) {
+		return create ? createChildMap(path, parent, factory, keyPattern) : null;
 	}
 
 	protected <VC, OVC extends JsonOverlay<VC>> ChildMapOverlay<VC, OVC> createChildMap(String path,
 			JsonOverlay<?> parent, OverlayFactory<VC, OVC> factory, String keyPattern) {
-		ChildMapOverlay<VC, OVC> child = new ChildMapOverlay<VC, OVC>(path,
-				initJson.at(path.isEmpty() ? "" : "/" + path), parent, MapOverlay.getFactory(factory, keyPattern),
-				refReg);
-		children.put(path, child);
+		if (initJson.isMissingNode()) {
+			return null;
+		}
+		ChildMapOverlay<VC, OVC> child = new ChildMapOverlay<VC, OVC>(path, initJson.at(pathPointer(path)), parent,
+				MapOverlay.getFactory(factory, keyPattern), refReg);
+		children.add(child);
 		return child;
+	}
+
+	protected <VC, OVC extends JsonOverlay<VC>> ChildListOverlay<VC, OVC> createChildList(boolean create, String path,
+			JsonOverlay<?> parent, OverlayFactory<VC, OVC> factory) {
+		return create ? createChildList(path, parent, factory) : null;
 	}
 
 	protected <VC, OVC extends JsonOverlay<VC>> ChildListOverlay<VC, OVC> createChildList(String path,
 			JsonOverlay<?> parent, OverlayFactory<VC, OVC> factory) {
-		ChildListOverlay<VC, OVC> child = new ChildListOverlay<VC, OVC>(path,
-				initJson.at(path.isEmpty() ? "" : "/" + path), parent, ListOverlay.getFactory(factory), refReg);
-		children.put(path, child);
+		if (initJson.isMissingNode()) {
+			return null;
+		}
+		ChildListOverlay<VC, OVC> child = new ChildListOverlay<VC, OVC>(path, initJson.at(pathPointer(path)), parent,
+				ListOverlay.getFactory(factory), refReg);
+		children.add(child);
 		return child;
 	}
 
+	private JsonPointer pathPointer(String path) {
+		return (path == null || path.isEmpty()) ? JsonPointer.compile("") : JsonPointer.compile("/" + path);
+	}
 }

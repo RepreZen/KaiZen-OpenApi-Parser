@@ -86,10 +86,12 @@ public class ReferenceRegistry {
 	}
 
 	public boolean hasOverlay(JsonNode node) {
-		return overlays.containsKey(node);
+		return !node.isMissingNode() && overlays.containsKey(node);
 	}
 
 	public void setOverlay(JsonNode node, JsonOverlay<?> overlay) {
-		overlays.put(node, overlay);
+		if (!node.isMissingNode()) {
+			overlays.put(node, overlay);
+		}
 	}
 }

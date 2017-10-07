@@ -11,14 +11,22 @@
 package com.reprezen.kaizen.oasparser.jsonoverlay;
 
 import java.util.Map;
+import java.util.regex.Pattern;
 
+import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay.MapOverlayFactory;
 
 public class ChildMapOverlay<V, OV extends JsonOverlay<V>> extends ChildOverlay<Map<String, V>, MapOverlay<V, OV>> {
+
+	private MapOverlay<V, OV> mapOverlay;
 
 	public ChildMapOverlay(String path, JsonNode json, JsonOverlay<?> parent,
 			OverlayFactory<Map<String, V>, MapOverlay<V, OV>> factory, ReferenceRegistry refReg) {
 		super(path, json, parent, factory, refReg);
+		@SuppressWarnings("unchecked")
+		MapOverlay<V, OV> castOverlay = (MapOverlay<V, OV>) overlay;
+		this.mapOverlay = castOverlay;
 	}
 
 	public ChildMapOverlay(String path, Map<String, V> value, JsonOverlay<?> parent,
@@ -26,19 +34,39 @@ public class ChildMapOverlay<V, OV extends JsonOverlay<V>> extends ChildOverlay<
 		super(path, value, parent, factory, refReg);
 	}
 
+	@Override
+	protected boolean isPartial() {
+		return ((MapOverlayFactory<V,OV>) factory).getKeyPattern() != null;
+	}
+
+	@Override
+	protected boolean matchesPath(JsonPointer path) {
+		if (super.matchesPath(path)) {
+			String key = super.tailPath(path).getMatchingProperty();
+			Pattern keyPattern = mapOverlay.getKeyPattern();
+			return keyPattern == null || keyPattern.matcher(key).matches();
+		} else {
+			return false;
+		}
+	}
+
 	public boolean containsKey(String name) {
-		return false;
+		return mapOverlay.containsKey(name);
 	}
 
 	public V get(String name) {
-		return null;
+		return mapOverlay.get(name);
 	}
 
 	public void set(String name, V value) {
-
+		mapOverlay.set(name, value);
 	}
 
 	public void remove(String name) {
+		mapOverlay.remove(name);
+	}
 
+	public int size() {
+		return mapOverlay.size();
 	}
 }

@@ -17,7 +17,7 @@ public class SecurityParameterImpl extends OpenApiObjectImpl<SecurityParameter> 
 
     @Override
     protected JsonNode fixJson(JsonNode json) {
-        return json.isMissingNode() ? JsonNodeFactory.instance.arrayNode() : json;
+        return json.isMissingNode() ? jsonArray() : json;
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

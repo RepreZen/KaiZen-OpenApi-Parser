@@ -324,6 +324,6 @@ public abstract class ValidatorBase<T> implements Validator<T> {
     }
 
     private boolean isPresent(Object value) {
-        return value instanceof JsonOverlay ? ((JsonOverlay<?>) value).isPresent() : value != null;
-    }
+		return value instanceof JsonOverlay ? ((JsonOverlay<?>) value).isPresent() : value != null;
+	}
 }

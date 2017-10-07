@@ -79,6 +79,11 @@ public class Template {
 			return quote(field.getId());
 		case "qpath":
 			return quote(field.getParentPath());
+		case "qpointer": {
+			String path = field.getParentPath();
+			path = path == null || path.isEmpty() ? "" : "/"+path;
+			return quote(path);
+		}
 		case "qkeyPat":
 			return quote(field.getKeyPattern());
 		case "boolDefault":

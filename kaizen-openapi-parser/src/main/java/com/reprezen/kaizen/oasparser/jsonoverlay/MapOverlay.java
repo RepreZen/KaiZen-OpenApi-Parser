@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.regex.Pattern;
 
+import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.base.Function;
@@ -29,9 +30,11 @@ public class MapOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Map<St
 		super(value, parent, refReg);
 		this.valueFactory = valueFactory;
 		this.keyPattern = keyPattern;
-		for (Entry<String, V> entry : value.entrySet()) {
-			overlays.put(entry.getKey(),
-					new ChildOverlay<V, OV>(entry.getKey(), entry.getValue(), this, valueFactory, refReg));
+		if (value != null) {
+			for (Entry<String, V> entry : value.entrySet()) {
+				overlays.put(entry.getKey(),
+						new ChildOverlay<V, OV>(entry.getKey(), entry.getValue(), this, valueFactory, refReg));
+			}
 		}
 	}
 
@@ -41,6 +44,12 @@ public class MapOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Map<St
 		this.valueFactory = valueFactory;
 		this.keyPattern = keyPattern;
 		setupOverlays(json);
+	}
+
+	@Override
+	public IJsonOverlay<?> _find(JsonPointer path) {
+		String key = path.getMatchingProperty();
+		return overlays.containsKey(key) ? overlays.get(key).find(path.tail()) : null;
 	}
 
 	@Override
@@ -89,6 +98,10 @@ public class MapOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Map<St
 		overlays.remove(name);
 	}
 
+	public int size() {
+		return overlays.size();
+	}
+
 	private Function<IJsonOverlay<V>, V> valueFunction = new Function<IJsonOverlay<V>, V>() {
 		@Override
 		public V apply(IJsonOverlay<V> overlay) {
@@ -106,10 +119,14 @@ public class MapOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Map<St
 
 	public static <V, OV extends JsonOverlay<V>> OverlayFactory<Map<String, V>, MapOverlay<V, OV>> getFactory(
 			OverlayFactory<V, OV> valueFactory, String keyPattern) {
-		return new MapOverlayFactory<V, OV>(valueFactory, Pattern.compile("^" + keyPattern + "$"));
+		return new MapOverlayFactory<V, OV>(valueFactory, getWholeMatchPattern(keyPattern));
 	}
 
-	private static class MapOverlayFactory<V, OV extends JsonOverlay<V>>
+	private static Pattern getWholeMatchPattern(String pat) {
+		return pat != null ? Pattern.compile("^" + pat + "$") : null;
+	}
+
+	protected static class MapOverlayFactory<V, OV extends JsonOverlay<V>>
 			extends OverlayFactory<Map<String, V>, MapOverlay<V, OV>> {
 
 		private OverlayFactory<V, OV> valueFactory;
@@ -118,6 +135,10 @@ public class MapOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Map<St
 		public MapOverlayFactory(OverlayFactory<V, OV> valueFactory, Pattern keyPattern) {
 			this.valueFactory = valueFactory;
 			this.keyPattern = keyPattern;
+		}
+
+		public Pattern getKeyPattern() {
+			return keyPattern;
 		}
 
 		@Override

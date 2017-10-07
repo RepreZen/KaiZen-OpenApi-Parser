@@ -185,6 +185,7 @@ public class TypeData {
 		private String id;
 		private boolean boolDefault = false;
 		private String parentPath;
+		private String createTest;
 
 		private Type container;
 
@@ -255,6 +256,17 @@ public class TypeData {
 			return keyPattern;
 		}
 
+		public String getCreateTest() {
+			if (createTest != null) {
+				if (createTest.startsWith(".")) {
+					return t("initJson.at(${qpointer})${0}", this, createTest);
+				} else if (createTest.matches("^[a-zA-Z][a-zA-Z0-9_]*$")) {
+					return t("${0}(initJson.at(${qpointer}))", this, createTest);
+				}
+			}
+			return createTest;
+		}
+
 		public boolean isNoImpl() {
 			return noImpl;
 		}
@@ -311,13 +323,15 @@ public class TypeData {
 		}
 
 		public String getPropertyNew() {
-			switch(structure) {
+			String createTest = getCreateTest();
+			createTest = createTest != null ? createTest + ", " : "";
+			switch (structure) {
 			case scalar:
-				return t("createChild(${qpath}, this, ${implType}.factory)", this);
+				return t("createChild(${0}${qpath}, this, ${implType}.factory)", this, createTest);
 			case collection:
-				return t("createChildList(${qpath}, this, ${implType}.factory)", this);
+				return t("createChildList(${0}${qpath}, this, ${implType}.factory)", this, createTest);
 			case map:
-				return t("createChildMap(${qpath}, this, ${implType}.factory, ${qkeyPat})", this);
+				return t("createChildMap(${0}${qpath}, this, ${implType}.factory, ${qkeyPat})", this, createTest);
 			}
 			return null;
 		}

@@ -16,14 +16,16 @@ import com.fasterxml.jackson.databind.JsonNode;
 public class ChildOverlay<V, OV extends JsonOverlay<V>> implements IJsonOverlay<V> {
 
 	private JsonPath path;
-	private JsonOverlay<V> overlay;
+	protected JsonOverlay<V> overlay;
 	private JsonOverlay<?> parent;
 	private Reference reference = null;
+	protected OverlayFactory<V, OV> factory;
 
 	public ChildOverlay(String path, V value, JsonOverlay<?> parent, OverlayFactory<V, OV> factory,
 			ReferenceRegistry refReg) {
 		this.path = new JsonPath(path);
 		this.parent = parent;
+		this.factory = factory;
 		this.overlay = factory.create(value, parent, refReg);
 	}
 
@@ -31,6 +33,7 @@ public class ChildOverlay<V, OV extends JsonOverlay<V>> implements IJsonOverlay<
 			ReferenceRegistry refReg) {
 		this.path = new JsonPath(path);
 		this.parent = parent;
+		this.factory = factory;
 		if (isReferenceNode(json)) {
 			this.reference = refReg.getRef(json);
 			JsonNode resolved = reference.resolve();
@@ -55,8 +58,20 @@ public class ChildOverlay<V, OV extends JsonOverlay<V>> implements IJsonOverlay<
 				this.overlay = null;
 			}
 		} else {
-			this.overlay = factory.create(json, parent, refReg);
+			this.overlay = factory.create(json, parent, isPartial(), refReg);
 		}
+	}
+
+	protected boolean isPartial() {
+		return false;
+	}
+
+	protected boolean matchesPath(JsonPointer path) {
+		return this.path.matchesPath(path);
+	}
+
+	protected JsonPointer tailPath(JsonPointer path) {
+		return this.path.tailPath(path);
 	}
 
 	private boolean isReferenceNode(JsonNode node) {
@@ -117,6 +132,6 @@ public class ChildOverlay<V, OV extends JsonOverlay<V>> implements IJsonOverlay<
 	@Override
 	public String toString() {
 		String refString = reference != null ? String.format("<%s>", reference.getRefString()) : "";
-		return String.format("Child@%s%s: %s]", path, refString, overlay);
+		return String.format("Child@%s%s: %s", path, refString, overlay);
 	}
 }

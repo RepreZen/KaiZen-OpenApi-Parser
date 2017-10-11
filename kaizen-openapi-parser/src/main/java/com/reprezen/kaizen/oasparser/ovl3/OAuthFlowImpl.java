@@ -22,30 +22,32 @@ public class OAuthFlowImpl extends OpenApiObjectImpl<OAuthFlow> implements OAuth
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public OAuthFlowImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
+            super.maybeFillChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public OAuthFlowImpl(OAuthFlow oAuthFlow, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(oAuthFlow, parent, refReg);
+            super.maybeFillChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> authorizationUrl = createChild("authorizationUrl", this, StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> authorizationUrl = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> tokenUrl = createChild("tokenUrl", this, StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> tokenUrl = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> refreshUrl = createChild("refreshUrl", this, StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> refreshUrl = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<String, StringOverlay> scopes = createChildMap("scopes", this, StringOverlay.factory, "(?!x-).*");
+    private ChildMapOverlay<String, StringOverlay> scopes = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object, ObjectOverlay> scopesExtensions = createChildMap("scopes", this, ObjectOverlay.factory, "x-.+");
+    private ChildMapOverlay<Object, ObjectOverlay> scopesExtensions = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object, ObjectOverlay> extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
+    private ChildMapOverlay<Object, ObjectOverlay> extensions = null;
 
     // AuthorizationUrl
     @Override
@@ -195,6 +197,17 @@ public class OAuthFlowImpl extends OpenApiObjectImpl<OAuthFlow> implements OAuth
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void removeExtension(String name) {
         extensions.remove(name);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    protected void fillChildren() {
+        authorizationUrl = createChild("authorizationUrl", this, StringOverlay.factory);
+            tokenUrl = createChild("tokenUrl", this, StringOverlay.factory);
+            refreshUrl = createChild("refreshUrl", this, StringOverlay.factory);
+            scopes = createChildMap("scopes", this, StringOverlay.factory, "(?!x-).*");
+            scopesExtensions = createChildMap("scopes", this, ObjectOverlay.factory, "x-.+");
+            extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

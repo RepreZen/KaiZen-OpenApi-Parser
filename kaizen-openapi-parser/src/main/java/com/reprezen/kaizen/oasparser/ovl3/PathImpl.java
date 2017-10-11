@@ -108,30 +108,32 @@ public class PathImpl extends OpenApiObjectImpl<Path> implements Path {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public PathImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
+            super.maybeFillChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public PathImpl(Path path, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(path, parent, refReg);
+            super.maybeFillChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> summary = createChild("summary", this, StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> summary = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> description = createChild("description", this, StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> description = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Operation, OperationImpl> operations = createChildMap("", this, OperationImpl.factory, "get|put|post|delete|options|head|patch|trace");
+    private ChildMapOverlay<Operation, OperationImpl> operations = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildListOverlay<Server, ServerImpl> servers = createChildList("servers", this, ServerImpl.factory);
+    private ChildListOverlay<Server, ServerImpl> servers = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildListOverlay<Parameter, ParameterImpl> parameters = createChildList("parameters", this, ParameterImpl.factory);
+    private ChildListOverlay<Parameter, ParameterImpl> parameters = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object, ObjectOverlay> extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
+    private ChildMapOverlay<Object, ObjectOverlay> extensions = null;
 
     // Summary
     @Override
@@ -317,6 +319,17 @@ public class PathImpl extends OpenApiObjectImpl<Path> implements Path {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void removeExtension(String name) {
         extensions.remove(name);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    protected void fillChildren() {
+        summary = createChild("summary", this, StringOverlay.factory);
+            description = createChild("description", this, StringOverlay.factory);
+            operations = createChildMap("", this, OperationImpl.factory, "get|put|post|delete|options|head|patch|trace");
+            servers = createChildList("servers", this, ServerImpl.factory);
+            parameters = createChildList("parameters", this, ParameterImpl.factory);
+            extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

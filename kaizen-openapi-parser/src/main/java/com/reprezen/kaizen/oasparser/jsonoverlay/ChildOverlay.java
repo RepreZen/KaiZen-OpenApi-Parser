@@ -86,6 +86,10 @@ public class ChildOverlay<V, OV extends JsonOverlay<V>> implements IJsonOverlay<
 		return overlay.get();
 	}
 
+	public V get(boolean complete) {
+		return overlay.get(complete);
+	}
+
 	public IJsonOverlay<?> find(JsonPointer path) {
 		return overlay.find(path);
 	}

@@ -53,6 +53,7 @@ public class ImplGenerator extends TypeGenerator {
 	@Override
 	public Members getOtherMembers(Type type) {
 		Members members = new Members();
+		members.add(getFillChildrenMethod(type));
 		members.add(getFactoryMethod(type));
 		return members;
 	}
@@ -73,10 +74,10 @@ public class ImplGenerator extends TypeGenerator {
 	protected Members getConstructors(Type type) {
 		Members members = new Members();
 		members.add(t("public ${implName}(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg)", type), //
-				code("super(json, parent, refReg);"));
+				code("super(json, parent, refReg);", "super.maybeFillChildrenAtCreation();"));
 		requireTypes(JsonNode.class, JsonOverlay.class);
 		members.add(t("public ${implName}(${name} ${lcName}, JsonOverlay<?> parent, ReferenceRegistry refReg)", type), //
-				code(t("super(${lcName}, parent, refReg);", type)));
+				code(t("super(${lcName}, parent, refReg);", type), "super.maybeFillChildrenAtCreation();"));
 		return members;
 	}
 
@@ -89,7 +90,7 @@ public class ImplGenerator extends TypeGenerator {
 	protected Members getFieldMembers(Field field) {
 		requireTypes(field.getType(), field.getImplType());
 		Members members = new Members();
-		members.add(t("private ${propType} ${propName} = ${propCons}", field));
+		members.add(t("private ${propType} ${propName} = null", field));
 		switch (field.getStructure()) {
 		case scalar:
 			requireTypes(ChildOverlay.class);
@@ -179,6 +180,17 @@ public class ImplGenerator extends TypeGenerator {
 		methods.add(remDecl, code(field, "${lcPlural}.remove(index);"));
 		// methods.addAll(getKeyedCollectionMethods(field));
 		return methods;
+	}
+
+	private Member getFillChildrenMethod(Type type) {
+		String decl = "protected void fillChildren()";
+		Collection<String> code = Lists.newArrayList();
+		for (Field field : type.getFields().values()) {
+			if (!field.isNoImpl()) {
+				code.addAll(code(field, "${propName} = ${propCons};"));
+			}
+		}
+		return new Member(decl, code).override();
 	}
 
 	private Member getFactoryMethod(Type type) {

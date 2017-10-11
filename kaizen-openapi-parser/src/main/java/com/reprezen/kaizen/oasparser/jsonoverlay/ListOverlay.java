@@ -16,8 +16,6 @@ import java.util.List;
 import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.google.common.base.Function;
-import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
 
 public class ListOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Collection<V>> {
@@ -29,34 +27,42 @@ public class ListOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Colle
 			ReferenceRegistry refReg) {
 		super(value, parent, refReg);
 		this.itemFactory = itemFactory;
-		if (value != null) {
-			for (V item : value) {
-				overlays.add(itemFactory.create(item, this, refReg));
-			}
-		}
+		fillWithValues();
 	}
 
 	public ListOverlay(JsonNode json, JsonOverlay<?> parent, OverlayFactory<V, OV> itemFactory,
 			ReferenceRegistry refReg) {
 		super(json, parent, refReg);
 		this.itemFactory = itemFactory;
-		setupOverlays(json);
+		fillWithJson();
+	}
+
+	private void fillWithValues() {
+		overlays.clear();
+		if (value != null) {
+			for (V item : value) {
+				overlays.add(new ChildOverlay<V, OV>(null, item, this, itemFactory, refReg));
+			}
+		}
+	}
+
+	private void fillWithJson() {
+		value.clear();
+		overlays.clear();
+		for (JsonNode itemJson : iterable(json.elements())) {
+			ChildOverlay<V, OV> overlay = new ChildOverlay<>(null, itemJson, this, itemFactory, refReg);
+			overlays.add(overlay);
+			value.add(overlay.get(false));
+		}
+	}
+
+	protected Collection<V> get(boolean complete) {
+		return value;
 	}
 
 	@Override
 	protected Collection<V> fromJson(JsonNode json) {
-		// can't do this now because it's called from super-constructor (JsonOverlay)
-		// before our overlays member has been initialized, so we do it explicitly in
-		// the json constructor
-		return null;
-	}
-
-	private void setupOverlays(JsonNode json) {
-		overlays.clear();
-		for (JsonNode element : iterable(json.elements())) {
-			overlays.add(new ChildOverlay<V, OV>(null, element, this, itemFactory, refReg));
-		}
-		set(getItems());
+		return Lists.newArrayList();
 	}
 
 	@Override
@@ -97,17 +103,6 @@ public class ListOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Colle
 
 	public int size() {
 		return overlays.size();
-	}
-
-	private Function<IJsonOverlay<V>, V> itemGetter = new Function<IJsonOverlay<V>, V>() {
-		@Override
-		public V apply(IJsonOverlay<V> overlay) {
-			return overlay.get();
-		}
-	};
-
-	private Collection<V> getItems() {
-		return Collections2.transform(overlays, itemGetter);
 	}
 
 	public static <V, OV extends JsonOverlay<V>> OverlayFactory<Collection<V>, ListOverlay<V, OV>> getFactory(

@@ -23,27 +23,29 @@ public class EncodingPropertyImpl extends OpenApiObjectImpl<EncodingProperty> im
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public EncodingPropertyImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
+            super.maybeFillChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public EncodingPropertyImpl(EncodingProperty encodingProperty, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(encodingProperty, parent, refReg);
+            super.maybeFillChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> contentType = createChild("contentType", this, StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> contentType = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<String, StringOverlay> headers = createChildMap("Headers", this, StringOverlay.factory, null);
+    private ChildMapOverlay<String, StringOverlay> headers = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> style = createChild("style", this, StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> style = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Boolean, BooleanOverlay> explode = createChild("explode", this, BooleanOverlay.factory);
+    private ChildOverlay<Boolean, BooleanOverlay> explode = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object, ObjectOverlay> extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
+    private ChildMapOverlay<Object, ObjectOverlay> extensions = null;
 
     // ContentType
     @Override
@@ -162,6 +164,16 @@ public class EncodingPropertyImpl extends OpenApiObjectImpl<EncodingProperty> im
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void removeExtension(String name) {
         extensions.remove(name);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    protected void fillChildren() {
+        contentType = createChild("contentType", this, StringOverlay.factory);
+            headers = createChildMap("Headers", this, StringOverlay.factory, null);
+            style = createChild("style", this, StringOverlay.factory);
+            explode = createChild("explode", this, BooleanOverlay.factory);
+            extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

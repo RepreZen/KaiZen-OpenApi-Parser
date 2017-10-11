@@ -259,9 +259,9 @@ public class TypeData {
 		public String getCreateTest() {
 			if (createTest != null) {
 				if (createTest.startsWith(".")) {
-					return t("initJson.at(${qpointer})${0}", this, createTest);
+					return t("json.at(${qpointer})${0}", this, createTest);
 				} else if (createTest.matches("^[a-zA-Z][a-zA-Z0-9_]*$")) {
-					return t("${0}(initJson.at(${qpointer}))", this, createTest);
+					return t("${0}(json.at(${qpointer}))", this, createTest);
 				}
 			}
 			return createTest;

@@ -34,4 +34,10 @@ public abstract class ScalarOverlay<V> extends JsonOverlay<V> {
 	}
 
 	protected abstract JsonNode _toJson();
+
+	@Override
+	protected V get(boolean complete) {
+		return value;
+	}
+
 }

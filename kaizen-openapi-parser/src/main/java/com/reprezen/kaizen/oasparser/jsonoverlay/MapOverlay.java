@@ -17,7 +17,6 @@ import java.util.regex.Pattern;
 import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.google.common.base.Function;
 import com.google.common.collect.Maps;
 
 public class MapOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Map<String, V>> {
@@ -30,12 +29,7 @@ public class MapOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Map<St
 		super(value, parent, refReg);
 		this.valueFactory = valueFactory;
 		this.keyPattern = keyPattern;
-		if (value != null) {
-			for (Entry<String, V> entry : value.entrySet()) {
-				overlays.put(entry.getKey(),
-						new ChildOverlay<V, OV>(entry.getKey(), entry.getValue(), this, valueFactory, refReg));
-			}
-		}
+		fillWithValues();
 	}
 
 	public MapOverlay(JsonNode json, JsonOverlay<?> parent, OverlayFactory<V, OV> valueFactory, Pattern keyPattern,
@@ -43,7 +37,35 @@ public class MapOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Map<St
 		super(json, parent, refReg);
 		this.valueFactory = valueFactory;
 		this.keyPattern = keyPattern;
-		setupOverlays(json);
+		fillWithJson();
+	}
+
+	private void fillWithValues() {
+		overlays.clear();
+		if (value != null) {
+			for (Entry<String, V> entry : value.entrySet()) {
+				overlays.put(entry.getKey(),
+						new ChildOverlay<>(entry.getKey(), entry.getValue(), this, valueFactory, refReg));
+			}
+		}
+	}
+
+	private void fillWithJson() {
+		value.clear();
+		overlays.clear();
+		for (Entry<String, JsonNode> field : iterable(json.fields())) {
+			String key = field.getKey();
+			if (keyPattern == null || keyPattern.matcher(key).matches()) {
+				ChildOverlay<V, OV> overlay = new ChildOverlay<V, OV>(key, json.get(key), this, valueFactory, refReg);
+				overlays.put(key, overlay);
+				value.put(key, overlay.get(false));
+			}
+		}
+	}
+
+	@Override
+	protected Map<String, V> get(boolean complete) {
+		return value;
 	}
 
 	@Override
@@ -54,22 +76,7 @@ public class MapOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Map<St
 
 	@Override
 	protected Map<String, V> fromJson(JsonNode json) {
-		// can't do this since the call from JsonOverlay constructor happens before our
-		// overlays member has been initialized, so we explicitly call it from the json
-		// constructor
-		return null;
-	}
-
-	private void setupOverlays(JsonNode json) {
-		overlays.clear();
-		for (Entry<String, JsonNode> field : iterable(json.fields())) {
-			if (keyPattern == null || keyPattern.matcher(field.getKey()).matches()) {
-				IJsonOverlay<V> child = new ChildOverlay<V, OV>(field.getKey(), field.getValue(), this, valueFactory,
-						refReg);
-				overlays.put(field.getKey(), child);
-			}
-		}
-		set(getValueMap());
+		return Maps.newHashMap();
 	}
 
 	@Override
@@ -100,17 +107,6 @@ public class MapOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Map<St
 
 	public int size() {
 		return overlays.size();
-	}
-
-	private Function<IJsonOverlay<V>, V> valueFunction = new Function<IJsonOverlay<V>, V>() {
-		@Override
-		public V apply(IJsonOverlay<V> overlay) {
-			return overlay.get();
-		}
-	};
-
-	private Map<String, V> getValueMap() {
-		return Maps.transformValues(overlays, valueFunction);
 	}
 
 	public Pattern getKeyPattern() {

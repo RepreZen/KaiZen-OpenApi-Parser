@@ -22,24 +22,26 @@ public class ContactImpl extends OpenApiObjectImpl<Contact> implements Contact {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public ContactImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
+            super.maybeFillChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public ContactImpl(Contact contact, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(contact, parent, refReg);
+            super.maybeFillChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> name = createChild("name", this, StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> name = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> url = createChild("url", this, StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> url = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> email = createChild("email", this, StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> email = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object, ObjectOverlay> extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
+    private ChildMapOverlay<Object, ObjectOverlay> extensions = null;
 
     // Name
     @Override
@@ -115,6 +117,15 @@ public class ContactImpl extends OpenApiObjectImpl<Contact> implements Contact {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void removeExtension(String name) {
         extensions.remove(name);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    protected void fillChildren() {
+        name = createChild("name", this, StringOverlay.factory);
+            url = createChild("url", this, StringOverlay.factory);
+            email = createChild("email", this, StringOverlay.factory);
+            extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

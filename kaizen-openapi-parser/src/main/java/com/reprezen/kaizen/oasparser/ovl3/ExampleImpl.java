@@ -22,27 +22,29 @@ public class ExampleImpl extends OpenApiObjectImpl<Example> implements Example {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public ExampleImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
+            super.maybeFillChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public ExampleImpl(Example example, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(example, parent, refReg);
+            super.maybeFillChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> summary = createChild("summary", this, StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> summary = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> description = createChild("description", this, StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> description = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Object, ObjectOverlay> value = createChild("value", this, ObjectOverlay.factory);
+    private ChildOverlay<Object, ObjectOverlay> value = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> externalValue = createChild("externalValue", this, StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> externalValue = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object, ObjectOverlay> extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
+    private ChildMapOverlay<Object, ObjectOverlay> extensions = null;
 
     // Summary
     @Override
@@ -131,6 +133,16 @@ public class ExampleImpl extends OpenApiObjectImpl<Example> implements Example {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void removeExtension(String name) {
         extensions.remove(name);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    protected void fillChildren() {
+        summary = createChild("summary", this, StringOverlay.factory);
+            description = createChild("description", this, StringOverlay.factory);
+            value = createChild("value", this, ObjectOverlay.factory);
+            externalValue = createChild("externalValue", this, StringOverlay.factory);
+            extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

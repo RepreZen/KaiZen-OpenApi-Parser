@@ -29,54 +29,56 @@ public class ParameterImpl extends OpenApiObjectImpl<Parameter> implements Param
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public ParameterImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
+            super.maybeFillChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public ParameterImpl(Parameter parameter, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(parameter, parent, refReg);
+            super.maybeFillChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> name = createChild("name", this, StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> name = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> in = createChild("in", this, StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> in = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> description = createChild("description", this, StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> description = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Boolean, BooleanOverlay> required = createChild("required", this, BooleanOverlay.factory);
+    private ChildOverlay<Boolean, BooleanOverlay> required = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Boolean, BooleanOverlay> deprecated = createChild("deprecated", this, BooleanOverlay.factory);
+    private ChildOverlay<Boolean, BooleanOverlay> deprecated = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Boolean, BooleanOverlay> allowEmptyValue = createChild("allowEmptyValue", this, BooleanOverlay.factory);
+    private ChildOverlay<Boolean, BooleanOverlay> allowEmptyValue = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> style = createChild("style", this, StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> style = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Boolean, BooleanOverlay> explode = createChild("explode", this, BooleanOverlay.factory);
+    private ChildOverlay<Boolean, BooleanOverlay> explode = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Boolean, BooleanOverlay> allowReserved = createChild("allowReserved", this, BooleanOverlay.factory);
+    private ChildOverlay<Boolean, BooleanOverlay> allowReserved = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Schema, SchemaImpl> schema = createChild("schema", this, SchemaImpl.factory);
+    private ChildOverlay<Schema, SchemaImpl> schema = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Object, ObjectOverlay> example = createChild("example", this, ObjectOverlay.factory);
+    private ChildOverlay<Object, ObjectOverlay> example = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Example, ExampleImpl> examples = createChildMap("examples", this, ExampleImpl.factory, "[a-zA-Z0-9\\._-]+");
+    private ChildMapOverlay<Example, ExampleImpl> examples = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<MediaType, MediaTypeImpl> contentMediaTypes = createChildMap("content", this, MediaTypeImpl.factory, null);
+    private ChildMapOverlay<MediaType, MediaTypeImpl> contentMediaTypes = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object, ObjectOverlay> extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
+    private ChildMapOverlay<Object, ObjectOverlay> extensions = null;
 
     // Name
     @Override
@@ -360,6 +362,25 @@ public class ParameterImpl extends OpenApiObjectImpl<Parameter> implements Param
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void removeExtension(String name) {
         extensions.remove(name);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    protected void fillChildren() {
+        name = createChild("name", this, StringOverlay.factory);
+            in = createChild("in", this, StringOverlay.factory);
+            description = createChild("description", this, StringOverlay.factory);
+            required = createChild("required", this, BooleanOverlay.factory);
+            deprecated = createChild("deprecated", this, BooleanOverlay.factory);
+            allowEmptyValue = createChild("allowEmptyValue", this, BooleanOverlay.factory);
+            style = createChild("style", this, StringOverlay.factory);
+            explode = createChild("explode", this, BooleanOverlay.factory);
+            allowReserved = createChild("allowReserved", this, BooleanOverlay.factory);
+            schema = createChild("schema", this, SchemaImpl.factory);
+            example = createChild("example", this, ObjectOverlay.factory);
+            examples = createChildMap("examples", this, ExampleImpl.factory, "[a-zA-Z0-9\\._-]+");
+            contentMediaTypes = createChildMap("content", this, MediaTypeImpl.factory, null);
+            extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

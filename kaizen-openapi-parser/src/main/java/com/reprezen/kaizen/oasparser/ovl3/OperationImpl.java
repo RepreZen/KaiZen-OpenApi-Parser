@@ -37,57 +37,59 @@ public class OperationImpl extends OpenApiObjectImpl<Operation> implements Opera
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public OperationImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
+            super.maybeFillChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public OperationImpl(Operation operation, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(operation, parent, refReg);
+            super.maybeFillChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildListOverlay<String, StringOverlay> tags = createChildList("tags", this, StringOverlay.factory);
+    private ChildListOverlay<String, StringOverlay> tags = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> summary = createChild("summary", this, StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> summary = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> description = createChild("description", this, StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> description = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<ExternalDocs, ExternalDocsImpl> externalDocs = createChild("externalDocs", this, ExternalDocsImpl.factory);
+    private ChildOverlay<ExternalDocs, ExternalDocsImpl> externalDocs = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> operationId = createChild("operationId", this, StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> operationId = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildListOverlay<Parameter, ParameterImpl> parameters = createChildList("parameters", this, ParameterImpl.factory);
+    private ChildListOverlay<Parameter, ParameterImpl> parameters = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<RequestBody, RequestBodyImpl> requestBody = createChild("requestBody", this, RequestBodyImpl.factory);
+    private ChildOverlay<RequestBody, RequestBodyImpl> requestBody = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Response, ResponseImpl> responses = createChildMap("responses", this, ResponseImpl.factory, "default|(\\d\\d\\d)");
+    private ChildMapOverlay<Response, ResponseImpl> responses = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object, ObjectOverlay> responsesExtensions = createChildMap("responses", this, ObjectOverlay.factory, "x-.+");
+    private ChildMapOverlay<Object, ObjectOverlay> responsesExtensions = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Callback, CallbackImpl> callbacks = createChildMap("callbacks", this, CallbackImpl.factory, "(?!x-)[a-zA-Z0-9\\._-]+");
+    private ChildMapOverlay<Callback, CallbackImpl> callbacks = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object, ObjectOverlay> callbacksExtensions = createChildMap("callbacks", this, ObjectOverlay.factory, "x-.+");
+    private ChildMapOverlay<Object, ObjectOverlay> callbacksExtensions = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Boolean, BooleanOverlay> deprecated = createChild("deprecated", this, BooleanOverlay.factory);
+    private ChildOverlay<Boolean, BooleanOverlay> deprecated = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildListOverlay<SecurityRequirement, SecurityRequirementImpl> securityRequirements = createChildList("security", this, SecurityRequirementImpl.factory);
+    private ChildListOverlay<SecurityRequirement, SecurityRequirementImpl> securityRequirements = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildListOverlay<Server, ServerImpl> servers = createChildList("servers", this, ServerImpl.factory);
+    private ChildListOverlay<Server, ServerImpl> servers = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object, ObjectOverlay> extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
+    private ChildMapOverlay<Object, ObjectOverlay> extensions = null;
 
     // Tag
     @Override
@@ -528,6 +530,26 @@ public class OperationImpl extends OpenApiObjectImpl<Operation> implements Opera
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void removeExtension(String name) {
         extensions.remove(name);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    protected void fillChildren() {
+        tags = createChildList("tags", this, StringOverlay.factory);
+            summary = createChild("summary", this, StringOverlay.factory);
+            description = createChild("description", this, StringOverlay.factory);
+            externalDocs = createChild("externalDocs", this, ExternalDocsImpl.factory);
+            operationId = createChild("operationId", this, StringOverlay.factory);
+            parameters = createChildList("parameters", this, ParameterImpl.factory);
+            requestBody = createChild("requestBody", this, RequestBodyImpl.factory);
+            responses = createChildMap("responses", this, ResponseImpl.factory, "default|(\\d\\d\\d)");
+            responsesExtensions = createChildMap("responses", this, ObjectOverlay.factory, "x-.+");
+            callbacks = createChildMap("callbacks", this, CallbackImpl.factory, "(?!x-)[a-zA-Z0-9\\._-]+");
+            callbacksExtensions = createChildMap("callbacks", this, ObjectOverlay.factory, "x-.+");
+            deprecated = createChild("deprecated", this, BooleanOverlay.factory);
+            securityRequirements = createChildList("security", this, SecurityRequirementImpl.factory);
+            servers = createChildList("servers", this, ServerImpl.factory);
+            extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

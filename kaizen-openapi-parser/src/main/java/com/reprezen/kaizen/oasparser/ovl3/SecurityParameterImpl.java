@@ -23,15 +23,17 @@ public class SecurityParameterImpl extends OpenApiObjectImpl<SecurityParameter> 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public SecurityParameterImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
+            super.maybeFillChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public SecurityParameterImpl(SecurityParameter securityParameter, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(securityParameter, parent, refReg);
+            super.maybeFillChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildListOverlay<String, StringOverlay> parameters = createChildList("", this, StringOverlay.factory);
+    private ChildListOverlay<String, StringOverlay> parameters = null;
 
     // Parameter
     @Override
@@ -74,6 +76,12 @@ public class SecurityParameterImpl extends OpenApiObjectImpl<SecurityParameter> 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void removeParameter(int index) {
         parameters.remove(index);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    protected void fillChildren() {
+        parameters = createChildList("", this, StringOverlay.factory);
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

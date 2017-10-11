@@ -24,51 +24,53 @@ public class SecuritySchemeImpl extends OpenApiObjectImpl<SecurityScheme> implem
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public SecuritySchemeImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
+            super.maybeFillChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public SecuritySchemeImpl(SecurityScheme securityScheme, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(securityScheme, parent, refReg);
+            super.maybeFillChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> type = createChild("type", this, StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> type = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> description = createChild("description", this, StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> description = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> name = createChild("name", this, StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> name = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> in = createChild("in", this, StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> in = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> scheme = createChild("scheme", this, StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> scheme = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> bearerFormat = createChild("bearerFormat", this, StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> bearerFormat = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<OAuthFlow, OAuthFlowImpl> implicitOAuthFlow = createChild("flow/implicit", this, OAuthFlowImpl.factory);
+    private ChildOverlay<OAuthFlow, OAuthFlowImpl> implicitOAuthFlow = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<OAuthFlow, OAuthFlowImpl> passwordOAuthFlow = createChild("flow/password", this, OAuthFlowImpl.factory);
+    private ChildOverlay<OAuthFlow, OAuthFlowImpl> passwordOAuthFlow = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<OAuthFlow, OAuthFlowImpl> clientCredentialsOAuthFlow = createChild("flow/clientCredentials", this, OAuthFlowImpl.factory);
+    private ChildOverlay<OAuthFlow, OAuthFlowImpl> clientCredentialsOAuthFlow = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<OAuthFlow, OAuthFlowImpl> authorizationCodeOAuthFlow = createChild("flow/authorizationCode", this, OAuthFlowImpl.factory);
+    private ChildOverlay<OAuthFlow, OAuthFlowImpl> authorizationCodeOAuthFlow = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object, ObjectOverlay> oAuthFlowsExtensions = createChildMap("flow", this, ObjectOverlay.factory, "x-.+");
+    private ChildMapOverlay<Object, ObjectOverlay> oAuthFlowsExtensions = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> openIdConnectUrl = createChild("openIdConnectUrl", this, StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> openIdConnectUrl = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object, ObjectOverlay> extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
+    private ChildMapOverlay<Object, ObjectOverlay> extensions = null;
 
     // Type
     @Override
@@ -285,6 +287,24 @@ public class SecuritySchemeImpl extends OpenApiObjectImpl<SecurityScheme> implem
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void removeExtension(String name) {
         extensions.remove(name);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    protected void fillChildren() {
+        type = createChild("type", this, StringOverlay.factory);
+            description = createChild("description", this, StringOverlay.factory);
+            name = createChild("name", this, StringOverlay.factory);
+            in = createChild("in", this, StringOverlay.factory);
+            scheme = createChild("scheme", this, StringOverlay.factory);
+            bearerFormat = createChild("bearerFormat", this, StringOverlay.factory);
+            implicitOAuthFlow = createChild("flow/implicit", this, OAuthFlowImpl.factory);
+            passwordOAuthFlow = createChild("flow/password", this, OAuthFlowImpl.factory);
+            clientCredentialsOAuthFlow = createChild("flow/clientCredentials", this, OAuthFlowImpl.factory);
+            authorizationCodeOAuthFlow = createChild("flow/authorizationCode", this, OAuthFlowImpl.factory);
+            oAuthFlowsExtensions = createChildMap("flow", this, ObjectOverlay.factory, "x-.+");
+            openIdConnectUrl = createChild("openIdConnectUrl", this, StringOverlay.factory);
+            extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

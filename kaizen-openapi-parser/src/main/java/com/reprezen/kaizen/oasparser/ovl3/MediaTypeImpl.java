@@ -27,27 +27,29 @@ public class MediaTypeImpl extends OpenApiObjectImpl<MediaType> implements Media
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public MediaTypeImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
+            super.maybeFillChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public MediaTypeImpl(MediaType mediaType, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(mediaType, parent, refReg);
+            super.maybeFillChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Schema, SchemaImpl> schema = createChild("schema", this, SchemaImpl.factory);
+    private ChildOverlay<Schema, SchemaImpl> schema = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Example, ExampleImpl> examples = createChildMap("examples", this, ExampleImpl.factory, "[a-zA-Z0-9\\._-]+");
+    private ChildMapOverlay<Example, ExampleImpl> examples = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Object, ObjectOverlay> example = createChild("example", this, ObjectOverlay.factory);
+    private ChildOverlay<Object, ObjectOverlay> example = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<EncodingProperty, EncodingPropertyImpl> encodingProperties = createChildMap("encoding", this, EncodingPropertyImpl.factory, null);
+    private ChildMapOverlay<EncodingProperty, EncodingPropertyImpl> encodingProperties = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object, ObjectOverlay> extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
+    private ChildMapOverlay<Object, ObjectOverlay> extensions = null;
 
     // Schema
     @Override
@@ -184,6 +186,16 @@ public class MediaTypeImpl extends OpenApiObjectImpl<MediaType> implements Media
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void removeExtension(String name) {
         extensions.remove(name);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    protected void fillChildren() {
+        schema = createChild("schema", this, SchemaImpl.factory);
+            examples = createChildMap("examples", this, ExampleImpl.factory, "[a-zA-Z0-9\\._-]+");
+            example = createChild("example", this, ObjectOverlay.factory);
+            encodingProperties = createChildMap("encoding", this, EncodingPropertyImpl.factory, null);
+            extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

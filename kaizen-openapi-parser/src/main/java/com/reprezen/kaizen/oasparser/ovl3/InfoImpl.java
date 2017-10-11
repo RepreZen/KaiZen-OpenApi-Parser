@@ -26,33 +26,35 @@ public class InfoImpl extends OpenApiObjectImpl<Info> implements Info {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public InfoImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
+            super.maybeFillChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public InfoImpl(Info info, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(info, parent, refReg);
+            super.maybeFillChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> title = createChild("title", this, StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> title = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> description = createChild("description", this, StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> description = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> termsOfService = createChild("termsOfService", this, StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> termsOfService = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Contact, ContactImpl> contact = createChild("contact", this, ContactImpl.factory);
+    private ChildOverlay<Contact, ContactImpl> contact = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<License, LicenseImpl> license = createChild("license", this, LicenseImpl.factory);
+    private ChildOverlay<License, LicenseImpl> license = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> version = createChild("version", this, StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> version = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object, ObjectOverlay> extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
+    private ChildMapOverlay<Object, ObjectOverlay> extensions = null;
 
     // Title
     @Override
@@ -167,6 +169,18 @@ public class InfoImpl extends OpenApiObjectImpl<Info> implements Info {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void removeExtension(String name) {
         extensions.remove(name);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    protected void fillChildren() {
+        title = createChild("title", this, StringOverlay.factory);
+            description = createChild("description", this, StringOverlay.factory);
+            termsOfService = createChild("termsOfService", this, StringOverlay.factory);
+            contact = createChild("contact", this, ContactImpl.factory);
+            license = createChild("license", this, LicenseImpl.factory);
+            version = createChild("version", this, StringOverlay.factory);
+            extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

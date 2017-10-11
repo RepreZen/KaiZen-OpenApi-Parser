@@ -23,30 +23,32 @@ public class XmlImpl extends OpenApiObjectImpl<Xml> implements Xml {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public XmlImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
+            super.maybeFillChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public XmlImpl(Xml xml, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(xml, parent, refReg);
+            super.maybeFillChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> name = createChild("name", this, StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> name = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> namespace = createChild("namespace", this, StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> namespace = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> prefix = createChild("prefix", this, StringOverlay.factory);
+    private ChildOverlay<String, StringOverlay> prefix = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Boolean, BooleanOverlay> attribute = createChild("attribute", this, BooleanOverlay.factory);
+    private ChildOverlay<Boolean, BooleanOverlay> attribute = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Boolean, BooleanOverlay> wrapped = createChild("wrapped", this, BooleanOverlay.factory);
+    private ChildOverlay<Boolean, BooleanOverlay> wrapped = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object, ObjectOverlay> extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
+    private ChildMapOverlay<Object, ObjectOverlay> extensions = null;
 
     // Name
     @Override
@@ -160,6 +162,17 @@ public class XmlImpl extends OpenApiObjectImpl<Xml> implements Xml {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void removeExtension(String name) {
         extensions.remove(name);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    protected void fillChildren() {
+        name = createChild("name", this, StringOverlay.factory);
+            namespace = createChild("namespace", this, StringOverlay.factory);
+            prefix = createChild("prefix", this, StringOverlay.factory);
+            attribute = createChild("attribute", this, BooleanOverlay.factory);
+            wrapped = createChild("wrapped", this, BooleanOverlay.factory);
+            extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

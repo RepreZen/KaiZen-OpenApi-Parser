@@ -11,6 +11,9 @@ public interface ExternalDocs extends OpenApiObject<ExternalDocs> {
     String getDescription();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    String getDescription(boolean elaborate);
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setDescription(String description);
 
     // Url
@@ -18,11 +21,17 @@ public interface ExternalDocs extends OpenApiObject<ExternalDocs> {
     String getUrl();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    String getUrl(boolean elaborate);
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setUrl(String url);
 
     // Extension
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     Map<String, Object> getExtensions();
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    Map<String, Object> getExtensions(boolean elaborate);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasExtension(String name);

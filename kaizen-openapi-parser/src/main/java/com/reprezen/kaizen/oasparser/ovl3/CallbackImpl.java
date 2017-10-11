@@ -19,13 +19,13 @@ public class CallbackImpl extends OpenApiObjectImpl<Callback> implements Callbac
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public CallbackImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
-            super.maybeFillChildrenAtCreation();
+            super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public CallbackImpl(Callback callback, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(callback, parent, refReg);
-            super.maybeFillChildrenAtCreation();
+            super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -39,6 +39,12 @@ public class CallbackImpl extends OpenApiObjectImpl<Callback> implements Callbac
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Map<String, Path> getCallbackPaths() {
         return callbackPaths.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Path> getCallbackPaths(boolean elaborate) {
+        return callbackPaths.get(elaborate);
     }
 
     @Override
@@ -80,6 +86,12 @@ public class CallbackImpl extends OpenApiObjectImpl<Callback> implements Callbac
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Object> getExtensions(boolean elaborate) {
+        return extensions.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean hasExtension(String name) {
         return extensions.containsKey(name);
     }
@@ -110,7 +122,7 @@ public class CallbackImpl extends OpenApiObjectImpl<Callback> implements Callbac
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void fillChildren() {
+    protected void elaborateChildren() {
         callbackPaths = createChildMap("", this, PathImpl.factory, "(?!x-).*");
             extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }

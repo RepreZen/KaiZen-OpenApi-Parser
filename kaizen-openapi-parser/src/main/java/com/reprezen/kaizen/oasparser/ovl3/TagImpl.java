@@ -24,13 +24,13 @@ public class TagImpl extends OpenApiObjectImpl<Tag> implements Tag {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public TagImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
-            super.maybeFillChildrenAtCreation();
+            super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public TagImpl(Tag tag, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(tag, parent, refReg);
-            super.maybeFillChildrenAtCreation();
+            super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -54,6 +54,12 @@ public class TagImpl extends OpenApiObjectImpl<Tag> implements Tag {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getName(boolean elaborate) {
+        return name.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setName(String name) {
         this.name.set(name);
     }
@@ -63,6 +69,12 @@ public class TagImpl extends OpenApiObjectImpl<Tag> implements Tag {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public String getDescription() {
         return description.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getDescription(boolean elaborate) {
+        return description.get(elaborate);
     }
 
     @Override
@@ -80,6 +92,12 @@ public class TagImpl extends OpenApiObjectImpl<Tag> implements Tag {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public ExternalDocs getExternalDocs(boolean elaborate) {
+        return externalDocs.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setExternalDocs(ExternalDocs externalDocs) {
         this.externalDocs.set(externalDocs);
     }
@@ -89,6 +107,12 @@ public class TagImpl extends OpenApiObjectImpl<Tag> implements Tag {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Map<String, Object> getExtensions() {
         return extensions.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Object> getExtensions(boolean elaborate) {
+        return extensions.get(elaborate);
     }
 
     @Override
@@ -123,7 +147,7 @@ public class TagImpl extends OpenApiObjectImpl<Tag> implements Tag {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void fillChildren() {
+    protected void elaborateChildren() {
         name = createChild("name", this, StringOverlay.factory);
             description = createChild("description", this, StringOverlay.factory);
             externalDocs = createChild("externalDocs", this, ExternalDocsImpl.factory);

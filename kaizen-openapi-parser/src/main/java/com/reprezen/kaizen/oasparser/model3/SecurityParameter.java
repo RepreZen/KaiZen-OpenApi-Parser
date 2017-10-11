@@ -11,6 +11,9 @@ public interface SecurityParameter extends OpenApiObject<SecurityParameter> {
     Collection<String> getParameters();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    Collection<String> getParameters(boolean elaborate);
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasParameters();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

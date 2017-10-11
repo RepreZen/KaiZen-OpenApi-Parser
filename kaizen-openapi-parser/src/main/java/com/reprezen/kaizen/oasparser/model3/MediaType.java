@@ -14,11 +14,17 @@ public interface MediaType extends OpenApiObject<MediaType> {
     Schema getSchema();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    Schema getSchema(boolean elaborate);
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setSchema(Schema schema);
 
     // Example
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     Map<String, Example> getExamples();
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    Map<String, Example> getExamples(boolean elaborate);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasExample(String name);
@@ -40,11 +46,17 @@ public interface MediaType extends OpenApiObject<MediaType> {
     Object getExample();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    Object getExample(boolean elaborate);
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setExample(Object example);
 
     // EncodingProperty
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     Map<String, EncodingProperty> getEncodingProperties();
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    Map<String, EncodingProperty> getEncodingProperties(boolean elaborate);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasEncodingProperty(String name);
@@ -64,6 +76,9 @@ public interface MediaType extends OpenApiObject<MediaType> {
     // Extension
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     Map<String, Object> getExtensions();
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    Map<String, Object> getExtensions(boolean elaborate);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasExtension(String name);

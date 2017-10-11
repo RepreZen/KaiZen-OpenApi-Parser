@@ -14,11 +14,17 @@ public interface Response extends OpenApiObject<Response> {
     String getDescription();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    String getDescription(boolean elaborate);
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setDescription(String description);
 
     // Header
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     Map<String, Header> getHeaders();
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    Map<String, Header> getHeaders(boolean elaborate);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasHeader(String name);
@@ -40,6 +46,9 @@ public interface Response extends OpenApiObject<Response> {
     Map<String, MediaType> getContentMediaTypes();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    Map<String, MediaType> getContentMediaTypes(boolean elaborate);
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasContentMediaType(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -59,6 +68,9 @@ public interface Response extends OpenApiObject<Response> {
     Map<String, Link> getLinks();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    Map<String, Link> getLinks(boolean elaborate);
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasLink(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -76,6 +88,9 @@ public interface Response extends OpenApiObject<Response> {
     // Extension
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     Map<String, Object> getExtensions();
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    Map<String, Object> getExtensions(boolean elaborate);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasExtension(String name);

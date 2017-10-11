@@ -19,33 +19,38 @@ import com.google.common.collect.Lists;
 public abstract class PropertiesOverlay<V extends IPropertiesOverlay<V>> extends JsonOverlay<V> {
 
 	protected List<ChildOverlay<?, ?>> children = Lists.newArrayList();
-	private boolean filledChildren = false;
-	private boolean deferFill = false;
+	private boolean elaborated = false;
+	private boolean deferElaboration = false;
 
 	protected PropertiesOverlay(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
 		super(json, parent, refReg);
-		deferFill = json.isMissingNode();
+		deferElaboration = json.isMissingNode();
 	}
 
 	public PropertiesOverlay(V value, JsonOverlay<?> parent, ReferenceRegistry refReg) {
 		super(value, parent, refReg);
-		filledChildren = true;
+		elaborated = true;
 	}
 
-	protected void maybeFillChildrenAtCreation() {
-		if (!deferFill) {
-			ensureFilledChildren();
+	protected void maybeElaborateChildrenAtCreation() {
+		if (!deferElaboration) {
+			ensureElaborated();
 		}
 	}
 
-	protected void ensureFilledChildren() {
-		if (!filledChildren) {
-			fillChildren();
-			filledChildren = true;
+	protected void ensureElaborated() {
+		if (!elaborated) {
+			elaborateChildren();
+			elaborated = true;
 		}
 	}
 
-	protected abstract void fillChildren();
+	protected abstract void elaborateChildren();
+
+	@Override
+	public boolean isElaborated() {
+		return elaborated;
+	}
 
 	@Override
 	public IJsonOverlay<?> _find(JsonPointer path) {
@@ -88,9 +93,9 @@ public abstract class PropertiesOverlay<V extends IPropertiesOverlay<V>> extends
 	}
 
 	@Override
-	protected V get(boolean complete) {
-		if (complete) {
-			ensureFilledChildren();
+	public V get(boolean elaborate) {
+		if (elaborate) {
+			ensureElaborated();
 		}
 		return value;
 	}
@@ -98,7 +103,7 @@ public abstract class PropertiesOverlay<V extends IPropertiesOverlay<V>> extends
 	@Override
 	public void set(V value) {
 		super.set(value);
-		fillChildren();
+		elaborateChildren();
 	}
 
 	protected <VC, OVC extends JsonOverlay<VC>> ChildOverlay<VC, OVC> createChild(boolean create, String path,

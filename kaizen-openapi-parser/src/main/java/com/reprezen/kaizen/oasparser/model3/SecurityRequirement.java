@@ -12,6 +12,9 @@ public interface SecurityRequirement extends OpenApiObject<SecurityRequirement> 
     Map<String, SecurityParameter> getRequirements();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    Map<String, SecurityParameter> getRequirements(boolean elaborate);
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasRequirement(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

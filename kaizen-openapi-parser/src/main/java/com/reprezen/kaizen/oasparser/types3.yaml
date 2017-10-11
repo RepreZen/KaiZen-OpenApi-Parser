@@ -20,7 +20,7 @@ decls:
 types:
   - name: OpenApi3
     imports: 
-      intf:  [ ValidationResults ]
+      intf:  [ ValidationResults, Collection ]
       impl: [ OpenApi3Validator, Validator, ValidationResults, Severity, Inject, ReferenceRegistry, ObjectNode, JsonNodeFactory ]
     extendInterfaces: [OpenApi<OpenApi3>]
     fields:

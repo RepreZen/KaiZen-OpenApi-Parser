@@ -26,13 +26,13 @@ public class LinkImpl extends OpenApiObjectImpl<Link> implements Link {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public LinkImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
-            super.maybeFillChildrenAtCreation();
+            super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public LinkImpl(Link link, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(link, parent, refReg);
-            super.maybeFillChildrenAtCreation();
+            super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -65,6 +65,12 @@ public class LinkImpl extends OpenApiObjectImpl<Link> implements Link {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getOperationId(boolean elaborate) {
+        return operationId.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setOperationId(String operationId) {
         this.operationId.set(operationId);
     }
@@ -78,6 +84,12 @@ public class LinkImpl extends OpenApiObjectImpl<Link> implements Link {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getOperationRef(boolean elaborate) {
+        return operationRef.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setOperationRef(String operationRef) {
         this.operationRef.set(operationRef);
     }
@@ -87,6 +99,12 @@ public class LinkImpl extends OpenApiObjectImpl<Link> implements Link {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Map<String, String> getParameters() {
         return parameters.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, String> getParameters(boolean elaborate) {
+        return parameters.get(elaborate);
     }
 
     @Override
@@ -128,6 +146,12 @@ public class LinkImpl extends OpenApiObjectImpl<Link> implements Link {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Header> getHeaders(boolean elaborate) {
+        return headers.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean hasHeader(String name) {
         return headers.containsKey(name);
     }
@@ -165,6 +189,12 @@ public class LinkImpl extends OpenApiObjectImpl<Link> implements Link {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getDescription(boolean elaborate) {
+        return description.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setDescription(String description) {
         this.description.set(description);
     }
@@ -178,6 +208,12 @@ public class LinkImpl extends OpenApiObjectImpl<Link> implements Link {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Server getServer(boolean elaborate) {
+        return server.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setServer(Server server) {
         this.server.set(server);
     }
@@ -187,6 +223,12 @@ public class LinkImpl extends OpenApiObjectImpl<Link> implements Link {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Map<String, Object> getExtensions() {
         return extensions.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Object> getExtensions(boolean elaborate) {
+        return extensions.get(elaborate);
     }
 
     @Override
@@ -221,7 +263,7 @@ public class LinkImpl extends OpenApiObjectImpl<Link> implements Link {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void fillChildren() {
+    protected void elaborateChildren() {
         operationId = createChild("operationId", this, StringOverlay.factory);
             operationRef = createChild("operationRef", this, StringOverlay.factory);
             parameters = createChildMap("parameters", this, StringOverlay.factory, null);

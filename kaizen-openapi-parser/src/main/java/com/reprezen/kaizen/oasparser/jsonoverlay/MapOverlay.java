@@ -64,7 +64,7 @@ public class MapOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Map<St
 	}
 
 	@Override
-	protected Map<String, V> get(boolean complete) {
+	public Map<String, V> get(boolean elaborate) {
 		return value;
 	}
 

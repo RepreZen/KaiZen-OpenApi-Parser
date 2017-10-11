@@ -25,13 +25,13 @@ public class RequestBodyImpl extends OpenApiObjectImpl<RequestBody> implements R
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public RequestBodyImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
-            super.maybeFillChildrenAtCreation();
+            super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public RequestBodyImpl(RequestBody requestBody, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(requestBody, parent, refReg);
-            super.maybeFillChildrenAtCreation();
+            super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -55,6 +55,12 @@ public class RequestBodyImpl extends OpenApiObjectImpl<RequestBody> implements R
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getDescription(boolean elaborate) {
+        return description.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setDescription(String description) {
         this.description.set(description);
     }
@@ -64,6 +70,12 @@ public class RequestBodyImpl extends OpenApiObjectImpl<RequestBody> implements R
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Map<String, MediaType> getContentMediaTypes() {
         return contentMediaTypes.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, MediaType> getContentMediaTypes(boolean elaborate) {
+        return contentMediaTypes.get(elaborate);
     }
 
     @Override
@@ -105,6 +117,12 @@ public class RequestBodyImpl extends OpenApiObjectImpl<RequestBody> implements R
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Boolean getRequired(boolean elaborate) {
+        return required.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean isRequired() {
         return required.get() != null ? required.get() : false;
     }
@@ -120,6 +138,12 @@ public class RequestBodyImpl extends OpenApiObjectImpl<RequestBody> implements R
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Map<String, Object> getExtensions() {
         return extensions.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Object> getExtensions(boolean elaborate) {
+        return extensions.get(elaborate);
     }
 
     @Override
@@ -154,7 +178,7 @@ public class RequestBodyImpl extends OpenApiObjectImpl<RequestBody> implements R
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void fillChildren() {
+    protected void elaborateChildren() {
         description = createChild("description", this, StringOverlay.factory);
             contentMediaTypes = createChildMap("content", this, MediaTypeImpl.factory, null);
             required = createChild("required", this, BooleanOverlay.factory);

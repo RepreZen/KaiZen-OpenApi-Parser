@@ -23,13 +23,13 @@ public class ServerVariableImpl extends OpenApiObjectImpl<ServerVariable> implem
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public ServerVariableImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
-            super.maybeFillChildrenAtCreation();
+            super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public ServerVariableImpl(ServerVariable serverVariable, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(serverVariable, parent, refReg);
-            super.maybeFillChildrenAtCreation();
+            super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -49,6 +49,12 @@ public class ServerVariableImpl extends OpenApiObjectImpl<ServerVariable> implem
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Collection<Object> getEnumValues() {
         return enumValues.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Collection<Object> getEnumValues(boolean elaborate) {
+        return enumValues.get(elaborate);
     }
 
     @Override
@@ -96,6 +102,12 @@ public class ServerVariableImpl extends OpenApiObjectImpl<ServerVariable> implem
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Object getDefault(boolean elaborate) {
+        return defaultValue.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setDefault(Object defaultValue) {
         this.defaultValue.set(defaultValue);
     }
@@ -109,6 +121,12 @@ public class ServerVariableImpl extends OpenApiObjectImpl<ServerVariable> implem
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getDescription(boolean elaborate) {
+        return description.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setDescription(String description) {
         this.description.set(description);
     }
@@ -118,6 +136,12 @@ public class ServerVariableImpl extends OpenApiObjectImpl<ServerVariable> implem
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Map<String, Object> getExtensions() {
         return extensions.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Object> getExtensions(boolean elaborate) {
+        return extensions.get(elaborate);
     }
 
     @Override
@@ -152,7 +176,7 @@ public class ServerVariableImpl extends OpenApiObjectImpl<ServerVariable> implem
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void fillChildren() {
+    protected void elaborateChildren() {
         enumValues = createChildList("enum", this, PrimitiveOverlay.factory);
             defaultValue = createChild("default", this, PrimitiveOverlay.factory);
             description = createChild("description", this, StringOverlay.factory);

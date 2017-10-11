@@ -37,6 +37,9 @@ public interface OpenApi3 extends OpenApiObject<OpenApi3>, OpenApi<OpenApi3> {
     String getOpenApi();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    String getOpenApi(boolean elaborate);
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setOpenApi(String openApi);
 
     // Info
@@ -44,11 +47,17 @@ public interface OpenApi3 extends OpenApiObject<OpenApi3>, OpenApi<OpenApi3> {
     Info getInfo();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    Info getInfo(boolean elaborate);
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setInfo(Info info);
 
     // Server
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     Collection<Server> getServers();
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    Collection<Server> getServers(boolean elaborate);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasServers();
@@ -73,6 +82,9 @@ public interface OpenApi3 extends OpenApiObject<OpenApi3>, OpenApi<OpenApi3> {
     Map<String, Path> getPaths();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    Map<String, Path> getPaths(boolean elaborate);
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasPath(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -90,6 +102,9 @@ public interface OpenApi3 extends OpenApiObject<OpenApi3>, OpenApi<OpenApi3> {
     // PathsExtension
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     Map<String, Object> getPathsExtensions();
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    Map<String, Object> getPathsExtensions(boolean elaborate);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasPathsExtension(String name);
@@ -111,6 +126,9 @@ public interface OpenApi3 extends OpenApiObject<OpenApi3>, OpenApi<OpenApi3> {
     Map<String, Schema> getSchemas();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    Map<String, Schema> getSchemas(boolean elaborate);
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasSchema(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -128,6 +146,9 @@ public interface OpenApi3 extends OpenApiObject<OpenApi3>, OpenApi<OpenApi3> {
     // Response
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     Map<String, Response> getResponses();
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    Map<String, Response> getResponses(boolean elaborate);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasResponse(String name);
@@ -149,6 +170,9 @@ public interface OpenApi3 extends OpenApiObject<OpenApi3>, OpenApi<OpenApi3> {
     Map<String, Parameter> getParameters();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    Map<String, Parameter> getParameters(boolean elaborate);
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasParameter(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -166,6 +190,9 @@ public interface OpenApi3 extends OpenApiObject<OpenApi3>, OpenApi<OpenApi3> {
     // Example
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     Map<String, Example> getExamples();
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    Map<String, Example> getExamples(boolean elaborate);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasExample(String name);
@@ -187,6 +214,9 @@ public interface OpenApi3 extends OpenApiObject<OpenApi3>, OpenApi<OpenApi3> {
     Map<String, RequestBody> getRequestBodies();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    Map<String, RequestBody> getRequestBodies(boolean elaborate);
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasRequestBody(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -204,6 +234,9 @@ public interface OpenApi3 extends OpenApiObject<OpenApi3>, OpenApi<OpenApi3> {
     // Header
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     Map<String, Header> getHeaders();
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    Map<String, Header> getHeaders(boolean elaborate);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasHeader(String name);
@@ -225,6 +258,9 @@ public interface OpenApi3 extends OpenApiObject<OpenApi3>, OpenApi<OpenApi3> {
     Map<String, SecurityScheme> getSecuritySchemes();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    Map<String, SecurityScheme> getSecuritySchemes(boolean elaborate);
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasSecurityScheme(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -242,6 +278,9 @@ public interface OpenApi3 extends OpenApiObject<OpenApi3>, OpenApi<OpenApi3> {
     // Link
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     Map<String, Link> getLinks();
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    Map<String, Link> getLinks(boolean elaborate);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasLink(String name);
@@ -263,6 +302,9 @@ public interface OpenApi3 extends OpenApiObject<OpenApi3>, OpenApi<OpenApi3> {
     Map<String, Callback> getCallbacks();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    Map<String, Callback> getCallbacks(boolean elaborate);
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasCallback(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -282,6 +324,9 @@ public interface OpenApi3 extends OpenApiObject<OpenApi3>, OpenApi<OpenApi3> {
     Map<String, Object> getComponentsExtensions();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    Map<String, Object> getComponentsExtensions(boolean elaborate);
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasComponentsExtension(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -299,6 +344,9 @@ public interface OpenApi3 extends OpenApiObject<OpenApi3>, OpenApi<OpenApi3> {
     // SecurityRequirement
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     Collection<SecurityRequirement> getSecurityRequirements();
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    Collection<SecurityRequirement> getSecurityRequirements(boolean elaborate);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasSecurityRequirements();
@@ -323,6 +371,9 @@ public interface OpenApi3 extends OpenApiObject<OpenApi3>, OpenApi<OpenApi3> {
     Collection<Tag> getTags();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    Collection<Tag> getTags(boolean elaborate);
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasTags();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -345,11 +396,17 @@ public interface OpenApi3 extends OpenApiObject<OpenApi3>, OpenApi<OpenApi3> {
     ExternalDocs getExternalDocs();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    ExternalDocs getExternalDocs(boolean elaborate);
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setExternalDocs(ExternalDocs externalDocs);
 
     // Extension
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     Map<String, Object> getExtensions();
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    Map<String, Object> getExtensions(boolean elaborate);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasExtension(String name);

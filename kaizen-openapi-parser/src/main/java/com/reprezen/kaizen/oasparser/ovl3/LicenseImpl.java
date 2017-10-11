@@ -24,13 +24,13 @@ public class LicenseImpl extends OpenApiObjectImpl<License> implements License {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public LicenseImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
-            super.maybeFillChildrenAtCreation();
+            super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public LicenseImpl(License license, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(license, parent, refReg);
-            super.maybeFillChildrenAtCreation();
+            super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -51,6 +51,12 @@ public class LicenseImpl extends OpenApiObjectImpl<License> implements License {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getName(boolean elaborate) {
+        return name.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setName(String name) {
         this.name.set(name);
     }
@@ -64,6 +70,12 @@ public class LicenseImpl extends OpenApiObjectImpl<License> implements License {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getUrl(boolean elaborate) {
+        return url.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setUrl(String url) {
         this.url.set(url);
     }
@@ -73,6 +85,12 @@ public class LicenseImpl extends OpenApiObjectImpl<License> implements License {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Map<String, Object> getExtensions() {
         return extensions.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Object> getExtensions(boolean elaborate) {
+        return extensions.get(elaborate);
     }
 
     @Override
@@ -107,7 +125,7 @@ public class LicenseImpl extends OpenApiObjectImpl<License> implements License {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void fillChildren() {
+    protected void elaborateChildren() {
         name = createChild("name", this, StringOverlay.factory);
             url = createChild("url", this, StringOverlay.factory);
             extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");

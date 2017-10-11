@@ -29,13 +29,13 @@ public class HeaderImpl extends OpenApiObjectImpl<Header> implements Header {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public HeaderImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
-            super.maybeFillChildrenAtCreation();
+            super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public HeaderImpl(Header header, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(header, parent, refReg);
-            super.maybeFillChildrenAtCreation();
+            super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -89,6 +89,12 @@ public class HeaderImpl extends OpenApiObjectImpl<Header> implements Header {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getName(boolean elaborate) {
+        return name.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setName(String name) {
         this.name.set(name);
     }
@@ -98,6 +104,12 @@ public class HeaderImpl extends OpenApiObjectImpl<Header> implements Header {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public String getIn() {
         return in.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getIn(boolean elaborate) {
+        return in.get(elaborate);
     }
 
     @Override
@@ -115,6 +127,12 @@ public class HeaderImpl extends OpenApiObjectImpl<Header> implements Header {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getDescription(boolean elaborate) {
+        return description.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setDescription(String description) {
         this.description.set(description);
     }
@@ -124,6 +142,12 @@ public class HeaderImpl extends OpenApiObjectImpl<Header> implements Header {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Boolean getRequired() {
         return required.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Boolean getRequired(boolean elaborate) {
+        return required.get(elaborate);
     }
 
     @Override
@@ -147,6 +171,12 @@ public class HeaderImpl extends OpenApiObjectImpl<Header> implements Header {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Boolean getDeprecated(boolean elaborate) {
+        return deprecated.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean isDeprecated() {
         return deprecated.get() != null ? deprecated.get() : false;
     }
@@ -162,6 +192,12 @@ public class HeaderImpl extends OpenApiObjectImpl<Header> implements Header {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Boolean getAllowEmptyValue() {
         return allowEmptyValue.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Boolean getAllowEmptyValue(boolean elaborate) {
+        return allowEmptyValue.get(elaborate);
     }
 
     @Override
@@ -185,6 +221,12 @@ public class HeaderImpl extends OpenApiObjectImpl<Header> implements Header {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getStyle(boolean elaborate) {
+        return style.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setStyle(String style) {
         this.style.set(style);
     }
@@ -194,6 +236,12 @@ public class HeaderImpl extends OpenApiObjectImpl<Header> implements Header {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Boolean getExplode() {
         return explode.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Boolean getExplode(boolean elaborate) {
+        return explode.get(elaborate);
     }
 
     @Override
@@ -217,6 +265,12 @@ public class HeaderImpl extends OpenApiObjectImpl<Header> implements Header {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Boolean getAllowReserved(boolean elaborate) {
+        return allowReserved.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean isAllowReserved() {
         return allowReserved.get() != null ? allowReserved.get() : false;
     }
@@ -236,6 +290,12 @@ public class HeaderImpl extends OpenApiObjectImpl<Header> implements Header {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Schema getSchema(boolean elaborate) {
+        return schema.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setSchema(Schema schema) {
         this.schema.set(schema);
     }
@@ -249,6 +309,12 @@ public class HeaderImpl extends OpenApiObjectImpl<Header> implements Header {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Object getExample(boolean elaborate) {
+        return example.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setExample(Object example) {
         this.example.set(example);
     }
@@ -258,6 +324,12 @@ public class HeaderImpl extends OpenApiObjectImpl<Header> implements Header {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Map<String, Example> getExamples() {
         return examples.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Example> getExamples(boolean elaborate) {
+        return examples.get(elaborate);
     }
 
     @Override
@@ -299,6 +371,12 @@ public class HeaderImpl extends OpenApiObjectImpl<Header> implements Header {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, MediaType> getContentMediaTypes(boolean elaborate) {
+        return contentMediaTypes.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean hasContentMediaType(String name) {
         return contentMediaTypes.containsKey(name);
     }
@@ -336,6 +414,12 @@ public class HeaderImpl extends OpenApiObjectImpl<Header> implements Header {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Object> getExtensions(boolean elaborate) {
+        return extensions.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean hasExtension(String name) {
         return extensions.containsKey(name);
     }
@@ -366,7 +450,7 @@ public class HeaderImpl extends OpenApiObjectImpl<Header> implements Header {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void fillChildren() {
+    protected void elaborateChildren() {
         name = createChild("name", this, StringOverlay.factory);
             in = createChild("in", this, StringOverlay.factory);
             description = createChild("description", this, StringOverlay.factory);

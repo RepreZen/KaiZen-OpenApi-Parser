@@ -90,6 +90,8 @@ public class InterfaceGenerator extends TypeGenerator {
         Members methods = new Members();
         // T getFoo()
         methods.add(t("${type} get${name}()", field));
+        // T getFoo(boolean elaborate)
+        methods.add(t("${type} get${name}(boolean elaborate)", field));
         if (field.getType().equals("Boolean")) {
             // boolean isFoo()
             methods.add(t("boolean is${name}()", field));
@@ -103,6 +105,8 @@ public class InterfaceGenerator extends TypeGenerator {
         Members methods = new Members();
         // Collection<? extends T> getFoos()
         methods.add(t("Collection<${collType}> get${plural}()", field));
+        // Collection<? extends T> getFoos(boolean elaborate)
+        methods.add(t("Collection<${collType}> get${plural}(boolean elaborate)", field));
         // boolean hasFoos()
         methods.add(t("boolean has${plural}()", field));
         // T getFoo(int index)
@@ -125,6 +129,8 @@ public class InterfaceGenerator extends TypeGenerator {
         Members methods = new Members();
         // Map<String, ? extends T> getFoos()
         methods.add(t("Map<String, ${collType}> get${plural}()", field));
+        // Map<String, ? extends T> getFoos(boolean elaborate)
+        methods.add(t("Map<String, ${collType}> get${plural}(boolean elaborate)", field));
         // boolean hasFoo(String name)
         methods.add(t("boolean has${name}(String ${keyName})", field));
         // Foo getFoo(String name)

@@ -37,13 +37,13 @@ public class OperationImpl extends OpenApiObjectImpl<Operation> implements Opera
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public OperationImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
-            super.maybeFillChildrenAtCreation();
+            super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public OperationImpl(Operation operation, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(operation, parent, refReg);
-            super.maybeFillChildrenAtCreation();
+            super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -100,6 +100,12 @@ public class OperationImpl extends OpenApiObjectImpl<Operation> implements Opera
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Collection<String> getTags(boolean elaborate) {
+        return tags.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean hasTags() {
         return tags.isPresent();
     }
@@ -143,6 +149,12 @@ public class OperationImpl extends OpenApiObjectImpl<Operation> implements Opera
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getSummary(boolean elaborate) {
+        return summary.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setSummary(String summary) {
         this.summary.set(summary);
     }
@@ -152,6 +164,12 @@ public class OperationImpl extends OpenApiObjectImpl<Operation> implements Opera
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public String getDescription() {
         return description.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getDescription(boolean elaborate) {
+        return description.get(elaborate);
     }
 
     @Override
@@ -169,6 +187,12 @@ public class OperationImpl extends OpenApiObjectImpl<Operation> implements Opera
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public ExternalDocs getExternalDocs(boolean elaborate) {
+        return externalDocs.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setExternalDocs(ExternalDocs externalDocs) {
         this.externalDocs.set(externalDocs);
     }
@@ -182,6 +206,12 @@ public class OperationImpl extends OpenApiObjectImpl<Operation> implements Opera
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getOperationId(boolean elaborate) {
+        return operationId.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setOperationId(String operationId) {
         this.operationId.set(operationId);
     }
@@ -191,6 +221,12 @@ public class OperationImpl extends OpenApiObjectImpl<Operation> implements Opera
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Collection<Parameter> getParameters() {
         return parameters.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Collection<Parameter> getParameters(boolean elaborate) {
+        return parameters.get(elaborate);
     }
 
     @Override
@@ -238,6 +274,12 @@ public class OperationImpl extends OpenApiObjectImpl<Operation> implements Opera
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public RequestBody getRequestBody(boolean elaborate) {
+        return requestBody.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setRequestBody(RequestBody requestBody) {
         this.requestBody.set(requestBody);
     }
@@ -247,6 +289,12 @@ public class OperationImpl extends OpenApiObjectImpl<Operation> implements Opera
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Map<String, Response> getResponses() {
         return responses.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Response> getResponses(boolean elaborate) {
+        return responses.get(elaborate);
     }
 
     @Override
@@ -288,6 +336,12 @@ public class OperationImpl extends OpenApiObjectImpl<Operation> implements Opera
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Object> getResponsesExtensions(boolean elaborate) {
+        return responsesExtensions.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean hasResponsesExtension(String name) {
         return responsesExtensions.containsKey(name);
     }
@@ -321,6 +375,12 @@ public class OperationImpl extends OpenApiObjectImpl<Operation> implements Opera
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Map<String, Callback> getCallbacks() {
         return callbacks.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Callback> getCallbacks(boolean elaborate) {
+        return callbacks.get(elaborate);
     }
 
     @Override
@@ -362,6 +422,12 @@ public class OperationImpl extends OpenApiObjectImpl<Operation> implements Opera
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Object> getCallbacksExtensions(boolean elaborate) {
+        return callbacksExtensions.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean hasCallbacksExtension(String name) {
         return callbacksExtensions.containsKey(name);
     }
@@ -399,6 +465,12 @@ public class OperationImpl extends OpenApiObjectImpl<Operation> implements Opera
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Boolean getDeprecated(boolean elaborate) {
+        return deprecated.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean isDeprecated() {
         return deprecated.get() != null ? deprecated.get() : false;
     }
@@ -414,6 +486,12 @@ public class OperationImpl extends OpenApiObjectImpl<Operation> implements Opera
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Collection<SecurityRequirement> getSecurityRequirements() {
         return securityRequirements.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Collection<SecurityRequirement> getSecurityRequirements(boolean elaborate) {
+        return securityRequirements.get(elaborate);
     }
 
     @Override
@@ -461,6 +539,12 @@ public class OperationImpl extends OpenApiObjectImpl<Operation> implements Opera
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Collection<Server> getServers(boolean elaborate) {
+        return servers.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean hasServers() {
         return servers.isPresent();
     }
@@ -504,6 +588,12 @@ public class OperationImpl extends OpenApiObjectImpl<Operation> implements Opera
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Object> getExtensions(boolean elaborate) {
+        return extensions.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean hasExtension(String name) {
         return extensions.containsKey(name);
     }
@@ -534,7 +624,7 @@ public class OperationImpl extends OpenApiObjectImpl<Operation> implements Opera
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void fillChildren() {
+    protected void elaborateChildren() {
         tags = createChildList("tags", this, StringOverlay.factory);
             summary = createChild("summary", this, StringOverlay.factory);
             description = createChild("description", this, StringOverlay.factory);

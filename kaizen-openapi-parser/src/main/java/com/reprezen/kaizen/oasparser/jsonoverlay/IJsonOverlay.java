@@ -16,6 +16,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 public interface IJsonOverlay<V> {
 
 	V get();
+	
+	V get(boolean elaborate);
 
 	void set(V value);
 
@@ -28,6 +30,8 @@ public interface IJsonOverlay<V> {
 	JsonNode toJson(boolean keepEmpty);
 
 	boolean isPresent();
+	
+	boolean isElaborated();
 	
 	IJsonOverlay<?> getParent();
 	

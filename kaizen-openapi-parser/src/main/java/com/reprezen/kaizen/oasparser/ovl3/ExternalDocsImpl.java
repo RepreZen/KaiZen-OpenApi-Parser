@@ -22,13 +22,13 @@ public class ExternalDocsImpl extends OpenApiObjectImpl<ExternalDocs> implements
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public ExternalDocsImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
-            super.maybeFillChildrenAtCreation();
+            super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public ExternalDocsImpl(ExternalDocs externalDocs, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(externalDocs, parent, refReg);
-            super.maybeFillChildrenAtCreation();
+            super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -49,6 +49,12 @@ public class ExternalDocsImpl extends OpenApiObjectImpl<ExternalDocs> implements
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getDescription(boolean elaborate) {
+        return description.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setDescription(String description) {
         this.description.set(description);
     }
@@ -62,6 +68,12 @@ public class ExternalDocsImpl extends OpenApiObjectImpl<ExternalDocs> implements
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getUrl(boolean elaborate) {
+        return url.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setUrl(String url) {
         this.url.set(url);
     }
@@ -71,6 +83,12 @@ public class ExternalDocsImpl extends OpenApiObjectImpl<ExternalDocs> implements
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Map<String, Object> getExtensions() {
         return extensions.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Object> getExtensions(boolean elaborate) {
+        return extensions.get(elaborate);
     }
 
     @Override
@@ -105,7 +123,7 @@ public class ExternalDocsImpl extends OpenApiObjectImpl<ExternalDocs> implements
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void fillChildren() {
+    protected void elaborateChildren() {
         description = createChild("description", this, StringOverlay.factory);
             url = createChild("url", this, StringOverlay.factory);
             extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");

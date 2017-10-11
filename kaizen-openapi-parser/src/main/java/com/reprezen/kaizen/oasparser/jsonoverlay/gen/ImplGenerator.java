@@ -53,7 +53,7 @@ public class ImplGenerator extends TypeGenerator {
 	@Override
 	public Members getOtherMembers(Type type) {
 		Members members = new Members();
-		members.add(getFillChildrenMethod(type));
+		members.add(getElaborateChildrenMethod(type));
 		members.add(getFactoryMethod(type));
 		return members;
 	}
@@ -74,10 +74,10 @@ public class ImplGenerator extends TypeGenerator {
 	protected Members getConstructors(Type type) {
 		Members members = new Members();
 		members.add(t("public ${implName}(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg)", type), //
-				code("super(json, parent, refReg);", "super.maybeFillChildrenAtCreation();"));
+				code("super(json, parent, refReg);", "super.maybeElaborateChildrenAtCreation();"));
 		requireTypes(JsonNode.class, JsonOverlay.class);
 		members.add(t("public ${implName}(${name} ${lcName}, JsonOverlay<?> parent, ReferenceRegistry refReg)", type), //
-				code(t("super(${lcName}, parent, refReg);", type), "super.maybeFillChildrenAtCreation();"));
+				code(t("super(${lcName}, parent, refReg);", type), "super.maybeElaborateChildrenAtCreation();"));
 		return members;
 	}
 
@@ -137,9 +137,12 @@ public class ImplGenerator extends TypeGenerator {
 	private Members getScalarMethods(Field field) {
 		Members methods = new Members();
 		String getDecl = t("public ${type} get${name}()", field);
+		String getBoolDecl = t("public ${type} get${name}(boolean elaborate)", field);
 		String setDecl = t("public void set${name}(${type} ${lcName})", field);
 		// T getFoo() => return foo.get()
 		methods.add(getDecl, code(field, "return ${lcName}.get();"));
+		// T getFoo(boolean elaborate) => return foo.get(elaborate)
+		methods.add(getBoolDecl, code(field, "return ${lcName}.get(elaborate);"));
 		if (field.isBoolean()) {
 			// boolean isFoo() => foo.get() != null ? foo.get() : boolDefault
 			methods.add(t("public boolean is${name}()", field),
@@ -153,6 +156,7 @@ public class ImplGenerator extends TypeGenerator {
 	private Members getCollectionMethods(Field field) {
 		Members methods = new Members();
 		String getDecl = t("public Collection<${collType}> get${plural}()", field);
+		String getBoolDecl = t("public Collection<${collType}> get${plural}(boolean elaborate)", field);
 		String hasDecl = t("public boolean has${plural}()", field);
 		String iGetDecl = t("public ${type} get${name}(int index)", field);
 		String setDecl = t("public void set${plural}(Collection<${collType}> ${lcPlural})", field);
@@ -162,8 +166,10 @@ public class ImplGenerator extends TypeGenerator {
 		// field);
 		String remDecl = t("public void remove${name}(int index)", field);
 
-		// Collection<T> getFoos() => foos.get()
+		// Collection<T> getFoos(boolean) => foos.get()
 		methods.add(getDecl, code(field, "return ${lcPlural}.get();"));
+		// Collection<T> getFoos(boolean elaborate) => foos.get(elaborate)
+		methods.add(getBoolDecl, code(field, "return ${lcPlural}.get(elaborate);"));
 		// boolean hasFoos() => foos.isPresent()
 		methods.add(hasDecl, code(field, "return ${lcPlural}.isPresent();"));
 		// T getFoo(int index) => foos.get(index)
@@ -182,13 +188,11 @@ public class ImplGenerator extends TypeGenerator {
 		return methods;
 	}
 
-	private Member getFillChildrenMethod(Type type) {
-		String decl = "protected void fillChildren()";
+	private Member getElaborateChildrenMethod(Type type) {
+		String decl = "protected void elaborateChildren()";
 		Collection<String> code = Lists.newArrayList();
 		for (Field field : type.getFields().values()) {
-			if (!field.isNoImpl()) {
-				code.addAll(code(field, "${propName} = ${propCons};"));
-			}
+			code.addAll(code(field, "${propName} = ${propCons};"));
 		}
 		return new Member(decl, code).override();
 	}
@@ -220,6 +224,9 @@ public class ImplGenerator extends TypeGenerator {
 		// Map<String, ? extends T> getFoos() => foos.get()
 		methods.add(t("public Map<String, ${collType}> get${plural}()", field),
 				code(field, "return ${lcPlural}.get();"));
+		// Map<String, ? extends T> getFoos(boolean elaborate) => foos.get(elaborate)
+		methods.add(t("public Map<String, ${collType}> get${plural}(boolean elaborate)", field),
+				code(field, "return ${lcPlural}.get(elaborate);"));
 		// boolean hasFoo(String key) => foos.containsKey(key)
 		methods.add(t("public boolean has${name}(String ${keyName})", field),
 				code(field, "return ${lcPlural}.containsKey(${keyName});"));

@@ -24,13 +24,13 @@ public class SecuritySchemeImpl extends OpenApiObjectImpl<SecurityScheme> implem
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public SecuritySchemeImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
-            super.maybeFillChildrenAtCreation();
+            super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public SecuritySchemeImpl(SecurityScheme securityScheme, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(securityScheme, parent, refReg);
-            super.maybeFillChildrenAtCreation();
+            super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -81,6 +81,12 @@ public class SecuritySchemeImpl extends OpenApiObjectImpl<SecurityScheme> implem
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getType(boolean elaborate) {
+        return type.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setType(String type) {
         this.type.set(type);
     }
@@ -90,6 +96,12 @@ public class SecuritySchemeImpl extends OpenApiObjectImpl<SecurityScheme> implem
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public String getDescription() {
         return description.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getDescription(boolean elaborate) {
+        return description.get(elaborate);
     }
 
     @Override
@@ -107,6 +119,12 @@ public class SecuritySchemeImpl extends OpenApiObjectImpl<SecurityScheme> implem
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getName(boolean elaborate) {
+        return name.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setName(String name) {
         this.name.set(name);
     }
@@ -116,6 +134,12 @@ public class SecuritySchemeImpl extends OpenApiObjectImpl<SecurityScheme> implem
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public String getIn() {
         return in.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getIn(boolean elaborate) {
+        return in.get(elaborate);
     }
 
     @Override
@@ -133,6 +157,12 @@ public class SecuritySchemeImpl extends OpenApiObjectImpl<SecurityScheme> implem
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getScheme(boolean elaborate) {
+        return scheme.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setScheme(String scheme) {
         this.scheme.set(scheme);
     }
@@ -142,6 +172,12 @@ public class SecuritySchemeImpl extends OpenApiObjectImpl<SecurityScheme> implem
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public String getBearerFormat() {
         return bearerFormat.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getBearerFormat(boolean elaborate) {
+        return bearerFormat.get(elaborate);
     }
 
     @Override
@@ -159,6 +195,12 @@ public class SecuritySchemeImpl extends OpenApiObjectImpl<SecurityScheme> implem
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public OAuthFlow getImplicitOAuthFlow(boolean elaborate) {
+        return implicitOAuthFlow.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setImplicitOAuthFlow(OAuthFlow implicitOAuthFlow) {
         this.implicitOAuthFlow.set(implicitOAuthFlow);
     }
@@ -168,6 +210,12 @@ public class SecuritySchemeImpl extends OpenApiObjectImpl<SecurityScheme> implem
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public OAuthFlow getPasswordOAuthFlow() {
         return passwordOAuthFlow.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public OAuthFlow getPasswordOAuthFlow(boolean elaborate) {
+        return passwordOAuthFlow.get(elaborate);
     }
 
     @Override
@@ -185,6 +233,12 @@ public class SecuritySchemeImpl extends OpenApiObjectImpl<SecurityScheme> implem
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public OAuthFlow getClientCredentialsOAuthFlow(boolean elaborate) {
+        return clientCredentialsOAuthFlow.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setClientCredentialsOAuthFlow(OAuthFlow clientCredentialsOAuthFlow) {
         this.clientCredentialsOAuthFlow.set(clientCredentialsOAuthFlow);
     }
@@ -198,6 +252,12 @@ public class SecuritySchemeImpl extends OpenApiObjectImpl<SecurityScheme> implem
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public OAuthFlow getAuthorizationCodeOAuthFlow(boolean elaborate) {
+        return authorizationCodeOAuthFlow.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setAuthorizationCodeOAuthFlow(OAuthFlow authorizationCodeOAuthFlow) {
         this.authorizationCodeOAuthFlow.set(authorizationCodeOAuthFlow);
     }
@@ -207,6 +267,12 @@ public class SecuritySchemeImpl extends OpenApiObjectImpl<SecurityScheme> implem
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Map<String, Object> getOAuthFlowsExtensions() {
         return oAuthFlowsExtensions.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Object> getOAuthFlowsExtensions(boolean elaborate) {
+        return oAuthFlowsExtensions.get(elaborate);
     }
 
     @Override
@@ -248,6 +314,12 @@ public class SecuritySchemeImpl extends OpenApiObjectImpl<SecurityScheme> implem
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getOpenIdConnectUrl(boolean elaborate) {
+        return openIdConnectUrl.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setOpenIdConnectUrl(String openIdConnectUrl) {
         this.openIdConnectUrl.set(openIdConnectUrl);
     }
@@ -257,6 +329,12 @@ public class SecuritySchemeImpl extends OpenApiObjectImpl<SecurityScheme> implem
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Map<String, Object> getExtensions() {
         return extensions.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Object> getExtensions(boolean elaborate) {
+        return extensions.get(elaborate);
     }
 
     @Override
@@ -291,7 +369,7 @@ public class SecuritySchemeImpl extends OpenApiObjectImpl<SecurityScheme> implem
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void fillChildren() {
+    protected void elaborateChildren() {
         type = createChild("type", this, StringOverlay.factory);
             description = createChild("description", this, StringOverlay.factory);
             name = createChild("name", this, StringOverlay.factory);

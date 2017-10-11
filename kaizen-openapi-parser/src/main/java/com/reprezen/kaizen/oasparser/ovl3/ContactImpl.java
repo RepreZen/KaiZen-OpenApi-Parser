@@ -22,13 +22,13 @@ public class ContactImpl extends OpenApiObjectImpl<Contact> implements Contact {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public ContactImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
-            super.maybeFillChildrenAtCreation();
+            super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public ContactImpl(Contact contact, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(contact, parent, refReg);
-            super.maybeFillChildrenAtCreation();
+            super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -52,6 +52,12 @@ public class ContactImpl extends OpenApiObjectImpl<Contact> implements Contact {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getName(boolean elaborate) {
+        return name.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setName(String name) {
         this.name.set(name);
     }
@@ -61,6 +67,12 @@ public class ContactImpl extends OpenApiObjectImpl<Contact> implements Contact {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public String getUrl() {
         return url.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getUrl(boolean elaborate) {
+        return url.get(elaborate);
     }
 
     @Override
@@ -78,6 +90,12 @@ public class ContactImpl extends OpenApiObjectImpl<Contact> implements Contact {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getEmail(boolean elaborate) {
+        return email.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setEmail(String email) {
         this.email.set(email);
     }
@@ -87,6 +105,12 @@ public class ContactImpl extends OpenApiObjectImpl<Contact> implements Contact {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Map<String, Object> getExtensions() {
         return extensions.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Object> getExtensions(boolean elaborate) {
+        return extensions.get(elaborate);
     }
 
     @Override
@@ -121,7 +145,7 @@ public class ContactImpl extends OpenApiObjectImpl<Contact> implements Contact {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void fillChildren() {
+    protected void elaborateChildren() {
         name = createChild("name", this, StringOverlay.factory);
             url = createChild("url", this, StringOverlay.factory);
             email = createChild("email", this, StringOverlay.factory);

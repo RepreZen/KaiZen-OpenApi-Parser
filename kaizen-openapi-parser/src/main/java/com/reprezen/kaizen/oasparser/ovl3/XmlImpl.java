@@ -23,13 +23,13 @@ public class XmlImpl extends OpenApiObjectImpl<Xml> implements Xml {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public XmlImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
-            super.maybeFillChildrenAtCreation();
+            super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public XmlImpl(Xml xml, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(xml, parent, refReg);
-            super.maybeFillChildrenAtCreation();
+            super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -59,6 +59,12 @@ public class XmlImpl extends OpenApiObjectImpl<Xml> implements Xml {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getName(boolean elaborate) {
+        return name.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setName(String name) {
         this.name.set(name);
     }
@@ -68,6 +74,12 @@ public class XmlImpl extends OpenApiObjectImpl<Xml> implements Xml {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public String getNamespace() {
         return namespace.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getNamespace(boolean elaborate) {
+        return namespace.get(elaborate);
     }
 
     @Override
@@ -85,6 +97,12 @@ public class XmlImpl extends OpenApiObjectImpl<Xml> implements Xml {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getPrefix(boolean elaborate) {
+        return prefix.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setPrefix(String prefix) {
         this.prefix.set(prefix);
     }
@@ -94,6 +112,12 @@ public class XmlImpl extends OpenApiObjectImpl<Xml> implements Xml {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Boolean getAttribute() {
         return attribute.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Boolean getAttribute(boolean elaborate) {
+        return attribute.get(elaborate);
     }
 
     @Override
@@ -117,6 +141,12 @@ public class XmlImpl extends OpenApiObjectImpl<Xml> implements Xml {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Boolean getWrapped(boolean elaborate) {
+        return wrapped.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean isWrapped() {
         return wrapped.get() != null ? wrapped.get() : false;
     }
@@ -132,6 +162,12 @@ public class XmlImpl extends OpenApiObjectImpl<Xml> implements Xml {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Map<String, Object> getExtensions() {
         return extensions.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Object> getExtensions(boolean elaborate) {
+        return extensions.get(elaborate);
     }
 
     @Override
@@ -166,7 +202,7 @@ public class XmlImpl extends OpenApiObjectImpl<Xml> implements Xml {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void fillChildren() {
+    protected void elaborateChildren() {
         name = createChild("name", this, StringOverlay.factory);
             namespace = createChild("namespace", this, StringOverlay.factory);
             prefix = createChild("prefix", this, StringOverlay.factory);

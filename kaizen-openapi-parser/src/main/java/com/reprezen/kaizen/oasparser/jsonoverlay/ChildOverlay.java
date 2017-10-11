@@ -121,6 +121,11 @@ public class ChildOverlay<V, OV extends JsonOverlay<V>> implements IJsonOverlay<
 		return overlay.toJson(keepEmpty);
 	}
 
+	@Override
+	public boolean isElaborated() {
+		return overlay.isElaborated();
+	}
+
 	public JsonPath getPath() {
 		return path;
 	}

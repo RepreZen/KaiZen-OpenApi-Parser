@@ -101,13 +101,13 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3> implements OpenApi
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public OpenApi3Impl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
-            super.maybeFillChildrenAtCreation();
+            super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public OpenApi3Impl(OpenApi3 openApi3, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(openApi3, parent, refReg);
-            super.maybeFillChildrenAtCreation();
+            super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -176,6 +176,12 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3> implements OpenApi
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getOpenApi(boolean elaborate) {
+        return openApi.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setOpenApi(String openApi) {
         this.openApi.set(openApi);
     }
@@ -189,6 +195,12 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3> implements OpenApi
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Info getInfo(boolean elaborate) {
+        return info.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setInfo(Info info) {
         this.info.set(info);
     }
@@ -198,6 +210,12 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3> implements OpenApi
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Collection<Server> getServers() {
         return servers.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Collection<Server> getServers(boolean elaborate) {
+        return servers.get(elaborate);
     }
 
     @Override
@@ -245,6 +263,12 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3> implements OpenApi
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Path> getPaths(boolean elaborate) {
+        return paths.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean hasPath(String name) {
         return paths.containsKey(name);
     }
@@ -278,6 +302,12 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3> implements OpenApi
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Map<String, Object> getPathsExtensions() {
         return pathsExtensions.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Object> getPathsExtensions(boolean elaborate) {
+        return pathsExtensions.get(elaborate);
     }
 
     @Override
@@ -319,6 +349,12 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3> implements OpenApi
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Schema> getSchemas(boolean elaborate) {
+        return schemas.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean hasSchema(String name) {
         return schemas.containsKey(name);
     }
@@ -352,6 +388,12 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3> implements OpenApi
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Map<String, Response> getResponses() {
         return responses.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Response> getResponses(boolean elaborate) {
+        return responses.get(elaborate);
     }
 
     @Override
@@ -393,6 +435,12 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3> implements OpenApi
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Parameter> getParameters(boolean elaborate) {
+        return parameters.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean hasParameter(String name) {
         return parameters.containsKey(name);
     }
@@ -426,6 +474,12 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3> implements OpenApi
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Map<String, Example> getExamples() {
         return examples.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Example> getExamples(boolean elaborate) {
+        return examples.get(elaborate);
     }
 
     @Override
@@ -467,6 +521,12 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3> implements OpenApi
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, RequestBody> getRequestBodies(boolean elaborate) {
+        return requestBodies.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean hasRequestBody(String name) {
         return requestBodies.containsKey(name);
     }
@@ -500,6 +560,12 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3> implements OpenApi
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Map<String, Header> getHeaders() {
         return headers.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Header> getHeaders(boolean elaborate) {
+        return headers.get(elaborate);
     }
 
     @Override
@@ -541,6 +607,12 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3> implements OpenApi
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, SecurityScheme> getSecuritySchemes(boolean elaborate) {
+        return securitySchemes.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean hasSecurityScheme(String name) {
         return securitySchemes.containsKey(name);
     }
@@ -574,6 +646,12 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3> implements OpenApi
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Map<String, Link> getLinks() {
         return links.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Link> getLinks(boolean elaborate) {
+        return links.get(elaborate);
     }
 
     @Override
@@ -615,6 +693,12 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3> implements OpenApi
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Callback> getCallbacks(boolean elaborate) {
+        return callbacks.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean hasCallback(String name) {
         return callbacks.containsKey(name);
     }
@@ -652,6 +736,12 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3> implements OpenApi
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Object> getComponentsExtensions(boolean elaborate) {
+        return componentsExtensions.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean hasComponentsExtension(String name) {
         return componentsExtensions.containsKey(name);
     }
@@ -685,6 +775,12 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3> implements OpenApi
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Collection<SecurityRequirement> getSecurityRequirements() {
         return securityRequirements.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Collection<SecurityRequirement> getSecurityRequirements(boolean elaborate) {
+        return securityRequirements.get(elaborate);
     }
 
     @Override
@@ -732,6 +828,12 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3> implements OpenApi
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Collection<Tag> getTags(boolean elaborate) {
+        return tags.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean hasTags() {
         return tags.isPresent();
     }
@@ -775,6 +877,12 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3> implements OpenApi
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public ExternalDocs getExternalDocs(boolean elaborate) {
+        return externalDocs.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setExternalDocs(ExternalDocs externalDocs) {
         this.externalDocs.set(externalDocs);
     }
@@ -784,6 +892,12 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3> implements OpenApi
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Map<String, Object> getExtensions() {
         return extensions.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Object> getExtensions(boolean elaborate) {
+        return extensions.get(elaborate);
     }
 
     @Override
@@ -818,7 +932,7 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3> implements OpenApi
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void fillChildren() {
+    protected void elaborateChildren() {
         openApi = createChild("openapi", this, StringOverlay.factory);
             info = createChild("info", this, InfoImpl.factory);
             servers = createChildList("servers", this, ServerImpl.factory);

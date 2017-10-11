@@ -22,13 +22,13 @@ public class OAuthFlowImpl extends OpenApiObjectImpl<OAuthFlow> implements OAuth
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public OAuthFlowImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
-            super.maybeFillChildrenAtCreation();
+            super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public OAuthFlowImpl(OAuthFlow oAuthFlow, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(oAuthFlow, parent, refReg);
-            super.maybeFillChildrenAtCreation();
+            super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -58,6 +58,12 @@ public class OAuthFlowImpl extends OpenApiObjectImpl<OAuthFlow> implements OAuth
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getAuthorizationUrl(boolean elaborate) {
+        return authorizationUrl.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setAuthorizationUrl(String authorizationUrl) {
         this.authorizationUrl.set(authorizationUrl);
     }
@@ -67,6 +73,12 @@ public class OAuthFlowImpl extends OpenApiObjectImpl<OAuthFlow> implements OAuth
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public String getTokenUrl() {
         return tokenUrl.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getTokenUrl(boolean elaborate) {
+        return tokenUrl.get(elaborate);
     }
 
     @Override
@@ -84,6 +96,12 @@ public class OAuthFlowImpl extends OpenApiObjectImpl<OAuthFlow> implements OAuth
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getRefreshUrl(boolean elaborate) {
+        return refreshUrl.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setRefreshUrl(String refreshUrl) {
         this.refreshUrl.set(refreshUrl);
     }
@@ -93,6 +111,12 @@ public class OAuthFlowImpl extends OpenApiObjectImpl<OAuthFlow> implements OAuth
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Map<String, String> getScopes() {
         return scopes.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, String> getScopes(boolean elaborate) {
+        return scopes.get(elaborate);
     }
 
     @Override
@@ -134,6 +158,12 @@ public class OAuthFlowImpl extends OpenApiObjectImpl<OAuthFlow> implements OAuth
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Object> getScopesExtensions(boolean elaborate) {
+        return scopesExtensions.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean hasScopesExtension(String name) {
         return scopesExtensions.containsKey(name);
     }
@@ -171,6 +201,12 @@ public class OAuthFlowImpl extends OpenApiObjectImpl<OAuthFlow> implements OAuth
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Object> getExtensions(boolean elaborate) {
+        return extensions.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean hasExtension(String name) {
         return extensions.containsKey(name);
     }
@@ -201,7 +237,7 @@ public class OAuthFlowImpl extends OpenApiObjectImpl<OAuthFlow> implements OAuth
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void fillChildren() {
+    protected void elaborateChildren() {
         authorizationUrl = createChild("authorizationUrl", this, StringOverlay.factory);
             tokenUrl = createChild("tokenUrl", this, StringOverlay.factory);
             refreshUrl = createChild("refreshUrl", this, StringOverlay.factory);

@@ -51,11 +51,17 @@ public abstract class JsonOverlay<V> implements IJsonOverlay<V> {
 		return get(true);
 	}
 
-	protected abstract V get(boolean complete);
+	public abstract V get(boolean elaborate);
 	
 	@Override
 	public boolean isPresent() {
 		return value != null;
+	}
+
+	@Override
+	public boolean isElaborated() {
+		// most overlays are complete when constructed
+		return true;
 	}
 
 	@Override

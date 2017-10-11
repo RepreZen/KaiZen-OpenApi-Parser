@@ -178,7 +178,7 @@ public abstract class TypeGenerator {
 				Optional.class, //
 				JsonNode.class, //
 				ObjectNode.class, //
-				JsonNodeFactory.class, //				
+				JsonNodeFactory.class, //
 				JsonPointer.class, //
 				JsonOverlay.class, //
 				IJsonOverlay.class, //

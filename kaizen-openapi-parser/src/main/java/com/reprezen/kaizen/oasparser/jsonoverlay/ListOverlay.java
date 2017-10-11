@@ -56,7 +56,7 @@ public class ListOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Colle
 		}
 	}
 
-	protected Collection<V> get(boolean complete) {
+	public Collection<V> get(boolean elaborate) {
 		return value;
 	}
 

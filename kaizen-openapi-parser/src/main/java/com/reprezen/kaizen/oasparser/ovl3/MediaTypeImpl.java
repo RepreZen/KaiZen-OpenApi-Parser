@@ -27,13 +27,13 @@ public class MediaTypeImpl extends OpenApiObjectImpl<MediaType> implements Media
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public MediaTypeImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
-            super.maybeFillChildrenAtCreation();
+            super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public MediaTypeImpl(MediaType mediaType, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(mediaType, parent, refReg);
-            super.maybeFillChildrenAtCreation();
+            super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -60,6 +60,12 @@ public class MediaTypeImpl extends OpenApiObjectImpl<MediaType> implements Media
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Schema getSchema(boolean elaborate) {
+        return schema.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setSchema(Schema schema) {
         this.schema.set(schema);
     }
@@ -69,6 +75,12 @@ public class MediaTypeImpl extends OpenApiObjectImpl<MediaType> implements Media
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Map<String, Example> getExamples() {
         return examples.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Example> getExamples(boolean elaborate) {
+        return examples.get(elaborate);
     }
 
     @Override
@@ -110,6 +122,12 @@ public class MediaTypeImpl extends OpenApiObjectImpl<MediaType> implements Media
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Object getExample(boolean elaborate) {
+        return example.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setExample(Object example) {
         this.example.set(example);
     }
@@ -119,6 +137,12 @@ public class MediaTypeImpl extends OpenApiObjectImpl<MediaType> implements Media
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Map<String, EncodingProperty> getEncodingProperties() {
         return encodingProperties.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, EncodingProperty> getEncodingProperties(boolean elaborate) {
+        return encodingProperties.get(elaborate);
     }
 
     @Override
@@ -160,6 +184,12 @@ public class MediaTypeImpl extends OpenApiObjectImpl<MediaType> implements Media
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Object> getExtensions(boolean elaborate) {
+        return extensions.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean hasExtension(String name) {
         return extensions.containsKey(name);
     }
@@ -190,7 +220,7 @@ public class MediaTypeImpl extends OpenApiObjectImpl<MediaType> implements Media
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void fillChildren() {
+    protected void elaborateChildren() {
         schema = createChild("schema", this, SchemaImpl.factory);
             examples = createChildMap("examples", this, ExampleImpl.factory, "[a-zA-Z0-9\\._-]+");
             example = createChild("example", this, ObjectOverlay.factory);

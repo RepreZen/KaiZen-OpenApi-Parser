@@ -26,13 +26,13 @@ public class InfoImpl extends OpenApiObjectImpl<Info> implements Info {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public InfoImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
-            super.maybeFillChildrenAtCreation();
+            super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public InfoImpl(Info info, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(info, parent, refReg);
-            super.maybeFillChildrenAtCreation();
+            super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -65,6 +65,12 @@ public class InfoImpl extends OpenApiObjectImpl<Info> implements Info {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getTitle(boolean elaborate) {
+        return title.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setTitle(String title) {
         this.title.set(title);
     }
@@ -74,6 +80,12 @@ public class InfoImpl extends OpenApiObjectImpl<Info> implements Info {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public String getDescription() {
         return description.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getDescription(boolean elaborate) {
+        return description.get(elaborate);
     }
 
     @Override
@@ -91,6 +103,12 @@ public class InfoImpl extends OpenApiObjectImpl<Info> implements Info {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getTermsOfService(boolean elaborate) {
+        return termsOfService.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setTermsOfService(String termsOfService) {
         this.termsOfService.set(termsOfService);
     }
@@ -100,6 +118,12 @@ public class InfoImpl extends OpenApiObjectImpl<Info> implements Info {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Contact getContact() {
         return contact.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Contact getContact(boolean elaborate) {
+        return contact.get(elaborate);
     }
 
     @Override
@@ -117,6 +141,12 @@ public class InfoImpl extends OpenApiObjectImpl<Info> implements Info {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public License getLicense(boolean elaborate) {
+        return license.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setLicense(License license) {
         this.license.set(license);
     }
@@ -130,6 +160,12 @@ public class InfoImpl extends OpenApiObjectImpl<Info> implements Info {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getVersion(boolean elaborate) {
+        return version.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setVersion(String version) {
         this.version.set(version);
     }
@@ -139,6 +175,12 @@ public class InfoImpl extends OpenApiObjectImpl<Info> implements Info {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Map<String, Object> getExtensions() {
         return extensions.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Object> getExtensions(boolean elaborate) {
+        return extensions.get(elaborate);
     }
 
     @Override
@@ -173,7 +215,7 @@ public class InfoImpl extends OpenApiObjectImpl<Info> implements Info {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void fillChildren() {
+    protected void elaborateChildren() {
         title = createChild("title", this, StringOverlay.factory);
             description = createChild("description", this, StringOverlay.factory);
             termsOfService = createChild("termsOfService", this, StringOverlay.factory);

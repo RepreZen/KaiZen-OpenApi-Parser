@@ -25,9 +25,7 @@ public abstract class OverlayFactory<V, OV extends JsonOverlay<V>> {
 	}
 
 	public OV create(JsonNode json, JsonOverlay<?> parent, boolean partial, ReferenceRegistry refReg) {
-		if (json.isMissingNode()) {
-			return create((V) null, parent, refReg);
-		} else if (!partial && refReg.hasOverlay(json)) {
+		if (!partial && refReg.hasOverlay(json)) {
 			@SuppressWarnings("unchecked")
 			OV overlay = (OV) refReg.getOverlay(json);
 			if (parent != null) {

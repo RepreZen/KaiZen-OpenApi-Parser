@@ -31,6 +31,11 @@ public class PathImpl extends OpenApiObjectImpl<Path> implements Path {
     }
 
     @Override
+    public Operation getGet(boolean elaborate) {
+        return operations.get("get").get(elaborate);
+    }
+
+    @Override
     public void setGet(Operation get) {
         operations.set("get", (OperationImpl) get);
     }
@@ -38,6 +43,11 @@ public class PathImpl extends OpenApiObjectImpl<Path> implements Path {
     @Override
     public Operation getPut() {
         return operations.get("put");
+    }
+
+    @Override
+    public Operation getPut(boolean elaborate) {
+        return operations.get("put").get(elaborate);
     }
 
     @Override
@@ -51,6 +61,11 @@ public class PathImpl extends OpenApiObjectImpl<Path> implements Path {
     }
 
     @Override
+    public Operation getPost(boolean elaborate) {
+        return operations.get("post").get(elaborate);
+    }
+
+    @Override
     public void setPost(Operation post) {
         operations.set("post", (OperationImpl) post);
     }
@@ -58,6 +73,11 @@ public class PathImpl extends OpenApiObjectImpl<Path> implements Path {
     @Override
     public Operation getDelete() {
         return operations.get("delete");
+    }
+
+    @Override
+    public Operation getDelete(boolean elaborate) {
+        return operations.get("delete").get(elaborate);
     }
 
     @Override
@@ -71,6 +91,11 @@ public class PathImpl extends OpenApiObjectImpl<Path> implements Path {
     }
 
     @Override
+    public Operation getOptions(boolean elaborate) {
+        return operations.get("options").get(elaborate);
+    }
+
+    @Override
     public void setOptions(Operation options) {
         operations.set("options", (OperationImpl) options);
     }
@@ -78,6 +103,11 @@ public class PathImpl extends OpenApiObjectImpl<Path> implements Path {
     @Override
     public Operation getHead() {
         return operations.get("head");
+    }
+
+    @Override
+    public Operation getHead(boolean elaborate) {
+        return operations.get("head").get(elaborate);
     }
 
     @Override
@@ -91,6 +121,11 @@ public class PathImpl extends OpenApiObjectImpl<Path> implements Path {
     }
 
     @Override
+    public Operation getPatch(boolean elaborate) {
+        return operations.get("patch").get(elaborate);
+    }
+
+    @Override
     public void setPatch(Operation patch) {
         operations.set("patch", (OperationImpl) patch);
     }
@@ -98,6 +133,11 @@ public class PathImpl extends OpenApiObjectImpl<Path> implements Path {
     @Override
     public Operation getTrace() {
         return operations.get("trace");
+    }
+
+    @Override
+    public Operation getTrace(boolean elaborate) {
+        return operations.get("trace").get(elaborate);
     }
 
     @Override
@@ -363,14 +403,6 @@ public class PathImpl extends OpenApiObjectImpl<Path> implements Path {
         summary = createChild("summary", this, StringOverlay.factory);
             description = createChild("description", this, StringOverlay.factory);
             operations = createChildMap("", this, OperationImpl.factory, "get|put|post|delete|options|head|patch|trace");
-            get = createChild("get", this, OperationImpl.factory);
-            put = createChild("put", this, OperationImpl.factory);
-            post = createChild("post", this, OperationImpl.factory);
-            delete = createChild("delete", this, OperationImpl.factory);
-            options = createChild("options", this, OperationImpl.factory);
-            head = createChild("head", this, OperationImpl.factory);
-            patch = createChild("patch", this, OperationImpl.factory);
-            trace = createChild("trace", this, OperationImpl.factory);
             servers = createChildList("servers", this, ServerImpl.factory);
             parameters = createChildList("parameters", this, ParameterImpl.factory);
             extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");

@@ -192,7 +192,9 @@ public class ImplGenerator extends TypeGenerator {
 		String decl = "protected void elaborateChildren()";
 		Collection<String> code = Lists.newArrayList();
 		for (Field field : type.getFields().values()) {
-			code.addAll(code(field, "${propName} = ${propCons};"));
+			if (!field.isNoImpl()) {
+				code.addAll(code(field, "${propName} = ${propCons};"));
+			}
 		}
 		return new Member(decl, code).override();
 	}

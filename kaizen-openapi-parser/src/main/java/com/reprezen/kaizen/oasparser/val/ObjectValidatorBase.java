@@ -11,19 +11,24 @@
 package com.reprezen.kaizen.oasparser.val;
 
 import com.google.inject.Inject;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IPropertiesOverlay;
 
 public abstract class ObjectValidatorBase<T> extends ValidatorBase<T> {
-    @Inject(optional = true)
-    private ImplValidator<T> implValidator;
+	@Inject(optional = true)
+	private ImplValidator<T> implValidator;
 
-    public abstract void validateObject(T object, ValidationResults results);
+	public abstract void validateObject(T object, ValidationResults results);
 
-    @Override
-    public void validate(T value, ValidationResults results) {
-        validateObject(value, results);
-        if (implValidator != null) {
-            implValidator.validateImpl(value, results);
-        }
-    }
+	@Override
+	public void validate(T value, ValidationResults results) {
+		@SuppressWarnings("unchecked")
+		IPropertiesOverlay<T> propValue = (IPropertiesOverlay<T>) value;
+		if (propValue.isElaborated()) {
+			validateObject(value, results);
+			if (implValidator != null) {
+				implValidator.validateImpl(value, results);
+			}
+		}
+	}
 
 }

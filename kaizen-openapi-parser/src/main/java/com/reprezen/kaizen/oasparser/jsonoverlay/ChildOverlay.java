@@ -108,6 +108,10 @@ public class ChildOverlay<V, OV extends JsonOverlay<V>> implements IJsonOverlay<
 		// referenced object, which is available via getOverlay().getParent().
 		return parent;
 	}
+	
+	public String getPathInParent() {
+		return overlay.getPathInParent();
+	}
 
 	public IJsonOverlay<?> getRoot() {
 		return parent != null ? parent.getParent() : overlay.getRoot();

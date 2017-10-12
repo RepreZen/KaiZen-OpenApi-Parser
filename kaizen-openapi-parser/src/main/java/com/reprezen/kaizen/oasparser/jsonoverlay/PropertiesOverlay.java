@@ -114,6 +114,7 @@ public abstract class PropertiesOverlay<V extends IPropertiesOverlay<V>> extends
 	protected <VC, OVC extends JsonOverlay<VC>> ChildOverlay<VC, OVC> createChild(String path, JsonOverlay<?> parent,
 			OverlayFactory<VC, OVC> factory) {
 		ChildOverlay<VC, OVC> child = new ChildOverlay<>(path, json.at("/" + path), parent, factory, refReg);
+		child.getOverlay().setPathInParent(path);
 		children.add(child);
 		return child;
 	}
@@ -127,6 +128,7 @@ public abstract class PropertiesOverlay<V extends IPropertiesOverlay<V>> extends
 			JsonOverlay<?> parent, OverlayFactory<VC, OVC> factory, String keyPattern) {
 		ChildMapOverlay<VC, OVC> child = new ChildMapOverlay<VC, OVC>(path, json.at(pathPointer(path)), parent,
 				MapOverlay.getFactory(factory, keyPattern), refReg);
+		child.getOverlay().setPathInParent(path);
 		children.add(child);
 		return child;
 	}
@@ -140,6 +142,7 @@ public abstract class PropertiesOverlay<V extends IPropertiesOverlay<V>> extends
 			JsonOverlay<?> parent, OverlayFactory<VC, OVC> factory) {
 		ChildListOverlay<VC, OVC> child = new ChildListOverlay<VC, OVC>(path, json.at(pathPointer(path)), parent,
 				ListOverlay.getFactory(factory), refReg);
+		child.getOverlay().setPathInParent(path);
 		children.add(child);
 		return child;
 	}

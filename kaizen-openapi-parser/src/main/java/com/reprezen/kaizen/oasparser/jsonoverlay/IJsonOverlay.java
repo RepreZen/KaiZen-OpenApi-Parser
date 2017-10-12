@@ -35,5 +35,7 @@ public interface IJsonOverlay<V> {
 	
 	IJsonOverlay<?> getParent();
 	
+	String getPathInParent();
+	
 	IJsonOverlay<?> getRoot();
 }

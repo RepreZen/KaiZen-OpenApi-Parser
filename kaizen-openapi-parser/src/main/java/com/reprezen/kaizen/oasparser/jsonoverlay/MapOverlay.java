@@ -57,6 +57,7 @@ public class MapOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Map<St
 			String key = field.getKey();
 			if (keyPattern == null || keyPattern.matcher(key).matches()) {
 				ChildOverlay<V, OV> overlay = new ChildOverlay<V, OV>(key, json.get(key), this, valueFactory, refReg);
+				overlay.getOverlay().setPathInParent(key);
 				overlays.put(key, overlay);
 				value.put(key, overlay.get(false));
 			}

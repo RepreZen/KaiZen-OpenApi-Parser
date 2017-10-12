@@ -32,6 +32,7 @@ public abstract class JsonOverlay<V> implements IJsonOverlay<V> {
 	protected JsonOverlay<?> parent;
 	protected JsonNode json = null;
 	protected ReferenceRegistry refReg;
+	private String pathInParent = null;
 
 	public JsonOverlay(V value, JsonOverlay<?> parent, ReferenceRegistry refReg) {
 		this.value = value;
@@ -52,10 +53,10 @@ public abstract class JsonOverlay<V> implements IJsonOverlay<V> {
 	}
 
 	public abstract V get(boolean elaborate);
-	
+
 	@Override
 	public boolean isPresent() {
-		return value != null;
+		return value != null && !json.isMissingNode();
 	}
 
 	@Override
@@ -90,6 +91,14 @@ public abstract class JsonOverlay<V> implements IJsonOverlay<V> {
 
 	protected void setParent(JsonOverlay<?> parent) {
 		this.parent = parent;
+	}
+
+	protected void setPathInParent(String pathInParent) {
+		this.pathInParent = pathInParent;
+	}
+
+	public String getPathInParent() {
+		return pathInParent;
 	}
 
 	public JsonOverlay<?> getRoot() {

@@ -30,10 +30,10 @@ public class ResponseValidator extends ObjectValidatorBase<Response> {
 
     @Override
     public void validateObject(Response response, ValidationResults results) {
-        validateMap(response.getHeaders(), results, false, "headers", null, headerValidator);
-        validateMap(response.getContentMediaTypes(), results, false, "content", Regexes.NOEXT_REGEX,
+        validateMap(response.getHeaders(false), results, false, "headers", null, headerValidator);
+        validateMap(response.getContentMediaTypes(false), results, false, "content", Regexes.NOEXT_REGEX,
                 mediaTypeValidator);
-        validateMap(response.getLinks(), results, false, "links", Regexes.NOEXT_NAME_REGEX, linkValidator);
-        validateExtensions(response.getExtensions(), results);
+        validateMap(response.getLinks(false), results, false, "links", Regexes.NOEXT_NAME_REGEX, linkValidator);
+        validateExtensions(response.getExtensions(false), results);
     }
 }

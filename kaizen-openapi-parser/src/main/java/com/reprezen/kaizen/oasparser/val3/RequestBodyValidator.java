@@ -25,9 +25,9 @@ public class RequestBodyValidator extends ObjectValidatorBase<RequestBody> {
     @Override
     public void validateObject(RequestBody requestBody, ValidationResults results) {
         // no validation for: description, required
-        validateMap(requestBody.getContentMediaTypes(), results, false, "content", Regexes.NOEXT_REGEX,
+        validateMap(requestBody.getContentMediaTypes(false), results, false, "content", Regexes.NOEXT_REGEX,
                 mediaTypeValidator);
-        validateExtensions(requestBody.getExtensions(), results);
+        validateExtensions(requestBody.getExtensions(false), results);
     }
 
 }

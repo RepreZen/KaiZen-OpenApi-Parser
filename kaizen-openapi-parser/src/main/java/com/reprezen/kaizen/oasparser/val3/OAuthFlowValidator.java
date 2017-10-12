@@ -18,11 +18,11 @@ public class OAuthFlowValidator extends ObjectValidatorBase<OAuthFlow> {
 
     @Override
     public void validateObject(OAuthFlow oauthFlow, ValidationResults results) {
-        validateUrl(oauthFlow.getAuthorizationUrl(), results, true, "authorizationUrl");
-        validateUrl(oauthFlow.getTokenUrl(), results, true, "tokenUrl");
-        validateUrl(oauthFlow.getRefreshUrl(), results, true, "refreshUrl");
-        validateMap(oauthFlow.getScopes(), results, true, "scopes", Regexes.NOEXT_REGEX, null);
-        validateExtensions(oauthFlow.getExtensions(), results);
+        validateUrl(oauthFlow.getAuthorizationUrl(false), results, true, "authorizationUrl");
+        validateUrl(oauthFlow.getTokenUrl(false), results, true, "tokenUrl");
+        validateUrl(oauthFlow.getRefreshUrl(false), results, true, "refreshUrl");
+        validateMap(oauthFlow.getScopes(false), results, true, "scopes", Regexes.NOEXT_REGEX, null);
+        validateExtensions(oauthFlow.getExtensions(false), results);
     }
 
 }

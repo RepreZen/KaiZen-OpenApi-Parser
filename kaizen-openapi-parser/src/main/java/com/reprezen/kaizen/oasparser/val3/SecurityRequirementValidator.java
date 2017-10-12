@@ -19,16 +19,16 @@ public class SecurityRequirementValidator extends ObjectValidatorBase<SecurityRe
 	@Override
 	public void validateObject(SecurityRequirement securityRequirement, ValidationResults results) {
 		// TODO wait for getModel
-		// OpenApi3 model = securityRequirement.getModel();
-		// Set<String> definedSchemes = model.getSecuritySchemes().keySet();
+		// OpenApi3 model = securityRequirement.getModel(false);
+		// Set<String> definedSchemes = model.getSecuritySchemes(false).keySet();
 		// for (Entry<String, ? extends SecurityParameter> entry :
-		// securityRequirement.getRequirements().entrySet()) {
-		// if (!definedSchemes.contains(entry.getKey())) {
+		// securityRequirement.getRequirements(false).entrySet()) {
+		// if (!definedSchemes.contains(entry.getKey(false))) {
 		// results.addError(
 		// m.msg("UnkSecScheme|Security scheme not defined in components object",
-		// entry.getKey()));
+		// entry.getKey(false)));
 		// } else {
-		// String type = model.getSecurityScheme(entry.getKey()).getType();
+		// String type = model.getSecurityScheme(entry.getKey(false)).getType(false);
 		// switch (type) {
 		// case "oauth2":
 		// case "openIdConnect":
@@ -36,11 +36,11 @@ public class SecurityRequirementValidator extends ObjectValidatorBase<SecurityRe
 		// are?
 		// break;
 		// default:
-		// if (!entry.getValue().getParameters().isEmpty()) {
+		// if (!entry.getValue(false).getParameters(false).isEmpty()) {
 		// results.addError(
 		// m.msg("NonEmptySecReqParms|Security requirement parameters must be empty
 		// unless scheme type is oauth2 or openIdConnect",
-		// entry.getKey(), type));
+		// entry.getKey(false), type));
 		// }
 		//
 		// }

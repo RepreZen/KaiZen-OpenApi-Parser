@@ -70,31 +70,31 @@ public class OpenApi3Validator extends ObjectValidatorBase<OpenApi3> {
         results.withCrumb("model", new Runnable() {
             @Override
             public void run() {
-                validateString(swagger.getOpenApi(), results, true, "3\\.\\d+(\\.\\d+.*)?", "openapi");
-                validateField(swagger.getInfo(), results, true, "info", infoValidator);
-                validateList(swagger.getServers(), swagger.hasServers(), results, false, "servers", serverValidator);
-                validateMap(swagger.getPaths(), results, true, "paths", PATH_REGEX, pathValidator);
-                validateMap(swagger.getPathsExtensions(), results, false, "paths", EXT_REGEX, null);
-                validateMap(swagger.getSchemas(), results, false, "collections/schemas", NAME_REGEX, schemaValidator);
-                validateMap(swagger.getResponses(), results, false, "collections/responses", NAME_REGEX,
+                validateString(swagger.getOpenApi(false), results, true, "3\\.\\d+(\\.\\d+.*)?", "openapi");
+                validateField(swagger.getInfo(false), results, true, "info", infoValidator);
+                validateList(swagger.getServers(false), swagger.hasServers(), results, false, "servers", serverValidator);
+                validateMap(swagger.getPaths(false), results, true, "paths", PATH_REGEX, pathValidator);
+                validateMap(swagger.getPathsExtensions(false), results, false, "paths", EXT_REGEX, null);
+                validateMap(swagger.getSchemas(false), results, false, "collections/schemas", NAME_REGEX, schemaValidator);
+                validateMap(swagger.getResponses(false), results, false, "collections/responses", NAME_REGEX,
                         responseValidator);
-                validateMap(swagger.getParameters(), results, false, "collections/parameters", NAME_REGEX,
+                validateMap(swagger.getParameters(false), results, false, "collections/parameters", NAME_REGEX,
                         parameterValidator);
-                validateMap(swagger.getExamples(), results, false, "collections/examples", NAME_REGEX, null);
-                validateMap(swagger.getRequestBodies(), results, false, "collection/requestBodies", NAME_REGEX,
+                validateMap(swagger.getExamples(false), results, false, "collections/examples", NAME_REGEX, null);
+                validateMap(swagger.getRequestBodies(false), results, false, "collection/requestBodies", NAME_REGEX,
                         requestBodyValidator);
-                validateMap(swagger.getHeaders(), results, false, "collections/headers", NAME_REGEX, headerValidator);
-                validateMap(swagger.getSecuritySchemes(), results, false, "collections/securitySchemes", NAME_REGEX,
+                validateMap(swagger.getHeaders(false), results, false, "collections/headers", NAME_REGEX, headerValidator);
+                validateMap(swagger.getSecuritySchemes(false), results, false, "collections/securitySchemes", NAME_REGEX,
                         securitySchemeValidator);
-                validateMap(swagger.getLinks(), results, false, "collections/links", NAME_REGEX, linkValidator);
-                validateMap(swagger.getCallbacks(), results, false, "collections/callbacks", NAME_REGEX,
+                validateMap(swagger.getLinks(false), results, false, "collections/links", NAME_REGEX, linkValidator);
+                validateMap(swagger.getCallbacks(false), results, false, "collections/callbacks", NAME_REGEX,
                         callbackValidator);
-                validateMap(swagger.getComponentsExtensions(), results, false, "collections", EXT_REGEX, null);
-                validateList(swagger.getSecurityRequirements(), swagger.hasSecurityRequirements(), results, false,
+                validateMap(swagger.getComponentsExtensions(false), results, false, "collections", EXT_REGEX, null);
+                validateList(swagger.getSecurityRequirements(false), swagger.hasSecurityRequirements(), results, false,
                         "security", securityRequirementValidator);
-                validateList(swagger.getTags(), swagger.hasTags(), results, false, "tags", tagValidator);
-                validateField(swagger.getExternalDocs(), results, false, "externalDocs", externalDocsValidator);
-                validateExtensions(swagger.getExtensions(), results);
+                validateList(swagger.getTags(false), swagger.hasTags(), results, false, "tags", tagValidator);
+                validateField(swagger.getExternalDocs(false), results, false, "externalDocs", externalDocsValidator);
+                validateExtensions(swagger.getExtensions(false), results);
             }
         });
     }

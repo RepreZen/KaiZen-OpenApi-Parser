@@ -131,7 +131,7 @@ public class ChildOverlay<V, OV extends JsonOverlay<V>> implements IJsonOverlay<
 	}
 
 	public JsonNode toJson(JsonOptions options) {
-		if (isReference() && !options.isFollowRefs()) {
+		if (isReference() && (!options.isFollowRefs() || getReference().isInvalid())) {
 			ObjectNode obj = JsonOverlay.jsonObject();
 			obj.put("$ref", reference.getRefString());
 			return obj;

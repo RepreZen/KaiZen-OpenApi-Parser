@@ -36,7 +36,7 @@ public class ChildMapOverlay<V, OV extends JsonOverlay<V>> extends ChildOverlay<
 
 	@Override
 	protected boolean isPartial() {
-		return ((MapOverlayFactory<V,OV>) factory).getKeyPattern() != null;
+		return ((MapOverlayFactory<V, OV>) factory).getKeyPattern() != null;
 	}
 
 	@Override
@@ -69,10 +69,10 @@ public class ChildMapOverlay<V, OV extends JsonOverlay<V>> extends ChildOverlay<
 	public int size() {
 		return mapOverlay.size();
 	}
-	
+
 	public ChildOverlay<V, OV> getChild(String key) {
 		@SuppressWarnings("unchecked")
-		ChildOverlay<V, OV> child = (ChildOverlay<V, OV>) mapOverlay.get(key);
+		ChildOverlay<V, OV> child = (ChildOverlay<V, OV>) mapOverlay.getOverlay(key);
 		return child;
 	}
 }

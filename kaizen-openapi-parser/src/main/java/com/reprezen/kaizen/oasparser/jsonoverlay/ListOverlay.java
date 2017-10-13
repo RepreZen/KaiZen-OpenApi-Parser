@@ -85,6 +85,10 @@ public class ListOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Colle
 		return overlay != null ? overlay.get() : null;
 	}
 
+	public IJsonOverlay<V> getOverlay(int index) {
+		return overlays.get(index);
+	}
+
 	public void set(int index, V value) {
 		overlays.set(index, itemFactory.create(value, this, refReg));
 	}
@@ -110,7 +114,7 @@ public class ListOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Colle
 		ChildOverlay<V, OV> childOverlay = (ChildOverlay<V, OV>) overlays.get(index);
 		return childOverlay.isReference();
 	}
-	
+
 	public Reference getReference(int index) {
 		@SuppressWarnings("unchecked")
 		ChildOverlay<V, OV> childOverlay = (ChildOverlay<V, OV>) overlays.get(index);

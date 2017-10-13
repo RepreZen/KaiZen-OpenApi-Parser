@@ -98,6 +98,10 @@ public class MapOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Map<St
 		return overlay != null ? overlay.get() : null;
 	}
 
+	protected IJsonOverlay<V> getOverlay(String name) {
+		return overlays.get(name);
+	}
+	
 	public void set(String name, V value) {
 		overlays.put(name, valueFactory.create(value, this, refReg));
 	}

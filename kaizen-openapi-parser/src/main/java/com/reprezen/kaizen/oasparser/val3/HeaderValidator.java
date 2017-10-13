@@ -15,6 +15,9 @@ import static com.reprezen.kaizen.oasparser.val.Messages.m;
 import com.google.inject.Inject;
 import com.reprezen.kaizen.oasparser.model3.Header;
 import com.reprezen.kaizen.oasparser.model3.MediaType;
+import com.reprezen.kaizen.oasparser.model3.OpenApi3;
+import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
+import com.reprezen.kaizen.oasparser.model3.Path;
 import com.reprezen.kaizen.oasparser.model3.Schema;
 import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
 import com.reprezen.kaizen.oasparser.val.ValidationResults;
@@ -39,7 +42,8 @@ public class HeaderValidator extends ObjectValidatorBase<Header> {
 		checkAllowReserved(header, results);
 		// TODO Q: Should schema be required in header object?
 		validateField(header.getSchema(false), results, false, "schema", schemaValidator);
-		validateMap(header.getContentMediaTypes(false), results, false, "content", Regexes.NOEXT_REGEX, mediaTypeValidator);
+		validateMap(header.getContentMediaTypes(false), results, false, "content", Regexes.NOEXT_REGEX,
+				mediaTypeValidator);
 		validateExtensions(header.getExtensions(false), results);
 	}
 
@@ -52,8 +56,8 @@ public class HeaderValidator extends ObjectValidatorBase<Header> {
 							header.getName(false), path), "name");
 				}
 			} else {
-				results.addWarning(
-						m.msg("NoPath|Could not locate path for parameter", header.getName(false), header.getIn(false)));
+				results.addWarning(m.msg("NoPath|Could not locate path for parameter", header.getName(false),
+						header.getIn(false)));
 			}
 		}
 	}
@@ -76,12 +80,10 @@ public class HeaderValidator extends ObjectValidatorBase<Header> {
 	}
 
 	private String getPathString(Header header) {
-		// TODO reimplement
-		// OpenApiObject<?> parent = (OpenApiObject<?>) parameter.getParentObject(false);
-		// nwhile (parent != null && !(parent instanceof Path)) {
-		// parent = (OpenApiObject<?>) parent.getParentObject(false);
-		// }
-		// return parent instanceof Path ? parent.getKey(false) : null;
-		return null;
+		OpenApiObject<OpenApi3, ?> parent = (OpenApiObject<OpenApi3, ?>) header.getParentObject();
+		while (parent != null && !(parent instanceof Path)) {
+			parent = (OpenApiObject<OpenApi3, ?>) parent.getParentObject();
+		}
+		return parent instanceof Path ? parent.getPathInParent() : null;
 	}
 }

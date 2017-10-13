@@ -5,7 +5,7 @@ import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public interface Tag extends OpenApiObject<Tag> {
+public interface Tag extends OpenApiObject<OpenApi3, Tag> {
 
     // Name
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

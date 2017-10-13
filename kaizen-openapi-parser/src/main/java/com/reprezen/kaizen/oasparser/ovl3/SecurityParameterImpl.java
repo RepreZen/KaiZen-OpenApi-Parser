@@ -8,12 +8,13 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
+import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.SecurityParameter;
 import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
 import java.util.Collection;
 import javax.annotation.Generated;
 
-public class SecurityParameterImpl extends OpenApiObjectImpl<SecurityParameter> implements SecurityParameter {
+public class SecurityParameterImpl extends OpenApiObjectImpl<OpenApi3, SecurityParameter> implements SecurityParameter {
 
     @Override
     protected JsonNode fixJson(JsonNode json) {

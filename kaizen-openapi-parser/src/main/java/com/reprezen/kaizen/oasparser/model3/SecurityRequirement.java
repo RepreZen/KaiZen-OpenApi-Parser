@@ -5,7 +5,7 @@ import com.reprezen.kaizen.oasparser.model3.SecurityParameter;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public interface SecurityRequirement extends OpenApiObject<SecurityRequirement> {
+public interface SecurityRequirement extends OpenApiObject<OpenApi3, SecurityRequirement> {
 
     // Requirement
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

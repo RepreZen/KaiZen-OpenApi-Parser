@@ -6,6 +6,7 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
+import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.SecurityParameter;
 import com.reprezen.kaizen.oasparser.model3.SecurityRequirement;
 import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
@@ -13,7 +14,7 @@ import com.reprezen.kaizen.oasparser.ovl3.SecurityParameterImpl;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public class SecurityRequirementImpl extends OpenApiObjectImpl<SecurityRequirement> implements SecurityRequirement {
+public class SecurityRequirementImpl extends OpenApiObjectImpl<OpenApi3, SecurityRequirement> implements SecurityRequirement {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public SecurityRequirementImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {

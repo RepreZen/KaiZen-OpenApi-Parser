@@ -35,7 +35,8 @@ public class LinkValidator extends ObjectValidatorBase<Link> {
 	@Override
 	public void validateObject(Link link, ValidationResults results) {
 		// no validation for: description
-		// TODO: Validate operationRef value (why didn't they must make it a ref object???!)
+		// TODO: Validate operationRef value (why didn't they must make it a ref
+		// object???!)
 		Operation op = checkValidOperation(link, results);
 		if (op != null) {
 			checkParameters(link, op, results);
@@ -49,31 +50,29 @@ public class LinkValidator extends ObjectValidatorBase<Link> {
 		String operationRef = link.getOperationRef(false);
 		Operation op = null;
 		if (opId == null && operationRef == null) {
-			results.addError(m.msg("NoOpIdNoOpRefInLink|Link must contain eitehr 'operationRef' or 'operationId' properties"));
+			results.addError(
+					m.msg("NoOpIdNoOpRefInLink|Link must contain eitehr 'operationRef' or 'operationId' properties"));
 		} else if (opId != null && operationRef != null) {
-			results.addError(m.msg("OpIdAndOpRefInLink|Link may not contain both 'operationRef' and 'operationId' properties"));
-		} 
+			results.addError(
+					m.msg("OpIdAndOpRefInLink|Link may not contain both 'operationRef' and 'operationId' properties"));
+		}
 		if (opId != null) {
-			// TODO reimplement
-			// op = findOperationById(link.getModel(false), opId);
-			// if (op == null) {
-			// results.addError(
-			// m.msg("OpIdNotFound|OperationId in Link does not identify an operation in the
-			// containing model",
-			// opId),
-			// "operationId");
-			// }
+			op = findOperationById(link.getModel(), opId);
+			if (op == null) {
+				results.addError(
+						m.msg("OpIdNotFound|OperationId in Link does not identify an operation in the containing model",
+								opId),
+						"operationId");
+			}
 		}
 		String relativePath = getRelativePath(operationRef, results);
 		if (relativePath != null) {
-			// TODO reimplement
-			// op = findOperationByPath(link.getModel(false), relativePath, results);
-			// if (op == null) {
-			// results.addError(m.msg(
-			// "OpPathNotFound|Relative OperationRef in Link does not identify a GET
-			// operation in the containing model",
-			// operationRef), "operationRef");
-			// }
+			op = findOperationByPath(link.getModel(), relativePath, results);
+			if (op == null) {
+				results.addError(m.msg(
+						"OpPathNotFound|Relative OperationRef in Link does not identify a GET operation in the containing model",
+						operationRef), "operationRef");
+			}
 			//
 		}
 		return op;

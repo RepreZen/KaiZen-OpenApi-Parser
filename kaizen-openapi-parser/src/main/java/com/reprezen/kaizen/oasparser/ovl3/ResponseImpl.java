@@ -14,6 +14,7 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 import com.reprezen.kaizen.oasparser.model3.Header;
 import com.reprezen.kaizen.oasparser.model3.Link;
 import com.reprezen.kaizen.oasparser.model3.MediaType;
+import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.Response;
 import com.reprezen.kaizen.oasparser.ovl3.HeaderImpl;
 import com.reprezen.kaizen.oasparser.ovl3.LinkImpl;
@@ -23,7 +24,7 @@ import java.util.Collection;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public class ResponseImpl extends OpenApiObjectImpl<Response> implements Response {
+public class ResponseImpl extends OpenApiObjectImpl<OpenApi3, Response> implements Response {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public ResponseImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {

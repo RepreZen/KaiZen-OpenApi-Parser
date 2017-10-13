@@ -1,3 +1,4 @@
+modelType: OpenApi3
 imports:
   OpenApiObject: _intf
   OpenApiObjectImpl: _impl

@@ -12,12 +12,13 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 import com.reprezen.kaizen.oasparser.model3.License;
+import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
 import java.util.Collection;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public class LicenseImpl extends OpenApiObjectImpl<License> implements License {
+public class LicenseImpl extends OpenApiObjectImpl<OpenApi3, License> implements License {
 
     JsonNode initJson = jsonMissing();
 

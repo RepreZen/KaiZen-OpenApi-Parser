@@ -19,6 +19,7 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 import com.reprezen.kaizen.oasparser.model3.Example;
 import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
+import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.Schema;
 import com.reprezen.kaizen.oasparser.model3.Xml;
 import com.reprezen.kaizen.oasparser.ovl3.ExampleImpl;
@@ -30,7 +31,7 @@ import java.util.Collection;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
+public class SchemaImpl extends OpenApiObjectImpl<OpenApi3, Schema> implements Schema {
 
     @Override
     public IJsonOverlay<?> find(JsonPointer path) {

@@ -12,12 +12,13 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 import com.reprezen.kaizen.oasparser.model3.Example;
+import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
 import java.util.Collection;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public class ExampleImpl extends OpenApiObjectImpl<Example> implements Example {
+public class ExampleImpl extends OpenApiObjectImpl<OpenApi3, Example> implements Example {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public ExampleImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {

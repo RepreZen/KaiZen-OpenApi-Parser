@@ -7,7 +7,7 @@ import com.reprezen.kaizen.oasparser.model3.Schema;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public interface MediaType extends OpenApiObject<MediaType> {
+public interface MediaType extends OpenApiObject<OpenApi3, MediaType> {
 
     // Schema
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

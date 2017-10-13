@@ -8,13 +8,14 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.model3.Callback;
+import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.Path;
 import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
 import com.reprezen.kaizen.oasparser.ovl3.PathImpl;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public class CallbackImpl extends OpenApiObjectImpl<Callback> implements Callback {
+public class CallbackImpl extends OpenApiObjectImpl<OpenApi3, Callback> implements Callback {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public CallbackImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {

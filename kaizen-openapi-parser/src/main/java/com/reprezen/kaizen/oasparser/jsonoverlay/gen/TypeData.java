@@ -32,6 +32,7 @@ public class TypeData {
 	private Map<String, String> imports = Maps.newHashMap();
 	private List<String> defaultExtendInterfaces = null;
 	private Map<String, Type> typeMap = null;
+	private String modelType = null;
 
 	// Container for "decls" section that is solely used to define reusable anchors
 	@JsonProperty
@@ -47,6 +48,10 @@ public class TypeData {
 		for (Type type : types) {
 			type.init(this);
 		}
+	}
+
+	public String getModelType() {
+		return modelType;
 	}
 
 	public Collection<Type> getTypes() {

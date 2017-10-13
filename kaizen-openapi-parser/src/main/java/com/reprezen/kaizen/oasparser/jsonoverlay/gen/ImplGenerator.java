@@ -32,6 +32,7 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.gen.SimpleJavaGenerator.Member;
 import com.reprezen.kaizen.oasparser.jsonoverlay.gen.TypeData.Field;
 import com.reprezen.kaizen.oasparser.jsonoverlay.gen.TypeData.Type;
+import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
 
 public class ImplGenerator extends TypeGenerator {
@@ -60,14 +61,14 @@ public class ImplGenerator extends TypeGenerator {
 
 	@Override
 	public String getTypeDeclaration(Type type, String suffix) {
-		requireTypes(OpenApiObjectImpl.class);
+		requireTypes(OpenApiObjectImpl.class, OpenApi3.class);
 		requireTypes(type);
 		return t("public class ${name}${0} extends ${1} implements ${name}", type, suffix, getSuperType(type));
 	}
 
 	private String getSuperType(Type type) {
 		String superType = type.getExtensionOf();
-		return superType != null ? Type.getImplType(superType) : t("OpenApiObjectImpl<${name}>", type);
+		return superType != null ? Type.getImplType(superType) : t("OpenApiObjectImpl<${modelType}, ${name}>", type);
 	}
 
 	@Override

@@ -15,6 +15,7 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 import com.reprezen.kaizen.oasparser.model3.Example;
 import com.reprezen.kaizen.oasparser.model3.Header;
 import com.reprezen.kaizen.oasparser.model3.MediaType;
+import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.Schema;
 import com.reprezen.kaizen.oasparser.ovl3.ExampleImpl;
 import com.reprezen.kaizen.oasparser.ovl3.MediaTypeImpl;
@@ -24,7 +25,7 @@ import java.util.Collection;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public class HeaderImpl extends OpenApiObjectImpl<Header> implements Header {
+public class HeaderImpl extends OpenApiObjectImpl<OpenApi3, Header> implements Header {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public HeaderImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {

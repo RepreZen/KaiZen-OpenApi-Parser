@@ -14,6 +14,7 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 import com.reprezen.kaizen.oasparser.model3.Contact;
 import com.reprezen.kaizen.oasparser.model3.Info;
 import com.reprezen.kaizen.oasparser.model3.License;
+import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.ovl3.ContactImpl;
 import com.reprezen.kaizen.oasparser.ovl3.LicenseImpl;
 import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
@@ -21,7 +22,7 @@ import java.util.Collection;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public class InfoImpl extends OpenApiObjectImpl<Info> implements Info {
+public class InfoImpl extends OpenApiObjectImpl<OpenApi3, Info> implements Info {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public InfoImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {

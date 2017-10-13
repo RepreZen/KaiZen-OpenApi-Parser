@@ -13,7 +13,9 @@ package com.reprezen.kaizen.oasparser.val3;
 import static com.reprezen.kaizen.oasparser.val.Messages.m;
 
 import com.google.inject.Inject;
+import com.reprezen.kaizen.oasparser.OpenApi;
 import com.reprezen.kaizen.oasparser.model3.MediaType;
+import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
 import com.reprezen.kaizen.oasparser.model3.Parameter;
 import com.reprezen.kaizen.oasparser.model3.Path;
@@ -79,9 +81,9 @@ public class ParameterValidator extends ObjectValidatorBase<Parameter> {
 	}
 
 	private String getPathString(Parameter parameter) {
-		OpenApiObject<?> parent = (OpenApiObject<?>) parameter.getParentObject();
+		OpenApiObject<OpenApi3, ?> parent = (OpenApiObject<OpenApi3, ?>) parameter.getParentObject();
 		while (parent != null && !(parent instanceof Path)) {
-			parent = (OpenApiObject<?>) parent.getParentObject();
+			parent = (OpenApiObject<OpenApi3, ?>) parent.getParentObject();
 		}
 		return parent instanceof Path ? parent.getPathInParent() : null;
 	}

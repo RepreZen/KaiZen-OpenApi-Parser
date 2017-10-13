@@ -13,6 +13,7 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.model3.EncodingProperty;
 import com.reprezen.kaizen.oasparser.model3.Example;
 import com.reprezen.kaizen.oasparser.model3.MediaType;
+import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.Schema;
 import com.reprezen.kaizen.oasparser.ovl3.EncodingPropertyImpl;
 import com.reprezen.kaizen.oasparser.ovl3.ExampleImpl;
@@ -22,7 +23,7 @@ import java.util.Collection;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public class MediaTypeImpl extends OpenApiObjectImpl<MediaType> implements MediaType {
+public class MediaTypeImpl extends OpenApiObjectImpl<OpenApi3, MediaType> implements MediaType {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public MediaTypeImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {

@@ -6,7 +6,7 @@ import com.reprezen.kaizen.oasparser.model3.Server;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public interface Link extends OpenApiObject<Link> {
+public interface Link extends OpenApiObject<OpenApi3, Link> {
 
     // OperationId
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

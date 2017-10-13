@@ -20,8 +20,8 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
 //import com.reprezen.swaggerparser.model3.OpenApi3;
 
-public abstract class OpenApiObjectImpl<V extends IPropertiesOverlay<V>> extends PropertiesOverlay<V>
-		implements OpenApiObject<V> {
+public abstract class OpenApiObjectImpl<OpenApi3, V extends IPropertiesOverlay<V>> extends PropertiesOverlay<V>
+		implements OpenApiObject<OpenApi3, V> {
 
 	protected OpenApiObjectImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
 		super(json, parent, refReg);
@@ -32,17 +32,17 @@ public abstract class OpenApiObjectImpl<V extends IPropertiesOverlay<V>> extends
 	}
 
 	@Override
-	public OpenApi<?> getModel() {
+	public OpenApi3 getModel() {
 		IJsonOverlay<?> root = getRoot();
-		return root instanceof OpenApi<?> ? (OpenApi<?>) root : null;
+		return root instanceof OpenApi<?> ? (OpenApi3) root : null;
 	}
 
 	@Override
-	public OpenApiObject<?> getParentObject() {
+	public OpenApiObject<OpenApi3, ?> getParentObject() {
 		IJsonOverlay<?> parent = super.getParent();
 		while (parent != null && !(parent instanceof OpenApiObject)) {
 			parent = parent.getParent();
 		}
-		return (OpenApiObject<?>) parent;
+		return (OpenApiObject<OpenApi3, ?>) parent;
 	}
 }

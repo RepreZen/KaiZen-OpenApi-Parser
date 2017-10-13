@@ -109,6 +109,8 @@ public class Template {
 			return type.getLcName();
 		case "implName":
 			return type.getImplType();
+		case "modelType":
+			return type.getTypeData().getModelType();
 		default:
 			return args[Integer.valueOf(var)];
 		}

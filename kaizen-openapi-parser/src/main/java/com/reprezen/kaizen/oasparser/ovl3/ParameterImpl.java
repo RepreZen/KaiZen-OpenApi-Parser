@@ -14,6 +14,7 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 import com.reprezen.kaizen.oasparser.model3.Example;
 import com.reprezen.kaizen.oasparser.model3.MediaType;
+import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.Parameter;
 import com.reprezen.kaizen.oasparser.model3.Schema;
 import com.reprezen.kaizen.oasparser.ovl3.ExampleImpl;
@@ -24,7 +25,7 @@ import java.util.Collection;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public class ParameterImpl extends OpenApiObjectImpl<Parameter> implements Parameter {
+public class ParameterImpl extends OpenApiObjectImpl<OpenApi3, Parameter> implements Parameter {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public ParameterImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {

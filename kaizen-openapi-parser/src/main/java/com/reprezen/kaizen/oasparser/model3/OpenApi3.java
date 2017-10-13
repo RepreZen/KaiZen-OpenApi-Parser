@@ -22,7 +22,7 @@ import java.util.Collection;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public interface OpenApi3 extends OpenApiObject<OpenApi3>, OpenApi<OpenApi3> {
+public interface OpenApi3 extends OpenApiObject<OpenApi3, OpenApi3>, OpenApi<OpenApi3> {
 
     public void validate();
 

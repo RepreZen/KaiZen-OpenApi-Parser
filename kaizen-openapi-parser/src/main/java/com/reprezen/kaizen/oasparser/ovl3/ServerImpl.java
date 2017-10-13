@@ -11,6 +11,7 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
+import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.Server;
 import com.reprezen.kaizen.oasparser.model3.ServerVariable;
 import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
@@ -19,7 +20,7 @@ import java.util.Collection;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public class ServerImpl extends OpenApiObjectImpl<Server> implements Server {
+public class ServerImpl extends OpenApiObjectImpl<OpenApi3, Server> implements Server {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public ServerImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {

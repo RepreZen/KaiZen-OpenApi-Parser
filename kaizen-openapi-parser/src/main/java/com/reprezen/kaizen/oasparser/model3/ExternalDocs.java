@@ -4,7 +4,7 @@ import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public interface ExternalDocs extends OpenApiObject<ExternalDocs> {
+public interface ExternalDocs extends OpenApiObject<OpenApi3, ExternalDocs> {
 
     // Description
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

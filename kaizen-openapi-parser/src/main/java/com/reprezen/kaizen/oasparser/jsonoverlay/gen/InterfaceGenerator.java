@@ -52,7 +52,7 @@ public class InterfaceGenerator extends TypeGenerator {
 
     private String getSuperType(Type type) {
         String superType = type.getExtensionOf();
-        return superType != null ? superType : t("OpenApiObject<${name}>", type);
+        return superType != null ? superType : t("OpenApiObject<${modelType}, ${name}>", type);
     }
 
     @Override

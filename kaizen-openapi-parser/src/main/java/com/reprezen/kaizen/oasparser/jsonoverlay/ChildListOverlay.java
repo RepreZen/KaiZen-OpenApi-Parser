@@ -70,4 +70,10 @@ public class ChildListOverlay<V, OV extends JsonOverlay<V>> extends ChildOverlay
 	public int size() {
 		return listOverlay.size();
 	}
+
+	public ChildOverlay<V, OV> getChild(int index) {
+		@SuppressWarnings("unchecked")
+		ChildOverlay<V, OV> child = (ChildOverlay<V, OV>) listOverlay.get(index);
+		return child;
+	}
 }

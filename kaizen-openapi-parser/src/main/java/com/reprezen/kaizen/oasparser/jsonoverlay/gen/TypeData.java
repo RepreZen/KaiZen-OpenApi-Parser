@@ -191,6 +191,7 @@ public class TypeData {
 		private boolean boolDefault = false;
 		private String parentPath;
 		private String createTest;
+		private boolean refable = false;
 
 		private Type container;
 
@@ -347,6 +348,10 @@ public class TypeData {
 
 		public String getTypeInCollection() {
 			return isScalarType() ? type : t("? extends ${type}", this);
+		}
+		
+		public boolean isRefable() {
+			return refable;
 		}
 	}
 

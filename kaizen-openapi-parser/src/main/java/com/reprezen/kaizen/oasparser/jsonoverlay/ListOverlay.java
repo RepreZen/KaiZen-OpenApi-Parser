@@ -105,6 +105,18 @@ public class ListOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Colle
 		return overlays.size();
 	}
 
+	public boolean isReference(int index) {
+		@SuppressWarnings("unchecked")
+		ChildOverlay<V, OV> childOverlay = (ChildOverlay<V, OV>) overlays.get(index);
+		return childOverlay.isReference();
+	}
+	
+	public Reference getReference(int index) {
+		@SuppressWarnings("unchecked")
+		ChildOverlay<V, OV> childOverlay = (ChildOverlay<V, OV>) overlays.get(index);
+		return childOverlay.getReference();
+	}
+
 	public static <V, OV extends JsonOverlay<V>> OverlayFactory<Collection<V>, ListOverlay<V, OV>> getFactory(
 			OverlayFactory<V, OV> itemFactory) {
 		return new ListOverlayFactory<V, OV>(itemFactory);

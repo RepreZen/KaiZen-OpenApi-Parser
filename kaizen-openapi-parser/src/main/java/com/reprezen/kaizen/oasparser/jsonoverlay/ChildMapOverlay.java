@@ -69,4 +69,10 @@ public class ChildMapOverlay<V, OV extends JsonOverlay<V>> extends ChildOverlay<
 	public int size() {
 		return mapOverlay.size();
 	}
+	
+	public ChildOverlay<V, OV> getChild(String key) {
+		@SuppressWarnings("unchecked")
+		ChildOverlay<V, OV> child = (ChildOverlay<V, OV>) mapOverlay.get(key);
+		return child;
+	}
 }

@@ -30,6 +30,9 @@ public interface ServerVariable extends OpenApiObject<OpenApi3, ServerVariable> 
     void addEnumValue(Object enumValue);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    void insertEnumValue(int index, Object enumValue);
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void removeEnumValue(int index);
 
     // Default

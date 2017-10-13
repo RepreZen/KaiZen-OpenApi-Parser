@@ -9,6 +9,7 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
+import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 import com.reprezen.kaizen.oasparser.model3.Header;
@@ -115,6 +116,20 @@ public class ResponseImpl extends OpenApiObjectImpl<OpenApi3, Response> implemen
         headers.remove(name);
     }
 
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public boolean isHeaderReference(String key) {
+        ChildOverlay<Header, HeaderImpl> child = headers.getChild(key);
+            return child != null ? child.isReference() : false;
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Reference getHeaderReference(String key) {
+        ChildOverlay<Header, HeaderImpl> child = headers.getChild(key);
+            return child != null ? child.getReference() : null;
+    }
+
     // ContentMediaType
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -201,6 +216,20 @@ public class ResponseImpl extends OpenApiObjectImpl<OpenApi3, Response> implemen
         links.remove(name);
     }
 
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public boolean isLinkReference(String key) {
+        ChildOverlay<Link, LinkImpl> child = links.getChild(key);
+            return child != null ? child.isReference() : false;
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Reference getLinkReference(String key) {
+        ChildOverlay<Link, LinkImpl> child = links.getChild(key);
+            return child != null ? child.getReference() : null;
+    }
+
     // Extension
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -249,8 +278,10 @@ public class ResponseImpl extends OpenApiObjectImpl<OpenApi3, Response> implemen
     protected void elaborateChildren() {
         description = createChild("description", this, StringOverlay.factory);
             headers = createChildMap("headers", this, HeaderImpl.factory, null);
+            refables.put("headers", headers);
             contentMediaTypes = createChildMap("content", this, MediaTypeImpl.factory, null);
             links = createChildMap("links", this, LinkImpl.factory, null);
+            refables.put("links", links);
             extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }
 

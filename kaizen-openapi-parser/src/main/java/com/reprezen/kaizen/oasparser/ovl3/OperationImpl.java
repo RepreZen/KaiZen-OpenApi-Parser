@@ -10,6 +10,7 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
+import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 import com.reprezen.kaizen.oasparser.model3.Callback;
@@ -133,6 +134,12 @@ public class OperationImpl extends OpenApiObjectImpl<OpenApi3, Operation> implem
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void addTag(String tag) {
         tags.add(tag);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public void insertTag(int index, String tag) {
+        tags.insert(index, tag);
     }
 
     @Override
@@ -262,8 +269,26 @@ public class OperationImpl extends OpenApiObjectImpl<OpenApi3, Operation> implem
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public void insertParameter(int index, Parameter parameter) {
+        parameters.insert(index, parameter);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void removeParameter(int index) {
         parameters.remove(index);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public boolean isParameterReference(int index) {
+        return parameters.getChild(index).isReference();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Reference getParameterReference(int index) {
+        return parameters.getChild(index).getReference();
     }
 
     // RequestBody
@@ -283,6 +308,18 @@ public class OperationImpl extends OpenApiObjectImpl<OpenApi3, Operation> implem
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setRequestBody(RequestBody requestBody) {
         this.requestBody.set(requestBody);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public boolean isRequestBodyReference() {
+        return requestBody != null ? requestBody.isReference() : false;
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Reference getRequestBodyReference() {
+        return requestBody != null ? requestBody.getReference() : null;
     }
 
     // Response
@@ -326,6 +363,20 @@ public class OperationImpl extends OpenApiObjectImpl<OpenApi3, Operation> implem
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void removeResponse(String name) {
         responses.remove(name);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public boolean isResponseReference(String key) {
+        ChildOverlay<Response, ResponseImpl> child = responses.getChild(key);
+            return child != null ? child.isReference() : false;
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Reference getResponseReference(String key) {
+        ChildOverlay<Response, ResponseImpl> child = responses.getChild(key);
+            return child != null ? child.getReference() : null;
     }
 
     // ResponsesExtension
@@ -412,6 +463,20 @@ public class OperationImpl extends OpenApiObjectImpl<OpenApi3, Operation> implem
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void removeCallback(String name) {
         callbacks.remove(name);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public boolean isCallbackReference(String key) {
+        ChildOverlay<Callback, CallbackImpl> child = callbacks.getChild(key);
+            return child != null ? child.isReference() : false;
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Reference getCallbackReference(String key) {
+        ChildOverlay<Callback, CallbackImpl> child = callbacks.getChild(key);
+            return child != null ? child.getReference() : null;
     }
 
     // CallbacksExtension
@@ -527,6 +592,12 @@ public class OperationImpl extends OpenApiObjectImpl<OpenApi3, Operation> implem
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public void insertSecurityRequirement(int index, SecurityRequirement securityRequirement) {
+        securityRequirements.insert(index, securityRequirement);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void removeSecurityRequirement(int index) {
         securityRequirements.remove(index);
     }
@@ -572,6 +643,12 @@ public class OperationImpl extends OpenApiObjectImpl<OpenApi3, Operation> implem
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void addServer(Server server) {
         servers.add(server);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public void insertServer(int index, Server server) {
+        servers.insert(index, server);
     }
 
     @Override
@@ -632,10 +709,14 @@ public class OperationImpl extends OpenApiObjectImpl<OpenApi3, Operation> implem
             externalDocs = createChild("externalDocs", this, ExternalDocsImpl.factory);
             operationId = createChild("operationId", this, StringOverlay.factory);
             parameters = createChildList("parameters", this, ParameterImpl.factory);
+            refables.put("parameters", parameters);
             requestBody = createChild("requestBody", this, RequestBodyImpl.factory);
+            refables.put("requestBody", requestBody);
             responses = createChildMap("responses", this, ResponseImpl.factory, "default|(\\d\\d\\d)");
+            refables.put("responses", responses);
             responsesExtensions = createChildMap("responses", this, ObjectOverlay.factory, "x-.+");
             callbacks = createChildMap("callbacks", this, CallbackImpl.factory, "(?!x-)[a-zA-Z0-9\\._-]+");
+            refables.put("callbacks", callbacks);
             callbacksExtensions = createChildMap("callbacks", this, ObjectOverlay.factory, "x-.+");
             deprecated = createChild("deprecated", this, BooleanOverlay.factory);
             securityRequirements = createChildList("security", this, SecurityRequirementImpl.factory);

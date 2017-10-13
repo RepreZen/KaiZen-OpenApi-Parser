@@ -114,6 +114,18 @@ public class MapOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Map<St
 		return keyPattern;
 	}
 
+	public boolean isReference(String key) {
+		@SuppressWarnings("unchecked")
+		ChildOverlay<V, OV> childOverlay = (ChildOverlay<V, OV>) overlays.get(key);
+		return childOverlay.isReference();
+	}
+	
+	public Reference getReference(String key) {
+		@SuppressWarnings("unchecked")
+		ChildOverlay<V, OV> childOverlay = (ChildOverlay<V, OV>) overlays.get(key);
+		return childOverlay.getReference();
+	}
+
 	public static <V, OV extends JsonOverlay<V>> OverlayFactory<Map<String, V>, MapOverlay<V, OV>> getFactory(
 			OverlayFactory<V, OV> valueFactory, String keyPattern) {
 		return new MapOverlayFactory<V, OV>(valueFactory, getWholeMatchPattern(keyPattern));

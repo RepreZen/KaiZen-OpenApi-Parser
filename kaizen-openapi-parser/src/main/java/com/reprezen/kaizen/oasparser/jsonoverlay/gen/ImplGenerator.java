@@ -28,6 +28,7 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
+import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.gen.SimpleJavaGenerator.Member;
 import com.reprezen.kaizen.oasparser.jsonoverlay.gen.TypeData.Field;
@@ -112,6 +113,9 @@ public class ImplGenerator extends TypeGenerator {
 		Members methods = new Members();
 		boolean first = true;
 		String typeComment = field.getName();
+		if (field.isRefable()) {
+			requireTypes(Reference.class);
+		}
 		switch (field.getStructure()) {
 		case scalar:
 			for (Member method : getScalarMethods(field)) {
@@ -151,6 +155,14 @@ public class ImplGenerator extends TypeGenerator {
 		}
 		// void setFoo(T foo) => foo = this.foo.set(foo)
 		methods.add(setDecl, code(field, "this.${lcName}.set(${lcName});"));
+		if (field.isRefable()) {
+			// boolean isFooReference() => foo.isReference()
+			methods.add(t("public boolean is${name}Reference()", field),
+					code(field, "return ${lcName} != null ? ${lcName}.isReference() : false;"));
+			// Reference getFooReference() => foo.getReference()
+			methods.add(t("public Reference get${name}Reference()", field),
+					code(field, "return ${lcName} != null ? ${lcName}.getReference() : null;"));
+		}
 		return methods;
 	}
 
@@ -163,8 +175,7 @@ public class ImplGenerator extends TypeGenerator {
 		String setDecl = t("public void set${plural}(Collection<${collType}> ${lcPlural})", field);
 		String iSetDecl = t("public void set${name}(int index, ${type} ${lcName})", field);
 		String addDecl = t("public void add${name}(${type} ${lcName})", field);
-		// String insDecl = t("public void insert${name}(int index, ${type} ${lcName})",
-		// field);
+		String insDecl = t("public void insert${name}(int index, ${type} ${lcName})", field);
 		String remDecl = t("public void remove${name}(int index)", field);
 
 		// Collection<T> getFoos(boolean) => foos.get()
@@ -182,10 +193,18 @@ public class ImplGenerator extends TypeGenerator {
 		// void addFoo(Foo foo) => foos.add(foo)
 		methods.add(addDecl, code(field, "${lcPlural}.add(${lcName});"));
 		// void insertFoo(int index, Foo foo) => foos.insertOveraly(index, foo)
-		// methods.add(insDecl, code(field, "${lcPlural}.insert(index, ${lcName});"));
+		methods.add(insDecl, code(field, "${lcPlural}.insert(index, ${lcName});"));
 		// void removeFoo(int index) => foos.remove(index)
 		methods.add(remDecl, code(field, "${lcPlural}.remove(index);"));
 		// methods.addAll(getKeyedCollectionMethods(field));
+		if (field.isRefable()) {
+			// boolean isFooReference(int index) => foos.getChild(index).isReference()
+			methods.add(t("public boolean is${name}Reference(int index)", field),
+					code(field, "return ${lcPlural}.getChild(index).isReference();"));
+			// Reference getFooReference(int index) => foos.getChild(index).getReference()
+			methods.add(t("public Reference get${name}Reference(int index)", field),
+					code(field, "return ${lcPlural}.getChild(index).getReference();"));
+		}
 		return methods;
 	}
 
@@ -195,6 +214,9 @@ public class ImplGenerator extends TypeGenerator {
 		for (Field field : type.getFields().values()) {
 			if (!field.isNoImpl()) {
 				code.addAll(code(field, "${propName} = ${propCons};"));
+				if (field.isRefable()) {
+					code.addAll(code(field, "refables.put(${qpath}, ${propName});"));
+				}
 			}
 		}
 		return new Member(decl, code).override();
@@ -245,6 +267,16 @@ public class ImplGenerator extends TypeGenerator {
 		// void removeFoo(String key) => foos.remove(key)
 		methods.add(t("public void remove${name}(String ${keyName})", field),
 				code(field, "${lcPlural}.remove(${keyName});"));
+		if (field.isRefable()) {
+			// boolean isFooReference(String key) => foos.getChild(key).isReference()
+			methods.add(t("public boolean is${name}Reference(String key)", field),
+					code(field, "ChildOverlay<${type}, ${implType}> child = ${lcPlural}.getChild(key);",
+							"return child != null ? child.isReference() : false;"));
+			// Reference getFooReference(String key) => foos.getChild(key).getReference()
+			methods.add(t("public Reference get${name}Reference(String key)", field),
+					code(field, "ChildOverlay<${type}, ${implType}> child = ${lcPlural}.getChild(key);",
+							"return child != null ? child.getReference() : null;"));
+		}
 		return methods;
 	}
 

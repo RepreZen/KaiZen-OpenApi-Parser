@@ -10,6 +10,7 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
+import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 import com.reprezen.kaizen.oasparser.model3.Example;
@@ -301,6 +302,18 @@ public class HeaderImpl extends OpenApiObjectImpl<OpenApi3, Header> implements H
         this.schema.set(schema);
     }
 
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public boolean isSchemaReference() {
+        return schema != null ? schema.isReference() : false;
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Reference getSchemaReference() {
+        return schema != null ? schema.getReference() : null;
+    }
+
     // Example
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -361,6 +374,20 @@ public class HeaderImpl extends OpenApiObjectImpl<OpenApi3, Header> implements H
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void removeExample(String name) {
         examples.remove(name);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public boolean isExampleReference(String key) {
+        ChildOverlay<Example, ExampleImpl> child = examples.getChild(key);
+            return child != null ? child.isReference() : false;
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Reference getExampleReference(String key) {
+        ChildOverlay<Example, ExampleImpl> child = examples.getChild(key);
+            return child != null ? child.getReference() : null;
     }
 
     // ContentMediaType
@@ -462,8 +489,10 @@ public class HeaderImpl extends OpenApiObjectImpl<OpenApi3, Header> implements H
             explode = createChild("explode", this, BooleanOverlay.factory);
             allowReserved = createChild("allowReserved", this, BooleanOverlay.factory);
             schema = createChild("schema", this, SchemaImpl.factory);
+            refables.put("schema", schema);
             example = createChild("example", this, ObjectOverlay.factory);
             examples = createChildMap("examples", this, ExampleImpl.factory, "[a-zA-Z0-9\\._-]+");
+            refables.put("examples", examples);
             contentMediaTypes = createChildMap("content", this, MediaTypeImpl.factory, null);
             extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }

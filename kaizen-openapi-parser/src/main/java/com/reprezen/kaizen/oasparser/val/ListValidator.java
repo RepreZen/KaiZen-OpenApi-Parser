@@ -22,11 +22,10 @@ public class ListValidator<T extends ListOverlay<T, ?>> extends OverlayValidator
 
 	@Override
 	public void validate(ListOverlay<T, ?> overlay, ValidationResults results) {
-		// TODO reimplement
-		// int i = 0;
-		// for (T value : overlay.getStore().getOverlays()) {
-		// elementValidator.validate(value, results, getElementCrumb(i++));
-		// }
+		int i = 0;
+		for (T value : overlay.get()) {
+			elementValidator.validate(value, results, getElementCrumb(i++));
+		}
 	}
 
 	protected String getElementCrumb(int index) {

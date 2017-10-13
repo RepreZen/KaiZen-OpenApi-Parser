@@ -17,12 +17,16 @@ import java.util.Set;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
 
 public class OverlayValidator<T> extends ValidatorBase<T> {
 
 	@Override
 	public void validate(T overlay, ValidationResults results) {
-		checkReference((JsonOverlay<?>) overlay, results);
+		checkReferences((JsonOverlay<?>) overlay, results);
 	}
 
 	public void validate(T overlay, ValidationResults results, Class<? extends JsonNode> allowedNodeType) {
@@ -46,15 +50,48 @@ public class OverlayValidator<T> extends ValidatorBase<T> {
 		}
 	}
 
-	private void checkReference(JsonOverlay<?> overlay, ValidationResults results) {
-		// TODO reimplement
-		// if (overlay.isReference()) {
-		// Reference ref = overlay.getReference();
-		// if (ref.isInvalid()) {
-		// results.addError(
-		// m.msg("BadRef|JSON reference node was not resolved", ref.getRefString(),
-		// ref.getErrorReason()));
-		// }
-		// }
+	private void checkReferences(JsonOverlay<?> overlay, ValidationResults results) {
+		if (overlay instanceof ListOverlay<?, ?>) {
+			checkReferences((ListOverlay<?, ?>) overlay, results);
+		} else if (overlay instanceof MapOverlay<?, ?>) {
+			checkReferences((MapOverlay<?, ?>) overlay, results);
+		} else if (overlay instanceof PropertiesOverlay<?>) {
+			checkReferences((PropertiesOverlay<?>) overlay, results);
+		}
+	}
+
+	private void checkReferences(ListOverlay<?, ?> list, ValidationResults results) {
+		for (int i = 0; i < list.size(); i++) {
+			if (list.isReference(i)) {
+				checkReference(list.getReference(i), results, Integer.toString(i));
+			}
+		}
+	}
+
+	private void checkReferences(MapOverlay<?, ?> map, ValidationResults results) {
+		for (String key : map.get().keySet()) {
+			if (map.isReference(key)) {
+				checkReference(map.getReference(key), results, key);
+			}
+		}
+	}
+
+	private void checkReferences(PropertiesOverlay<?> props, ValidationResults results) {
+		if (props.isElaborated()) {
+			for (String path : props.getRefablePaths()) {
+				if (props.isReference(path)) {
+					checkReference(props.getReference(path), results, path);
+				}
+			}
+		}
+	}
+
+	private void checkReference(Reference ref, ValidationResults results, String crumb) {
+		if (ref.isInvalid()) {
+			results.addError(
+					m.msg("BadRef|JSON reference node was not resolved", ref.getRefString(), ref.getErrorReason()),
+					crumb);
+		}
+
 	}
 }

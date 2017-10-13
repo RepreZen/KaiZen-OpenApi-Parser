@@ -15,6 +15,7 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.NumberOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
+import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 import com.reprezen.kaizen.oasparser.model3.Example;
@@ -497,6 +498,12 @@ public class SchemaImpl extends OpenApiObjectImpl<OpenApi3, Schema> implements S
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public void insertRequiredField(int index, String requiredField) {
+        requiredFields.insert(index, requiredField);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void removeRequiredField(int index) {
         requiredFields.remove(index);
     }
@@ -542,6 +549,12 @@ public class SchemaImpl extends OpenApiObjectImpl<OpenApi3, Schema> implements S
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void addEnum(Object enumValue) {
         enums.add(enumValue);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public void insertEnum(int index, Object enumValue) {
+        enums.insert(index, enumValue);
     }
 
     @Override
@@ -614,8 +627,26 @@ public class SchemaImpl extends OpenApiObjectImpl<OpenApi3, Schema> implements S
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public void insertAllOfSchema(int index, Schema allOfSchema) {
+        allOfSchemas.insert(index, allOfSchema);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void removeAllOfSchema(int index) {
         allOfSchemas.remove(index);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public boolean isAllOfSchemaReference(int index) {
+        return allOfSchemas.getChild(index).isReference();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Reference getAllOfSchemaReference(int index) {
+        return allOfSchemas.getChild(index).getReference();
     }
 
     // OneOfSchema
@@ -663,8 +694,26 @@ public class SchemaImpl extends OpenApiObjectImpl<OpenApi3, Schema> implements S
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public void insertOneOfSchema(int index, Schema oneOfSchema) {
+        oneOfSchemas.insert(index, oneOfSchema);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void removeOneOfSchema(int index) {
         oneOfSchemas.remove(index);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public boolean isOneOfSchemaReference(int index) {
+        return oneOfSchemas.getChild(index).isReference();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Reference getOneOfSchemaReference(int index) {
+        return oneOfSchemas.getChild(index).getReference();
     }
 
     // AnyOfSchema
@@ -712,8 +761,26 @@ public class SchemaImpl extends OpenApiObjectImpl<OpenApi3, Schema> implements S
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public void insertAnyOfSchema(int index, Schema anyOfSchema) {
+        anyOfSchemas.insert(index, anyOfSchema);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void removeAnyOfSchema(int index) {
         anyOfSchemas.remove(index);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public boolean isAnyOfSchemaReference(int index) {
+        return anyOfSchemas.getChild(index).isReference();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Reference getAnyOfSchemaReference(int index) {
+        return anyOfSchemas.getChild(index).getReference();
     }
 
     // NotSchema
@@ -735,6 +802,18 @@ public class SchemaImpl extends OpenApiObjectImpl<OpenApi3, Schema> implements S
         this.notSchema.set(notSchema);
     }
 
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public boolean isNotSchemaReference() {
+        return notSchema != null ? notSchema.isReference() : false;
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Reference getNotSchemaReference() {
+        return notSchema != null ? notSchema.getReference() : null;
+    }
+
     // ItemsSchema
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -752,6 +831,18 @@ public class SchemaImpl extends OpenApiObjectImpl<OpenApi3, Schema> implements S
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setItemsSchema(Schema itemsSchema) {
         this.itemsSchema.set(itemsSchema);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public boolean isItemsSchemaReference() {
+        return itemsSchema != null ? itemsSchema.isReference() : false;
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Reference getItemsSchemaReference() {
+        return itemsSchema != null ? itemsSchema.getReference() : null;
     }
 
     // Property
@@ -797,6 +888,20 @@ public class SchemaImpl extends OpenApiObjectImpl<OpenApi3, Schema> implements S
         properties.remove(name);
     }
 
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public boolean isPropertyReference(String key) {
+        ChildOverlay<Schema, SchemaImpl> child = properties.getChild(key);
+            return child != null ? child.isReference() : false;
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Reference getPropertyReference(String key) {
+        ChildOverlay<Schema, SchemaImpl> child = properties.getChild(key);
+            return child != null ? child.getReference() : null;
+    }
+
     // AdditionalPropertiesSchema
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -814,6 +919,18 @@ public class SchemaImpl extends OpenApiObjectImpl<OpenApi3, Schema> implements S
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setAdditionalPropertiesSchema(Schema additionalPropertiesSchema) {
         this.additionalPropertiesSchema.set(additionalPropertiesSchema);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public boolean isAdditionalPropertiesSchemaReference() {
+        return additionalPropertiesSchema != null ? additionalPropertiesSchema.isReference() : false;
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Reference getAdditionalPropertiesSchemaReference() {
+        return additionalPropertiesSchema != null ? additionalPropertiesSchema.getReference() : null;
     }
 
     // AdditionalProperties
@@ -1181,12 +1298,19 @@ public class SchemaImpl extends OpenApiObjectImpl<OpenApi3, Schema> implements S
             enums = createChildList("enum", this, ObjectOverlay.factory);
             type = createChild("type", this, StringOverlay.factory);
             allOfSchemas = createChildList("allOf", this, SchemaImpl.factory);
+            refables.put("allOf", allOfSchemas);
             oneOfSchemas = createChildList("oneOf", this, SchemaImpl.factory);
+            refables.put("oneOf", oneOfSchemas);
             anyOfSchemas = createChildList("anyOf", this, SchemaImpl.factory);
+            refables.put("anyOf", anyOfSchemas);
             notSchema = createChild("not", this, SchemaImpl.factory);
+            refables.put("not", notSchema);
             itemsSchema = createChild("items", this, SchemaImpl.factory);
+            refables.put("items", itemsSchema);
             properties = createChildMap("properties", this, SchemaImpl.factory, null);
+            refables.put("properties", properties);
             additionalPropertiesSchema = createChild(json.at("/additionalProperties").isObject(), "additionalProperties", this, SchemaImpl.factory);
+            refables.put("additionalProperties", additionalPropertiesSchema);
             additionalProperties = createChild(json.at("/additionalProperties").isBoolean(), "additionalProperties", this, BooleanOverlay.factory);
             description = createChild("description", this, StringOverlay.factory);
             format = createChild("format", this, StringOverlay.factory);

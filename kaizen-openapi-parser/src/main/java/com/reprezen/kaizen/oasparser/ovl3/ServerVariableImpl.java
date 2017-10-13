@@ -90,6 +90,12 @@ public class ServerVariableImpl extends OpenApiObjectImpl<OpenApi3, ServerVariab
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public void insertEnumValue(int index, Object enumValue) {
+        enumValues.insert(index, enumValue);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void removeEnumValue(int index) {
         enumValues.remove(index);
     }

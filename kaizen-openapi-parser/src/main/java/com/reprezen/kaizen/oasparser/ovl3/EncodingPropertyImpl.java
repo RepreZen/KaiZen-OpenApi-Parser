@@ -10,6 +10,7 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
+import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 import com.reprezen.kaizen.oasparser.model3.EncodingProperty;
@@ -110,6 +111,20 @@ public class EncodingPropertyImpl extends OpenApiObjectImpl<OpenApi3, EncodingPr
         headers.remove(name);
     }
 
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public boolean isHeaderReference(String key) {
+        ChildOverlay<String, StringOverlay> child = headers.getChild(key);
+            return child != null ? child.isReference() : false;
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Reference getHeaderReference(String key) {
+        ChildOverlay<String, StringOverlay> child = headers.getChild(key);
+            return child != null ? child.getReference() : null;
+    }
+
     // Style
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -201,7 +216,8 @@ public class EncodingPropertyImpl extends OpenApiObjectImpl<OpenApi3, EncodingPr
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     protected void elaborateChildren() {
         contentType = createChild("contentType", this, StringOverlay.factory);
-            headers = createChildMap("Headers", this, StringOverlay.factory, null);
+            headers = createChildMap("headers", this, StringOverlay.factory, null);
+            refables.put("headers", headers);
             style = createChild("style", this, StringOverlay.factory);
             explode = createChild("explode", this, BooleanOverlay.factory);
             extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");

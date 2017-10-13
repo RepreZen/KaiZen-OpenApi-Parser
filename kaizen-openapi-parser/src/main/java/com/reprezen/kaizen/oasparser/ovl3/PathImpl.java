@@ -9,6 +9,7 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
+import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 import com.reprezen.kaizen.oasparser.model3.OpenApi3;
@@ -302,6 +303,12 @@ public class PathImpl extends OpenApiObjectImpl<OpenApi3, Path> implements Path 
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public void insertServer(int index, Server server) {
+        servers.insert(index, server);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void removeServer(int index) {
         servers.remove(index);
     }
@@ -351,8 +358,26 @@ public class PathImpl extends OpenApiObjectImpl<OpenApi3, Path> implements Path 
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public void insertParameter(int index, Parameter parameter) {
+        parameters.insert(index, parameter);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void removeParameter(int index) {
         parameters.remove(index);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public boolean isParameterReference(int index) {
+        return parameters.getChild(index).isReference();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Reference getParameterReference(int index) {
+        return parameters.getChild(index).getReference();
     }
 
     // Extension
@@ -406,6 +431,7 @@ public class PathImpl extends OpenApiObjectImpl<OpenApi3, Path> implements Path 
             operations = createChildMap("", this, OperationImpl.factory, "get|put|post|delete|options|head|patch|trace");
             servers = createChildList("servers", this, ServerImpl.factory);
             parameters = createChildList("parameters", this, ParameterImpl.factory);
+            refables.put("parameters", parameters);
             extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }
 

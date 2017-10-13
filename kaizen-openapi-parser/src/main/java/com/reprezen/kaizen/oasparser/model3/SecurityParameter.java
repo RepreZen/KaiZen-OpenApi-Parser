@@ -29,6 +29,9 @@ public interface SecurityParameter extends OpenApiObject<OpenApi3, SecurityParam
     void addParameter(String parameter);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    void insertParameter(int index, String parameter);
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void removeParameter(int index);
 
 }

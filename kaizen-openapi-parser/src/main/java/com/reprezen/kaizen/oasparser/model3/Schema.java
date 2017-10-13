@@ -1,5 +1,6 @@
 package com.reprezen.kaizen.oasparser.model3;
 
+import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
 import com.reprezen.kaizen.oasparser.model3.Example;
 import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
 import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
@@ -183,6 +184,9 @@ public interface Schema extends OpenApiObject<OpenApi3, Schema> {
     void addRequiredField(String requiredField);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    void insertRequiredField(int index, String requiredField);
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void removeRequiredField(int index);
 
     // Enum
@@ -206,6 +210,9 @@ public interface Schema extends OpenApiObject<OpenApi3, Schema> {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void addEnum(Object enumValue);
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    void insertEnum(int index, Object enumValue);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void removeEnum(int index);
@@ -243,7 +250,16 @@ public interface Schema extends OpenApiObject<OpenApi3, Schema> {
     void addAllOfSchema(Schema allOfSchema);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    void insertAllOfSchema(int index, Schema allOfSchema);
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void removeAllOfSchema(int index);
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    boolean isAllOfSchemaReference(int index);
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    Reference getAllOfSchemaReference(int index);
 
     // OneOfSchema
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -268,7 +284,16 @@ public interface Schema extends OpenApiObject<OpenApi3, Schema> {
     void addOneOfSchema(Schema oneOfSchema);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    void insertOneOfSchema(int index, Schema oneOfSchema);
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void removeOneOfSchema(int index);
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    boolean isOneOfSchemaReference(int index);
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    Reference getOneOfSchemaReference(int index);
 
     // AnyOfSchema
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -293,7 +318,16 @@ public interface Schema extends OpenApiObject<OpenApi3, Schema> {
     void addAnyOfSchema(Schema anyOfSchema);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    void insertAnyOfSchema(int index, Schema anyOfSchema);
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void removeAnyOfSchema(int index);
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    boolean isAnyOfSchemaReference(int index);
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    Reference getAnyOfSchemaReference(int index);
 
     // NotSchema
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -305,6 +339,12 @@ public interface Schema extends OpenApiObject<OpenApi3, Schema> {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setNotSchema(Schema notSchema);
 
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    boolean isNotSchemaReference();
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    Reference getNotSchemaReference();
+
     // ItemsSchema
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     Schema getItemsSchema();
@@ -314,6 +354,12 @@ public interface Schema extends OpenApiObject<OpenApi3, Schema> {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setItemsSchema(Schema itemsSchema);
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    boolean isItemsSchemaReference();
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    Reference getItemsSchemaReference();
 
     // Property
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -337,6 +383,12 @@ public interface Schema extends OpenApiObject<OpenApi3, Schema> {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void removeProperty(String name);
 
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    boolean isPropertyReference(String key);
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    Reference getPropertyReference(String key);
+
     // AdditionalPropertiesSchema
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     Schema getAdditionalPropertiesSchema();
@@ -346,6 +398,12 @@ public interface Schema extends OpenApiObject<OpenApi3, Schema> {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setAdditionalPropertiesSchema(Schema additionalPropertiesSchema);
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    boolean isAdditionalPropertiesSchemaReference();
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    Reference getAdditionalPropertiesSchemaReference();
 
     // AdditionalProperties
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

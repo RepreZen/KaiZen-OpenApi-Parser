@@ -81,6 +81,12 @@ public class SecurityParameterImpl extends OpenApiObjectImpl<OpenApi3, SecurityP
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public void insertParameter(int index, String parameter) {
+        parameters.insert(index, parameter);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void removeParameter(int index) {
         parameters.remove(index);
     }

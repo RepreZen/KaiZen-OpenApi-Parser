@@ -12,6 +12,7 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
+import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 import com.reprezen.kaizen.oasparser.model3.Callback;
@@ -250,6 +251,12 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3, OpenApi3> implemen
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public void insertServer(int index, Server server) {
+        servers.insert(index, server);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void removeServer(int index) {
         servers.remove(index);
     }
@@ -383,6 +390,20 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3, OpenApi3> implemen
         schemas.remove(name);
     }
 
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public boolean isSchemaReference(String key) {
+        ChildOverlay<Schema, SchemaImpl> child = schemas.getChild(key);
+            return child != null ? child.isReference() : false;
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Reference getSchemaReference(String key) {
+        ChildOverlay<Schema, SchemaImpl> child = schemas.getChild(key);
+            return child != null ? child.getReference() : null;
+    }
+
     // Response
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -424,6 +445,20 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3, OpenApi3> implemen
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void removeResponse(String name) {
         responses.remove(name);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public boolean isResponseReference(String key) {
+        ChildOverlay<Response, ResponseImpl> child = responses.getChild(key);
+            return child != null ? child.isReference() : false;
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Reference getResponseReference(String key) {
+        ChildOverlay<Response, ResponseImpl> child = responses.getChild(key);
+            return child != null ? child.getReference() : null;
     }
 
     // Parameter
@@ -469,6 +504,20 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3, OpenApi3> implemen
         parameters.remove(name);
     }
 
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public boolean isParameterReference(String key) {
+        ChildOverlay<Parameter, ParameterImpl> child = parameters.getChild(key);
+            return child != null ? child.isReference() : false;
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Reference getParameterReference(String key) {
+        ChildOverlay<Parameter, ParameterImpl> child = parameters.getChild(key);
+            return child != null ? child.getReference() : null;
+    }
+
     // Example
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -510,6 +559,20 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3, OpenApi3> implemen
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void removeExample(String name) {
         examples.remove(name);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public boolean isExampleReference(String key) {
+        ChildOverlay<Example, ExampleImpl> child = examples.getChild(key);
+            return child != null ? child.isReference() : false;
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Reference getExampleReference(String key) {
+        ChildOverlay<Example, ExampleImpl> child = examples.getChild(key);
+            return child != null ? child.getReference() : null;
     }
 
     // RequestBody
@@ -555,6 +618,20 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3, OpenApi3> implemen
         requestBodies.remove(name);
     }
 
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public boolean isRequestBodyReference(String key) {
+        ChildOverlay<RequestBody, RequestBodyImpl> child = requestBodies.getChild(key);
+            return child != null ? child.isReference() : false;
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Reference getRequestBodyReference(String key) {
+        ChildOverlay<RequestBody, RequestBodyImpl> child = requestBodies.getChild(key);
+            return child != null ? child.getReference() : null;
+    }
+
     // Header
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -596,6 +673,20 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3, OpenApi3> implemen
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void removeHeader(String name) {
         headers.remove(name);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public boolean isHeaderReference(String key) {
+        ChildOverlay<Header, HeaderImpl> child = headers.getChild(key);
+            return child != null ? child.isReference() : false;
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Reference getHeaderReference(String key) {
+        ChildOverlay<Header, HeaderImpl> child = headers.getChild(key);
+            return child != null ? child.getReference() : null;
     }
 
     // SecurityScheme
@@ -641,6 +732,20 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3, OpenApi3> implemen
         securitySchemes.remove(name);
     }
 
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public boolean isSecuritySchemeReference(String key) {
+        ChildOverlay<SecurityScheme, SecuritySchemeImpl> child = securitySchemes.getChild(key);
+            return child != null ? child.isReference() : false;
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Reference getSecuritySchemeReference(String key) {
+        ChildOverlay<SecurityScheme, SecuritySchemeImpl> child = securitySchemes.getChild(key);
+            return child != null ? child.getReference() : null;
+    }
+
     // Link
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -684,6 +789,20 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3, OpenApi3> implemen
         links.remove(name);
     }
 
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public boolean isLinkReference(String key) {
+        ChildOverlay<Link, LinkImpl> child = links.getChild(key);
+            return child != null ? child.isReference() : false;
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Reference getLinkReference(String key) {
+        ChildOverlay<Link, LinkImpl> child = links.getChild(key);
+            return child != null ? child.getReference() : null;
+    }
+
     // Callback
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -725,6 +844,20 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3, OpenApi3> implemen
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void removeCallback(String name) {
         callbacks.remove(name);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public boolean isCallbackReference(String key) {
+        ChildOverlay<Callback, CallbackImpl> child = callbacks.getChild(key);
+            return child != null ? child.isReference() : false;
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Reference getCallbackReference(String key) {
+        ChildOverlay<Callback, CallbackImpl> child = callbacks.getChild(key);
+            return child != null ? child.getReference() : null;
     }
 
     // ComponentsExtension
@@ -815,6 +948,12 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3, OpenApi3> implemen
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public void insertSecurityRequirement(int index, SecurityRequirement securityRequirement) {
+        securityRequirements.insert(index, securityRequirement);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void removeSecurityRequirement(int index) {
         securityRequirements.remove(index);
     }
@@ -860,6 +999,12 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3, OpenApi3> implemen
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void addTag(Tag tag) {
         tags.add(tag);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public void insertTag(int index, Tag tag) {
+        tags.insert(index, tag);
     }
 
     @Override
@@ -939,14 +1084,23 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3, OpenApi3> implemen
             paths = createChildMap("paths", this, PathImpl.factory, "/.*");
             pathsExtensions = createChildMap("paths", this, ObjectOverlay.factory, "x-.+");
             schemas = createChildMap("components/schemas", this, SchemaImpl.factory, "[a-zA-Z0-9\\._-]+");
+            refables.put("components/schemas", schemas);
             responses = createChildMap("components/responses", this, ResponseImpl.factory, "[a-zA-Z0-9\\._-]+");
+            refables.put("components/responses", responses);
             parameters = createChildMap("components/parameters", this, ParameterImpl.factory, "[a-zA-Z0-9\\._-]+");
+            refables.put("components/parameters", parameters);
             examples = createChildMap("components/examples", this, ExampleImpl.factory, "[a-zA-Z0-9\\._-]+");
+            refables.put("components/examples", examples);
             requestBodies = createChildMap("components/requestBodies", this, RequestBodyImpl.factory, "[a-zA-Z0-9\\._-]+");
+            refables.put("components/requestBodies", requestBodies);
             headers = createChildMap("components/headers", this, HeaderImpl.factory, "[a-zA-Z0-9\\._-]+");
+            refables.put("components/headers", headers);
             securitySchemes = createChildMap("components/securitySchemes", this, SecuritySchemeImpl.factory, "[a-zA-Z0-9\\._-]+");
+            refables.put("components/securitySchemes", securitySchemes);
             links = createChildMap("components/links", this, LinkImpl.factory, "[a-zA-Z0-9\\._-]+");
+            refables.put("components/links", links);
             callbacks = createChildMap("components/callbacks", this, CallbackImpl.factory, "(?!x-)[a-zA-Z0-9\\._-]+");
+            refables.put("components/callbacks", callbacks);
             componentsExtensions = createChildMap("components", this, ObjectOverlay.factory, "x-.+");
             securityRequirements = createChildList("security", this, SecurityRequirementImpl.factory);
             tags = createChildList("tags", this, TagImpl.factory);

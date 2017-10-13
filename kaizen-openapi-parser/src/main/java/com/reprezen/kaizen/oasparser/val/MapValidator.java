@@ -24,9 +24,8 @@ public class MapValidator<T extends MapOverlay<T, ?>> extends OverlayValidator<M
 	@Override
 	public void validate(MapOverlay<T, ?> overlay, ValidationResults results) {
 		super.validate(overlay, results, ObjectNode.class);
-		// TODO reimplement
-		// for (T value : overlay.getStore().getOverlays()) {
-		// elementValidator.validate(value, results, value.getKey());
-		// }
+		for (T value : overlay.get().values()) {
+			elementValidator.validate(value, results, value.getPathInParent());
+		}
 	}
 }

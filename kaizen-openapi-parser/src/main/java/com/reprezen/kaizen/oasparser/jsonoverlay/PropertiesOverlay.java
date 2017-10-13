@@ -11,14 +11,17 @@
 package com.reprezen.kaizen.oasparser.jsonoverlay;
 
 import java.util.List;
+import java.util.Map;
 
 import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 public abstract class PropertiesOverlay<V extends IPropertiesOverlay<V>> extends JsonOverlay<V> {
 
-	protected List<ChildOverlay<?, ?>> children = Lists.newArrayList();
+	private List<ChildOverlay<?, ?>> children = Lists.newArrayList();
+	protected Map<String, ChildOverlay<?, ?>> refables = Maps.newLinkedHashMap();
 	private boolean elaborated = false;
 	private boolean deferElaboration = false;
 
@@ -145,6 +148,20 @@ public abstract class PropertiesOverlay<V extends IPropertiesOverlay<V>> extends
 		child.getOverlay().setPathInParent(path);
 		children.add(child);
 		return child;
+	}
+
+	public Iterable<String> getRefablePaths() {
+		return refables.keySet();
+	}
+
+	public boolean isReference(String path) {
+		ChildOverlay<?, ?> child = (ChildOverlay<?, ?>) refables.get(path);
+		return child != null ? child.isReference() : false;
+	}
+
+	public Reference getReference(String path) {
+		ChildOverlay<?, ?> child = (ChildOverlay<?, ?>) refables.get(path);
+		return child != null ? child.getReference() : null;
 	}
 
 	private JsonPointer pathPointer(String path) {

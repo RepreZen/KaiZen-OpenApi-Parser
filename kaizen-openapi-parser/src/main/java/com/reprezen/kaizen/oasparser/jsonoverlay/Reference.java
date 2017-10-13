@@ -128,6 +128,10 @@ public class Reference {
 				} else {
 					try {
 						this.json = root.at(fragment.substring(1));
+						if (json.isMissingNode()) {
+							throw new ResolutionException(
+									"JSON pointer does not address a value in the containing structure");
+						}
 					} catch (IllegalArgumentException e) {
 						throw new ResolutionException("Failed to resolve JSON pointer", e);
 					}
@@ -140,5 +144,11 @@ public class Reference {
 			}
 		}
 		return json;
+	}
+
+	@Override
+	public String toString() {
+		return String.format("Reference[$ref=%s; canonical=%s; valid=%s, badReason=%s]", getRefString(),
+				getCanonicalRefString(), isValid(), getErrorReason());
 	}
 }

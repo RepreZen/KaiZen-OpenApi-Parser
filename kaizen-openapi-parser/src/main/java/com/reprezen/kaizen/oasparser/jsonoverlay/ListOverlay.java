@@ -72,12 +72,12 @@ public class ListOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Colle
 	}
 
 	@Override
-	public JsonNode toJson(boolean keepEmpty) {
+	public JsonNode toJson(JsonOptions options) {
 		ArrayNode array = jsonArray();
 		for (IJsonOverlay<V> overlay : overlays) {
-			array.add(overlay.toJson(keepEmpty));
+			array.add(overlay.toJson(options.plus(JsonOption.KEEP_ONE_EMPTY)));
 		}
-		return array.size() > 0 || keepEmpty ? array : jsonMissing();
+		return array.size() > 0 || options.isKeepThisEmpty() ? array : jsonMissing();
 	}
 
 	public V get(int index) {

@@ -12,7 +12,6 @@ package com.reprezen.kaizen.oasparser.jsonoverlay;
 
 import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.MissingNode;
 
 public abstract class ScalarOverlay<V> extends JsonOverlay<V> {
 
@@ -27,13 +26,6 @@ public abstract class ScalarOverlay<V> extends JsonOverlay<V> {
 	public JsonOverlay<?> _find(JsonPointer path) {
 		return null;
 	}
-
-	@Override
-	public JsonNode toJson(boolean keepEmpty) {
-		return value != null ? _toJson() : MissingNode.getInstance();
-	}
-
-	protected abstract JsonNode _toJson();
 
 	@Override
 	public V get(boolean elaborate) {

@@ -52,7 +52,10 @@ public class NumberOverlay extends ScalarOverlay<Number> {
 	}
 
 	@Override
-	public JsonNode _toJson() {
+	public JsonNode toJson(JsonOptions options) {
+		if (value == null) {
+			return jsonMissing();
+		}
 		NumberType type = NumberType.of(value);
 		if (type == null) {
 			throw new IllegalArgumentException(

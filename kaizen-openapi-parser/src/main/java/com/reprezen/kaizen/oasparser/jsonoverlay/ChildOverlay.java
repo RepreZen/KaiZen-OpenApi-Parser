@@ -12,6 +12,9 @@ package com.reprezen.kaizen.oasparser.jsonoverlay;
 
 import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay.JsonOption;
+import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay.JsonOptions;
 
 public class ChildOverlay<V, OV extends JsonOverlay<V>> implements IJsonOverlay<V> {
 
@@ -108,7 +111,7 @@ public class ChildOverlay<V, OV extends JsonOverlay<V>> implements IJsonOverlay<
 		// referenced object, which is available via getOverlay().getParent().
 		return parent;
 	}
-	
+
 	public String getPathInParent() {
 		return overlay.getPathInParent();
 	}
@@ -117,12 +120,24 @@ public class ChildOverlay<V, OV extends JsonOverlay<V>> implements IJsonOverlay<
 		return parent != null ? parent.getParent() : overlay.getRoot();
 	}
 
+	private static final JsonOptions emptyOptions = new JsonOptions();
+
 	public JsonNode toJson() {
-		return overlay.toJson();
+		return toJson(emptyOptions);
 	}
 
-	public JsonNode toJson(boolean keepEmpty) {
-		return overlay.toJson(keepEmpty);
+	public JsonNode toJson(JsonOption... options) {
+		return toJson(new JsonOptions(options));
+	}
+
+	public JsonNode toJson(JsonOptions options) {
+		if (isReference() && !options.isFollowRefs()) {
+			ObjectNode obj = JsonOverlay.jsonObject();
+			obj.put("$ref", reference.getRefString());
+			return obj;
+		} else {
+			return overlay.toJson(options);
+		}
 	}
 
 	@Override
@@ -132,6 +147,10 @@ public class ChildOverlay<V, OV extends JsonOverlay<V>> implements IJsonOverlay<
 
 	public JsonPath getPath() {
 		return path;
+	}
+
+	public boolean isReference() {
+		return reference != null;
 	}
 
 	public Reference getReference() {

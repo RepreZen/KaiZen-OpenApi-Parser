@@ -28,8 +28,8 @@ public class BooleanOverlay extends ScalarOverlay<Boolean> {
 	}
 
 	@Override
-	public JsonNode _toJson() {
-		return jsonBoolean(value);
+	public JsonNode toJson(JsonOptions options) {
+		return value != null ? jsonBoolean(value) : jsonMissing();
 	}
 
 	public static OverlayFactory<Boolean, BooleanOverlay> factory = new OverlayFactory<Boolean, BooleanOverlay>() {

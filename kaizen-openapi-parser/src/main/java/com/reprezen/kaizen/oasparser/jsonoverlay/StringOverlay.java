@@ -28,8 +28,8 @@ public class StringOverlay extends ScalarOverlay<String> {
 	}
 
 	@Override
-	public JsonNode _toJson() {
-		return jsonScalar(value);
+	public JsonNode toJson(JsonOptions options) {
+		return value != null ? jsonScalar(value) : jsonMissing();
 	}
 
 	public static OverlayFactory<String, StringOverlay> factory = new OverlayFactory<String, StringOverlay>() {

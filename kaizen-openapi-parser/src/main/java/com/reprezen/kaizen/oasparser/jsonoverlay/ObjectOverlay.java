@@ -28,8 +28,8 @@ public class ObjectOverlay extends ScalarOverlay<Object> {
 	}
 
 	@Override
-	public JsonNode _toJson() {
-		return mapper.convertValue(value, JsonNode.class);
+	public JsonNode toJson(JsonOptions options) {
+		return value != null ?  mapper.convertValue(value, JsonNode.class) : jsonMissing();
 	}
 
 	public static OverlayFactory<Object, ObjectOverlay> factory = new OverlayFactory<Object, ObjectOverlay>() {

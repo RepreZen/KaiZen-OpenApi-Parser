@@ -76,16 +76,16 @@ public abstract class PropertiesOverlay<V extends IPropertiesOverlay<V>> extends
 	}
 
 	@Override
-	public JsonNode toJson(boolean keepEmpty) {
+	public JsonNode toJson(JsonOptions options) {
 		JsonNode obj = jsonMissing();
 		for (ChildOverlay<?, ?> child : children) {
-			JsonNode childJson = child.getOverlay().toJson();
+			JsonNode childJson = child.toJson(options.minus(JsonOption.KEEP_ONE_EMPTY));
 			if (!childJson.isMissingNode()) {
 				obj = child.getPath().setInPath(obj, childJson);
 			}
 		}
 		JsonNode result = fixJson(obj);
-		return result.size() > 0 || keepEmpty ? result : jsonMissing();
+		return result.size() > 0 || options.isKeepThisEmpty() ? result : jsonMissing();
 	}
 
 	protected JsonNode fixJson(JsonNode json) {

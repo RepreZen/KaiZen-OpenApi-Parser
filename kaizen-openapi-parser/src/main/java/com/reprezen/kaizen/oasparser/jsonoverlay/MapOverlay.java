@@ -81,12 +81,12 @@ public class MapOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Map<St
 	}
 
 	@Override
-	public JsonNode toJson(boolean keepEmpty) {
+	public JsonNode toJson(JsonOptions options) {
 		ObjectNode obj = jsonObject();
 		for (Entry<String, IJsonOverlay<V>> entry : overlays.entrySet()) {
-			obj.set(entry.getKey(), entry.getValue().toJson(true));
+			obj.set(entry.getKey(), entry.getValue().toJson(options.plus(JsonOption.KEEP_ONE_EMPTY)));
 		}
-		return obj.size() > 0 || keepEmpty ? obj : jsonMissing();
+		return obj.size() > 0 || options.isKeepThisEmpty() ? obj : jsonMissing();
 	}
 
 	public boolean containsKey(String name) {

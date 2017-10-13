@@ -11,7 +11,6 @@
 package com.reprezen.kaizen.oasparser.jsonoverlay;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 
 public class IntegerOverlay extends ScalarOverlay<Integer> {
 
@@ -29,8 +28,8 @@ public class IntegerOverlay extends ScalarOverlay<Integer> {
 	}
 
 	@Override
-	public JsonNode _toJson() {
-		return JsonNodeFactory.instance.numberNode(value);
+	public JsonNode toJson(JsonOptions options) {
+		return value != null ? jsonScalar(value) : jsonMissing();
 	}
 
 	public static OverlayFactory<Integer, IntegerOverlay> factory = new OverlayFactory<Integer, IntegerOverlay>() {

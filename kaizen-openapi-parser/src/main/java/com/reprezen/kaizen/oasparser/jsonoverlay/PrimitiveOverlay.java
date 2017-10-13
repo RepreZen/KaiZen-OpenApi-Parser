@@ -39,8 +39,10 @@ public class PrimitiveOverlay extends ScalarOverlay<Object> {
 	}
 
 	@Override
-	public JsonNode _toJson() {
-		if (value instanceof String) {
+	public JsonNode toJson(JsonOptions options) {
+		if (value == null) {
+			return jsonMissing();
+		} else if (value instanceof String) {
 			return jsonScalar((String) value);
 		} else if (value instanceof BigDecimal) {
 			return jsonScalar((BigDecimal) value);

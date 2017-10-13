@@ -41,6 +41,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Queues;
 import com.reprezen.kaizen.oasparser.OpenApiParser;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay.JsonOption;
 import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
 import com.reprezen.kaizen.oasparser.model3.Schema;
@@ -111,13 +112,8 @@ public class SimpleSerializationTest extends Assert {
 			// this changes the overlay value but does not refresh cached JSON - just marks
 			// it as out-of-date
 			model.getInfo().setTitle("changed title");
-			// verify that cached JSON has stale value
-			assertEquals("simple model", getCachedJson(model).at("/info/title").asText());
 			assertEquals("changed title", model.getInfo().getTitle());
-			// this will trigger refresh of JSON
 			assertEquals("changed title", model.toJson().at("/info/title").asText());
-			// verify that cached JSON now has new value
-			assertEquals("changed title", getCachedJson(model).at("/info/title").asText());
 		}
 
 		@Test
@@ -125,19 +121,7 @@ public class SimpleSerializationTest extends Assert {
 			OpenApi3 model = parseLocalModel("simpleTest");
 			Schema xSchema = model.getSchema("X");
 			assertEquals("#/components/schemas/Y", xSchema.toJson().at("/properties/y/$ref").asText());
-			// TODO reimplement
-			// assertEquals("integer",
-			// xSchema.toJson(true).at("/properties/y/type").asText());
-		}
-	}
-
-	private static <T extends OpenApiObject<T>> JsonNode getCachedJson(T overlay) {
-		try {
-			Method getJson = JsonOverlay.class.getDeclaredMethod("getJson");
-			getJson.setAccessible(true);
-			return (JsonNode) getJson.invoke(overlay);
-		} catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-			throw new RuntimeException(e);
+			assertEquals("integer", xSchema.toJson(JsonOption.FOLLOW_REFS).at("/properties/y/type").asText());
 		}
 	}
 

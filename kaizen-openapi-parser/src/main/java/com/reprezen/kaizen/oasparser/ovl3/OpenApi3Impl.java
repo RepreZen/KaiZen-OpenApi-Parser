@@ -304,6 +304,20 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3, OpenApi3> implemen
         paths.remove(name);
     }
 
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public boolean isPathReference(String key) {
+        ChildOverlay<Path, PathImpl> child = paths.getChild(key);
+            return child != null ? child.isReference() : false;
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Reference getPathReference(String key) {
+        ChildOverlay<Path, PathImpl> child = paths.getChild(key);
+            return child != null ? child.getReference() : null;
+    }
+
     // PathsExtension
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -1082,6 +1096,7 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3, OpenApi3> implemen
             info = createChild("info", this, InfoImpl.factory);
             servers = createChildList("servers", this, ServerImpl.factory);
             paths = createChildMap("paths", this, PathImpl.factory, "/.*");
+            refables.put("paths", paths);
             pathsExtensions = createChildMap("paths", this, ObjectOverlay.factory, "x-.+");
             schemas = createChildMap("components/schemas", this, SchemaImpl.factory, "[a-zA-Z0-9\\._-]+");
             refables.put("components/schemas", schemas);

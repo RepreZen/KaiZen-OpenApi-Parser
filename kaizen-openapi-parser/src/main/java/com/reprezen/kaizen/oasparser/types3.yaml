@@ -37,6 +37,7 @@ types:
         name: Path
         structure: map
         keyPattern: *pathPat
+        refable: true
       pathsExtension: 
         <<: *extDef
         name: PathsExtension

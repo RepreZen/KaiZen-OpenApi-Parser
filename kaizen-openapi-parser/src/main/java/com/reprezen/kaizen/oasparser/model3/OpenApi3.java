@@ -103,6 +103,12 @@ public interface OpenApi3 extends OpenApiObject<OpenApi3, OpenApi3>, OpenApi<Ope
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void removePath(String name);
 
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    boolean isPathReference(String key);
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    Reference getPathReference(String key);
+
     // PathsExtension
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     Map<String, Object> getPathsExtensions();

@@ -11,6 +11,8 @@ from classes and interfaces that are nearly 100% generated from a
 succinct catalog of OpenAPI objects, their properties, and their
 relationships. As a result, the object models are highly uniform.
 
+## Model Values
+
 Values fall broadly into four categories, each with its own unique
 API features:
 
@@ -40,10 +42,13 @@ properties object and one or more map objects. The most common case of
 this appears with objects that can contain "vendor extensions" - JSON
 properties with names that begin with `x-`. In all cases of this
 nature, the OpenAPI specification defines a regular expression for the
-names of properties belonging to the map object. This scheme even
-allows more than one map object to coexistin the same JSON object,
-requiring that the associated regular expressions be mutually
-exclusive.
+names of properties belonging to the map object. The fixed properties
+will be represented in the properties object, while other properties
+matching the regular expression will appear in the map value.
+
+This scheme even allows multiple map objects to coexist in the same
+JSON object, as long as the associated property name regular
+expressions are mutually exclusive.
 
 Each of the value types listed above appears in the top-level JSON
 object of an overall OpenAPI 3.0 model, and we'll use examples from
@@ -148,7 +153,275 @@ an OpenApi 3.0 model.
   properties object, from the model. As with lists and maps, this will
   never be null.
 
+* `Info getInfo(boolean elaborate)` - like `getInfo()`, but allows the
+  caller to determine whether "elaboration" of the `Info` object
+  occurs as a side-effect. See the following sub-section.
+
 * `void setInfo(Info info)` - set the model's `info` value to the
   given properties object.
 
+#### Properties Value Elaboration
+
+As mentioned earlier, the API is designed in such a way as to minimize
+the need for null checks to avoid raising `NullPointerException`. In
+practical terms, this means that values obtainable from a properties
+object - with the exception of scalar values - will not generally be
+`null`.
+
+If `model` is a variable holding a parsed OpenAPI 3.0 model, then
+`model.getServes()` will return an empty list even if no `servers`
+property appears in the model, and likewise for `model.getPaths()`.
+
+It also means that `model.getInfo()` will generally return an `Info`
+object, even if no `info` property appears in the model. However, this
+case is a bit more nuanced, because of the possibility of recursive
+properties object structures.
+
+In general, we call the process of filling a value from its
+corresponding JSON structure "elaboration" of the value. The overall
+parsing process basically consists of a depth-first elaboration of
+nested values from JSON structures.
+
+During elaboration of a properties object, missing properties are
+elaborated as follows:
+
+* A scalar property is elaborated to an internal structure that
+  represent a `null` value for the property
+
+* A list or map property is elaborated to an empty container.
+
+* A properties value will be elaborated to an internal object of the
+  type required for the property.
+
+The elaboration of missing scalar, list or map values always
+teriminates immediately. However, this is not the case with properties
+objects.
+
+Consider an OpenAPI 3.0 model with no `info` property. Elaborating the
+`info` property of that model will create an `Info` object. Then
+elaborating that `Info` object will cause a `Contact` object and a
+`License` object to be created. Elaborating those objects will not
+cause any further properties objects to be created, since those
+objects only contain scalar properties (and may have maps of vendor
+extensions).
+
+Things are different for a `Schema` object. A schema includes a few
+properties whose values may themselves be schemas: `items`, `not`, and
+`additionalProperties`. Elaborating a `Schema` object therefore
+creates new `Schema` objects as a side-effect. Elaborating those
+objects would then create additional `Schema` objects, and so forth.
+
+As a result of this potential for recursive elaboration, the KaiZen
+OpenAPI parser adopts a lazy elaboration strategy for properties
+values whose corresponding JSON structures are missing. During the
+initial parse, these values are created, but their own properties are
+not elaborated at that time. Elaboration is triggered the first time
+the object is retrieved. For example, `schema.getItemsSchema()` will
+trigger the elaboration of a schema's `items` value, if that value was
+not previously elaborated. The object will have been *created* during
+the initial parse, but it will not be elaborated until it is first
+accessed.
+
+#### Avoiding Triggered Elaboration
+
+There are situations in which one must navigate to a property value
+without triggering elaboration. One example is the KaiZen OpenAPI
+Parser validation framework, since validation should not alter the
+object being validated. (And besides, blindly triggering elaboration
+in this context would lead to infinite recursion.)
+
+To avoid elaboration, `get` methods for properties values come with an
+optional boolean argument, named `elaborate`. If `true` (the default),
+the `get` operation will trigger elaboration; `false` will
+not. Attempts to retrieve properties values of an unelaborated
+properties value will always return `null`.
+
+## References
+
+There are several places in the OpenAPI specification where reference
+objects are permitted in place of inline structures. Such a  reference
+must resolve to a JSON value that is compatible with the context of
+the reference. For example, if a schema's `items` property is a
+reference, that reference needs to resolve to a JSON value that
+embodies a valid schema object.
+
+### Shared Representations
+
+The KaiZen OpenAPI parser attempts to resolve all references that
+encountered when parsing a model, including references references
+appearing in JSON data that was itself obtained to satisfy a
+reference. If the same JSON value is referenced in more than one place
+in a model, that value is parsed only once, and the result is linked
+as needed into the overall parsed model structure.
+
+This means that "object-equality" (`==`) tests will show that the same
+object obtained by different paths do, in fact, share a single
+internal represenation.
+
+As an example, consider this model:
+
+```
+---
+openapi: 3.0.0
+info:
+  title: Link Example
+  version: 1.0.0
+paths: {}
+components:
+  schemas:
+    X:
+      type: string
+    Y:
+      type: object
+      properties:
+        x: 
+          $ref: "#/components/schemas/X"
+    Z:
+      type: array
+      items:
+        $ref: "#/components/schemas/X"
+```
+
+When the model is parsed, the following will all by equal per `==`:
+
+* `model.getSchema("X")`
+* `model.getSchema("Y").getProperty("x")`
+* `model.getSchema("Z").getItemsSchema()`
+
+### Exposing References
+
+The shared representation is a very handy feature of the parser, but
+it is sometimes important to be able to distinguish references from
+inlined structures, and to obtain details of references.
+
+For this reason *reference-enabled* values in the OpenAPI
+specification have a special treatment in the API. These are generally
+values that, in the specification, include "Reference Object" in their
+description.
+
+A good example is any of the numerous places where a `Schema Object`
+may appear in a model. In all such cases, `is...Reference()` and
+`get...Reference()` methods are available, in a form that depends on
+the struture of the containing value. Examples are:
+
+* A single schema as property object, e.g. the `items` property of a
+  `Schema Object`:
+
+  * `schema.isItemsSchemaReference()` - `true` if the `items` property
+    is a reference object
+  
+  * `schema.getItemsSchemaReference()` - retreive a `Reference` object
+    containing full details of the reference.
+
+* A schema object in a list of schema objects, e.g. in the `allOf`
+  property of a `Schema Object`:
+
+  * `schema.isAllofSchemaReference(int index)` - `true` if the
+    indicated schema is specified by a reference.
+
+  * `schema.getAllofSchemaReference(int index)` - retreive the
+  `Reference` object for the reference.
+
+* A schema object in a map of schema objects, e.g. in the `properties`
+  property of a `Schema Object`:
+
+  * `schema.isPropertyReference(String name)` - `true` if the schema
+    for the indicated property is specified by a reference.
+
+  * `schema.getPropertyReference(String name)` - retrieve the
+    `Reference` object for the reference.
+
+### Canonical Reference Strings
+
+The reference string appearing in a reference (the value of the `$ref`
+property in the JSON object) may come in any of three forms - all just
+variants of the general URL syntax:
+
+* Local reference - consists of nothing but a *fragment*, beging with
+  `#`, e.g. `#/components/schemas/Foo`. The fragment must be a valid
+  JSON Pointer.
+
+* Relative reference - consists of a relative URL with or without a
+  fragment, e.g. `../schemas/PetSchema.yaml` or
+  `../schemas/PetStore.yaml#/components/schemas/Pet`.
+
+* Absolute reference - consists of an absolute URL with our without a
+  fragment, e.g. `http://example.com/catalog/schemas/Pet.yaml` or
+  `http://example.com/catalog/PetStore.yaml#/components/schemas/Pet`
+
+Whenever any reference is encountered, the KaiZen OpenAPI Parser first
+canonicalizes the reference string. This operation never changes the
+fragment, and only operates on the non-fragment portion.
+
+Canonicalization of an absolute reference means simplifying portions
+of the path (e.g. changing `/a/b/c/../d/./foo.yaml` to
+`/a/b/d/foo.yaml`).
+
+Canonicalization of a relative reference means converting it to an absolute
+URL by merging it into the *context URL* (the URL of the containing
+file), and then canonicalizing the result.
+
+Canonicalizing a local reference means attaching the fragment
+appearing in the reference to the (canonicalized) context URL.
+
+When two references have the same canonical reference string, the
+corresponding references are treated as identical, and will yield
+shared representations as described above. Otherwise they will not,
+even if the retrieved JSON structures are identical for the two
+references.
+
+### Reference Resolution
+
+The parser attempts to resolve all references that are encountered,
+but sometimes this fails. This may happen for many different reasons,
+including:
+
+* The reference string is syntactically invalid (e.g. the fragment is
+  not a valid JSON Pointer, or non-fragment parts are invalid).
+
+* Canonicalizataion of a relative reference fails (e.g. `../foo.yaml`
+  cannot be canonicalized with a `http://example.com/bar.yaml` as a
+  context URL).
+
+* The parser fails to retrieve content from the canonicalized URL.
+
+* The content retrieved from the canonicalized URL is not valid JSON
+  or YAML.
+
+* The JSON Pointer supplied in the fragment does not address a value
+  contained in the JSON object retrieved from the canonicalized URL.
+
+In all such cases, the corresponding model value will appear to be
+missing, but its corresponding `is...Reference()` and
+`get...Reference()` methods will apply. The fact that the reference
+was found to be invalid - as well as details of the reason - can be
+obtained from the `Reference` object.
+
+
+### The Reference Object
+
+A `Reference` object supports the following methods:
+
+* `String getRefString()` - returns the reference string appearing in
+  the reference object (the `$ref` property value)
+
+* `String getCanonicalRefString()` returns the canonicalized reference
+  string. 
+
+* `String getFragment()`- returns the fragment portion, or `null` if
+  there was none.
+
+* `JsonNode getJson()` - returns the retrieved and parsed JSON
+  structure addressed by the reference.
+
+* `boolean isValid()` - `true` if the reference could be resolved.
+
+* `boolean isInvalid()` - `true` if the reference could not be
+  resolved.
+
+* `ResolutionException getError()` - returns an exception explaining
+  the reason behind a resolution failure (including a stack trace).
+
+* `String getErrorReason()` - returns the message contained in the
+  exception.
 

@@ -17,6 +17,7 @@ import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.reprezen.kaizen.oasparser.jsonoverlay.SerializationOptions.Option;
 
 public abstract class PropertiesOverlay<V extends IPropertiesOverlay<V>> extends JsonOverlay<V> {
 
@@ -79,10 +80,10 @@ public abstract class PropertiesOverlay<V extends IPropertiesOverlay<V>> extends
 	}
 
 	@Override
-	public JsonNode toJson(JsonOptions options) {
+	public JsonNode toJson(SerializationOptions options) {
 		JsonNode obj = jsonMissing();
 		for (ChildOverlay<?, ?> child : children) {
-			JsonNode childJson = child.toJson(options.minus(JsonOption.KEEP_ONE_EMPTY));
+			JsonNode childJson = child.toJson(options.minus(Option.KEEP_ONE_EMPTY));
 			if (!childJson.isMissingNode()) {
 				obj = child.getPath().setInPath(obj, childJson);
 			}

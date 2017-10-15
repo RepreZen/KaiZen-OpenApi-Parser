@@ -1,6 +1,4 @@
-# The KaiZen OpenAPI Parser API and Object Model
-
-# Overall Structure
+epl# The KaiZen OpenAPI Parser API and Object Model
 
 In its most common use-case, the KaiZen OpenAPI Parser consumes an
 OpenAPI model and creates Java objects that expose and allow
@@ -423,8 +421,6 @@ A `Reference` object supports the following methods:
 * `String getErrorReason()` - returns the message contained in the
   exception.
 
-## Miscellaneous Methods
-
 ## Manually Defined Methods for OpenAPI 3.0
 
 Methods for certain objects have been defined manually to supplement
@@ -471,9 +467,214 @@ The following methods are available in all properties values:
   `method.find("/responses/200/headers/MyHeader/schema/enum/3")` would
   be equivalent to
   `method.getResponse("200").getHeader("MyHeader").getSchema().getEnum(3).get()`. (See
-  [Overlay Objects] to understand the reason for the final `get()`
-  method.)
+  [JSON Overlay Framework](json-overlay-framework) to understand the reason for the
+  final `get()` method.)
+
+* `1IJsonOverlay<?> find(JsonPointer path)` - same as `String` version
+  but with a `JsonPointer` object compiled from the same string.
+
+* `boolean isPresent()`  - `true` if the object is actually considered
+  present in the model - i.e. it was present in the JSON/YAML file
+  from which the model was parsed, or it was added using the mutation
+  API. (This method is not reliable at the time of this writing).
+
+* `boolean isElaborated()` - `true` of this properties value has
+  already been elaborated - see
+  [Properties Value Elaboration](#properties-value-elaboration).
+
+* `IJsonOverlay<?> getParent()` return the
+  [overlay object](json-overlay-framework) that is the 
+  parent of this one. Note that references *do not* establish
+  parenting relationships among overlay objects. Only inlined model
+  content does so. For example, imagine a schema named `Foo` defined
+  in `/components/schemas/Foo` in a model, and referenced as the
+  `items` schema in another schema named `FooList`. Then
+  `model.getSchema("Foo").getParent()` and
+  `model.getSchema("FooList").getItemsSchema().getParent()` will both
+  return the map overlay object corresponding to the
+  `model.getSchemas()` map. It is entirely possible for a value to be
+  included in a model only through external references, and in such a
+  case its parent will be `null`.
+
+* `String getPathInParent()` - returns a slash-separated list of JSON
+  property names that, in the JSON structure, would navigate from this
+  parent's JSON value to this value. For example,
+  `model.getInfo().getPathInParent()` is `"info"` and
+  `model.getSchemas("Foo").getPathInParent()` is `"Foo"`. An example
+  with a multi-component path is
+  `model.getSchemas().getPathInParent()`, which is
+  `"components/schemas"`.
+
+* `OpenApi3 getModel()` - performs `getParent()` repeatedly until a
+  `null` value is obtained, and returns the final non-null overlay
+  object in the sequence, if any. Note that this method returns a
+  value of type `M` in an instance of the type `OpenApi<M>` that
+  corresponds to the type of OpenAPI model that was parsed or
+  created. (Currently this will always be `OpenApi3`, but in the
+  future, other type like Swagger 2.0 may be supported.)
+
+## Structural Choices
+
+In creating an overal object model for to represent an OpenAPI 3.0
+model, a nubmer of choices were made, and some may be somewhat
+unexpected. Here are the most likely cases of that:
+
+### Vendor Extensions
+
+Vendor extensions are always represented as map values (`Map<String,
+Object>`).
+
+Vendor extensions that are embedded in an object that
+corresponds to a properties value in this API will appear as a map
+value named `extensions` in that object. Thus we have
+`schema.getExtensions()`, `schema.getExtension("x-whatevfer")`, etc.
+
+Sometimes, vendor extensions appear embedded in other map values, and
+they apply to that map as a whole. An example is the `paths` object in
+an OpenAPI 3.0 model. This object is primarily a map of path strings
+to path item objects, but it may also contain vendor extensions. The
+extensions - like the paths themselves - are available from the
+top-level model object, as in `model.getPathsExtensions()` and
+`model.getPathsExtension("x-whatever")`.
+
+### No Components Object
+
+We do not implement a components object per-se. Doing so would only
+lead to the addition of `getComponents()` to any code that wanted to
+navigate to anything of interest within the object. Instead, the API
+treats all the individual maps appearing in the `components` object of
+a model as top-level map objects. Hence we have `model.getCallbacks()`
+and `model.getCallbacksExtensions()` instead of
+`model.getComponents().getCallbacks()` and
+`model.getComponents().getCallbacksExtensions()`, as would be the case
+if we had created a `Components` properties object.
+
+### Security Requirements
+
+The Security Requirement Object in the OpenAPI 3.0 is defined as a map
+of names to string arrays. This does not fit the capabilities of the
+[JSON Overlay Framework](#json-overlay-framework) used by the KaiZen
+OpenAPI Parser, and so an intermediate object was introduced, called
+`SecurityParemter`. The `SecurityRequirements` object is defined with
+a map property named `requirement`, and `SecurityParameter` is defined
+with a list property named `parameter`. Thus, for example, one might
+use
+`operation.getSecurityRequirement(0).getRequirement("petstore_auth").getParameter(0)`.
+
+## Parser API
+
+The `OpenApiParser` class is the entry point for parsing OpenAPI
+models. It features automatic detection of the OpenAPI version to
+which a model conforms, and it applies the corresponding
+version-specific parser. (Currently, only OpenAPI 3.0 is implemented.)
+The class of the result can be interrogated to determine the model
+type and cast as needed.
+
+When the model type is known in advance, one may instead use a
+type-specific parser, e.g. `OpenApi3Parser` instead. Attempting to
+parse a different type of model will fail, but the result will be of
+the correct object type, with no interrogation or casting necessary.
+
+Here we will focus on the `OpenApi3Parser` methods, which mimic those
+of `OpenApiParser` (and, we expect, parsers for other versions of
+OpenAPI).
+
+Create a new parser using the empty constructor:
+```
+OpenApi3Parser parser = new OpenApi3Parser();
+```
+
+### Parsing Options
+
+A varient of method signatures exist for parsing a model:
+
+* `OpenApi3 parse(String model, URL resolutionBase)` - parse a JSON or
+  YAML string, with the given URL used for resolving any relative
+  references encountered in the model.
+
+* `OpenApi3 parse(File specFile)` - parse the content of the given
+  file, and use the corresponding file URL as the resolution base.
+
+* `OpenApi3 parse(URI uri)` - parse the content retrived from the
+ given URI and use the corresponding URL as the resolution base.
+
+* `OpenApi3 parse(URL url)` - parse the content retrieved from the
+  given URL and use that same URL as the resolution base.
+
+In all the above, validation occurs automatically, and validation
+results are available from the model object. (See
+[above](#openapi3-object).) Validation can be suppressed (but can be
+performed later) by adding a final `false` argument to any of the
+above `parse` methods.
+
+## Serialization API
+
+The serialization API applies to any
+[overlay object](json-overlay-framework), but most commonly will be applied
+to complete models. It consists of a single method:
+
+```JsonNode toJson(SerializationOptions.options... options)```
+
+The return value is of type `JsonNode` from the Jackson library. It
+can be easily translated into either a JSON or YAML string using
+so-called *mapper* objects from that library. For example:
+
+```
+JsonNode serial = model.toJson();
+String json = new ObjectMapper().writeValueAsString(serial);
+String yaml = new YAMLMapper().writeValueAsString(serial);
+String prettyYaml = new YAMLMapper().writerWithDefaultPrettyPrinter().writeValueAsString(serial);
+```
+
+Available options for the `toJson()` method include:
+
+* `FOLLOW_REFS` - By default, objects that are defined by references
+  are serialized using reference objects containing the
+  (un-canonocalized) referene strings. With `FOLLOW_REFS`, the
+  refenced structures will be inlined instead. If your model includes
+  recursive reference structures, this will currently blow up, but we
+  intend to fix that by emitting a reference object whenever recursion
+  would otherwise occur.
+
+* `KEEP_EMPTY` - Normally, emtpy lists and objects are omitted from
+  the serialized output. This option causes them to be retained in the
+  serialized structure.
+
+  N.B. Neither treatment distinguishes between empty structures that
+  were created automatically during the elaboration process, and empty
+  structures that were present in the source model (or added via the
+  mutation API). This is especially problematic in certain cases where
+  empty structures actually mean something different from missing
+  structures in the OpenAPI specification. For example, an empty
+  `servers` list in an Operation Object overrides `servers` objects at
+  the path or root level in the model, but a missing `servers` object
+  does not. Until this issue is addressed properly, `toJson()` can
+  yield models that differ semantically from their intended
+  meaning. Round-tripping through the parser and the serializer can
+  change the meaning of a model.
+  
+  There are a couple of places in the OpenAPI specification where
+  missing structures are actually invalid, namely: the `paths`
+  property of the root object, and the array values for properties in
+  a Security Requirement Object. The serializer supplies empty objects
+  in this case, regardless of the `KEEP_EMPTY` setting.
+
+* `KEEP_ONE_EMPTY` - This is an internal option used by the serializer
+  so that if an empty value is an element of a list object or a
+  property value in a properties object, it will be rendered as empty
+  regardless of the `KEEP_EMPTY` setting. Users are not expected to
+  make use of this option.
+
+## Builders
+
+Builder APIs have not yet been implemented.
+
+## JSON Overlay Framework
+
+The KaiZen OpenAPI Parser makes use of a framework designed (with this
+as the driving first example) to facilitate the creation of tooling
+for JSON/YAML based DSLs.
+
+Additional information TBA.
 
 
-## Overlay Objects
-blah

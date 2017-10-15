@@ -11,8 +11,6 @@
 package com.reprezen.swaggerparser.test;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.Collection;
 import java.util.Deque;
@@ -33,17 +31,13 @@ import org.skyscreamer.jsonassert.JSONCompareMode;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.JsonNodeFactory;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import com.google.common.base.Charsets;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Queues;
 import com.reprezen.kaizen.oasparser.OpenApiParser;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay.JsonOption;
+import com.reprezen.kaizen.oasparser.jsonoverlay.SerializationOptions.Option;
 import com.reprezen.kaizen.oasparser.model3.OpenApi3;
-import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
 import com.reprezen.kaizen.oasparser.model3.Schema;
 import com.reprezen.kaizen.oasparser.ovl3.OpenApi3Impl;
 
@@ -123,7 +117,7 @@ public class SimpleSerializationTest extends Assert {
 			OpenApi3 model = parseLocalModel("simpleTest");
 			Schema xSchema = model.getSchema("X");
 			assertEquals("#/components/schemas/Y", xSchema.toJson().at("/properties/y/$ref").asText());
-			assertEquals("integer", xSchema.toJson(JsonOption.FOLLOW_REFS).at("/properties/y/type").asText());
+			assertEquals("integer", xSchema.toJson(Option.FOLLOW_REFS).at("/properties/y/type").asText());
 		}
 	}
 

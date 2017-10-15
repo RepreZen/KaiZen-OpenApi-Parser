@@ -12,10 +12,7 @@ package com.reprezen.kaizen.oasparser.jsonoverlay;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Iterator;
-import java.util.Set;
 
 import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -26,7 +23,6 @@ import com.fasterxml.jackson.databind.node.MissingNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
 import com.fasterxml.jackson.databind.node.ValueNode;
-import com.google.common.collect.Sets;
 
 public abstract class JsonOverlay<V> implements IJsonOverlay<V> {
 
@@ -111,19 +107,19 @@ public abstract class JsonOverlay<V> implements IJsonOverlay<V> {
 
 	protected abstract V fromJson(JsonNode json);
 
-	private static final JsonOptions emptyOptions = new JsonOptions();
+	private static final SerializationOptions emptyOptions = new SerializationOptions();
 
 	@Override
 	public JsonNode toJson() {
 		return toJson(emptyOptions);
 	}
-	
+
 	@Override
-	public JsonNode toJson(JsonOption... options) {
-		return toJson(new JsonOptions(options));
+	public JsonNode toJson(SerializationOptions.Option... options) {
+		return toJson(new SerializationOptions(options));
 	}
 
-	public abstract JsonNode toJson(JsonOptions options);
+	public abstract JsonNode toJson(SerializationOptions options);
 
 	// some utility classes for overlays
 
@@ -191,58 +187,6 @@ public abstract class JsonOverlay<V> implements IJsonOverlay<V> {
 	@Override
 	public String toString() {
 		return toJson().toString();
-	}
-
-	public enum JsonOption {
-		KEEP_EMPTY, KEEP_ONE_EMPTY, FOLLOW_REFS;
-	}
-
-	public static class JsonOptions {
-		private final Set<JsonOption> options;
-
-		public JsonOptions(JsonOption... options) {
-			this.options = Sets.newHashSet(options);
-		}
-
-		public JsonOptions(Collection<JsonOption> options) {
-			this.options = Sets.newHashSet(options);
-		}
-
-		public JsonOptions plus(Collection<JsonOption> addOptions) {
-			Set<JsonOption> newOptions = Sets.newHashSet(this.options);
-			newOptions.addAll(addOptions);
-			return new JsonOptions(newOptions);
-		}
-
-		public JsonOptions plus(JsonOption... addOptions) {
-			return plus(Arrays.asList(addOptions));
-		}
-
-		public JsonOptions minus(Collection<JsonOption> removeOptions) {
-			Set<JsonOption> newOptions = Sets.newHashSet(this.options);
-			newOptions.removeAll(removeOptions);
-			return new JsonOptions(newOptions);
-		}
-
-		public JsonOptions minus(JsonOption... removeOptions) {
-			return minus(Arrays.asList(removeOptions));
-		}
-
-		public boolean isKeepEmpty() {
-			return options.contains(JsonOption.KEEP_EMPTY);
-		}
-
-		public boolean isKeepOneEmpty() {
-			return options.contains(JsonOption.KEEP_ONE_EMPTY);
-		}
-
-		public boolean isKeepThisEmpty() {
-			return isKeepEmpty() || isKeepOneEmpty();
-		}
-
-		public boolean isFollowRefs() {
-			return options.contains(JsonOption.FOLLOW_REFS);
-		}
 	}
 
 }

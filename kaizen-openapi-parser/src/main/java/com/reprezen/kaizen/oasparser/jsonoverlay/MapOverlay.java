@@ -18,6 +18,7 @@ import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.collect.Maps;
+import com.reprezen.kaizen.oasparser.jsonoverlay.SerializationOptions.Option;
 
 public class MapOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Map<String, V>> {
 	private Map<String, IJsonOverlay<V>> overlays = Maps.newLinkedHashMap();
@@ -81,10 +82,10 @@ public class MapOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Map<St
 	}
 
 	@Override
-	public JsonNode toJson(JsonOptions options) {
+	public JsonNode toJson(SerializationOptions options) {
 		ObjectNode obj = jsonObject();
 		for (Entry<String, IJsonOverlay<V>> entry : overlays.entrySet()) {
-			obj.set(entry.getKey(), entry.getValue().toJson(options.plus(JsonOption.KEEP_ONE_EMPTY)));
+			obj.set(entry.getKey(), entry.getValue().toJson(options.plus(Option.KEEP_ONE_EMPTY)));
 		}
 		return obj.size() > 0 || options.isKeepThisEmpty() ? obj : jsonMissing();
 	}

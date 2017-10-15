@@ -28,7 +28,7 @@ public class BooleanOverlay extends ScalarOverlay<Boolean> {
 	}
 
 	@Override
-	public JsonNode toJson(JsonOptions options) {
+	public JsonNode toJson(SerializationOptions options) {
 		return value != null ? jsonBoolean(value) : jsonMissing();
 	}
 

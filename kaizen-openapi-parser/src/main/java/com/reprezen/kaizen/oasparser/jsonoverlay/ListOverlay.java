@@ -17,6 +17,7 @@ import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.google.common.collect.Lists;
+import com.reprezen.kaizen.oasparser.jsonoverlay.SerializationOptions.Option;
 
 public class ListOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Collection<V>> {
 
@@ -72,10 +73,10 @@ public class ListOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Colle
 	}
 
 	@Override
-	public JsonNode toJson(JsonOptions options) {
+	public JsonNode toJson(SerializationOptions options) {
 		ArrayNode array = jsonArray();
 		for (IJsonOverlay<V> overlay : overlays) {
-			array.add(overlay.toJson(options.plus(JsonOption.KEEP_ONE_EMPTY)));
+			array.add(overlay.toJson(options.plus(Option.KEEP_ONE_EMPTY)));
 		}
 		return array.size() > 0 || options.isKeepThisEmpty() ? array : jsonMissing();
 	}

@@ -39,7 +39,7 @@ public class PrimitiveOverlay extends ScalarOverlay<Object> {
 	}
 
 	@Override
-	public JsonNode toJson(JsonOptions options) {
+	public JsonNode toJson(SerializationOptions options) {
 		if (value == null) {
 			return jsonMissing();
 		} else if (value instanceof String) {

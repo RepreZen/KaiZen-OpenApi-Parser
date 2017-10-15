@@ -12,8 +12,6 @@ package com.reprezen.kaizen.oasparser.jsonoverlay;
 
 import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay.JsonOption;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay.JsonOptions;
 
 public interface IJsonOverlay<V> {
 
@@ -29,9 +27,9 @@ public interface IJsonOverlay<V> {
 
 	JsonNode toJson();
 	
-	JsonNode toJson(JsonOptions options);
+	JsonNode toJson(SerializationOptions options);
 	
-	JsonNode toJson(JsonOption... options);
+	JsonNode toJson(SerializationOptions.Option... options);
 
 	boolean isPresent();
 	

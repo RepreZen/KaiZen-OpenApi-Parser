@@ -28,7 +28,7 @@ public class ObjectOverlay extends ScalarOverlay<Object> {
 	}
 
 	@Override
-	public JsonNode toJson(JsonOptions options) {
+	public JsonNode toJson(SerializationOptions options) {
 		return value != null ?  mapper.convertValue(value, JsonNode.class) : jsonMissing();
 	}
 

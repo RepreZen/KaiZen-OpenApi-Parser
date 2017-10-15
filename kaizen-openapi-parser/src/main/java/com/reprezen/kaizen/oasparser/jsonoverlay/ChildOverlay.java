@@ -13,8 +13,7 @@ package com.reprezen.kaizen.oasparser.jsonoverlay;
 import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay.JsonOption;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay.JsonOptions;
+import com.reprezen.kaizen.oasparser.jsonoverlay.SerializationOptions.Option;
 
 public class ChildOverlay<V, OV extends JsonOverlay<V>> implements IJsonOverlay<V> {
 
@@ -120,17 +119,17 @@ public class ChildOverlay<V, OV extends JsonOverlay<V>> implements IJsonOverlay<
 		return parent != null ? parent.getParent() : overlay.getRoot();
 	}
 
-	private static final JsonOptions emptyOptions = new JsonOptions();
+	private static final SerializationOptions emptyOptions = new SerializationOptions();
 
 	public JsonNode toJson() {
 		return toJson(emptyOptions);
 	}
 
-	public JsonNode toJson(JsonOption... options) {
-		return toJson(new JsonOptions(options));
+	public JsonNode toJson(Option... options) {
+		return toJson(new SerializationOptions(options));
 	}
 
-	public JsonNode toJson(JsonOptions options) {
+	public JsonNode toJson(SerializationOptions options) {
 		if (isReference() && (!options.isFollowRefs() || getReference().isInvalid())) {
 			ObjectNode obj = JsonOverlay.jsonObject();
 			obj.put("$ref", reference.getRefString());

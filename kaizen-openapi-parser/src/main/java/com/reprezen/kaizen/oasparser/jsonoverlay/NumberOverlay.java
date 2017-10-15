@@ -52,7 +52,7 @@ public class NumberOverlay extends ScalarOverlay<Number> {
 	}
 
 	@Override
-	public JsonNode toJson(JsonOptions options) {
+	public JsonNode toJson(SerializationOptions options) {
 		if (value == null) {
 			return jsonMissing();
 		}

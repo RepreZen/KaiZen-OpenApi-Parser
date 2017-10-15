@@ -2,14 +2,12 @@
 
 # Overall Structure
 
-# The OpenApi Object Model
-
 In its most common use-case, the KaiZen OpenAPI Parser consumes an
 OpenAPI model and creates Java objects that expose and allow
 manipulation of its component parts. Those objects are constructed
 from classes and interfaces that are nearly 100% generated from a
 succinct catalog of OpenAPI objects, their properties, and their
-relationships. As a result, the object models are highly uniform.
+relationships. As a result, the object APIs are highly uniform.
 
 ## Model Values
 
@@ -379,7 +377,7 @@ including:
 * The reference string is syntactically invalid (e.g. the fragment is
   not a valid JSON Pointer, or non-fragment parts are invalid).
 
-* Canonicalizataion of a relative reference fails (e.g. `../foo.yaml`
+* Canonicalizaation of a relative reference fails (e.g. `../foo.yaml`
   cannot be canonicalized with a `http://example.com/bar.yaml` as a
   context URL).
 
@@ -425,3 +423,57 @@ A `Reference` object supports the following methods:
 * `String getErrorReason()` - returns the message contained in the
   exception.
 
+## Miscellaneous Methods
+
+## Manually Defined Methods for OpenAPI 3.0
+
+Methods for certain objects have been defined manually to supplement
+the standard behavior in some way. They are as follows:
+
+### OpenApi3 Object
+
+* `void validate()` - perform validation on entire model.
+* `boolean isValid()` - if the model has not been validated, validate
+  it. Then return `true` if there are no validation items at the
+  `ERROR` severity level.
+* `ValidationResults getValidationResults()` - validate the model if
+  it has not been validated. Then return the results of the
+  validation.
+* `Collection<ValidationResults.ValidationItem>
+  getValidationItems()` - shortcut for
+  `getValidationResults().getItems()`. 
+
+### Path Object
+
+* `Operation getGet()` - returns the `get` operation for this path.
+* `Operation getPut()` - returns the `put` operation for this path.
+* `Operation getPost()` - returns the `post` operation for this path.
+* `Operation getDelete()` - returns the `delete` operation for this path.
+* `Operation getOptions()` - returns the `options` operation for this path.
+* `Operation getHead()` - returns the `head` operation for this path.
+* `Operation getPatch()` - returns the `patch` operation for this path.
+* `Operation getTrace()` - returns the `trace` operation for this path.
+
+Each of the above also comes with corresponding non-elaborating `get`,
+and `set` methods. E.g. `getGet(boolean elaborate)` and
+`setSet(Operation get)`. In all cases, the effect is identical to
+accessing the operations via the generated methods for the
+`operations` map value, e.g. `getOperation("get")`.
+
+## Miscellaneous Methods
+
+The following methods are available in all properties values:
+
+* `IJsonOverlay<?> find(String path)` - navigate through the model
+  from this point using the given JSONPointer, and return the located
+  model object, or `null` if not found. The path is according to the
+  actual JSON structure of the model. For example,
+  `method.find("/responses/200/headers/MyHeader/schema/enum/3")` would
+  be equivalent to
+  `method.getResponse("200").getHeader("MyHeader").getSchema().getEnum(3).get()`. (See
+  [Overlay Objects] to understand the reason for the final `get()`
+  method.)
+
+
+## Overlay Objects
+blah

@@ -1,4 +1,4 @@
-epl# The KaiZen OpenAPI Parser API and Object Model
+# The KaiZen OpenAPI Parser API and Object Model
 
 In its most common use-case, the KaiZen OpenAPI Parser consumes an
 OpenAPI model and creates Java objects that expose and allow

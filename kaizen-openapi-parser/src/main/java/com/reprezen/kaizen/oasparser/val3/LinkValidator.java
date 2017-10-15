@@ -35,24 +35,27 @@ public class LinkValidator extends ObjectValidatorBase<Link> {
 	@Override
 	public void validateObject(Link link, ValidationResults results) {
 		// no validation for: description
-		// TODO: Validate operationRef value (why didn't they must make it a ref object???!)
+		// TODO: Validate operationRef value (why didn't they must make it a ref
+		// object???!)
 		Operation op = checkValidOperation(link, results);
 		if (op != null) {
 			checkParameters(link, op, results);
 		}
-		validateMap(link.getHeaders(), results, false, "headers", Regexes.NOEXT_REGEX, headerValidator);
-		validateExtensions(link.getExtensions(), results);
+		validateMap(link.getHeaders(false), results, false, "headers", Regexes.NOEXT_REGEX, headerValidator);
+		validateExtensions(link.getExtensions(false), results);
 	}
 
 	private Operation checkValidOperation(Link link, ValidationResults results) {
-		String opId = link.getOperationId();
-		String operationRef = link.getOperationRef();
+		String opId = link.getOperationId(false);
+		String operationRef = link.getOperationRef(false);
 		Operation op = null;
 		if (opId == null && operationRef == null) {
-			results.addError(m.msg("NoOpIdNoOpRefInLink|Link must contain eitehr 'operationRef' or 'operationId' properties"));
+			results.addError(
+					m.msg("NoOpIdNoOpRefInLink|Link must contain eitehr 'operationRef' or 'operationId' properties"));
 		} else if (opId != null && operationRef != null) {
-			results.addError(m.msg("OpIdAndOpRefInLink|Link may not contain both 'operationRef' and 'operationId' properties"));
-		} 
+			results.addError(
+					m.msg("OpIdAndOpRefInLink|Link may not contain both 'operationRef' and 'operationId' properties"));
+		}
 		if (opId != null) {
 			op = findOperationById(link.getModel(), opId);
 			if (op == null) {
@@ -70,7 +73,7 @@ public class LinkValidator extends ObjectValidatorBase<Link> {
 						"OpPathNotFound|Relative OperationRef in Link does not identify a GET operation in the containing model",
 						operationRef), "operationRef");
 			}
-
+			//
 		}
 		return op;
 	}
@@ -79,8 +82,8 @@ public class LinkValidator extends ObjectValidatorBase<Link> {
 		// TODO Q: parameter name is not sufficient to identify param in operation; will
 		// allow if it's unique, warn if
 		// it's not
-		Map<String, Integer> opParamCounts = getParamNameCounts(op.getParameters());
-		for (String paramName : link.getParameters().keySet()) {
+		Map<String, Integer> opParamCounts = getParamNameCounts(op.getParameters(false));
+		for (String paramName : link.getParameters(false).keySet()) {
 			int count = opParamCounts.get(paramName);
 			if (count == 0) {
 				results.addError(m.msg("BadLinkParam|Link parameter does not appear in linked operation", paramName),
@@ -95,9 +98,9 @@ public class LinkValidator extends ObjectValidatorBase<Link> {
 	}
 
 	private Operation findOperationById(OpenApi3 model, String operationId) {
-		for (Path path : model.getPaths().values()) {
-			for (Operation op : path.getOperations().values()) {
-				if (operationId.equals(op.getOperationId())) {
+		for (Path path : model.getPaths(false).values()) {
+			for (Operation op : path.getOperations(false).values()) {
+				if (operationId.equals(op.getOperationId(false))) {
 					return op;
 				}
 			}
@@ -107,7 +110,7 @@ public class LinkValidator extends ObjectValidatorBase<Link> {
 
 	private Operation findOperationByPath(OpenApi3 model, String relativePath, ValidationResults results) {
 		Path path = model.getPath(relativePath);
-		return path != null ? path.getGet() : null;
+		return path != null ? path.getGet(false) : null;
 	}
 
 	private String getRelativePath(String operationRef, ValidationResults results) {
@@ -121,7 +124,7 @@ public class LinkValidator extends ObjectValidatorBase<Link> {
 	private Map<String, Integer> getParamNameCounts(Collection<? extends Parameter> parameters) {
 		Map<String, Integer> counts = Maps.newHashMap();
 		for (Parameter parameter : parameters) {
-			String name = parameter.getName();
+			String name = parameter.getName(false);
 			if (counts.containsKey(name)) {
 				counts.put(name, 1 + counts.get(name));
 			} else {

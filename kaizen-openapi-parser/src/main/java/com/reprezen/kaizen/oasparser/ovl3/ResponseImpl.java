@@ -1,55 +1,70 @@
 package com.reprezen.kaizen.oasparser.ovl3;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.reprezen.kaizen.oasparser.jsonoverlay.AnyObjectOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlayFactory;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
+import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ValMapOverlay;
 import com.reprezen.kaizen.oasparser.model3.Header;
 import com.reprezen.kaizen.oasparser.model3.Link;
 import com.reprezen.kaizen.oasparser.model3.MediaType;
+import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.Response;
 import com.reprezen.kaizen.oasparser.ovl3.HeaderImpl;
 import com.reprezen.kaizen.oasparser.ovl3.LinkImpl;
 import com.reprezen.kaizen.oasparser.ovl3.MediaTypeImpl;
 import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
+import java.util.Collection;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public class ResponseImpl extends OpenApiObjectImpl<Response> implements Response {
+public class ResponseImpl extends OpenApiObjectImpl<OpenApi3, Response> implements Response {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public ResponseImpl(String key, JsonNode json, JsonOverlay<?> parent) {
-        super(key, json, parent);
+    public ResponseImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        super(json, parent, refReg);
+            super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public ResponseImpl(String key, JsonOverlay<?> parent) {
-        super(key, parent);
+    public ResponseImpl(Response response, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        super(response, parent, refReg);
+            super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay description = new StringOverlay("description", this);
+    private ChildOverlay<String, StringOverlay> description = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<HeaderImpl> headers = new MapOverlay<HeaderImpl>("headers", this, HeaderImpl.factory, null);
+    private ChildMapOverlay<Header, HeaderImpl> headers = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<MediaTypeImpl> contentMediaTypes = new MapOverlay<MediaTypeImpl>("content", this, MediaTypeImpl.factory, null);
+    private ChildMapOverlay<MediaType, MediaTypeImpl> contentMediaTypes = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<LinkImpl> links = new MapOverlay<LinkImpl>("links", this, LinkImpl.factory, null);
+    private ChildMapOverlay<Link, LinkImpl> links = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object, AnyObjectOverlay> extensions = new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+");
+    private ChildMapOverlay<Object, ObjectOverlay> extensions = null;
 
     // Description
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public String getDescription() {
         return description.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getDescription(boolean elaborate) {
+        return description.get(elaborate);
     }
 
     @Override
@@ -61,8 +76,14 @@ public class ResponseImpl extends OpenApiObjectImpl<Response> implements Respons
     // Header
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public Map<String, ? extends Header> getHeaders() {
+    public Map<String, Header> getHeaders() {
         return headers.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Header> getHeaders(boolean elaborate) {
+        return headers.get(elaborate);
     }
 
     @Override
@@ -79,16 +100,14 @@ public class ResponseImpl extends OpenApiObjectImpl<Response> implements Respons
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public void setHeaders(Map<String, ? extends Header> headers) {
-        @SuppressWarnings("unchecked")
-            Map<String,HeaderImpl> implHeaders = (Map<String, HeaderImpl>) headers;
-            this.headers.set(implHeaders);
+    public void setHeaders(Map<String, Header> headers) {
+        this.headers.set(headers);
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setHeader(String name, Header header) {
-        headers.set(name, (HeaderImpl) header);
+        headers.set(name, header);
     }
 
     @Override
@@ -97,11 +116,31 @@ public class ResponseImpl extends OpenApiObjectImpl<Response> implements Respons
         headers.remove(name);
     }
 
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public boolean isHeaderReference(String key) {
+        ChildOverlay<Header, HeaderImpl> child = headers.getChild(key);
+            return child != null ? child.isReference() : false;
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Reference getHeaderReference(String key) {
+        ChildOverlay<Header, HeaderImpl> child = headers.getChild(key);
+            return child != null ? child.getReference() : null;
+    }
+
     // ContentMediaType
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public Map<String, ? extends MediaType> getContentMediaTypes() {
+    public Map<String, MediaType> getContentMediaTypes() {
         return contentMediaTypes.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, MediaType> getContentMediaTypes(boolean elaborate) {
+        return contentMediaTypes.get(elaborate);
     }
 
     @Override
@@ -118,16 +157,14 @@ public class ResponseImpl extends OpenApiObjectImpl<Response> implements Respons
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public void setContentMediaTypes(Map<String, ? extends MediaType> contentMediaTypes) {
-        @SuppressWarnings("unchecked")
-            Map<String,MediaTypeImpl> implContentMediaTypes = (Map<String, MediaTypeImpl>) contentMediaTypes;
-            this.contentMediaTypes.set(implContentMediaTypes);
+    public void setContentMediaTypes(Map<String, MediaType> contentMediaTypes) {
+        this.contentMediaTypes.set(contentMediaTypes);
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setContentMediaType(String name, MediaType contentMediaType) {
-        contentMediaTypes.set(name, (MediaTypeImpl) contentMediaType);
+        contentMediaTypes.set(name, contentMediaType);
     }
 
     @Override
@@ -139,8 +176,14 @@ public class ResponseImpl extends OpenApiObjectImpl<Response> implements Respons
     // Link
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public Map<String, ? extends Link> getLinks() {
+    public Map<String, Link> getLinks() {
         return links.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Link> getLinks(boolean elaborate) {
+        return links.get(elaborate);
     }
 
     @Override
@@ -157,16 +200,14 @@ public class ResponseImpl extends OpenApiObjectImpl<Response> implements Respons
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public void setLinks(Map<String, ? extends Link> links) {
-        @SuppressWarnings("unchecked")
-            Map<String,LinkImpl> implLinks = (Map<String, LinkImpl>) links;
-            this.links.set(implLinks);
+    public void setLinks(Map<String, Link> links) {
+        this.links.set(links);
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setLink(String name, Link link) {
-        links.set(name, (LinkImpl) link);
+        links.set(name, link);
     }
 
     @Override
@@ -175,11 +216,31 @@ public class ResponseImpl extends OpenApiObjectImpl<Response> implements Respons
         links.remove(name);
     }
 
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public boolean isLinkReference(String key) {
+        ChildOverlay<Link, LinkImpl> child = links.getChild(key);
+            return child != null ? child.isReference() : false;
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Reference getLinkReference(String key) {
+        ChildOverlay<Link, LinkImpl> child = links.getChild(key);
+            return child != null ? child.getReference() : null;
+    }
+
     // Extension
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Map<String, Object> getExtensions() {
         return extensions.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Object> getExtensions(boolean elaborate) {
+        return extensions.get(elaborate);
     }
 
     @Override
@@ -212,28 +273,34 @@ public class ResponseImpl extends OpenApiObjectImpl<Response> implements Respons
         extensions.remove(name);
     }
 
-    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static JsonOverlayFactory<ResponseImpl> factory = new JsonOverlayFactory<ResponseImpl>() {
     @Override
-    public ResponseImpl create(String key, JsonNode json, JsonOverlay<?> parent) {
-        return isEmptyRecursive(parent, ResponseImpl.class) ? null : new ResponseImpl(key, json, parent);
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    protected void elaborateChildren() {
+        description = createChild("description", this, StringOverlay.factory);
+            headers = createChildMap("headers", this, HeaderImpl.factory, null);
+            refables.put("headers", headers);
+            contentMediaTypes = createChildMap("content", this, MediaTypeImpl.factory, null);
+            links = createChildMap("links", this, LinkImpl.factory, null);
+            refables.put("links", links);
+            extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }
-};
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public static OverlayFactory<Response, ResponseImpl> factory = new OverlayFactory<Response, ResponseImpl>() {
+    @Override
+    protected Class<? super ResponseImpl> getOverlayClass() {
+         return ResponseImpl.class;
+    }
 
     @Override
-    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void installPropertyAccessors(PropertyAccessors accessors) {
-        OverlayGetter getter = null;
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return description;}};
-            accessors.add("description", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return headers;}};
-            accessors.add("headers", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return contentMediaTypes;}};
-            accessors.add("content", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return links;}};
-            accessors.add("links", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return extensions;}};
-            accessors.add("", "x-.+", getter);
+    public ResponseImpl _create(Response response, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        return new ResponseImpl(response, parent, refReg);
     }
+
+    @Override
+    public ResponseImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        return new ResponseImpl(json, parent, refReg);
+    }
+};
 
 }

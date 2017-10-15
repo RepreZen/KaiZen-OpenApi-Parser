@@ -10,7 +10,7 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.jsonoverlay;
 
-public interface CollectionOverlay<OV extends JsonOverlay<?>> {
+public interface IPropertiesOverlay<VI> extends IJsonOverlay<VI> {
 
-    public CollectionStore<OV> getStore();
+	IPropertiesOverlay<?> getParentObject();
 }

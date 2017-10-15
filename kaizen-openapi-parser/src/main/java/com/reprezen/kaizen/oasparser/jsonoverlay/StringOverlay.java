@@ -11,51 +11,43 @@
 package com.reprezen.kaizen.oasparser.jsonoverlay;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.MissingNode;
 
-public class StringOverlay extends JsonOverlay<String> {
+public class StringOverlay extends ScalarOverlay<String> {
 
-	public StringOverlay(String key, JsonNode json, JsonOverlay<?> parent) {
-		super(key, json, parent);
+	private StringOverlay(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+		super(json, parent, refReg);
 	}
 
-	public StringOverlay(String key, JsonOverlay<?> parent) {
-		super(key, parent);
-	}
-
-	public StringOverlay(String key, String value, JsonOverlay<?> parent) {
-		super(key, value, parent);
+	private StringOverlay(String value, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+		super(value, parent, refReg);
 	}
 
 	@Override
-	public boolean isPresent() {
-		return super.isPresent() && getJson().isTextual();
-	}
-
-	@Override
-	public String fromJson() {
-		JsonNode json = getJson();
+	public String fromJson(JsonNode json) {
 		return json.isTextual() ? json.textValue() : null;
 	}
 
 	@Override
-	public JsonNode _createJson(boolean followRefs) {
-		return value != null ? jsonFactory.textNode(value) : MissingNode.getInstance();
+	public JsonNode toJson(SerializationOptions options) {
+		return value != null ? jsonScalar(value) : jsonMissing();
 	}
 
-	public static JsonOverlayFactory<StringOverlay> factory = new JsonOverlayFactory<StringOverlay>() {
+	public static OverlayFactory<String, StringOverlay> factory = new OverlayFactory<String, StringOverlay>() {
+
 		@Override
-		public StringOverlay create(String key, JsonNode json, JsonOverlay<?> parent) {
-			return new StringOverlay(key, json, parent);
+		protected Class<StringOverlay> getOverlayClass() {
+			return StringOverlay.class;
 		}
 
 		@Override
-		public StringOverlay create(String key, Object value, JsonOverlay<?> parent) {
-			if (value == null || value instanceof String) {
-				return new StringOverlay(key, (String) value, parent);
-			} else {
-				return super.create(key, value, parent);
-			}
+		public StringOverlay _create(String value, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+			return new StringOverlay(value, parent, refReg);
 		}
+
+		@Override
+		public StringOverlay _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+			return new StringOverlay(json, parent, refReg);
+		}
+
 	};
 }

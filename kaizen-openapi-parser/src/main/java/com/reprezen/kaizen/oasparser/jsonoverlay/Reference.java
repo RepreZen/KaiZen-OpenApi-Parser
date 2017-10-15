@@ -12,6 +12,7 @@ package com.reprezen.kaizen.oasparser.jsonoverlay;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.UUID;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.MissingNode;
@@ -19,116 +20,135 @@ import com.google.common.base.Charsets;
 
 public class Reference {
 
-    private String refString;
-    private ResolutionBase base;
-    private String fragment;
-    private Boolean isValid = null;
-    private JsonNode json = null;
-    private ResolutionException error;
-    private String key;
+	private String refString;
+	private String canonRefString;
+	private ResolutionBase base;
+	private String fragment;
+	private Boolean isValid = null;
+	private JsonNode json = null;
+	private ResolutionException error;
+	private String key;
 
-    private final ResolutionBaseRegistry resolutionBaseRegistry;
+	private final ResolutionBaseRegistry resolutionBaseRegistry;
 
-    /*package*/ Reference(String refString, ResolutionBase base) {
-        this.refString = refString;
-        resolutionBaseRegistry = base.getResolutionBaseRegistry();
-        int pos = refString.indexOf('#');
-        String relUrl = pos < 0 ? refString : refString.substring(0, pos);
-        if (relUrl.isEmpty()) {
-            this.base = base;
-        } else {
-            // note re false: if creating a ref with resolution requested, the base will be resolved as a side-effect
-            // during ref resolution, so no need to do it now.
-            this.base = resolutionBaseRegistry.of(base.comprehend(relUrl), false);
-        }
-        if (pos >= 0) {
-            this.fragment = refString.substring(pos);
-        }
-        if (fragment != null) {
-            try {
-                // certain chars *should* be URL encoded in fragments, and if they are we'll decode them before applying
-                // as a pointer. But if not, we don't complain (all our URL/URI parsing is done with fragments removed).
-                this.fragment = URLDecoder.decode(fragment, Charsets.UTF_8.name());
-            } catch (UnsupportedEncodingException e) {
-            }
-        }
-        this.key = refString;
-    }
+	/* package */ Reference(String refString, String canonicalRefString, ResolutionBase base) {
+		this.refString = refString;
+		this.canonRefString = canonicalRefString;
+		resolutionBaseRegistry = base.getResolutionBaseRegistry();
+		int pos = refString.indexOf('#');
+		String relUrl = pos < 0 ? refString : refString.substring(0, pos);
+		if (relUrl.isEmpty()) {
+			this.base = base;
+		} else {
+			// note re false: if creating a ref with resolution requested, the base will be
+			// resolved as a side-effect during ref resolution, so no need to do it now.
+			this.base = resolutionBaseRegistry.of(base.comprehend(relUrl), false);
+		}
+		if (pos >= 0) {
+			this.fragment = refString.substring(pos);
+		}
+		if (fragment != null) {
+			try {
+				// certain chars *should* be URL encoded in fragments, and if they are we'll
+				// decode them before applying
+				// as a pointer. But if not, we don't complain (all our URL/URI parsing is done
+				// with fragments removed).
+				this.fragment = URLDecoder.decode(fragment, Charsets.UTF_8.name());
+			} catch (UnsupportedEncodingException e) {
+			}
+		}
+		this.key = canonRefString;
+	}
 
-    /*package*/ Reference(String refString, ResolutionBase base, ResolutionException e) {
-        this.refString = refString;
-        resolutionBaseRegistry = base.getResolutionBaseRegistry();
-        this.fragment = null;
-        this.base = base;
-        this.isValid = false;
-        this.error = e;
-        this.key = String.format("[%s,%s]", refString, base.getUrlString());
-    }
+	/* package */ Reference(String refString, ResolutionBase base, ResolutionException e) {
+		this.refString = refString;
+		this.canonRefString = null;
+		resolutionBaseRegistry = base.getResolutionBaseRegistry();
+		this.fragment = null;
+		this.base = base;
+		this.isValid = false;
+		this.error = e;
+		this.key = UUID.randomUUID().toString();
+	}
 
-    public String getRefString() {
-        return refString;
-    }
+	public String getRefString() {
+		return refString;
+	}
 
-    public ResolutionBase getBase() {
-        return base;
-    }
+	public String getCanonicalRefString() {
+		return canonRefString;
+	}
 
-    public String getFragment() {
-        return fragment;
-    }
+	public ResolutionBase getBase() {
+		return base;
+	}
 
-    public JsonNode getJson() {
-        if (isValid()) {
-            return json;
-        } else {
-            return MissingNode.getInstance();
-        }
-    }
+	public String getFragment() {
+		return fragment;
+	}
 
-    public boolean isValid() {
-        return isValid != null && isValid;
-    }
+	public JsonNode getJson() {
+		if (isValid()) {
+			return json;
+		} else {
+			return MissingNode.getInstance();
+		}
+	}
 
-    public boolean isInvalid() {
-        return isValid != null && !isValid;
-    }
+	public boolean isValid() {
+		return isValid != null && isValid;
+	}
 
-    public boolean isResolved() {
-        return isValid != null;
-    }
+	public boolean isInvalid() {
+		return isValid != null && !isValid;
+	}
 
-    public ResolutionException getError() {
-        return error;
-    }
+	public boolean isResolved() {
+		return isValid != null;
+	}
 
-    public String getErrorReason() {
-        return error != null ? error.getLocalizedMessage() : null;
-    }
+	public ResolutionException getError() {
+		return error;
+	}
 
-    public String getKey() {
-        return key;
-    }
+	public String getErrorReason() {
+		return error != null ? error.getLocalizedMessage() : null;
+	}
 
-    public JsonNode resolve() {
-        if (!isResolved()) {
-            try {
-                JsonNode root = base.resolve();
-                if (fragment == null) {
-                    this.json = root;
-                } else {
-                    try {
-                        this.json = root.at(fragment.substring(1));
-                    } catch (IllegalArgumentException e) {
-                        throw new ResolutionException("Failed to resolve JSON pointer", e);
-                    }
-                }
-                isValid = true;
-            } catch (ResolutionException e) {
-                this.error = e;
-                this.isValid = false;
-                this.json = MissingNode.getInstance();
-            }
-        }
-        return json;
-    }
+	public String getKey() {
+		return key;
+	}
+
+	public JsonNode resolve() {
+		if (!isResolved()) {
+			try {
+				JsonNode root = base.resolve();
+				if (fragment == null) {
+					this.json = root;
+				} else {
+					try {
+						this.json = root.at(fragment.substring(1));
+						if (json.isMissingNode()) {
+							throw new ResolutionException(
+									"JSON pointer does not address a value in the containing structure");
+						}
+					} catch (IllegalArgumentException e) {
+						throw new ResolutionException("Failed to resolve JSON pointer", e);
+					}
+				}
+				isValid = true;
+			} catch (ResolutionException e) {
+				this.error = e;
+				this.isValid = false;
+				this.json = MissingNode.getInstance();
+			}
+		}
+		return json;
+	}
+
+	@Override
+	public String toString() {
+		return String.format("Reference[$ref=%s; canonical=%s; valid=%s, badReason=%s]", getRefString(),
+				getCanonicalRefString(), isValid(), getErrorReason());
+	}
 }

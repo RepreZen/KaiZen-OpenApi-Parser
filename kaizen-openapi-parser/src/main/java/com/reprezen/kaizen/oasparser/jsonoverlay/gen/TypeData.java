@@ -32,6 +32,7 @@ public class TypeData {
 	private Map<String, String> imports = Maps.newHashMap();
 	private List<String> defaultExtendInterfaces = null;
 	private Map<String, Type> typeMap = null;
+	private String modelType = null;
 
 	// Container for "decls" section that is solely used to define reusable anchors
 	@JsonProperty
@@ -47,6 +48,10 @@ public class TypeData {
 		for (Type type : types) {
 			type.init(this);
 		}
+	}
+
+	public String getModelType() {
+		return modelType;
 	}
 
 	public Collection<Type> getTypes() {
@@ -120,6 +125,11 @@ public class TypeData {
 			return name;
 		}
 
+		public String getLcName() {
+			String lcName = lcFirst(name);
+			return lcName;
+		}
+
 		public Map<String, Field> getFields() {
 			return fields;
 		}
@@ -155,12 +165,15 @@ public class TypeData {
 			case "Number":
 			case "Boolean":
 			case "Primitive":
-				return typeName + "Overlay";
 			case "Object":
-				return "AnyObjectOverlay";
+				return typeName + "Overlay";
 			default:
 				return typeName + "Impl";
 			}
+		}
+
+		String lcFirst(String s) {
+			return s.substring(0, 1).toLowerCase() + s.substring(1);
 		}
 	}
 
@@ -177,6 +190,8 @@ public class TypeData {
 		private String id;
 		private boolean boolDefault = false;
 		private String parentPath;
+		private String createTest;
+		private boolean refable = false;
 
 		private Type container;
 
@@ -247,12 +262,23 @@ public class TypeData {
 			return keyPattern;
 		}
 
+		public String getCreateTest() {
+			if (createTest != null) {
+				if (createTest.startsWith(".")) {
+					return t("json.at(${qpointer})${0}", this, createTest);
+				} else if (createTest.matches("^[a-zA-Z][a-zA-Z0-9_]*$")) {
+					return t("${0}(json.at(${qpointer}))", this, createTest);
+				}
+			}
+			return createTest;
+		}
+
 		public boolean isNoImpl() {
 			return noImpl;
 		}
 
 		public boolean isBoolean() {
-			return type.equals("Boolean");
+			return getType().equals("Boolean");
 		}
 
 		public boolean getBoolDefault() {
@@ -282,48 +308,50 @@ public class TypeData {
 			}
 		}
 
+		private String getOverlayVariant() {
+			switch (structure) {
+			case scalar:
+				return "";
+			case collection:
+				return "List";
+			case map:
+				return "Map";
+			}
+			return null;
+		}
+
 		public String getPropertyName() {
 			return structure == Structure.scalar ? getLcName() : getLcPlural();
 		}
 
 		public String getPropertyType() {
+			return t("Child${0}Overlay<${type}, ${implType}>", this, getOverlayVariant());
+		}
+
+		public String getPropertyNew() {
+			String createTest = getCreateTest();
+			createTest = createTest != null ? createTest + ", " : "";
 			switch (structure) {
 			case scalar:
-				return getImplType();
+				return t("createChild(${0}${qpath}, this, ${implType}.factory)", this, createTest);
 			case collection:
-				if (isScalarType()) {
-					return t("ValListOverlay<${type}, ${implType}>", this);
-				} else {
-					return t("ListOverlay<${implType}>", this);
-				}
+				return t("createChildList(${0}${qpath}, this, ${implType}.factory)", this, createTest);
 			case map:
-				if (isScalarType()) {
-					return t("ValMapOverlay<${type}, ${implType}>", this);
-				} else {
-					return t("MapOverlay<${implType}>", this);
-				}
+				return t("createChildMap(${0}${qpath}, this, ${implType}.factory, ${qkeyPat})", this, createTest);
 			}
 			return null;
 		}
 
-		public String getPropertyNew() {
-			switch (structure) {
-			case scalar:
-				return t(isScalarType() ? "new ${implType}(${qpath}, this)"
-						: "${implType}.factory.create(${qpath}, this)", this);
-			case collection:
-				return t(isScalarType() ? "new ValListOverlay<${type}, ${implType}>(${qpath}, this, ${implType}.factory)"
-						: "new ListOverlay<${implType}>(${qpath}, this, ${implType}.factory)", this);
-			case map:
-				return t(isScalarType()
-						? "new ValMapOverlay<${type}, ${implType}>(${qpath}, this, ${implType}.factory, ${qkeyPat})"
-						: "new MapOverlay<${implType}>(${qpath}, this, ${implType}.factory, ${qkeyPat})", this);
-			}
-			return null;
+		public String getOverlayType() {
+			return getType() + (isScalarType() ? "Overlay" : "");
 		}
 
 		public String getTypeInCollection() {
 			return isScalarType() ? type : t("? extends ${type}", this);
+		}
+		
+		public boolean isRefable() {
+			return refable;
 		}
 	}
 

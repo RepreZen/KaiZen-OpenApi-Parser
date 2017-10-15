@@ -46,22 +46,22 @@ public class OperationValidator extends ObjectValidatorBase<Operation> {
     public void validateObject(Operation operation, ValidationResults results) {
         // no validation for: tags, description, deprecated
         checkSummaryLength(operation, results);
-        validateField(operation.getExternalDocs(), results, false, "externalDocs", externalDocsValidator);
+        validateField(operation.getExternalDocs(false), results, false, "externalDocs", externalDocsValidator);
         // TODO Q: Not marked as required in spec, but spec says they all must be unique within the API. Seems like it
         // should be required.
-        validateString(operation.getOperationId(), results, false, "operationId");
-        validateList(operation.getParameters(), operation.hasParameters(), results, false, "parameters",
+        validateString(operation.getOperationId(false), results, false, "operationId");
+        validateList(operation.getParameters(false), operation.hasParameters(), results, false, "parameters",
                 parameterValidator);
-        validateField(operation.getRequestBody(), results, false, "requestBody", requestBodyValidator);
-        validateMap(operation.getResponses(), results, true, "responses", Regexes.RESPONSE_REGEX, responseValidator);
-        validateMap(operation.getCallbacks(), results, false, "callbacks", Regexes.NOEXT_REGEX, callbackValidator);
-        validateList(operation.getSecurityRequirements(), operation.hasSecurityRequirements(), results, false,
+        validateField(operation.getRequestBody(false), results, false, "requestBody", requestBodyValidator);
+        validateMap(operation.getResponses(false), results, true, "responses", Regexes.RESPONSE_REGEX, responseValidator);
+        validateMap(operation.getCallbacks(false), results, false, "callbacks", Regexes.NOEXT_REGEX, callbackValidator);
+        validateList(operation.getSecurityRequirements(false), operation.hasSecurityRequirements(), results, false,
                 "security", securityRequirementValidator);
-        validateList(operation.getServers(), operation.hasServers(), results, false, "servers", serverValidator);
+        validateList(operation.getServers(false), operation.hasServers(), results, false, "servers", serverValidator);
     }
 
     private void checkSummaryLength(Operation operation, ValidationResults results) {
-        String summary = operation.getSummary();
+        String summary = operation.getSummary(false);
         if (summary != null && summary.length() > 120) {
             results.addWarning(m.msg("LongSummary|Sumamry exceeds recommended limit of 120 chars"), "summary");
         }

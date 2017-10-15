@@ -11,22 +11,21 @@
 package com.reprezen.kaizen.oasparser.val;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 
-public class MapValidator<T extends JsonOverlay<?>> extends OverlayValidator<MapOverlay<T>> {
+public class MapValidator<T extends MapOverlay<T, ?>> extends OverlayValidator<MapOverlay<T, ?>> {
 
-    private Validator<T> elementValidator;
+	private Validator<T> elementValidator;
 
-    public MapValidator(Validator<T> elementValidator) {
-        this.elementValidator = elementValidator;
-    }
+	public MapValidator(Validator<T> elementValidator) {
+		this.elementValidator = elementValidator;
+	}
 
-    @Override
-    public void validate(MapOverlay<T> overlay, ValidationResults results) {
-        super.validate(overlay, results, ObjectNode.class);
-        for (T value : overlay.getStore().getOverlays()) {
-            elementValidator.validate(value, results, value.getKey());
-        }
-    }
+	@Override
+	public void validate(MapOverlay<T, ?> overlay, ValidationResults results) {
+		super.validate(overlay, results, ObjectNode.class);
+		for (T value : overlay.get().values()) {
+			elementValidator.validate(value, results, value.getPathInParent());
+		}
+	}
 }

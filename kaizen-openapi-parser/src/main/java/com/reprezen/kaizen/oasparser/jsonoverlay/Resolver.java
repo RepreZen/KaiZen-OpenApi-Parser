@@ -30,108 +30,109 @@ import com.google.common.collect.Sets;
 
 public class Resolver {
 
-    private Set<ResolutionBase> resolvedBases = Sets.newHashSet();
-    private final ReferenceRegistry referenceRegistry;
-    private final ResolutionBaseRegistry resolutionBaseRegistry;
-    
-    public Resolver(ReferenceRegistry referenceRegistry, ResolutionBaseRegistry resolutionBaseRegistry) {
-       this.referenceRegistry = referenceRegistry;
-       this.resolutionBaseRegistry = resolutionBaseRegistry;
-    }
+	private Set<ResolutionBase> resolvedBases = Sets.newHashSet();
+	private final ReferenceRegistry referenceRegistry;
+	private final ResolutionBaseRegistry resolutionBaseRegistry;
 
-    public void preresolve(String... baseUrls) {
-        for (String url : baseUrls) {
-            preresolve(resolutionBaseRegistry.of(url, true));
-        }
-    }
+	public Resolver(ReferenceRegistry referenceRegistry, ResolutionBaseRegistry resolutionBaseRegistry) {
+		this.referenceRegistry = referenceRegistry;
+		this.resolutionBaseRegistry = resolutionBaseRegistry;
+	}
 
-    public void preresolve(URL... baseUrls) {
-        for (URL url : baseUrls) {
-            preresolve(resolutionBaseRegistry.of(url, true));
-        }
-    }
+	public void preresolve(String... baseUrls) {
+		for (String url : baseUrls) {
+			preresolve(resolutionBaseRegistry.of(url, true));
+		}
+	}
 
-    public void preresolve(ResolutionBase base) {
-        Queue<ResolutionBase> toResolve = Queues.newArrayDeque();
-        toResolve.add(base);
-        while (!toResolve.isEmpty()) {
-            toResolve.addAll(preresolveBase(toResolve.remove()));
-        }
-    }
+	public void preresolve(URL... baseUrls) {
+		for (URL url : baseUrls) {
+			preresolve(resolutionBaseRegistry.of(url, true));
+		}
+	}
 
-    private Collection<ResolutionBase> preresolveBase(ResolutionBase base) {
-        List<ResolutionBase> discoveredBases = Lists.newArrayList();
-        if (!resolvedBases.contains(base)) {
-            resolvedBases.add(base);
-            if (base.isValid()) {
-                for (JsonNode refNode : findReferenceNodes(base.getJson())) {
-                    JsonNode refString = refNode.get("$ref");
-                    String key = referenceRegistry.register(refString, base, true);
-                    ((ObjectNode) refNode).put("key", key);
-                    Reference ref = referenceRegistry.get(key);
-                    if (ref.isValid() && !resolvedBases.contains(ref.getBase())) {
-                        discoveredBases.add(ref.getBase());
-                    }
-                }
-            }
-        }
-        return discoveredBases;
-    }
+	public void preresolve(ResolutionBase base) {
+		Queue<ResolutionBase> toResolve = Queues.newArrayDeque();
+		toResolve.add(base);
+		while (!toResolve.isEmpty()) {
+			toResolve.addAll(preresolveBase(toResolve.remove()));
+		}
+	}
 
-    private final Predicate<JsonNode> refNodeFilter = new Predicate<JsonNode>() {
-        @Override
-        public boolean apply(JsonNode node) {
-            // accepting nodes with non-text $ref properties will mean we'll get Reference objects marked as invalid, as
-            // desired
-            return node.isObject() && node.has("$ref");
-        }
-    };
+	private Collection<ResolutionBase> preresolveBase(ResolutionBase base) {
+		List<ResolutionBase> discoveredBases = Lists.newArrayList();
+		if (!resolvedBases.contains(base)) {
+			resolvedBases.add(base);
+			if (base.isValid()) {
+				for (JsonNode refNode : findReferenceNodes(base.getJson())) {
+					JsonNode refString = refNode.get("$ref");
+					String key = referenceRegistry.registerRef(refString, base, true);
+					((ObjectNode) refNode).put("key", key);
+					Reference ref = referenceRegistry.getRef(key);
+					if (ref.isValid() && !resolvedBases.contains(ref.getBase())) {
+						discoveredBases.add(ref.getBase());
+					}
+				}
+			}
+		}
+		return discoveredBases;
+	}
 
-    private Iterable<JsonNode> findReferenceNodes(JsonNode tree) {
-        return Iterables.filter(treeWalk(tree), refNodeFilter);
-    }
+	private final Predicate<JsonNode> refNodeFilter = new Predicate<JsonNode>() {
+		@Override
+		public boolean apply(JsonNode node) {
+			// accepting nodes with non-text $ref properties will mean we'll get Reference
+			// objects marked as invalid, as
+			// desired
+			return node.isObject() && node.has("$ref");
+		}
+	};
 
-    private Iterable<JsonNode> treeWalk(JsonNode tree) {
-        final ArrayDeque<JsonNode> toVisit = Queues.newArrayDeque();
-        toVisit.add(tree);
-        return new Iterable<JsonNode>() {
-            @Override
-            public Iterator<JsonNode> iterator() {
-                return new Iterator<JsonNode>() {
-                    @Override
-                    public boolean hasNext() {
-                        return !toVisit.isEmpty();
-                    }
+	private Iterable<JsonNode> findReferenceNodes(JsonNode tree) {
+		return Iterables.filter(treeWalk(tree), refNodeFilter);
+	}
 
-                    @Override
-                    public JsonNode next() {
-                        if (hasNext()) {
-                            JsonNode next = toVisit.remove();
-                            queueChildren(next);
-                            return next;
-                        } else {
-                            throw new NoSuchElementException();
-                        }
-                    }
+	private Iterable<JsonNode> treeWalk(JsonNode tree) {
+		final ArrayDeque<JsonNode> toVisit = Queues.newArrayDeque();
+		toVisit.add(tree);
+		return new Iterable<JsonNode>() {
+			@Override
+			public Iterator<JsonNode> iterator() {
+				return new Iterator<JsonNode>() {
+					@Override
+					public boolean hasNext() {
+						return !toVisit.isEmpty();
+					}
 
-                    @Override
-                    public void remove() {
-                        throw new UnsupportedOperationException();
-                    }
+					@Override
+					public JsonNode next() {
+						if (hasNext()) {
+							JsonNode next = toVisit.remove();
+							queueChildren(next);
+							return next;
+						} else {
+							throw new NoSuchElementException();
+						}
+					}
 
-                    private void queueChildren(JsonNode node) {
-                        if (node.isArray()) {
-                            for (Iterator<JsonNode> iter = node.elements(); iter.hasNext();) {
-                                toVisit.addFirst(iter.next());
-                            }
-                        } else if (node.isObject()) {
-                            for (Iterator<Entry<String, JsonNode>> iter = node.fields(); iter.hasNext();) {
-                                toVisit.addFirst(iter.next().getValue());
-                            }
-                        }
-                    }
-                };
-            }
-        };
-    }
+					@Override
+					public void remove() {
+						throw new UnsupportedOperationException();
+					}
+
+					private void queueChildren(JsonNode node) {
+						if (node.isArray()) {
+							for (Iterator<JsonNode> iter = node.elements(); iter.hasNext();) {
+								toVisit.addFirst(iter.next());
+							}
+						} else if (node.isObject()) {
+							for (Iterator<Entry<String, JsonNode>> iter = node.fields(); iter.hasNext();) {
+								toVisit.addFirst(iter.next().getValue());
+							}
+						}
+					}
+				};
+			}
+		};
+	}
 }

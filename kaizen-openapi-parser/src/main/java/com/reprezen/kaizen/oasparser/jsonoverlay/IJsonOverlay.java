@@ -17,29 +17,27 @@ public interface IJsonOverlay<V> {
 
 	V get();
 	
+	V get(boolean elaborate);
+
 	void set(V value);
 
 	IJsonOverlay<?> find(JsonPointer path);
 
 	IJsonOverlay<?> find(String path);
-	
+
 	JsonNode toJson();
 	
-	JsonNode toJson(boolean followRefs);
+	JsonNode toJson(SerializationOptions options);
 	
-	JsonNode createJson();
+	JsonNode toJson(SerializationOptions.Option... options);
 
-	JsonNode createJson(boolean followRefs);
+	boolean isPresent();
 	
-	boolean isReference();
-	
-	Reference getReference();
+	boolean isElaborated();
 	
 	IJsonOverlay<?> getParent();
 	
+	String getPathInParent();
+	
 	IJsonOverlay<?> getRoot();
-	
-	String getKey();
-	
-	boolean isPresent();
 }

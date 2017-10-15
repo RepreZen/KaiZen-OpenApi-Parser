@@ -3,20 +3,24 @@ package com.reprezen.kaizen.oasparser.ovl3;
 import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.base.Optional;
-import com.reprezen.kaizen.oasparser.jsonoverlay.AnyObjectOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.BooleanOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.IJsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.IntegerOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlayFactory;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.NumberOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
+import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ValListOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ValMapOverlay;
 import com.reprezen.kaizen.oasparser.model3.Example;
 import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
+import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.Schema;
 import com.reprezen.kaizen.oasparser.model3.Xml;
 import com.reprezen.kaizen.oasparser.ovl3.ExampleImpl;
@@ -28,7 +32,7 @@ import java.util.Collection;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
+public class SchemaImpl extends OpenApiObjectImpl<OpenApi3, Schema> implements Schema {
 
     @Override
     public IJsonOverlay<?> find(JsonPointer path) {
@@ -40,134 +44,142 @@ public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public SchemaImpl(String key, JsonNode json, JsonOverlay<?> parent) {
-        super(key, json, parent);
+    public SchemaImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        super(json, parent, refReg);
+            super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public SchemaImpl(String key, JsonOverlay<?> parent) {
-        super(key, parent);
+    public SchemaImpl(Schema schema, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        super(schema, parent, refReg);
+            super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay title = new StringOverlay("title", this);
+    private ChildOverlay<String, StringOverlay> title = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private NumberOverlay multipleOf = new NumberOverlay("multipleOf", this);
+    private ChildOverlay<Number, NumberOverlay> multipleOf = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private NumberOverlay maximum = new NumberOverlay("maximum", this);
+    private ChildOverlay<Number, NumberOverlay> maximum = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private BooleanOverlay exclusiveMaximum = new BooleanOverlay("exclusiveMaximum", this);
+    private ChildOverlay<Boolean, BooleanOverlay> exclusiveMaximum = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private NumberOverlay minimum = new NumberOverlay("minimum", this);
+    private ChildOverlay<Number, NumberOverlay> minimum = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private BooleanOverlay exclusiveMinimum = new BooleanOverlay("exclusiveMinimum", this);
+    private ChildOverlay<Boolean, BooleanOverlay> exclusiveMinimum = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private IntegerOverlay maxLength = new IntegerOverlay("maxLength", this);
+    private ChildOverlay<Integer, IntegerOverlay> maxLength = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private IntegerOverlay minLength = new IntegerOverlay("minLength", this);
+    private ChildOverlay<Integer, IntegerOverlay> minLength = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay pattern = new StringOverlay("pattern", this);
+    private ChildOverlay<String, StringOverlay> pattern = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private IntegerOverlay maxItems = new IntegerOverlay("maxItems", this);
+    private ChildOverlay<Integer, IntegerOverlay> maxItems = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private IntegerOverlay minItems = new IntegerOverlay("minItems", this);
+    private ChildOverlay<Integer, IntegerOverlay> minItems = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private BooleanOverlay uniqueItems = new BooleanOverlay("uniqueItems", this);
+    private ChildOverlay<Boolean, BooleanOverlay> uniqueItems = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private IntegerOverlay maxProperties = new IntegerOverlay("maxProperties", this);
+    private ChildOverlay<Integer, IntegerOverlay> maxProperties = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private IntegerOverlay minProperties = new IntegerOverlay("minProperties", this);
+    private ChildOverlay<Integer, IntegerOverlay> minProperties = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ValListOverlay<String, StringOverlay> requiredFields = new ValListOverlay<String, StringOverlay>("required", this, StringOverlay.factory);
+    private ChildListOverlay<String, StringOverlay> requiredFields = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ValListOverlay<Object, AnyObjectOverlay> enums = new ValListOverlay<Object, AnyObjectOverlay>("enum", this, AnyObjectOverlay.factory);
+    private ChildListOverlay<Object, ObjectOverlay> enums = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay type = new StringOverlay("type", this);
+    private ChildOverlay<String, StringOverlay> type = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ListOverlay<SchemaImpl> allOfSchemas = new ListOverlay<SchemaImpl>("allOf", this, SchemaImpl.factory);
+    private ChildListOverlay<Schema, SchemaImpl> allOfSchemas = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ListOverlay<SchemaImpl> oneOfSchemas = new ListOverlay<SchemaImpl>("oneOf", this, SchemaImpl.factory);
+    private ChildListOverlay<Schema, SchemaImpl> oneOfSchemas = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ListOverlay<SchemaImpl> anyOfSchemas = new ListOverlay<SchemaImpl>("anyOf", this, SchemaImpl.factory);
+    private ChildListOverlay<Schema, SchemaImpl> anyOfSchemas = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private SchemaImpl notSchema = SchemaImpl.factory.create("not", this);
+    private ChildOverlay<Schema, SchemaImpl> notSchema = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private SchemaImpl itemsSchema = SchemaImpl.factory.create("items", this);
+    private ChildOverlay<Schema, SchemaImpl> itemsSchema = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<SchemaImpl> properties = new MapOverlay<SchemaImpl>("properties", this, SchemaImpl.factory, null);
+    private ChildMapOverlay<Schema, SchemaImpl> properties = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private SchemaImpl additionalPropertiesSchema = SchemaImpl.factory.create("additionalProperties", this);
+    private ChildOverlay<Schema, SchemaImpl> additionalPropertiesSchema = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private BooleanOverlay additionalProperties = new BooleanOverlay("additionalProperties", this);
+    private ChildOverlay<Boolean, BooleanOverlay> additionalProperties = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay description = new StringOverlay("description", this);
+    private ChildOverlay<String, StringOverlay> description = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay format = new StringOverlay("format", this);
+    private ChildOverlay<String, StringOverlay> format = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private AnyObjectOverlay defaultValue = new AnyObjectOverlay("default", this);
+    private ChildOverlay<Object, ObjectOverlay> defaultValue = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private BooleanOverlay nullable = new BooleanOverlay("nullable", this);
+    private ChildOverlay<Boolean, BooleanOverlay> nullable = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay discriminator = new StringOverlay("discriminator", this);
+    private ChildOverlay<String, StringOverlay> discriminator = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private BooleanOverlay readOnly = new BooleanOverlay("readOnly", this);
+    private ChildOverlay<Boolean, BooleanOverlay> readOnly = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private BooleanOverlay writeOnly = new BooleanOverlay("writeOnly", this);
+    private ChildOverlay<Boolean, BooleanOverlay> writeOnly = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private XmlImpl xml = XmlImpl.factory.create("xml", this);
+    private ChildOverlay<Xml, XmlImpl> xml = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ExternalDocsImpl externalDocs = ExternalDocsImpl.factory.create("externalDocs", this);
+    private ChildOverlay<ExternalDocs, ExternalDocsImpl> externalDocs = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<ExampleImpl> examples = new MapOverlay<ExampleImpl>("examples", this, ExampleImpl.factory, "[a-zA-Z0-9\\._-]+");
+    private ChildMapOverlay<Example, ExampleImpl> examples = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private AnyObjectOverlay example = new AnyObjectOverlay("example", this);
+    private ChildOverlay<Object, ObjectOverlay> example = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private BooleanOverlay deprecated = new BooleanOverlay("deprecated", this);
+    private ChildOverlay<Boolean, BooleanOverlay> deprecated = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object, AnyObjectOverlay> extensions = new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+");
+    private ChildMapOverlay<Object, ObjectOverlay> extensions = null;
 
     // Title
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public String getTitle() {
         return title.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getTitle(boolean elaborate) {
+        return title.get(elaborate);
     }
 
     @Override
@@ -185,6 +197,12 @@ public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Number getMultipleOf(boolean elaborate) {
+        return multipleOf.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setMultipleOf(Number multipleOf) {
         this.multipleOf.set(multipleOf);
     }
@@ -198,6 +216,12 @@ public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Number getMaximum(boolean elaborate) {
+        return maximum.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setMaximum(Number maximum) {
         this.maximum.set(maximum);
     }
@@ -207,6 +231,12 @@ public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Boolean getExclusiveMaximum() {
         return exclusiveMaximum.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Boolean getExclusiveMaximum(boolean elaborate) {
+        return exclusiveMaximum.get(elaborate);
     }
 
     @Override
@@ -230,6 +260,12 @@ public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Number getMinimum(boolean elaborate) {
+        return minimum.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setMinimum(Number minimum) {
         this.minimum.set(minimum);
     }
@@ -239,6 +275,12 @@ public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Boolean getExclusiveMinimum() {
         return exclusiveMinimum.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Boolean getExclusiveMinimum(boolean elaborate) {
+        return exclusiveMinimum.get(elaborate);
     }
 
     @Override
@@ -262,6 +304,12 @@ public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Integer getMaxLength(boolean elaborate) {
+        return maxLength.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setMaxLength(Integer maxLength) {
         this.maxLength.set(maxLength);
     }
@@ -271,6 +319,12 @@ public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Integer getMinLength() {
         return minLength.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Integer getMinLength(boolean elaborate) {
+        return minLength.get(elaborate);
     }
 
     @Override
@@ -288,6 +342,12 @@ public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getPattern(boolean elaborate) {
+        return pattern.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setPattern(String pattern) {
         this.pattern.set(pattern);
     }
@@ -297,6 +357,12 @@ public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Integer getMaxItems() {
         return maxItems.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Integer getMaxItems(boolean elaborate) {
+        return maxItems.get(elaborate);
     }
 
     @Override
@@ -314,6 +380,12 @@ public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Integer getMinItems(boolean elaborate) {
+        return minItems.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setMinItems(Integer minItems) {
         this.minItems.set(minItems);
     }
@@ -323,6 +395,12 @@ public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Boolean getUniqueItems() {
         return uniqueItems.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Boolean getUniqueItems(boolean elaborate) {
+        return uniqueItems.get(elaborate);
     }
 
     @Override
@@ -346,6 +424,12 @@ public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Integer getMaxProperties(boolean elaborate) {
+        return maxProperties.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setMaxProperties(Integer maxProperties) {
         this.maxProperties.set(maxProperties);
     }
@@ -359,6 +443,12 @@ public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Integer getMinProperties(boolean elaborate) {
+        return minProperties.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setMinProperties(Integer minProperties) {
         this.minProperties.set(minProperties);
     }
@@ -368,6 +458,12 @@ public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Collection<String> getRequiredFields() {
         return requiredFields.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Collection<String> getRequiredFields(boolean elaborate) {
+        return requiredFields.get(elaborate);
     }
 
     @Override
@@ -402,6 +498,12 @@ public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public void insertRequiredField(int index, String requiredField) {
+        requiredFields.insert(index, requiredField);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void removeRequiredField(int index) {
         requiredFields.remove(index);
     }
@@ -411,6 +513,12 @@ public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Collection<Object> getEnums() {
         return enums.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Collection<Object> getEnums(boolean elaborate) {
+        return enums.get(elaborate);
     }
 
     @Override
@@ -445,6 +553,12 @@ public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public void insertEnum(int index, Object enumValue) {
+        enums.insert(index, enumValue);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void removeEnum(int index) {
         enums.remove(index);
     }
@@ -458,6 +572,12 @@ public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getType(boolean elaborate) {
+        return type.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setType(String type) {
         this.type.set(type);
     }
@@ -465,8 +585,14 @@ public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
     // AllOfSchema
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public Collection<? extends Schema> getAllOfSchemas() {
+    public Collection<Schema> getAllOfSchemas() {
         return allOfSchemas.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Collection<Schema> getAllOfSchemas(boolean elaborate) {
+        return allOfSchemas.get(elaborate);
     }
 
     @Override
@@ -483,22 +609,26 @@ public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public void setAllOfSchemas(Collection<? extends Schema> allOfSchemas) {
-        @SuppressWarnings("unchecked")
-            Collection<SchemaImpl> implAllOfSchemas = (Collection<SchemaImpl>) allOfSchemas;
-            this.allOfSchemas.set(implAllOfSchemas);
+    public void setAllOfSchemas(Collection<Schema> allOfSchemas) {
+        this.allOfSchemas.set((Collection<Schema>) allOfSchemas);
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setAllOfSchema(int index, Schema allOfSchema) {
-        allOfSchemas.set(index, (SchemaImpl) allOfSchema);
+        allOfSchemas.set(index, allOfSchema);
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void addAllOfSchema(Schema allOfSchema) {
-        allOfSchemas.add((SchemaImpl) allOfSchema);
+        allOfSchemas.add(allOfSchema);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public void insertAllOfSchema(int index, Schema allOfSchema) {
+        allOfSchemas.insert(index, allOfSchema);
     }
 
     @Override
@@ -507,11 +637,29 @@ public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
         allOfSchemas.remove(index);
     }
 
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public boolean isAllOfSchemaReference(int index) {
+        return allOfSchemas.getChild(index).isReference();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Reference getAllOfSchemaReference(int index) {
+        return allOfSchemas.getChild(index).getReference();
+    }
+
     // OneOfSchema
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public Collection<? extends Schema> getOneOfSchemas() {
+    public Collection<Schema> getOneOfSchemas() {
         return oneOfSchemas.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Collection<Schema> getOneOfSchemas(boolean elaborate) {
+        return oneOfSchemas.get(elaborate);
     }
 
     @Override
@@ -528,22 +676,26 @@ public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public void setOneOfSchemas(Collection<? extends Schema> oneOfSchemas) {
-        @SuppressWarnings("unchecked")
-            Collection<SchemaImpl> implOneOfSchemas = (Collection<SchemaImpl>) oneOfSchemas;
-            this.oneOfSchemas.set(implOneOfSchemas);
+    public void setOneOfSchemas(Collection<Schema> oneOfSchemas) {
+        this.oneOfSchemas.set((Collection<Schema>) oneOfSchemas);
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setOneOfSchema(int index, Schema oneOfSchema) {
-        oneOfSchemas.set(index, (SchemaImpl) oneOfSchema);
+        oneOfSchemas.set(index, oneOfSchema);
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void addOneOfSchema(Schema oneOfSchema) {
-        oneOfSchemas.add((SchemaImpl) oneOfSchema);
+        oneOfSchemas.add(oneOfSchema);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public void insertOneOfSchema(int index, Schema oneOfSchema) {
+        oneOfSchemas.insert(index, oneOfSchema);
     }
 
     @Override
@@ -552,11 +704,29 @@ public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
         oneOfSchemas.remove(index);
     }
 
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public boolean isOneOfSchemaReference(int index) {
+        return oneOfSchemas.getChild(index).isReference();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Reference getOneOfSchemaReference(int index) {
+        return oneOfSchemas.getChild(index).getReference();
+    }
+
     // AnyOfSchema
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public Collection<? extends Schema> getAnyOfSchemas() {
+    public Collection<Schema> getAnyOfSchemas() {
         return anyOfSchemas.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Collection<Schema> getAnyOfSchemas(boolean elaborate) {
+        return anyOfSchemas.get(elaborate);
     }
 
     @Override
@@ -573,22 +743,26 @@ public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public void setAnyOfSchemas(Collection<? extends Schema> anyOfSchemas) {
-        @SuppressWarnings("unchecked")
-            Collection<SchemaImpl> implAnyOfSchemas = (Collection<SchemaImpl>) anyOfSchemas;
-            this.anyOfSchemas.set(implAnyOfSchemas);
+    public void setAnyOfSchemas(Collection<Schema> anyOfSchemas) {
+        this.anyOfSchemas.set((Collection<Schema>) anyOfSchemas);
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setAnyOfSchema(int index, Schema anyOfSchema) {
-        anyOfSchemas.set(index, (SchemaImpl) anyOfSchema);
+        anyOfSchemas.set(index, anyOfSchema);
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void addAnyOfSchema(Schema anyOfSchema) {
-        anyOfSchemas.add((SchemaImpl) anyOfSchema);
+        anyOfSchemas.add(anyOfSchema);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public void insertAnyOfSchema(int index, Schema anyOfSchema) {
+        anyOfSchemas.insert(index, anyOfSchema);
     }
 
     @Override
@@ -597,37 +771,91 @@ public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
         anyOfSchemas.remove(index);
     }
 
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public boolean isAnyOfSchemaReference(int index) {
+        return anyOfSchemas.getChild(index).isReference();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Reference getAnyOfSchemaReference(int index) {
+        return anyOfSchemas.getChild(index).getReference();
+    }
+
     // NotSchema
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Schema getNotSchema() {
-        return notSchema;
+        return notSchema.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Schema getNotSchema(boolean elaborate) {
+        return notSchema.get(elaborate);
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setNotSchema(Schema notSchema) {
-        this.notSchema.set((SchemaImpl) notSchema);
+        this.notSchema.set(notSchema);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public boolean isNotSchemaReference() {
+        return notSchema != null ? notSchema.isReference() : false;
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Reference getNotSchemaReference() {
+        return notSchema != null ? notSchema.getReference() : null;
     }
 
     // ItemsSchema
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Schema getItemsSchema() {
-        return itemsSchema;
+        return itemsSchema.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Schema getItemsSchema(boolean elaborate) {
+        return itemsSchema.get(elaborate);
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setItemsSchema(Schema itemsSchema) {
-        this.itemsSchema.set((SchemaImpl) itemsSchema);
+        this.itemsSchema.set(itemsSchema);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public boolean isItemsSchemaReference() {
+        return itemsSchema != null ? itemsSchema.isReference() : false;
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Reference getItemsSchemaReference() {
+        return itemsSchema != null ? itemsSchema.getReference() : null;
     }
 
     // Property
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public Map<String, ? extends Schema> getProperties() {
+    public Map<String, Schema> getProperties() {
         return properties.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Schema> getProperties(boolean elaborate) {
+        return properties.get(elaborate);
     }
 
     @Override
@@ -644,16 +872,14 @@ public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public void setProperties(Map<String, ? extends Schema> properties) {
-        @SuppressWarnings("unchecked")
-            Map<String,SchemaImpl> implProperties = (Map<String, SchemaImpl>) properties;
-            this.properties.set(implProperties);
+    public void setProperties(Map<String, Schema> properties) {
+        this.properties.set(properties);
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setProperty(String name, Schema property) {
-        properties.set(name, (SchemaImpl) property);
+        properties.set(name, property);
     }
 
     @Override
@@ -662,17 +888,49 @@ public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
         properties.remove(name);
     }
 
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public boolean isPropertyReference(String key) {
+        ChildOverlay<Schema, SchemaImpl> child = properties.getChild(key);
+            return child != null ? child.isReference() : false;
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Reference getPropertyReference(String key) {
+        ChildOverlay<Schema, SchemaImpl> child = properties.getChild(key);
+            return child != null ? child.getReference() : null;
+    }
+
     // AdditionalPropertiesSchema
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Schema getAdditionalPropertiesSchema() {
-        return additionalPropertiesSchema;
+        return additionalPropertiesSchema.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Schema getAdditionalPropertiesSchema(boolean elaborate) {
+        return additionalPropertiesSchema.get(elaborate);
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setAdditionalPropertiesSchema(Schema additionalPropertiesSchema) {
-        this.additionalPropertiesSchema.set((SchemaImpl) additionalPropertiesSchema);
+        this.additionalPropertiesSchema.set(additionalPropertiesSchema);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public boolean isAdditionalPropertiesSchemaReference() {
+        return additionalPropertiesSchema != null ? additionalPropertiesSchema.isReference() : false;
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Reference getAdditionalPropertiesSchemaReference() {
+        return additionalPropertiesSchema != null ? additionalPropertiesSchema.getReference() : null;
     }
 
     // AdditionalProperties
@@ -680,6 +938,12 @@ public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Boolean getAdditionalProperties() {
         return additionalProperties.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Boolean getAdditionalProperties(boolean elaborate) {
+        return additionalProperties.get(elaborate);
     }
 
     @Override
@@ -703,6 +967,12 @@ public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getDescription(boolean elaborate) {
+        return description.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setDescription(String description) {
         this.description.set(description);
     }
@@ -712,6 +982,12 @@ public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public String getFormat() {
         return format.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getFormat(boolean elaborate) {
+        return format.get(elaborate);
     }
 
     @Override
@@ -729,6 +1005,12 @@ public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Object getDefault(boolean elaborate) {
+        return defaultValue.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setDefault(Object defaultValue) {
         this.defaultValue.set(defaultValue);
     }
@@ -738,6 +1020,12 @@ public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Boolean getNullable() {
         return nullable.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Boolean getNullable(boolean elaborate) {
+        return nullable.get(elaborate);
     }
 
     @Override
@@ -761,6 +1049,12 @@ public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getDiscriminator(boolean elaborate) {
+        return discriminator.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setDiscriminator(String discriminator) {
         this.discriminator.set(discriminator);
     }
@@ -770,6 +1064,12 @@ public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Boolean getReadOnly() {
         return readOnly.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Boolean getReadOnly(boolean elaborate) {
+        return readOnly.get(elaborate);
     }
 
     @Override
@@ -793,6 +1093,12 @@ public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Boolean getWriteOnly(boolean elaborate) {
+        return writeOnly.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean isWriteOnly() {
         return writeOnly.get() != null ? writeOnly.get() : false;
     }
@@ -807,33 +1113,51 @@ public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Xml getXml() {
-        return xml;
+        return xml.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Xml getXml(boolean elaborate) {
+        return xml.get(elaborate);
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setXml(Xml xml) {
-        this.xml.set((XmlImpl) xml);
+        this.xml.set(xml);
     }
 
     // ExternalDocs
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public ExternalDocs getExternalDocs() {
-        return externalDocs;
+        return externalDocs.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public ExternalDocs getExternalDocs(boolean elaborate) {
+        return externalDocs.get(elaborate);
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setExternalDocs(ExternalDocs externalDocs) {
-        this.externalDocs.set((ExternalDocsImpl) externalDocs);
+        this.externalDocs.set(externalDocs);
     }
 
     // Example
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public Map<String, ? extends Example> getExamples() {
+    public Map<String, Example> getExamples() {
         return examples.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Example> getExamples(boolean elaborate) {
+        return examples.get(elaborate);
     }
 
     @Override
@@ -850,16 +1174,14 @@ public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public void setExamples(Map<String, ? extends Example> examples) {
-        @SuppressWarnings("unchecked")
-            Map<String,ExampleImpl> implExamples = (Map<String, ExampleImpl>) examples;
-            this.examples.set(implExamples);
+    public void setExamples(Map<String, Example> examples) {
+        this.examples.set(examples);
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setExample(String name, Example example) {
-        examples.set(name, (ExampleImpl) example);
+        examples.set(name, example);
     }
 
     @Override
@@ -877,6 +1199,12 @@ public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Object getExample(boolean elaborate) {
+        return example.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setExample(Object example) {
         this.example.set(example);
     }
@@ -886,6 +1214,12 @@ public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Boolean getDeprecated() {
         return deprecated.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Boolean getDeprecated(boolean elaborate) {
+        return deprecated.get(elaborate);
     }
 
     @Override
@@ -905,6 +1239,12 @@ public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Map<String, Object> getExtensions() {
         return extensions.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Object> getExtensions(boolean elaborate) {
+        return extensions.get(elaborate);
     }
 
     @Override
@@ -937,94 +1277,72 @@ public class SchemaImpl extends OpenApiObjectImpl<Schema> implements Schema {
         extensions.remove(name);
     }
 
-    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static JsonOverlayFactory<SchemaImpl> factory = new JsonOverlayFactory<SchemaImpl>() {
     @Override
-    public SchemaImpl create(String key, JsonNode json, JsonOverlay<?> parent) {
-        return isEmptyRecursive(parent, SchemaImpl.class) ? null : new SchemaImpl(key, json, parent);
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    protected void elaborateChildren() {
+        title = createChild("title", this, StringOverlay.factory);
+            multipleOf = createChild("multipleOf", this, NumberOverlay.factory);
+            maximum = createChild("maximum", this, NumberOverlay.factory);
+            exclusiveMaximum = createChild("exclusiveMaximum", this, BooleanOverlay.factory);
+            minimum = createChild("minimum", this, NumberOverlay.factory);
+            exclusiveMinimum = createChild("exclusiveMinimum", this, BooleanOverlay.factory);
+            maxLength = createChild("maxLength", this, IntegerOverlay.factory);
+            minLength = createChild("minLength", this, IntegerOverlay.factory);
+            pattern = createChild("pattern", this, StringOverlay.factory);
+            maxItems = createChild("maxItems", this, IntegerOverlay.factory);
+            minItems = createChild("minItems", this, IntegerOverlay.factory);
+            uniqueItems = createChild("uniqueItems", this, BooleanOverlay.factory);
+            maxProperties = createChild("maxProperties", this, IntegerOverlay.factory);
+            minProperties = createChild("minProperties", this, IntegerOverlay.factory);
+            requiredFields = createChildList("required", this, StringOverlay.factory);
+            enums = createChildList("enum", this, ObjectOverlay.factory);
+            type = createChild("type", this, StringOverlay.factory);
+            allOfSchemas = createChildList("allOf", this, SchemaImpl.factory);
+            refables.put("allOf", allOfSchemas);
+            oneOfSchemas = createChildList("oneOf", this, SchemaImpl.factory);
+            refables.put("oneOf", oneOfSchemas);
+            anyOfSchemas = createChildList("anyOf", this, SchemaImpl.factory);
+            refables.put("anyOf", anyOfSchemas);
+            notSchema = createChild("not", this, SchemaImpl.factory);
+            refables.put("not", notSchema);
+            itemsSchema = createChild("items", this, SchemaImpl.factory);
+            refables.put("items", itemsSchema);
+            properties = createChildMap("properties", this, SchemaImpl.factory, null);
+            refables.put("properties", properties);
+            additionalPropertiesSchema = createChild(json.at("/additionalProperties").isObject(), "additionalProperties", this, SchemaImpl.factory);
+            refables.put("additionalProperties", additionalPropertiesSchema);
+            additionalProperties = createChild(json.at("/additionalProperties").isBoolean(), "additionalProperties", this, BooleanOverlay.factory);
+            description = createChild("description", this, StringOverlay.factory);
+            format = createChild("format", this, StringOverlay.factory);
+            defaultValue = createChild("default", this, ObjectOverlay.factory);
+            nullable = createChild("nullable", this, BooleanOverlay.factory);
+            discriminator = createChild("discriminator", this, StringOverlay.factory);
+            readOnly = createChild("readOnly", this, BooleanOverlay.factory);
+            writeOnly = createChild("writeOnly", this, BooleanOverlay.factory);
+            xml = createChild("xml", this, XmlImpl.factory);
+            externalDocs = createChild("externalDocs", this, ExternalDocsImpl.factory);
+            examples = createChildMap("examples", this, ExampleImpl.factory, "[a-zA-Z0-9\\._-]+");
+            example = createChild("example", this, ObjectOverlay.factory);
+            deprecated = createChild("deprecated", this, BooleanOverlay.factory);
+            extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }
-};
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public static OverlayFactory<Schema, SchemaImpl> factory = new OverlayFactory<Schema, SchemaImpl>() {
+    @Override
+    protected Class<? super SchemaImpl> getOverlayClass() {
+         return SchemaImpl.class;
+    }
 
     @Override
-    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void installPropertyAccessors(PropertyAccessors accessors) {
-        OverlayGetter getter = null;
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return title;}};
-            accessors.add("title", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return multipleOf;}};
-            accessors.add("multipleOf", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return maximum;}};
-            accessors.add("maximum", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return exclusiveMaximum;}};
-            accessors.add("exclusiveMaximum", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return minimum;}};
-            accessors.add("minimum", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return exclusiveMinimum;}};
-            accessors.add("exclusiveMinimum", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return maxLength;}};
-            accessors.add("maxLength", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return minLength;}};
-            accessors.add("minLength", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return pattern;}};
-            accessors.add("pattern", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return maxItems;}};
-            accessors.add("maxItems", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return minItems;}};
-            accessors.add("minItems", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return uniqueItems;}};
-            accessors.add("uniqueItems", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return maxProperties;}};
-            accessors.add("maxProperties", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return minProperties;}};
-            accessors.add("minProperties", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return requiredFields;}};
-            accessors.add("required", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return enums;}};
-            accessors.add("enum", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return type;}};
-            accessors.add("type", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return allOfSchemas;}};
-            accessors.add("allOf", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return oneOfSchemas;}};
-            accessors.add("oneOf", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return anyOfSchemas;}};
-            accessors.add("anyOf", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return notSchema;}};
-            accessors.add("not", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return itemsSchema;}};
-            accessors.add("items", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return properties;}};
-            accessors.add("properties", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return additionalPropertiesSchema;}};
-            accessors.add("additionalProperties", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return additionalProperties;}};
-            accessors.add("additionalProperties", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return description;}};
-            accessors.add("description", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return format;}};
-            accessors.add("format", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return defaultValue;}};
-            accessors.add("default", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return nullable;}};
-            accessors.add("nullable", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return discriminator;}};
-            accessors.add("discriminator", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return readOnly;}};
-            accessors.add("readOnly", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return writeOnly;}};
-            accessors.add("writeOnly", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return xml;}};
-            accessors.add("xml", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return externalDocs;}};
-            accessors.add("externalDocs", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return examples;}};
-            accessors.add("examples", "[a-zA-Z0-9\\._-]+", getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return example;}};
-            accessors.add("example", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return deprecated;}};
-            accessors.add("deprecated", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return extensions;}};
-            accessors.add("", "x-.+", getter);
+    public SchemaImpl _create(Schema schema, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        return new SchemaImpl(schema, parent, refReg);
     }
+
+    @Override
+    public SchemaImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        return new SchemaImpl(json, parent, refReg);
+    }
+};
 
 }

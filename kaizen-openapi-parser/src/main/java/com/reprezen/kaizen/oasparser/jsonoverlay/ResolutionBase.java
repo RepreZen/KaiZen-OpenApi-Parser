@@ -18,95 +18,96 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 public class ResolutionBase {
 
-    private String urlString;
-    private Boolean isValid = null;
-    private ResolutionException error = null;
-    private JsonNode json = null;
-    private final ResolutionBaseRegistry resolutionBaseRegistry;
-    
-    /*package*/ ResolutionBase(String urlString, ResolutionBaseRegistry resolutionBaseRegistry) {
-        this.urlString = urlString;
-        this.isValid = null;
-        this.resolutionBaseRegistry = resolutionBaseRegistry;
-    }
+	private String urlString;
+	private Boolean isValid = null;
+	private ResolutionException error = null;
+	private JsonNode json = null;
+	private final ResolutionBaseRegistry resolutionBaseRegistry;
 
-    /*package*/ ResolutionBase(String urlString, ResolutionException e, ResolutionBaseRegistry resolutionBaseRegistry) {
-        this.urlString = urlString;
-        this.isValid = false;
-        this.error = e;
-        this.resolutionBaseRegistry = resolutionBaseRegistry;
-    }
+	/* package */ ResolutionBase(String urlString, ResolutionBaseRegistry resolutionBaseRegistry) {
+		this.urlString = urlString;
+		this.isValid = null;
+		this.resolutionBaseRegistry = resolutionBaseRegistry;
+	}
 
-    /*package*/ ResolutionBase(String urlString, JsonNode json, ResolutionBaseRegistry resolutionBaseRegistry) {
-        this.urlString = urlString;
-        this.json = json;
-        this.isValid = true;
-        this.resolutionBaseRegistry = resolutionBaseRegistry;
-    }
+	/* package */ ResolutionBase(String urlString, ResolutionException e,
+			ResolutionBaseRegistry resolutionBaseRegistry) {
+		this.urlString = urlString;
+		this.isValid = false;
+		this.error = e;
+		this.resolutionBaseRegistry = resolutionBaseRegistry;
+	}
 
-    public JsonNode getJson() {
-        return json;
-    }
+	/* package */ ResolutionBase(String urlString, JsonNode json, ResolutionBaseRegistry resolutionBaseRegistry) {
+		this.urlString = urlString;
+		this.json = json;
+		this.isValid = true;
+		this.resolutionBaseRegistry = resolutionBaseRegistry;
+	}
 
-    public String getUrlString() {
-        return urlString;
-    }
+	public JsonNode getJson() {
+		return json;
+	}
 
-    public boolean isResolved() {
-        return isValid != null;
-    }
+	public String getUrlString() {
+		return urlString;
+	}
 
-    public boolean isValid() {
-        return isValid != null && isValid;
-    }
+	public boolean isResolved() {
+		return isValid != null;
+	}
 
-    public boolean isInvalid() {
-        return isValid != null && !isValid;
-    }
+	public boolean isValid() {
+		return isValid != null && isValid;
+	}
 
-    public ResolutionException getError() {
-        return error;
-    }
+	public boolean isInvalid() {
+		return isValid != null && !isValid;
+	}
 
-    public String getErrorReason() {
-        return error != null ? error.getLocalizedMessage() : null;
-    }
+	public ResolutionException getError() {
+		return error;
+	}
 
-    public JsonNode resolve() {
-        if (isValid == null) {
-            try {
-                json = resolutionBaseRegistry.getJsonLoader().load(new URL(urlString));
-                isValid = true;
-            } catch (IOException e) {
-                isValid = false;
-                error = new ResolutionException(String.format("Failed to load document from '%s'", urlString), e);
-                throw error;
-            }
-        } else if (isInvalid()) {
-            throw error;
-        }
-        return json;
-    }
+	public String getErrorReason() {
+		return error != null ? error.getLocalizedMessage() : null;
+	}
 
-    public String comprehend(String basedUrlString) {
-        String fragment = "";
-        if (basedUrlString.contains("#")) {
-            int pos = basedUrlString.indexOf('#');
-            fragment = basedUrlString.substring(pos);
-            basedUrlString = basedUrlString.substring(0, pos);
-        }
-        try {
-            URL url = new URL(new URL(urlString), basedUrlString);
-            return url.toString() + fragment;
-        } catch (MalformedURLException e) {
-            throw new ResolutionException(
-                    String.format("Failed to comprehend reference string '%s' relative to resolution base '%s'",
-                            basedUrlString + fragment, urlString),
-                    e);
-        }
-    }
-    
-    public ResolutionBaseRegistry getResolutionBaseRegistry() {
-        return resolutionBaseRegistry;
-    }
+	public JsonNode resolve() {
+		if (isValid == null) {
+			try {
+				json = resolutionBaseRegistry.getJsonLoader().load(new URL(urlString));
+				isValid = true;
+			} catch (IOException e) {
+				isValid = false;
+				error = new ResolutionException(String.format("Failed to load document from '%s'", urlString), e);
+				throw error;
+			}
+		} else if (isInvalid()) {
+			throw error;
+		}
+		return json;
+	}
+
+	public String comprehend(String basedUrlString) {
+		String fragment = "";
+		if (basedUrlString.contains("#")) {
+			int pos = basedUrlString.indexOf('#');
+			fragment = basedUrlString.substring(pos);
+			basedUrlString = basedUrlString.substring(0, pos);
+		}
+		try {
+			URL url = new URL(new URL(urlString), basedUrlString);
+			return url.toString() + fragment;
+		} catch (MalformedURLException e) {
+			throw new ResolutionException(
+					String.format("Failed to comprehend reference string '%s' relative to resolution base '%s'",
+							basedUrlString + fragment, urlString),
+					e);
+		}
+	}
+
+	public ResolutionBaseRegistry getResolutionBaseRegistry() {
+		return resolutionBaseRegistry;
+	}
 }

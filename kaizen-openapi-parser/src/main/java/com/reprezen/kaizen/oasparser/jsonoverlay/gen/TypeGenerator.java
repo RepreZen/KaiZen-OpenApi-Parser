@@ -47,21 +47,23 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.reprezen.kaizen.oasparser.OpenApi;
-import com.reprezen.kaizen.oasparser.jsonoverlay.AnyObjectOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.BooleanOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.IJsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.IntegerOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlayFactory;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.NumberOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.reprezen.kaizen.oasparser.jsonoverlay.Primitive;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PrimitiveOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ValListOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ValMapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.gen.SimpleJavaGenerator.Member;
 import com.reprezen.kaizen.oasparser.jsonoverlay.gen.TypeData.Field;
 import com.reprezen.kaizen.oasparser.jsonoverlay.gen.TypeData.Type;
@@ -177,11 +179,15 @@ public abstract class TypeGenerator {
 				Optional.class, //
 				JsonNode.class, //
 				ObjectNode.class, //
-				JsonNodeFactory.class, //				
+				JsonNodeFactory.class, //
 				JsonPointer.class, //
 				JsonOverlay.class, //
 				IJsonOverlay.class, //
-				JsonOverlayFactory.class, //
+				ChildOverlay.class, //
+				ChildMapOverlay.class, //
+				ChildListOverlay.class, //
+				OverlayFactory.class, //
+				Reference.class, //
 				ReferenceRegistry.class, //
 				Inject.class, //
 				StringOverlay.class, //
@@ -189,11 +195,9 @@ public abstract class TypeGenerator {
 				NumberOverlay.class, //
 				BooleanOverlay.class, //
 				PrimitiveOverlay.class, //
-				AnyObjectOverlay.class, //
+				ObjectOverlay.class, //
 				ListOverlay.class, //
-				ValListOverlay.class, //
 				MapOverlay.class, //
-				ValMapOverlay.class, //
 				Validator.class, //
 				ValidationResults.class, //
 				OpenApi3Validator.class, //

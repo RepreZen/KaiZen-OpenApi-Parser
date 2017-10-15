@@ -18,66 +18,80 @@ import com.google.common.collect.Maps;
 
 public class ReferenceRegistry {
 
-    private Map<String, Reference> references = Maps.newHashMap();
+	private Map<String, Reference> references = Maps.newHashMap();
+	private Map<JsonNode, JsonOverlay<?>> overlays = Maps.newIdentityHashMap();
 
-    public Collection<Reference> getAllReferences() {
-        return references.values();
-    }
+	public Collection<Reference> getAllReferences() {
+		return references.values();
+	}
 
-    public String register(JsonNode refStringNode, ResolutionBase base, boolean resolve) {
-        return get(refStringNode, base, resolve).getKey();
-    }
+	public String registerRef(JsonNode refStringNode, ResolutionBase base, boolean resolve) {
+		return getRef(refStringNode, base, resolve).getKey();
+	}
 
-    public String register(String refString, ResolutionBase base, boolean resolve) {
-        return get(refString, base, resolve).getKey();
-    }
+	public String registerRef(String refString, ResolutionBase base, boolean resolve) {
+		return getRef(refString, base, resolve).getKey();
+	}
 
-    public Reference get(String key) {
-        return references.get(key);
-    }
+	public Reference getRef(String key) {
+		return references.get(key);
+	}
 
-    public Reference get(JsonNode refNode) {
-        if (refNode.isObject() && refNode.has("$ref") && refNode.has("key")) {
-            return get(refNode.get("key").textValue());
-        } else {
-            return null;
-        }
-    }
+	public Reference getRef(JsonNode refNode) {
+		if (refNode.isObject() && refNode.has("$ref") && refNode.has("key")) {
+			return getRef(refNode.get("key").textValue());
+		} else {
+			return null;
+		}
+	}
 
-    public Reference get(JsonNode refStringNode, ResolutionBase base, boolean resolve) {
-        if (refStringNode.isTextual()) {
-            return get(refStringNode.textValue(), base, resolve);
-        } else {
-            String badRefString = refStringNode.toString();
-            Reference ref = new Reference(badRefString, base,
-                    new ResolutionException("Non-text $ref property value in JSON reference node"));
-            String key = ref.getKey();
-            if (!references.containsKey(key)) {
-                references.put(key, ref);
-            }
-            return references.get(key);
-        }
-    }
+	public Reference getRef(JsonNode refStringNode, ResolutionBase base, boolean resolve) {
+		if (refStringNode.isTextual()) {
+			return getRef(refStringNode.textValue(), base, resolve);
+		} else {
+			String badRefString = refStringNode.toString();
+			Reference ref = new Reference(badRefString, base,
+					new ResolutionException("Non-text $ref property value in JSON reference node"));
+			String key = ref.getKey();
+			if (!references.containsKey(key)) {
+				references.put(key, ref);
+			}
+			return references.get(key);
+		}
+	}
 
-    public Reference get(String refString, ResolutionBase base, boolean resolve) {
-        try {
-            if (base.isInvalid()) {
-                throw new ResolutionException("Invalid base for reference resolution", base.getError());
-            }
-            String comprehendedRef = base.comprehend(refString);
-            if (!references.containsKey(comprehendedRef)) {
-                references.put(comprehendedRef, new Reference(comprehendedRef, base));
-            }
-            Reference ref = references.get(comprehendedRef);
-            if (resolve) {
-                ref.resolve();
-            }
-            return ref;
-        } catch (ResolutionException e) {
-            Reference ref = new Reference(refString, base, e);
-            references.put(refString, ref);
-            return ref;
-        }
-    }
+	public Reference getRef(String refString, ResolutionBase base, boolean resolve) {
+		try {
+			if (base.isInvalid()) {
+				throw new ResolutionException("Invalid base for reference resolution", base.getError());
+			}
+			String comprehendedRef = base.comprehend(refString);
+			if (!references.containsKey(comprehendedRef)) {
+				references.put(comprehendedRef, new Reference(refString, comprehendedRef, base));
+			}
+			Reference ref = references.get(comprehendedRef);
+			if (resolve) {
+				ref.resolve();
+			}
+			return ref;
+		} catch (ResolutionException e) {
+			Reference ref = new Reference(refString, base, e);
+			references.put(refString, ref);
+			return ref;
+		}
+	}
 
+	public JsonOverlay<?> getOverlay(JsonNode node) {
+		return overlays.get(node);
+	}
+
+	public boolean hasOverlay(JsonNode node) {
+		return !node.isMissingNode() && overlays.containsKey(node);
+	}
+
+	public void setOverlay(JsonNode node, JsonOverlay<?> overlay) {
+		if (!node.isMissingNode()) {
+			overlays.put(node, overlay);
+		}
+	}
 }

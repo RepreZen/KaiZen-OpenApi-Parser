@@ -1,51 +1,65 @@
 package com.reprezen.kaizen.oasparser.ovl3;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.reprezen.kaizen.oasparser.jsonoverlay.AnyObjectOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlayFactory;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ValMapOverlay;
+import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.Server;
 import com.reprezen.kaizen.oasparser.model3.ServerVariable;
 import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
 import com.reprezen.kaizen.oasparser.ovl3.ServerVariableImpl;
+import java.util.Collection;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public class ServerImpl extends OpenApiObjectImpl<Server> implements Server {
+public class ServerImpl extends OpenApiObjectImpl<OpenApi3, Server> implements Server {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public ServerImpl(String key, JsonNode json, JsonOverlay<?> parent) {
-        super(key, json, parent);
+    public ServerImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        super(json, parent, refReg);
+            super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public ServerImpl(String key, JsonOverlay<?> parent) {
-        super(key, parent);
+    public ServerImpl(Server server, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        super(server, parent, refReg);
+            super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay url = new StringOverlay("url", this);
+    private ChildOverlay<String, StringOverlay> url = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay description = new StringOverlay("description", this);
+    private ChildOverlay<String, StringOverlay> description = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<ServerVariableImpl> serverVariables = new MapOverlay<ServerVariableImpl>("variables", this, ServerVariableImpl.factory, "(?!x-)[a-zA-Z0-9\\._-]+");
+    private ChildMapOverlay<ServerVariable, ServerVariableImpl> serverVariables = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object, AnyObjectOverlay> variablesExtensions = new ValMapOverlay<Object, AnyObjectOverlay>("variables", this, AnyObjectOverlay.factory, "x-.+");
+    private ChildMapOverlay<Object, ObjectOverlay> variablesExtensions = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object, AnyObjectOverlay> extensions = new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+");
+    private ChildMapOverlay<Object, ObjectOverlay> extensions = null;
 
     // Url
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public String getUrl() {
         return url.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getUrl(boolean elaborate) {
+        return url.get(elaborate);
     }
 
     @Override
@@ -63,6 +77,12 @@ public class ServerImpl extends OpenApiObjectImpl<Server> implements Server {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getDescription(boolean elaborate) {
+        return description.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setDescription(String description) {
         this.description.set(description);
     }
@@ -70,8 +90,14 @@ public class ServerImpl extends OpenApiObjectImpl<Server> implements Server {
     // ServerVariable
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public Map<String, ? extends ServerVariable> getServerVariables() {
+    public Map<String, ServerVariable> getServerVariables() {
         return serverVariables.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, ServerVariable> getServerVariables(boolean elaborate) {
+        return serverVariables.get(elaborate);
     }
 
     @Override
@@ -88,16 +114,14 @@ public class ServerImpl extends OpenApiObjectImpl<Server> implements Server {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public void setServerVariables(Map<String, ? extends ServerVariable> serverVariables) {
-        @SuppressWarnings("unchecked")
-            Map<String,ServerVariableImpl> implServerVariables = (Map<String, ServerVariableImpl>) serverVariables;
-            this.serverVariables.set(implServerVariables);
+    public void setServerVariables(Map<String, ServerVariable> serverVariables) {
+        this.serverVariables.set(serverVariables);
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setServerVariable(String name, ServerVariable serverVariable) {
-        serverVariables.set(name, (ServerVariableImpl) serverVariable);
+        serverVariables.set(name, serverVariable);
     }
 
     @Override
@@ -111,6 +135,12 @@ public class ServerImpl extends OpenApiObjectImpl<Server> implements Server {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Map<String, Object> getVariablesExtensions() {
         return variablesExtensions.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Object> getVariablesExtensions(boolean elaborate) {
+        return variablesExtensions.get(elaborate);
     }
 
     @Override
@@ -152,6 +182,12 @@ public class ServerImpl extends OpenApiObjectImpl<Server> implements Server {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Object> getExtensions(boolean elaborate) {
+        return extensions.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean hasExtension(String name) {
         return extensions.containsKey(name);
     }
@@ -180,28 +216,32 @@ public class ServerImpl extends OpenApiObjectImpl<Server> implements Server {
         extensions.remove(name);
     }
 
-    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static JsonOverlayFactory<ServerImpl> factory = new JsonOverlayFactory<ServerImpl>() {
     @Override
-    public ServerImpl create(String key, JsonNode json, JsonOverlay<?> parent) {
-        return isEmptyRecursive(parent, ServerImpl.class) ? null : new ServerImpl(key, json, parent);
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    protected void elaborateChildren() {
+        url = createChild("url", this, StringOverlay.factory);
+            description = createChild("description", this, StringOverlay.factory);
+            serverVariables = createChildMap("variables", this, ServerVariableImpl.factory, "(?!x-)[a-zA-Z0-9\\._-]+");
+            variablesExtensions = createChildMap("variables", this, ObjectOverlay.factory, "x-.+");
+            extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }
-};
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public static OverlayFactory<Server, ServerImpl> factory = new OverlayFactory<Server, ServerImpl>() {
+    @Override
+    protected Class<? super ServerImpl> getOverlayClass() {
+         return ServerImpl.class;
+    }
 
     @Override
-    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void installPropertyAccessors(PropertyAccessors accessors) {
-        OverlayGetter getter = null;
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return url;}};
-            accessors.add("url", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return description;}};
-            accessors.add("description", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return serverVariables;}};
-            accessors.add("variables", "(?!x-)[a-zA-Z0-9\\._-]+", getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return variablesExtensions;}};
-            accessors.add("variables", "x-.+", getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return extensions;}};
-            accessors.add("", "x-.+", getter);
+    public ServerImpl _create(Server server, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        return new ServerImpl(server, parent, refReg);
     }
+
+    @Override
+    public ServerImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        return new ServerImpl(json, parent, refReg);
+    }
+};
 
 }

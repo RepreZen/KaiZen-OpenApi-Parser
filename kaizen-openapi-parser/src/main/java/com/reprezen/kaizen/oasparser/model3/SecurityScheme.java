@@ -5,11 +5,14 @@ import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public interface SecurityScheme extends OpenApiObject<SecurityScheme> {
+public interface SecurityScheme extends OpenApiObject<OpenApi3, SecurityScheme> {
 
     // Type
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     String getType();
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    String getType(boolean elaborate);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setType(String type);
@@ -19,11 +22,17 @@ public interface SecurityScheme extends OpenApiObject<SecurityScheme> {
     String getDescription();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    String getDescription(boolean elaborate);
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setDescription(String description);
 
     // Name
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     String getName();
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    String getName(boolean elaborate);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setName(String name);
@@ -33,11 +42,17 @@ public interface SecurityScheme extends OpenApiObject<SecurityScheme> {
     String getIn();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    String getIn(boolean elaborate);
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setIn(String in);
 
     // Scheme
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     String getScheme();
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    String getScheme(boolean elaborate);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setScheme(String scheme);
@@ -47,11 +62,17 @@ public interface SecurityScheme extends OpenApiObject<SecurityScheme> {
     String getBearerFormat();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    String getBearerFormat(boolean elaborate);
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setBearerFormat(String bearerFormat);
 
     // ImplicitOAuthFlow
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     OAuthFlow getImplicitOAuthFlow();
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    OAuthFlow getImplicitOAuthFlow(boolean elaborate);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setImplicitOAuthFlow(OAuthFlow implicitOAuthFlow);
@@ -61,11 +82,17 @@ public interface SecurityScheme extends OpenApiObject<SecurityScheme> {
     OAuthFlow getPasswordOAuthFlow();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    OAuthFlow getPasswordOAuthFlow(boolean elaborate);
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setPasswordOAuthFlow(OAuthFlow passwordOAuthFlow);
 
     // ClientCredentialsOAuthFlow
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     OAuthFlow getClientCredentialsOAuthFlow();
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    OAuthFlow getClientCredentialsOAuthFlow(boolean elaborate);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setClientCredentialsOAuthFlow(OAuthFlow clientCredentialsOAuthFlow);
@@ -75,11 +102,17 @@ public interface SecurityScheme extends OpenApiObject<SecurityScheme> {
     OAuthFlow getAuthorizationCodeOAuthFlow();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    OAuthFlow getAuthorizationCodeOAuthFlow(boolean elaborate);
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setAuthorizationCodeOAuthFlow(OAuthFlow authorizationCodeOAuthFlow);
 
     // OAuthFlowsExtension
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     Map<String, Object> getOAuthFlowsExtensions();
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    Map<String, Object> getOAuthFlowsExtensions(boolean elaborate);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasOAuthFlowsExtension(String name);
@@ -101,11 +134,17 @@ public interface SecurityScheme extends OpenApiObject<SecurityScheme> {
     String getOpenIdConnectUrl();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    String getOpenIdConnectUrl(boolean elaborate);
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setOpenIdConnectUrl(String openIdConnectUrl);
 
     // Extension
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     Map<String, Object> getExtensions();
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    Map<String, Object> getExtensions(boolean elaborate);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasExtension(String name);

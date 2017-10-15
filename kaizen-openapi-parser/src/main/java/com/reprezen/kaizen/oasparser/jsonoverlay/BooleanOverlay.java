@@ -11,52 +11,41 @@
 package com.reprezen.kaizen.oasparser.jsonoverlay;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.MissingNode;
 
-public class BooleanOverlay extends JsonOverlay<Boolean> {
+public class BooleanOverlay extends ScalarOverlay<Boolean> {
 
-    public BooleanOverlay(String key, Boolean value, JsonOverlay<?> parent) {
-        super(key, value, parent);
-    }
+	private BooleanOverlay(Boolean value, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+		super(value, parent, refReg);
+	}
 
-    public BooleanOverlay(String key, JsonNode json, JsonOverlay<?> parent) {
-        super(key, json, parent);
-    }
+	private BooleanOverlay(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+		super(json, parent, refReg);
+	}
 
-    public BooleanOverlay(String key, JsonOverlay<?> parent) {
-        super(key, parent);
-    }
+	@Override
+	public Boolean fromJson(JsonNode json) {
+		return json.isBoolean() ? json.booleanValue() : null;
+	}
 
-    @Override
-    public boolean isPresent() {
-        return super.isPresent() && getJson().isBoolean();
-    }
+	@Override
+	public JsonNode toJson(SerializationOptions options) {
+		return value != null ? jsonBoolean(value) : jsonMissing();
+	}
 
-    @Override
-    public Boolean fromJson() {
-        JsonNode json = getJson();
-        return json.isBoolean() ? json.booleanValue() : null;
-    }
+	public static OverlayFactory<Boolean, BooleanOverlay> factory = new OverlayFactory<Boolean, BooleanOverlay>() {
+		@Override
+		protected Class<BooleanOverlay> getOverlayClass() {
+			return BooleanOverlay.class;
+		}
 
-    @Override
-    public JsonNode _createJson(boolean followRefs) {
-        return value != null ? jsonFactory.booleanNode(value) : MissingNode.getInstance();
+		@Override
+		public BooleanOverlay _create(Boolean value, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+			return new BooleanOverlay(value, parent, refReg);
+		}
 
-    }
-
-    public static JsonOverlayFactory<BooleanOverlay> factory = new JsonOverlayFactory<BooleanOverlay>() {
-        @Override
-        public BooleanOverlay create(String key, JsonNode json, JsonOverlay<?> parent) {
-            return new BooleanOverlay(key, json, parent);
-        }
-
-        @Override
-        public BooleanOverlay create(String key, Object value, JsonOverlay<?> parent) {
-            if (value == null || value instanceof Boolean) {
-                return new BooleanOverlay(key, (Boolean) value, parent);
-            } else {
-                return super.create(key, value, parent);
-            }
-        }
-    };
+		@Override
+		public BooleanOverlay _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+			return new BooleanOverlay(json, parent, refReg);
+		}
+	};
 }

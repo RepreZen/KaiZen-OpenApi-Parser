@@ -1,13 +1,18 @@
 package com.reprezen.kaizen.oasparser.ovl3;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.reprezen.kaizen.oasparser.jsonoverlay.AnyObjectOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlayFactory;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
+import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ValMapOverlay;
+import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.Operation;
 import com.reprezen.kaizen.oasparser.model3.Parameter;
 import com.reprezen.kaizen.oasparser.model3.Path;
@@ -20,11 +25,16 @@ import java.util.Collection;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public class PathImpl extends OpenApiObjectImpl<Path> implements Path {
+public class PathImpl extends OpenApiObjectImpl<OpenApi3, Path> implements Path {
 
     @Override
     public Operation getGet() {
         return operations.get("get");
+    }
+
+    @Override
+    public Operation getGet(boolean elaborate) {
+        return operations.get("get").get(elaborate);
     }
 
     @Override
@@ -38,6 +48,11 @@ public class PathImpl extends OpenApiObjectImpl<Path> implements Path {
     }
 
     @Override
+    public Operation getPut(boolean elaborate) {
+        return operations.get("put").get(elaborate);
+    }
+
+    @Override
     public void setPut(Operation put) {
         operations.set("put", (OperationImpl) put);
     }
@@ -45,6 +60,11 @@ public class PathImpl extends OpenApiObjectImpl<Path> implements Path {
     @Override
     public Operation getPost() {
         return operations.get("post");
+    }
+
+    @Override
+    public Operation getPost(boolean elaborate) {
+        return operations.get("post").get(elaborate);
     }
 
     @Override
@@ -58,6 +78,11 @@ public class PathImpl extends OpenApiObjectImpl<Path> implements Path {
     }
 
     @Override
+    public Operation getDelete(boolean elaborate) {
+        return operations.get("delete").get(elaborate);
+    }
+
+    @Override
     public void setDelete(Operation delete) {
         operations.set("delete", (OperationImpl) delete);
     }
@@ -65,6 +90,11 @@ public class PathImpl extends OpenApiObjectImpl<Path> implements Path {
     @Override
     public Operation getOptions() {
         return operations.get("options");
+    }
+
+    @Override
+    public Operation getOptions(boolean elaborate) {
+        return operations.get("options").get(elaborate);
     }
 
     @Override
@@ -78,6 +108,11 @@ public class PathImpl extends OpenApiObjectImpl<Path> implements Path {
     }
 
     @Override
+    public Operation getHead(boolean elaborate) {
+        return operations.get("head").get(elaborate);
+    }
+
+    @Override
     public void setHead(Operation head) {
         operations.set("head", (OperationImpl) head);
     }
@@ -85,6 +120,11 @@ public class PathImpl extends OpenApiObjectImpl<Path> implements Path {
     @Override
     public Operation getPatch() {
         return operations.get("patch");
+    }
+
+    @Override
+    public Operation getPatch(boolean elaborate) {
+        return operations.get("patch").get(elaborate);
     }
 
     @Override
@@ -98,43 +138,56 @@ public class PathImpl extends OpenApiObjectImpl<Path> implements Path {
     }
 
     @Override
+    public Operation getTrace(boolean elaborate) {
+        return operations.get("trace").get(elaborate);
+    }
+
+    @Override
     public void setTrace(Operation trace) {
         operations.set("trace", (OperationImpl) trace);
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public PathImpl(String key, JsonNode json, JsonOverlay<?> parent) {
-        super(key, json, parent);
+    public PathImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        super(json, parent, refReg);
+            super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public PathImpl(String key, JsonOverlay<?> parent) {
-        super(key, parent);
+    public PathImpl(Path path, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        super(path, parent, refReg);
+            super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay summary = new StringOverlay("summary", this);
+    private ChildOverlay<String, StringOverlay> summary = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private StringOverlay description = new StringOverlay("description", this);
+    private ChildOverlay<String, StringOverlay> description = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private MapOverlay<OperationImpl> operations = new MapOverlay<OperationImpl>("", this, OperationImpl.factory, "get|put|post|delete|options|head|patch|trace");
+    private ChildMapOverlay<Operation, OperationImpl> operations = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ListOverlay<ServerImpl> servers = new ListOverlay<ServerImpl>("servers", this, ServerImpl.factory);
+    private ChildListOverlay<Server, ServerImpl> servers = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ListOverlay<ParameterImpl> parameters = new ListOverlay<ParameterImpl>("parameters", this, ParameterImpl.factory);
+    private ChildListOverlay<Parameter, ParameterImpl> parameters = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ValMapOverlay<Object, AnyObjectOverlay> extensions = new ValMapOverlay<Object, AnyObjectOverlay>("", this, AnyObjectOverlay.factory, "x-.+");
+    private ChildMapOverlay<Object, ObjectOverlay> extensions = null;
 
     // Summary
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public String getSummary() {
         return summary.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getSummary(boolean elaborate) {
+        return summary.get(elaborate);
     }
 
     @Override
@@ -152,6 +205,12 @@ public class PathImpl extends OpenApiObjectImpl<Path> implements Path {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public String getDescription(boolean elaborate) {
+        return description.get(elaborate);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setDescription(String description) {
         this.description.set(description);
     }
@@ -159,8 +218,14 @@ public class PathImpl extends OpenApiObjectImpl<Path> implements Path {
     // Operation
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public Map<String, ? extends Operation> getOperations() {
+    public Map<String, Operation> getOperations() {
         return operations.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Operation> getOperations(boolean elaborate) {
+        return operations.get(elaborate);
     }
 
     @Override
@@ -177,16 +242,14 @@ public class PathImpl extends OpenApiObjectImpl<Path> implements Path {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public void setOperations(Map<String, ? extends Operation> operations) {
-        @SuppressWarnings("unchecked")
-            Map<String,OperationImpl> implOperations = (Map<String, OperationImpl>) operations;
-            this.operations.set(implOperations);
+    public void setOperations(Map<String, Operation> operations) {
+        this.operations.set(operations);
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setOperation(String name, Operation operation) {
-        operations.set(name, (OperationImpl) operation);
+        operations.set(name, operation);
     }
 
     @Override
@@ -198,8 +261,14 @@ public class PathImpl extends OpenApiObjectImpl<Path> implements Path {
     // Server
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public Collection<? extends Server> getServers() {
+    public Collection<Server> getServers() {
         return servers.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Collection<Server> getServers(boolean elaborate) {
+        return servers.get(elaborate);
     }
 
     @Override
@@ -216,22 +285,26 @@ public class PathImpl extends OpenApiObjectImpl<Path> implements Path {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public void setServers(Collection<? extends Server> servers) {
-        @SuppressWarnings("unchecked")
-            Collection<ServerImpl> implServers = (Collection<ServerImpl>) servers;
-            this.servers.set(implServers);
+    public void setServers(Collection<Server> servers) {
+        this.servers.set((Collection<Server>) servers);
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setServer(int index, Server server) {
-        servers.set(index, (ServerImpl) server);
+        servers.set(index, server);
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void addServer(Server server) {
-        servers.add((ServerImpl) server);
+        servers.add(server);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public void insertServer(int index, Server server) {
+        servers.insert(index, server);
     }
 
     @Override
@@ -243,8 +316,14 @@ public class PathImpl extends OpenApiObjectImpl<Path> implements Path {
     // Parameter
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public Collection<? extends Parameter> getParameters() {
+    public Collection<Parameter> getParameters() {
         return parameters.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Collection<Parameter> getParameters(boolean elaborate) {
+        return parameters.get(elaborate);
     }
 
     @Override
@@ -261,22 +340,26 @@ public class PathImpl extends OpenApiObjectImpl<Path> implements Path {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public void setParameters(Collection<? extends Parameter> parameters) {
-        @SuppressWarnings("unchecked")
-            Collection<ParameterImpl> implParameters = (Collection<ParameterImpl>) parameters;
-            this.parameters.set(implParameters);
+    public void setParameters(Collection<Parameter> parameters) {
+        this.parameters.set((Collection<Parameter>) parameters);
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setParameter(int index, Parameter parameter) {
-        parameters.set(index, (ParameterImpl) parameter);
+        parameters.set(index, parameter);
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void addParameter(Parameter parameter) {
-        parameters.add((ParameterImpl) parameter);
+        parameters.add(parameter);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public void insertParameter(int index, Parameter parameter) {
+        parameters.insert(index, parameter);
     }
 
     @Override
@@ -285,11 +368,29 @@ public class PathImpl extends OpenApiObjectImpl<Path> implements Path {
         parameters.remove(index);
     }
 
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public boolean isParameterReference(int index) {
+        return parameters.getChild(index).isReference();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Reference getParameterReference(int index) {
+        return parameters.getChild(index).getReference();
+    }
+
     // Extension
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Map<String, Object> getExtensions() {
         return extensions.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Object> getExtensions(boolean elaborate) {
+        return extensions.get(elaborate);
     }
 
     @Override
@@ -322,30 +423,34 @@ public class PathImpl extends OpenApiObjectImpl<Path> implements Path {
         extensions.remove(name);
     }
 
-    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static JsonOverlayFactory<PathImpl> factory = new JsonOverlayFactory<PathImpl>() {
     @Override
-    public PathImpl create(String key, JsonNode json, JsonOverlay<?> parent) {
-        return isEmptyRecursive(parent, PathImpl.class) ? null : new PathImpl(key, json, parent);
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    protected void elaborateChildren() {
+        summary = createChild("summary", this, StringOverlay.factory);
+            description = createChild("description", this, StringOverlay.factory);
+            operations = createChildMap("", this, OperationImpl.factory, "get|put|post|delete|options|head|patch|trace");
+            servers = createChildList("servers", this, ServerImpl.factory);
+            parameters = createChildList("parameters", this, ParameterImpl.factory);
+            refables.put("parameters", parameters);
+            extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }
-};
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public static OverlayFactory<Path, PathImpl> factory = new OverlayFactory<Path, PathImpl>() {
+    @Override
+    protected Class<? super PathImpl> getOverlayClass() {
+         return PathImpl.class;
+    }
 
     @Override
-    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void installPropertyAccessors(PropertyAccessors accessors) {
-        OverlayGetter getter = null;
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return summary;}};
-            accessors.add("summary", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return description;}};
-            accessors.add("description", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return operations;}};
-            accessors.add("", "get|put|post|delete|options|head|patch|trace", getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return servers;}};
-            accessors.add("servers", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return parameters;}};
-            accessors.add("parameters", null, getter);
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return extensions;}};
-            accessors.add("", "x-.+", getter);
+    public PathImpl _create(Path path, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        return new PathImpl(path, parent, refReg);
     }
+
+    @Override
+    public PathImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        return new PathImpl(json, parent, refReg);
+    }
+};
 
 }

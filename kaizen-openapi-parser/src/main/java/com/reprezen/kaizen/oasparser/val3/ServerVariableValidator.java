@@ -25,7 +25,7 @@ public class ServerVariableValidator extends ObjectValidatorBase<ServerVariable>
             @Override
             public void run() {
                 int i = 0;
-                for (Object primitive : variable.getEnumValues()) {
+                for (Object primitive : variable.getEnumValues(false)) {
                     checkPrimitive(primitive, results, i++);
                 }
             }
@@ -33,10 +33,10 @@ public class ServerVariableValidator extends ObjectValidatorBase<ServerVariable>
         results.withCrumb("default", new Runnable() {
             @Override
             public void run() {
-                checkPrimitive(variable.getDefault(), results, "default");
+                checkPrimitive(variable.getDefault(false), results, "default");
             }
         });
-        validateString(variable.getDescription(), results, false, "description");
+        validateString(variable.getDescription(false), results, false, "description");
     }
 
     private void checkPrimitive(Object primitive, ValidationResults results, int index) {

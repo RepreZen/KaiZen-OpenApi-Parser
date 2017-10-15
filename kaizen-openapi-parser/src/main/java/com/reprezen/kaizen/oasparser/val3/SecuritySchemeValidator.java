@@ -25,28 +25,28 @@ public class SecuritySchemeValidator extends ObjectValidatorBase<SecurityScheme>
     @Override
     public void validateObject(SecurityScheme securityScheme, ValidationResults results) {
         // no validation for: description, bearerFormat
-        validateString(securityScheme.getType(), results, true, "apiKey|http|oauth2|openIdConnect", "type");
-        switch (securityScheme.getType()) {
+        validateString(securityScheme.getType(false), results, true, "apiKey|http|oauth2|openIdConnect", "type");
+        switch (securityScheme.getType(false)) {
             case "http":
-            	validateString(securityScheme.getScheme(), results, true, "scheme");
+            	validateString(securityScheme.getScheme(false), results, true, "scheme");
                 // If bearer validate bearerFormat
                 break;
             case "apiKey":
-                validateString(securityScheme.getName(), results, true, "name");
-                validateString(securityScheme.getIn(), results, true, "query|header|cookie", "in");
+                validateString(securityScheme.getName(false), results, true, "name");
+                validateString(securityScheme.getIn(false), results, true, "query|header|cookie", "in");
                 break;
             case "oauth2":
-                validateField(securityScheme.getImplicitOAuthFlow(), results, false, "flow.implicit", oauthFlowValidator);
-                validateField(securityScheme.getImplicitOAuthFlow(), results, false, "flow.password", oauthFlowValidator);
-                validateField(securityScheme.getImplicitOAuthFlow(), results, false, "flow.clientCredentials", oauthFlowValidator);
-                validateField(securityScheme.getImplicitOAuthFlow(), results, false, "authorizationCode", oauthFlowValidator);
-                validateExtensions(securityScheme.getOAuthFlowsExtensions(), results, "flow");
+                validateField(securityScheme.getImplicitOAuthFlow(false), results, false, "flow.implicit", oauthFlowValidator);
+                validateField(securityScheme.getImplicitOAuthFlow(false), results, false, "flow.password", oauthFlowValidator);
+                validateField(securityScheme.getImplicitOAuthFlow(false), results, false, "flow.clientCredentials", oauthFlowValidator);
+                validateField(securityScheme.getImplicitOAuthFlow(false), results, false, "authorizationCode", oauthFlowValidator);
+                validateExtensions(securityScheme.getOAuthFlowsExtensions(false), results, "flow");
                 break;
             case "openIdConnect":
-                validateUrl(securityScheme.getOpenIdConnectUrl(), results, true, "openIdConnectUrl");
+                validateUrl(securityScheme.getOpenIdConnectUrl(false), results, true, "openIdConnectUrl");
                 break;
         }
-        validateExtensions(securityScheme.getExtensions(), results);
+        validateExtensions(securityScheme.getExtensions(false), results);
     }
 
 }

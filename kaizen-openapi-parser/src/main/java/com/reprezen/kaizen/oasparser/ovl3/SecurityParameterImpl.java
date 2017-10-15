@@ -2,40 +2,51 @@ package com.reprezen.kaizen.oasparser.ovl3;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlayFactory;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ValListOverlay;
+import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.SecurityParameter;
 import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
 import java.util.Collection;
 import javax.annotation.Generated;
 
-public class SecurityParameterImpl extends OpenApiObjectImpl<SecurityParameter> implements SecurityParameter {
+public class SecurityParameterImpl extends OpenApiObjectImpl<OpenApi3, SecurityParameter> implements SecurityParameter {
 
     @Override
-    protected JsonNode fixCreatedJson(JsonNode json) {
-        return json.isMissingNode() ? JsonNodeFactory.instance.arrayNode() : json;
+    protected JsonNode fixJson(JsonNode json) {
+        return json.isMissingNode() ? jsonArray() : json;
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public SecurityParameterImpl(String key, JsonNode json, JsonOverlay<?> parent) {
-        super(key, json, parent);
+    public SecurityParameterImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        super(json, parent, refReg);
+            super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public SecurityParameterImpl(String key, JsonOverlay<?> parent) {
-        super(key, parent);
+    public SecurityParameterImpl(SecurityParameter securityParameter, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        super(securityParameter, parent, refReg);
+            super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ValListOverlay<String, StringOverlay> parameters = new ValListOverlay<String, StringOverlay>("", this, StringOverlay.factory);
+    private ChildListOverlay<String, StringOverlay> parameters = null;
 
     // Parameter
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Collection<String> getParameters() {
         return parameters.get();
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public Collection<String> getParameters(boolean elaborate) {
+        return parameters.get(elaborate);
     }
 
     @Override
@@ -70,24 +81,38 @@ public class SecurityParameterImpl extends OpenApiObjectImpl<SecurityParameter> 
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public void insertParameter(int index, String parameter) {
+        parameters.insert(index, parameter);
+    }
+
+    @Override
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void removeParameter(int index) {
         parameters.remove(index);
     }
 
-    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static JsonOverlayFactory<SecurityParameterImpl> factory = new JsonOverlayFactory<SecurityParameterImpl>() {
     @Override
-    public SecurityParameterImpl create(String key, JsonNode json, JsonOverlay<?> parent) {
-        return isEmptyRecursive(parent, SecurityParameterImpl.class) ? null : new SecurityParameterImpl(key, json, parent);
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    protected void elaborateChildren() {
+        parameters = createChildList("", this, StringOverlay.factory);
     }
-};
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public static OverlayFactory<SecurityParameter, SecurityParameterImpl> factory = new OverlayFactory<SecurityParameter, SecurityParameterImpl>() {
+    @Override
+    protected Class<? super SecurityParameterImpl> getOverlayClass() {
+         return SecurityParameterImpl.class;
+    }
 
     @Override
-    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void installPropertyAccessors(PropertyAccessors accessors) {
-        OverlayGetter getter = null;
-            getter = new OverlayGetter(){ public JsonOverlay<?> get(){return parameters;}};
-            accessors.add("", null, getter);
+    public SecurityParameterImpl _create(SecurityParameter securityParameter, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        return new SecurityParameterImpl(securityParameter, parent, refReg);
     }
+
+    @Override
+    public SecurityParameterImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        return new SecurityParameterImpl(json, parent, refReg);
+    }
+};
 
 }

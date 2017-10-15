@@ -10,96 +10,67 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.jsonoverlay;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Iterator;
 
 import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.MissingNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.google.common.base.Optional;
+import com.fasterxml.jackson.databind.node.TextNode;
+import com.fasterxml.jackson.databind.node.ValueNode;
 
 public abstract class JsonOverlay<V> implements IJsonOverlay<V> {
 
-	protected final static JsonNodeFactory jsonFactory = JsonNodeFactory.instance;
 	protected final static ObjectMapper mapper = new ObjectMapper();
 
-	private final ReferenceRegistry referenceRegistry;
-
-	protected String key;
-	private JsonNode json; // need to prevent subclasses from direct access due to reference management
-	private JsonNode resolvedJson = null;
+	protected V value = null;
 	protected JsonOverlay<?> parent;
-	protected JsonOverlay<?> root;
-	protected Reference ref = null;
-	protected V value;
-	protected boolean jsonIsCurrent;
+	protected JsonNode json = null;
+	protected ReferenceRegistry refReg;
+	private String pathInParent = null;
 
-	public JsonOverlay(String key, V value, JsonOverlay<?> parent) {
-		this(key, Optional.fromNullable(value), Optional.<JsonNode>absent(), parent);
-	}
-
-	public JsonOverlay(String key, JsonNode json, JsonOverlay<?> parent, ReferenceRegistry referenceRegistry) {
-		this(key, Optional.<V>absent(), Optional.fromNullable(json), parent, referenceRegistry);
-	}
-
-	public JsonOverlay(String key, JsonNode json, JsonOverlay<?> parent) {
-		this(key, Optional.<V>absent(), Optional.fromNullable(json), parent);
-	}
-
-	public JsonOverlay(String key, JsonOverlay<?> parent) {
-		this(key, Optional.<V>absent(), Optional.<JsonNode>absent(), parent);
-	}
-
-	private JsonOverlay(String key, Optional<V> value, Optional<JsonNode> json, JsonOverlay<?> parent) {
-		this(key, value, json, parent, parent == null ? new ReferenceRegistry() : parent.referenceRegistry);
-	}
-
-	private JsonOverlay(String key, Optional<V> value, Optional<JsonNode> json, JsonOverlay<?> parent,
-			ReferenceRegistry referenceRegistry) {
-		this.key = key;
+	public JsonOverlay(V value, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+		this.value = value;
 		this.parent = parent;
-		this.referenceRegistry = referenceRegistry;
-		if (parent == null) {
-			root = this;
-		} else {
-			root = (JsonOverlay<?>) parent.getRoot();
-		}
-		if (json.isPresent()) {
-			this.json = json.get();
-			processReference();
-			this.value = fromJson();
-			this.jsonIsCurrent = true;
-		} else if (value.isPresent()) {
-			this.value = value.get();
-			this.jsonIsCurrent = false;
-			this.json = toJson();
-		} else if (parent != null) {
-			this.json = parent.getJson(key);
-			this.jsonIsCurrent = true;
-			processReference();
-			this.value = fromJson();
-		} else {
-			this.json = MissingNode.getInstance();
-			this.jsonIsCurrent = true;
-			this.value = null;
-		}
+		this.refReg = refReg;
+	}
+
+	public JsonOverlay(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+		this.json = json;
+		this.value = fromJson(json);
+		this.parent = parent;
+		this.refReg = refReg;
 	}
 
 	@Override
 	public V get() {
-		return value;
+		return get(true);
+	}
+
+	public abstract V get(boolean elaborate);
+
+	@Override
+	public boolean isPresent() {
+		return value != null && !json.isMissingNode();
+	}
+
+	@Override
+	public boolean isElaborated() {
+		// most overlays are complete when constructed
+		return true;
 	}
 
 	@Override
 	public IJsonOverlay<?> find(JsonPointer path) {
-		// this implementation suffices for primitive types, but must be overriden in
-		// overlays designed for JSON arrays or objects
-		return isPresent() //
-				? (path.matches() ? this : null) //
-				: null;
+		return path.matches() ? this : _find(path);
 	}
+
+	abstract protected IJsonOverlay<?> _find(JsonPointer path);
 
 	@Override
 	public IJsonOverlay<?> find(String path) {
@@ -112,162 +83,99 @@ public abstract class JsonOverlay<V> implements IJsonOverlay<V> {
 
 	protected void set(V value, boolean invalidate) {
 		this.value = value;
-		if (invalidate) {
-			invalidate();
-		}
-		if (parent != null) {
-			parent.addToSerialization(key);
-		}
 	}
 
-	protected void invalidate() {
-		this.jsonIsCurrent = false;
-		if (parent != null) {
-			parent.invalidate();
-		}
-	}
-
-	protected JsonNode getJson() {
-		if (ref != null) {
-			return resolvedJson;
-		} else {
-			return json;
-		}
-	}
-
-	protected JsonNode getJson(String key) {
-		JsonNode json = getJson();
-		if (key.isEmpty()) {
-			return json;
-		} else if (key.indexOf('/') < 0) {
-			return json.path(key);
-		} else {
-			return json.at("/" + key);
-		}
-	}
-
-	protected JsonNode getResolvedJson(String key) {
-		JsonNode json = getJson(key);
-		if (isReferenceNode(json)) {
-			return referenceRegistry.get(json.get("key").asText()).getJson();
-		} else {
-			return json;
-		}
-	}
-
-	protected JsonNode getOriginalJson() {
-		return json;
-	}
-
-	protected abstract V fromJson();
-
-	@Override
-	public JsonNode toJson() {
-		return toJson(false);
-	}
-
-	@Override
-	public JsonNode toJson(boolean followRefs) {
-		if (jsonIsCurrent && !followRefs) {
-			return getJson();
-		} else {
-			JsonNode result = createJson(followRefs);
-			if (!followRefs) {
-				this.json = result;
-				this.jsonIsCurrent = true;
-			}
-			return result;
-		}
-	}
-
-	@Override
-	public JsonNode createJson() {
-		return createJson(false);
-	}
-
-	@Override
-	public JsonNode createJson(boolean followRefs) {
-		if (isReference() && !followRefs) {
-			ObjectNode obj = JsonNodeFactory.instance.objectNode();
-			obj.put("$ref", json.get("$ref").asText());
-			return obj;
-		} else {
-			return fixCreatedJson(_createJson(followRefs));
-		}
-	}
-
-	protected abstract JsonNode _createJson(boolean followRefs);
-
-	protected JsonNode fixCreatedJson(JsonNode json) {
-		return json;
-	};
-
-	protected void addToSerialization(String key) {
-		// no-op except for ObjectOverlay
-	}
-
-	protected void processReference() {
-		if (isReferenceNode()) {
-			ref = referenceRegistry.get(json.get("key").asText());
-			resolvedJson = ref.getJson();
-		}
-	}
-
-	protected boolean isReferenceNode() {
-		return isReferenceNode(json);
-	}
-
-	protected boolean isReferenceNode(JsonNode json) {
-		// If the $ref property isn't a string, that's an issue for validation.
-		return json instanceof ObjectNode && json.has("$ref");
-	}
-
-	@Override
-	public boolean isReference() {
-		return ref != null;
-	}
-
-	@Override
-	public Reference getReference() {
-		return ref;
-	}
-
-	@Override
-	public IJsonOverlay<?> getParent() {
+	public JsonOverlay<?> getParent() {
 		return parent;
 	}
 
-	@Override
-	public IJsonOverlay<?> getRoot() {
-		return root != null ? root : this;
-	}
-
-	@Override
-	public String getKey() {
-		return key;
-	}
-
-	protected void reparent(JsonOverlay<?> parent, String key) {
+	protected void setParent(JsonOverlay<?> parent) {
 		this.parent = parent;
-		this.root = parent.root;
-		this.key = key;
 	}
 
-	protected void deparent() {
-		this.parent = null;
-		this.root = null;
-		this.key = null;
+	protected void setPathInParent(String pathInParent) {
+		this.pathInParent = pathInParent;
+	}
+
+	public String getPathInParent() {
+		return pathInParent;
+	}
+
+	public JsonOverlay<?> getRoot() {
+		return parent != null ? parent.getRoot() : this;
+	}
+
+	protected abstract V fromJson(JsonNode json);
+
+	private static final SerializationOptions emptyOptions = new SerializationOptions();
+
+	@Override
+	public JsonNode toJson() {
+		return toJson(emptyOptions);
 	}
 
 	@Override
-	public boolean isPresent() {
-		if (!jsonIsCurrent) {
-			this.json = createJson();
-		}
-		return !json.isMissingNode();
+	public JsonNode toJson(SerializationOptions.Option... options) {
+		return toJson(new SerializationOptions(options));
 	}
 
-	public static final <T> Iterable<T> iterable(final Iterator<T> iterator) {
+	public abstract JsonNode toJson(SerializationOptions options);
+
+	// some utility classes for overlays
+
+	protected static ObjectNode jsonObject() {
+		return JsonNodeFactory.instance.objectNode();
+	}
+
+	protected static ArrayNode jsonArray() {
+		return JsonNodeFactory.instance.arrayNode();
+	}
+
+	protected static TextNode jsonScalar(String s) {
+		return JsonNodeFactory.instance.textNode(s);
+	}
+
+	protected static ValueNode jsonScalar(int n) {
+		return JsonNodeFactory.instance.numberNode(n);
+	}
+
+	protected static ValueNode jsonScalar(long n) {
+		return JsonNodeFactory.instance.numberNode(n);
+	}
+
+	protected static ValueNode jsonScalar(short n) {
+		return JsonNodeFactory.instance.numberNode(n);
+	}
+
+	protected static ValueNode jsonScalar(byte n) {
+		return JsonNodeFactory.instance.numberNode(n);
+	}
+
+	protected static ValueNode jsonScalar(double n) {
+		return JsonNodeFactory.instance.numberNode(n);
+	}
+
+	protected static ValueNode jsonScalar(float n) {
+		return JsonNodeFactory.instance.numberNode(n);
+	}
+
+	protected static ValueNode jsonScalar(BigInteger n) {
+		return JsonNodeFactory.instance.numberNode(n);
+	}
+
+	protected static ValueNode jsonScalar(BigDecimal n) {
+		return JsonNodeFactory.instance.numberNode(n);
+	}
+
+	protected static ValueNode jsonBoolean(boolean b) {
+		return JsonNodeFactory.instance.booleanNode(b);
+	}
+
+	protected static MissingNode jsonMissing() {
+		return MissingNode.getInstance();
+	}
+
+	protected static final <T> Iterable<T> iterable(final Iterator<T> iterator) {
 		return new Iterable<T>() {
 			@Override
 			public Iterator<T> iterator() {
@@ -275,4 +183,10 @@ public abstract class JsonOverlay<V> implements IJsonOverlay<V> {
 			}
 		};
 	}
+
+	@Override
+	public String toString() {
+		return toJson().toString();
+	}
+
 }

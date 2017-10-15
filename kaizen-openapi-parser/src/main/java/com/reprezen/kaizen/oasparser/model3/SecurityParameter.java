@@ -4,11 +4,14 @@ import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
 import java.util.Collection;
 import javax.annotation.Generated;
 
-public interface SecurityParameter extends OpenApiObject<SecurityParameter> {
+public interface SecurityParameter extends OpenApiObject<OpenApi3, SecurityParameter> {
 
     // Parameter
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     Collection<String> getParameters();
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    Collection<String> getParameters(boolean elaborate);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasParameters();
@@ -24,6 +27,9 @@ public interface SecurityParameter extends OpenApiObject<SecurityParameter> {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void addParameter(String parameter);
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    void insertParameter(int index, String parameter);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void removeParameter(int index);

@@ -5,11 +5,14 @@ import com.reprezen.kaizen.oasparser.model3.ServerVariable;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public interface Server extends OpenApiObject<Server> {
+public interface Server extends OpenApiObject<OpenApi3, Server> {
 
     // Url
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     String getUrl();
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    String getUrl(boolean elaborate);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setUrl(String url);
@@ -19,11 +22,17 @@ public interface Server extends OpenApiObject<Server> {
     String getDescription();
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    String getDescription(boolean elaborate);
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setDescription(String description);
 
     // ServerVariable
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    Map<String, ? extends ServerVariable> getServerVariables();
+    Map<String, ServerVariable> getServerVariables();
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    Map<String, ServerVariable> getServerVariables(boolean elaborate);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasServerVariable(String name);
@@ -32,7 +41,7 @@ public interface Server extends OpenApiObject<Server> {
     ServerVariable getServerVariable(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    void setServerVariables(Map<String, ? extends ServerVariable> serverVariables);
+    void setServerVariables(Map<String, ServerVariable> serverVariables);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setServerVariable(String name, ServerVariable serverVariable);
@@ -43,6 +52,9 @@ public interface Server extends OpenApiObject<Server> {
     // VariablesExtension
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     Map<String, Object> getVariablesExtensions();
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    Map<String, Object> getVariablesExtensions(boolean elaborate);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasVariablesExtension(String name);
@@ -62,6 +74,9 @@ public interface Server extends OpenApiObject<Server> {
     // Extension
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     Map<String, Object> getExtensions();
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    Map<String, Object> getExtensions(boolean elaborate);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasExtension(String name);

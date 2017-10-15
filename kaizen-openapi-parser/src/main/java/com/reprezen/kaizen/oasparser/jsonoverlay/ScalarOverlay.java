@@ -10,6 +10,25 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.jsonoverlay;
 
-public interface IObjectOverlay<VI> extends IJsonOverlay<VI> {
+import com.fasterxml.jackson.core.JsonPointer;
+import com.fasterxml.jackson.databind.JsonNode;
 
+public abstract class ScalarOverlay<V> extends JsonOverlay<V> {
+
+	public ScalarOverlay(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+		super(json, parent, refReg);
+	}
+
+	public ScalarOverlay(V value, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+		super(value, parent, refReg);
+	}
+
+	public JsonOverlay<?> _find(JsonPointer path) {
+		return null;
+	}
+
+	@Override
+	public V get(boolean elaborate) {
+		return value;
+	}
 }

@@ -21,8 +21,8 @@ public class XmlValidator extends ObjectValidatorBase<Xml> {
     @Override
     public void validateObject(Xml xml, ValidationResults results) {
         // no validation for: name, prefix, attribute, wrapped
-        validateUrl(xml.getNamespace(), results, false, "namespace", false, Severity.WARNING);
-        validateExtensions(xml.getExtensions(), results);
+        validateUrl(xml.getNamespace(false), results, false, "namespace", false, Severity.WARNING);
+        validateExtensions(xml.getExtensions(false), results);
     }
 
 }

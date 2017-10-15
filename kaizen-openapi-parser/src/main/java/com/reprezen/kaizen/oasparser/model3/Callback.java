@@ -5,11 +5,14 @@ import com.reprezen.kaizen.oasparser.model3.Path;
 import java.util.Map;
 import javax.annotation.Generated;
 
-public interface Callback extends OpenApiObject<Callback> {
+public interface Callback extends OpenApiObject<OpenApi3, Callback> {
 
     // CallbackPath
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    Map<String, ? extends Path> getCallbackPaths();
+    Map<String, Path> getCallbackPaths();
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    Map<String, Path> getCallbackPaths(boolean elaborate);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasCallbackPath(String expression);
@@ -18,7 +21,7 @@ public interface Callback extends OpenApiObject<Callback> {
     Path getCallbackPath(String expression);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    void setCallbackPaths(Map<String, ? extends Path> callbackPaths);
+    void setCallbackPaths(Map<String, Path> callbackPaths);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void setCallbackPath(String expression, Path callbackPath);
@@ -29,6 +32,9 @@ public interface Callback extends OpenApiObject<Callback> {
     // Extension
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     Map<String, Object> getExtensions();
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    Map<String, Object> getExtensions(boolean elaborate);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     boolean hasExtension(String name);

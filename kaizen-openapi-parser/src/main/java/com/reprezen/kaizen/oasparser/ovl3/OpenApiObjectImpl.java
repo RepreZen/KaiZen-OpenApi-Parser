@@ -11,41 +11,38 @@
 package com.reprezen.kaizen.oasparser.ovl3;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.reprezen.kaizen.oasparser.OpenApi;
 import com.reprezen.kaizen.oasparser.jsonoverlay.IJsonOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.IObjectOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IPropertiesOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
-import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
 //import com.reprezen.swaggerparser.model3.OpenApi3;
 
-public abstract class OpenApiObjectImpl<V extends IObjectOverlay<V>> extends ObjectOverlay<V>
-		implements OpenApiObject<V> {
+public abstract class OpenApiObjectImpl<OpenApi3, V extends IPropertiesOverlay<V>> extends PropertiesOverlay<V>
+		implements OpenApiObject<OpenApi3, V> {
 
-	protected OpenApiObjectImpl(String key, JsonNode json, JsonOverlay<?> parent, ReferenceRegistry referenceRegistry) {
-		super(key, json, parent, referenceRegistry);
+	protected OpenApiObjectImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+		super(json, parent, refReg);
 	}
 
-	public OpenApiObjectImpl(String key, JsonNode json, JsonOverlay<?> parent) {
-		super(key, json, parent);
-	}
-
-	public OpenApiObjectImpl(String key, JsonOverlay<?> parent) {
-		super(key, parent);
+	protected OpenApiObjectImpl(V value, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+		super(value, parent, refReg);
 	}
 
 	@Override
 	public OpenApi3 getModel() {
 		IJsonOverlay<?> root = getRoot();
-		return root instanceof OpenApi3 ? (OpenApi3) root : null;
+		return root instanceof OpenApi<?> ? (OpenApi3) root : null;
 	}
 
-	public OpenApiObject<?> getParentObject() {
+	@Override
+	public OpenApiObject<OpenApi3, ?> getParentObject() {
 		IJsonOverlay<?> parent = super.getParent();
 		while (parent != null && !(parent instanceof OpenApiObject)) {
 			parent = parent.getParent();
 		}
-		return (OpenApiObject<?>) parent;
+		return (OpenApiObject<OpenApi3, ?>) parent;
 	}
 }

@@ -19,8 +19,8 @@ public class ExternalDocsValidator extends ObjectValidatorBase<ExternalDocs> {
     @Override
     public void validateObject(ExternalDocs externalDocs, ValidationResults results) {
         // no validation for: description
-        validateUrl(externalDocs.getUrl(), results, true, "externalDocs");
-        validateExtensions(externalDocs.getExtensions(), results);
+        validateUrl(externalDocs.getUrl(false), results, true, "externalDocs");
+        validateExtensions(externalDocs.getExtensions(false), results);
     }
 
 }

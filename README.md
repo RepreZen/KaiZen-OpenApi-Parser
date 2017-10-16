@@ -6,7 +6,7 @@
 
 The KaiZen OpenApi Parser from RepreZen is a Java-based validating
 parser for OpenAPI 3.0 offering full compliance with the
-[OpenAPI 3.0 Specification](https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc0/versions/3.0.md),
+[OpenAPI 3.0 Specification](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md),
 and a highly uniform read/write programming API.
 [OpenAPI](http://openapis.org), formerly known as the Swagger
 specification, is the industry-standard format for machine-readable
@@ -105,9 +105,6 @@ Here's a starting list of projects that are currently using KaiZen OpenAPI Parse
   - Optional boolean arg (default false) controls whether references
     are followed (true) or left as references (false) in the output.
   - Reference recursion will break reference-following serialization
-    (even after
-    [Issue 64](https://github.com/RepreZen/KaiZen-OpenApi-Parser/issues/64)
-    is addressed).
   - Preservation of order of JSON object properties is not yet
     implemented in all cases.
   - See
@@ -124,9 +121,7 @@ Here's a starting list of projects that are currently using KaiZen OpenAPI Parse
     that every value node in the input is accessible in the expected
     fashion in the resulting model object.
   - *ExamplesTest* - Parses and validates all example models currently
-    in the
-    [`dm/examples`](https://github.com/OAI/OpenAPI-Specification/tree/dm/examples)
-    branch of the `OAI/OpenAPI-Specification` GitHub repo.
+    in the the `OAI/OpenAPI-Specification` GitHub repo.
 
     Many more tests are required!
 
@@ -189,3 +184,4 @@ a suggestion or want to report a bug or omission.
 ## Resources
 * Blog Post: [Introducing KaiZen OpenAPI 3.0 Parser: fast, flexible Java parsing & validation](http://www.reprezen.com/blog/kaizen-openapi-3_0-parser-swagger-java-open-source)
 * [Getting Started Guide](GettingStarted.md)
+* [API Overview](API-Overview.md)

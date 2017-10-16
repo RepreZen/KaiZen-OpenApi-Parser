@@ -36,9 +36,9 @@ import com.reprezen.kaizen.oasparser.val.ValidationResults.ValidationItem;
 @RunWith(Parameterized.class)
 public class ExamplesTest extends Assert {
 
-	private static final String SPEC_REPO = "RepreZen/KaiZen-OpenAPI-Editor";
+	private static final String SPEC_REPO = "OAI/OpenAPI-specification";
 	private static final String EXAMPLES_BRANCH = "master";
-	private static final String EXAMPLES_ROOT = "com.reprezen.swagedit.openapi3.tests/resources/spec_examples/v3.0";
+	private static final String EXAMPLES_ROOT = "examples/v3.0";
 
 	private static ObjectMapper mapper = new ObjectMapper();
 
@@ -84,7 +84,6 @@ public class ExamplesTest extends Assert {
 			}
 			assertTrue("Example was not valid: " + exampleUrl, model.isValid());
 		}
-
 	}
 
 	private static <T> Iterable<T> iterable(final Iterator<T> iterator) {

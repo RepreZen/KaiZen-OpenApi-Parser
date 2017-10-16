@@ -4,10 +4,13 @@
 
 ## Overview ##
 
-The KaiZen OpenApi Parser from RepreZen is a Java-based validating parser for
-OpenAPI 3.0 offering full compliance with the
+The KaiZen OpenApi Parser from RepreZen is a Java-based validating
+parser for OpenAPI 3.0 offering full compliance with the
 [OpenAPI 3.0 Specification](https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc0/versions/3.0.md),
-and a highly uniform read/write programming API.  [OpenAPI](http://openapis.org), formerly known as the Swagger specification, is the industry-standard format for machine-readable REST API descriptions.
+and a highly uniform read/write programming API.
+[OpenAPI](http://openapis.org), formerly known as the Swagger
+specification, is the industry-standard format for machine-readable
+REST API descriptions.
 
 Feature highlights of KaiZen OpenAPI Parser include:
 * **High Performance** - Informal testing shows a 3x-4x performance
@@ -60,11 +63,15 @@ Feature highlights of KaiZen OpenAPI Parser include:
   the API, but full details of references and their resolution status
   are also available.
   
-## Quick Start Documentation
+## Documentation
 
 The [Getting Started Guide](GettingStarted.md) shows how to build the 
 software locally, and contains a simple sample program that shows how 
 to use the parser.
+
+The [API Overview](API-Overview.md) describes the APIs presented in
+the project, including the parser, the serializer, the read/write
+model, and the treatment of references.
 
 ## Who's using KaiZen Parser?
 

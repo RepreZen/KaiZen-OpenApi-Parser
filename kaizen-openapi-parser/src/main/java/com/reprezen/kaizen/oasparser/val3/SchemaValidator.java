@@ -56,7 +56,7 @@ public class SchemaValidator extends ObjectValidatorBase<Schema> {
         if (schema.getItemsSchema(false) != null && schema.getItemsSchema(false).isPresent()) {
             validate(schema.getItemsSchema(false), results, "items");
         }
-        validateMap(schema.getProperties(false), results, false, "properties", Regexes.NOEXT_NAME_REGEX, this);
+        validateMap(schema.getProperties(false), results, false, "properties", null, this);
         validateFormat(schema.getFormat(false), schema.getType(false), results, "format");
         validateDefault(schema.getDefault(false), schema.getType(false), results, "default");
         checkDiscriminator(schema, results, "discriminator");

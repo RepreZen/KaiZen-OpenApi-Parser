@@ -278,7 +278,7 @@ components:
         $ref: "#/components/schemas/X"
 ```
 
-When the model is parsed, the following will all by equal per `==`:
+When the model is parsed, the following will all be equal per `==`:
 
 * `model.getSchema("X")`
 * `model.getSchema("Y").getProperty("x")`

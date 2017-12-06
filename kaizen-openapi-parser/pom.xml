@@ -176,6 +176,8 @@
                                         <argument>*-sources.jar</argument>
                                         <argument>--exclude</argument>
                                         <argument>*-javadoc.jar</argument>
+                                        <argument>--exclude</argument>
+                                        <argument>surefire*.jar</argument>
                                         <argument>${project.build.directory}</argument>
                                     </arguments>
                                 </configuration>

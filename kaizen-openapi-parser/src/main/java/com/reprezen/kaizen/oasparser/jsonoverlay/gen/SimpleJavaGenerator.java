@@ -14,6 +14,7 @@ import static com.reprezen.kaizen.oasparser.jsonoverlay.gen.Template.t;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -26,6 +27,7 @@ import com.github.javaparser.ParseStart;
 import com.github.javaparser.ParserConfiguration;
 import com.github.javaparser.StringProvider;
 import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.Modifier;
 import com.github.javaparser.ast.body.BodyDeclaration;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.ConstructorDeclaration;
@@ -102,7 +104,7 @@ public class SimpleJavaGenerator {
 	}
 
 	public String format() {
-		Map<String, BodyDeclaration<?>> memberMap = Maps.newTreeMap();
+		Map<String, BodyDeclaration<?>> memberMap = Maps.newLinkedHashMap();
 		CompilationUnit cu = new CompilationUnit();
 		if (fileComment != null) {
 			cu.addOrphanComment(new JavadocComment(fileComment));
@@ -173,9 +175,6 @@ public class SimpleJavaGenerator {
 		}
 
 		public Member comment(String comment) {
-			if (comment != null) {
-				declaration.addOrphanComment(new LineComment(comment));
-			}
 			return this;
 		}
 
@@ -198,20 +197,51 @@ public class SimpleJavaGenerator {
 			throw new RuntimeException("Cannot set member of type " + this.declaration.getClass() + " static");
 		}
 
-		public Member _public(boolean _public) {
+		public Member publicAccess() {
+			setAccess(Modifier.PUBLIC);
 			return this;
 		}
-		
+
+		public Member protectedAccess() {
+			setAccess(Modifier.PROTECTED);
+			return this;
+		}
+
+		public Member packageAccess() {
+			setAccess(null);
+			return this;
+		}
+
+		public Member privateAccess() {
+			setAccess(Modifier.PRIVATE);
+			return this;
+		}
+
+		protected void setAccess(Modifier mod) {
+		}
+
+		protected final EnumSet<Modifier> setAccessModifier(EnumSet<Modifier> mods, Modifier mod) {
+			mods.remove(Modifier.PUBLIC);
+			mods.remove(Modifier.PROTECTED);
+			mods.remove(Modifier.PRIVATE);
+			if (mod != null) { // package private
+				mods.add(mod);
+			}
+			return mods;
+		}
+
 		public String format() {
 			return declaration.toString();
 		}
-
 	}
 
 	public static class ConstructorMember extends Member {
+		private ConstructorDeclaration cons;
+
 		public ConstructorMember(com.reprezen.kaizen.oasparser.jsonoverlay.gen.TypeData.Type type, String className,
 				String... paramPairs) {
 			this(type, className, Arrays.asList(paramPairs));
+			this.cons = (ConstructorDeclaration) declaration;
 		}
 
 		public ConstructorMember(com.reprezen.kaizen.oasparser.jsonoverlay.gen.TypeData.Type type, String className,
@@ -223,12 +253,18 @@ public class SimpleJavaGenerator {
 		public Member code(Collection<String> code) {
 			// JavaParser does not appear capable of parsing calls to super() and this() in
 			// block statements. So we need to just add the statements one at a time...
-			BlockStmt body = ((ConstructorDeclaration) declaration).getBody();
+			BlockStmt body = cons.getBody();
 			for (String stmt : expandStrings(type, code)) {
 				body.addStatement(stmt);
 			}
 			return this;
 		}
+
+		@Override
+		protected void setAccess(Modifier mod) {
+			cons.setModifiers(setAccessModifier(cons.getModifiers(), mod));
+		}
+
 	}
 
 	private static ConstructorDeclaration constructorDecl(
@@ -244,9 +280,11 @@ public class SimpleJavaGenerator {
 	}
 
 	public static class MethodMember extends Member {
+		private MethodDeclaration meth;
 
 		public MethodMember(Field field, String type, String name, String... paramPairs) {
 			this(field, type, name, Arrays.asList(paramPairs));
+			this.meth = (MethodDeclaration) declaration;
 		}
 
 		public MethodMember(Field field, String type, String name, List<String> paramPairs) {
@@ -270,25 +308,39 @@ public class SimpleJavaGenerator {
 			String blockCode = code != null ? "{" + String.join("", expandStrings(field, code)) + "}" : "{}";
 			BlockStmt block = SimpleJavaGenerator.parser.parse(ParseStart.BLOCK, new StringProvider(blockCode))
 					.getResult().get();
-			((MethodDeclaration) declaration).setBody(block);
+			meth.setBody(block);
 			return this;
 		}
 
 		@Override
 		public Member _static(boolean _static) {
-			((MethodDeclaration) declaration).setStatic(_static);
+			meth.setStatic(_static);
 			return this;
+		}
+
+		@Override
+		public Member comment(String comment) {
+			meth.setComment(comment != null ? new LineComment(comment) : null);
+			return this;
+		}
+
+		@Override
+		protected void setAccess(Modifier mod) {
+			meth.setModifiers(setAccessModifier(meth.getModifiers(), mod));
 		}
 
 	}
 
 	public static class FieldMember extends Member {
+		private FieldDeclaration fld;
+
 		public FieldMember(Field field, String type, String name) {
 			this(field, type, name, null);
 		}
 
 		public FieldMember(Field field, String type, String name, String initializer) {
 			super(field, fieldDecl(field, type, name, initializer));
+			this.fld = (FieldDeclaration) declaration;
 		}
 
 		private static FieldDeclaration fieldDecl(Field field, String typeString, String name, String initializer) {
@@ -306,18 +358,15 @@ public class SimpleJavaGenerator {
 
 		@Override
 		public Member _static(boolean _static) {
-			((FieldDeclaration) declaration).setStatic(_static);
+			fld.setStatic(_static);
 			return this;
 		}
 
 		@Override
-		public Member _public(boolean _public) {
-			
-			FieldDeclaration decl = (FieldDeclaration) declaration;
-			decl.setPrivate(!_public);
-			decl.setPublic(_public);
-			return this;
+		protected void setAccess(Modifier mod) {
+			fld.setModifiers(setAccessModifier(fld.getModifiers(), mod));
 		}
+
 	}
 
 	private static List<String> expandStrings(Field field, Collection<String> strings) {

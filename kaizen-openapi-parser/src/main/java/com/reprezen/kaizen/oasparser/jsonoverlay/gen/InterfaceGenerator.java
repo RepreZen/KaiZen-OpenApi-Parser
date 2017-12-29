@@ -93,6 +93,9 @@ public class InterfaceGenerator extends TypeGenerator {
 			}
 			break;
 		}
+		for (Member method: methods) {
+			method.packageAccess();
+		}
 		return methods;
 	}
 

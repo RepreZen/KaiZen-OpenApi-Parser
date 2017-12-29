@@ -223,7 +223,7 @@ public class ImplGenerator extends TypeGenerator {
 				}
 			}
 		}
-		return new MethodMember(null, "void", "elaborateChildren").override().code(code);
+		return new MethodMember(null, "void", "elaborateChildren").override().protectedAccess().code(code);
 	}
 
 	private Member getFactoryMethod(Type type) {
@@ -245,7 +245,7 @@ public class ImplGenerator extends TypeGenerator {
 				"    }", //
 				"}"));
 		return new FieldMember(null, t("OverlayFactory<${name}, ${implName}>", type), "factory", initializer)
-				._static(true)._public(true);
+				._static(true).publicAccess();
 	}
 
 	private Members getMapMethods(Field field) {

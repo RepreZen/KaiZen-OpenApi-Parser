@@ -99,23 +99,10 @@ public class SimpleJavaGenerator {
 			cu.addImport(imp);
 		}
 		cu.addType(type);
-		for (Member method : members) {
-			type.addMember(parser.parse(ParseStart.CLASS_BODY, new StringProvider(method.format())).getResult().get());
+		for (Member member : members) {
+			type.addMember(parser.parse(ParseStart.CLASS_BODY, new StringProvider(member.format())).getResult().get());
 		}
 		return cu.toString();
-	}
-
-	private static String indent(int n) {
-		return StringUtils.repeat(" ", indentation * n);
-	}
-
-	private static String indent(int n, String text) {
-		String[] lines = StringUtils.split(text, "\n");
-		String result = "";
-		for (String line : lines) {
-			result += indent(n) + line + "\n";
-		}
-		return result;
 	}
 
 	public String getImports() {
@@ -172,21 +159,18 @@ public class SimpleJavaGenerator {
 
 		public String format() {
 			if (this.complete) {
-				return indent(1, declaration);
+				return declaration;
 			} else {
-				String override = this.override ? indent(1) + "@Override\n" : "";
-				String gen = this.generated
-						? indent(1) + String.format("@Generated(\"%s\")\n", CodeGenerator.class.getName())
-						: "";
-				String comment = this.comment != null ? indent(1) + "// " + this.comment + "\n" : "";
-				String header = comment + override + gen + indent(1) + declaration;
-				return code == null || code.isEmpty() ? header + ";\n"
-						: header + " {\n" + formatCode() + "\n" + indent(1) + "}\n";
+				String override = this.override ? "@Override\n" : "";
+				String gen = this.generated ? String.format("@Generated(\"%s\")\n", CodeGenerator.class.getName()) : "";
+				String comment = this.comment != null ? "// " + this.comment + "\n" : "";
+				String header = comment + override + gen + declaration;
+				return code == null || code.isEmpty() ? header + ";\n" : header + " {\n" + formatCode() + "\n" + "}\n";
 			}
 		}
 
 		private String formatCode() {
-			return (indent(2) + StringUtils.join(code, "\n" + indent(3)));
+			return StringUtils.join(code, "\n");
 		}
 	}
 }

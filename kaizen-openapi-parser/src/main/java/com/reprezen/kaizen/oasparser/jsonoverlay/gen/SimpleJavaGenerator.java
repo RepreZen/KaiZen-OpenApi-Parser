@@ -18,6 +18,7 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import javax.annotation.Generated;
@@ -28,6 +29,7 @@ import com.github.javaparser.ParserConfiguration;
 import com.github.javaparser.StringProvider;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Modifier;
+import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.BodyDeclaration;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.ConstructorDeclaration;
@@ -36,6 +38,7 @@ import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.ast.comments.JavadocComment;
 import com.github.javaparser.ast.comments.LineComment;
+import com.github.javaparser.ast.expr.Expression;
 import com.github.javaparser.ast.stmt.BlockStmt;
 import com.github.javaparser.ast.type.Type;
 import com.github.javaparser.ast.validator.Java8Validator;
@@ -104,7 +107,6 @@ public class SimpleJavaGenerator {
 	}
 
 	public String format() {
-		Map<String, BodyDeclaration<?>> memberMap = Maps.newLinkedHashMap();
 		CompilationUnit cu = new CompilationUnit();
 		if (fileComment != null) {
 			cu.addOrphanComment(new JavadocComment(fileComment));
@@ -114,13 +116,36 @@ public class SimpleJavaGenerator {
 			cu.addImport(imp);
 		}
 		cu.addType(type);
-		for (Member member : members) {
-			memberMap.put(member.getKey(), member.getDeclaration());
-		}
-		for (BodyDeclaration<?> member : memberMap.values()) {
-			type.addMember(member);
+		for (Member member : gatherFinalMembers(members, cu)) {
+			type.addMember(member.getDeclaration());
 		}
 		return cu.toString();
+	}
+
+	private Collection<Member> gatherFinalMembers(List<Member> members, CompilationUnit cu) {
+		Map<String, Member> memberMap = Maps.newLinkedHashMap();
+		for (Member member : members) {
+			String key = member.getKey();
+			if (!memberMap.containsKey(key)) {
+				memberMap.put(key, member);
+			} else {
+				BodyDeclaration<?> copy = member.getDeclaration().clone();
+				if (copy instanceof ConstructorDeclaration) {
+					((ConstructorDeclaration) copy).setBody(JavaParser.parseBlock("{}"));
+					((ConstructorDeclaration) copy).setComment(null);
+				} else if (copy instanceof MethodDeclaration) {
+					((MethodDeclaration) copy).setBody(null);
+					((MethodDeclaration) copy).setComment(null);
+				} else if (copy instanceof FieldDeclaration) {
+					((FieldDeclaration) copy).getVariable(0).setInitializer((Expression) null);
+					((FieldDeclaration) copy).setComment(null);
+				}
+				copy.setAnnotations(new NodeList<>());
+				Logger.getGlobal().warning(String.format("Suppressing already-present generated member in type %s: %s",
+						cu.getType(0).getNameAsString(), copy.toString()));
+			}
+		}
+		return memberMap.values();
 	}
 
 	public static class Member {

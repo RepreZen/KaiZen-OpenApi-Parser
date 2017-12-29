@@ -64,7 +64,10 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.PrimitiveOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.gen.SimpleJavaGenerator.ConstructorMember;
+import com.reprezen.kaizen.oasparser.jsonoverlay.gen.SimpleJavaGenerator.FieldMember;
 import com.reprezen.kaizen.oasparser.jsonoverlay.gen.SimpleJavaGenerator.Member;
+import com.reprezen.kaizen.oasparser.jsonoverlay.gen.SimpleJavaGenerator.MethodMember;
 import com.reprezen.kaizen.oasparser.jsonoverlay.gen.TypeData.Field;
 import com.reprezen.kaizen.oasparser.jsonoverlay.gen.TypeData.Type;
 import com.reprezen.kaizen.oasparser.val.ValidationResults;
@@ -99,7 +102,7 @@ public abstract class TypeGenerator {
 		SimpleJavaGenerator gen = new SimpleJavaGenerator(getPackage(), declaration);
 		if (existing != null) {
 			copyFileComment(gen, existing);
-			addManualMethods(gen, existing);
+			addManualMembers(gen, existing);
 		}
 		requireTypes(getImports(type));
 		addGeneratedMembers(type, gen);
@@ -276,18 +279,17 @@ public abstract class TypeGenerator {
 		}
 	}
 
-	private void addManualMethods(SimpleJavaGenerator gen, CompilationUnit existing) {
+	private void addManualMembers(SimpleJavaGenerator gen, CompilationUnit existing) {
 		for (TypeDeclaration<?> type : existing.getTypes()) {
 			for (BodyDeclaration<?> member : type.getMembers()) {
 				if (member instanceof MethodDeclaration || member instanceof FieldDeclaration
 						|| member instanceof ConstructorDeclaration) {
 					if (!isGenerated(member)) {
-						gen.addMember(new Member(member.toString(), null).complete(true));
+						gen.addMember(new Member(member));
 					}
 				}
 			}
 		}
-
 	}
 
 	private boolean isGenerated(BodyDeclaration<?> node) {
@@ -300,27 +302,26 @@ public abstract class TypeGenerator {
 	}
 
 	protected Members getConstructors(Type type) {
-		return new Members();
+		return new Members(type);
 	}
 
 	protected Members getFieldMembers(Field field) {
-		return new Members();
+		return new Members(field);
 	}
 
 	protected Members getFieldMethods(Field field) {
-		return new Members();
+		return new Members(field);
 	}
 
 	protected Members getOtherMembers(Type type) {
-		return new Members();
+		return new Members(type);
 	}
 
-	protected Member addMember(String declaration, Collection<String> code) {
-		Member member = new Member(declaration, code);
-		return member;
+	protected Member addMember(BodyDeclaration<?> declaration, Collection<String> code) {
+		return addMember(declaration, null);
 	}
 
-	protected final Member addMember(String declaration) {
+	protected final Member addMember(BodyDeclaration<?> declaration) {
 		return addMember(declaration, null);
 	}
 
@@ -328,19 +329,38 @@ public abstract class TypeGenerator {
 
 		private static final long serialVersionUID = 1L;
 
-		public Member add(String declaration, Collection<String> code) {
-			Member member = new Member(declaration, code);
-			super.add(member);
-			return member;
+		private Field field = null;
+
+		private Type type = null;
+
+		public Members(Type type) {
+			this.type = type;
 		}
 
-		public Member add(String declaration) {
-			return add(declaration, null);
+		public Members(Field field) {
+			this.field = field;
+		}
+
+		public Member addConstructor(String className, String... paramPairs) {
+			return addMember(new ConstructorMember(type, className, paramPairs));
+		}
+
+		public Member addMethod(String type, String name, String... paramPairs) {
+			return addMember(new MethodMember(field, type, name, paramPairs));
+		}
+
+		public Member addField(String type, String name) {
+			return addField(type, name, null);
+		}
+
+		public Member addField(String type, String name, String initializer) {
+			return addMember(new FieldMember(field, type, name, initializer));
 		}
 
 		public Member addMember(Member member) {
 			add(member);
 			return member;
 		}
+
 	}
 }

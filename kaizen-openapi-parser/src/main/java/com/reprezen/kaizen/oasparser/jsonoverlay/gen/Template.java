@@ -10,14 +10,14 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.jsonoverlay.gen;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 
-import com.google.common.base.Function;
-import com.google.common.collect.Lists;
 import com.reprezen.kaizen.oasparser.jsonoverlay.gen.TypeData.Field;
 import com.reprezen.kaizen.oasparser.jsonoverlay.gen.TypeData.Type;
 
@@ -43,12 +43,11 @@ public class Template {
 	}
 
 	public static <T> List<String> t(final T item, String... templates) {
-		return Lists.transform(Lists.newArrayList(templates), new Function<String, String>() {
-			@Override
-			public String apply(String template) {
-				return t(template, item);
-			}
-		});
+		return t(item, Arrays.asList(templates));
+	}
+
+	public static <T> List<String> t(final T item, List<String> templates) {
+		return templates.stream().map(s -> t(s, item)).collect(Collectors.toList());
 	}
 
 	private static String replacement(String var, Field field, String[] args) {
@@ -81,7 +80,7 @@ public class Template {
 			return quote(field.getParentPath());
 		case "qpointer": {
 			String path = field.getParentPath();
-			path = path == null || path.isEmpty() ? "" : "/"+path;
+			path = path == null || path.isEmpty() ? "" : "/" + path;
 			return quote(path);
 		}
 		case "qkeyPat":
@@ -97,7 +96,11 @@ public class Template {
 		case "overlayType":
 			return field.getOverlayType();
 		default:
-			return args[Integer.valueOf(var)];
+			if (var.matches("\\d+")) {
+				return args[Integer.valueOf(var)];
+			} else {
+				return replacement(var, field.getContainer(), args);
+			}
 		}
 	}
 
@@ -117,6 +120,9 @@ public class Template {
 	}
 
 	private static String replacement(String var, Object item, String[] args) {
+		if (item == null) {
+			return "${" + var + "}";
+		}
 		if (item instanceof Field) {
 			return replacement(var, (Field) item, args);
 		} else if (item instanceof Type) {

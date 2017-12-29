@@ -10,25 +10,37 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.jsonoverlay.gen;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import static com.reprezen.kaizen.oasparser.jsonoverlay.gen.Template.t;
 
-import org.apache.commons.lang3.StringUtils;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import javax.annotation.Generated;
 
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ParseStart;
 import com.github.javaparser.ParserConfiguration;
 import com.github.javaparser.StringProvider;
 import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.body.BodyDeclaration;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
+import com.github.javaparser.ast.body.ConstructorDeclaration;
+import com.github.javaparser.ast.body.FieldDeclaration;
+import com.github.javaparser.ast.body.MethodDeclaration;
+import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.ast.comments.JavadocComment;
+import com.github.javaparser.ast.comments.LineComment;
+import com.github.javaparser.ast.stmt.BlockStmt;
+import com.github.javaparser.ast.type.Type;
 import com.github.javaparser.ast.validator.Java8Validator;
-import com.google.common.base.Function;
-import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.reprezen.kaizen.oasparser.jsonoverlay.gen.TypeData.Field;
 
 public class SimpleJavaGenerator {
 
@@ -37,7 +49,7 @@ public class SimpleJavaGenerator {
 	private ClassOrInterfaceDeclaration type;
 	private List<Member> members = Lists.newArrayList();
 	private String fileComment;
-	private JavaParser parser = new JavaParser(new ParserConfiguration().setValidator(new Java8Validator()));
+	private static JavaParser parser = new JavaParser(new ParserConfiguration().setValidator(new Java8Validator()));
 	private static int indentation = 4;
 
 	public SimpleJavaGenerator(String pkg, ClassOrInterfaceDeclaration type) {
@@ -90,6 +102,7 @@ public class SimpleJavaGenerator {
 	}
 
 	public String format() {
+		Map<String, BodyDeclaration<?>> memberMap = Maps.newTreeMap();
 		CompilationUnit cu = new CompilationUnit();
 		if (fileComment != null) {
 			cu.addOrphanComment(new JavadocComment(fileComment));
@@ -100,77 +113,219 @@ public class SimpleJavaGenerator {
 		}
 		cu.addType(type);
 		for (Member member : members) {
-			type.addMember(parser.parse(ParseStart.CLASS_BODY, new StringProvider(member.format())).getResult().get());
+			memberMap.put(member.getKey(), member.getDeclaration());
+		}
+		for (BodyDeclaration<?> member : memberMap.values()) {
+			type.addMember(member);
 		}
 		return cu.toString();
 	}
 
-	public String getImports() {
-		List<String> importsList = Lists.newArrayList(imports);
-		Collections.sort(importsList);
-		return StringUtils.join(Collections2.transform(importsList, new Function<String, String>() {
-			@Override
-			public String apply(String imp) {
-				return "import " + imp + ";";
-			}
-		}), "\n");
-	}
-
 	public static class Member {
-		private String declaration;
-		private Collection<String> code;
-		private String comment;
-		private boolean override;
-		private boolean generated;
-		private boolean complete;
+		protected BodyDeclaration<?> declaration;
+		protected Field field = null;
+		protected com.reprezen.kaizen.oasparser.jsonoverlay.gen.TypeData.Type type = null;
 
-		public Member(String declaration, Collection<String> code) {
-			this.declaration = declaration;
-			this.code = code;
+		public Member(com.reprezen.kaizen.oasparser.jsonoverlay.gen.TypeData.Type type,
+				BodyDeclaration<?> declaration) {
+			this(declaration);
+			this.type = type;
 		}
 
-		public String getDeclaration() {
+		public Member(Field field, BodyDeclaration<?> declaration) {
+			this(declaration);
+			this.field = field;
+		}
+
+		public Member(BodyDeclaration<?> declaration) {
+			this.declaration = declaration;
+		}
+
+		public BodyDeclaration<?> getDeclaration() {
 			return declaration;
 		}
 
-		public Collection<String> getCode() {
-			return code;
+		public String getKey() {
+			if (declaration instanceof FieldDeclaration) {
+				FieldDeclaration field = (FieldDeclaration) declaration;
+				if (field.getVariables().size() != 1) {
+					throw new RuntimeException(
+							"Multiple fields in a single manual field declaration is not yet supported: "
+									+ field.toString());
+				}
+				return "F:" + field.getVariable(0).getNameAsString();
+			} else if (declaration instanceof MethodDeclaration) {
+				MethodDeclaration method = (MethodDeclaration) declaration;
+				return "M:" + method.getNameAsString() + ":" + method.getParameters().stream()
+						.map(p -> p.getType().toString()).collect(Collectors.joining(","));
+			} else if (declaration instanceof ConstructorDeclaration) {
+				ConstructorDeclaration constructor = (ConstructorDeclaration) declaration;
+				return "C:" + constructor.getParameters().stream().map(p -> p.getType().toString())
+						.collect(Collectors.joining(","));
+			}
+			throw new RuntimeException(
+					"Unsupported manual member type encountered: " + declaration.getClass().getName());
 		}
 
 		public Member override() {
-			this.override = true;
+			declaration.addMarkerAnnotation(Override.class);
 			return this;
 		}
 
 		public Member comment(String comment) {
-			this.comment = comment;
+			if (comment != null) {
+				declaration.addOrphanComment(new LineComment(comment));
+			}
 			return this;
 		}
 
 		public Member generated(boolean generated) {
-			this.generated = generated;
-			return this;
-		}
-
-		public Member complete(boolean complete) {
-			this.complete = complete;
-			return this;
-		}
-
-		public String format() {
-			if (this.complete) {
-				return declaration;
-			} else {
-				String override = this.override ? "@Override\n" : "";
-				String gen = this.generated ? String.format("@Generated(\"%s\")\n", CodeGenerator.class.getName()) : "";
-				String comment = this.comment != null ? "// " + this.comment + "\n" : "";
-				String header = comment + override + gen + declaration;
-				return code == null || code.isEmpty() ? header + ";\n" : header + " {\n" + formatCode() + "\n" + "}\n";
+			if (generated) {
+				declaration.addSingleMemberAnnotation(Generated.class, "\"" + CodeGenerator.class.getName() + "\"");
 			}
+			return this;
 		}
 
-		private String formatCode() {
-			return StringUtils.join(code, "\n");
+		public Member code(String... code) {
+			return code(Arrays.asList(code));
 		}
+
+		public Member code(Collection<String> code) {
+			throw new RuntimeException("Cannot add code to member of type " + this.declaration.getClass());
+		}
+
+		public Member _static(boolean _static) {
+			throw new RuntimeException("Cannot set member of type " + this.declaration.getClass() + " static");
+		}
+
+		public Member _public(boolean _public) {
+			return this;
+		}
+		
+		public String format() {
+			return declaration.toString();
+		}
+
+	}
+
+	public static class ConstructorMember extends Member {
+		public ConstructorMember(com.reprezen.kaizen.oasparser.jsonoverlay.gen.TypeData.Type type, String className,
+				String... paramPairs) {
+			this(type, className, Arrays.asList(paramPairs));
+		}
+
+		public ConstructorMember(com.reprezen.kaizen.oasparser.jsonoverlay.gen.TypeData.Type type, String className,
+				List<String> paramPairs) {
+			super(type, constructorDecl(type, className, paramPairs));
+		}
+
+		@Override
+		public Member code(Collection<String> code) {
+			// JavaParser does not appear capable of parsing calls to super() and this() in
+			// block statements. So we need to just add the statements one at a time...
+			BlockStmt body = ((ConstructorDeclaration) declaration).getBody();
+			for (String stmt : expandStrings(type, code)) {
+				body.addStatement(stmt);
+			}
+			return this;
+		}
+	}
+
+	private static ConstructorDeclaration constructorDecl(
+			com.reprezen.kaizen.oasparser.jsonoverlay.gen.TypeData.Type type, String className,
+			List<String> paramPairs) {
+		ConstructorDeclaration decl = new ConstructorDeclaration();
+		decl.setPublic(true);
+		decl.setName(t(className, type));
+		for (int i = 0; i < paramPairs.size(); i += 2) {
+			decl.addParameter(t(paramPairs.get(i), type), t(paramPairs.get(i + 1), type));
+		}
+		return decl;
+	}
+
+	public static class MethodMember extends Member {
+
+		public MethodMember(Field field, String type, String name, String... paramPairs) {
+			this(field, type, name, Arrays.asList(paramPairs));
+		}
+
+		public MethodMember(Field field, String type, String name, List<String> paramPairs) {
+			super(field, methodDecl(field, type, name, paramPairs));
+		}
+
+		private static MethodDeclaration methodDecl(Field field, String type, String name, List<String> paramPairs) {
+			MethodDeclaration decl = new MethodDeclaration();
+			decl.setPublic(true);
+			decl.setType(t(type, field));
+			decl.setName(t(name, field));
+			decl.setBody(null);
+			for (int i = 0; i < paramPairs.size(); i += 2) {
+				decl.addParameter(t(paramPairs.get(i), field), t(paramPairs.get(i + 1), field));
+			}
+			return decl;
+		}
+
+		@Override
+		public Member code(Collection<String> code) {
+			String blockCode = code != null ? "{" + String.join("", expandStrings(field, code)) + "}" : "{}";
+			BlockStmt block = SimpleJavaGenerator.parser.parse(ParseStart.BLOCK, new StringProvider(blockCode))
+					.getResult().get();
+			((MethodDeclaration) declaration).setBody(block);
+			return this;
+		}
+
+		@Override
+		public Member _static(boolean _static) {
+			((MethodDeclaration) declaration).setStatic(_static);
+			return this;
+		}
+
+	}
+
+	public static class FieldMember extends Member {
+		public FieldMember(Field field, String type, String name) {
+			this(field, type, name, null);
+		}
+
+		public FieldMember(Field field, String type, String name, String initializer) {
+			super(field, fieldDecl(field, type, name, initializer));
+		}
+
+		private static FieldDeclaration fieldDecl(Field field, String typeString, String name, String initializer) {
+			FieldDeclaration decl = new FieldDeclaration();
+			decl.setPrivate(true);
+			Type type = parser.parse(ParseStart.TYPE, new StringProvider(t(typeString, field))).getResult().get();
+			VariableDeclarator var = new VariableDeclarator(type, t(name, field));
+			if (initializer != null) {
+				var.setInitializer(parser.parse(ParseStart.EXPRESSION, new StringProvider(t(initializer, field)))
+						.getResult().get());
+			}
+			decl.addVariable(var);
+			return decl;
+		}
+
+		@Override
+		public Member _static(boolean _static) {
+			((FieldDeclaration) declaration).setStatic(_static);
+			return this;
+		}
+
+		@Override
+		public Member _public(boolean _public) {
+			
+			FieldDeclaration decl = (FieldDeclaration) declaration;
+			decl.setPrivate(!_public);
+			decl.setPublic(_public);
+			return this;
+		}
+	}
+
+	private static List<String> expandStrings(Field field, Collection<String> strings) {
+		return strings.stream().map(s -> t(s, field)).collect(Collectors.toList());
+	}
+
+	private static List<String> expandStrings(com.reprezen.kaizen.oasparser.jsonoverlay.gen.TypeData.Type type,
+			Collection<String> strings) {
+		return strings.stream().map(s -> t(s, type)).collect(Collectors.toList());
 	}
 }

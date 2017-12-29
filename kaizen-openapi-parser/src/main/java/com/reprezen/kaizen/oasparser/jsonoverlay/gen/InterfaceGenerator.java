@@ -17,8 +17,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
-
+import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.google.common.collect.Lists;
 import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
 import com.reprezen.kaizen.oasparser.jsonoverlay.gen.SimpleJavaGenerator.Member;
@@ -37,13 +36,20 @@ public class InterfaceGenerator extends TypeGenerator {
 	}
 
 	@Override
-	protected String getTypeDeclaration(Type type, String suffix) {
+	protected ClassOrInterfaceDeclaration getTypeDeclaration(Type type, String suffix) {
 		String superType = getSuperType(type);
 		requireTypes(superType);
 		requireTypes(type.getExtendInterfaces());
+		ClassOrInterfaceDeclaration decl = new ClassOrInterfaceDeclaration();
+		decl.setInterface(true);
+		decl.setName(type.getName());
+		decl.setPublic(true);
 		List<String> allTypes = Lists.newArrayList(superType);
 		allTypes.addAll(type.getExtendInterfaces());
-		return t("public interface ${name} extends ${0}", type, StringUtils.join(allTypes, ", "));
+		for (String extensionType : allTypes) {
+			decl.addExtendedType(extensionType);
+		}
+		return decl;
 	}
 
 	@Override

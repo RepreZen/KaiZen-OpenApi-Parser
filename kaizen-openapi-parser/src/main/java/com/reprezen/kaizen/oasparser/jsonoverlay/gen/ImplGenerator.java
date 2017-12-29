@@ -19,6 +19,7 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
@@ -61,10 +62,16 @@ public class ImplGenerator extends TypeGenerator {
 	}
 
 	@Override
-	public String getTypeDeclaration(Type type, String suffix) {
+	public ClassOrInterfaceDeclaration getTypeDeclaration(Type type, String suffix) {
 		requireTypes(OpenApiObjectImpl.class, OpenApi3.class);
 		requireTypes(type);
-		return t("public class ${name}${0} extends ${1} implements ${name}", type, suffix, getSuperType(type));
+		ClassOrInterfaceDeclaration decl = new ClassOrInterfaceDeclaration();
+		decl.setInterface(false);
+		decl.setPublic(true);
+		decl.setName(type.getName() + suffix);
+		decl.addExtendedType(getSuperType(type));
+		decl.addImplementedType(type.getName());
+		return decl;
 	}
 
 	private String getSuperType(Type type) {

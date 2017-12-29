@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.annotation.Generated;
@@ -29,9 +30,9 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.github.javaparser.JavaParser;
-import com.github.javaparser.ParseException;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.BodyDeclaration;
+import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.ConstructorDeclaration;
 import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
@@ -40,7 +41,6 @@ import com.github.javaparser.ast.comments.Comment;
 import com.github.javaparser.ast.expr.AnnotationExpr;
 import com.google.common.base.Charsets;
 import com.google.common.base.Function;
-import com.google.common.base.Optional;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -89,13 +89,13 @@ public abstract class TypeGenerator {
 		this.preserve = preserve;
 	}
 
-	protected abstract String getTypeDeclaration(Type type, String suffix);
+	protected abstract ClassOrInterfaceDeclaration getTypeDeclaration(Type type, String suffix);
 
 	public void generate(Type type) throws IOException {
 		File javaFile = new File(dir, t("${name}${0}.java", type, suffix));
 		System.out.println("Generating " + javaFile.getCanonicalFile());
 		CompilationUnit existing = preserve && javaFile.exists() ? tryParse(javaFile) : null;
-		String declaration = getTypeDeclaration(type, suffix);
+		ClassOrInterfaceDeclaration declaration = getTypeDeclaration(type, suffix);
 		SimpleJavaGenerator gen = new SimpleJavaGenerator(getPackage(), declaration);
 		if (existing != null) {
 			copyFileComment(gen, existing);
@@ -257,7 +257,7 @@ public abstract class TypeGenerator {
 	private CompilationUnit tryParse(File file) {
 		try {
 			return JavaParser.parse(file);
-		} catch (ParseException | IOException e) {
+		} catch (IOException e) {
 			System.err.println("ABORTING AFTER PARTIAL GENERATION!");
 			System.err.printf(
 					"Parsing of file %s failed; so generation cannot continue without destroying manual code.\n", file);
@@ -270,15 +270,15 @@ public abstract class TypeGenerator {
 	}
 
 	private void copyFileComment(SimpleJavaGenerator gen, CompilationUnit existing) {
-		Comment fileComment = existing.getComment();
-		if (fileComment != null) {
-			gen.setFileComment(fileComment.toString());
+		Optional<Comment> fileComment = existing.getComment();
+		if (fileComment.isPresent()) {
+			gen.setFileComment(fileComment.get().toString());
 		}
 	}
 
 	private void addManualMethods(SimpleJavaGenerator gen, CompilationUnit existing) {
-		for (TypeDeclaration type : existing.getTypes()) {
-			for (BodyDeclaration member : type.getMembers()) {
+		for (TypeDeclaration<?> type : existing.getTypes()) {
+			for (BodyDeclaration<?> member : type.getMembers()) {
 				if (member instanceof MethodDeclaration || member instanceof FieldDeclaration
 						|| member instanceof ConstructorDeclaration) {
 					if (!isGenerated(member)) {
@@ -290,7 +290,7 @@ public abstract class TypeGenerator {
 
 	}
 
-	private boolean isGenerated(BodyDeclaration node) {
+	private boolean isGenerated(BodyDeclaration<?> node) {
 		for (AnnotationExpr annotation : node.getAnnotations()) {
 			if (annotation.getName().toString().equals("Generated")) {
 				return true;

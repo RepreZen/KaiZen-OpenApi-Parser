@@ -1,29 +1,29 @@
 package com.reprezen.kaizen.oasparser.ovl3;
 
-import com.fasterxml.jackson.databind.JsonNode;
+import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
+import com.reprezen.kaizen.oasparser.model3.Server;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
-import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
+import com.reprezen.kaizen.oasparser.ovl3.OperationImpl;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
-import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
+import com.reprezen.kaizen.oasparser.model3.Path;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
+import java.util.Collection;
 import com.reprezen.kaizen.oasparser.model3.OpenApi3;
+import com.reprezen.kaizen.oasparser.ovl3.ParameterImpl;
+import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
+import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
+import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.model3.Operation;
 import com.reprezen.kaizen.oasparser.model3.Parameter;
-import com.reprezen.kaizen.oasparser.model3.Path;
-import com.reprezen.kaizen.oasparser.model3.Server;
 import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
-import com.reprezen.kaizen.oasparser.ovl3.OperationImpl;
-import com.reprezen.kaizen.oasparser.ovl3.ParameterImpl;
-import com.reprezen.kaizen.oasparser.ovl3.ServerImpl;
-import java.util.Collection;
 import java.util.Map;
-import javax.annotation.Generated;
+import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.reprezen.kaizen.oasparser.ovl3.ServerImpl;
+import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 
 public class PathImpl extends OpenApiObjectImpl<OpenApi3, Path> implements Path {
 
@@ -150,13 +150,13 @@ public class PathImpl extends OpenApiObjectImpl<OpenApi3, Path> implements Path 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public PathImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
-            super.maybeElaborateChildrenAtCreation();
+        super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public PathImpl(Path path, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(path, parent, refReg);
-            super.maybeElaborateChildrenAtCreation();
+        super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -427,30 +427,30 @@ public class PathImpl extends OpenApiObjectImpl<OpenApi3, Path> implements Path 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     protected void elaborateChildren() {
         summary = createChild("summary", this, StringOverlay.factory);
-            description = createChild("description", this, StringOverlay.factory);
-            operations = createChildMap("", this, OperationImpl.factory, "get|put|post|delete|options|head|patch|trace");
-            servers = createChildList("servers", this, ServerImpl.factory);
-            parameters = createChildList("parameters", this, ParameterImpl.factory);
-            refables.put("parameters", parameters);
-            extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
+        description = createChild("description", this, StringOverlay.factory);
+        operations = createChildMap("", this, OperationImpl.factory, "get|put|post|delete|options|head|patch|trace");
+        servers = createChildList("servers", this, ServerImpl.factory);
+        parameters = createChildList("parameters", this, ParameterImpl.factory);
+        refables.put("parameters", parameters);
+        extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public static OverlayFactory<Path, PathImpl> factory = new OverlayFactory<Path, PathImpl>() {
-    @Override
-    protected Class<? super PathImpl> getOverlayClass() {
-         return PathImpl.class;
-    }
 
-    @Override
-    public PathImpl _create(Path path, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-        return new PathImpl(path, parent, refReg);
-    }
+        @Override
+        protected Class<? super PathImpl> getOverlayClass() {
+            return PathImpl.class;
+        }
 
-    @Override
-    public PathImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-        return new PathImpl(json, parent, refReg);
-    }
-};
+        @Override
+        public PathImpl _create(Path path, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            return new PathImpl(path, parent, refReg);
+        }
 
+        @Override
+        public PathImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            return new PathImpl(json, parent, refReg);
+        }
+    };
 }

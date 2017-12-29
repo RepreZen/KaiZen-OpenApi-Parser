@@ -1,14 +1,14 @@
 package com.reprezen.kaizen.oasparser.model3;
 
-import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
-import com.reprezen.kaizen.oasparser.model3.Example;
-import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
-import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
 import com.reprezen.kaizen.oasparser.model3.Schema;
 import com.reprezen.kaizen.oasparser.model3.Xml;
+import javax.annotation.Generated;
+import com.reprezen.kaizen.oasparser.model3.Example;
 import java.util.Collection;
 import java.util.Map;
-import javax.annotation.Generated;
+import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
+import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
+import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
 
 public interface Schema extends OpenApiObject<OpenApi3, Schema> {
 
@@ -583,5 +583,4 @@ public interface Schema extends OpenApiObject<OpenApi3, Schema> {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void removeExtension(String name);
-
 }

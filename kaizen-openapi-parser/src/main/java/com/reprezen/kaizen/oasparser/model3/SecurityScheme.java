@@ -1,9 +1,9 @@
 package com.reprezen.kaizen.oasparser.model3;
 
+import javax.annotation.Generated;
+import java.util.Map;
 import com.reprezen.kaizen.oasparser.model3.OAuthFlow;
 import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
-import java.util.Map;
-import javax.annotation.Generated;
 
 public interface SecurityScheme extends OpenApiObject<OpenApi3, SecurityScheme> {
 
@@ -160,5 +160,4 @@ public interface SecurityScheme extends OpenApiObject<OpenApi3, SecurityScheme> 
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void removeExtension(String name);
-
 }

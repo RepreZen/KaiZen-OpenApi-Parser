@@ -1,9 +1,9 @@
 package com.reprezen.kaizen.oasparser.model3;
 
-import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
-import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
-import java.util.Map;
 import javax.annotation.Generated;
+import java.util.Map;
+import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
+import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
 
 public interface Tag extends OpenApiObject<OpenApi3, Tag> {
 
@@ -58,5 +58,4 @@ public interface Tag extends OpenApiObject<OpenApi3, Tag> {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void removeExtension(String name);
-
 }

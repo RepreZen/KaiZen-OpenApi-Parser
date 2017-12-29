@@ -1,22 +1,22 @@
 package com.reprezen.kaizen.oasparser.ovl3;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
+import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
-import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
 import com.reprezen.kaizen.oasparser.model3.License;
-import com.reprezen.kaizen.oasparser.model3.OpenApi3;
-import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
 import java.util.Collection;
-import java.util.Map;
+import com.reprezen.kaizen.oasparser.model3.OpenApi3;
+import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import javax.annotation.Generated;
+import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
+import java.util.Map;
+import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 
 public class LicenseImpl extends OpenApiObjectImpl<OpenApi3, License> implements License {
 
@@ -25,13 +25,13 @@ public class LicenseImpl extends OpenApiObjectImpl<OpenApi3, License> implements
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public LicenseImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
-            super.maybeElaborateChildrenAtCreation();
+        super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public LicenseImpl(License license, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(license, parent, refReg);
-            super.maybeElaborateChildrenAtCreation();
+        super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -128,26 +128,26 @@ public class LicenseImpl extends OpenApiObjectImpl<OpenApi3, License> implements
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     protected void elaborateChildren() {
         name = createChild("name", this, StringOverlay.factory);
-            url = createChild("url", this, StringOverlay.factory);
-            extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
+        url = createChild("url", this, StringOverlay.factory);
+        extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public static OverlayFactory<License, LicenseImpl> factory = new OverlayFactory<License, LicenseImpl>() {
-    @Override
-    protected Class<? super LicenseImpl> getOverlayClass() {
-         return LicenseImpl.class;
-    }
 
-    @Override
-    public LicenseImpl _create(License license, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-        return new LicenseImpl(license, parent, refReg);
-    }
+        @Override
+        protected Class<? super LicenseImpl> getOverlayClass() {
+            return LicenseImpl.class;
+        }
 
-    @Override
-    public LicenseImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-        return new LicenseImpl(json, parent, refReg);
-    }
-};
+        @Override
+        public LicenseImpl _create(License license, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            return new LicenseImpl(license, parent, refReg);
+        }
 
+        @Override
+        public LicenseImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            return new LicenseImpl(json, parent, refReg);
+        }
+    };
 }

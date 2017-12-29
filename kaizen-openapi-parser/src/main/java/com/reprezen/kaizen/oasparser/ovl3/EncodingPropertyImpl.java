@@ -1,37 +1,37 @@
 package com.reprezen.kaizen.oasparser.ovl3;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.reprezen.kaizen.oasparser.jsonoverlay.BooleanOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
-import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
+import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
-import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
-import com.reprezen.kaizen.oasparser.model3.EncodingProperty;
-import com.reprezen.kaizen.oasparser.model3.OpenApi3;
-import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
 import java.util.Collection;
-import java.util.Map;
+import com.reprezen.kaizen.oasparser.model3.OpenApi3;
+import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
+import com.reprezen.kaizen.oasparser.jsonoverlay.BooleanOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import javax.annotation.Generated;
+import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
+import java.util.Map;
+import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.reprezen.kaizen.oasparser.model3.EncodingProperty;
+import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 
 public class EncodingPropertyImpl extends OpenApiObjectImpl<OpenApi3, EncodingProperty> implements EncodingProperty {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public EncodingPropertyImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
-            super.maybeElaborateChildrenAtCreation();
+        super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public EncodingPropertyImpl(EncodingProperty encodingProperty, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(encodingProperty, parent, refReg);
-            super.maybeElaborateChildrenAtCreation();
+        super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -115,14 +115,14 @@ public class EncodingPropertyImpl extends OpenApiObjectImpl<OpenApi3, EncodingPr
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean isHeaderReference(String key) {
         ChildOverlay<String, StringOverlay> child = headers.getChild(key);
-            return child != null ? child.isReference() : false;
+        return child != null ? child.isReference() : false;
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Reference getHeaderReference(String key) {
         ChildOverlay<String, StringOverlay> child = headers.getChild(key);
-            return child != null ? child.getReference() : null;
+        return child != null ? child.getReference() : null;
     }
 
     // Style
@@ -216,29 +216,29 @@ public class EncodingPropertyImpl extends OpenApiObjectImpl<OpenApi3, EncodingPr
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     protected void elaborateChildren() {
         contentType = createChild("contentType", this, StringOverlay.factory);
-            headers = createChildMap("headers", this, StringOverlay.factory, null);
-            refables.put("headers", headers);
-            style = createChild("style", this, StringOverlay.factory);
-            explode = createChild("explode", this, BooleanOverlay.factory);
-            extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
+        headers = createChildMap("headers", this, StringOverlay.factory, null);
+        refables.put("headers", headers);
+        style = createChild("style", this, StringOverlay.factory);
+        explode = createChild("explode", this, BooleanOverlay.factory);
+        extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public static OverlayFactory<EncodingProperty, EncodingPropertyImpl> factory = new OverlayFactory<EncodingProperty, EncodingPropertyImpl>() {
-    @Override
-    protected Class<? super EncodingPropertyImpl> getOverlayClass() {
-         return EncodingPropertyImpl.class;
-    }
 
-    @Override
-    public EncodingPropertyImpl _create(EncodingProperty encodingProperty, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-        return new EncodingPropertyImpl(encodingProperty, parent, refReg);
-    }
+        @Override
+        protected Class<? super EncodingPropertyImpl> getOverlayClass() {
+            return EncodingPropertyImpl.class;
+        }
 
-    @Override
-    public EncodingPropertyImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-        return new EncodingPropertyImpl(json, parent, refReg);
-    }
-};
+        @Override
+        public EncodingPropertyImpl _create(EncodingProperty encodingProperty, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            return new EncodingPropertyImpl(encodingProperty, parent, refReg);
+        }
 
+        @Override
+        public EncodingPropertyImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            return new EncodingPropertyImpl(json, parent, refReg);
+        }
+    };
 }

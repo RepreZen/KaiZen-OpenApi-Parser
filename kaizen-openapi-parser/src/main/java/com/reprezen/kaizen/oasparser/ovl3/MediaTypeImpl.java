@@ -1,41 +1,41 @@
 package com.reprezen.kaizen.oasparser.ovl3;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
-import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
-import com.reprezen.kaizen.oasparser.model3.EncodingProperty;
-import com.reprezen.kaizen.oasparser.model3.Example;
-import com.reprezen.kaizen.oasparser.model3.MediaType;
-import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.Schema;
-import com.reprezen.kaizen.oasparser.ovl3.EncodingPropertyImpl;
-import com.reprezen.kaizen.oasparser.ovl3.ExampleImpl;
-import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
-import com.reprezen.kaizen.oasparser.ovl3.SchemaImpl;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
 import java.util.Collection;
-import java.util.Map;
+import com.reprezen.kaizen.oasparser.ovl3.ExampleImpl;
+import com.reprezen.kaizen.oasparser.model3.OpenApi3;
+import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
+import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
+import com.reprezen.kaizen.oasparser.ovl3.EncodingPropertyImpl;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import javax.annotation.Generated;
+import com.reprezen.kaizen.oasparser.ovl3.SchemaImpl;
+import com.reprezen.kaizen.oasparser.model3.MediaType;
+import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
+import com.reprezen.kaizen.oasparser.model3.Example;
+import java.util.Map;
+import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.reprezen.kaizen.oasparser.model3.EncodingProperty;
 
 public class MediaTypeImpl extends OpenApiObjectImpl<OpenApi3, MediaType> implements MediaType {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public MediaTypeImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
-            super.maybeElaborateChildrenAtCreation();
+        super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public MediaTypeImpl(MediaType mediaType, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(mediaType, parent, refReg);
-            super.maybeElaborateChildrenAtCreation();
+        super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -131,14 +131,14 @@ public class MediaTypeImpl extends OpenApiObjectImpl<OpenApi3, MediaType> implem
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean isExampleReference(String key) {
         ChildOverlay<Example, ExampleImpl> child = examples.getChild(key);
-            return child != null ? child.isReference() : false;
+        return child != null ? child.isReference() : false;
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Reference getExampleReference(String key) {
         ChildOverlay<Example, ExampleImpl> child = examples.getChild(key);
-            return child != null ? child.getReference() : null;
+        return child != null ? child.getReference() : null;
     }
 
     // Example
@@ -250,30 +250,30 @@ public class MediaTypeImpl extends OpenApiObjectImpl<OpenApi3, MediaType> implem
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     protected void elaborateChildren() {
         schema = createChild("schema", this, SchemaImpl.factory);
-            refables.put("schema", schema);
-            examples = createChildMap("examples", this, ExampleImpl.factory, "[a-zA-Z0-9\\._-]+");
-            refables.put("examples", examples);
-            example = createChild("example", this, ObjectOverlay.factory);
-            encodingProperties = createChildMap("encoding", this, EncodingPropertyImpl.factory, null);
-            extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
+        refables.put("schema", schema);
+        examples = createChildMap("examples", this, ExampleImpl.factory, "[a-zA-Z0-9\\._-]+");
+        refables.put("examples", examples);
+        example = createChild("example", this, ObjectOverlay.factory);
+        encodingProperties = createChildMap("encoding", this, EncodingPropertyImpl.factory, null);
+        extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public static OverlayFactory<MediaType, MediaTypeImpl> factory = new OverlayFactory<MediaType, MediaTypeImpl>() {
-    @Override
-    protected Class<? super MediaTypeImpl> getOverlayClass() {
-         return MediaTypeImpl.class;
-    }
 
-    @Override
-    public MediaTypeImpl _create(MediaType mediaType, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-        return new MediaTypeImpl(mediaType, parent, refReg);
-    }
+        @Override
+        protected Class<? super MediaTypeImpl> getOverlayClass() {
+            return MediaTypeImpl.class;
+        }
 
-    @Override
-    public MediaTypeImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-        return new MediaTypeImpl(json, parent, refReg);
-    }
-};
+        @Override
+        public MediaTypeImpl _create(MediaType mediaType, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            return new MediaTypeImpl(mediaType, parent, refReg);
+        }
 
+        @Override
+        public MediaTypeImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            return new MediaTypeImpl(json, parent, refReg);
+        }
+    };
 }

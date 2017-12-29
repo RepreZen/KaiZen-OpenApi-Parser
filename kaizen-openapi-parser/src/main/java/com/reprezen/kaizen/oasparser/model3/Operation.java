@@ -1,17 +1,17 @@
 package com.reprezen.kaizen.oasparser.model3;
 
-import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
-import com.reprezen.kaizen.oasparser.model3.Callback;
-import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
-import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
-import com.reprezen.kaizen.oasparser.model3.Parameter;
-import com.reprezen.kaizen.oasparser.model3.RequestBody;
-import com.reprezen.kaizen.oasparser.model3.Response;
-import com.reprezen.kaizen.oasparser.model3.SecurityRequirement;
 import com.reprezen.kaizen.oasparser.model3.Server;
+import com.reprezen.kaizen.oasparser.model3.Callback;
+import javax.annotation.Generated;
+import com.reprezen.kaizen.oasparser.model3.Response;
+import com.reprezen.kaizen.oasparser.model3.RequestBody;
+import com.reprezen.kaizen.oasparser.model3.SecurityRequirement;
+import com.reprezen.kaizen.oasparser.model3.Parameter;
 import java.util.Collection;
 import java.util.Map;
-import javax.annotation.Generated;
+import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
+import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
+import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
 
 public interface Operation extends OpenApiObject<OpenApi3, Operation> {
 
@@ -323,5 +323,4 @@ public interface Operation extends OpenApiObject<OpenApi3, Operation> {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void removeExtension(String name);
-
 }

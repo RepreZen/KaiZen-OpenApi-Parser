@@ -1,10 +1,10 @@
 package com.reprezen.kaizen.oasparser.model3;
 
-import com.reprezen.kaizen.oasparser.model3.Contact;
-import com.reprezen.kaizen.oasparser.model3.License;
-import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
-import java.util.Map;
 import javax.annotation.Generated;
+import com.reprezen.kaizen.oasparser.model3.License;
+import java.util.Map;
+import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
+import com.reprezen.kaizen.oasparser.model3.Contact;
 
 public interface Info extends OpenApiObject<OpenApi3, Info> {
 
@@ -89,5 +89,4 @@ public interface Info extends OpenApiObject<OpenApi3, Info> {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void removeExtension(String name);
-
 }

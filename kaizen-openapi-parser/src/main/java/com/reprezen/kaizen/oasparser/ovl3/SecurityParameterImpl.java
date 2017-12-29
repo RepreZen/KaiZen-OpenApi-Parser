@@ -1,18 +1,18 @@
 package com.reprezen.kaizen.oasparser.ovl3;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.JsonNodeFactory;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
-import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
+import java.util.Collection;
 import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.SecurityParameter;
-import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
-import java.util.Collection;
 import javax.annotation.Generated;
+import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 
 public class SecurityParameterImpl extends OpenApiObjectImpl<OpenApi3, SecurityParameter> implements SecurityParameter {
 
@@ -24,13 +24,13 @@ public class SecurityParameterImpl extends OpenApiObjectImpl<OpenApi3, SecurityP
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public SecurityParameterImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
-            super.maybeElaborateChildrenAtCreation();
+        super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public SecurityParameterImpl(SecurityParameter securityParameter, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(securityParameter, parent, refReg);
-            super.maybeElaborateChildrenAtCreation();
+        super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -99,20 +99,20 @@ public class SecurityParameterImpl extends OpenApiObjectImpl<OpenApi3, SecurityP
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public static OverlayFactory<SecurityParameter, SecurityParameterImpl> factory = new OverlayFactory<SecurityParameter, SecurityParameterImpl>() {
-    @Override
-    protected Class<? super SecurityParameterImpl> getOverlayClass() {
-         return SecurityParameterImpl.class;
-    }
 
-    @Override
-    public SecurityParameterImpl _create(SecurityParameter securityParameter, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-        return new SecurityParameterImpl(securityParameter, parent, refReg);
-    }
+        @Override
+        protected Class<? super SecurityParameterImpl> getOverlayClass() {
+            return SecurityParameterImpl.class;
+        }
 
-    @Override
-    public SecurityParameterImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-        return new SecurityParameterImpl(json, parent, refReg);
-    }
-};
+        @Override
+        public SecurityParameterImpl _create(SecurityParameter securityParameter, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            return new SecurityParameterImpl(securityParameter, parent, refReg);
+        }
 
+        @Override
+        public SecurityParameterImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            return new SecurityParameterImpl(json, parent, refReg);
+        }
+    };
 }

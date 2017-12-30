@@ -258,6 +258,13 @@ public class SimpleJavaGenerator {
 		public String format() {
 			return declaration.toString();
 		}
+
+		public String getName() {
+			return null;
+		}
+
+		public void setName(String name) {
+		}
 	}
 
 	public static class ConstructorMember extends Member {
@@ -289,7 +296,6 @@ public class SimpleJavaGenerator {
 		protected void setAccess(Modifier mod) {
 			cons.setModifiers(setAccessModifier(cons.getModifiers(), mod));
 		}
-
 	}
 
 	private static ConstructorDeclaration constructorDecl(
@@ -354,6 +360,15 @@ public class SimpleJavaGenerator {
 			meth.setModifiers(setAccessModifier(meth.getModifiers(), mod));
 		}
 
+		@Override
+		public String getName() {
+			return meth.getNameAsString();
+		}
+
+		@Override
+		public void setName(String name) {
+			meth.setName(name);
+		}
 	}
 
 	public static class FieldMember extends Member {
@@ -392,6 +407,15 @@ public class SimpleJavaGenerator {
 			fld.setModifiers(setAccessModifier(fld.getModifiers(), mod));
 		}
 
+		@Override
+		public String getName() {
+			return fld.getVariable(0).getNameAsString();
+		}
+
+		@Override
+		public void setName(String name) {
+			fld.getVariable(0).setName(name);
+		}
 	}
 
 	private static List<String> expandStrings(Field field, Collection<String> strings) {

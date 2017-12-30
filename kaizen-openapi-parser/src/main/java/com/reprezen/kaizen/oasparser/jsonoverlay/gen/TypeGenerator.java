@@ -239,18 +239,30 @@ public abstract class TypeGenerator {
 	}
 
 	protected void addGeneratedMembers(Type type, SimpleJavaGenerator gen) {
-		gen.addGeneratedMembers(getConstructors(type));
+		Members members = new Members(type);
+		members.addAll(getConstructors(type));
 		for (Field field : type.getFields().values()) {
 			if (!skipField(field)) {
-				gen.addGeneratedMembers(getFieldMembers(field));
+				members.addAll(getFieldMembers(field));
 			}
 		}
 		for (Field field : type.getFields().values()) {
 			if (!skipField(field)) {
-				gen.addGeneratedMembers(getFieldMethods(field));
+				members.addAll(getFieldMethods(field));
 			}
 		}
-		gen.addGeneratedMembers(getOtherMembers(type));
+		members.addAll(getOtherMembers(type));
+		for (Member member : members) {
+			maybeRename(member, type.getRenames());
+		}
+		gen.addGeneratedMembers(members);
+	}
+
+	private void maybeRename(Member member, Map<String, String> renames) {
+		String name = member.getName();
+		if (name != null && renames.containsKey(name)) {
+			member.setName(renames.get(name));
+		}
 	}
 
 	protected boolean skipField(Field field) {

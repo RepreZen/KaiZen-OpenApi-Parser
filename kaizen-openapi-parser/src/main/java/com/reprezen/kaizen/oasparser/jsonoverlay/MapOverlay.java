@@ -104,7 +104,7 @@ public class MapOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Map<St
 	}
 	
 	public void set(String name, V value) {
-		overlays.put(name, valueFactory.create(value, this, refReg));
+		overlays.put(name, valueFactory.create(value, this, refReg, null));
 	}
 
 	public void remove(String name) {

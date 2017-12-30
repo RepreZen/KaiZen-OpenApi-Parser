@@ -10,6 +10,8 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.jsonoverlay;
 
+import java.net.URL;
+
 import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -28,7 +30,7 @@ public class ChildOverlay<V, OV extends JsonOverlay<V>> implements IJsonOverlay<
 		this.path = new JsonPath(path);
 		this.parent = parent;
 		this.factory = factory;
-		this.overlay = factory.create(value, parent, refReg);
+		this.overlay = factory.create(value, parent, refReg, null);
 	}
 
 	public ChildOverlay(String path, JsonNode json, JsonOverlay<?> parent, OverlayFactory<V, OV> factory,
@@ -53,7 +55,7 @@ public class ChildOverlay<V, OV extends JsonOverlay<V>> implements IJsonOverlay<
 				} else {
 					// note - since this is a reference, we don't set parent. If there's a way to
 					// navigate to the object directly, that will determine its parent
-					this.overlay = factory.create(resolved, null, refReg);
+					this.overlay = factory.create(resolved, null, refReg, reference);
 					refReg.setOverlay(resolved, overlay);
 				}
 			} else {
@@ -158,6 +160,16 @@ public class ChildOverlay<V, OV extends JsonOverlay<V>> implements IJsonOverlay<
 
 	public JsonOverlay<V> getOverlay() {
 		return overlay;
+	}
+
+	public String getPathFromRoot() {
+		return overlay.getPathFromRoot();
+	}
+
+
+
+	public URL getJsonReference() {
+		return overlay.getJsonReference();
 	}
 
 	@Override

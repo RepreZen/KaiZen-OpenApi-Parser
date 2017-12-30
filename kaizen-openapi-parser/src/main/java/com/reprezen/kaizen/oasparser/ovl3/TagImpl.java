@@ -1,37 +1,37 @@
 package com.reprezen.kaizen.oasparser.ovl3;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
+import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
-import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
-import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
-import com.reprezen.kaizen.oasparser.model3.OpenApi3;
-import com.reprezen.kaizen.oasparser.model3.Tag;
-import com.reprezen.kaizen.oasparser.ovl3.ExternalDocsImpl;
-import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
 import java.util.Collection;
-import java.util.Map;
+import com.reprezen.kaizen.oasparser.model3.OpenApi3;
+import com.reprezen.kaizen.oasparser.ovl3.ExternalDocsImpl;
+import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import javax.annotation.Generated;
+import com.reprezen.kaizen.oasparser.model3.Tag;
+import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
+import java.util.Map;
+import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
+import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 
 public class TagImpl extends OpenApiObjectImpl<OpenApi3, Tag> implements Tag {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public TagImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
-            super.maybeElaborateChildrenAtCreation();
+        super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public TagImpl(Tag tag, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(tag, parent, refReg);
-            super.maybeElaborateChildrenAtCreation();
+        super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -150,27 +150,27 @@ public class TagImpl extends OpenApiObjectImpl<OpenApi3, Tag> implements Tag {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     protected void elaborateChildren() {
         name = createChild("name", this, StringOverlay.factory);
-            description = createChild("description", this, StringOverlay.factory);
-            externalDocs = createChild("externalDocs", this, ExternalDocsImpl.factory);
-            extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
+        description = createChild("description", this, StringOverlay.factory);
+        externalDocs = createChild("externalDocs", this, ExternalDocsImpl.factory);
+        extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public static OverlayFactory<Tag, TagImpl> factory = new OverlayFactory<Tag, TagImpl>() {
-    @Override
-    protected Class<? super TagImpl> getOverlayClass() {
-         return TagImpl.class;
-    }
 
-    @Override
-    public TagImpl _create(Tag tag, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-        return new TagImpl(tag, parent, refReg);
-    }
+        @Override
+        protected Class<? super TagImpl> getOverlayClass() {
+            return TagImpl.class;
+        }
 
-    @Override
-    public TagImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-        return new TagImpl(json, parent, refReg);
-    }
-};
+        @Override
+        public TagImpl _create(Tag tag, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            return new TagImpl(tag, parent, refReg);
+        }
 
+        @Override
+        public TagImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            return new TagImpl(json, parent, refReg);
+        }
+    };
 }

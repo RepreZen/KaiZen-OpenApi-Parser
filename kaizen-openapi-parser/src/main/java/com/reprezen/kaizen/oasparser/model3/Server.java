@@ -1,9 +1,9 @@
 package com.reprezen.kaizen.oasparser.model3;
 
-import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
-import com.reprezen.kaizen.oasparser.model3.ServerVariable;
-import java.util.Map;
 import javax.annotation.Generated;
+import java.util.Map;
+import com.reprezen.kaizen.oasparser.model3.ServerVariable;
+import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
 
 public interface Server extends OpenApiObject<OpenApi3, Server> {
 
@@ -92,5 +92,4 @@ public interface Server extends OpenApiObject<OpenApi3, Server> {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void removeExtension(String name);
-
 }

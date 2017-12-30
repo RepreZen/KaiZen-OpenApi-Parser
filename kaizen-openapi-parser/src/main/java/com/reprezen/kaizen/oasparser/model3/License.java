@@ -1,8 +1,8 @@
 package com.reprezen.kaizen.oasparser.model3;
 
-import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
-import java.util.Map;
 import javax.annotation.Generated;
+import java.util.Map;
+import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
 
 public interface License extends OpenApiObject<OpenApi3, License> {
 
@@ -47,5 +47,4 @@ public interface License extends OpenApiObject<OpenApi3, License> {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void removeExtension(String name);
-
 }

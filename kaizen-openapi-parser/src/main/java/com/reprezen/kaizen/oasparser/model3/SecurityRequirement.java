@@ -1,9 +1,9 @@
 package com.reprezen.kaizen.oasparser.model3;
 
+import javax.annotation.Generated;
+import java.util.Map;
 import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
 import com.reprezen.kaizen.oasparser.model3.SecurityParameter;
-import java.util.Map;
-import javax.annotation.Generated;
 
 public interface SecurityRequirement extends OpenApiObject<OpenApi3, SecurityRequirement> {
 
@@ -28,5 +28,4 @@ public interface SecurityRequirement extends OpenApiObject<OpenApi3, SecurityReq
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void removeRequirement(String name);
-
 }

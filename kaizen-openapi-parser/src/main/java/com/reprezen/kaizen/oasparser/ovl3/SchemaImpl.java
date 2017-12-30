@@ -1,36 +1,36 @@
 package com.reprezen.kaizen.oasparser.ovl3;
 
-import com.fasterxml.jackson.core.JsonPointer;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.google.common.base.Optional;
-import com.reprezen.kaizen.oasparser.jsonoverlay.BooleanOverlay;
+import com.reprezen.kaizen.oasparser.model3.Schema;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.IJsonOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.IntegerOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.NumberOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
-import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
-import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
-import com.reprezen.kaizen.oasparser.model3.Example;
-import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
 import com.reprezen.kaizen.oasparser.model3.OpenApi3;
-import com.reprezen.kaizen.oasparser.model3.Schema;
+import com.reprezen.kaizen.oasparser.jsonoverlay.BooleanOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import com.reprezen.kaizen.oasparser.model3.Xml;
-import com.reprezen.kaizen.oasparser.ovl3.ExampleImpl;
-import com.reprezen.kaizen.oasparser.ovl3.ExternalDocsImpl;
-import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
-import com.reprezen.kaizen.oasparser.ovl3.SchemaImpl;
-import com.reprezen.kaizen.oasparser.ovl3.XmlImpl;
-import java.util.Collection;
-import java.util.Map;
+import com.fasterxml.jackson.core.JsonPointer;
 import javax.annotation.Generated;
+import com.reprezen.kaizen.oasparser.ovl3.SchemaImpl;
+import com.reprezen.kaizen.oasparser.model3.Example;
+import java.util.Map;
+import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IJsonOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
+import com.reprezen.kaizen.oasparser.ovl3.ExampleImpl;
+import java.util.Collection;
+import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
+import com.reprezen.kaizen.oasparser.ovl3.ExternalDocsImpl;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.NumberOverlay;
+import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
+import java.util.Optional;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IntegerOverlay;
+import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
+import com.reprezen.kaizen.oasparser.ovl3.XmlImpl;
+import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 
 public class SchemaImpl extends OpenApiObjectImpl<OpenApi3, Schema> implements Schema {
 
@@ -46,13 +46,13 @@ public class SchemaImpl extends OpenApiObjectImpl<OpenApi3, Schema> implements S
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public SchemaImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
-            super.maybeElaborateChildrenAtCreation();
+        super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public SchemaImpl(Schema schema, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(schema, parent, refReg);
-            super.maybeElaborateChildrenAtCreation();
+        super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -892,14 +892,14 @@ public class SchemaImpl extends OpenApiObjectImpl<OpenApi3, Schema> implements S
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean isPropertyReference(String key) {
         ChildOverlay<Schema, SchemaImpl> child = properties.getChild(key);
-            return child != null ? child.isReference() : false;
+        return child != null ? child.isReference() : false;
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Reference getPropertyReference(String key) {
         ChildOverlay<Schema, SchemaImpl> child = properties.getChild(key);
-            return child != null ? child.getReference() : null;
+        return child != null ? child.getReference() : null;
     }
 
     // AdditionalPropertiesSchema
@@ -1281,68 +1281,68 @@ public class SchemaImpl extends OpenApiObjectImpl<OpenApi3, Schema> implements S
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     protected void elaborateChildren() {
         title = createChild("title", this, StringOverlay.factory);
-            multipleOf = createChild("multipleOf", this, NumberOverlay.factory);
-            maximum = createChild("maximum", this, NumberOverlay.factory);
-            exclusiveMaximum = createChild("exclusiveMaximum", this, BooleanOverlay.factory);
-            minimum = createChild("minimum", this, NumberOverlay.factory);
-            exclusiveMinimum = createChild("exclusiveMinimum", this, BooleanOverlay.factory);
-            maxLength = createChild("maxLength", this, IntegerOverlay.factory);
-            minLength = createChild("minLength", this, IntegerOverlay.factory);
-            pattern = createChild("pattern", this, StringOverlay.factory);
-            maxItems = createChild("maxItems", this, IntegerOverlay.factory);
-            minItems = createChild("minItems", this, IntegerOverlay.factory);
-            uniqueItems = createChild("uniqueItems", this, BooleanOverlay.factory);
-            maxProperties = createChild("maxProperties", this, IntegerOverlay.factory);
-            minProperties = createChild("minProperties", this, IntegerOverlay.factory);
-            requiredFields = createChildList("required", this, StringOverlay.factory);
-            enums = createChildList("enum", this, ObjectOverlay.factory);
-            type = createChild("type", this, StringOverlay.factory);
-            allOfSchemas = createChildList("allOf", this, SchemaImpl.factory);
-            refables.put("allOf", allOfSchemas);
-            oneOfSchemas = createChildList("oneOf", this, SchemaImpl.factory);
-            refables.put("oneOf", oneOfSchemas);
-            anyOfSchemas = createChildList("anyOf", this, SchemaImpl.factory);
-            refables.put("anyOf", anyOfSchemas);
-            notSchema = createChild("not", this, SchemaImpl.factory);
-            refables.put("not", notSchema);
-            itemsSchema = createChild("items", this, SchemaImpl.factory);
-            refables.put("items", itemsSchema);
-            properties = createChildMap("properties", this, SchemaImpl.factory, null);
-            refables.put("properties", properties);
-            additionalPropertiesSchema = createChild(json.at("/additionalProperties").isObject(), "additionalProperties", this, SchemaImpl.factory);
-            refables.put("additionalProperties", additionalPropertiesSchema);
-            additionalProperties = createChild(json.at("/additionalProperties").isBoolean(), "additionalProperties", this, BooleanOverlay.factory);
-            description = createChild("description", this, StringOverlay.factory);
-            format = createChild("format", this, StringOverlay.factory);
-            defaultValue = createChild("default", this, ObjectOverlay.factory);
-            nullable = createChild("nullable", this, BooleanOverlay.factory);
-            discriminator = createChild("discriminator", this, StringOverlay.factory);
-            readOnly = createChild("readOnly", this, BooleanOverlay.factory);
-            writeOnly = createChild("writeOnly", this, BooleanOverlay.factory);
-            xml = createChild("xml", this, XmlImpl.factory);
-            externalDocs = createChild("externalDocs", this, ExternalDocsImpl.factory);
-            examples = createChildMap("examples", this, ExampleImpl.factory, "[a-zA-Z0-9\\._-]+");
-            example = createChild("example", this, ObjectOverlay.factory);
-            deprecated = createChild("deprecated", this, BooleanOverlay.factory);
-            extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
+        multipleOf = createChild("multipleOf", this, NumberOverlay.factory);
+        maximum = createChild("maximum", this, NumberOverlay.factory);
+        exclusiveMaximum = createChild("exclusiveMaximum", this, BooleanOverlay.factory);
+        minimum = createChild("minimum", this, NumberOverlay.factory);
+        exclusiveMinimum = createChild("exclusiveMinimum", this, BooleanOverlay.factory);
+        maxLength = createChild("maxLength", this, IntegerOverlay.factory);
+        minLength = createChild("minLength", this, IntegerOverlay.factory);
+        pattern = createChild("pattern", this, StringOverlay.factory);
+        maxItems = createChild("maxItems", this, IntegerOverlay.factory);
+        minItems = createChild("minItems", this, IntegerOverlay.factory);
+        uniqueItems = createChild("uniqueItems", this, BooleanOverlay.factory);
+        maxProperties = createChild("maxProperties", this, IntegerOverlay.factory);
+        minProperties = createChild("minProperties", this, IntegerOverlay.factory);
+        requiredFields = createChildList("required", this, StringOverlay.factory);
+        enums = createChildList("enum", this, ObjectOverlay.factory);
+        type = createChild("type", this, StringOverlay.factory);
+        allOfSchemas = createChildList("allOf", this, SchemaImpl.factory);
+        refables.put("allOf", allOfSchemas);
+        oneOfSchemas = createChildList("oneOf", this, SchemaImpl.factory);
+        refables.put("oneOf", oneOfSchemas);
+        anyOfSchemas = createChildList("anyOf", this, SchemaImpl.factory);
+        refables.put("anyOf", anyOfSchemas);
+        notSchema = createChild("not", this, SchemaImpl.factory);
+        refables.put("not", notSchema);
+        itemsSchema = createChild("items", this, SchemaImpl.factory);
+        refables.put("items", itemsSchema);
+        properties = createChildMap("properties", this, SchemaImpl.factory, null);
+        refables.put("properties", properties);
+        additionalPropertiesSchema = createChild(json.at("/additionalProperties").isObject(), "additionalProperties", this, SchemaImpl.factory);
+        refables.put("additionalProperties", additionalPropertiesSchema);
+        additionalProperties = createChild(json.at("/additionalProperties").isBoolean(), "additionalProperties", this, BooleanOverlay.factory);
+        description = createChild("description", this, StringOverlay.factory);
+        format = createChild("format", this, StringOverlay.factory);
+        defaultValue = createChild("default", this, ObjectOverlay.factory);
+        nullable = createChild("nullable", this, BooleanOverlay.factory);
+        discriminator = createChild("discriminator", this, StringOverlay.factory);
+        readOnly = createChild("readOnly", this, BooleanOverlay.factory);
+        writeOnly = createChild("writeOnly", this, BooleanOverlay.factory);
+        xml = createChild("xml", this, XmlImpl.factory);
+        externalDocs = createChild("externalDocs", this, ExternalDocsImpl.factory);
+        examples = createChildMap("examples", this, ExampleImpl.factory, "[a-zA-Z0-9\\._-]+");
+        example = createChild("example", this, ObjectOverlay.factory);
+        deprecated = createChild("deprecated", this, BooleanOverlay.factory);
+        extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public static OverlayFactory<Schema, SchemaImpl> factory = new OverlayFactory<Schema, SchemaImpl>() {
-    @Override
-    protected Class<? super SchemaImpl> getOverlayClass() {
-         return SchemaImpl.class;
-    }
 
-    @Override
-    public SchemaImpl _create(Schema schema, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-        return new SchemaImpl(schema, parent, refReg);
-    }
+        @Override
+        protected Class<? super SchemaImpl> getOverlayClass() {
+            return SchemaImpl.class;
+        }
 
-    @Override
-    public SchemaImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-        return new SchemaImpl(json, parent, refReg);
-    }
-};
+        @Override
+        public SchemaImpl _create(Schema schema, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            return new SchemaImpl(schema, parent, refReg);
+        }
 
+        @Override
+        public SchemaImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            return new SchemaImpl(json, parent, refReg);
+        }
+    };
 }

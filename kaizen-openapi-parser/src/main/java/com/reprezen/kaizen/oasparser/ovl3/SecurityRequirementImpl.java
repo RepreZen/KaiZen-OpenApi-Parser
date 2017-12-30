@@ -1,31 +1,31 @@
 package com.reprezen.kaizen.oasparser.ovl3;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
+import com.reprezen.kaizen.oasparser.ovl3.SecurityParameterImpl;
+import com.reprezen.kaizen.oasparser.model3.SecurityRequirement;
 import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.SecurityParameter;
-import com.reprezen.kaizen.oasparser.model3.SecurityRequirement;
-import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
-import com.reprezen.kaizen.oasparser.ovl3.SecurityParameterImpl;
-import java.util.Map;
+import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import javax.annotation.Generated;
+import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
+import java.util.Map;
+import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
+import com.fasterxml.jackson.databind.JsonNode;
 
 public class SecurityRequirementImpl extends OpenApiObjectImpl<OpenApi3, SecurityRequirement> implements SecurityRequirement {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public SecurityRequirementImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
-            super.maybeElaborateChildrenAtCreation();
+        super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public SecurityRequirementImpl(SecurityRequirement securityRequirement, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(securityRequirement, parent, refReg);
-            super.maybeElaborateChildrenAtCreation();
+        super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -82,20 +82,20 @@ public class SecurityRequirementImpl extends OpenApiObjectImpl<OpenApi3, Securit
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public static OverlayFactory<SecurityRequirement, SecurityRequirementImpl> factory = new OverlayFactory<SecurityRequirement, SecurityRequirementImpl>() {
-    @Override
-    protected Class<? super SecurityRequirementImpl> getOverlayClass() {
-         return SecurityRequirementImpl.class;
-    }
 
-    @Override
-    public SecurityRequirementImpl _create(SecurityRequirement securityRequirement, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-        return new SecurityRequirementImpl(securityRequirement, parent, refReg);
-    }
+        @Override
+        protected Class<? super SecurityRequirementImpl> getOverlayClass() {
+            return SecurityRequirementImpl.class;
+        }
 
-    @Override
-    public SecurityRequirementImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-        return new SecurityRequirementImpl(json, parent, refReg);
-    }
-};
+        @Override
+        public SecurityRequirementImpl _create(SecurityRequirement securityRequirement, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            return new SecurityRequirementImpl(securityRequirement, parent, refReg);
+        }
 
+        @Override
+        public SecurityRequirementImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            return new SecurityRequirementImpl(json, parent, refReg);
+        }
+    };
 }

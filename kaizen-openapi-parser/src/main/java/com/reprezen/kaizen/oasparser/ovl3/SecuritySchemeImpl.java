@@ -1,37 +1,37 @@
 package com.reprezen.kaizen.oasparser.ovl3;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
-import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
-import com.reprezen.kaizen.oasparser.model3.OAuthFlow;
-import com.reprezen.kaizen.oasparser.model3.OpenApi3;
-import com.reprezen.kaizen.oasparser.model3.SecurityScheme;
+import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
 import com.reprezen.kaizen.oasparser.ovl3.OAuthFlowImpl;
-import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
 import java.util.Collection;
-import java.util.Map;
+import com.reprezen.kaizen.oasparser.model3.OpenApi3;
+import com.reprezen.kaizen.oasparser.model3.OAuthFlow;
+import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import javax.annotation.Generated;
+import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
+import java.util.Map;
+import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
+import com.reprezen.kaizen.oasparser.model3.SecurityScheme;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 
 public class SecuritySchemeImpl extends OpenApiObjectImpl<OpenApi3, SecurityScheme> implements SecurityScheme {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public SecuritySchemeImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
-            super.maybeElaborateChildrenAtCreation();
+        super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public SecuritySchemeImpl(SecurityScheme securityScheme, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(securityScheme, parent, refReg);
-            super.maybeElaborateChildrenAtCreation();
+        super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -372,36 +372,36 @@ public class SecuritySchemeImpl extends OpenApiObjectImpl<OpenApi3, SecuritySche
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     protected void elaborateChildren() {
         type = createChild("type", this, StringOverlay.factory);
-            description = createChild("description", this, StringOverlay.factory);
-            name = createChild("name", this, StringOverlay.factory);
-            in = createChild("in", this, StringOverlay.factory);
-            scheme = createChild("scheme", this, StringOverlay.factory);
-            bearerFormat = createChild("bearerFormat", this, StringOverlay.factory);
-            implicitOAuthFlow = createChild("flow/implicit", this, OAuthFlowImpl.factory);
-            passwordOAuthFlow = createChild("flow/password", this, OAuthFlowImpl.factory);
-            clientCredentialsOAuthFlow = createChild("flow/clientCredentials", this, OAuthFlowImpl.factory);
-            authorizationCodeOAuthFlow = createChild("flow/authorizationCode", this, OAuthFlowImpl.factory);
-            oAuthFlowsExtensions = createChildMap("flow", this, ObjectOverlay.factory, "x-.+");
-            openIdConnectUrl = createChild("openIdConnectUrl", this, StringOverlay.factory);
-            extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
+        description = createChild("description", this, StringOverlay.factory);
+        name = createChild("name", this, StringOverlay.factory);
+        in = createChild("in", this, StringOverlay.factory);
+        scheme = createChild("scheme", this, StringOverlay.factory);
+        bearerFormat = createChild("bearerFormat", this, StringOverlay.factory);
+        implicitOAuthFlow = createChild("flow/implicit", this, OAuthFlowImpl.factory);
+        passwordOAuthFlow = createChild("flow/password", this, OAuthFlowImpl.factory);
+        clientCredentialsOAuthFlow = createChild("flow/clientCredentials", this, OAuthFlowImpl.factory);
+        authorizationCodeOAuthFlow = createChild("flow/authorizationCode", this, OAuthFlowImpl.factory);
+        oAuthFlowsExtensions = createChildMap("flow", this, ObjectOverlay.factory, "x-.+");
+        openIdConnectUrl = createChild("openIdConnectUrl", this, StringOverlay.factory);
+        extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public static OverlayFactory<SecurityScheme, SecuritySchemeImpl> factory = new OverlayFactory<SecurityScheme, SecuritySchemeImpl>() {
-    @Override
-    protected Class<? super SecuritySchemeImpl> getOverlayClass() {
-         return SecuritySchemeImpl.class;
-    }
 
-    @Override
-    public SecuritySchemeImpl _create(SecurityScheme securityScheme, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-        return new SecuritySchemeImpl(securityScheme, parent, refReg);
-    }
+        @Override
+        protected Class<? super SecuritySchemeImpl> getOverlayClass() {
+            return SecuritySchemeImpl.class;
+        }
 
-    @Override
-    public SecuritySchemeImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-        return new SecuritySchemeImpl(json, parent, refReg);
-    }
-};
+        @Override
+        public SecuritySchemeImpl _create(SecurityScheme securityScheme, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            return new SecuritySchemeImpl(securityScheme, parent, refReg);
+        }
 
+        @Override
+        public SecuritySchemeImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            return new SecuritySchemeImpl(json, parent, refReg);
+        }
+    };
 }

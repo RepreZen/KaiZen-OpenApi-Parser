@@ -1,35 +1,35 @@
 package com.reprezen.kaizen.oasparser.ovl3;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
+import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
-import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
-import com.reprezen.kaizen.oasparser.model3.OAuthFlow;
-import com.reprezen.kaizen.oasparser.model3.OpenApi3;
-import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
 import java.util.Collection;
-import java.util.Map;
+import com.reprezen.kaizen.oasparser.model3.OpenApi3;
+import com.reprezen.kaizen.oasparser.model3.OAuthFlow;
+import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import javax.annotation.Generated;
+import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
+import java.util.Map;
+import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 
 public class OAuthFlowImpl extends OpenApiObjectImpl<OpenApi3, OAuthFlow> implements OAuthFlow {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public OAuthFlowImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
-            super.maybeElaborateChildrenAtCreation();
+        super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public OAuthFlowImpl(OAuthFlow oAuthFlow, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(oAuthFlow, parent, refReg);
-            super.maybeElaborateChildrenAtCreation();
+        super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -240,29 +240,29 @@ public class OAuthFlowImpl extends OpenApiObjectImpl<OpenApi3, OAuthFlow> implem
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     protected void elaborateChildren() {
         authorizationUrl = createChild("authorizationUrl", this, StringOverlay.factory);
-            tokenUrl = createChild("tokenUrl", this, StringOverlay.factory);
-            refreshUrl = createChild("refreshUrl", this, StringOverlay.factory);
-            scopes = createChildMap("scopes", this, StringOverlay.factory, "(?!x-).*");
-            scopesExtensions = createChildMap("scopes", this, ObjectOverlay.factory, "x-.+");
-            extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
+        tokenUrl = createChild("tokenUrl", this, StringOverlay.factory);
+        refreshUrl = createChild("refreshUrl", this, StringOverlay.factory);
+        scopes = createChildMap("scopes", this, StringOverlay.factory, "(?!x-).*");
+        scopesExtensions = createChildMap("scopes", this, ObjectOverlay.factory, "x-.+");
+        extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public static OverlayFactory<OAuthFlow, OAuthFlowImpl> factory = new OverlayFactory<OAuthFlow, OAuthFlowImpl>() {
-    @Override
-    protected Class<? super OAuthFlowImpl> getOverlayClass() {
-         return OAuthFlowImpl.class;
-    }
 
-    @Override
-    public OAuthFlowImpl _create(OAuthFlow oAuthFlow, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-        return new OAuthFlowImpl(oAuthFlow, parent, refReg);
-    }
+        @Override
+        protected Class<? super OAuthFlowImpl> getOverlayClass() {
+            return OAuthFlowImpl.class;
+        }
 
-    @Override
-    public OAuthFlowImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-        return new OAuthFlowImpl(json, parent, refReg);
-    }
-};
+        @Override
+        public OAuthFlowImpl _create(OAuthFlow oAuthFlow, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            return new OAuthFlowImpl(oAuthFlow, parent, refReg);
+        }
 
+        @Override
+        public OAuthFlowImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            return new OAuthFlowImpl(json, parent, refReg);
+        }
+    };
 }

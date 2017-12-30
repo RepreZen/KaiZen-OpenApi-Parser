@@ -1,8 +1,8 @@
 package com.reprezen.kaizen.oasparser.model3;
 
-import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
-import java.util.Map;
 import javax.annotation.Generated;
+import java.util.Map;
+import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
 
 public interface OAuthFlow extends OpenApiObject<OpenApi3, OAuthFlow> {
 
@@ -101,5 +101,4 @@ public interface OAuthFlow extends OpenApiObject<OpenApi3, OAuthFlow> {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void removeExtension(String name);
-
 }

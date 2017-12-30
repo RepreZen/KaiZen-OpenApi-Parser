@@ -16,9 +16,8 @@ import java.io.File;
 import java.util.Collection;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.fasterxml.jackson.databind.JsonNode;
+import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
@@ -30,7 +29,9 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
+import com.reprezen.kaizen.oasparser.jsonoverlay.gen.SimpleJavaGenerator.FieldMember;
 import com.reprezen.kaizen.oasparser.jsonoverlay.gen.SimpleJavaGenerator.Member;
+import com.reprezen.kaizen.oasparser.jsonoverlay.gen.SimpleJavaGenerator.MethodMember;
 import com.reprezen.kaizen.oasparser.jsonoverlay.gen.TypeData.Field;
 import com.reprezen.kaizen.oasparser.jsonoverlay.gen.TypeData.Type;
 import com.reprezen.kaizen.oasparser.model3.OpenApi3;
@@ -54,17 +55,23 @@ public class ImplGenerator extends TypeGenerator {
 
 	@Override
 	public Members getOtherMembers(Type type) {
-		Members members = new Members();
+		Members members = new Members(type);
 		members.add(getElaborateChildrenMethod(type));
 		members.add(getFactoryMethod(type));
 		return members;
 	}
 
 	@Override
-	public String getTypeDeclaration(Type type, String suffix) {
+	public ClassOrInterfaceDeclaration getTypeDeclaration(Type type, String suffix) {
 		requireTypes(OpenApiObjectImpl.class, OpenApi3.class);
 		requireTypes(type);
-		return t("public class ${name}${0} extends ${1} implements ${name}", type, suffix, getSuperType(type));
+		ClassOrInterfaceDeclaration decl = new ClassOrInterfaceDeclaration();
+		decl.setInterface(false);
+		decl.setPublic(true);
+		decl.setName(type.getName() + suffix);
+		decl.addExtendedType(getSuperType(type));
+		decl.addImplementedType(type.getName());
+		return decl;
 	}
 
 	private String getSuperType(Type type) {
@@ -74,12 +81,18 @@ public class ImplGenerator extends TypeGenerator {
 
 	@Override
 	protected Members getConstructors(Type type) {
-		Members members = new Members();
-		members.add(t("public ${implName}(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg)", type), //
-				code("super(json, parent, refReg);", "super.maybeElaborateChildrenAtCreation();"));
+		Members members = new Members(type);
+		members.addConstructor("${implName}", //
+				"JsonNode", "json", "JsonOverlay<?>", "parent", "ReferenceRegistry", "refReg") //
+				.code( //
+						"super(json, parent, refReg);", //
+						"super.maybeElaborateChildrenAtCreation();");
 		requireTypes(JsonNode.class, JsonOverlay.class);
-		members.add(t("public ${implName}(${name} ${lcName}, JsonOverlay<?> parent, ReferenceRegistry refReg)", type), //
-				code(t("super(${lcName}, parent, refReg);", type), "super.maybeElaborateChildrenAtCreation();"));
+		members.addConstructor("${implName}", //
+				"${name}", "${lcName}", "JsonOverlay<?>", "parent", "ReferenceRegistry", "refReg") //
+				.code( //
+						"super(${lcName}, parent, refReg);", //
+						"super.maybeElaborateChildrenAtCreation();");
 		return members;
 	}
 
@@ -91,8 +104,8 @@ public class ImplGenerator extends TypeGenerator {
 	@Override
 	protected Members getFieldMembers(Field field) {
 		requireTypes(field.getType(), field.getImplType());
-		Members members = new Members();
-		members.add(t("private ${propType} ${propName} = null", field));
+		Members members = new Members(field);
+		members.addField("${propType}", "${propName}", "null");
 		switch (field.getStructure()) {
 		case scalar:
 			requireTypes(ChildOverlay.class);
@@ -110,7 +123,7 @@ public class ImplGenerator extends TypeGenerator {
 
 	@Override
 	protected Members getFieldMethods(Field field) {
-		Members methods = new Members();
+		Members methods = new Members(field);
 		boolean first = true;
 		String typeComment = field.getName();
 		if (field.isRefable()) {
@@ -140,76 +153,67 @@ public class ImplGenerator extends TypeGenerator {
 	}
 
 	private Members getScalarMethods(Field field) {
-		Members methods = new Members();
-		String getDecl = t("public ${type} get${name}()", field);
-		String getBoolDecl = t("public ${type} get${name}(boolean elaborate)", field);
-		String setDecl = t("public void set${name}(${type} ${lcName})", field);
+		Members methods = new Members(field);
 		// T getFoo() => return foo.get()
-		methods.add(getDecl, code(field, "return ${lcName}.get();"));
+		methods.addMethod("${type}", "get${name}").code("return ${lcName}.get();");
 		// T getFoo(boolean elaborate) => return foo.get(elaborate)
-		methods.add(getBoolDecl, code(field, "return ${lcName}.get(elaborate);"));
+		methods.addMethod("${type}", "get${name}", "boolean", "elaborate").code("return ${lcName}.get(elaborate);");
 		if (field.isBoolean()) {
 			// boolean isFoo() => foo.get() != null ? foo.get() : boolDefault
-			methods.add(t("public boolean is${name}()", field),
-					code(field, "return ${lcName}.get() != null ? ${lcName}.get() : ${boolDefault};"));
+			methods.addMethod("boolean", "is${name}")
+					.code("return ${lcName}.get() != null ? ${lcName}.get() : ${boolDefault};");
 		}
 		// void setFoo(T foo) => foo = this.foo.set(foo)
-		methods.add(setDecl, code(field, "this.${lcName}.set(${lcName});"));
+		methods.addMethod("void", "set${name}", "${type}", "${lcName}").code("this.${lcName}.set(${lcName});");
 		if (field.isRefable()) {
 			// boolean isFooReference() => foo.isReference()
-			methods.add(t("public boolean is${name}Reference()", field),
-					code(field, "return ${lcName} != null ? ${lcName}.isReference() : false;"));
+			methods.addMethod("boolean", "is${name}Reference")
+					.code("return ${lcName} != null ? ${lcName}.isReference() : false;");
 			// Reference getFooReference() => foo.getReference()
-			methods.add(t("public Reference get${name}Reference()", field),
-					code(field, "return ${lcName} != null ? ${lcName}.getReference() : null;"));
+			methods.addMethod("Reference", "get${name}Reference")
+					.code("return ${lcName} != null ? ${lcName}.getReference() : null;");
 		}
 		return methods;
 	}
 
 	private Members getCollectionMethods(Field field) {
-		Members methods = new Members();
-		String getDecl = t("public Collection<${collType}> get${plural}()", field);
-		String getBoolDecl = t("public Collection<${collType}> get${plural}(boolean elaborate)", field);
-		String hasDecl = t("public boolean has${plural}()", field);
-		String iGetDecl = t("public ${type} get${name}(int index)", field);
-		String setDecl = t("public void set${plural}(Collection<${collType}> ${lcPlural})", field);
-		String iSetDecl = t("public void set${name}(int index, ${type} ${lcName})", field);
-		String addDecl = t("public void add${name}(${type} ${lcName})", field);
-		String insDecl = t("public void insert${name}(int index, ${type} ${lcName})", field);
-		String remDecl = t("public void remove${name}(int index)", field);
+		Members methods = new Members(field);
 
 		// Collection<T> getFoos(boolean) => foos.get()
-		methods.add(getDecl, code(field, "return ${lcPlural}.get();"));
+		methods.addMethod("Collection<${collType}>", "get${plural}").code("return ${lcPlural}.get();");
 		// Collection<T> getFoos(boolean elaborate) => foos.get(elaborate)
-		methods.add(getBoolDecl, code(field, "return ${lcPlural}.get(elaborate);"));
+		methods.addMethod("Collection<${collType}>", "get${plural}", "boolean", "elaborate")
+				.code("return ${lcPlural}.get(elaborate);");
 		// boolean hasFoos() => foos.isPresent()
-		methods.add(hasDecl, code(field, "return ${lcPlural}.isPresent();"));
+		methods.addMethod("boolean", "has${plural}").code("return ${lcPlural}.isPresent();");
 		// T getFoo(int index) => foos.get(index)
-		methods.add(iGetDecl, code(field, "return ${lcPlural}.get(index);"));
+		methods.addMethod("${type}", "get${name}", "int", "index").code("return ${lcPlural}.get(index);");
 		// void setFoos(Collection<T> foos) => this.foos.set((TImpl) foos)
-		methods.add(setDecl, code(field, "this.${lcPlural}.set((Collection<${collType}>) ${lcPlural});"));
+		methods.addMethod("void", "set${plural}", "Collection<${collType}>", "${lcPlural}")
+				.code("this.${lcPlural}.set((Collection<${collType}>) ${lcPlural});");
 		// void setFoo(int index, T foo) => foos.set(index, foo)
-		methods.add(iSetDecl, code(field, "${lcPlural}.set(index, ${lcName});"));
+		methods.addMethod("void", "set${name}", "int", "index", "${type}", "${lcName}")
+				.code("${lcPlural}.set(index, ${lcName});");
 		// void addFoo(Foo foo) => foos.add(foo)
-		methods.add(addDecl, code(field, "${lcPlural}.add(${lcName});"));
+		methods.addMethod("void", "add${name}", "${type}", "${lcName}").code("${lcPlural}.add(${lcName});");
 		// void insertFoo(int index, Foo foo) => foos.insertOveraly(index, foo)
-		methods.add(insDecl, code(field, "${lcPlural}.insert(index, ${lcName});"));
+		methods.addMethod("void", "insert${name}", "int", "index", "${type}", "${lcName}")
+				.code("${lcPlural}.insert(index, ${lcName});");
 		// void removeFoo(int index) => foos.remove(index)
-		methods.add(remDecl, code(field, "${lcPlural}.remove(index);"));
+		methods.addMethod("void", "remove${name}", "int", "index").code("${lcPlural}.remove(index);");
 		// methods.addAll(getKeyedCollectionMethods(field));
 		if (field.isRefable()) {
 			// boolean isFooReference(int index) => foos.getChild(index).isReference()
-			methods.add(t("public boolean is${name}Reference(int index)", field),
-					code(field, "return ${lcPlural}.getChild(index).isReference();"));
+			methods.addMethod("boolean", "is${name}Reference", "int", "index")
+					.code("return ${lcPlural}.getChild(index).isReference();");
 			// Reference getFooReference(int index) => foos.getChild(index).getReference()
-			methods.add(t("public Reference get${name}Reference(int index)", field),
-					code(field, "return ${lcPlural}.getChild(index).getReference();"));
+			methods.addMethod("Reference", "get${name}Reference", "int", "index")
+					.code("return ${lcPlural}.getChild(index).getReference();");
 		}
 		return methods;
 	}
 
 	private Member getElaborateChildrenMethod(Type type) {
-		String decl = "protected void elaborateChildren()";
 		Collection<String> code = Lists.newArrayList();
 		for (Field field : type.getFields().values()) {
 			if (!field.isNoImpl()) {
@@ -219,13 +223,12 @@ public class ImplGenerator extends TypeGenerator {
 				}
 			}
 		}
-		return new Member(decl, code).override();
+		return new MethodMember(null, "void", "elaborateChildren").override().protectedAccess().code(code);
 	}
 
 	private Member getFactoryMethod(Type type) {
 		requireTypes(OverlayFactory.class, JsonNode.class, ReferenceRegistry.class);
-		Collection<String> decl = t(type,
-				"public static OverlayFactory<${name}, ${implName}> factory = new OverlayFactory<${name}, ${implName}>() {", //
+		String initializer = String.join("\n", t(type, "new OverlayFactory<${name}, ${implName}>() {", //
 				"    @Override", //
 				"    protected Class<? super ${implName}> getOverlayClass() {", //
 				"         return ${implName}.class;", //
@@ -240,48 +243,42 @@ public class ImplGenerator extends TypeGenerator {
 				"    public ${implName} _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {", //
 				"        return new ${implName}(json, parent, refReg);", //
 				"    }", //
-				"}");
-		return new Member(StringUtils.join(decl, "\n"), null);
+				"}"));
+		return new FieldMember(null, t("OverlayFactory<${name}, ${implName}>", type), "factory", initializer)
+				._static(true).publicAccess();
 	}
 
 	private Members getMapMethods(Field field) {
-		Members methods = new Members();
+		Members methods = new Members(field);
 		// Map<String, ? extends T> getFoos() => foos.get()
-		methods.add(t("public Map<String, ${collType}> get${plural}()", field),
-				code(field, "return ${lcPlural}.get();"));
+		methods.addMethod("Map<String, ${collType}>", "get${plural}").code("return ${lcPlural}.get();");
 		// Map<String, ? extends T> getFoos(boolean elaborate) => foos.get(elaborate)
-		methods.add(t("public Map<String, ${collType}> get${plural}(boolean elaborate)", field),
-				code(field, "return ${lcPlural}.get(elaborate);"));
+		methods.addMethod("Map<String, ${collType}>", "get${plural}", "boolean", "elaborate")
+				.code("return ${lcPlural}.get(elaborate);");
 		// boolean hasFoo(String key) => foos.containsKey(key)
-		methods.add(t("public boolean has${name}(String ${keyName})", field),
-				code(field, "return ${lcPlural}.containsKey(${keyName});"));
+		methods.addMethod("boolean", "has${name}", "String", "${keyName}")
+				.code("return ${lcPlural}.containsKey(${keyName});");
 		// T getFoo(String key) => foos.get(key)
-		methods.add(t("public ${type} get${name}(String ${keyName})", field),
-				code(field, "return ${lcPlural}.get(${keyName});"));
+		methods.addMethod("${type}", "get${name}", "String", "${keyName}").code("return ${lcPlural}.get(${keyName});");
 		// void setFoos(Map<String, T> foos) => this.foos.set(foos)
-		methods.add(t("public void set${plural}(Map<String, ${type}> ${lcPlural})", field),
-				code(field, "this.${lcPlural}.set(${lcPlural});"));
+		methods.addMethod("void", "set${plural}", "Map<String, ${type}>", "${lcPlural}")
+				.code("this.${lcPlural}.set(${lcPlural});");
 		// void setFoo(String key, Foo foo) => foos.set(key, foo)
-		methods.add(t("public void set${name}(String ${keyName}, ${type} ${lcName})", field),
-				code(field, "${lcPlural}.set(${keyName}, ${lcName});"));
+		methods.addMethod("void", "set${name}", "String", "${keyName}", "${type}", "${lcName}")
+				.code("${lcPlural}.set(${keyName}, ${lcName});");
 		// void removeFoo(String key) => foos.remove(key)
-		methods.add(t("public void remove${name}(String ${keyName})", field),
-				code(field, "${lcPlural}.remove(${keyName});"));
+		methods.addMethod("void", "remove${name}", "String", "${keyName}").code("${lcPlural}.remove(${keyName});");
 		if (field.isRefable()) {
 			// boolean isFooReference(String key) => foos.getChild(key).isReference()
-			methods.add(t("public boolean is${name}Reference(String key)", field),
-					code(field, "ChildOverlay<${type}, ${implType}> child = ${lcPlural}.getChild(key);",
-							"return child != null ? child.isReference() : false;"));
+			methods.addMethod("boolean", "is${name}Reference", "String", "key").code(
+					"ChildOverlay<${type}, ${implType}> child = ${lcPlural}.getChild(key);",
+					"return child != null ? child.isReference() : false;");
 			// Reference getFooReference(String key) => foos.getChild(key).getReference()
-			methods.add(t("public Reference get${name}Reference(String key)", field),
-					code(field, "ChildOverlay<${type}, ${implType}> child = ${lcPlural}.getChild(key);",
-							"return child != null ? child.getReference() : null;"));
+			methods.addMethod("Reference", "get${name}Reference", "String", "key").code(
+					"ChildOverlay<${type}, ${implType}> child = ${lcPlural}.getChild(key);",
+					"return child != null ? child.getReference() : null;");
 		}
 		return methods;
-	}
-
-	private Collection<String> code(String... lines) {
-		return Lists.newArrayList(lines);
 	}
 
 	private Collection<String> code(final Field field, String... lines) {

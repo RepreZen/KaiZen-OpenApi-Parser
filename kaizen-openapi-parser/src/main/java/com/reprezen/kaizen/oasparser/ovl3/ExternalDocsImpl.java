@@ -1,35 +1,35 @@
 package com.reprezen.kaizen.oasparser.ovl3;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
+import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
-import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
-import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
-import com.reprezen.kaizen.oasparser.model3.OpenApi3;
-import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
 import java.util.Collection;
-import java.util.Map;
+import com.reprezen.kaizen.oasparser.model3.OpenApi3;
+import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import javax.annotation.Generated;
+import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
+import java.util.Map;
+import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
+import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 
 public class ExternalDocsImpl extends OpenApiObjectImpl<OpenApi3, ExternalDocs> implements ExternalDocs {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public ExternalDocsImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
-            super.maybeElaborateChildrenAtCreation();
+        super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public ExternalDocsImpl(ExternalDocs externalDocs, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(externalDocs, parent, refReg);
-            super.maybeElaborateChildrenAtCreation();
+        super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -126,26 +126,26 @@ public class ExternalDocsImpl extends OpenApiObjectImpl<OpenApi3, ExternalDocs> 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     protected void elaborateChildren() {
         description = createChild("description", this, StringOverlay.factory);
-            url = createChild("url", this, StringOverlay.factory);
-            extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
+        url = createChild("url", this, StringOverlay.factory);
+        extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public static OverlayFactory<ExternalDocs, ExternalDocsImpl> factory = new OverlayFactory<ExternalDocs, ExternalDocsImpl>() {
-    @Override
-    protected Class<? super ExternalDocsImpl> getOverlayClass() {
-         return ExternalDocsImpl.class;
-    }
 
-    @Override
-    public ExternalDocsImpl _create(ExternalDocs externalDocs, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-        return new ExternalDocsImpl(externalDocs, parent, refReg);
-    }
+        @Override
+        protected Class<? super ExternalDocsImpl> getOverlayClass() {
+            return ExternalDocsImpl.class;
+        }
 
-    @Override
-    public ExternalDocsImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-        return new ExternalDocsImpl(json, parent, refReg);
-    }
-};
+        @Override
+        public ExternalDocsImpl _create(ExternalDocs externalDocs, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            return new ExternalDocsImpl(externalDocs, parent, refReg);
+        }
 
+        @Override
+        public ExternalDocsImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            return new ExternalDocsImpl(json, parent, refReg);
+        }
+    };
 }

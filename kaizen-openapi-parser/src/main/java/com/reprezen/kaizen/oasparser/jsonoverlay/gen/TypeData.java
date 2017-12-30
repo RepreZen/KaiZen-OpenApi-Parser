@@ -83,6 +83,7 @@ public class TypeData {
 		private Map<String, Collection<String>> imports = Maps.newHashMap();
 		private boolean noGen = false;
 		private String extensionOf;
+		private Map<String, String> renames = Maps.newHashMap();
 
 		private TypeData typeData;
 
@@ -152,6 +153,10 @@ public class TypeData {
 
 		public String getExtensionOf() {
 			return extensionOf;
+		}
+
+		public Map<String, String> getRenames() {
+			return renames;
 		}
 
 		public String getImplType() {
@@ -349,7 +354,7 @@ public class TypeData {
 		public String getTypeInCollection() {
 			return isScalarType() ? type : t("? extends ${type}", this);
 		}
-		
+
 		public boolean isRefable() {
 			return refable;
 		}

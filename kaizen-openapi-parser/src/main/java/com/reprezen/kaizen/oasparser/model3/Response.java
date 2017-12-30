@@ -1,12 +1,12 @@
 package com.reprezen.kaizen.oasparser.model3;
 
-import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
-import com.reprezen.kaizen.oasparser.model3.Header;
-import com.reprezen.kaizen.oasparser.model3.Link;
-import com.reprezen.kaizen.oasparser.model3.MediaType;
-import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
-import java.util.Map;
 import javax.annotation.Generated;
+import com.reprezen.kaizen.oasparser.model3.MediaType;
+import java.util.Map;
+import com.reprezen.kaizen.oasparser.model3.Header;
+import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
+import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
+import com.reprezen.kaizen.oasparser.model3.Link;
 
 public interface Response extends OpenApiObject<OpenApi3, Response> {
 
@@ -119,5 +119,4 @@ public interface Response extends OpenApiObject<OpenApi3, Response> {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void removeExtension(String name);
-
 }

@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.annotation.Generated;
@@ -29,9 +30,9 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.github.javaparser.JavaParser;
-import com.github.javaparser.ParseException;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.BodyDeclaration;
+import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.ConstructorDeclaration;
 import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
@@ -40,7 +41,6 @@ import com.github.javaparser.ast.comments.Comment;
 import com.github.javaparser.ast.expr.AnnotationExpr;
 import com.google.common.base.Charsets;
 import com.google.common.base.Function;
-import com.google.common.base.Optional;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -64,7 +64,10 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.PrimitiveOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.gen.SimpleJavaGenerator.ConstructorMember;
+import com.reprezen.kaizen.oasparser.jsonoverlay.gen.SimpleJavaGenerator.FieldMember;
 import com.reprezen.kaizen.oasparser.jsonoverlay.gen.SimpleJavaGenerator.Member;
+import com.reprezen.kaizen.oasparser.jsonoverlay.gen.SimpleJavaGenerator.MethodMember;
 import com.reprezen.kaizen.oasparser.jsonoverlay.gen.TypeData.Field;
 import com.reprezen.kaizen.oasparser.jsonoverlay.gen.TypeData.Type;
 import com.reprezen.kaizen.oasparser.val.ValidationResults;
@@ -89,17 +92,17 @@ public abstract class TypeGenerator {
 		this.preserve = preserve;
 	}
 
-	protected abstract String getTypeDeclaration(Type type, String suffix);
+	protected abstract ClassOrInterfaceDeclaration getTypeDeclaration(Type type, String suffix);
 
 	public void generate(Type type) throws IOException {
 		File javaFile = new File(dir, t("${name}${0}.java", type, suffix));
 		System.out.println("Generating " + javaFile.getCanonicalFile());
 		CompilationUnit existing = preserve && javaFile.exists() ? tryParse(javaFile) : null;
-		String declaration = getTypeDeclaration(type, suffix);
+		ClassOrInterfaceDeclaration declaration = getTypeDeclaration(type, suffix);
 		SimpleJavaGenerator gen = new SimpleJavaGenerator(getPackage(), declaration);
 		if (existing != null) {
 			copyFileComment(gen, existing);
-			addManualMethods(gen, existing);
+			addManualMembers(gen, existing);
 		}
 		requireTypes(getImports(type));
 		addGeneratedMembers(type, gen);
@@ -236,18 +239,30 @@ public abstract class TypeGenerator {
 	}
 
 	protected void addGeneratedMembers(Type type, SimpleJavaGenerator gen) {
-		gen.addGeneratedMembers(getConstructors(type));
+		Members members = new Members(type);
+		members.addAll(getConstructors(type));
 		for (Field field : type.getFields().values()) {
 			if (!skipField(field)) {
-				gen.addGeneratedMembers(getFieldMembers(field));
+				members.addAll(getFieldMembers(field));
 			}
 		}
 		for (Field field : type.getFields().values()) {
 			if (!skipField(field)) {
-				gen.addGeneratedMembers(getFieldMethods(field));
+				members.addAll(getFieldMethods(field));
 			}
 		}
-		gen.addGeneratedMembers(getOtherMembers(type));
+		members.addAll(getOtherMembers(type));
+		for (Member member : members) {
+			maybeRename(member, type.getRenames());
+		}
+		gen.addGeneratedMembers(members);
+	}
+
+	private void maybeRename(Member member, Map<String, String> renames) {
+		String name = member.getName();
+		if (name != null && renames.containsKey(name)) {
+			member.setName(renames.get(name));
+		}
 	}
 
 	protected boolean skipField(Field field) {
@@ -257,7 +272,7 @@ public abstract class TypeGenerator {
 	private CompilationUnit tryParse(File file) {
 		try {
 			return JavaParser.parse(file);
-		} catch (ParseException | IOException e) {
+		} catch (IOException e) {
 			System.err.println("ABORTING AFTER PARTIAL GENERATION!");
 			System.err.printf(
 					"Parsing of file %s failed; so generation cannot continue without destroying manual code.\n", file);
@@ -270,27 +285,26 @@ public abstract class TypeGenerator {
 	}
 
 	private void copyFileComment(SimpleJavaGenerator gen, CompilationUnit existing) {
-		Comment fileComment = existing.getComment();
-		if (fileComment != null) {
-			gen.setFileComment(fileComment.toString());
+		Optional<Comment> fileComment = existing.getComment();
+		if (fileComment.isPresent()) {
+			gen.setFileComment(fileComment.get().toString());
 		}
 	}
 
-	private void addManualMethods(SimpleJavaGenerator gen, CompilationUnit existing) {
-		for (TypeDeclaration type : existing.getTypes()) {
-			for (BodyDeclaration member : type.getMembers()) {
+	private void addManualMembers(SimpleJavaGenerator gen, CompilationUnit existing) {
+		for (TypeDeclaration<?> type : existing.getTypes()) {
+			for (BodyDeclaration<?> member : type.getMembers()) {
 				if (member instanceof MethodDeclaration || member instanceof FieldDeclaration
 						|| member instanceof ConstructorDeclaration) {
 					if (!isGenerated(member)) {
-						gen.addMember(new Member(member.toString(), null).complete(true));
+						gen.addMember(new Member(member));
 					}
 				}
 			}
 		}
-
 	}
 
-	private boolean isGenerated(BodyDeclaration node) {
+	private boolean isGenerated(BodyDeclaration<?> node) {
 		for (AnnotationExpr annotation : node.getAnnotations()) {
 			if (annotation.getName().toString().equals("Generated")) {
 				return true;
@@ -300,27 +314,26 @@ public abstract class TypeGenerator {
 	}
 
 	protected Members getConstructors(Type type) {
-		return new Members();
+		return new Members(type);
 	}
 
 	protected Members getFieldMembers(Field field) {
-		return new Members();
+		return new Members(field);
 	}
 
 	protected Members getFieldMethods(Field field) {
-		return new Members();
+		return new Members(field);
 	}
 
 	protected Members getOtherMembers(Type type) {
-		return new Members();
+		return new Members(type);
 	}
 
-	protected Member addMember(String declaration, Collection<String> code) {
-		Member member = new Member(declaration, code);
-		return member;
+	protected Member addMember(BodyDeclaration<?> declaration, Collection<String> code) {
+		return addMember(declaration, null);
 	}
 
-	protected final Member addMember(String declaration) {
+	protected final Member addMember(BodyDeclaration<?> declaration) {
 		return addMember(declaration, null);
 	}
 
@@ -328,19 +341,38 @@ public abstract class TypeGenerator {
 
 		private static final long serialVersionUID = 1L;
 
-		public Member add(String declaration, Collection<String> code) {
-			Member member = new Member(declaration, code);
-			super.add(member);
-			return member;
+		private Field field = null;
+
+		private Type type = null;
+
+		public Members(Type type) {
+			this.type = type;
 		}
 
-		public Member add(String declaration) {
-			return add(declaration, null);
+		public Members(Field field) {
+			this.field = field;
+		}
+
+		public Member addConstructor(String className, String... paramPairs) {
+			return addMember(new ConstructorMember(type, className, paramPairs));
+		}
+
+		public Member addMethod(String type, String name, String... paramPairs) {
+			return addMember(new MethodMember(field, type, name, paramPairs));
+		}
+
+		public Member addField(String type, String name) {
+			return addField(type, name, null);
+		}
+
+		public Member addField(String type, String name, String initializer) {
+			return addMember(new FieldMember(field, type, name, initializer));
 		}
 
 		public Member addMember(Member member) {
 			add(member);
 			return member;
 		}
+
 	}
 }

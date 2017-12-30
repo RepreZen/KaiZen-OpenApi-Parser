@@ -1,8 +1,8 @@
 package com.reprezen.kaizen.oasparser.model3;
 
-import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
-import java.util.Collection;
 import javax.annotation.Generated;
+import java.util.Collection;
+import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
 
 public interface SecurityParameter extends OpenApiObject<OpenApi3, SecurityParameter> {
 
@@ -33,5 +33,4 @@ public interface SecurityParameter extends OpenApiObject<OpenApi3, SecurityParam
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     void removeParameter(int index);
-
 }

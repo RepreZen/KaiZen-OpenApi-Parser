@@ -16,15 +16,19 @@ public abstract class OverlayFactory<V, OV extends JsonOverlay<V>> {
 
 	private final Class<? super OV> overlayClass = getOverlayClass();
 
-	public OV create(V value, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-		return _create(value, parent, refReg);
+	public OV create(V value, JsonOverlay<?> parent, ReferenceRegistry refReg, Reference ref) {
+		OV overlay = _create(value, parent, refReg);
+		overlay.setReference(ref);
+		return overlay;
 	}
 
-	public OV create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-		return create(json, parent, false, refReg);
+	public OV create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg, Reference ref) {
+		OV overlay = create(json, parent, false, refReg);
+		overlay.setReference(ref);
+		return overlay;
 	}
 
-	public OV create(JsonNode json, JsonOverlay<?> parent, boolean partial, ReferenceRegistry refReg) {
+	protected OV create(JsonNode json, JsonOverlay<?> parent, boolean partial, ReferenceRegistry refReg) {
 		if (!partial && refReg.hasOverlay(json)) {
 			@SuppressWarnings("unchecked")
 			OV overlay = (OV) refReg.getOverlay(json);
@@ -47,7 +51,7 @@ public abstract class OverlayFactory<V, OV extends JsonOverlay<V>> {
 
 	protected abstract Class<? super OV> getOverlayClass();
 
-	public abstract OV _create(V value, JsonOverlay<?> parent, ReferenceRegistry refReg);
+	protected abstract OV _create(V value, JsonOverlay<?> parent, ReferenceRegistry refReg);
 
-	public abstract OV _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg);
+	protected abstract OV _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg);
 }

@@ -17,12 +17,19 @@ import java.net.URI;
 import java.net.URL;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonLoader;
+import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ResolutionBase;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ResolutionBaseRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.Resolver;
+import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.ovl3.OpenApi3Impl;
 import com.reprezen.kaizen.oasparser.val3.ValidationConfigurator;
 import com.reprezen.kaizen.oasparser.val3.ovl.OverlayValidationConfigurator;
@@ -91,14 +98,16 @@ public class OpenApiParser {
 		try {
 			ReferenceRegistry referenceRegistry = new ReferenceRegistry();
 			new Resolver(referenceRegistry, resolutionBaseRegistry).preresolve(resolutionBase);
-			JsonNode tree = resolutionBaseRegistry.get(resolutionBase.toString()).getJson();
+			ResolutionBase base = resolutionBaseRegistry.get(resolutionBase.toString());
+			Reference topRef = referenceRegistry.getRef(resolutionBase.toString(), base, true);
+			JsonNode tree = topRef.getJson();
 			if (isVersion3(tree)) {
-				OpenApi3Impl model = new OpenApi3Impl(tree, null, referenceRegistry);
-				injector.injectMembers(model);
+				OpenApi3 model = OpenApi3Impl.factory.create(tree, null, referenceRegistry, topRef);
+				injector.injectMembers(model.get());
 				if (validate) {
-					model.validate();
+					model.get().validate();
 				}
-				return model;
+				return model.get();
 			} else {
 				throw new SwaggerParserException(
 						"Could not determine OpenApi version - missing or invalid 'openapi' or 'swagger' property");

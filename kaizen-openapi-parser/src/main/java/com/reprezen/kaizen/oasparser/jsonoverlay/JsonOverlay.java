@@ -12,6 +12,8 @@ package com.reprezen.kaizen.oasparser.jsonoverlay;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Iterator;
 
 import com.fasterxml.jackson.core.JsonPointer;
@@ -33,6 +35,7 @@ public abstract class JsonOverlay<V> implements IJsonOverlay<V> {
 	protected JsonNode json = null;
 	protected ReferenceRegistry refReg;
 	private String pathInParent = null;
+	private Reference reference = null;
 
 	public JsonOverlay(V value, JsonOverlay<?> parent, ReferenceRegistry refReg) {
 		this.value = value;
@@ -45,6 +48,10 @@ public abstract class JsonOverlay<V> implements IJsonOverlay<V> {
 		this.value = fromJson(json);
 		this.parent = parent;
 		this.refReg = refReg;
+	}
+
+	protected void setReference(Reference reference) {
+		this.reference = reference;
 	}
 
 	@Override
@@ -99,6 +106,29 @@ public abstract class JsonOverlay<V> implements IJsonOverlay<V> {
 
 	public String getPathInParent() {
 		return pathInParent;
+	}
+
+	public String getPathFromRoot() {
+		return parent != null ? (parent.getParent() != null ? parent.getPathFromRoot() : "") + "/" + pathInParent : "/";
+	}
+
+	@Override
+	public URL getJsonReference() {
+		URL result = null;
+		try {
+			if (reference != null) {
+				result = new URL(reference.getCanonicalRefString());
+			} else {
+				URL parentUrl = parent != null ? parent.getJsonReference() : null;
+				if (parentUrl != null) {
+					JsonPointer ptr = JsonPointer.compile(parentUrl.getRef());
+					ptr = ptr.append(JsonPointer.compile("/" + pathInParent));
+					result = new URL(parentUrl, "#" + ptr.toString());
+				}
+			}
+		} catch (IllegalArgumentException | MalformedURLException e) {
+		}
+		return result;
 	}
 
 	public JsonOverlay<?> getRoot() {

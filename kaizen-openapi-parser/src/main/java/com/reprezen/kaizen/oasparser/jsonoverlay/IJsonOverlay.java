@@ -10,13 +10,15 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.jsonoverlay;
 
+import java.net.URL;
+
 import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
 
 public interface IJsonOverlay<V> {
 
 	V get();
-	
+
 	V get(boolean elaborate);
 
 	void set(V value);
@@ -26,18 +28,22 @@ public interface IJsonOverlay<V> {
 	IJsonOverlay<?> find(String path);
 
 	JsonNode toJson();
-	
+
 	JsonNode toJson(SerializationOptions options);
-	
+
 	JsonNode toJson(SerializationOptions.Option... options);
 
 	boolean isPresent();
-	
+
 	boolean isElaborated();
-	
+
 	IJsonOverlay<?> getParent();
-	
+
 	String getPathInParent();
-	
+
 	IJsonOverlay<?> getRoot();
+
+	String getPathFromRoot();
+
+	URL getJsonReference();
 }

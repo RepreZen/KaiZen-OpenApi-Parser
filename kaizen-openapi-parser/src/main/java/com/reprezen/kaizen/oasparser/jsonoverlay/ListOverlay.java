@@ -91,15 +91,15 @@ public class ListOverlay<V, OV extends JsonOverlay<V>> extends JsonOverlay<Colle
 	}
 
 	public void set(int index, V value) {
-		overlays.set(index, itemFactory.create(value, this, refReg));
+		overlays.set(index, itemFactory.create(value, this, refReg, null));
 	}
 
 	public void add(V value) {
-		overlays.add(itemFactory.create(value, this, refReg));
+		overlays.add(itemFactory.create(value, this, refReg, null));
 	}
 
 	public void insert(int index, V value) {
-		overlays.add(index, itemFactory.create(value, this, refReg));
+		overlays.add(index, itemFactory.create(value, this, refReg, null));
 	}
 
 	public void remove(int index) {

@@ -32,7 +32,7 @@ public class IntegerOverlay extends ScalarOverlay<Integer> {
 		return value != null ? jsonScalar(value) : jsonMissing();
 	}
 
-	public static OverlayFactory<Integer, IntegerOverlay> factory = new OverlayFactory<Integer, IntegerOverlay>() {
+	public static OverlayFactory<Integer> factory = new OverlayFactory<Integer>() {
 		@Override
 		protected Class<IntegerOverlay> getOverlayClass() {
 			return IntegerOverlay.class;

@@ -14,38 +14,38 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 public class ObjectOverlay extends ScalarOverlay<Object> {
 
-	private ObjectOverlay(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-		super(json, parent, refReg);
-	}
+    private ObjectOverlay(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        super(json, parent, refReg);
+    }
 
-	private ObjectOverlay(Object value, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-		super(value, parent, refReg);
-	}
+    private ObjectOverlay(Object value, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+        super(value, parent, refReg);
+    }
 
-	@Override
-	public Object fromJson(JsonNode json) {
-		return json.isMissingNode() ? null : mapper.convertValue(json, Object.class);
-	}
+    @Override
+    public Object fromJson(JsonNode json) {
+        return json.isMissingNode() ? null : mapper.convertValue(json, Object.class);
+    }
 
-	@Override
-	public JsonNode toJson(SerializationOptions options) {
-		return value != null ?  mapper.convertValue(value, JsonNode.class) : jsonMissing();
-	}
+    @Override
+    public JsonNode toJson(SerializationOptions options) {
+        return value != null ? mapper.convertValue(value, JsonNode.class) : jsonMissing();
+    }
 
-	public static OverlayFactory<Object, ObjectOverlay> factory = new OverlayFactory<Object, ObjectOverlay>() {
-		@Override
-		protected Class<ObjectOverlay> getOverlayClass() {
-			return ObjectOverlay.class;
-		}
+    public static OverlayFactory<Object> factory = new OverlayFactory<Object>() {
+        @Override
+        protected Class<ObjectOverlay> getOverlayClass() {
+            return ObjectOverlay.class;
+        }
 
-		@Override
-		public ObjectOverlay _create(Object value, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-			return new ObjectOverlay(value, parent, refReg);
-		}
+        @Override
+        public ObjectOverlay _create(Object value, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            return new ObjectOverlay(value, parent, refReg);
+        }
 
-		@Override
-		public ObjectOverlay _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-			return new ObjectOverlay(json, parent, refReg);
-		}
-	};
+        @Override
+        public ObjectOverlay _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            return new ObjectOverlay(json, parent, refReg);
+        }
+    };
 }

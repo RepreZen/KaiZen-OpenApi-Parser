@@ -5,16 +5,16 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
 import java.util.Collection;
-import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.SecurityParameter;
 import javax.annotation.Generated;
-import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
+import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IJsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 
-public class SecurityParameterImpl extends OpenApiObjectImpl<OpenApi3, SecurityParameter> implements SecurityParameter {
+public class SecurityParameterImpl extends PropertiesOverlay<SecurityParameter> implements SecurityParameter {
 
     @Override
     protected JsonNode fixJson(JsonNode json) {
@@ -34,7 +34,7 @@ public class SecurityParameterImpl extends OpenApiObjectImpl<OpenApi3, SecurityP
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildListOverlay<String, StringOverlay> parameters = null;
+    private ChildListOverlay<String> parameters = null;
 
     // Parameter
     @Override
@@ -98,21 +98,25 @@ public class SecurityParameterImpl extends OpenApiObjectImpl<OpenApi3, SecurityP
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static OverlayFactory<SecurityParameter, SecurityParameterImpl> factory = new OverlayFactory<SecurityParameter, SecurityParameterImpl>() {
+    public static OverlayFactory<SecurityParameter> factory = new OverlayFactory<SecurityParameter>() {
 
         @Override
-        protected Class<? super SecurityParameterImpl> getOverlayClass() {
+        protected Class<? extends IJsonOverlay<? super SecurityParameter>> getOverlayClass() {
             return SecurityParameterImpl.class;
         }
 
         @Override
-        public SecurityParameterImpl _create(SecurityParameter securityParameter, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            return new SecurityParameterImpl(securityParameter, parent, refReg);
+        public JsonOverlay<SecurityParameter> _create(SecurityParameter securityParameter, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            JsonOverlay<?> overlay = new SecurityParameterImpl(securityParameter, parent, refReg);
+            @SuppressWarnings("unchecked") JsonOverlay<SecurityParameter> castOverlay = (JsonOverlay<SecurityParameter>) overlay;
+            return castOverlay;
         }
 
         @Override
-        public SecurityParameterImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            return new SecurityParameterImpl(json, parent, refReg);
+        public JsonOverlay<SecurityParameter> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            JsonOverlay<?> overlay = new SecurityParameterImpl(json, parent, refReg);
+            @SuppressWarnings("unchecked") JsonOverlay<SecurityParameter> castOverlay = (JsonOverlay<SecurityParameter>) overlay;
+            return castOverlay;
         }
     };
 }

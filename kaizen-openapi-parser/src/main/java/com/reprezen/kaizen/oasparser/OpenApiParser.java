@@ -17,13 +17,9 @@ import java.net.URI;
 import java.net.URL;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.JsonNodeFactory;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonLoader;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ResolutionBase;
@@ -102,7 +98,7 @@ public class OpenApiParser {
 			Reference topRef = referenceRegistry.getRef(resolutionBase.toString(), base, true);
 			JsonNode tree = topRef.getJson();
 			if (isVersion3(tree)) {
-				OpenApi3 model = OpenApi3Impl.factory.create(tree, null, referenceRegistry, topRef);
+				OpenApi3 model = OpenApi3Impl.factory.create(tree, null, referenceRegistry, topRef).get();
 				injector.injectMembers(model.get());
 				if (validate) {
 					model.get().validate();

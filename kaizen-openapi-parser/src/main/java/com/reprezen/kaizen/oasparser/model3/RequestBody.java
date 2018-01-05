@@ -3,9 +3,10 @@ package com.reprezen.kaizen.oasparser.model3;
 import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.model3.MediaType;
 import java.util.Map;
-import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IPropertiesOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IModelPart;
 
-public interface RequestBody extends OpenApiObject<OpenApi3, RequestBody> {
+public interface RequestBody extends IPropertiesOverlay<RequestBody>, IModelPart<OpenApi3, RequestBody> {
 
     // Description
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

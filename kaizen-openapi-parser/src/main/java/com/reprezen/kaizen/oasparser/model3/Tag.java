@@ -2,10 +2,11 @@ package com.reprezen.kaizen.oasparser.model3;
 
 import javax.annotation.Generated;
 import java.util.Map;
-import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IPropertiesOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IModelPart;
 import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
 
-public interface Tag extends OpenApiObject<OpenApi3, Tag> {
+public interface Tag extends IPropertiesOverlay<Tag>, IModelPart<OpenApi3, Tag> {
 
     // Name
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

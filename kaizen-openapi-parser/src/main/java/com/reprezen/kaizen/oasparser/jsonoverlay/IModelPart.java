@@ -8,11 +8,13 @@
  *  Contributors:
  *     ModelSolv, Inc. - initial API and implementation and/or initial documentation
  *******************************************************************************/
-package com.reprezen.kaizen.oasparser.model3;
+package com.reprezen.kaizen.oasparser.jsonoverlay;
 
-import com.reprezen.kaizen.oasparser.jsonoverlay.IPropertiesOverlay;
+public interface IModelPart<Model, V> extends IPropertiesOverlay<V> {
 
-public interface OpenApiObject<MI, VI> extends IPropertiesOverlay<VI> {
-
-	MI getModel();
+    public default Model getModel() {
+        @SuppressWarnings("unchecked")
+        Model castRoot = (Model) getRoot();
+        return castRoot;
+    }
 }

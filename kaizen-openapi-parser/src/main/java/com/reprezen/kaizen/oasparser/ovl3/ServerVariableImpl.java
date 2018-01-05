@@ -8,18 +8,18 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PrimitiveOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
 import java.util.Collection;
-import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.ServerVariable;
 import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import javax.annotation.Generated;
-import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
+import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IJsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 
-public class ServerVariableImpl extends OpenApiObjectImpl<OpenApi3, ServerVariable> implements ServerVariable {
+public class ServerVariableImpl extends PropertiesOverlay<ServerVariable> implements ServerVariable {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public ServerVariableImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
@@ -34,16 +34,16 @@ public class ServerVariableImpl extends OpenApiObjectImpl<OpenApi3, ServerVariab
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildListOverlay<Object, PrimitiveOverlay> enumValues = null;
+    private ChildListOverlay<Object> enumValues = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Object, PrimitiveOverlay> defaultValue = null;
+    private ChildOverlay<Object> defaultValue = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> description = null;
+    private ChildOverlay<String> description = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object, ObjectOverlay> extensions = null;
+    private ChildMapOverlay<Object> extensions = null;
 
     // EnumValue
     @Override
@@ -191,21 +191,25 @@ public class ServerVariableImpl extends OpenApiObjectImpl<OpenApi3, ServerVariab
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static OverlayFactory<ServerVariable, ServerVariableImpl> factory = new OverlayFactory<ServerVariable, ServerVariableImpl>() {
+    public static OverlayFactory<ServerVariable> factory = new OverlayFactory<ServerVariable>() {
 
         @Override
-        protected Class<? super ServerVariableImpl> getOverlayClass() {
+        protected Class<? extends IJsonOverlay<? super ServerVariable>> getOverlayClass() {
             return ServerVariableImpl.class;
         }
 
         @Override
-        public ServerVariableImpl _create(ServerVariable serverVariable, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            return new ServerVariableImpl(serverVariable, parent, refReg);
+        public JsonOverlay<ServerVariable> _create(ServerVariable serverVariable, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            JsonOverlay<?> overlay = new ServerVariableImpl(serverVariable, parent, refReg);
+            @SuppressWarnings("unchecked") JsonOverlay<ServerVariable> castOverlay = (JsonOverlay<ServerVariable>) overlay;
+            return castOverlay;
         }
 
         @Override
-        public ServerVariableImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            return new ServerVariableImpl(json, parent, refReg);
+        public JsonOverlay<ServerVariable> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            JsonOverlay<?> overlay = new ServerVariableImpl(json, parent, refReg);
+            @SuppressWarnings("unchecked") JsonOverlay<ServerVariable> castOverlay = (JsonOverlay<ServerVariable>) overlay;
+            return castOverlay;
         }
     };
 }

@@ -6,24 +6,25 @@ import com.reprezen.kaizen.oasparser.model3.Path;
 import com.reprezen.kaizen.oasparser.model3.SecurityRequirement;
 import java.util.Collection;
 import com.reprezen.kaizen.oasparser.model3.Header;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IModelPart;
 import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
 import com.reprezen.kaizen.oasparser.model3.Link;
 import com.reprezen.kaizen.oasparser.model3.Callback;
 import com.reprezen.kaizen.oasparser.OpenApi;
 import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.model3.Response;
-import com.reprezen.kaizen.oasparser.model3.Tag;
 import com.reprezen.kaizen.oasparser.model3.RequestBody;
+import com.reprezen.kaizen.oasparser.model3.Tag;
 import com.reprezen.kaizen.oasparser.model3.Parameter;
-import com.reprezen.kaizen.oasparser.val.ValidationResults;
 import com.reprezen.kaizen.oasparser.model3.Example;
+import com.reprezen.kaizen.oasparser.val.ValidationResults;
 import java.util.Map;
-import com.reprezen.kaizen.oasparser.model3.Info;
 import com.reprezen.kaizen.oasparser.model3.SecurityScheme;
-import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
+import com.reprezen.kaizen.oasparser.model3.Info;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IPropertiesOverlay;
 import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
 
-public interface OpenApi3 extends OpenApiObject<OpenApi3, OpenApi3>, OpenApi<OpenApi3> {
+public interface OpenApi3 extends IPropertiesOverlay<OpenApi3>, IModelPart<OpenApi3, OpenApi3>, OpenApi<OpenApi3> {
 
     public void validate();
 

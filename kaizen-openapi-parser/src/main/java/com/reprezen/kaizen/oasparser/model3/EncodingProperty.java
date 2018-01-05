@@ -2,10 +2,11 @@ package com.reprezen.kaizen.oasparser.model3;
 
 import javax.annotation.Generated;
 import java.util.Map;
-import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IPropertiesOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IModelPart;
 import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
 
-public interface EncodingProperty extends OpenApiObject<OpenApi3, EncodingProperty> {
+public interface EncodingProperty extends IPropertiesOverlay<EncodingProperty>, IModelPart<OpenApi3, EncodingProperty> {
 
     // ContentType
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

@@ -51,16 +51,16 @@ public class OverlayValidator<T> extends ValidatorBase<T> {
 	}
 
 	private void checkReferences(JsonOverlay<?> overlay, ValidationResults results) {
-		if (overlay instanceof ListOverlay<?, ?>) {
-			checkReferences((ListOverlay<?, ?>) overlay, results);
-		} else if (overlay instanceof MapOverlay<?, ?>) {
-			checkReferences((MapOverlay<?, ?>) overlay, results);
+		if (overlay instanceof ListOverlay<?>) {
+			checkReferences((ListOverlay<?>) overlay, results);
+		} else if (overlay instanceof MapOverlay<?>) {
+			checkReferences((MapOverlay<?>) overlay, results);
 		} else if (overlay instanceof PropertiesOverlay<?>) {
 			checkReferences((PropertiesOverlay<?>) overlay, results);
 		}
 	}
 
-	private void checkReferences(ListOverlay<?, ?> list, ValidationResults results) {
+	private void checkReferences(ListOverlay<?> list, ValidationResults results) {
 		for (int i = 0; i < list.size(); i++) {
 			if (list.isReference(i)) {
 				checkReference(list.getReference(i), results, Integer.toString(i));
@@ -68,7 +68,7 @@ public class OverlayValidator<T> extends ValidatorBase<T> {
 		}
 	}
 
-	private void checkReferences(MapOverlay<?, ?> map, ValidationResults results) {
+    private void checkReferences(MapOverlay<?> map, ValidationResults results) {
 		for (String key : map.get().keySet()) {
 			if (map.isReference(key)) {
 				checkReference(map.getReference(key), results, key);

@@ -3,9 +3,10 @@ package com.reprezen.kaizen.oasparser.model3;
 import javax.annotation.Generated;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.model3.OAuthFlow;
-import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IPropertiesOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IModelPart;
 
-public interface SecurityScheme extends OpenApiObject<OpenApi3, SecurityScheme> {
+public interface SecurityScheme extends IPropertiesOverlay<SecurityScheme>, IModelPart<OpenApi3, SecurityScheme> {
 
     // Type
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

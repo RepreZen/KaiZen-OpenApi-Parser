@@ -5,13 +5,13 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.ovl3.CallbackImpl;
-import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.ovl3.ParameterImpl;
 import com.reprezen.kaizen.oasparser.jsonoverlay.BooleanOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import com.reprezen.kaizen.oasparser.ovl3.SecurityRequirementImpl;
 import com.reprezen.kaizen.oasparser.model3.Callback;
 import javax.annotation.Generated;
+import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import com.reprezen.kaizen.oasparser.model3.Response;
 import com.reprezen.kaizen.oasparser.model3.RequestBody;
 import com.reprezen.kaizen.oasparser.model3.Parameter;
@@ -19,6 +19,7 @@ import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.reprezen.kaizen.oasparser.ovl3.ServerImpl;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IJsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
 import com.reprezen.kaizen.oasparser.model3.SecurityRequirement;
@@ -29,12 +30,11 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
 import com.reprezen.kaizen.oasparser.ovl3.ExternalDocsImpl;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import com.reprezen.kaizen.oasparser.model3.Operation;
-import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
 import com.reprezen.kaizen.oasparser.ovl3.RequestBodyImpl;
 import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 
-public class OperationImpl extends OpenApiObjectImpl<OpenApi3, Operation> implements Operation {
+public class OperationImpl extends PropertiesOverlay<Operation> implements Operation {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public OperationImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
@@ -49,49 +49,49 @@ public class OperationImpl extends OpenApiObjectImpl<OpenApi3, Operation> implem
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildListOverlay<String, StringOverlay> tags = null;
+    private ChildListOverlay<String> tags = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> summary = null;
+    private ChildOverlay<String> summary = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> description = null;
+    private ChildOverlay<String> description = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<ExternalDocs, ExternalDocsImpl> externalDocs = null;
+    private ChildOverlay<ExternalDocs> externalDocs = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> operationId = null;
+    private ChildOverlay<String> operationId = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildListOverlay<Parameter, ParameterImpl> parameters = null;
+    private ChildListOverlay<Parameter> parameters = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<RequestBody, RequestBodyImpl> requestBody = null;
+    private ChildOverlay<RequestBody> requestBody = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Response, ResponseImpl> responses = null;
+    private ChildMapOverlay<Response> responses = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object, ObjectOverlay> responsesExtensions = null;
+    private ChildMapOverlay<Object> responsesExtensions = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Callback, CallbackImpl> callbacks = null;
+    private ChildMapOverlay<Callback> callbacks = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object, ObjectOverlay> callbacksExtensions = null;
+    private ChildMapOverlay<Object> callbacksExtensions = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Boolean, BooleanOverlay> deprecated = null;
+    private ChildOverlay<Boolean> deprecated = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildListOverlay<SecurityRequirement, SecurityRequirementImpl> securityRequirements = null;
+    private ChildListOverlay<SecurityRequirement> securityRequirements = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildListOverlay<Server, ServerImpl> servers = null;
+    private ChildListOverlay<Server> servers = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object, ObjectOverlay> extensions = null;
+    private ChildMapOverlay<Object> extensions = null;
 
     // Tag
     @Override
@@ -368,14 +368,14 @@ public class OperationImpl extends OpenApiObjectImpl<OpenApi3, Operation> implem
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean isResponseReference(String key) {
-        ChildOverlay<Response, ResponseImpl> child = responses.getChild(key);
+        ChildOverlay<Response> child = responses.getChild(key);
         return child != null ? child.isReference() : false;
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Reference getResponseReference(String key) {
-        ChildOverlay<Response, ResponseImpl> child = responses.getChild(key);
+        ChildOverlay<Response> child = responses.getChild(key);
         return child != null ? child.getReference() : null;
     }
 
@@ -468,14 +468,14 @@ public class OperationImpl extends OpenApiObjectImpl<OpenApi3, Operation> implem
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean isCallbackReference(String key) {
-        ChildOverlay<Callback, CallbackImpl> child = callbacks.getChild(key);
+        ChildOverlay<Callback> child = callbacks.getChild(key);
         return child != null ? child.isReference() : false;
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Reference getCallbackReference(String key) {
-        ChildOverlay<Callback, CallbackImpl> child = callbacks.getChild(key);
+        ChildOverlay<Callback> child = callbacks.getChild(key);
         return child != null ? child.getReference() : null;
     }
 
@@ -725,21 +725,25 @@ public class OperationImpl extends OpenApiObjectImpl<OpenApi3, Operation> implem
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static OverlayFactory<Operation, OperationImpl> factory = new OverlayFactory<Operation, OperationImpl>() {
+    public static OverlayFactory<Operation> factory = new OverlayFactory<Operation>() {
 
         @Override
-        protected Class<? super OperationImpl> getOverlayClass() {
+        protected Class<? extends IJsonOverlay<? super Operation>> getOverlayClass() {
             return OperationImpl.class;
         }
 
         @Override
-        public OperationImpl _create(Operation operation, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            return new OperationImpl(operation, parent, refReg);
+        public JsonOverlay<Operation> _create(Operation operation, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            JsonOverlay<?> overlay = new OperationImpl(operation, parent, refReg);
+            @SuppressWarnings("unchecked") JsonOverlay<Operation> castOverlay = (JsonOverlay<Operation>) overlay;
+            return castOverlay;
         }
 
         @Override
-        public OperationImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            return new OperationImpl(json, parent, refReg);
+        public JsonOverlay<Operation> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            JsonOverlay<?> overlay = new OperationImpl(json, parent, refReg);
+            @SuppressWarnings("unchecked") JsonOverlay<Operation> castOverlay = (JsonOverlay<Operation>) overlay;
+            return castOverlay;
         }
     };
 }

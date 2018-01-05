@@ -6,10 +6,11 @@ import com.reprezen.kaizen.oasparser.model3.Operation;
 import com.reprezen.kaizen.oasparser.model3.Parameter;
 import java.util.Collection;
 import java.util.Map;
-import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IPropertiesOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IModelPart;
 import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
 
-public interface Path extends OpenApiObject<OpenApi3, Path> {
+public interface Path extends IPropertiesOverlay<Path>, IModelPart<OpenApi3, Path> {
 
     // Summary
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

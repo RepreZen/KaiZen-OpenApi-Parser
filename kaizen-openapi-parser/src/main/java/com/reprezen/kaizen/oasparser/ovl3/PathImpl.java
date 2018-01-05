@@ -10,22 +10,22 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.model3.Path;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
 import java.util.Collection;
-import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.ovl3.ParameterImpl;
 import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
 import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import javax.annotation.Generated;
+import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import com.reprezen.kaizen.oasparser.model3.Operation;
 import com.reprezen.kaizen.oasparser.model3.Parameter;
-import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.reprezen.kaizen.oasparser.ovl3.ServerImpl;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IJsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 
-public class PathImpl extends OpenApiObjectImpl<OpenApi3, Path> implements Path {
+public class PathImpl extends PropertiesOverlay<Path> implements Path {
 
     @Override
     public Operation getGet() {
@@ -160,22 +160,22 @@ public class PathImpl extends OpenApiObjectImpl<OpenApi3, Path> implements Path 
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> summary = null;
+    private ChildOverlay<String> summary = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> description = null;
+    private ChildOverlay<String> description = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Operation, OperationImpl> operations = null;
+    private ChildMapOverlay<Operation> operations = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildListOverlay<Server, ServerImpl> servers = null;
+    private ChildListOverlay<Server> servers = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildListOverlay<Parameter, ParameterImpl> parameters = null;
+    private ChildListOverlay<Parameter> parameters = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object, ObjectOverlay> extensions = null;
+    private ChildMapOverlay<Object> extensions = null;
 
     // Summary
     @Override
@@ -436,21 +436,25 @@ public class PathImpl extends OpenApiObjectImpl<OpenApi3, Path> implements Path 
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static OverlayFactory<Path, PathImpl> factory = new OverlayFactory<Path, PathImpl>() {
+    public static OverlayFactory<Path> factory = new OverlayFactory<Path>() {
 
         @Override
-        protected Class<? super PathImpl> getOverlayClass() {
+        protected Class<? extends IJsonOverlay<? super Path>> getOverlayClass() {
             return PathImpl.class;
         }
 
         @Override
-        public PathImpl _create(Path path, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            return new PathImpl(path, parent, refReg);
+        public JsonOverlay<Path> _create(Path path, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            JsonOverlay<?> overlay = new PathImpl(path, parent, refReg);
+            @SuppressWarnings("unchecked") JsonOverlay<Path> castOverlay = (JsonOverlay<Path>) overlay;
+            return castOverlay;
         }
 
         @Override
-        public PathImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            return new PathImpl(json, parent, refReg);
+        public JsonOverlay<Path> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            JsonOverlay<?> overlay = new PathImpl(json, parent, refReg);
+            @SuppressWarnings("unchecked") JsonOverlay<Path> castOverlay = (JsonOverlay<Path>) overlay;
+            return castOverlay;
         }
     };
 }

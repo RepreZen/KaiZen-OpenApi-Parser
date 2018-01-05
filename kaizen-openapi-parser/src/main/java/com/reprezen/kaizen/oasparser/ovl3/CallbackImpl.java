@@ -5,17 +5,17 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.model3.Path;
-import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.ovl3.PathImpl;
 import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import com.reprezen.kaizen.oasparser.model3.Callback;
 import javax.annotation.Generated;
-import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
+import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IJsonOverlay;
 
-public class CallbackImpl extends OpenApiObjectImpl<OpenApi3, Callback> implements Callback {
+public class CallbackImpl extends PropertiesOverlay<Callback> implements Callback {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public CallbackImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
@@ -30,10 +30,10 @@ public class CallbackImpl extends OpenApiObjectImpl<OpenApi3, Callback> implemen
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Path, PathImpl> callbackPaths = null;
+    private ChildMapOverlay<Path> callbackPaths = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object, ObjectOverlay> extensions = null;
+    private ChildMapOverlay<Object> extensions = null;
 
     // CallbackPath
     @Override
@@ -129,21 +129,25 @@ public class CallbackImpl extends OpenApiObjectImpl<OpenApi3, Callback> implemen
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static OverlayFactory<Callback, CallbackImpl> factory = new OverlayFactory<Callback, CallbackImpl>() {
+    public static OverlayFactory<Callback> factory = new OverlayFactory<Callback>() {
 
         @Override
-        protected Class<? super CallbackImpl> getOverlayClass() {
+        protected Class<? extends IJsonOverlay<? super Callback>> getOverlayClass() {
             return CallbackImpl.class;
         }
 
         @Override
-        public CallbackImpl _create(Callback callback, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            return new CallbackImpl(callback, parent, refReg);
+        public JsonOverlay<Callback> _create(Callback callback, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            JsonOverlay<?> overlay = new CallbackImpl(callback, parent, refReg);
+            @SuppressWarnings("unchecked") JsonOverlay<Callback> castOverlay = (JsonOverlay<Callback>) overlay;
+            return castOverlay;
         }
 
         @Override
-        public CallbackImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            return new CallbackImpl(json, parent, refReg);
+        public JsonOverlay<Callback> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            JsonOverlay<?> overlay = new CallbackImpl(json, parent, refReg);
+            @SuppressWarnings("unchecked") JsonOverlay<Callback> castOverlay = (JsonOverlay<Callback>) overlay;
+            return castOverlay;
         }
     };
 }

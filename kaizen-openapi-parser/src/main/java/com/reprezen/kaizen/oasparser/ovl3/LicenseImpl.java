@@ -8,17 +8,17 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
 import com.reprezen.kaizen.oasparser.model3.License;
 import java.util.Collection;
-import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import javax.annotation.Generated;
-import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
+import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IJsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 
-public class LicenseImpl extends OpenApiObjectImpl<OpenApi3, License> implements License {
+public class LicenseImpl extends PropertiesOverlay<License> implements License {
 
     JsonNode initJson = jsonMissing();
 
@@ -35,13 +35,13 @@ public class LicenseImpl extends OpenApiObjectImpl<OpenApi3, License> implements
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> name = null;
+    private ChildOverlay<String> name = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> url = null;
+    private ChildOverlay<String> url = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object, ObjectOverlay> extensions = null;
+    private ChildMapOverlay<Object> extensions = null;
 
     // Name
     @Override
@@ -133,21 +133,25 @@ public class LicenseImpl extends OpenApiObjectImpl<OpenApi3, License> implements
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static OverlayFactory<License, LicenseImpl> factory = new OverlayFactory<License, LicenseImpl>() {
+    public static OverlayFactory<License> factory = new OverlayFactory<License>() {
 
         @Override
-        protected Class<? super LicenseImpl> getOverlayClass() {
+        protected Class<? extends IJsonOverlay<? super License>> getOverlayClass() {
             return LicenseImpl.class;
         }
 
         @Override
-        public LicenseImpl _create(License license, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            return new LicenseImpl(license, parent, refReg);
+        public JsonOverlay<License> _create(License license, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            JsonOverlay<?> overlay = new LicenseImpl(license, parent, refReg);
+            @SuppressWarnings("unchecked") JsonOverlay<License> castOverlay = (JsonOverlay<License>) overlay;
+            return castOverlay;
         }
 
         @Override
-        public LicenseImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            return new LicenseImpl(json, parent, refReg);
+        public JsonOverlay<License> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            JsonOverlay<?> overlay = new LicenseImpl(json, parent, refReg);
+            @SuppressWarnings("unchecked") JsonOverlay<License> castOverlay = (JsonOverlay<License>) overlay;
+            return castOverlay;
         }
     };
 }

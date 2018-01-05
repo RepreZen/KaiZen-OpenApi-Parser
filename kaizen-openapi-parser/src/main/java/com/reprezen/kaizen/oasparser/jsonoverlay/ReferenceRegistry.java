@@ -19,7 +19,7 @@ import com.google.common.collect.Maps;
 public class ReferenceRegistry {
 
 	private Map<String, Reference> references = Maps.newHashMap();
-	private Map<JsonNode, JsonOverlay<?>> overlays = Maps.newIdentityHashMap();
+	private Map<JsonNode, IJsonOverlay<?>> overlays = Maps.newIdentityHashMap();
 
 	public Collection<Reference> getAllReferences() {
 		return references.values();
@@ -81,7 +81,7 @@ public class ReferenceRegistry {
 		}
 	}
 
-	public JsonOverlay<?> getOverlay(JsonNode node) {
+	public IJsonOverlay<?> getOverlay(JsonNode node) {
 		return overlays.get(node);
 	}
 
@@ -89,7 +89,7 @@ public class ReferenceRegistry {
 		return !node.isMissingNode() && overlays.containsKey(node);
 	}
 
-	public void setOverlay(JsonNode node, JsonOverlay<?> overlay) {
+	public void setOverlay(JsonNode node, IJsonOverlay<?> overlay) {
 		if (!node.isMissingNode()) {
 			overlays.put(node, overlay);
 		}

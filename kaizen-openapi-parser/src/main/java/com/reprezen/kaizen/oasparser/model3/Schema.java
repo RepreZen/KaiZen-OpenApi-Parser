@@ -6,11 +6,12 @@ import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.model3.Example;
 import java.util.Collection;
 import java.util.Map;
-import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IPropertiesOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IModelPart;
 import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
 import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
 
-public interface Schema extends OpenApiObject<OpenApi3, Schema> {
+public interface Schema extends IPropertiesOverlay<Schema>, IModelPart<OpenApi3, Schema> {
 
     // Title
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

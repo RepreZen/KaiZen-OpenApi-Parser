@@ -7,18 +7,18 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
 import java.util.Collection;
-import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import javax.annotation.Generated;
-import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
+import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IJsonOverlay;
 import com.reprezen.kaizen.oasparser.model3.Contact;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 
-public class ContactImpl extends OpenApiObjectImpl<OpenApi3, Contact> implements Contact {
+public class ContactImpl extends PropertiesOverlay<Contact> implements Contact {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public ContactImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
@@ -33,16 +33,16 @@ public class ContactImpl extends OpenApiObjectImpl<OpenApi3, Contact> implements
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> name = null;
+    private ChildOverlay<String> name = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> url = null;
+    private ChildOverlay<String> url = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> email = null;
+    private ChildOverlay<String> email = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object, ObjectOverlay> extensions = null;
+    private ChildMapOverlay<Object> extensions = null;
 
     // Name
     @Override
@@ -154,21 +154,25 @@ public class ContactImpl extends OpenApiObjectImpl<OpenApi3, Contact> implements
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static OverlayFactory<Contact, ContactImpl> factory = new OverlayFactory<Contact, ContactImpl>() {
+    public static OverlayFactory<Contact> factory = new OverlayFactory<Contact>() {
 
         @Override
-        protected Class<? super ContactImpl> getOverlayClass() {
+        protected Class<? extends IJsonOverlay<? super Contact>> getOverlayClass() {
             return ContactImpl.class;
         }
 
         @Override
-        public ContactImpl _create(Contact contact, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            return new ContactImpl(contact, parent, refReg);
+        public JsonOverlay<Contact> _create(Contact contact, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            JsonOverlay<?> overlay = new ContactImpl(contact, parent, refReg);
+            @SuppressWarnings("unchecked") JsonOverlay<Contact> castOverlay = (JsonOverlay<Contact>) overlay;
+            return castOverlay;
         }
 
         @Override
-        public ContactImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            return new ContactImpl(json, parent, refReg);
+        public JsonOverlay<Contact> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            JsonOverlay<?> overlay = new ContactImpl(json, parent, refReg);
+            @SuppressWarnings("unchecked") JsonOverlay<Contact> castOverlay = (JsonOverlay<Contact>) overlay;
+            return castOverlay;
         }
     };
 }

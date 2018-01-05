@@ -10,7 +10,5 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser;
 
-import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
-
-public interface OpenApi<T extends OpenApi<?>> extends OpenApiObject<T, T> {
+public interface OpenApi<M> {
 }

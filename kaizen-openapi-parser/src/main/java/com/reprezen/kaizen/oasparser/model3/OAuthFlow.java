@@ -2,9 +2,10 @@ package com.reprezen.kaizen.oasparser.model3;
 
 import javax.annotation.Generated;
 import java.util.Map;
-import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IPropertiesOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IModelPart;
 
-public interface OAuthFlow extends OpenApiObject<OpenApi3, OAuthFlow> {
+public interface OAuthFlow extends IPropertiesOverlay<OAuthFlow>, IModelPart<OpenApi3, OAuthFlow> {
 
     // AuthorizationUrl
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

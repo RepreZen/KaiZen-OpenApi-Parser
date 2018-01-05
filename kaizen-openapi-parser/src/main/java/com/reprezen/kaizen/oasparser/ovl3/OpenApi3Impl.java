@@ -13,6 +13,7 @@ import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.reprezen.kaizen.oasparser.ovl3.ServerImpl;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IJsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
 import com.reprezen.kaizen.oasparser.val.ValidationResults.Severity;
@@ -37,6 +38,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import com.reprezen.kaizen.oasparser.model3.Callback;
 import com.reprezen.kaizen.oasparser.val.Validator;
+import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import com.reprezen.kaizen.oasparser.model3.Response;
 import com.reprezen.kaizen.oasparser.ovl3.SchemaImpl;
 import com.reprezen.kaizen.oasparser.model3.RequestBody;
@@ -47,7 +49,6 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
 import com.reprezen.kaizen.oasparser.ovl3.ExampleImpl;
 import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
-import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
 import com.reprezen.kaizen.oasparser.val.ValidationResults;
 import com.reprezen.kaizen.oasparser.model3.SecurityScheme;
 import com.reprezen.kaizen.oasparser.model3.Info;
@@ -55,7 +56,7 @@ import com.reprezen.kaizen.oasparser.ovl3.LinkImpl;
 import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 
-public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3, OpenApi3> implements OpenApi3 {
+public class OpenApi3Impl extends PropertiesOverlay<OpenApi3> implements OpenApi3 {
 
     private ValidationResults validationResults = null;
 
@@ -112,61 +113,61 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3, OpenApi3> implemen
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> openApi = null;
+    private ChildOverlay<String> openApi = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Info, InfoImpl> info = null;
+    private ChildOverlay<Info> info = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildListOverlay<Server, ServerImpl> servers = null;
+    private ChildListOverlay<Server> servers = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Path, PathImpl> paths = null;
+    private ChildMapOverlay<Path> paths = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object, ObjectOverlay> pathsExtensions = null;
+    private ChildMapOverlay<Object> pathsExtensions = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Schema, SchemaImpl> schemas = null;
+    private ChildMapOverlay<Schema> schemas = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Response, ResponseImpl> responses = null;
+    private ChildMapOverlay<Response> responses = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Parameter, ParameterImpl> parameters = null;
+    private ChildMapOverlay<Parameter> parameters = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Example, ExampleImpl> examples = null;
+    private ChildMapOverlay<Example> examples = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<RequestBody, RequestBodyImpl> requestBodies = null;
+    private ChildMapOverlay<RequestBody> requestBodies = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Header, HeaderImpl> headers = null;
+    private ChildMapOverlay<Header> headers = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<SecurityScheme, SecuritySchemeImpl> securitySchemes = null;
+    private ChildMapOverlay<SecurityScheme> securitySchemes = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Link, LinkImpl> links = null;
+    private ChildMapOverlay<Link> links = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Callback, CallbackImpl> callbacks = null;
+    private ChildMapOverlay<Callback> callbacks = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object, ObjectOverlay> componentsExtensions = null;
+    private ChildMapOverlay<Object> componentsExtensions = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildListOverlay<SecurityRequirement, SecurityRequirementImpl> securityRequirements = null;
+    private ChildListOverlay<SecurityRequirement> securityRequirements = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildListOverlay<Tag, TagImpl> tags = null;
+    private ChildListOverlay<Tag> tags = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<ExternalDocs, ExternalDocsImpl> externalDocs = null;
+    private ChildOverlay<ExternalDocs> externalDocs = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object, ObjectOverlay> extensions = null;
+    private ChildMapOverlay<Object> extensions = null;
 
     // OpenApi
     @Override
@@ -307,14 +308,14 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3, OpenApi3> implemen
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean isPathReference(String key) {
-        ChildOverlay<Path, PathImpl> child = paths.getChild(key);
+        ChildOverlay<Path> child = paths.getChild(key);
         return child != null ? child.isReference() : false;
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Reference getPathReference(String key) {
-        ChildOverlay<Path, PathImpl> child = paths.getChild(key);
+        ChildOverlay<Path> child = paths.getChild(key);
         return child != null ? child.getReference() : null;
     }
 
@@ -407,14 +408,14 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3, OpenApi3> implemen
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean isSchemaReference(String key) {
-        ChildOverlay<Schema, SchemaImpl> child = schemas.getChild(key);
+        ChildOverlay<Schema> child = schemas.getChild(key);
         return child != null ? child.isReference() : false;
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Reference getSchemaReference(String key) {
-        ChildOverlay<Schema, SchemaImpl> child = schemas.getChild(key);
+        ChildOverlay<Schema> child = schemas.getChild(key);
         return child != null ? child.getReference() : null;
     }
 
@@ -464,14 +465,14 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3, OpenApi3> implemen
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean isResponseReference(String key) {
-        ChildOverlay<Response, ResponseImpl> child = responses.getChild(key);
+        ChildOverlay<Response> child = responses.getChild(key);
         return child != null ? child.isReference() : false;
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Reference getResponseReference(String key) {
-        ChildOverlay<Response, ResponseImpl> child = responses.getChild(key);
+        ChildOverlay<Response> child = responses.getChild(key);
         return child != null ? child.getReference() : null;
     }
 
@@ -521,14 +522,14 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3, OpenApi3> implemen
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean isParameterReference(String key) {
-        ChildOverlay<Parameter, ParameterImpl> child = parameters.getChild(key);
+        ChildOverlay<Parameter> child = parameters.getChild(key);
         return child != null ? child.isReference() : false;
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Reference getParameterReference(String key) {
-        ChildOverlay<Parameter, ParameterImpl> child = parameters.getChild(key);
+        ChildOverlay<Parameter> child = parameters.getChild(key);
         return child != null ? child.getReference() : null;
     }
 
@@ -578,14 +579,14 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3, OpenApi3> implemen
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean isExampleReference(String key) {
-        ChildOverlay<Example, ExampleImpl> child = examples.getChild(key);
+        ChildOverlay<Example> child = examples.getChild(key);
         return child != null ? child.isReference() : false;
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Reference getExampleReference(String key) {
-        ChildOverlay<Example, ExampleImpl> child = examples.getChild(key);
+        ChildOverlay<Example> child = examples.getChild(key);
         return child != null ? child.getReference() : null;
     }
 
@@ -635,14 +636,14 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3, OpenApi3> implemen
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean isRequestBodyReference(String key) {
-        ChildOverlay<RequestBody, RequestBodyImpl> child = requestBodies.getChild(key);
+        ChildOverlay<RequestBody> child = requestBodies.getChild(key);
         return child != null ? child.isReference() : false;
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Reference getRequestBodyReference(String key) {
-        ChildOverlay<RequestBody, RequestBodyImpl> child = requestBodies.getChild(key);
+        ChildOverlay<RequestBody> child = requestBodies.getChild(key);
         return child != null ? child.getReference() : null;
     }
 
@@ -692,14 +693,14 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3, OpenApi3> implemen
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean isHeaderReference(String key) {
-        ChildOverlay<Header, HeaderImpl> child = headers.getChild(key);
+        ChildOverlay<Header> child = headers.getChild(key);
         return child != null ? child.isReference() : false;
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Reference getHeaderReference(String key) {
-        ChildOverlay<Header, HeaderImpl> child = headers.getChild(key);
+        ChildOverlay<Header> child = headers.getChild(key);
         return child != null ? child.getReference() : null;
     }
 
@@ -749,14 +750,14 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3, OpenApi3> implemen
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean isSecuritySchemeReference(String key) {
-        ChildOverlay<SecurityScheme, SecuritySchemeImpl> child = securitySchemes.getChild(key);
+        ChildOverlay<SecurityScheme> child = securitySchemes.getChild(key);
         return child != null ? child.isReference() : false;
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Reference getSecuritySchemeReference(String key) {
-        ChildOverlay<SecurityScheme, SecuritySchemeImpl> child = securitySchemes.getChild(key);
+        ChildOverlay<SecurityScheme> child = securitySchemes.getChild(key);
         return child != null ? child.getReference() : null;
     }
 
@@ -806,14 +807,14 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3, OpenApi3> implemen
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean isLinkReference(String key) {
-        ChildOverlay<Link, LinkImpl> child = links.getChild(key);
+        ChildOverlay<Link> child = links.getChild(key);
         return child != null ? child.isReference() : false;
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Reference getLinkReference(String key) {
-        ChildOverlay<Link, LinkImpl> child = links.getChild(key);
+        ChildOverlay<Link> child = links.getChild(key);
         return child != null ? child.getReference() : null;
     }
 
@@ -863,14 +864,14 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3, OpenApi3> implemen
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean isCallbackReference(String key) {
-        ChildOverlay<Callback, CallbackImpl> child = callbacks.getChild(key);
+        ChildOverlay<Callback> child = callbacks.getChild(key);
         return child != null ? child.isReference() : false;
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Reference getCallbackReference(String key) {
-        ChildOverlay<Callback, CallbackImpl> child = callbacks.getChild(key);
+        ChildOverlay<Callback> child = callbacks.getChild(key);
         return child != null ? child.getReference() : null;
     }
 
@@ -1124,21 +1125,25 @@ public class OpenApi3Impl extends OpenApiObjectImpl<OpenApi3, OpenApi3> implemen
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static OverlayFactory<OpenApi3, OpenApi3Impl> factory = new OverlayFactory<OpenApi3, OpenApi3Impl>() {
+    public static OverlayFactory<OpenApi3> factory = new OverlayFactory<OpenApi3>() {
 
         @Override
-        protected Class<? super OpenApi3Impl> getOverlayClass() {
+        protected Class<? extends IJsonOverlay<? super OpenApi3>> getOverlayClass() {
             return OpenApi3Impl.class;
         }
 
         @Override
-        public OpenApi3Impl _create(OpenApi3 openApi3, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            return new OpenApi3Impl(openApi3, parent, refReg);
+        public JsonOverlay<OpenApi3> _create(OpenApi3 openApi3, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            JsonOverlay<?> overlay = new OpenApi3Impl(openApi3, parent, refReg);
+            @SuppressWarnings("unchecked") JsonOverlay<OpenApi3> castOverlay = (JsonOverlay<OpenApi3>) overlay;
+            return castOverlay;
         }
 
         @Override
-        public OpenApi3Impl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            return new OpenApi3Impl(json, parent, refReg);
+        public JsonOverlay<OpenApi3> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            JsonOverlay<?> overlay = new OpenApi3Impl(json, parent, refReg);
+            @SuppressWarnings("unchecked") JsonOverlay<OpenApi3> castOverlay = (JsonOverlay<OpenApi3>) overlay;
+            return castOverlay;
         }
     };
 }

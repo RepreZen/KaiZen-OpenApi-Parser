@@ -2,9 +2,10 @@ package com.reprezen.kaizen.oasparser.model3;
 
 import javax.annotation.Generated;
 import java.util.Collection;
-import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IPropertiesOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IModelPart;
 
-public interface SecurityParameter extends OpenApiObject<OpenApi3, SecurityParameter> {
+public interface SecurityParameter extends IPropertiesOverlay<SecurityParameter>, IModelPart<OpenApi3, SecurityParameter> {
 
     // Parameter
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

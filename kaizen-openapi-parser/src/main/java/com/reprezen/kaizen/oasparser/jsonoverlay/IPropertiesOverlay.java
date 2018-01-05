@@ -12,5 +12,5 @@ package com.reprezen.kaizen.oasparser.jsonoverlay;
 
 public interface IPropertiesOverlay<VI> extends IJsonOverlay<VI> {
 
-	IPropertiesOverlay<?> getParentObject();
+	IPropertiesOverlay<?> getParentPropertiesObject();
 }

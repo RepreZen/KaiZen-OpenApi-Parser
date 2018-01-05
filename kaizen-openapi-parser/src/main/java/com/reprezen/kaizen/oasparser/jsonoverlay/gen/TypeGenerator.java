@@ -46,12 +46,13 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
-import com.reprezen.kaizen.oasparser.OpenApi;
 import com.reprezen.kaizen.oasparser.jsonoverlay.BooleanOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.IJsonOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IModelPart;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IPropertiesOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.IntegerOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
@@ -61,6 +62,7 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.reprezen.kaizen.oasparser.jsonoverlay.Primitive;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PrimitiveOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
@@ -70,17 +72,13 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.gen.SimpleJavaGenerator.Member;
 import com.reprezen.kaizen.oasparser.jsonoverlay.gen.SimpleJavaGenerator.MethodMember;
 import com.reprezen.kaizen.oasparser.jsonoverlay.gen.TypeData.Field;
 import com.reprezen.kaizen.oasparser.jsonoverlay.gen.TypeData.Type;
-import com.reprezen.kaizen.oasparser.val.ValidationResults;
-import com.reprezen.kaizen.oasparser.val.ValidationResults.Severity;
-import com.reprezen.kaizen.oasparser.val.Validator;
-import com.reprezen.kaizen.oasparser.val3.OpenApi3Validator;
 
 public abstract class TypeGenerator {
 
 	private File dir;
 	protected String intfPackage;
 	protected String implPackage;
-	private String suffix;
+	protected String suffix;
 	private boolean preserve;
 	private Set<String> requiredTypes = Sets.newHashSet();
 
@@ -186,10 +184,13 @@ public abstract class TypeGenerator {
 				JsonPointer.class, //
 				JsonOverlay.class, //
 				IJsonOverlay.class, //
+				PropertiesOverlay.class, //
+				IPropertiesOverlay.class, //
 				ChildOverlay.class, //
 				ChildMapOverlay.class, //
 				ChildListOverlay.class, //
 				OverlayFactory.class, //
+				IModelPart.class, //
 				Reference.class, //
 				ReferenceRegistry.class, //
 				Inject.class, //
@@ -200,12 +201,7 @@ public abstract class TypeGenerator {
 				PrimitiveOverlay.class, //
 				ObjectOverlay.class, //
 				ListOverlay.class, //
-				MapOverlay.class, //
-				Validator.class, //
-				ValidationResults.class, //
-				OpenApi3Validator.class, //
-				OpenApi.class, //
-				Severity.class);
+				MapOverlay.class); //
 		for (Class<?> cls : overlays) {
 			results.put(cls.getSimpleName(), cls.getName().replaceAll("\\$", "."));
 		}

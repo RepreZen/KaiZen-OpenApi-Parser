@@ -10,19 +10,19 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
 import java.util.Collection;
 import com.reprezen.kaizen.oasparser.model3.Header;
-import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.Link;
 import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import javax.annotation.Generated;
-import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
+import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IJsonOverlay;
 import com.reprezen.kaizen.oasparser.ovl3.ServerImpl;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 
-public class LinkImpl extends OpenApiObjectImpl<OpenApi3, Link> implements Link {
+public class LinkImpl extends PropertiesOverlay<Link> implements Link {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public LinkImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
@@ -37,25 +37,25 @@ public class LinkImpl extends OpenApiObjectImpl<OpenApi3, Link> implements Link 
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> operationId = null;
+    private ChildOverlay<String> operationId = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> operationRef = null;
+    private ChildOverlay<String> operationRef = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<String, StringOverlay> parameters = null;
+    private ChildMapOverlay<String> parameters = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Header, HeaderImpl> headers = null;
+    private ChildMapOverlay<Header> headers = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> description = null;
+    private ChildOverlay<String> description = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Server, ServerImpl> server = null;
+    private ChildOverlay<Server> server = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object, ObjectOverlay> extensions = null;
+    private ChildMapOverlay<Object> extensions = null;
 
     // OperationId
     @Override
@@ -275,21 +275,25 @@ public class LinkImpl extends OpenApiObjectImpl<OpenApi3, Link> implements Link 
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static OverlayFactory<Link, LinkImpl> factory = new OverlayFactory<Link, LinkImpl>() {
+    public static OverlayFactory<Link> factory = new OverlayFactory<Link>() {
 
         @Override
-        protected Class<? super LinkImpl> getOverlayClass() {
+        protected Class<? extends IJsonOverlay<? super Link>> getOverlayClass() {
             return LinkImpl.class;
         }
 
         @Override
-        public LinkImpl _create(Link link, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            return new LinkImpl(link, parent, refReg);
+        public JsonOverlay<Link> _create(Link link, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            JsonOverlay<?> overlay = new LinkImpl(link, parent, refReg);
+            @SuppressWarnings("unchecked") JsonOverlay<Link> castOverlay = (JsonOverlay<Link>) overlay;
+            return castOverlay;
         }
 
         @Override
-        public LinkImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            return new LinkImpl(json, parent, refReg);
+        public JsonOverlay<Link> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            JsonOverlay<?> overlay = new LinkImpl(json, parent, refReg);
+            @SuppressWarnings("unchecked") JsonOverlay<Link> castOverlay = (JsonOverlay<Link>) overlay;
+            return castOverlay;
         }
     };
 }

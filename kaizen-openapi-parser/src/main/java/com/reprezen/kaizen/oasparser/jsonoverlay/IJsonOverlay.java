@@ -17,33 +17,33 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 public interface IJsonOverlay<V> {
 
-	V get();
+    V get();
 
-	V get(boolean elaborate);
+    V get(boolean elaborate);
 
-	void set(V value);
+    void set(V value);
 
-	IJsonOverlay<?> find(JsonPointer path);
+    IJsonOverlay<?> find(JsonPointer path);
 
-	IJsonOverlay<?> find(String path);
+    IJsonOverlay<?> find(String path);
 
-	JsonNode toJson();
+    JsonNode toJson();
 
-	JsonNode toJson(SerializationOptions options);
+    JsonNode toJson(SerializationOptions options);
 
-	JsonNode toJson(SerializationOptions.Option... options);
+    JsonNode toJson(SerializationOptions.Option... options);
 
-	boolean isPresent();
+    boolean isPresent();
 
-	boolean isElaborated();
+    boolean isElaborated();
 
-	IJsonOverlay<?> getParent();
+    IJsonOverlay<?> getParent();
 
-	String getPathInParent();
+    String getPathInParent();
 
-	IJsonOverlay<?> getRoot();
+    IJsonOverlay<?> getRoot();
 
-	String getPathFromRoot();
+    String getPathFromRoot();
 
-	URL getJsonReference();
+    URL getJsonReference();
 }

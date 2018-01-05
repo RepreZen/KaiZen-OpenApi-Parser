@@ -65,7 +65,7 @@ public class PrimitiveOverlay extends ScalarOverlay<Object> {
 		}
 	}
 
-	public static OverlayFactory<Object, PrimitiveOverlay> factory = new OverlayFactory<Object, PrimitiveOverlay>() {
+	public static OverlayFactory<Object> factory = new OverlayFactory<Object>() {
 
 		@Override
 		protected Class<PrimitiveOverlay> getOverlayClass() {

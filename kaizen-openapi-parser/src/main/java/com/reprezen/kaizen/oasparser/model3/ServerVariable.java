@@ -3,9 +3,10 @@ package com.reprezen.kaizen.oasparser.model3;
 import javax.annotation.Generated;
 import java.util.Collection;
 import java.util.Map;
-import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IPropertiesOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IModelPart;
 
-public interface ServerVariable extends OpenApiObject<OpenApi3, ServerVariable> {
+public interface ServerVariable extends IPropertiesOverlay<ServerVariable>, IModelPart<OpenApi3, ServerVariable> {
 
     // EnumValue
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

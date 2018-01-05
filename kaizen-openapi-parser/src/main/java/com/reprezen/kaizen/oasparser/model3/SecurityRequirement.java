@@ -2,10 +2,11 @@ package com.reprezen.kaizen.oasparser.model3;
 
 import javax.annotation.Generated;
 import java.util.Map;
-import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IPropertiesOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IModelPart;
 import com.reprezen.kaizen.oasparser.model3.SecurityParameter;
 
-public interface SecurityRequirement extends OpenApiObject<OpenApi3, SecurityRequirement> {
+public interface SecurityRequirement extends IPropertiesOverlay<SecurityRequirement>, IModelPart<OpenApi3, SecurityRequirement> {
 
     // Requirement
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

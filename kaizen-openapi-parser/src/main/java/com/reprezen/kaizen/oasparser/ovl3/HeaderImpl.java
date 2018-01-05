@@ -4,15 +4,16 @@ import com.reprezen.kaizen.oasparser.model3.Schema;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
-import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.jsonoverlay.BooleanOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import javax.annotation.Generated;
+import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import com.reprezen.kaizen.oasparser.ovl3.SchemaImpl;
 import com.reprezen.kaizen.oasparser.model3.Example;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IJsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
 import com.reprezen.kaizen.oasparser.ovl3.MediaTypeImpl;
@@ -23,10 +24,9 @@ import com.reprezen.kaizen.oasparser.model3.Header;
 import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import com.reprezen.kaizen.oasparser.model3.MediaType;
-import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 
-public class HeaderImpl extends OpenApiObjectImpl<OpenApi3, Header> implements Header {
+public class HeaderImpl extends PropertiesOverlay<Header> implements Header {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public HeaderImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
@@ -41,46 +41,46 @@ public class HeaderImpl extends OpenApiObjectImpl<OpenApi3, Header> implements H
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> name = null;
+    private ChildOverlay<String> name = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> in = null;
+    private ChildOverlay<String> in = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> description = null;
+    private ChildOverlay<String> description = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Boolean, BooleanOverlay> required = null;
+    private ChildOverlay<Boolean> required = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Boolean, BooleanOverlay> deprecated = null;
+    private ChildOverlay<Boolean> deprecated = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Boolean, BooleanOverlay> allowEmptyValue = null;
+    private ChildOverlay<Boolean> allowEmptyValue = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> style = null;
+    private ChildOverlay<String> style = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Boolean, BooleanOverlay> explode = null;
+    private ChildOverlay<Boolean> explode = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Boolean, BooleanOverlay> allowReserved = null;
+    private ChildOverlay<Boolean> allowReserved = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Schema, SchemaImpl> schema = null;
+    private ChildOverlay<Schema> schema = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Object, ObjectOverlay> example = null;
+    private ChildOverlay<Object> example = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Example, ExampleImpl> examples = null;
+    private ChildMapOverlay<Example> examples = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<MediaType, MediaTypeImpl> contentMediaTypes = null;
+    private ChildMapOverlay<MediaType> contentMediaTypes = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object, ObjectOverlay> extensions = null;
+    private ChildMapOverlay<Object> extensions = null;
 
     // Name
     @Override
@@ -379,14 +379,14 @@ public class HeaderImpl extends OpenApiObjectImpl<OpenApi3, Header> implements H
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean isExampleReference(String key) {
-        ChildOverlay<Example, ExampleImpl> child = examples.getChild(key);
+        ChildOverlay<Example> child = examples.getChild(key);
         return child != null ? child.isReference() : false;
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Reference getExampleReference(String key) {
-        ChildOverlay<Example, ExampleImpl> child = examples.getChild(key);
+        ChildOverlay<Example> child = examples.getChild(key);
         return child != null ? child.getReference() : null;
     }
 
@@ -498,21 +498,25 @@ public class HeaderImpl extends OpenApiObjectImpl<OpenApi3, Header> implements H
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static OverlayFactory<Header, HeaderImpl> factory = new OverlayFactory<Header, HeaderImpl>() {
+    public static OverlayFactory<Header> factory = new OverlayFactory<Header>() {
 
         @Override
-        protected Class<? super HeaderImpl> getOverlayClass() {
+        protected Class<? extends IJsonOverlay<? super Header>> getOverlayClass() {
             return HeaderImpl.class;
         }
 
         @Override
-        public HeaderImpl _create(Header header, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            return new HeaderImpl(header, parent, refReg);
+        public JsonOverlay<Header> _create(Header header, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            JsonOverlay<?> overlay = new HeaderImpl(header, parent, refReg);
+            @SuppressWarnings("unchecked") JsonOverlay<Header> castOverlay = (JsonOverlay<Header>) overlay;
+            return castOverlay;
         }
 
         @Override
-        public HeaderImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            return new HeaderImpl(json, parent, refReg);
+        public JsonOverlay<Header> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            JsonOverlay<?> overlay = new HeaderImpl(json, parent, refReg);
+            @SuppressWarnings("unchecked") JsonOverlay<Header> castOverlay = (JsonOverlay<Header>) overlay;
+            return castOverlay;
         }
     };
 }

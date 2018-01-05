@@ -1,9 +1,11 @@
 modelType: OpenApi3
 imports:
-  OpenApiObject: _intf
-  OpenApiObjectImpl: _impl
-defaultExtendInterfaces:
-  - OpenApiObject
+  OpenApi: com.reprezen.kaizen.oasparser.OpenApi
+  Validator: com.reprezen.kaizen.oasparser.val.Validator
+  ValidationResults: com.reprezen.kaizen.oasparser.val.ValidationResults
+  Severity: com.reprezen.kaizen.oasparser.val.ValidationResults.Severity
+  OpenApi3Validator: com.reprezen.kaizen.oasparser.val3.OpenApi3Validator
+  
 decls:
   - extPat: &extPat "x-.+"
   - noextPat: &noextPat "(?!x-).*"

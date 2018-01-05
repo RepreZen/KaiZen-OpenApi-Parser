@@ -4,11 +4,12 @@ import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.model3.MediaType;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.model3.Header;
-import com.reprezen.kaizen.oasparser.model3.OpenApiObject;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IPropertiesOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IModelPart;
 import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
 import com.reprezen.kaizen.oasparser.model3.Link;
 
-public interface Response extends OpenApiObject<OpenApi3, Response> {
+public interface Response extends IPropertiesOverlay<Response>, IModelPart<OpenApi3, Response> {
 
     // Description
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

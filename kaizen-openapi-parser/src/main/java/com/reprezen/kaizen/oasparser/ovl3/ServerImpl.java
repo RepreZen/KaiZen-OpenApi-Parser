@@ -9,18 +9,18 @@ import com.reprezen.kaizen.oasparser.ovl3.ServerVariableImpl;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
 import java.util.Collection;
-import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.ServerVariable;
 import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import javax.annotation.Generated;
-import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
+import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IJsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 
-public class ServerImpl extends OpenApiObjectImpl<OpenApi3, Server> implements Server {
+public class ServerImpl extends PropertiesOverlay<Server> implements Server {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public ServerImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
@@ -35,19 +35,19 @@ public class ServerImpl extends OpenApiObjectImpl<OpenApi3, Server> implements S
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> url = null;
+    private ChildOverlay<String> url = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> description = null;
+    private ChildOverlay<String> description = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<ServerVariable, ServerVariableImpl> serverVariables = null;
+    private ChildMapOverlay<ServerVariable> serverVariables = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object, ObjectOverlay> variablesExtensions = null;
+    private ChildMapOverlay<Object> variablesExtensions = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object, ObjectOverlay> extensions = null;
+    private ChildMapOverlay<Object> extensions = null;
 
     // Url
     @Override
@@ -227,21 +227,25 @@ public class ServerImpl extends OpenApiObjectImpl<OpenApi3, Server> implements S
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static OverlayFactory<Server, ServerImpl> factory = new OverlayFactory<Server, ServerImpl>() {
+    public static OverlayFactory<Server> factory = new OverlayFactory<Server>() {
 
         @Override
-        protected Class<? super ServerImpl> getOverlayClass() {
+        protected Class<? extends IJsonOverlay<? super Server>> getOverlayClass() {
             return ServerImpl.class;
         }
 
         @Override
-        public ServerImpl _create(Server server, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            return new ServerImpl(server, parent, refReg);
+        public JsonOverlay<Server> _create(Server server, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            JsonOverlay<?> overlay = new ServerImpl(server, parent, refReg);
+            @SuppressWarnings("unchecked") JsonOverlay<Server> castOverlay = (JsonOverlay<Server>) overlay;
+            return castOverlay;
         }
 
         @Override
-        public ServerImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            return new ServerImpl(json, parent, refReg);
+        public JsonOverlay<Server> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            JsonOverlay<?> overlay = new ServerImpl(json, parent, refReg);
+            @SuppressWarnings("unchecked") JsonOverlay<Server> castOverlay = (JsonOverlay<Server>) overlay;
+            return castOverlay;
         }
     };
 }

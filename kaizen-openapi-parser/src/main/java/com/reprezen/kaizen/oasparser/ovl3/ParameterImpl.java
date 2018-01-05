@@ -4,16 +4,17 @@ import com.reprezen.kaizen.oasparser.model3.Schema;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
-import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.jsonoverlay.BooleanOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import javax.annotation.Generated;
+import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import com.reprezen.kaizen.oasparser.ovl3.SchemaImpl;
 import com.reprezen.kaizen.oasparser.model3.Parameter;
 import com.reprezen.kaizen.oasparser.model3.Example;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IJsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
 import com.reprezen.kaizen.oasparser.ovl3.MediaTypeImpl;
@@ -23,10 +24,9 @@ import java.util.Collection;
 import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import com.reprezen.kaizen.oasparser.model3.MediaType;
-import com.reprezen.kaizen.oasparser.ovl3.OpenApiObjectImpl;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 
-public class ParameterImpl extends OpenApiObjectImpl<OpenApi3, Parameter> implements Parameter {
+public class ParameterImpl extends PropertiesOverlay<Parameter> implements Parameter {
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public ParameterImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
@@ -41,46 +41,46 @@ public class ParameterImpl extends OpenApiObjectImpl<OpenApi3, Parameter> implem
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> name = null;
+    private ChildOverlay<String> name = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> in = null;
+    private ChildOverlay<String> in = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> description = null;
+    private ChildOverlay<String> description = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Boolean, BooleanOverlay> required = null;
+    private ChildOverlay<Boolean> required = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Boolean, BooleanOverlay> deprecated = null;
+    private ChildOverlay<Boolean> deprecated = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Boolean, BooleanOverlay> allowEmptyValue = null;
+    private ChildOverlay<Boolean> allowEmptyValue = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String, StringOverlay> style = null;
+    private ChildOverlay<String> style = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Boolean, BooleanOverlay> explode = null;
+    private ChildOverlay<Boolean> explode = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Boolean, BooleanOverlay> allowReserved = null;
+    private ChildOverlay<Boolean> allowReserved = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Schema, SchemaImpl> schema = null;
+    private ChildOverlay<Schema> schema = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Object, ObjectOverlay> example = null;
+    private ChildOverlay<Object> example = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Example, ExampleImpl> examples = null;
+    private ChildMapOverlay<Example> examples = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<MediaType, MediaTypeImpl> contentMediaTypes = null;
+    private ChildMapOverlay<MediaType> contentMediaTypes = null;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object, ObjectOverlay> extensions = null;
+    private ChildMapOverlay<Object> extensions = null;
 
     // Name
     @Override
@@ -379,14 +379,14 @@ public class ParameterImpl extends OpenApiObjectImpl<OpenApi3, Parameter> implem
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public boolean isExampleReference(String key) {
-        ChildOverlay<Example, ExampleImpl> child = examples.getChild(key);
+        ChildOverlay<Example> child = examples.getChild(key);
         return child != null ? child.isReference() : false;
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public Reference getExampleReference(String key) {
-        ChildOverlay<Example, ExampleImpl> child = examples.getChild(key);
+        ChildOverlay<Example> child = examples.getChild(key);
         return child != null ? child.getReference() : null;
     }
 
@@ -498,21 +498,25 @@ public class ParameterImpl extends OpenApiObjectImpl<OpenApi3, Parameter> implem
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static OverlayFactory<Parameter, ParameterImpl> factory = new OverlayFactory<Parameter, ParameterImpl>() {
+    public static OverlayFactory<Parameter> factory = new OverlayFactory<Parameter>() {
 
         @Override
-        protected Class<? super ParameterImpl> getOverlayClass() {
+        protected Class<? extends IJsonOverlay<? super Parameter>> getOverlayClass() {
             return ParameterImpl.class;
         }
 
         @Override
-        public ParameterImpl _create(Parameter parameter, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            return new ParameterImpl(parameter, parent, refReg);
+        public JsonOverlay<Parameter> _create(Parameter parameter, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            JsonOverlay<?> overlay = new ParameterImpl(parameter, parent, refReg);
+            @SuppressWarnings("unchecked") JsonOverlay<Parameter> castOverlay = (JsonOverlay<Parameter>) overlay;
+            return castOverlay;
         }
 
         @Override
-        public ParameterImpl _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            return new ParameterImpl(json, parent, refReg);
+        public JsonOverlay<Parameter> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+            JsonOverlay<?> overlay = new ParameterImpl(json, parent, refReg);
+            @SuppressWarnings("unchecked") JsonOverlay<Parameter> castOverlay = (JsonOverlay<Parameter>) overlay;
+            return castOverlay;
         }
     };
 }

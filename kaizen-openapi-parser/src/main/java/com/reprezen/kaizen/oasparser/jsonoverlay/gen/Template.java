@@ -114,6 +114,10 @@ public class Template {
 			return type.getImplType();
 		case "modelType":
 			return type.getTypeData().getModelType();
+		case "discriminator":
+			return type.getDiscriminator();
+		case "discValue":
+			return type.getDiscriminatorValue();
 		default:
 			return args[Integer.valueOf(var)];
 		}

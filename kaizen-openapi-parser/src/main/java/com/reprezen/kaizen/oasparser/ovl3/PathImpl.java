@@ -1,28 +1,30 @@
 package com.reprezen.kaizen.oasparser.ovl3;
 
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
 import com.reprezen.kaizen.oasparser.model3.Server;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
-import com.reprezen.kaizen.oasparser.ovl3.OperationImpl;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
-import com.reprezen.kaizen.oasparser.model3.Path;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
-import java.util.Collection;
 import com.reprezen.kaizen.oasparser.ovl3.ParameterImpl;
-import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
 import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
+import com.fasterxml.jackson.core.JsonPointer;
 import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
-import com.reprezen.kaizen.oasparser.model3.Operation;
 import com.reprezen.kaizen.oasparser.model3.Parameter;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.reprezen.kaizen.oasparser.ovl3.ServerImpl;
 import com.reprezen.kaizen.oasparser.jsonoverlay.IJsonOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
+import com.reprezen.kaizen.oasparser.ovl3.OperationImpl;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
+import java.util.Collection;
+import java.util.stream.Collectors;
+import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
+import com.reprezen.kaizen.oasparser.model3.*;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
+import com.reprezen.kaizen.oasparser.model3.Operation;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 
 public class PathImpl extends PropertiesOverlay<Path> implements Path {
@@ -445,16 +447,44 @@ public class PathImpl extends PropertiesOverlay<Path> implements Path {
 
         @Override
         public JsonOverlay<Path> _create(Path path, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            JsonOverlay<?> overlay = new PathImpl(path, parent, refReg);
+            Class<? extends Path> subtype = getSubtypeOf(path);
+            IJsonOverlay<?> overlay;
+            if (subtype == null || subtype == Path.class) {
+                overlay = new PathImpl(path, parent, refReg);
+            } else {
+                switch(subtype.getSimpleName()) {
+                    default:
+                        overlay = null;
+                }
+            }
             @SuppressWarnings("unchecked") JsonOverlay<Path> castOverlay = (JsonOverlay<Path>) overlay;
             return castOverlay;
         }
 
         @Override
         public JsonOverlay<Path> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            JsonOverlay<?> overlay = new PathImpl(json, parent, refReg);
+            Class<? extends Path> subtype = getSubtypeOf(json);
+            IJsonOverlay<?> overlay;
+            if (subtype == null || subtype == Path.class) {
+                overlay = new PathImpl(json, parent, refReg);
+            } else {
+                switch(subtype.getSimpleName()) {
+                    default:
+                        overlay = null;
+                }
+            }
             @SuppressWarnings("unchecked") JsonOverlay<Path> castOverlay = (JsonOverlay<Path>) overlay;
             return castOverlay;
         }
     };
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    private static Class<? extends Path> getSubtypeOf(Path path) {
+        return Path.class;
+    }
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    private static Class<? extends Path> getSubtypeOf(JsonNode json) {
+        return Path.class;
+    }
 }

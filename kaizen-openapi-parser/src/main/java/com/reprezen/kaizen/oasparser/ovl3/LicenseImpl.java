@@ -6,12 +6,14 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
-import com.reprezen.kaizen.oasparser.model3.License;
 import java.util.Collection;
+import java.util.stream.Collectors;
+import com.reprezen.kaizen.oasparser.model3.*;
 import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
+import com.fasterxml.jackson.core.JsonPointer;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -142,16 +144,44 @@ public class LicenseImpl extends PropertiesOverlay<License> implements License {
 
         @Override
         public JsonOverlay<License> _create(License license, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            JsonOverlay<?> overlay = new LicenseImpl(license, parent, refReg);
+            Class<? extends License> subtype = getSubtypeOf(license);
+            IJsonOverlay<?> overlay;
+            if (subtype == null || subtype == License.class) {
+                overlay = new LicenseImpl(license, parent, refReg);
+            } else {
+                switch(subtype.getSimpleName()) {
+                    default:
+                        overlay = null;
+                }
+            }
             @SuppressWarnings("unchecked") JsonOverlay<License> castOverlay = (JsonOverlay<License>) overlay;
             return castOverlay;
         }
 
         @Override
         public JsonOverlay<License> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            JsonOverlay<?> overlay = new LicenseImpl(json, parent, refReg);
+            Class<? extends License> subtype = getSubtypeOf(json);
+            IJsonOverlay<?> overlay;
+            if (subtype == null || subtype == License.class) {
+                overlay = new LicenseImpl(json, parent, refReg);
+            } else {
+                switch(subtype.getSimpleName()) {
+                    default:
+                        overlay = null;
+                }
+            }
             @SuppressWarnings("unchecked") JsonOverlay<License> castOverlay = (JsonOverlay<License>) overlay;
             return castOverlay;
         }
     };
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    private static Class<? extends License> getSubtypeOf(License license) {
+        return License.class;
+    }
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    private static Class<? extends License> getSubtypeOf(JsonNode json) {
+        return License.class;
+    }
 }

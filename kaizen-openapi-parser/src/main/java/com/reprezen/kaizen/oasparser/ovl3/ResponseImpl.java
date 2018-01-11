@@ -1,28 +1,30 @@
 package com.reprezen.kaizen.oasparser.ovl3;
 
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
 import com.reprezen.kaizen.oasparser.ovl3.HeaderImpl;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
+import com.reprezen.kaizen.oasparser.model3.Link;
+import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
+import com.fasterxml.jackson.core.JsonPointer;
+import javax.annotation.Generated;
+import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
+import java.util.Map;
+import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IJsonOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
 import com.reprezen.kaizen.oasparser.ovl3.MediaTypeImpl;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
 import java.util.Collection;
 import com.reprezen.kaizen.oasparser.model3.Header;
+import java.util.stream.Collectors;
 import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
-import com.reprezen.kaizen.oasparser.model3.Link;
-import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
+import com.reprezen.kaizen.oasparser.model3.*;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
-import javax.annotation.Generated;
-import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
-import com.reprezen.kaizen.oasparser.model3.Response;
 import com.reprezen.kaizen.oasparser.model3.MediaType;
-import java.util.Map;
-import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.reprezen.kaizen.oasparser.ovl3.LinkImpl;
-import com.reprezen.kaizen.oasparser.jsonoverlay.IJsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 
 public class ResponseImpl extends PropertiesOverlay<Response> implements Response {
@@ -295,16 +297,44 @@ public class ResponseImpl extends PropertiesOverlay<Response> implements Respons
 
         @Override
         public JsonOverlay<Response> _create(Response response, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            JsonOverlay<?> overlay = new ResponseImpl(response, parent, refReg);
+            Class<? extends Response> subtype = getSubtypeOf(response);
+            IJsonOverlay<?> overlay;
+            if (subtype == null || subtype == Response.class) {
+                overlay = new ResponseImpl(response, parent, refReg);
+            } else {
+                switch(subtype.getSimpleName()) {
+                    default:
+                        overlay = null;
+                }
+            }
             @SuppressWarnings("unchecked") JsonOverlay<Response> castOverlay = (JsonOverlay<Response>) overlay;
             return castOverlay;
         }
 
         @Override
         public JsonOverlay<Response> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            JsonOverlay<?> overlay = new ResponseImpl(json, parent, refReg);
+            Class<? extends Response> subtype = getSubtypeOf(json);
+            IJsonOverlay<?> overlay;
+            if (subtype == null || subtype == Response.class) {
+                overlay = new ResponseImpl(json, parent, refReg);
+            } else {
+                switch(subtype.getSimpleName()) {
+                    default:
+                        overlay = null;
+                }
+            }
             @SuppressWarnings("unchecked") JsonOverlay<Response> castOverlay = (JsonOverlay<Response>) overlay;
             return castOverlay;
         }
     };
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    private static Class<? extends Response> getSubtypeOf(Response response) {
+        return Response.class;
+    }
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    private static Class<? extends Response> getSubtypeOf(JsonNode json) {
+        return Response.class;
+    }
 }

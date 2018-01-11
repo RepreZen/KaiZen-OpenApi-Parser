@@ -7,15 +7,17 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
 import java.util.Collection;
+import java.util.stream.Collectors;
+import com.reprezen.kaizen.oasparser.model3.*;
 import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
+import com.fasterxml.jackson.core.JsonPointer;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.reprezen.kaizen.oasparser.jsonoverlay.IJsonOverlay;
-import com.reprezen.kaizen.oasparser.model3.Contact;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 
 public class ContactImpl extends PropertiesOverlay<Contact> implements Contact {
@@ -163,16 +165,44 @@ public class ContactImpl extends PropertiesOverlay<Contact> implements Contact {
 
         @Override
         public JsonOverlay<Contact> _create(Contact contact, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            JsonOverlay<?> overlay = new ContactImpl(contact, parent, refReg);
+            Class<? extends Contact> subtype = getSubtypeOf(contact);
+            IJsonOverlay<?> overlay;
+            if (subtype == null || subtype == Contact.class) {
+                overlay = new ContactImpl(contact, parent, refReg);
+            } else {
+                switch(subtype.getSimpleName()) {
+                    default:
+                        overlay = null;
+                }
+            }
             @SuppressWarnings("unchecked") JsonOverlay<Contact> castOverlay = (JsonOverlay<Contact>) overlay;
             return castOverlay;
         }
 
         @Override
         public JsonOverlay<Contact> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            JsonOverlay<?> overlay = new ContactImpl(json, parent, refReg);
+            Class<? extends Contact> subtype = getSubtypeOf(json);
+            IJsonOverlay<?> overlay;
+            if (subtype == null || subtype == Contact.class) {
+                overlay = new ContactImpl(json, parent, refReg);
+            } else {
+                switch(subtype.getSimpleName()) {
+                    default:
+                        overlay = null;
+                }
+            }
             @SuppressWarnings("unchecked") JsonOverlay<Contact> castOverlay = (JsonOverlay<Contact>) overlay;
             return castOverlay;
         }
     };
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    private static Class<? extends Contact> getSubtypeOf(Contact contact) {
+        return Contact.class;
+    }
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    private static Class<? extends Contact> getSubtypeOf(JsonNode json) {
+        return Contact.class;
+    }
 }

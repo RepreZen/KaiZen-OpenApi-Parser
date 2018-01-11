@@ -7,12 +7,14 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
 import java.util.Collection;
+import java.util.stream.Collectors;
+import com.reprezen.kaizen.oasparser.model3.*;
 import com.reprezen.kaizen.oasparser.ovl3.ExternalDocsImpl;
 import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
-import com.reprezen.kaizen.oasparser.model3.Tag;
+import com.fasterxml.jackson.core.JsonPointer;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -165,16 +167,44 @@ public class TagImpl extends PropertiesOverlay<Tag> implements Tag {
 
         @Override
         public JsonOverlay<Tag> _create(Tag tag, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            JsonOverlay<?> overlay = new TagImpl(tag, parent, refReg);
+            Class<? extends Tag> subtype = getSubtypeOf(tag);
+            IJsonOverlay<?> overlay;
+            if (subtype == null || subtype == Tag.class) {
+                overlay = new TagImpl(tag, parent, refReg);
+            } else {
+                switch(subtype.getSimpleName()) {
+                    default:
+                        overlay = null;
+                }
+            }
             @SuppressWarnings("unchecked") JsonOverlay<Tag> castOverlay = (JsonOverlay<Tag>) overlay;
             return castOverlay;
         }
 
         @Override
         public JsonOverlay<Tag> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            JsonOverlay<?> overlay = new TagImpl(json, parent, refReg);
+            Class<? extends Tag> subtype = getSubtypeOf(json);
+            IJsonOverlay<?> overlay;
+            if (subtype == null || subtype == Tag.class) {
+                overlay = new TagImpl(json, parent, refReg);
+            } else {
+                switch(subtype.getSimpleName()) {
+                    default:
+                        overlay = null;
+                }
+            }
             @SuppressWarnings("unchecked") JsonOverlay<Tag> castOverlay = (JsonOverlay<Tag>) overlay;
             return castOverlay;
         }
     };
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    private static Class<? extends Tag> getSubtypeOf(Tag tag) {
+        return Tag.class;
+    }
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    private static Class<? extends Tag> getSubtypeOf(JsonNode json) {
+        return Tag.class;
+    }
 }

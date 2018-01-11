@@ -1,28 +1,30 @@
 package com.reprezen.kaizen.oasparser.ovl3;
 
 import com.reprezen.kaizen.oasparser.model3.Schema;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
-import java.util.Collection;
-import com.reprezen.kaizen.oasparser.ovl3.ExampleImpl;
-import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
 import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
-import com.reprezen.kaizen.oasparser.ovl3.EncodingPropertyImpl;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
+import com.fasterxml.jackson.core.JsonPointer;
 import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import com.reprezen.kaizen.oasparser.ovl3.SchemaImpl;
-import com.reprezen.kaizen.oasparser.model3.MediaType;
 import com.reprezen.kaizen.oasparser.model3.Example;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.reprezen.kaizen.oasparser.model3.EncodingProperty;
 import com.reprezen.kaizen.oasparser.jsonoverlay.IJsonOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
+import com.reprezen.kaizen.oasparser.ovl3.ExampleImpl;
+import java.util.Collection;
+import java.util.stream.Collectors;
+import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
+import com.reprezen.kaizen.oasparser.model3.*;
+import com.reprezen.kaizen.oasparser.ovl3.EncodingPropertyImpl;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
+import com.reprezen.kaizen.oasparser.model3.EncodingProperty;
 
 public class MediaTypeImpl extends PropertiesOverlay<MediaType> implements MediaType {
 
@@ -268,16 +270,44 @@ public class MediaTypeImpl extends PropertiesOverlay<MediaType> implements Media
 
         @Override
         public JsonOverlay<MediaType> _create(MediaType mediaType, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            JsonOverlay<?> overlay = new MediaTypeImpl(mediaType, parent, refReg);
+            Class<? extends MediaType> subtype = getSubtypeOf(mediaType);
+            IJsonOverlay<?> overlay;
+            if (subtype == null || subtype == MediaType.class) {
+                overlay = new MediaTypeImpl(mediaType, parent, refReg);
+            } else {
+                switch(subtype.getSimpleName()) {
+                    default:
+                        overlay = null;
+                }
+            }
             @SuppressWarnings("unchecked") JsonOverlay<MediaType> castOverlay = (JsonOverlay<MediaType>) overlay;
             return castOverlay;
         }
 
         @Override
         public JsonOverlay<MediaType> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            JsonOverlay<?> overlay = new MediaTypeImpl(json, parent, refReg);
+            Class<? extends MediaType> subtype = getSubtypeOf(json);
+            IJsonOverlay<?> overlay;
+            if (subtype == null || subtype == MediaType.class) {
+                overlay = new MediaTypeImpl(json, parent, refReg);
+            } else {
+                switch(subtype.getSimpleName()) {
+                    default:
+                        overlay = null;
+                }
+            }
             @SuppressWarnings("unchecked") JsonOverlay<MediaType> castOverlay = (JsonOverlay<MediaType>) overlay;
             return castOverlay;
         }
     };
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    private static Class<? extends MediaType> getSubtypeOf(MediaType mediaType) {
+        return MediaType.class;
+    }
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    private static Class<? extends MediaType> getSubtypeOf(JsonNode json) {
+        return MediaType.class;
+    }
 }

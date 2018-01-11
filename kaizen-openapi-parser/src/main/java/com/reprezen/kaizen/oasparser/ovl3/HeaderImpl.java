@@ -6,6 +6,7 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.BooleanOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
+import com.fasterxml.jackson.core.JsonPointer;
 import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import com.reprezen.kaizen.oasparser.ovl3.SchemaImpl;
@@ -20,8 +21,9 @@ import com.reprezen.kaizen.oasparser.ovl3.MediaTypeImpl;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
 import com.reprezen.kaizen.oasparser.ovl3.ExampleImpl;
 import java.util.Collection;
-import com.reprezen.kaizen.oasparser.model3.Header;
+import java.util.stream.Collectors;
 import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
+import com.reprezen.kaizen.oasparser.model3.*;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import com.reprezen.kaizen.oasparser.model3.MediaType;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
@@ -507,16 +509,44 @@ public class HeaderImpl extends PropertiesOverlay<Header> implements Header {
 
         @Override
         public JsonOverlay<Header> _create(Header header, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            JsonOverlay<?> overlay = new HeaderImpl(header, parent, refReg);
+            Class<? extends Header> subtype = getSubtypeOf(header);
+            IJsonOverlay<?> overlay;
+            if (subtype == null || subtype == Header.class) {
+                overlay = new HeaderImpl(header, parent, refReg);
+            } else {
+                switch(subtype.getSimpleName()) {
+                    default:
+                        overlay = null;
+                }
+            }
             @SuppressWarnings("unchecked") JsonOverlay<Header> castOverlay = (JsonOverlay<Header>) overlay;
             return castOverlay;
         }
 
         @Override
         public JsonOverlay<Header> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            JsonOverlay<?> overlay = new HeaderImpl(json, parent, refReg);
+            Class<? extends Header> subtype = getSubtypeOf(json);
+            IJsonOverlay<?> overlay;
+            if (subtype == null || subtype == Header.class) {
+                overlay = new HeaderImpl(json, parent, refReg);
+            } else {
+                switch(subtype.getSimpleName()) {
+                    default:
+                        overlay = null;
+                }
+            }
             @SuppressWarnings("unchecked") JsonOverlay<Header> castOverlay = (JsonOverlay<Header>) overlay;
             return castOverlay;
         }
     };
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    private static Class<? extends Header> getSubtypeOf(Header header) {
+        return Header.class;
+    }
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    private static Class<? extends Header> getSubtypeOf(JsonNode json) {
+        return Header.class;
+    }
 }

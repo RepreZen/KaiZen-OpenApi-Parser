@@ -3,7 +3,6 @@ package com.reprezen.kaizen.oasparser.ovl3;
 import com.reprezen.kaizen.oasparser.ovl3.HeaderImpl;
 import com.reprezen.kaizen.oasparser.ovl3.CallbackImpl;
 import com.google.inject.Inject;
-import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.ovl3.SecuritySchemeImpl;
 import com.reprezen.kaizen.oasparser.ovl3.SecurityRequirementImpl;
 import javax.annotation.Generated;
@@ -20,6 +19,8 @@ import com.reprezen.kaizen.oasparser.val.ValidationResults.Severity;
 import java.util.Collection;
 import com.reprezen.kaizen.oasparser.ovl3.ResponseImpl;
 import com.reprezen.kaizen.oasparser.model3.Header;
+import java.util.stream.Collectors;
+import com.reprezen.kaizen.oasparser.model3.*;
 import com.reprezen.kaizen.oasparser.ovl3.ExternalDocsImpl;
 import com.reprezen.kaizen.oasparser.val3.OpenApi3Validator;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
@@ -38,6 +39,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import com.reprezen.kaizen.oasparser.model3.Callback;
 import com.reprezen.kaizen.oasparser.val.Validator;
+import com.fasterxml.jackson.core.JsonPointer;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import com.reprezen.kaizen.oasparser.model3.Response;
 import com.reprezen.kaizen.oasparser.ovl3.SchemaImpl;
@@ -1134,16 +1136,44 @@ public class OpenApi3Impl extends PropertiesOverlay<OpenApi3> implements OpenApi
 
         @Override
         public JsonOverlay<OpenApi3> _create(OpenApi3 openApi3, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            JsonOverlay<?> overlay = new OpenApi3Impl(openApi3, parent, refReg);
+            Class<? extends OpenApi3> subtype = getSubtypeOf(openApi3);
+            IJsonOverlay<?> overlay;
+            if (subtype == null || subtype == OpenApi3.class) {
+                overlay = new OpenApi3Impl(openApi3, parent, refReg);
+            } else {
+                switch(subtype.getSimpleName()) {
+                    default:
+                        overlay = null;
+                }
+            }
             @SuppressWarnings("unchecked") JsonOverlay<OpenApi3> castOverlay = (JsonOverlay<OpenApi3>) overlay;
             return castOverlay;
         }
 
         @Override
         public JsonOverlay<OpenApi3> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            JsonOverlay<?> overlay = new OpenApi3Impl(json, parent, refReg);
+            Class<? extends OpenApi3> subtype = getSubtypeOf(json);
+            IJsonOverlay<?> overlay;
+            if (subtype == null || subtype == OpenApi3.class) {
+                overlay = new OpenApi3Impl(json, parent, refReg);
+            } else {
+                switch(subtype.getSimpleName()) {
+                    default:
+                        overlay = null;
+                }
+            }
             @SuppressWarnings("unchecked") JsonOverlay<OpenApi3> castOverlay = (JsonOverlay<OpenApi3>) overlay;
             return castOverlay;
         }
     };
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    private static Class<? extends OpenApi3> getSubtypeOf(OpenApi3 openApi3) {
+        return OpenApi3.class;
+    }
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    private static Class<? extends OpenApi3> getSubtypeOf(JsonNode json) {
+        return OpenApi3.class;
+    }
 }

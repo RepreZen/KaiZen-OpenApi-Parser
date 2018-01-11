@@ -7,12 +7,14 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
 import java.util.Collection;
+import java.util.stream.Collectors;
+import com.reprezen.kaizen.oasparser.model3.*;
 import com.reprezen.kaizen.oasparser.jsonoverlay.BooleanOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
-import com.reprezen.kaizen.oasparser.model3.Xml;
 import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
+import com.fasterxml.jackson.core.JsonPointer;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -222,16 +224,44 @@ public class XmlImpl extends PropertiesOverlay<Xml> implements Xml {
 
         @Override
         public JsonOverlay<Xml> _create(Xml xml, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            JsonOverlay<?> overlay = new XmlImpl(xml, parent, refReg);
+            Class<? extends Xml> subtype = getSubtypeOf(xml);
+            IJsonOverlay<?> overlay;
+            if (subtype == null || subtype == Xml.class) {
+                overlay = new XmlImpl(xml, parent, refReg);
+            } else {
+                switch(subtype.getSimpleName()) {
+                    default:
+                        overlay = null;
+                }
+            }
             @SuppressWarnings("unchecked") JsonOverlay<Xml> castOverlay = (JsonOverlay<Xml>) overlay;
             return castOverlay;
         }
 
         @Override
         public JsonOverlay<Xml> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            JsonOverlay<?> overlay = new XmlImpl(json, parent, refReg);
+            Class<? extends Xml> subtype = getSubtypeOf(json);
+            IJsonOverlay<?> overlay;
+            if (subtype == null || subtype == Xml.class) {
+                overlay = new XmlImpl(json, parent, refReg);
+            } else {
+                switch(subtype.getSimpleName()) {
+                    default:
+                        overlay = null;
+                }
+            }
             @SuppressWarnings("unchecked") JsonOverlay<Xml> castOverlay = (JsonOverlay<Xml>) overlay;
             return castOverlay;
         }
     };
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    private static Class<? extends Xml> getSubtypeOf(Xml xml) {
+        return Xml.class;
+    }
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    private static Class<? extends Xml> getSubtypeOf(JsonNode json) {
+        return Xml.class;
+    }
 }

@@ -8,11 +8,13 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PrimitiveOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
 import java.util.Collection;
-import com.reprezen.kaizen.oasparser.model3.ServerVariable;
+import java.util.stream.Collectors;
+import com.reprezen.kaizen.oasparser.model3.*;
 import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
+import com.fasterxml.jackson.core.JsonPointer;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -200,16 +202,44 @@ public class ServerVariableImpl extends PropertiesOverlay<ServerVariable> implem
 
         @Override
         public JsonOverlay<ServerVariable> _create(ServerVariable serverVariable, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            JsonOverlay<?> overlay = new ServerVariableImpl(serverVariable, parent, refReg);
+            Class<? extends ServerVariable> subtype = getSubtypeOf(serverVariable);
+            IJsonOverlay<?> overlay;
+            if (subtype == null || subtype == ServerVariable.class) {
+                overlay = new ServerVariableImpl(serverVariable, parent, refReg);
+            } else {
+                switch(subtype.getSimpleName()) {
+                    default:
+                        overlay = null;
+                }
+            }
             @SuppressWarnings("unchecked") JsonOverlay<ServerVariable> castOverlay = (JsonOverlay<ServerVariable>) overlay;
             return castOverlay;
         }
 
         @Override
         public JsonOverlay<ServerVariable> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            JsonOverlay<?> overlay = new ServerVariableImpl(json, parent, refReg);
+            Class<? extends ServerVariable> subtype = getSubtypeOf(json);
+            IJsonOverlay<?> overlay;
+            if (subtype == null || subtype == ServerVariable.class) {
+                overlay = new ServerVariableImpl(json, parent, refReg);
+            } else {
+                switch(subtype.getSimpleName()) {
+                    default:
+                        overlay = null;
+                }
+            }
             @SuppressWarnings("unchecked") JsonOverlay<ServerVariable> castOverlay = (JsonOverlay<ServerVariable>) overlay;
             return castOverlay;
         }
     };
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    private static Class<? extends ServerVariable> getSubtypeOf(ServerVariable serverVariable) {
+        return ServerVariable.class;
+    }
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    private static Class<? extends ServerVariable> getSubtypeOf(JsonNode json) {
+        return ServerVariable.class;
+    }
 }

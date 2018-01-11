@@ -4,11 +4,13 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.ovl3.SecurityParameterImpl;
-import com.reprezen.kaizen.oasparser.model3.SecurityRequirement;
 import com.reprezen.kaizen.oasparser.model3.SecurityParameter;
+import java.util.stream.Collectors;
+import com.reprezen.kaizen.oasparser.model3.*;
 import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
+import com.fasterxml.jackson.core.JsonPointer;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -90,16 +92,44 @@ public class SecurityRequirementImpl extends PropertiesOverlay<SecurityRequireme
 
         @Override
         public JsonOverlay<SecurityRequirement> _create(SecurityRequirement securityRequirement, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            JsonOverlay<?> overlay = new SecurityRequirementImpl(securityRequirement, parent, refReg);
+            Class<? extends SecurityRequirement> subtype = getSubtypeOf(securityRequirement);
+            IJsonOverlay<?> overlay;
+            if (subtype == null || subtype == SecurityRequirement.class) {
+                overlay = new SecurityRequirementImpl(securityRequirement, parent, refReg);
+            } else {
+                switch(subtype.getSimpleName()) {
+                    default:
+                        overlay = null;
+                }
+            }
             @SuppressWarnings("unchecked") JsonOverlay<SecurityRequirement> castOverlay = (JsonOverlay<SecurityRequirement>) overlay;
             return castOverlay;
         }
 
         @Override
         public JsonOverlay<SecurityRequirement> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            JsonOverlay<?> overlay = new SecurityRequirementImpl(json, parent, refReg);
+            Class<? extends SecurityRequirement> subtype = getSubtypeOf(json);
+            IJsonOverlay<?> overlay;
+            if (subtype == null || subtype == SecurityRequirement.class) {
+                overlay = new SecurityRequirementImpl(json, parent, refReg);
+            } else {
+                switch(subtype.getSimpleName()) {
+                    default:
+                        overlay = null;
+                }
+            }
             @SuppressWarnings("unchecked") JsonOverlay<SecurityRequirement> castOverlay = (JsonOverlay<SecurityRequirement>) overlay;
             return castOverlay;
         }
     };
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    private static Class<? extends SecurityRequirement> getSubtypeOf(SecurityRequirement securityRequirement) {
+        return SecurityRequirement.class;
+    }
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    private static Class<? extends SecurityRequirement> getSubtypeOf(JsonNode json) {
+        return SecurityRequirement.class;
+    }
 }

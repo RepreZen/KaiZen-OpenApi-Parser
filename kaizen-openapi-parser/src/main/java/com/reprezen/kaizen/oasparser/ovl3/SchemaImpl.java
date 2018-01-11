@@ -21,7 +21,9 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
 import com.reprezen.kaizen.oasparser.ovl3.ExampleImpl;
 import java.util.Collection;
+import java.util.stream.Collectors;
 import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
+import com.reprezen.kaizen.oasparser.model3.*;
 import com.reprezen.kaizen.oasparser.ovl3.ExternalDocsImpl;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.NumberOverlay;
@@ -1336,16 +1338,44 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 
         @Override
         public JsonOverlay<Schema> _create(Schema schema, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            JsonOverlay<?> overlay = new SchemaImpl(schema, parent, refReg);
+            Class<? extends Schema> subtype = getSubtypeOf(schema);
+            IJsonOverlay<?> overlay;
+            if (subtype == null || subtype == Schema.class) {
+                overlay = new SchemaImpl(schema, parent, refReg);
+            } else {
+                switch(subtype.getSimpleName()) {
+                    default:
+                        overlay = null;
+                }
+            }
             @SuppressWarnings("unchecked") JsonOverlay<Schema> castOverlay = (JsonOverlay<Schema>) overlay;
             return castOverlay;
         }
 
         @Override
         public JsonOverlay<Schema> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            JsonOverlay<?> overlay = new SchemaImpl(json, parent, refReg);
+            Class<? extends Schema> subtype = getSubtypeOf(json);
+            IJsonOverlay<?> overlay;
+            if (subtype == null || subtype == Schema.class) {
+                overlay = new SchemaImpl(json, parent, refReg);
+            } else {
+                switch(subtype.getSimpleName()) {
+                    default:
+                        overlay = null;
+                }
+            }
             @SuppressWarnings("unchecked") JsonOverlay<Schema> castOverlay = (JsonOverlay<Schema>) overlay;
             return castOverlay;
         }
     };
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    private static Class<? extends Schema> getSubtypeOf(Schema schema) {
+        return Schema.class;
+    }
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    private static Class<? extends Schema> getSubtypeOf(JsonNode json) {
+        return Schema.class;
+    }
 }

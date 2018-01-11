@@ -20,6 +20,7 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.annotation.Generated;
 
@@ -103,6 +104,9 @@ public abstract class TypeGenerator {
 			addManualMembers(gen, existing);
 		}
 		requireTypes(getImports(type));
+		if (needIntfImports()) {
+			gen.addImport(intfPackage + ".*");
+		}
 		addGeneratedMembers(type, gen);
 		requireTypes(Generated.class);
 		resolveImports(type, gen);
@@ -112,6 +116,10 @@ public abstract class TypeGenerator {
 	protected abstract String getPackage();
 
 	protected abstract Collection<String> getImports(Type type);
+
+	protected boolean needIntfImports() {
+		return false;
+	}
 
 	protected void requireTypes(Class<?>... types) {
 		requireTypes(Collections2.transform(Arrays.asList(types), new Function<Class<?>, String>() {
@@ -178,6 +186,7 @@ public abstract class TypeGenerator {
 				Collection.class, //
 				Map.class, //
 				Optional.class, //
+				Collectors.class, //
 				JsonNode.class, //
 				ObjectNode.class, //
 				JsonNodeFactory.class, //

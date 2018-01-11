@@ -6,10 +6,10 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.BooleanOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
+import com.fasterxml.jackson.core.JsonPointer;
 import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import com.reprezen.kaizen.oasparser.ovl3.SchemaImpl;
-import com.reprezen.kaizen.oasparser.model3.Parameter;
 import com.reprezen.kaizen.oasparser.model3.Example;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
@@ -21,7 +21,9 @@ import com.reprezen.kaizen.oasparser.ovl3.MediaTypeImpl;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
 import com.reprezen.kaizen.oasparser.ovl3.ExampleImpl;
 import java.util.Collection;
+import java.util.stream.Collectors;
 import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
+import com.reprezen.kaizen.oasparser.model3.*;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import com.reprezen.kaizen.oasparser.model3.MediaType;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
@@ -507,16 +509,44 @@ public class ParameterImpl extends PropertiesOverlay<Parameter> implements Param
 
         @Override
         public JsonOverlay<Parameter> _create(Parameter parameter, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            JsonOverlay<?> overlay = new ParameterImpl(parameter, parent, refReg);
+            Class<? extends Parameter> subtype = getSubtypeOf(parameter);
+            IJsonOverlay<?> overlay;
+            if (subtype == null || subtype == Parameter.class) {
+                overlay = new ParameterImpl(parameter, parent, refReg);
+            } else {
+                switch(subtype.getSimpleName()) {
+                    default:
+                        overlay = null;
+                }
+            }
             @SuppressWarnings("unchecked") JsonOverlay<Parameter> castOverlay = (JsonOverlay<Parameter>) overlay;
             return castOverlay;
         }
 
         @Override
         public JsonOverlay<Parameter> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            JsonOverlay<?> overlay = new ParameterImpl(json, parent, refReg);
+            Class<? extends Parameter> subtype = getSubtypeOf(json);
+            IJsonOverlay<?> overlay;
+            if (subtype == null || subtype == Parameter.class) {
+                overlay = new ParameterImpl(json, parent, refReg);
+            } else {
+                switch(subtype.getSimpleName()) {
+                    default:
+                        overlay = null;
+                }
+            }
             @SuppressWarnings("unchecked") JsonOverlay<Parameter> castOverlay = (JsonOverlay<Parameter>) overlay;
             return castOverlay;
         }
     };
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    private static Class<? extends Parameter> getSubtypeOf(Parameter parameter) {
+        return Parameter.class;
+    }
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    private static Class<? extends Parameter> getSubtypeOf(JsonNode json) {
+        return Parameter.class;
+    }
 }

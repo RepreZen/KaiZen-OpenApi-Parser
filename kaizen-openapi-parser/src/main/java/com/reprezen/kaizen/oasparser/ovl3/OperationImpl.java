@@ -10,6 +10,7 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.BooleanOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import com.reprezen.kaizen.oasparser.ovl3.SecurityRequirementImpl;
 import com.reprezen.kaizen.oasparser.model3.Callback;
+import com.fasterxml.jackson.core.JsonPointer;
 import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import com.reprezen.kaizen.oasparser.model3.Response;
@@ -26,10 +27,11 @@ import com.reprezen.kaizen.oasparser.model3.SecurityRequirement;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
 import java.util.Collection;
 import com.reprezen.kaizen.oasparser.ovl3.ResponseImpl;
+import java.util.stream.Collectors;
 import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
+import com.reprezen.kaizen.oasparser.model3.*;
 import com.reprezen.kaizen.oasparser.ovl3.ExternalDocsImpl;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
-import com.reprezen.kaizen.oasparser.model3.Operation;
 import com.reprezen.kaizen.oasparser.ovl3.RequestBodyImpl;
 import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
@@ -734,16 +736,44 @@ public class OperationImpl extends PropertiesOverlay<Operation> implements Opera
 
         @Override
         public JsonOverlay<Operation> _create(Operation operation, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            JsonOverlay<?> overlay = new OperationImpl(operation, parent, refReg);
+            Class<? extends Operation> subtype = getSubtypeOf(operation);
+            IJsonOverlay<?> overlay;
+            if (subtype == null || subtype == Operation.class) {
+                overlay = new OperationImpl(operation, parent, refReg);
+            } else {
+                switch(subtype.getSimpleName()) {
+                    default:
+                        overlay = null;
+                }
+            }
             @SuppressWarnings("unchecked") JsonOverlay<Operation> castOverlay = (JsonOverlay<Operation>) overlay;
             return castOverlay;
         }
 
         @Override
         public JsonOverlay<Operation> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            JsonOverlay<?> overlay = new OperationImpl(json, parent, refReg);
+            Class<? extends Operation> subtype = getSubtypeOf(json);
+            IJsonOverlay<?> overlay;
+            if (subtype == null || subtype == Operation.class) {
+                overlay = new OperationImpl(json, parent, refReg);
+            } else {
+                switch(subtype.getSimpleName()) {
+                    default:
+                        overlay = null;
+                }
+            }
             @SuppressWarnings("unchecked") JsonOverlay<Operation> castOverlay = (JsonOverlay<Operation>) overlay;
             return castOverlay;
         }
     };
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    private static Class<? extends Operation> getSubtypeOf(Operation operation) {
+        return Operation.class;
+    }
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    private static Class<? extends Operation> getSubtypeOf(JsonNode json) {
+        return Operation.class;
+    }
 }

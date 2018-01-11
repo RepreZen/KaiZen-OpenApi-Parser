@@ -5,9 +5,11 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
 import java.util.Collection;
-import com.reprezen.kaizen.oasparser.model3.SecurityParameter;
+import java.util.stream.Collectors;
+import com.reprezen.kaizen.oasparser.model3.*;
 import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
+import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -107,16 +109,44 @@ public class SecurityParameterImpl extends PropertiesOverlay<SecurityParameter> 
 
         @Override
         public JsonOverlay<SecurityParameter> _create(SecurityParameter securityParameter, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            JsonOverlay<?> overlay = new SecurityParameterImpl(securityParameter, parent, refReg);
+            Class<? extends SecurityParameter> subtype = getSubtypeOf(securityParameter);
+            IJsonOverlay<?> overlay;
+            if (subtype == null || subtype == SecurityParameter.class) {
+                overlay = new SecurityParameterImpl(securityParameter, parent, refReg);
+            } else {
+                switch(subtype.getSimpleName()) {
+                    default:
+                        overlay = null;
+                }
+            }
             @SuppressWarnings("unchecked") JsonOverlay<SecurityParameter> castOverlay = (JsonOverlay<SecurityParameter>) overlay;
             return castOverlay;
         }
 
         @Override
         public JsonOverlay<SecurityParameter> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            JsonOverlay<?> overlay = new SecurityParameterImpl(json, parent, refReg);
+            Class<? extends SecurityParameter> subtype = getSubtypeOf(json);
+            IJsonOverlay<?> overlay;
+            if (subtype == null || subtype == SecurityParameter.class) {
+                overlay = new SecurityParameterImpl(json, parent, refReg);
+            } else {
+                switch(subtype.getSimpleName()) {
+                    default:
+                        overlay = null;
+                }
+            }
             @SuppressWarnings("unchecked") JsonOverlay<SecurityParameter> castOverlay = (JsonOverlay<SecurityParameter>) overlay;
             return castOverlay;
         }
     };
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    private static Class<? extends SecurityParameter> getSubtypeOf(SecurityParameter securityParameter) {
+        return SecurityParameter.class;
+    }
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    private static Class<? extends SecurityParameter> getSubtypeOf(JsonNode json) {
+        return SecurityParameter.class;
+    }
 }

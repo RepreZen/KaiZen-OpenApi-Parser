@@ -32,10 +32,10 @@ public class CallbackImpl extends PropertiesOverlay<Callback> implements Callbac
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Path> callbackPaths = null;
+    private ChildMapOverlay<Path> callbackPaths;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object> extensions = null;
+    private ChildMapOverlay<Object> extensions;
 
     // CallbackPath
     @Override

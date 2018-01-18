@@ -35,22 +35,22 @@ public class OAuthFlowImpl extends PropertiesOverlay<OAuthFlow> implements OAuth
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String> authorizationUrl = null;
+    private ChildOverlay<String> authorizationUrl;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String> tokenUrl = null;
+    private ChildOverlay<String> tokenUrl;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String> refreshUrl = null;
+    private ChildOverlay<String> refreshUrl;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<String> scopes = null;
+    private ChildMapOverlay<String> scopes;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object> scopesExtensions = null;
+    private ChildMapOverlay<Object> scopesExtensions;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object> extensions = null;
+    private ChildMapOverlay<Object> extensions;
 
     // AuthorizationUrl
     @Override

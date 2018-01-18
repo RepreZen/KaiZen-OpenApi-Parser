@@ -41,19 +41,19 @@ public class MediaTypeImpl extends PropertiesOverlay<MediaType> implements Media
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Schema> schema = null;
+    private ChildOverlay<Schema> schema;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Example> examples = null;
+    private ChildMapOverlay<Example> examples;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Object> example = null;
+    private ChildOverlay<Object> example;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<EncodingProperty> encodingProperties = null;
+    private ChildMapOverlay<EncodingProperty> encodingProperties;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object> extensions = null;
+    private ChildMapOverlay<Object> extensions;
 
     // Schema
     @Override

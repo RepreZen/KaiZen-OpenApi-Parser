@@ -57,118 +57,118 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String> title = null;
+    private ChildOverlay<String> title;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Number> multipleOf = null;
+    private ChildOverlay<Number> multipleOf;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Number> maximum = null;
+    private ChildOverlay<Number> maximum;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Boolean> exclusiveMaximum = null;
+    private ChildOverlay<Boolean> exclusiveMaximum;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Number> minimum = null;
+    private ChildOverlay<Number> minimum;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Boolean> exclusiveMinimum = null;
+    private ChildOverlay<Boolean> exclusiveMinimum;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Integer> maxLength = null;
+    private ChildOverlay<Integer> maxLength;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Integer> minLength = null;
+    private ChildOverlay<Integer> minLength;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String> pattern = null;
+    private ChildOverlay<String> pattern;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Integer> maxItems = null;
+    private ChildOverlay<Integer> maxItems;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Integer> minItems = null;
+    private ChildOverlay<Integer> minItems;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Boolean> uniqueItems = null;
+    private ChildOverlay<Boolean> uniqueItems;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Integer> maxProperties = null;
+    private ChildOverlay<Integer> maxProperties;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Integer> minProperties = null;
+    private ChildOverlay<Integer> minProperties;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildListOverlay<String> requiredFields = null;
+    private ChildListOverlay<String> requiredFields;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildListOverlay<Object> enums = null;
+    private ChildListOverlay<Object> enums;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String> type = null;
+    private ChildOverlay<String> type;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildListOverlay<Schema> allOfSchemas = null;
+    private ChildListOverlay<Schema> allOfSchemas;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildListOverlay<Schema> oneOfSchemas = null;
+    private ChildListOverlay<Schema> oneOfSchemas;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildListOverlay<Schema> anyOfSchemas = null;
+    private ChildListOverlay<Schema> anyOfSchemas;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Schema> notSchema = null;
+    private ChildOverlay<Schema> notSchema;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Schema> itemsSchema = null;
+    private ChildOverlay<Schema> itemsSchema;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Schema> properties = null;
+    private ChildMapOverlay<Schema> properties;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Schema> additionalPropertiesSchema = null;
+    private ChildOverlay<Schema> additionalPropertiesSchema;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Boolean> additionalProperties = null;
+    private ChildOverlay<Boolean> additionalProperties;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String> description = null;
+    private ChildOverlay<String> description;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String> format = null;
+    private ChildOverlay<String> format;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Object> defaultValue = null;
+    private ChildOverlay<Object> defaultValue;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Boolean> nullable = null;
+    private ChildOverlay<Boolean> nullable;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String> discriminator = null;
+    private ChildOverlay<String> discriminator;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Boolean> readOnly = null;
+    private ChildOverlay<Boolean> readOnly;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Boolean> writeOnly = null;
+    private ChildOverlay<Boolean> writeOnly;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Xml> xml = null;
+    private ChildOverlay<Xml> xml;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<ExternalDocs> externalDocs = null;
+    private ChildOverlay<ExternalDocs> externalDocs;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Example> examples = null;
+    private ChildMapOverlay<Example> examples;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Object> example = null;
+    private ChildOverlay<Object> example;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Boolean> deprecated = null;
+    private ChildOverlay<Boolean> deprecated;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object> extensions = null;
+    private ChildMapOverlay<Object> extensions;
 
     // Title
     @Override

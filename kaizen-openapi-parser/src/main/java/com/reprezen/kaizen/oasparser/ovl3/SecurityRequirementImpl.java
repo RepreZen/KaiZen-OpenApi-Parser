@@ -31,7 +31,7 @@ public class SecurityRequirementImpl extends PropertiesOverlay<SecurityRequireme
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<SecurityParameter> requirements = null;
+    private ChildMapOverlay<SecurityParameter> requirements;
 
     // Requirement
     @Override

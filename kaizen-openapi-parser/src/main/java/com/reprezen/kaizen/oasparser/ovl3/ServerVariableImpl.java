@@ -36,16 +36,16 @@ public class ServerVariableImpl extends PropertiesOverlay<ServerVariable> implem
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildListOverlay<Object> enumValues = null;
+    private ChildListOverlay<Object> enumValues;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Object> defaultValue = null;
+    private ChildOverlay<Object> defaultValue;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String> description = null;
+    private ChildOverlay<String> description;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object> extensions = null;
+    private ChildMapOverlay<Object> extensions;
 
     // EnumValue
     @Override

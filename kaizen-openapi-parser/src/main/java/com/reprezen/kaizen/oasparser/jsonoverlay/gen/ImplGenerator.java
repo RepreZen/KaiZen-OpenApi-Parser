@@ -121,7 +121,7 @@ public class ImplGenerator extends TypeGenerator {
 	protected Members getFieldMembers(Field field) {
 		requireTypes(field.getType(), field.getImplType());
 		Members members = new Members(field);
-		members.addField("${propType}", "${propName}", "null");
+		members.addField("${propType}", "${propName}");
 		switch (field.getStructure()) {
 		case scalar:
 			requireTypes(ChildOverlay.class);

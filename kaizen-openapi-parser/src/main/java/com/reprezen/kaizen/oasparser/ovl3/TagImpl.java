@@ -37,16 +37,16 @@ public class TagImpl extends PropertiesOverlay<Tag> implements Tag {
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String> name = null;
+    private ChildOverlay<String> name;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String> description = null;
+    private ChildOverlay<String> description;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<ExternalDocs> externalDocs = null;
+    private ChildOverlay<ExternalDocs> externalDocs;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object> extensions = null;
+    private ChildMapOverlay<Object> extensions;
 
     // Name
     @Override

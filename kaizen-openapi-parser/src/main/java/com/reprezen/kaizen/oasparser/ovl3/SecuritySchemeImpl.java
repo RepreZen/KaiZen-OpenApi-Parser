@@ -37,43 +37,43 @@ public class SecuritySchemeImpl extends PropertiesOverlay<SecurityScheme> implem
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String> type = null;
+    private ChildOverlay<String> type;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String> description = null;
+    private ChildOverlay<String> description;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String> name = null;
+    private ChildOverlay<String> name;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String> in = null;
+    private ChildOverlay<String> in;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String> scheme = null;
+    private ChildOverlay<String> scheme;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String> bearerFormat = null;
+    private ChildOverlay<String> bearerFormat;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<OAuthFlow> implicitOAuthFlow = null;
+    private ChildOverlay<OAuthFlow> implicitOAuthFlow;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<OAuthFlow> passwordOAuthFlow = null;
+    private ChildOverlay<OAuthFlow> passwordOAuthFlow;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<OAuthFlow> clientCredentialsOAuthFlow = null;
+    private ChildOverlay<OAuthFlow> clientCredentialsOAuthFlow;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<OAuthFlow> authorizationCodeOAuthFlow = null;
+    private ChildOverlay<OAuthFlow> authorizationCodeOAuthFlow;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object> oAuthFlowsExtensions = null;
+    private ChildMapOverlay<Object> oAuthFlowsExtensions;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String> openIdConnectUrl = null;
+    private ChildOverlay<String> openIdConnectUrl;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object> extensions = null;
+    private ChildMapOverlay<Object> extensions;
 
     // Type
     @Override

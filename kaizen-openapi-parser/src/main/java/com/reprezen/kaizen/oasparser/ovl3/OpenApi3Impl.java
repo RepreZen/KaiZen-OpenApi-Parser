@@ -115,61 +115,61 @@ public class OpenApi3Impl extends PropertiesOverlay<OpenApi3> implements OpenApi
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String> openApi = null;
+    private ChildOverlay<String> openApi;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Info> info = null;
+    private ChildOverlay<Info> info;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildListOverlay<Server> servers = null;
+    private ChildListOverlay<Server> servers;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Path> paths = null;
+    private ChildMapOverlay<Path> paths;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object> pathsExtensions = null;
+    private ChildMapOverlay<Object> pathsExtensions;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Schema> schemas = null;
+    private ChildMapOverlay<Schema> schemas;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Response> responses = null;
+    private ChildMapOverlay<Response> responses;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Parameter> parameters = null;
+    private ChildMapOverlay<Parameter> parameters;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Example> examples = null;
+    private ChildMapOverlay<Example> examples;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<RequestBody> requestBodies = null;
+    private ChildMapOverlay<RequestBody> requestBodies;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Header> headers = null;
+    private ChildMapOverlay<Header> headers;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<SecurityScheme> securitySchemes = null;
+    private ChildMapOverlay<SecurityScheme> securitySchemes;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Link> links = null;
+    private ChildMapOverlay<Link> links;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Callback> callbacks = null;
+    private ChildMapOverlay<Callback> callbacks;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object> componentsExtensions = null;
+    private ChildMapOverlay<Object> componentsExtensions;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildListOverlay<SecurityRequirement> securityRequirements = null;
+    private ChildListOverlay<SecurityRequirement> securityRequirements;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildListOverlay<Tag> tags = null;
+    private ChildListOverlay<Tag> tags;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<ExternalDocs> externalDocs = null;
+    private ChildOverlay<ExternalDocs> externalDocs;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object> extensions = null;
+    private ChildMapOverlay<Object> extensions;
 
     // OpenApi
     @Override

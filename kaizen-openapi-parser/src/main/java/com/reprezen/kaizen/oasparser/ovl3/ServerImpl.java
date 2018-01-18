@@ -37,19 +37,19 @@ public class ServerImpl extends PropertiesOverlay<Server> implements Server {
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String> url = null;
+    private ChildOverlay<String> url;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String> description = null;
+    private ChildOverlay<String> description;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<ServerVariable> serverVariables = null;
+    private ChildMapOverlay<ServerVariable> serverVariables;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object> variablesExtensions = null;
+    private ChildMapOverlay<Object> variablesExtensions;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object> extensions = null;
+    private ChildMapOverlay<Object> extensions;
 
     // Url
     @Override

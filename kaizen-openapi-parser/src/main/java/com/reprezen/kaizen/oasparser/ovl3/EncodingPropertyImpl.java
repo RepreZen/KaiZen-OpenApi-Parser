@@ -37,19 +37,19 @@ public class EncodingPropertyImpl extends PropertiesOverlay<EncodingProperty> im
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String> contentType = null;
+    private ChildOverlay<String> contentType;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<String> headers = null;
+    private ChildMapOverlay<String> headers;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String> style = null;
+    private ChildOverlay<String> style;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Boolean> explode = null;
+    private ChildOverlay<Boolean> explode;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object> extensions = null;
+    private ChildMapOverlay<Object> extensions;
 
     // ContentType
     @Override

@@ -51,49 +51,49 @@ public class OperationImpl extends PropertiesOverlay<Operation> implements Opera
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildListOverlay<String> tags = null;
+    private ChildListOverlay<String> tags;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String> summary = null;
+    private ChildOverlay<String> summary;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String> description = null;
+    private ChildOverlay<String> description;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<ExternalDocs> externalDocs = null;
+    private ChildOverlay<ExternalDocs> externalDocs;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String> operationId = null;
+    private ChildOverlay<String> operationId;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildListOverlay<Parameter> parameters = null;
+    private ChildListOverlay<Parameter> parameters;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<RequestBody> requestBody = null;
+    private ChildOverlay<RequestBody> requestBody;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Response> responses = null;
+    private ChildMapOverlay<Response> responses;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object> responsesExtensions = null;
+    private ChildMapOverlay<Object> responsesExtensions;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Callback> callbacks = null;
+    private ChildMapOverlay<Callback> callbacks;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object> callbacksExtensions = null;
+    private ChildMapOverlay<Object> callbacksExtensions;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Boolean> deprecated = null;
+    private ChildOverlay<Boolean> deprecated;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildListOverlay<SecurityRequirement> securityRequirements = null;
+    private ChildListOverlay<SecurityRequirement> securityRequirements;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildListOverlay<Server> servers = null;
+    private ChildListOverlay<Server> servers;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object> extensions = null;
+    private ChildMapOverlay<Object> extensions;
 
     // Tag
     @Override

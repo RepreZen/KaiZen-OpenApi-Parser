@@ -36,22 +36,22 @@ public class XmlImpl extends PropertiesOverlay<Xml> implements Xml {
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String> name = null;
+    private ChildOverlay<String> name;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String> namespace = null;
+    private ChildOverlay<String> namespace;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<String> prefix = null;
+    private ChildOverlay<String> prefix;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Boolean> attribute = null;
+    private ChildOverlay<Boolean> attribute;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildOverlay<Boolean> wrapped = null;
+    private ChildOverlay<Boolean> wrapped;
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    private ChildMapOverlay<Object> extensions = null;
+    private ChildMapOverlay<Object> extensions;
 
     // Name
     @Override

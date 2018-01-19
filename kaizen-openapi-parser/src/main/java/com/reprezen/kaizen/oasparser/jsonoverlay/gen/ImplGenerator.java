@@ -231,6 +231,7 @@ public class ImplGenerator extends TypeGenerator {
 
 	private Member getElaborateChildrenMethod(Type type) {
 		Collection<String> code = Lists.newArrayList();
+		code.add("super.elaborateChildren();");
 		for (Field field : type.getFields().values()) {
 			if (!field.isNoImpl()) {
 				code.addAll(code(field, "${propName} = ${propCons};"));

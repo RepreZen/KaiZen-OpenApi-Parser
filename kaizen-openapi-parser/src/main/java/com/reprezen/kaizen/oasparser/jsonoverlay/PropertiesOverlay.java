@@ -50,7 +50,8 @@ public abstract class PropertiesOverlay<V extends IPropertiesOverlay<V>> extends
         }
     }
 
-    protected abstract void elaborateChildren();
+    protected void elaborateChildren() {
+    }
 
     @Override
     public boolean isElaborated() {

@@ -267,6 +267,7 @@ public class LinkImpl extends PropertiesOverlay<Link> implements Link {
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     protected void elaborateChildren() {
+        super.elaborateChildren();
         operationId = createChild("operationId", this, StringOverlay.factory);
         operationRef = createChild("operationRef", this, StringOverlay.factory);
         parameters = createChildMap("parameters", this, StringOverlay.factory, null);

@@ -206,6 +206,7 @@ public class XmlImpl extends PropertiesOverlay<Xml> implements Xml {
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     protected void elaborateChildren() {
+        super.elaborateChildren();
         name = createChild("name", this, StringOverlay.factory);
         namespace = createChild("namespace", this, StringOverlay.factory);
         prefix = createChild("prefix", this, StringOverlay.factory);

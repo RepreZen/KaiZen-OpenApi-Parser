@@ -221,6 +221,7 @@ public class ServerImpl extends PropertiesOverlay<Server> implements Server {
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     protected void elaborateChildren() {
+        super.elaborateChildren();
         url = createChild("url", this, StringOverlay.factory);
         description = createChild("description", this, StringOverlay.factory);
         serverVariables = createChildMap("variables", this, ServerVariableImpl.factory, "(?!x-)[a-zA-Z0-9\\._-]+");

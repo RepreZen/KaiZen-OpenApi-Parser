@@ -481,6 +481,7 @@ public class HeaderImpl extends PropertiesOverlay<Header> implements Header {
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     protected void elaborateChildren() {
+        super.elaborateChildren();
         name = createChild("name", this, StringOverlay.factory);
         in = createChild("in", this, StringOverlay.factory);
         description = createChild("description", this, StringOverlay.factory);

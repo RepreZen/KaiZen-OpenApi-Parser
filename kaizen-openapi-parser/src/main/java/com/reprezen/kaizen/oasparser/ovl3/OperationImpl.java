@@ -705,6 +705,7 @@ public class OperationImpl extends PropertiesOverlay<Operation> implements Opera
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     protected void elaborateChildren() {
+        super.elaborateChildren();
         tags = createChildList("tags", this, StringOverlay.factory);
         summary = createChild("summary", this, StringOverlay.factory);
         description = createChild("description", this, StringOverlay.factory);

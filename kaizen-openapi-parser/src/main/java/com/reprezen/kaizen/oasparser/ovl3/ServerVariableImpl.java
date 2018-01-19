@@ -186,6 +186,7 @@ public class ServerVariableImpl extends PropertiesOverlay<ServerVariable> implem
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     protected void elaborateChildren() {
+        super.elaborateChildren();
         enumValues = createChildList("enum", this, PrimitiveOverlay.factory);
         defaultValue = createChild("default", this, PrimitiveOverlay.factory);
         description = createChild("description", this, StringOverlay.factory);

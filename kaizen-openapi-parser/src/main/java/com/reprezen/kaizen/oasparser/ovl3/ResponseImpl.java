@@ -278,6 +278,7 @@ public class ResponseImpl extends PropertiesOverlay<Response> implements Respons
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     protected void elaborateChildren() {
+        super.elaborateChildren();
         description = createChild("description", this, StringOverlay.factory);
         headers = createChildMap("headers", this, HeaderImpl.factory, null);
         refables.put("headers", headers);

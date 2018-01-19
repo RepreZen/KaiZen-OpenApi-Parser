@@ -251,6 +251,7 @@ public class MediaTypeImpl extends PropertiesOverlay<MediaType> implements Media
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     protected void elaborateChildren() {
+        super.elaborateChildren();
         schema = createChild("schema", this, SchemaImpl.factory);
         refables.put("schema", schema);
         examples = createChildMap("examples", this, ExampleImpl.factory, "[a-zA-Z0-9\\._-]+");

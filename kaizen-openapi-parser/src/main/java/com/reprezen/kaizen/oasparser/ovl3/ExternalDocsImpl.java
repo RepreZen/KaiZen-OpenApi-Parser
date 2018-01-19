@@ -127,6 +127,7 @@ public class ExternalDocsImpl extends PropertiesOverlay<ExternalDocs> implements
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     protected void elaborateChildren() {
+        super.elaborateChildren();
         description = createChild("description", this, StringOverlay.factory);
         url = createChild("url", this, StringOverlay.factory);
         extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");

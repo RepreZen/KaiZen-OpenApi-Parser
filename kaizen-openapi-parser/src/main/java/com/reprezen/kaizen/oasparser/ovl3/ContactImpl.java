@@ -149,6 +149,7 @@ public class ContactImpl extends PropertiesOverlay<Contact> implements Contact {
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     protected void elaborateChildren() {
+        super.elaborateChildren();
         name = createChild("name", this, StringOverlay.factory);
         url = createChild("url", this, StringOverlay.factory);
         email = createChild("email", this, StringOverlay.factory);

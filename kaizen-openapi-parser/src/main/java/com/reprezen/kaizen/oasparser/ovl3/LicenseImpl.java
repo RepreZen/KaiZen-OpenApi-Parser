@@ -129,6 +129,7 @@ public class LicenseImpl extends PropertiesOverlay<License> implements License {
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     protected void elaborateChildren() {
+        super.elaborateChildren();
         name = createChild("name", this, StringOverlay.factory);
         url = createChild("url", this, StringOverlay.factory);
         extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");

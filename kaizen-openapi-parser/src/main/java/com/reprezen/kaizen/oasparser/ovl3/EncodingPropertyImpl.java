@@ -217,6 +217,7 @@ public class EncodingPropertyImpl extends PropertiesOverlay<EncodingProperty> im
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     protected void elaborateChildren() {
+        super.elaborateChildren();
         contentType = createChild("contentType", this, StringOverlay.factory);
         headers = createChildMap("headers", this, StringOverlay.factory, null);
         refables.put("headers", headers);

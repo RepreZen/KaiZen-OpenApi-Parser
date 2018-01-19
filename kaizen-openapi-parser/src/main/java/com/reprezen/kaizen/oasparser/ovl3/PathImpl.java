@@ -428,6 +428,7 @@ public class PathImpl extends PropertiesOverlay<Path> implements Path {
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     protected void elaborateChildren() {
+        super.elaborateChildren();
         summary = createChild("summary", this, StringOverlay.factory);
         description = createChild("description", this, StringOverlay.factory);
         operations = createChildMap("", this, OperationImpl.factory, "get|put|post|delete|options|head|patch|trace");

@@ -373,6 +373,7 @@ public class SecuritySchemeImpl extends PropertiesOverlay<SecurityScheme> implem
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     protected void elaborateChildren() {
+        super.elaborateChildren();
         type = createChild("type", this, StringOverlay.factory);
         description = createChild("description", this, StringOverlay.factory);
         name = createChild("name", this, StringOverlay.factory);

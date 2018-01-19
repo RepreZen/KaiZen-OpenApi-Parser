@@ -126,6 +126,7 @@ public class CallbackImpl extends PropertiesOverlay<Callback> implements Callbac
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     protected void elaborateChildren() {
+        super.elaborateChildren();
         callbackPaths = createChildMap("", this, PathImpl.factory, "(?!x-).*");
         extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }

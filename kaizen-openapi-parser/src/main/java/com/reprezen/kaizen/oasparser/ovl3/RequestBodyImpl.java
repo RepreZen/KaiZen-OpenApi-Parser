@@ -182,6 +182,7 @@ public class RequestBodyImpl extends PropertiesOverlay<RequestBody> implements R
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     protected void elaborateChildren() {
+        super.elaborateChildren();
         description = createChild("description", this, StringOverlay.factory);
         contentMediaTypes = createChildMap("content", this, MediaTypeImpl.factory, null);
         required = createChild("required", this, BooleanOverlay.factory);

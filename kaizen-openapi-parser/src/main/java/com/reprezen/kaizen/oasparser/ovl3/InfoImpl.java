@@ -219,6 +219,7 @@ public class InfoImpl extends PropertiesOverlay<Info> implements Info {
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     protected void elaborateChildren() {
+        super.elaborateChildren();
         title = createChild("title", this, StringOverlay.factory);
         description = createChild("description", this, StringOverlay.factory);
         termsOfService = createChild("termsOfService", this, StringOverlay.factory);

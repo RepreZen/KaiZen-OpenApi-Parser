@@ -1281,6 +1281,7 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     protected void elaborateChildren() {
+        super.elaborateChildren();
         title = createChild("title", this, StringOverlay.factory);
         multipleOf = createChild("multipleOf", this, NumberOverlay.factory);
         maximum = createChild("maximum", this, NumberOverlay.factory);

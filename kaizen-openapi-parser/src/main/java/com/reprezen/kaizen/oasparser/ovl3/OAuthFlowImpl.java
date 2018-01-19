@@ -241,6 +241,7 @@ public class OAuthFlowImpl extends PropertiesOverlay<OAuthFlow> implements OAuth
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     protected void elaborateChildren() {
+        super.elaborateChildren();
         authorizationUrl = createChild("authorizationUrl", this, StringOverlay.factory);
         tokenUrl = createChild("tokenUrl", this, StringOverlay.factory);
         refreshUrl = createChild("refreshUrl", this, StringOverlay.factory);

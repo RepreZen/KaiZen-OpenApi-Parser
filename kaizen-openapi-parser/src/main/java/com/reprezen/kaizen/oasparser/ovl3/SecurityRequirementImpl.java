@@ -79,6 +79,7 @@ public class SecurityRequirementImpl extends PropertiesOverlay<SecurityRequireme
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     protected void elaborateChildren() {
+        super.elaborateChildren();
         requirements = createChildMap("", this, SecurityParameterImpl.factory, "[a-zA-Z0-9\\._-]+");
     }
 

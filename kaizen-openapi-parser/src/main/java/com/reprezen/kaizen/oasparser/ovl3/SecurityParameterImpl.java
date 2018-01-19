@@ -96,6 +96,7 @@ public class SecurityParameterImpl extends PropertiesOverlay<SecurityParameter> 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     protected void elaborateChildren() {
+        super.elaborateChildren();
         parameters = createChildList("", this, StringOverlay.factory);
     }
 

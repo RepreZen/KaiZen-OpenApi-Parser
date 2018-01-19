@@ -171,6 +171,7 @@ public class ExampleImpl extends PropertiesOverlay<Example> implements Example {
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     protected void elaborateChildren() {
+        super.elaborateChildren();
         summary = createChild("summary", this, StringOverlay.factory);
         description = createChild("description", this, StringOverlay.factory);
         value = createChild("value", this, ObjectOverlay.factory);

@@ -22,6 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.MissingNode;
+import com.fasterxml.jackson.databind.node.NullNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
 import com.fasterxml.jackson.databind.node.ValueNode;
@@ -203,6 +204,10 @@ public abstract class JsonOverlay<V> implements IJsonOverlay<V> {
 
 	protected static MissingNode jsonMissing() {
 		return MissingNode.getInstance();
+	}
+
+	protected static NullNode jsonNull() {
+		return JsonNodeFactory.instance.nullNode();
 	}
 
 	protected static final <T> Iterable<T> iterable(final Iterator<T> iterator) {

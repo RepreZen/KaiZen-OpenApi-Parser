@@ -78,7 +78,7 @@ public class MapOverlay<V> extends JsonOverlay<Map<String, V>> {
 
     @Override
     protected Map<String, V> fromJson(JsonNode json) {
-        return Maps.newHashMap();
+        return Maps.newLinkedHashMap();
     }
 
     @Override

@@ -90,7 +90,7 @@ public class ReferenceRegistry {
 	}
 
 	public void setOverlay(JsonNode node, IJsonOverlay<?> overlay) {
-		if (!node.isMissingNode()) {
+		if (!node.isMissingNode() && overlay != null) {
 			overlays.put(node, overlay);
 		}
 	}

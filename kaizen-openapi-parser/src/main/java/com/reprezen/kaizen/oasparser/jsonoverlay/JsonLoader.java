@@ -10,6 +10,7 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.jsonoverlay;
 
+import java.io.InputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Map;
@@ -40,8 +41,10 @@ public class JsonLoader {
 		if (cache.containsKey(urlString)) {
 			return cache.get(urlString);
 		}
-		String json = IOUtils.toString(url.openStream(), Charsets.UTF_8);
-		return loadString(url, json);
+		try(InputStream in = url.openStream()) {
+			String json = IOUtils.toString(in, Charsets.UTF_8);
+			return loadString(url, json);
+		}
 	}
 
 	public JsonNode loadString(URL url, String json) throws IOException, JsonProcessingException {

@@ -10,8 +10,8 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.jsonoverlay;
 
-import java.io.InputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.Map;
 
@@ -27,38 +27,40 @@ import com.google.common.collect.Maps;
 
 public class JsonLoader {
 
-	private static ObjectMapper jsonMapper = new ObjectMapper();
-	private static ObjectMapper yamlMapper = new ObjectMapper(new YAMLFactory());
-	private Yaml yaml = new Yaml();
+    private static ObjectMapper jsonMapper = new ObjectMapper();
 
-	private Map<String, JsonNode> cache = Maps.newHashMap();
+    private static ObjectMapper yamlMapper = new ObjectMapper(new YAMLFactory());
 
-	public JsonLoader() {
-	}
+    private Yaml yaml = new Yaml();
 
-	public JsonNode load(URL url) throws IOException {
-		String urlString = url.toString();
-		if (cache.containsKey(urlString)) {
-			return cache.get(urlString);
-		}
-		try(InputStream in : url.openStream()) {
-			String json = IOUtils.toString(in, Charsets.UTF_8);
-		}
-		return loadString(url, json);
-	}
+    private Map<String, JsonNode> cache = Maps.newHashMap();
 
-	public JsonNode loadString(URL url, String json) throws IOException, JsonProcessingException {
-		JsonNode tree;
-		if (json.trim().startsWith("{")) {
-			tree = jsonMapper.readTree(json);
-		} else {
-			Object parsedYaml = yaml.load(json); // this handles aliases - YAMLMapper doesn't
-			tree = yamlMapper.convertValue(parsedYaml, JsonNode.class);
-		}
-		if (url != null) {
-			cache.put(url.toString(), tree);
-		}
-		return tree;
-	}
+    public JsonLoader() {
+    }
+
+    public JsonNode load(URL url) throws IOException {
+        String urlString = url.toString();
+        if (cache.containsKey(urlString)) {
+            return cache.get(urlString);
+        }
+        try (InputStream in = url.openStream()) {
+            String json = IOUtils.toString(in, Charsets.UTF_8);
+            return loadString(url, json);
+        }
+    }
+
+    public JsonNode loadString(URL url, String json) throws IOException, JsonProcessingException {
+        JsonNode tree;
+        if (json.trim().startsWith("{")) {
+            tree = jsonMapper.readTree(json);
+        } else {
+            Object parsedYaml = yaml.load(json); // this handles aliases - YAMLMapper doesn't
+            tree = yamlMapper.convertValue(parsedYaml, JsonNode.class);
+        }
+        if (url != null) {
+            cache.put(url.toString(), tree);
+        }
+        return tree;
+    }
 
 }

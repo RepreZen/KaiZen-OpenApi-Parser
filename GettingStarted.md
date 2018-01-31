@@ -46,7 +46,7 @@ You can take the parser for a spin with the following simple program,
 or of course explore with your own models.
 
 The program parses each of the
-[example OpenAPI 3.0 models](https://github.com/OAI/OpenAPI-Specification/tree/dm/examples/examples/v3.0)
+[example OpenAPI 3.0 models](https://github.com/OAI/OpenAPI-Specification/tree/dm/implementation/examples/v3.0)
 currently available in the `OAI/OpenAPI-Specivication` GitHub Repo. In
 each case, if validation succeeds, a summary of all the model's paths,
 operations and operation parameters is printed. Otherwise, all
@@ -56,7 +56,7 @@ At the time of this writing, validation fails on the
 `callback-example` because that example does not include the required
 `openapi` and `info` properties.
 
-```
+```java
 package test;
 
 import java.net.URI;

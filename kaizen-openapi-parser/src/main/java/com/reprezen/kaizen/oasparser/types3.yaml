@@ -29,38 +29,31 @@ types:
     fields:
       openapi:
         name: OpenApi
-        type: String
-      info:
-        name: Info
+      info: {}
       servers:
-        name: Server
         structure: collection
       paths:
-        name: Path
         structure: map
         keyPattern: *pathPat
         refable: true
-      pathsExtension: 
+      pathsExtension:
+        name: PathsExtension 
         <<: *extDef
-        name: PathsExtension
         parentPath: paths
       components/schemas:
-        name: Schema
         structure: map
+        type: Schema
         keyPattern: *namePat
         refable: true
       components/responses:
-        name: Response
         structure: map
         keyPattern: *namePat
         refable: true
       components/parameters:
-        name: Parameter
         structure: map
         keyPattern: *namePat
         refable: true
       components/examples:
-        name: Example
         type: Example
         structure: map
         keyPattern: *namePat
@@ -72,93 +65,62 @@ types:
         keyPattern: *namePat
         refable: true
       components/headers:
-        name: Header
         structure: map
         keyPattern: *namePat
         refable: true
       components/securitySchemes:
-        name: SecurityScheme
         structure: map
         keyPattern: *namePat
         refable: true
       components/links:
-        name: Link
         structure: map
         keyPattern: *namePat
         refable: true
       components/callbacks:
-        name: Callback
         structure: map
         keyPattern: *noextNamePat
         refable: true
       componentsExtension:
-        <<: *extDef
         name: ComponentsExtension
+        <<: *extDef
         parentPath: components
       security:
         name: SecurityRequirement
         structure: collection
       tags:
-        name: Tag
         structure: collection
-      externalDocs:
-        name: ExternalDocs
+      externalDocs: {}
       *extName: *extDef
       
   - name: OAuthFlow
     fields:
-      authorizationUrl:
-        name: AuthorizationUrl
-        type: String
-      tokenUrl:
-        name: TokenUrl
-        type: String
-      refreshUrl:
-        name: RefreshUrl
-        type: String
+      authorizationUrl: {}
+      tokenUrl: {}
+      refreshUrl: {}
       scopes:
-        name: Scope
-        type: String
         structure: map
         keyPattern: *noextPat
       scopesExtension:
-        <<: *extDef
         name: ScopesExtension
+        <<: *extDef
         parentPath: scopes
       *extName: *extDef
                       
   - name: Tag
     fields:
-      name:
-        name: Name
-        type: String
-      description:
-        name: Description
-        type: String
-      externalDocs:
-        name: ExternalDocs 
+      name: {}
+      description: {}
+      externalDocs: {}
       *extName: *extDef
 
   - name: SecurityScheme
     fields:
-      type:
-        name: Type
-        type: String
-      description:
-        name: Description
-        type: String
-      name:
-        name: Name
-        type: String
-      in:
-        name: In
-        type: String
-      scheme:
-        name: Scheme
-        type: String
-      bearerFormat:
-        name: BearerFormat
-        type: String
+      type: {}
+      description: {}
+      name: {}
+      in: {}
+      scheme: {}
+      bearerFormat: {}
       flow/implicit:
         name: ImplicitOAuthFlow
         type: OAuthFlow
@@ -175,69 +137,43 @@ types:
         <<: *extDef
         name: OAuthFlowsExtension
         parentPath: flow
-      openIdConnectUrl:
-        name: OpenIdConnectUrl
-        type: String
+      openIdConnectUrl: {}
       *extName: *extDef
                 
   - name: Info
     fields:
-      title:
-        name: Title
-        type: String
-      description:
-        name: Description
-        type: String
-      termsOfService:
-        name: TermsOfService
-        type: String
-      contact:
-        name: Contact
-      license:
-        name: License
-      version:
-        name: Version
-        type: String
+      title: {}
+      description: {}
+      termsOfService: {}
+      contact: {}
+      license: {}
+      version: {}
       *extName: *extDef
 
   - name: Contact
     fields: 
-      name:
-        name: Name
-        type: String
-      url:
-        name: Url
-        type: String
-      email:
-        name: Email
-        type: String
+      name: {}
+      url: {}
+      email: {}
       *extName: *extDef
 
   - name: License
     fields:
-      name:
-        name: Name
-        type: String
-      url:
-        name: Url
-        type: String
+      name: {}
+      url: {}
       *extName: *extDef
   
   - name: Server
     fields:
-      url:
-        name: Url
-        type: String
-      description:
-        name: Description
-        type: String
+      url: {}
+      description: {}
       variables:
         name: ServerVariable
         structure: map
         keyPattern: *noextNamePat
       variablesExtension:
-        <<: *extDef
         name: VariablesExtension
+        <<: *extDef
         parentPath: variables
       *extName: *extDef
 
@@ -248,63 +184,45 @@ types:
         type: Primitive
         structure: collection
       default:
-        name: Default
         type: Primitive
-      description:
-        name: Description
-        type: String
+      description: {}
       *extName: *extDef
         
   - name: Path
     fields:
-      summary:
-        name: Summary
-        type: String
-      description:
-        name: Description
-        type: String
+      summary: {}
+      description: {}
       operations:
-        name: Operation
         structure: map
         parentPath: ""
         keyPattern: get|put|post|delete|options|head|patch|trace
       get:
-        name: Get
         type: Operation
         noImpl: true
       put:
-        name: Put
         type: Operation
         noImpl: true
       post:
-        name: Post
         type: Operation
         noImpl: true
       delete:
-        name: Delete
         type: Operation
         noImpl: true
       options:
-        name: Options
         type: Operation
         noImpl: true
       head:
-        name: Head
         type: Operation
         noImpl: true
       patch:
-        name: Patch
         type: Operation
         noImpl: true
       trace:
-        name: Trace
         type: Operation
         noImpl: true
       servers:
-        name: Server
         structure: collection
       parameters:
-        name: Parameter
         structure: collection
         keyDecls:
           - String name
@@ -315,63 +233,48 @@ types:
   - name: Operation
     fields:
       tags:
-        name: Tag
         type: String
         structure: collection
-      summary:
-        name: Summary
-        type: String
-      description:
-        name: Description
-        type: String
-      externalDocs:
-        name: ExternalDocs
-      operationId:
-        name: OperationId
-        type: String
+      summary: {}
+      description: {}
+      externalDocs: {}
+      operationId: {}
       parameters:
-        name: Parameter
         structure: collection
         keyDecls:
           - String name
           - String id
         refable: true
       requestBody:
-        name: RequestBody
         refable: true
       responses:
-        name: Response
         structure: map
         keyPattern: "default|(\\d\\d\\d)"
         refable: true
       responsesExtension:
-        <<: *extDef
         name: ResponsesExtension
+        <<: *extDef
         parentPath: responses
       callbacks:
-        name: Callback
         structure: map
         keyPattern: *noextNamePat
         refable: true
       callbacksExtension:
-        <<: *extDef
         name: CallbacksExtension
+        <<: *extDef
         parentPath: callbacks
       deprecated:
-        name: Deprecated
         type: Boolean
       security:
         name: SecurityRequirement
         structure: collection
       servers:
-        name: Server
         structure: collection
       *extName: *extDef
         
   - name: Callback
     fields:
       callbackPaths:
-        name: CallbackPath
         type: Path
         structure: map
         parentPath: ""
@@ -381,8 +284,7 @@ types:
 
   - name: SecurityRequirement
     fields:
-      reqirement:
-        name: Requirement
+      requirement:
         type: SecurityParameter
         parentPath: ""
         structure: map
@@ -393,18 +295,14 @@ types:
       impl: [JsonNodeFactory]
     fields:
       parameter:
-        name: Parameter
         type: String
         parentPath: ""
         structure: collection
                       
   - name: Response
     fields:
-      description:
-        name: Description
-        type: String
+      description: {}
       headers:
-        name: Header
         structure: map
         refable: true
       content:
@@ -412,62 +310,46 @@ types:
         type: MediaType
         structure: map
       links:
-        name: Link
         structure: map
         refable: true
       *extName: *extDef
 
   - name: Link
     fields:
-      operationId:
-        name: OperationId
-        type: String
-      operationRef:
-        name: OperationRef
-        type: String
+      operationId: {}
+      operationRef: {}
       parameters:
-        name: Parameter
         type: String
         structure: map
       headers:
-        name: Header
         type: Header
         structure: map
-      description:
-        name: Description
-        type: String
+      description: {}
       server:
-        name: Server
         type: Server
       *extName: *extDef
 
   - name: RequestBody
     fields:
-      description:
-        name: Description
-        type: String
+      description: {}
       content:
         name: ContentMediaType
         type: MediaType
         structure: map
       required:
-        name: Required
         type: Boolean
       *extName: *extDef
 
   - name: MediaType
     fields:
       schema:
-        name: Schema
         refable: true
       examples:
-        name: Example
         type: Example
         structure: map
         keyPattern: *namePat
         refable: true
       example:
-        name: Example
         type: Object
       encoding:
         name: EncodingProperty
@@ -477,70 +359,44 @@ types:
 
   - name: EncodingProperty
     fields:
-      contentType:
-        name: ContentType
-        type: String
+      contentType: {}
       headers:
-        name: Header
-        type: String
         structure: map
+        type: String
         selfKeyed: true
         refable: true
-      style:
-        name: Style
-        type: String
+      style: {}
       explode:
-        name: Explode
         type: Boolean
       *extName: *extDef
              
   - name: ExternalDocs
     fields:
-      description:
-        name: Description
-        type: String
-      url:
-        name: Url
-        type: String
+      description: {}
+      url: {}
       *extName: *extDef
 
   - name: Parameter
     fields: &paramFields
-      name:
-        name: Name
-        type: String
-      in:
-        name: In
-        type: String
-      description:
-        name: Description
-        type: String
+      name: {}
+      in: {}
+      description: {}
       required:
-        name: Required
         type: Boolean
       deprecated:
-        name: Deprecated
         type: Boolean
       allowEmptyValue:
-        name: AllowEmptyValue
         type: Boolean
-      style:
-        name: Style
-        type: String
+      style: {}
       explode:
-        name: Explode
         type: Boolean
       allowReserved:
-        name: AllowReserved
         type: Boolean
       schema:
-        name: Schema
         refable: true
       example:
-        name: Example
         type: Object
       examples:
-        name: Example
         type: Example
         structure: map
         keyPattern: *namePat
@@ -559,60 +415,40 @@ types:
     imports:
       impl: [ Optional, JsonPointer, IJsonOverlay ]
     fields:
-      title:
-        name: Title
-        type: String
+      title: {}
       multipleOf:
-        name: MultipleOf
         type: Number
       maximum:
-        name: Maximum
         type: Number
       exclusiveMaximum:
-        name: ExclusiveMaximum
         type: Boolean
       minimum:
-        name: Minimum
         type: Number
       exclusiveMinimum:
-        name: ExclusiveMinimum
         type: Boolean
       maxLength:
-        name: MaxLength
         type: Integer
       minLength:
-        name: MinLength
         type: Integer
-      pattern:
-        name: Pattern
-        type: String
+      pattern: {}
       maxItems:
-        name: MaxItems
         type: Integer
       minItems:
-        name: MinItems
         type: Integer
       uniqueItems:
-        name: UniqueItems
         type: Boolean
       maxProperties:
-        name: MaxProperties
         type: Integer
       minProperties:
-        name: MinProperties
         type: Integer
       required:
         name: RequiredField
-        type: String
         structure: collection
         selfKeyed: true
       enum:
-        name: Enum
         type: Object
         structure: collection
-      type:
-        name: Type
-        type: String
+      type: {}
       allOf:
         name: AllOfSchema
         type: Schema
@@ -643,7 +479,6 @@ types:
         structure: map
         refable: true
       additionalPropertiesSchema:
-        name: AdditionalPropertiesSchema
         parentPath: additionalProperties
         type: Schema
         createTest: .isObject() 
@@ -653,75 +488,45 @@ types:
         parentPath: additionalProperties
         type: Boolean
         createTest: .isBoolean()
-      description:
-        name: Description
-        type: String
-      format:
-        name: Format
-        type: String
+      description: {}
+      format: {}
       default:
-        name: Default
         type: Object
       nullable:
-        name: Nullable
         type: Boolean
-      discriminator:
-        name: Discriminator
-        type: String
+      discriminator: {}
       readOnly:
-        name: ReadOnly
         type: Boolean
       writeOnly:
-        name: WriteOnly
         type: Boolean
-      xml:
-        name: Xml
-      externalDocs:
-        name: ExternalDocs
+      xml: {}
+      externalDocs: {}
       examples:
-        name: Example
         type: Example
         structure: map
         keyPattern: *namePat
       example:
-        name: Example
         type: Object
       deprecated:
-        name: Deprecated
         type: Boolean
       *extName: *extDef
  
   - name: Xml
     fields:
-      name:
-        name: Name
-        type: String
-      namespace:
-        name: Namespace
-        type: String
-      prefix:
-        name: Prefix
-        type: String
+      name: {}
+      namespace: {}
+      prefix: {}
       attribute:
-        name: Attribute
         type: Boolean
       wrapped:
-        name: Wrapped
         type: Boolean        
       *extName: *extDef
   
   - name: Example
     fields:
-      summary:
-        name: Summary
-        type: String
-      description:
-        name: Description
-        type: String
+      summary: {}
+      description: {}
       value:
-        name: Value
         type: Object        
-      externalValue:
-        name: ExternalValue
-        type: String
+      externalValue: {}
       *extName: *extDef

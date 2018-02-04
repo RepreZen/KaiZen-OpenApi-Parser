@@ -11,9 +11,11 @@
 package com.reprezen.kaizen.oasparser.jsonoverlay.gen;
 
 import static com.reprezen.kaizen.oasparser.jsonoverlay.gen.Template.t;
+import static java.util.stream.Collectors.toList;
 
 import java.io.File;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
@@ -46,6 +48,10 @@ public class InterfaceGenerator extends TypeGenerator {
 			requireTypes("IModelPart");
 			decl.addExtendedType(t("IModelPart<${modelType}, ${name}>", type));
 		}
+		for (String unionType : getContainingUnions(type)) {
+			requireTypes(unionType);
+			decl.addExtendedType(unionType);
+		}
 		for (String extensionType : type.getExtendInterfaces()) {
 			requireTypes(extensionType);
 			decl.addExtendedType(extensionType);
@@ -61,6 +67,10 @@ public class InterfaceGenerator extends TypeGenerator {
 	private String getSuperType(Type type) {
 		String superType = type.getExtensionOf();
 		return superType != null ? superType : t("IPropertiesOverlay<${name}>", type);
+	}
+
+	private List<String> getContainingUnions(Type type) {
+		return type.containingUnions().stream().map(t -> t.getName()).collect(toList());
 	}
 
 	@Override

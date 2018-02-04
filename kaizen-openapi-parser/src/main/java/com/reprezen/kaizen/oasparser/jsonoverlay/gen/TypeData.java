@@ -92,6 +92,9 @@ public class TypeData {
 		private Map<String, String> renames = Maps.newHashMap();
 		@JsonProperty("abstract")
 		private boolean abstractType = false;
+		@JsonProperty("union")
+		private boolean unionType = false;
+		private List<String> unionMemberOfTypes = Lists.newArrayList();
 		private String discriminator = null;
 		private String discriminatorValue = null;
 
@@ -171,6 +174,14 @@ public class TypeData {
 
 		public boolean isAbstract() {
 			return abstractType;
+		}
+
+		public boolean isUnion() {
+			return unionType;
+		}
+
+		public List<Type> containingUnions() {
+			return unionMemberOfTypes.stream().map(t -> typeData.getType(t)).collect(toList());
 		}
 
 		public String getDiscriminator() {

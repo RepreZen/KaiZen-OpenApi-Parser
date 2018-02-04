@@ -11,6 +11,7 @@
 package com.reprezen.kaizen.oasparser.jsonoverlay.gen;
 
 import static com.reprezen.kaizen.oasparser.jsonoverlay.gen.Template.t;
+import static java.util.stream.Collectors.toList;
 
 import java.util.Collection;
 import java.util.List;
@@ -224,6 +225,20 @@ public class TypeData {
 		public void init(String id, Type container) {
 			this.id = id;
 			this.container = container;
+			if (this.name == null) {
+				String[] parts = id.split("/");
+				String lastPart = parts[parts.length - 1];
+				String defaultName = lastPart.substring(0, 1).toUpperCase() + lastPart.substring(1);
+				if (this.structure == Structure.scalar) {
+					this.name = defaultName;
+				} else {
+					this.name = defaultName.endsWith("s") ? defaultName.substring(0, defaultName.length() - 1)
+							: defaultName;
+				}
+			}
+			if (this.type == null) {
+				this.type = getTypeData().getType(name) != null ? name : "String";
+			}
 		}
 
 		public String getId() {
@@ -265,7 +280,7 @@ public class TypeData {
 		}
 
 		public String getType() {
-			return type != null ? type : name;
+			return type;
 		}
 
 		String lcFirst(String s) {

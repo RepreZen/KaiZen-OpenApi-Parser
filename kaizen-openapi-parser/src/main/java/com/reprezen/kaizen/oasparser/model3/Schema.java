@@ -385,10 +385,10 @@ public interface Schema extends IPropertiesOverlay<Schema>, IModelPart<OpenApi3,
     void removeProperty(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    boolean isPropertyReference(String key);
+    boolean isPropertyReference(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    Reference getPropertyReference(String key);
+    Reference getPropertyReference(String name);
 
     // AdditionalPropertiesSchema
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

@@ -50,10 +50,10 @@ public interface MediaType extends IPropertiesOverlay<MediaType>, IModelPart<Ope
     void removeExample(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    boolean isExampleReference(String key);
+    boolean isExampleReference(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    Reference getExampleReference(String key);
+    Reference getExampleReference(String name);
 
     // Example
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

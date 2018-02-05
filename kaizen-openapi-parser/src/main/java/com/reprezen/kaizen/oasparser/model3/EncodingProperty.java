@@ -41,10 +41,10 @@ public interface EncodingProperty extends IPropertiesOverlay<EncodingProperty>, 
     void removeHeader(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    boolean isHeaderReference(String key);
+    boolean isHeaderReference(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    Reference getHeaderReference(String key);
+    Reference getHeaderReference(String name);
 
     // Style
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

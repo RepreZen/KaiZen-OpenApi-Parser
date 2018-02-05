@@ -11,7 +11,6 @@
 package com.reprezen.kaizen.oasparser.jsonoverlay.gen;
 
 import static com.reprezen.kaizen.oasparser.jsonoverlay.gen.Template.t;
-import static java.util.stream.Collectors.toList;
 
 import java.util.Collection;
 import java.util.List;
@@ -280,7 +279,7 @@ public class TypeData {
 		}
 
 		public String getType() {
-			return type;
+			return type.equals("Primitive") ? "Object" : type;
 		}
 
 		String lcFirst(String s) {
@@ -332,7 +331,7 @@ public class TypeData {
 
 		public String getImplType() {
 			Type objectType = getContainer().getTypeData().getTypeMap().get(getType());
-			return Type.getImplType(objectType != null ? objectType.getName() : getType());
+			return Type.getImplType(objectType != null ? objectType.getName() : type);
 		}
 
 		public boolean isScalarType() {

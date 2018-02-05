@@ -157,10 +157,10 @@ public interface Operation extends IPropertiesOverlay<Operation>, IModelPart<Ope
     void removeResponse(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    boolean isResponseReference(String key);
+    boolean isResponseReference(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    Reference getResponseReference(String key);
+    Reference getResponseReference(String name);
 
     // ResponsesExtension
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -207,10 +207,10 @@ public interface Operation extends IPropertiesOverlay<Operation>, IModelPart<Ope
     void removeCallback(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    boolean isCallbackReference(String key);
+    boolean isCallbackReference(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    Reference getCallbackReference(String key);
+    Reference getCallbackReference(String name);
 
     // CallbacksExtension
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

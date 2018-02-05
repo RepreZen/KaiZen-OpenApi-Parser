@@ -165,10 +165,10 @@ public interface Parameter extends IPropertiesOverlay<Parameter>, IModelPart<Ope
     void removeExample(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    boolean isExampleReference(String key);
+    boolean isExampleReference(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    Reference getExampleReference(String key);
+    Reference getExampleReference(String name);
 
     // ContentMediaType
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

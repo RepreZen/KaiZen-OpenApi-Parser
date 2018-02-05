@@ -52,7 +52,7 @@ class InterfaceGenerator extends TypeGenerator {
 	}
 
 	override getFieldMethods(Field field) {
-		val methods = new Members(field)
+		val methods = new Members
 		requireTypes(field.type)
 		var first = true
 		if (field.isRefable) {
@@ -79,82 +79,56 @@ class InterfaceGenerator extends TypeGenerator {
 				}
 			}
 		}
-		methods.forEach[it.packageAccess]
 		return methods
 	}
 
 	def private getScalarMethods(Field f) {
-		val methods = new Members(f)
-		// T getFoo()
-		methods.addMethod(f.type, '''get«f.name»''')
-		// T getFoo(boolean elaborate)
-		methods.addMethod(f.type, '''get«f.name»''', "boolean", "elaborate")
+		val methods = new Members
+		methods.addMember('''«f.type» get«f.name»();''')
+		methods.addMember('''«f.type» get«f.name»(boolean elaborate);''')
 		if (f.type == "Boolean") {
-			// boolean isFoo()
-			methods.addMethod("boolean", '''is«f.name»''')
+			methods.addMember('''boolean is«f.name»();''')
 		}
-		// void setFoo(T foo)
-		methods.addMethod("void", '''set«f.name»''', f.type, f.lcName)
+		methods.addMember('''void set«f.name»(«f.type» «f.lcName»);''')
 		if (f.refable) {
-			// boolean isFooReference()
-			methods.addMethod("boolean", '''is«f.name»Reference''')
-			// boolean Reference getFooReference()
-			methods.addMethod("Reference", '''get«f.name»Reference''')
+			methods.addMember('''boolean is«f.name»Reference();''')
+			methods.addMember('''Reference get«f.name»Reference();''')
 		}
 		return methods
 	}
 
 	def private getCollectionMethods(Field f) {
-		val methods = new Members(f)
+		val methods = new Members
 		requireTypes(Collection)
-		// Collection<T> getFoos()
-		methods.addMethod('''Collection<«f.type»>''', '''get«f.plural»''')
-		// Collection<T> getFoos(boolean elaborate)
-		methods.addMethod('''Collection<«f.type»>''', '''get«f.plural»''', "boolean", "elaborate")
-		// boolean hasFoos()
-		methods.addMethod("boolean", '''has«f.plural»''')
-		// T getFoo(int index)
-		methods.addMethod(f.type, '''get«f.name»''', "int", "index")
-		// void setFoos(Collection<T> foos)
-		methods.addMethod("void", '''set«f.plural»''', '''Collection<«f.type»>''', f.lcPlural)
-		// void setFoo(int index, T foo)
-		methods.addMethod("void", '''set«f.name»''', "int", "index", f.type, f.lcName)
-		// void addFoo(T foo)
-		methods.addMethod("void", '''add«f.name»''', f.type, f.lcName)
-		// void insertFoo(int index, T foo)
-		methods.addMethod("void", '''insert«f.name»''', "int", "index", f.type, f.lcName)
-		// void removeFoo(int index)
-		methods.addMethod("void", '''remove«f.name»''', "int", "index");
+		methods.addMember('''Collection<«f.type»> get«f.plural»();''')
+		methods.addMember('''Collection<«f.type»> get«f.plural»(boolean elaborate);''')
+		methods.addMember('''boolean has«f.plural»();''')
+		methods.addMember('''«f.type» get«f.name»(int index);''')
+		methods.addMember('''void set«f.plural»(Collection<«f.type»> «f.lcPlural»);''')
+		methods.addMember('''void set«f.name»(int index, «f.type» «f.lcName»);''')
+		methods.addMember('''void add«f.name»(«f.type» «f.lcName»);''')
+		methods.addMember('''void insert«f.name»(int index, «f.type» «f.lcName»);''')
+		methods.addMember('''void remove«f.name»(int index);''')
 		if (f.refable) {
-			// boolean isFooReference(int index)
-			methods.addMethod("boolean", '''is«f.name»Reference''', "int", "index");
-			// Reference getFooReference(int index)
-			methods.addMethod("Reference", '''get«f.name»Reference''', "int", "index")
+			methods.addMember('''boolean is«f.name»Reference(int index);''')
+			methods.addMember('''Reference get«f.name»Reference(int index);''')
 		}
 		return methods
 	}
 
 	def private getMapMethods(Field f) {
 		requireTypes(Map)
-		val methods = new Members(f)
-		// Map<String, T> getFoos()
-		methods.addMethod('''Map<String, «f.type»>''', '''get«f.plural»''')
-		// Map<String, T> getFoos(boolean elaborate)
-		methods.addMethod('''Map<String, «f.type»>''', '''get«f.plural»''', "boolean", "elaborate")
-		// boolean hasFoo(String name)
-		methods.addMethod("boolean", '''has«f.name»''', "String", f.keyName)
-		// T getFoo(String name)
-		methods.addMethod(f.type, '''get«f.name»''', "String", f.keyName)
-		// void setFoos(Map<String, T> foos)
-		methods.addMethod("void", '''set«f.plural»''', '''Map<String, «f.type»>''', f.lcPlural)
-		methods.addMethod("void", "set${name}", "String", "${keyName}", "${type}", "${lcName}");
-		// void removeFoo(String name)
-		methods.addMethod("void", '''remove«f.name»''', "String", f.keyName);
+		val methods = new Members
+		methods.addMember('''Map<String, «f.type»> get«f.plural»();''')
+		methods.addMember('''Map<String, «f.type»> get«f.plural»(boolean elaborate);''')
+		methods.addMember('''boolean has«f.name»(String «f.keyName»);''')
+		methods.addMember('''«f.type» get«f.name»(String «f.keyName»);''')
+		methods.addMember('''void set«f.plural»(Map<String, «f.type»> «f.lcPlural»);''')
+		methods.addMember('''void set«f.name»(String «f.keyName», «f.type» «f.lcName»);''')
+		methods.addMember('''void remove«f.name»(String «f.keyName»);''')
 		if (f.refable) {
-			// boolean isFooReference(String name)
-			methods.addMethod("boolean", '''is«f.name»Reference''', "String", f.keyName)
-			// ReferencegetFooReference(String name)
-			methods.addMethod("Reference", '''get«f.name»Reference''', "String", f.keyName)
+			methods.addMember('''boolean is«f.name»Reference(String «f.keyName»);''')
+			methods.addMember('''Reference get«f.name»Reference(String «f.keyName»);''')
 		}
 		return methods
 	}

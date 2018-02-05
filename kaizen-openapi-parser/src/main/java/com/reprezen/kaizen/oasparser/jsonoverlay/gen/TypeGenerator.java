@@ -67,10 +67,7 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.gen.SimpleJavaGenerator.ConstructorMember;
-import com.reprezen.kaizen.oasparser.jsonoverlay.gen.SimpleJavaGenerator.FieldMember;
 import com.reprezen.kaizen.oasparser.jsonoverlay.gen.SimpleJavaGenerator.Member;
-import com.reprezen.kaizen.oasparser.jsonoverlay.gen.SimpleJavaGenerator.MethodMember;
 import com.reprezen.kaizen.oasparser.jsonoverlay.gen.TypeData.Field;
 import com.reprezen.kaizen.oasparser.jsonoverlay.gen.TypeData.Type;
 
@@ -244,7 +241,7 @@ public abstract class TypeGenerator {
 	}
 
 	protected void addGeneratedMembers(Type type, SimpleJavaGenerator gen) {
-		Members members = new Members(type);
+		Members members = new Members();
 		members.addAll(getConstructors(type));
 		for (Field field : type.getFields().values()) {
 			if (!skipField(field)) {
@@ -266,7 +263,7 @@ public abstract class TypeGenerator {
 	private void maybeRename(Member member, Map<String, String> renames) {
 		String name = member.getName();
 		if (name != null && renames.containsKey(name)) {
-			member.setName(renames.get(name));
+			member.rename(name, renames.get(name));
 		}
 	}
 
@@ -319,19 +316,19 @@ public abstract class TypeGenerator {
 	}
 
 	protected Members getConstructors(Type type) {
-		return new Members(type);
+		return new Members();
 	}
 
 	protected Members getFieldMembers(Field field) {
-		return new Members(field);
+		return new Members();
 	}
 
 	protected Members getFieldMethods(Field field) {
-		return new Members(field);
+		return new Members();
 	}
 
 	protected Members getOtherMembers(Type type) {
-		return new Members(type);
+		return new Members();
 	}
 
 	protected Member addMember(BodyDeclaration<?> declaration, Collection<String> code) {
@@ -345,33 +342,9 @@ public abstract class TypeGenerator {
 	protected static class Members extends ArrayList<Member> {
 
 		private static final long serialVersionUID = 1L;
-
-		private Field field = null;
-
-		private Type type = null;
-
-		public Members(Type type) {
-			this.type = type;
-		}
-
-		public Members(Field field) {
-			this.field = field;
-		}
-
-		public Member addConstructor(String className, String... paramPairs) {
-			return addMember(new ConstructorMember(type, className, paramPairs));
-		}
-
-		public Member addMethod(String type, String name, String... paramPairs) {
-			return addMember(new MethodMember(field, type, name, paramPairs));
-		}
-
-		public Member addField(String type, String name) {
-			return addField(type, name, null);
-		}
-
-		public Member addField(String type, String name, String initializer) {
-			return addMember(new FieldMember(field, type, name, initializer));
+ 
+		public Member addMember(String code) {
+			return addMember(new Member(code));
 		}
 
 		public Member addMember(Member member) {

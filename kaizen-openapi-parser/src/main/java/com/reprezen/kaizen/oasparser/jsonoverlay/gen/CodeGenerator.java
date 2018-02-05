@@ -46,7 +46,7 @@ public class CodeGenerator {
 
 	private void generate(TypeData typeData) throws IOException {
 		generateInterfaces(typeData);
-		generateImpls(typeData);
+//		generateImpls(typeData);
 		if (!opts.preserve) {
 			System.err.println("WARNING: Preservation of non-generated code is suppressed!");
 			System.err
@@ -79,7 +79,7 @@ public class CodeGenerator {
 			if (type.isNoGen()) {
 				return;
 			}
-			new ImplGenerator(implDir, intfPackage, implPackage, opts.classSuffix, opts.preserve).generate(type);
+//			new ImplGenerator(implDir, intfPackage, implPackage, opts.classSuffix, opts.preserve).generate(type);
 		}
 	}
 

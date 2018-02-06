@@ -13,11 +13,13 @@ package com.reprezen.kaizen.oasparser.jsonoverlay.gen
 import com.fasterxml.jackson.core.JsonPointer
 import com.fasterxml.jackson.databind.JsonNode
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration
+import com.github.javaparser.ast.body.TypeDeclaration
 import com.google.common.collect.Queues
 import com.google.common.collect.Sets
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay
+import com.reprezen.kaizen.oasparser.jsonoverlay.EnumOverlay
 import com.reprezen.kaizen.oasparser.jsonoverlay.IJsonOverlay
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay
 import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay
@@ -25,9 +27,9 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory
 import com.reprezen.kaizen.oasparser.jsonoverlay.Reference
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry
-import com.reprezen.kaizen.oasparser.jsonoverlay.gen.SimpleJavaGenerator.Member
 import com.reprezen.kaizen.oasparser.jsonoverlay.gen.TypeData.Field
 import com.reprezen.kaizen.oasparser.jsonoverlay.gen.TypeData.Type
+import com.reprezen.kaizen.oasparser.jsonoverlay.gen.SimpleJavaGenerator.Member
 import java.io.File
 import java.util.Collection
 import java.util.Map
@@ -44,7 +46,7 @@ class ImplGenerator extends TypeGenerator {
 	}
 
 	override Collection<String> getImports(Type type) {
-		return type.getRequiredImports("impl")
+		return type.getRequiredImports("impl", "both")
 	}
 
 	override boolean needIntfImports() {
@@ -53,30 +55,47 @@ class ImplGenerator extends TypeGenerator {
 
 	override Members getOtherMembers(Type type) {
 		val members = new Members
-		members.add(getElaborateChildrenMethod(type))
-		members.addAll(getFactoryMembers(type))
+		if (type.isEnum) {
+			members.add(new Member('''
+				protected Class<«type.name»> getEnumClass() {
+					return «type.name».class;
+				}
+			'''))
+			members.add(type.enumFactoryMember)
+		} else {
+			members.add(getElaborateChildrenMethod(type))
+			members.addAll(getFactoryMembers(type))
+		}
 		return members
 	}
 
-	override ClassOrInterfaceDeclaration getTypeDeclaration(Type type, String suffix) {
+	override TypeDeclaration<?> getTypeDeclaration(Type type, String suffix) {
 		val decl = new ClassOrInterfaceDeclaration()
 		decl.setInterface(false)
 		decl.setPublic(true)
 		decl.setName(type.getName() + suffix)
-		decl.addExtendedType(getSuperType(type))
-		decl.addImplementedType(type.getName())
+		if (type.isEnum) {
+			requireTypes(EnumOverlay)
+			decl.addExtendedType('''EnumOverlay<«type.name»>''')
+		} else {
+			decl.addExtendedType(getSuperType(type))
+			decl.addImplementedType(type.getName())
+		}
 		return decl
+	}
+
+	def private isEnum(Type type) {
+		return !type.enumValues.empty
 	}
 
 	def private String getSuperType(Type type) {
 		var superType = type.getExtensionOf()
 		if (superType === null) {
 			requireTypes("PropertiesOverlay")
-			superType = '''PropertiesOverlay<«type.name»>'''
+			return '''PropertiesOverlay<«type.name»>'''
 		} else {
-			superType = superType + suffix
+			return superType + suffix
 		}
-		return superType
 	}
 
 	override Members getConstructors(Type type) {
@@ -85,13 +104,17 @@ class ImplGenerator extends TypeGenerator {
 		members.addMember('''
 			public «type.implType»(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
 				super(json, parent, refReg);
-				super.maybeElaborateChildrenAtCreation();
+				«IF !type.isEnum»
+					super.maybeElaborateChildrenAtCreation();
+				«ENDIF»
 			}
 		''')
 		members.addMember('''
 			public «type.implType»(«type.name» «type.lcName», JsonOverlay<?> parent, ReferenceRegistry refReg) {
 				super(«type.lcName», parent, refReg);
-				super.maybeElaborateChildrenAtCreation();			
+				«IF !type.isEnum»
+					super.maybeElaborateChildrenAtCreation();
+				«ENDIF»			
 			}
 		''')
 		return members
@@ -102,8 +125,8 @@ class ImplGenerator extends TypeGenerator {
 	}
 
 	override Members getFieldMembers(Field field) {
-		requireTypes(field.getType(), field.getImplType())
 		val members = new Members
+		requireTypes(field.getType(), field.getImplType())
 		members.addMember('''private «field.propertyType» «field.propertyName»;''')
 		switch (field.getStructure()) {
 			case scalar:
@@ -310,6 +333,28 @@ class ImplGenerator extends TypeGenerator {
 		''').override
 	}
 
+	def private Member getEnumFactoryMember(Type type) {
+		requireTypes(OverlayFactory, IJsonOverlay, JsonOverlay, JsonNode, ReferenceRegistry)
+		return new Member('''
+			public static OverlayFactory<«type.name»> factory = new OverlayFactory<«type.name»>() {
+				@Override
+				protected Class<? extends IJsonOverlay<? super «type.name»>> getOverlayClass() {
+					return «type.implType».class;
+				}
+				
+				@Override
+				public JsonOverlay<«type.name»> _create(«type.name» «type.lcName», JsonOverlay<?> parent, ReferenceRegistry refReg) {
+					return new «type.implType»(«type.lcName», parent, refReg);
+				}
+				
+				@Override
+				public JsonOverlay<«type.name»> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
+					return new «type.implType»(json, parent, refReg);
+				}			
+			};
+		''')
+	}
+
 	def private Members getFactoryMembers(Type type) {
 		val members = new Members
 		members.add(getFactoryMember(type))
@@ -406,18 +451,21 @@ class ImplGenerator extends TypeGenerator {
 
 	def private String getSubtypeCreate(Type t, String arg0) {
 		val subtypes = t.subTypes
-		val castArg0 = if(arg0 == ".json") "json" else '''(«t.name») «arg0»'''
 		return '''
 			switch (subtype.getSimpleName()) {
 				«FOR sub : subtypes»
 					case "«sub.discriminatorValue»":
-						overlay = «sub.implType».factory.create(«castArg0», parent, refReg, null);
+						overlay = «sub.implType».factory.create(«sub.castArg0(arg0)», parent, refReg, null);
 						break;
 				«ENDFOR»
 				default:
 					overlay = null;
 			}
 		'''
+	}
+
+	def private castArg0(Type type, String arg0) {
+		return if(arg0 == ".json") "json" else '''(«type.name») «arg0»'''
 	}
 
 	def private Collection<Type> getSubTypes(Type type) {
@@ -428,12 +476,11 @@ class ImplGenerator extends TypeGenerator {
 			val nextType = todo.remove()
 			if (!subTypes.contains(nextType)) {
 				subTypes.add(nextType)
-				val  directSubtypes =	type.typeData.types.filter[it.extensionOf == nextType.name]
+				val directSubtypes = type.typeData.types.filter[it.extensionOf == nextType.name]
 				todo.addAll(directSubtypes)
 			}
 		}
 		subTypes.remove(type)
 		return subTypes
 	}
-
 }

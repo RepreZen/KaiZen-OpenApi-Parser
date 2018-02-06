@@ -11,6 +11,9 @@
 package com.reprezen.kaizen.oasparser.jsonoverlay.gen
 
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration
+import com.github.javaparser.ast.body.EnumConstantDeclaration
+import com.github.javaparser.ast.body.EnumDeclaration
+import com.github.javaparser.ast.body.TypeDeclaration
 import com.reprezen.kaizen.oasparser.jsonoverlay.Reference
 import com.reprezen.kaizen.oasparser.jsonoverlay.gen.TypeData.Field
 import com.reprezen.kaizen.oasparser.jsonoverlay.gen.TypeData.Type
@@ -28,18 +31,27 @@ class InterfaceGenerator extends TypeGenerator {
 		return intfPackage
 	}
 
-	override ClassOrInterfaceDeclaration getTypeDeclaration(Type type, String suffix) {
-		val decl = new ClassOrInterfaceDeclaration
-		decl.interface = true
+	override TypeDeclaration<?> getTypeDeclaration(Type type, String suffix) {
+		val decl = if(type.enumValues.empty) new ClassOrInterfaceDeclaration else new EnumDeclaration
 		decl.name = type.name
 		decl.public = true
-		decl.addExtendedType(type.superType)
-		requireTypes(type.superType)
-		if (type.typeData.modelType !== null) {
-			requireTypes("IModelPart")
-			decl.addExtendedType('''IModelPart<«type.typeData.modelType», «type.name»>''')
+		switch (decl) {
+			ClassOrInterfaceDeclaration: {
+				decl.interface = true
+				decl.addExtendedType(type.superType)
+				requireTypes(type.superType)
+				if (type.typeData.modelType !== null) {
+					requireTypes("IModelPart")
+					decl.addExtendedType('''IModelPart<«type.typeData.modelType», «type.name»>''')
+				}
+				type.extendInterfaces.forEach[requireTypes(it); decl.addExtendedType(it)]
+			}
+			EnumDeclaration: {
+				for (enumValue: type.enumValues) {
+					decl.addEntry(new EnumConstantDeclaration().setName(enumValue))
+				}
+			}
 		}
-		type.extendInterfaces.forEach[requireTypes(it); decl.addExtendedType(it)]
 		return decl
 	}
 
@@ -48,7 +60,7 @@ class InterfaceGenerator extends TypeGenerator {
 	}
 
 	override getImports(Type type) {
-		type.getRequiredImports("intf")
+		type.getRequiredImports("intf", "both")
 	}
 
 	override getFieldMethods(Field field) {

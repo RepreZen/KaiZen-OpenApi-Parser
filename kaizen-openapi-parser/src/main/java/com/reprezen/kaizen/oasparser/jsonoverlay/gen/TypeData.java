@@ -93,6 +93,7 @@ public class TypeData {
 		private boolean abstractType = false;
 		private String discriminator = null;
 		private String discriminatorValue = null;
+		private List<String> enumValues = Lists.newArrayList();
 
 		private TypeData typeData;
 
@@ -107,20 +108,16 @@ public class TypeData {
 			return typeData;
 		}
 
-		public Collection<String> getRequiredImports(String moduleType) {
+		public Collection<String> getRequiredImports(String... moduleTypes) {
 			Set<String> results = Sets.newLinkedHashSet();
 			Collection<String> interfaces = extendInterfaces != null ? extendInterfaces
 					: typeData.defaultExtendInterfaces;
 			if (interfaces != null) {
-				for (String intf : interfaces) {
-					if (typeData.imports.containsKey(intf)) {
-						results.add(typeData.imports.get(intf));
-					}
-				}
+				results.addAll(interfaces);
 			}
-			if (imports.get(moduleType) != null) {
-				for (String imp : imports.get(moduleType)) {
-					results.add(imp);
+			for (String moduleType : moduleTypes) {
+				if (imports.get(moduleType) != null) {
+					results.addAll(imports.get(moduleType));
 				}
 			}
 			return results;
@@ -178,6 +175,10 @@ public class TypeData {
 
 		public String getDiscriminatorValue() {
 			return discriminatorValue != null ? discriminatorValue : name;
+		}
+
+		public List<String> getEnumValues() {
+			return enumValues;
 		}
 
 		public String getImplType() {

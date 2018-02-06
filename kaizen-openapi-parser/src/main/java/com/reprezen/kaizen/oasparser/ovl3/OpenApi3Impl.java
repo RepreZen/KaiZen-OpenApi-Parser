@@ -237,7 +237,7 @@ public class OpenApi3Impl extends PropertiesOverlay<OpenApi3> implements OpenApi
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setServers(Collection<Server> servers) {
-        this.servers.set((Collection<Server>) servers);
+        this.servers.set(servers);
     }
 
     @Override
@@ -309,15 +309,15 @@ public class OpenApi3Impl extends PropertiesOverlay<OpenApi3> implements OpenApi
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public boolean isPathReference(String key) {
-        ChildOverlay<Path> child = paths.getChild(key);
+    public boolean isPathReference(String name) {
+        ChildOverlay<Path> child = paths.getChild(name);
         return child != null ? child.isReference() : false;
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public Reference getPathReference(String key) {
-        ChildOverlay<Path> child = paths.getChild(key);
+    public Reference getPathReference(String name) {
+        ChildOverlay<Path> child = paths.getChild(name);
         return child != null ? child.getReference() : null;
     }
 
@@ -409,15 +409,15 @@ public class OpenApi3Impl extends PropertiesOverlay<OpenApi3> implements OpenApi
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public boolean isSchemaReference(String key) {
-        ChildOverlay<Schema> child = schemas.getChild(key);
+    public boolean isSchemaReference(String name) {
+        ChildOverlay<Schema> child = schemas.getChild(name);
         return child != null ? child.isReference() : false;
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public Reference getSchemaReference(String key) {
-        ChildOverlay<Schema> child = schemas.getChild(key);
+    public Reference getSchemaReference(String name) {
+        ChildOverlay<Schema> child = schemas.getChild(name);
         return child != null ? child.getReference() : null;
     }
 
@@ -466,15 +466,15 @@ public class OpenApi3Impl extends PropertiesOverlay<OpenApi3> implements OpenApi
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public boolean isResponseReference(String key) {
-        ChildOverlay<Response> child = responses.getChild(key);
+    public boolean isResponseReference(String name) {
+        ChildOverlay<Response> child = responses.getChild(name);
         return child != null ? child.isReference() : false;
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public Reference getResponseReference(String key) {
-        ChildOverlay<Response> child = responses.getChild(key);
+    public Reference getResponseReference(String name) {
+        ChildOverlay<Response> child = responses.getChild(name);
         return child != null ? child.getReference() : null;
     }
 
@@ -523,15 +523,15 @@ public class OpenApi3Impl extends PropertiesOverlay<OpenApi3> implements OpenApi
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public boolean isParameterReference(String key) {
-        ChildOverlay<Parameter> child = parameters.getChild(key);
+    public boolean isParameterReference(String name) {
+        ChildOverlay<Parameter> child = parameters.getChild(name);
         return child != null ? child.isReference() : false;
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public Reference getParameterReference(String key) {
-        ChildOverlay<Parameter> child = parameters.getChild(key);
+    public Reference getParameterReference(String name) {
+        ChildOverlay<Parameter> child = parameters.getChild(name);
         return child != null ? child.getReference() : null;
     }
 
@@ -580,15 +580,15 @@ public class OpenApi3Impl extends PropertiesOverlay<OpenApi3> implements OpenApi
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public boolean isExampleReference(String key) {
-        ChildOverlay<Example> child = examples.getChild(key);
+    public boolean isExampleReference(String name) {
+        ChildOverlay<Example> child = examples.getChild(name);
         return child != null ? child.isReference() : false;
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public Reference getExampleReference(String key) {
-        ChildOverlay<Example> child = examples.getChild(key);
+    public Reference getExampleReference(String name) {
+        ChildOverlay<Example> child = examples.getChild(name);
         return child != null ? child.getReference() : null;
     }
 
@@ -637,15 +637,15 @@ public class OpenApi3Impl extends PropertiesOverlay<OpenApi3> implements OpenApi
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public boolean isRequestBodyReference(String key) {
-        ChildOverlay<RequestBody> child = requestBodies.getChild(key);
+    public boolean isRequestBodyReference(String name) {
+        ChildOverlay<RequestBody> child = requestBodies.getChild(name);
         return child != null ? child.isReference() : false;
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public Reference getRequestBodyReference(String key) {
-        ChildOverlay<RequestBody> child = requestBodies.getChild(key);
+    public Reference getRequestBodyReference(String name) {
+        ChildOverlay<RequestBody> child = requestBodies.getChild(name);
         return child != null ? child.getReference() : null;
     }
 
@@ -694,15 +694,15 @@ public class OpenApi3Impl extends PropertiesOverlay<OpenApi3> implements OpenApi
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public boolean isHeaderReference(String key) {
-        ChildOverlay<Header> child = headers.getChild(key);
+    public boolean isHeaderReference(String name) {
+        ChildOverlay<Header> child = headers.getChild(name);
         return child != null ? child.isReference() : false;
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public Reference getHeaderReference(String key) {
-        ChildOverlay<Header> child = headers.getChild(key);
+    public Reference getHeaderReference(String name) {
+        ChildOverlay<Header> child = headers.getChild(name);
         return child != null ? child.getReference() : null;
     }
 
@@ -751,15 +751,15 @@ public class OpenApi3Impl extends PropertiesOverlay<OpenApi3> implements OpenApi
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public boolean isSecuritySchemeReference(String key) {
-        ChildOverlay<SecurityScheme> child = securitySchemes.getChild(key);
+    public boolean isSecuritySchemeReference(String name) {
+        ChildOverlay<SecurityScheme> child = securitySchemes.getChild(name);
         return child != null ? child.isReference() : false;
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public Reference getSecuritySchemeReference(String key) {
-        ChildOverlay<SecurityScheme> child = securitySchemes.getChild(key);
+    public Reference getSecuritySchemeReference(String name) {
+        ChildOverlay<SecurityScheme> child = securitySchemes.getChild(name);
         return child != null ? child.getReference() : null;
     }
 
@@ -808,15 +808,15 @@ public class OpenApi3Impl extends PropertiesOverlay<OpenApi3> implements OpenApi
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public boolean isLinkReference(String key) {
-        ChildOverlay<Link> child = links.getChild(key);
+    public boolean isLinkReference(String name) {
+        ChildOverlay<Link> child = links.getChild(name);
         return child != null ? child.isReference() : false;
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public Reference getLinkReference(String key) {
-        ChildOverlay<Link> child = links.getChild(key);
+    public Reference getLinkReference(String name) {
+        ChildOverlay<Link> child = links.getChild(name);
         return child != null ? child.getReference() : null;
     }
 
@@ -865,15 +865,15 @@ public class OpenApi3Impl extends PropertiesOverlay<OpenApi3> implements OpenApi
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public boolean isCallbackReference(String key) {
-        ChildOverlay<Callback> child = callbacks.getChild(key);
+    public boolean isCallbackReference(String name) {
+        ChildOverlay<Callback> child = callbacks.getChild(name);
         return child != null ? child.isReference() : false;
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public Reference getCallbackReference(String key) {
-        ChildOverlay<Callback> child = callbacks.getChild(key);
+    public Reference getCallbackReference(String name) {
+        ChildOverlay<Callback> child = callbacks.getChild(name);
         return child != null ? child.getReference() : null;
     }
 
@@ -948,7 +948,7 @@ public class OpenApi3Impl extends PropertiesOverlay<OpenApi3> implements OpenApi
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setSecurityRequirements(Collection<SecurityRequirement> securityRequirements) {
-        this.securityRequirements.set((Collection<SecurityRequirement>) securityRequirements);
+        this.securityRequirements.set(securityRequirements);
     }
 
     @Override
@@ -1003,7 +1003,7 @@ public class OpenApi3Impl extends PropertiesOverlay<OpenApi3> implements OpenApi
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setTags(Collection<Tag> tags) {
-        this.tags.set((Collection<Tag>) tags);
+        this.tags.set(tags);
     }
 
     @Override

@@ -3,10 +3,7 @@ package com.reprezen.kaizen.oasparser.ovl3;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
-import java.util.Collection;
 import java.util.stream.Collectors;
 import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
 import com.reprezen.kaizen.oasparser.model3.*;
@@ -115,15 +112,15 @@ public class EncodingPropertyImpl extends PropertiesOverlay<EncodingProperty> im
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public boolean isHeaderReference(String key) {
-        ChildOverlay<String> child = headers.getChild(key);
+    public boolean isHeaderReference(String name) {
+        ChildOverlay<String> child = headers.getChild(name);
         return child != null ? child.isReference() : false;
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public Reference getHeaderReference(String key) {
-        ChildOverlay<String> child = headers.getChild(key);
+    public Reference getHeaderReference(String name) {
+        ChildOverlay<String> child = headers.getChild(name);
         return child != null ? child.getReference() : null;
     }
 

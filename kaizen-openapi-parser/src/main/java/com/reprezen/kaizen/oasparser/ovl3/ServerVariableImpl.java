@@ -75,7 +75,7 @@ public class ServerVariableImpl extends PropertiesOverlay<ServerVariable> implem
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setEnumValues(Collection<Object> enumValues) {
-        this.enumValues.set((Collection<Object>) enumValues);
+        this.enumValues.set(enumValues);
     }
 
     @Override

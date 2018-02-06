@@ -1,31 +1,28 @@
 package com.reprezen.kaizen.oasparser.ovl3;
 
 import com.reprezen.kaizen.oasparser.model3.Schema;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
+import com.reprezen.kaizen.oasparser.ovl3.MediaTypeImpl;
+import com.reprezen.kaizen.oasparser.ovl3.ExampleImpl;
+import java.util.stream.Collectors;
+import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
+import com.reprezen.kaizen.oasparser.model3.*;
 import com.reprezen.kaizen.oasparser.jsonoverlay.BooleanOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import com.fasterxml.jackson.core.JsonPointer;
 import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import com.reprezen.kaizen.oasparser.ovl3.SchemaImpl;
+import com.reprezen.kaizen.oasparser.model3.MediaType;
 import com.reprezen.kaizen.oasparser.model3.Example;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.reprezen.kaizen.oasparser.jsonoverlay.IJsonOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
-import com.reprezen.kaizen.oasparser.ovl3.MediaTypeImpl;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
-import com.reprezen.kaizen.oasparser.ovl3.ExampleImpl;
-import java.util.Collection;
-import java.util.stream.Collectors;
-import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
-import com.reprezen.kaizen.oasparser.model3.*;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
-import com.reprezen.kaizen.oasparser.model3.MediaType;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 
 public class HeaderImpl extends PropertiesOverlay<Header> implements Header {
@@ -380,15 +377,15 @@ public class HeaderImpl extends PropertiesOverlay<Header> implements Header {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public boolean isExampleReference(String key) {
-        ChildOverlay<Example> child = examples.getChild(key);
+    public boolean isExampleReference(String name) {
+        ChildOverlay<Example> child = examples.getChild(name);
         return child != null ? child.isReference() : false;
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public Reference getExampleReference(String key) {
-        ChildOverlay<Example> child = examples.getChild(key);
+    public Reference getExampleReference(String name) {
+        ChildOverlay<Example> child = examples.getChild(name);
         return child != null ? child.getReference() : null;
     }
 

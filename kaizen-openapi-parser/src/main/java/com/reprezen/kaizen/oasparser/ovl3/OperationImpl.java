@@ -123,7 +123,7 @@ public class OperationImpl extends PropertiesOverlay<Operation> implements Opera
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setTags(Collection<String> tags) {
-        this.tags.set((Collection<String>) tags);
+        this.tags.set(tags);
     }
 
     @Override
@@ -254,7 +254,7 @@ public class OperationImpl extends PropertiesOverlay<Operation> implements Opera
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setParameters(Collection<Parameter> parameters) {
-        this.parameters.set((Collection<Parameter>) parameters);
+        this.parameters.set(parameters);
     }
 
     @Override
@@ -369,15 +369,15 @@ public class OperationImpl extends PropertiesOverlay<Operation> implements Opera
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public boolean isResponseReference(String key) {
-        ChildOverlay<Response> child = responses.getChild(key);
+    public boolean isResponseReference(String name) {
+        ChildOverlay<Response> child = responses.getChild(name);
         return child != null ? child.isReference() : false;
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public Reference getResponseReference(String key) {
-        ChildOverlay<Response> child = responses.getChild(key);
+    public Reference getResponseReference(String name) {
+        ChildOverlay<Response> child = responses.getChild(name);
         return child != null ? child.getReference() : null;
     }
 
@@ -469,15 +469,15 @@ public class OperationImpl extends PropertiesOverlay<Operation> implements Opera
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public boolean isCallbackReference(String key) {
-        ChildOverlay<Callback> child = callbacks.getChild(key);
+    public boolean isCallbackReference(String name) {
+        ChildOverlay<Callback> child = callbacks.getChild(name);
         return child != null ? child.isReference() : false;
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public Reference getCallbackReference(String key) {
-        ChildOverlay<Callback> child = callbacks.getChild(key);
+    public Reference getCallbackReference(String name) {
+        ChildOverlay<Callback> child = callbacks.getChild(name);
         return child != null ? child.getReference() : null;
     }
 
@@ -577,7 +577,7 @@ public class OperationImpl extends PropertiesOverlay<Operation> implements Opera
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setSecurityRequirements(Collection<SecurityRequirement> securityRequirements) {
-        this.securityRequirements.set((Collection<SecurityRequirement>) securityRequirements);
+        this.securityRequirements.set(securityRequirements);
     }
 
     @Override
@@ -632,7 +632,7 @@ public class OperationImpl extends PropertiesOverlay<Operation> implements Opera
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setServers(Collection<Server> servers) {
-        this.servers.set((Collection<Server>) servers);
+        this.servers.set(servers);
     }
 
     @Override

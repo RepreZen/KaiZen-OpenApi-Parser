@@ -482,7 +482,7 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setRequiredFields(Collection<String> requiredFields) {
-        this.requiredFields.set((Collection<String>) requiredFields);
+        this.requiredFields.set(requiredFields);
     }
 
     @Override
@@ -537,7 +537,7 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setEnums(Collection<Object> enums) {
-        this.enums.set((Collection<Object>) enums);
+        this.enums.set(enums);
     }
 
     @Override
@@ -611,7 +611,7 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setAllOfSchemas(Collection<Schema> allOfSchemas) {
-        this.allOfSchemas.set((Collection<Schema>) allOfSchemas);
+        this.allOfSchemas.set(allOfSchemas);
     }
 
     @Override
@@ -678,7 +678,7 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setOneOfSchemas(Collection<Schema> oneOfSchemas) {
-        this.oneOfSchemas.set((Collection<Schema>) oneOfSchemas);
+        this.oneOfSchemas.set(oneOfSchemas);
     }
 
     @Override
@@ -745,7 +745,7 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setAnyOfSchemas(Collection<Schema> anyOfSchemas) {
-        this.anyOfSchemas.set((Collection<Schema>) anyOfSchemas);
+        this.anyOfSchemas.set(anyOfSchemas);
     }
 
     @Override
@@ -891,15 +891,15 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public boolean isPropertyReference(String key) {
-        ChildOverlay<Schema> child = properties.getChild(key);
+    public boolean isPropertyReference(String name) {
+        ChildOverlay<Schema> child = properties.getChild(name);
         return child != null ? child.isReference() : false;
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public Reference getPropertyReference(String key) {
-        ChildOverlay<Schema> child = properties.getChild(key);
+    public Reference getPropertyReference(String name) {
+        ChildOverlay<Schema> child = properties.getChild(name);
         return child != null ? child.getReference() : null;
     }
 

@@ -23,10 +23,10 @@ import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.BodyDeclaration;
-import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.ConstructorDeclaration;
 import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
+import com.github.javaparser.ast.body.TypeDeclaration;
 import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.ast.comments.JavadocComment;
 import com.github.javaparser.ast.expr.Expression;
@@ -38,12 +38,12 @@ public class SimpleJavaGenerator {
 
 	private String pkg;
 	private Set<String> imports = Sets.newHashSet();
-	private ClassOrInterfaceDeclaration type;
+	private TypeDeclaration<?> type;
 	private List<Member> members = Lists.newArrayList();
 	private String fileComment;
 	private static int indentation = 4;
 
-	public SimpleJavaGenerator(String pkg, ClassOrInterfaceDeclaration type) {
+	public SimpleJavaGenerator(String pkg, TypeDeclaration<?> type) {
 		this.pkg = pkg;
 		this.type = type;
 	}
@@ -142,7 +142,7 @@ public class SimpleJavaGenerator {
 		}
 
 		public Member(String code) {
-			 this(JavaParser.parseBodyDeclaration(code));
+			this(JavaParser.parseBodyDeclaration(code));
 		}
 
 		public Member generated() {
@@ -209,6 +209,14 @@ public class SimpleJavaGenerator {
 		}
 
 		public String getName() {
+			if (declaration instanceof MethodDeclaration) {
+				return ((MethodDeclaration) declaration).getNameAsString();
+			} else if (declaration instanceof FieldDeclaration) {
+				NodeList<VariableDeclarator> vars = ((FieldDeclaration) declaration).getVariables();
+				if (vars.size() == 1) {
+					return vars.get(0).getNameAsString();
+				}
+			}
 			return null;
 		}
 	}

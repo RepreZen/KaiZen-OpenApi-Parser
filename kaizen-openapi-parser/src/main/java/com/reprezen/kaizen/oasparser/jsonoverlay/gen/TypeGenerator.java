@@ -33,7 +33,6 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.BodyDeclaration;
-import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.ConstructorDeclaration;
 import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
@@ -51,6 +50,7 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.BooleanOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.EnumOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.IJsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.IModelPart;
 import com.reprezen.kaizen.oasparser.jsonoverlay.IPropertiesOverlay;
@@ -88,13 +88,13 @@ public abstract class TypeGenerator {
 		this.preserve = preserve;
 	}
 
-	protected abstract ClassOrInterfaceDeclaration getTypeDeclaration(Type type, String suffix);
+	protected abstract TypeDeclaration<?> getTypeDeclaration(Type type, String suffix);
 
 	public void generate(Type type) throws IOException {
 		File javaFile = new File(dir, t("${name}${0}.java", type, suffix));
 		System.out.println("Generating " + javaFile.getCanonicalFile());
 		CompilationUnit existing = preserve && javaFile.exists() ? tryParse(javaFile) : null;
-		ClassOrInterfaceDeclaration declaration = getTypeDeclaration(type, suffix);
+		TypeDeclaration<?> declaration = getTypeDeclaration(type, suffix);
 		SimpleJavaGenerator gen = new SimpleJavaGenerator(getPackage(), declaration);
 		if (existing != null) {
 			copyFileComment(gen, existing);
@@ -204,6 +204,7 @@ public abstract class TypeGenerator {
 				IntegerOverlay.class, //
 				NumberOverlay.class, //
 				BooleanOverlay.class, //
+				EnumOverlay.class, //
 				PrimitiveOverlay.class, //
 				ObjectOverlay.class, //
 				ListOverlay.class, //
@@ -342,7 +343,7 @@ public abstract class TypeGenerator {
 	protected static class Members extends ArrayList<Member> {
 
 		private static final long serialVersionUID = 1L;
- 
+
 		public Member addMember(String code) {
 			return addMember(new Member(code));
 		}

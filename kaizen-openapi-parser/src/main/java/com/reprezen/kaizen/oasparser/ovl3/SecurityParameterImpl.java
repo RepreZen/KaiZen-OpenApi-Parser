@@ -66,7 +66,7 @@ public class SecurityParameterImpl extends PropertiesOverlay<SecurityParameter> 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setParameters(Collection<String> parameters) {
-        this.parameters.set((Collection<String>) parameters);
+        this.parameters.set(parameters);
     }
 
     @Override

@@ -44,10 +44,10 @@ public interface Response extends IPropertiesOverlay<Response>, IModelPart<OpenA
     void removeHeader(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    boolean isHeaderReference(String key);
+    boolean isHeaderReference(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    Reference getHeaderReference(String key);
+    Reference getHeaderReference(String name);
 
     // ContentMediaType
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -94,10 +94,10 @@ public interface Response extends IPropertiesOverlay<Response>, IModelPart<OpenA
     void removeLink(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    boolean isLinkReference(String key);
+    boolean isLinkReference(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    Reference getLinkReference(String key);
+    Reference getLinkReference(String name);
 
     // Extension
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

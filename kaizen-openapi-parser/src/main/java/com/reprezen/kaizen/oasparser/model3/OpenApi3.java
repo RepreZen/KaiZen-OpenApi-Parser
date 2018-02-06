@@ -105,10 +105,10 @@ public interface OpenApi3 extends IPropertiesOverlay<OpenApi3>, IModelPart<OpenA
     void removePath(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    boolean isPathReference(String key);
+    boolean isPathReference(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    Reference getPathReference(String key);
+    Reference getPathReference(String name);
 
     // PathsExtension
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -155,10 +155,10 @@ public interface OpenApi3 extends IPropertiesOverlay<OpenApi3>, IModelPart<OpenA
     void removeSchema(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    boolean isSchemaReference(String key);
+    boolean isSchemaReference(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    Reference getSchemaReference(String key);
+    Reference getSchemaReference(String name);
 
     // Response
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -183,10 +183,10 @@ public interface OpenApi3 extends IPropertiesOverlay<OpenApi3>, IModelPart<OpenA
     void removeResponse(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    boolean isResponseReference(String key);
+    boolean isResponseReference(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    Reference getResponseReference(String key);
+    Reference getResponseReference(String name);
 
     // Parameter
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -211,10 +211,10 @@ public interface OpenApi3 extends IPropertiesOverlay<OpenApi3>, IModelPart<OpenA
     void removeParameter(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    boolean isParameterReference(String key);
+    boolean isParameterReference(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    Reference getParameterReference(String key);
+    Reference getParameterReference(String name);
 
     // Example
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -239,10 +239,10 @@ public interface OpenApi3 extends IPropertiesOverlay<OpenApi3>, IModelPart<OpenA
     void removeExample(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    boolean isExampleReference(String key);
+    boolean isExampleReference(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    Reference getExampleReference(String key);
+    Reference getExampleReference(String name);
 
     // RequestBody
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -267,10 +267,10 @@ public interface OpenApi3 extends IPropertiesOverlay<OpenApi3>, IModelPart<OpenA
     void removeRequestBody(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    boolean isRequestBodyReference(String key);
+    boolean isRequestBodyReference(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    Reference getRequestBodyReference(String key);
+    Reference getRequestBodyReference(String name);
 
     // Header
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -295,10 +295,10 @@ public interface OpenApi3 extends IPropertiesOverlay<OpenApi3>, IModelPart<OpenA
     void removeHeader(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    boolean isHeaderReference(String key);
+    boolean isHeaderReference(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    Reference getHeaderReference(String key);
+    Reference getHeaderReference(String name);
 
     // SecurityScheme
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -323,10 +323,10 @@ public interface OpenApi3 extends IPropertiesOverlay<OpenApi3>, IModelPart<OpenA
     void removeSecurityScheme(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    boolean isSecuritySchemeReference(String key);
+    boolean isSecuritySchemeReference(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    Reference getSecuritySchemeReference(String key);
+    Reference getSecuritySchemeReference(String name);
 
     // Link
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -351,10 +351,10 @@ public interface OpenApi3 extends IPropertiesOverlay<OpenApi3>, IModelPart<OpenA
     void removeLink(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    boolean isLinkReference(String key);
+    boolean isLinkReference(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    Reference getLinkReference(String key);
+    Reference getLinkReference(String name);
 
     // Callback
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
@@ -379,10 +379,10 @@ public interface OpenApi3 extends IPropertiesOverlay<OpenApi3>, IModelPart<OpenA
     void removeCallback(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    boolean isCallbackReference(String key);
+    boolean isCallbackReference(String name);
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    Reference getCallbackReference(String key);
+    Reference getCallbackReference(String name);
 
     // ComponentsExtension
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

@@ -1,30 +1,27 @@
 package com.reprezen.kaizen.oasparser.ovl3;
 
-import com.reprezen.kaizen.oasparser.jsonoverlay.ChildListOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
 import com.reprezen.kaizen.oasparser.ovl3.HeaderImpl;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
-import com.reprezen.kaizen.oasparser.model3.Link;
-import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
-import com.fasterxml.jackson.core.JsonPointer;
-import javax.annotation.Generated;
-import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
-import java.util.Map;
-import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.reprezen.kaizen.oasparser.jsonoverlay.IJsonOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
 import com.reprezen.kaizen.oasparser.ovl3.MediaTypeImpl;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
-import java.util.Collection;
 import com.reprezen.kaizen.oasparser.model3.Header;
 import java.util.stream.Collectors;
 import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
+import com.reprezen.kaizen.oasparser.model3.Link;
 import com.reprezen.kaizen.oasparser.model3.*;
+import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
+import javax.annotation.Generated;
+import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
+import com.fasterxml.jackson.core.JsonPointer;
 import com.reprezen.kaizen.oasparser.model3.MediaType;
+import java.util.Map;
+import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.reprezen.kaizen.oasparser.ovl3.LinkImpl;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IJsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 
 public class ResponseImpl extends PropertiesOverlay<Response> implements Response {
@@ -120,15 +117,15 @@ public class ResponseImpl extends PropertiesOverlay<Response> implements Respons
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public boolean isHeaderReference(String key) {
-        ChildOverlay<Header> child = headers.getChild(key);
+    public boolean isHeaderReference(String name) {
+        ChildOverlay<Header> child = headers.getChild(name);
         return child != null ? child.isReference() : false;
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public Reference getHeaderReference(String key) {
-        ChildOverlay<Header> child = headers.getChild(key);
+    public Reference getHeaderReference(String name) {
+        ChildOverlay<Header> child = headers.getChild(name);
         return child != null ? child.getReference() : null;
     }
 
@@ -220,15 +217,15 @@ public class ResponseImpl extends PropertiesOverlay<Response> implements Respons
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public boolean isLinkReference(String key) {
-        ChildOverlay<Link> child = links.getChild(key);
+    public boolean isLinkReference(String name) {
+        ChildOverlay<Link> child = links.getChild(name);
         return child != null ? child.isReference() : false;
     }
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public Reference getLinkReference(String key) {
-        ChildOverlay<Link> child = links.getChild(key);
+    public Reference getLinkReference(String name) {
+        ChildOverlay<Link> child = links.getChild(name);
         return child != null ? child.getReference() : null;
     }
 

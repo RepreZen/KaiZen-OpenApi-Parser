@@ -288,7 +288,7 @@ public class PathImpl extends PropertiesOverlay<Path> implements Path {
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setServers(Collection<Server> servers) {
-        this.servers.set((Collection<Server>) servers);
+        this.servers.set(servers);
     }
 
     @Override
@@ -343,7 +343,7 @@ public class PathImpl extends PropertiesOverlay<Path> implements Path {
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public void setParameters(Collection<Parameter> parameters) {
-        this.parameters.set((Collection<Parameter>) parameters);
+        this.parameters.set(parameters);
     }
 
     @Override

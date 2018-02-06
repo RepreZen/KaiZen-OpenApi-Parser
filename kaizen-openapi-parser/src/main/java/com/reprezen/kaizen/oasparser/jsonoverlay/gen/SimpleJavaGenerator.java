@@ -142,13 +142,11 @@ public class SimpleJavaGenerator {
 		}
 
 		public Member(String code) {
-//			this(JavaParser.parseBodyDeclaration(code));
-			System.out.println(code);
-			this.declaration = JavaParser.parseBodyDeclaration(code);
+			 this(JavaParser.parseBodyDeclaration(code));
 		}
 
 		public Member generated() {
-			declaration.addSingleMemberAnnotation(Generated.class, "\""+CodeGenerator.class.getName()+"\"");
+			declaration.addSingleMemberAnnotation(Generated.class, "\"" + CodeGenerator.class.getName() + "\"");
 			return this;
 		}
 
@@ -161,11 +159,16 @@ public class SimpleJavaGenerator {
 			return this;
 		}
 
+		public Member override() {
+			declaration.addMarkerAnnotation(Override.class);
+			return this;
+		}
+
 		public Member rename(String from, String to) {
 			if (declaration instanceof MethodDeclaration) {
 				((MethodDeclaration) declaration).setName(to);
 			} else if (declaration instanceof FieldDeclaration) {
-				for (VariableDeclarator var: ((FieldDeclaration)declaration ).getVariables()) {
+				for (VariableDeclarator var : ((FieldDeclaration) declaration).getVariables()) {
 					if (var.getName().equals(from)) {
 						var.setName(to);
 						break;

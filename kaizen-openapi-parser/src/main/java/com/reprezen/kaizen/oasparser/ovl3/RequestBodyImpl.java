@@ -198,14 +198,7 @@ public class RequestBodyImpl extends PropertiesOverlay<RequestBody> implements R
         public JsonOverlay<RequestBody> _create(RequestBody requestBody, JsonOverlay<?> parent, ReferenceRegistry refReg) {
             Class<? extends RequestBody> subtype = getSubtypeOf(requestBody);
             IJsonOverlay<?> overlay;
-            if (subtype == null || subtype == RequestBody.class) {
-                overlay = new RequestBodyImpl(requestBody, parent, refReg);
-            } else {
-                switch(subtype.getSimpleName()) {
-                    default:
-                        overlay = null;
-                }
-            }
+            overlay = new RequestBodyImpl((RequestBody) requestBody, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<RequestBody> castOverlay = (JsonOverlay<RequestBody>) overlay;
             return castOverlay;
         }
@@ -214,14 +207,7 @@ public class RequestBodyImpl extends PropertiesOverlay<RequestBody> implements R
         public JsonOverlay<RequestBody> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
             Class<? extends RequestBody> subtype = getSubtypeOf(json);
             IJsonOverlay<?> overlay;
-            if (subtype == null || subtype == RequestBody.class) {
-                overlay = new RequestBodyImpl(json, parent, refReg);
-            } else {
-                switch(subtype.getSimpleName()) {
-                    default:
-                        overlay = null;
-                }
-            }
+            overlay = new RequestBodyImpl(json, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<RequestBody> castOverlay = (JsonOverlay<RequestBody>) overlay;
             return castOverlay;
         }

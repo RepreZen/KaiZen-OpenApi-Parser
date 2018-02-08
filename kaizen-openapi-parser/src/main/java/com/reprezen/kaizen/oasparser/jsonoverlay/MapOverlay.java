@@ -54,13 +54,15 @@ public class MapOverlay<V> extends JsonOverlay<Map<String, V>> {
     private void fillWithJson() {
         value.clear();
         overlays.clear();
-        for (Entry<String, JsonNode> field : iterable(json.fields())) {
-            String key = field.getKey();
-            if (keyPattern == null || keyPattern.matcher(key).matches()) {
-                ChildOverlay<V> overlay = new ChildOverlay<V>(key, json.get(key), this, valueFactory, refReg);
-                overlay.getOverlay().setPathInParent(key);
-                overlays.put(key, overlay);
-                value.put(key, overlay.get(false));
+        if (!json.isMissingNode()) {
+            for (Entry<String, JsonNode> field : iterable(json.fields())) {
+                String key = field.getKey();
+                if (keyPattern == null || keyPattern.matcher(key).matches()) {
+                    ChildOverlay<V> overlay = new ChildOverlay<V>(key, json.get(key), this, valueFactory, refReg);
+                    overlay.getOverlay().setPathInParent(key);
+                    overlays.put(key, overlay);
+                    value.put(key, overlay.get(false));
+                }
             }
         }
     }

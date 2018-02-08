@@ -167,14 +167,7 @@ public class TagImpl extends PropertiesOverlay<Tag> implements Tag {
         public JsonOverlay<Tag> _create(Tag tag, JsonOverlay<?> parent, ReferenceRegistry refReg) {
             Class<? extends Tag> subtype = getSubtypeOf(tag);
             IJsonOverlay<?> overlay;
-            if (subtype == null || subtype == Tag.class) {
-                overlay = new TagImpl(tag, parent, refReg);
-            } else {
-                switch(subtype.getSimpleName()) {
-                    default:
-                        overlay = null;
-                }
-            }
+            overlay = new TagImpl((Tag) tag, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<Tag> castOverlay = (JsonOverlay<Tag>) overlay;
             return castOverlay;
         }
@@ -183,14 +176,7 @@ public class TagImpl extends PropertiesOverlay<Tag> implements Tag {
         public JsonOverlay<Tag> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
             Class<? extends Tag> subtype = getSubtypeOf(json);
             IJsonOverlay<?> overlay;
-            if (subtype == null || subtype == Tag.class) {
-                overlay = new TagImpl(json, parent, refReg);
-            } else {
-                switch(subtype.getSimpleName()) {
-                    default:
-                        overlay = null;
-                }
-            }
+            overlay = new TagImpl(json, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<Tag> castOverlay = (JsonOverlay<Tag>) overlay;
             return castOverlay;
         }

@@ -375,11 +375,7 @@ class ImplGenerator extends TypeGenerator {
 				public JsonOverlay<«type.name»> _create(«type.name» «type.lcName», JsonOverlay<?> parent, ReferenceRegistry refReg) {
 				Class<? extends «type.name»> subtype = getSubtypeOf(«type.lcName»);
 				IJsonOverlay<?> overlay;
-				if (subtype == null || subtype == «type.name».class) {
-					overlay = new «type.implType»(«type.lcName», parent, refReg);
-				} else {
-					«getSubtypeCreate(type, type.lcName)»
-				}
+				«getSubtypeCreate(type, type.lcName)»
 				@SuppressWarnings("unchecked")
 				JsonOverlay<«type.name»> castOverlay = (JsonOverlay<«type.name»>) overlay;
 				return castOverlay;
@@ -389,11 +385,7 @@ class ImplGenerator extends TypeGenerator {
 				public JsonOverlay<«type.name»> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
 				Class<? extends «type.name»> subtype = getSubtypeOf(json);
 				IJsonOverlay<?> overlay;
-				if (subtype == null || subtype == «type.name».class) {
-					overlay = new «type.implType»(json, parent, refReg);
-				} else {
-					«getSubtypeCreate(type, ".json")»
-				}
+				«getSubtypeCreate(type, ".json")»
 				@SuppressWarnings("unchecked")
 				JsonOverlay<«type.name»> castOverlay = (JsonOverlay<«type.name»>) overlay;
 				return castOverlay;
@@ -417,7 +409,7 @@ class ImplGenerator extends TypeGenerator {
 		val switchExpr = '''«t.lcName».getClass().getSimpleName()'''
 		return new Member('''
 			private static Class<? extends «t.name»> getSubtypeOf(«t.name» «t.lcName») {
-				«t.getSubtypeSwitch(subTypes, switchExpr)»
+				«t.getSubtypeSwitch(subTypes, switchExpr,[it.name])»
 			}
 		''')
 	}
@@ -427,19 +419,19 @@ class ImplGenerator extends TypeGenerator {
 		val switchExpr = '''json.at(JsonPointer.compile("/«t.discriminator»")).asText()'''
 		return new Member('''
 			private static Class<? extends «t.name»> getSubtypeOf(JsonNode json) {
-				«t.getSubtypeSwitch(subTypes, switchExpr)»
+				«t.getSubtypeSwitch(subTypes, switchExpr, [it.discriminatorValue])»
 			}
 		''')
 	}
 
-	def private String getSubtypeSwitch(Type t, Collection<Type> subTypes, String switchExpr) {
+	def private String getSubtypeSwitch(Type t, Collection<Type> subTypes, String switchExpr, (Type)=>String discFn) {
 		return '''
 			«IF subTypes.empty»
 				return «t.name».class;
 			«ELSE»
 				switch(«switchExpr») {
 					«FOR sub: subTypes»
-						case "«sub.discriminatorValue»":
+						case "«discFn.apply(sub)»":
 							return «sub.name».class;
 					«ENDFOR»
 					default:
@@ -451,17 +443,23 @@ class ImplGenerator extends TypeGenerator {
 
 	def private String getSubtypeCreate(Type t, String arg0) {
 		val subtypes = t.subTypes
-		return '''
-			switch (subtype.getSimpleName()) {
-				«FOR sub : subtypes»
-					case "«sub.discriminatorValue»":
-						overlay = «sub.implType».factory.create(«sub.castArg0(arg0)», parent, refReg, null);
-						break;
-				«ENDFOR»
-				default:
-					overlay = null;
-			}
-		'''
+		if (subtypes.empty) {
+			return '''
+				overlay = new «t.implType»(«t.castArg0(arg0)», parent, refReg);
+			'''
+		} else {
+			return '''
+				switch (subtype.getSimpleName()) {
+					«FOR sub : subtypes»
+						case "«sub.name»":
+							overlay = «sub.implType».factory.create(«sub.castArg0(arg0)», parent, refReg, null);
+							break;
+					«ENDFOR»
+					default:
+						overlay = null;
+				}
+			'''
+		}
 	}
 
 	def private castArg0(Type type, String arg0) {

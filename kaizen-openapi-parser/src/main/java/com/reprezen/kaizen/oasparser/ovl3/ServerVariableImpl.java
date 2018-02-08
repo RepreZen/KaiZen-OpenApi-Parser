@@ -205,14 +205,7 @@ public class ServerVariableImpl extends PropertiesOverlay<ServerVariable> implem
         public JsonOverlay<ServerVariable> _create(ServerVariable serverVariable, JsonOverlay<?> parent, ReferenceRegistry refReg) {
             Class<? extends ServerVariable> subtype = getSubtypeOf(serverVariable);
             IJsonOverlay<?> overlay;
-            if (subtype == null || subtype == ServerVariable.class) {
-                overlay = new ServerVariableImpl(serverVariable, parent, refReg);
-            } else {
-                switch(subtype.getSimpleName()) {
-                    default:
-                        overlay = null;
-                }
-            }
+            overlay = new ServerVariableImpl((ServerVariable) serverVariable, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<ServerVariable> castOverlay = (JsonOverlay<ServerVariable>) overlay;
             return castOverlay;
         }
@@ -221,14 +214,7 @@ public class ServerVariableImpl extends PropertiesOverlay<ServerVariable> implem
         public JsonOverlay<ServerVariable> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
             Class<? extends ServerVariable> subtype = getSubtypeOf(json);
             IJsonOverlay<?> overlay;
-            if (subtype == null || subtype == ServerVariable.class) {
-                overlay = new ServerVariableImpl(json, parent, refReg);
-            } else {
-                switch(subtype.getSimpleName()) {
-                    default:
-                        overlay = null;
-                }
-            }
+            overlay = new ServerVariableImpl(json, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<ServerVariable> castOverlay = (JsonOverlay<ServerVariable>) overlay;
             return castOverlay;
         }

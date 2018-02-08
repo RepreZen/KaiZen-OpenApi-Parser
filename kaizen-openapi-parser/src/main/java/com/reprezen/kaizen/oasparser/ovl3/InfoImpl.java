@@ -238,14 +238,7 @@ public class InfoImpl extends PropertiesOverlay<Info> implements Info {
         public JsonOverlay<Info> _create(Info info, JsonOverlay<?> parent, ReferenceRegistry refReg) {
             Class<? extends Info> subtype = getSubtypeOf(info);
             IJsonOverlay<?> overlay;
-            if (subtype == null || subtype == Info.class) {
-                overlay = new InfoImpl(info, parent, refReg);
-            } else {
-                switch(subtype.getSimpleName()) {
-                    default:
-                        overlay = null;
-                }
-            }
+            overlay = new InfoImpl((Info) info, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<Info> castOverlay = (JsonOverlay<Info>) overlay;
             return castOverlay;
         }
@@ -254,14 +247,7 @@ public class InfoImpl extends PropertiesOverlay<Info> implements Info {
         public JsonOverlay<Info> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
             Class<? extends Info> subtype = getSubtypeOf(json);
             IJsonOverlay<?> overlay;
-            if (subtype == null || subtype == Info.class) {
-                overlay = new InfoImpl(json, parent, refReg);
-            } else {
-                switch(subtype.getSimpleName()) {
-                    default:
-                        overlay = null;
-                }
-            }
+            overlay = new InfoImpl(json, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<Info> castOverlay = (JsonOverlay<Info>) overlay;
             return castOverlay;
         }

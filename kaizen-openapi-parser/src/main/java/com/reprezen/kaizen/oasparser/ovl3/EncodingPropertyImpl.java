@@ -235,14 +235,7 @@ public class EncodingPropertyImpl extends PropertiesOverlay<EncodingProperty> im
         public JsonOverlay<EncodingProperty> _create(EncodingProperty encodingProperty, JsonOverlay<?> parent, ReferenceRegistry refReg) {
             Class<? extends EncodingProperty> subtype = getSubtypeOf(encodingProperty);
             IJsonOverlay<?> overlay;
-            if (subtype == null || subtype == EncodingProperty.class) {
-                overlay = new EncodingPropertyImpl(encodingProperty, parent, refReg);
-            } else {
-                switch(subtype.getSimpleName()) {
-                    default:
-                        overlay = null;
-                }
-            }
+            overlay = new EncodingPropertyImpl((EncodingProperty) encodingProperty, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<EncodingProperty> castOverlay = (JsonOverlay<EncodingProperty>) overlay;
             return castOverlay;
         }
@@ -251,14 +244,7 @@ public class EncodingPropertyImpl extends PropertiesOverlay<EncodingProperty> im
         public JsonOverlay<EncodingProperty> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
             Class<? extends EncodingProperty> subtype = getSubtypeOf(json);
             IJsonOverlay<?> overlay;
-            if (subtype == null || subtype == EncodingProperty.class) {
-                overlay = new EncodingPropertyImpl(json, parent, refReg);
-            } else {
-                switch(subtype.getSimpleName()) {
-                    default:
-                        overlay = null;
-                }
-            }
+            overlay = new EncodingPropertyImpl(json, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<EncodingProperty> castOverlay = (JsonOverlay<EncodingProperty>) overlay;
             return castOverlay;
         }

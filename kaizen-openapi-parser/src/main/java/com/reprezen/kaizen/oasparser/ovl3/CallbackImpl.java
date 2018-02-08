@@ -143,14 +143,7 @@ public class CallbackImpl extends PropertiesOverlay<Callback> implements Callbac
         public JsonOverlay<Callback> _create(Callback callback, JsonOverlay<?> parent, ReferenceRegistry refReg) {
             Class<? extends Callback> subtype = getSubtypeOf(callback);
             IJsonOverlay<?> overlay;
-            if (subtype == null || subtype == Callback.class) {
-                overlay = new CallbackImpl(callback, parent, refReg);
-            } else {
-                switch(subtype.getSimpleName()) {
-                    default:
-                        overlay = null;
-                }
-            }
+            overlay = new CallbackImpl((Callback) callback, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<Callback> castOverlay = (JsonOverlay<Callback>) overlay;
             return castOverlay;
         }
@@ -159,14 +152,7 @@ public class CallbackImpl extends PropertiesOverlay<Callback> implements Callbac
         public JsonOverlay<Callback> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
             Class<? extends Callback> subtype = getSubtypeOf(json);
             IJsonOverlay<?> overlay;
-            if (subtype == null || subtype == Callback.class) {
-                overlay = new CallbackImpl(json, parent, refReg);
-            } else {
-                switch(subtype.getSimpleName()) {
-                    default:
-                        overlay = null;
-                }
-            }
+            overlay = new CallbackImpl(json, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<Callback> castOverlay = (JsonOverlay<Callback>) overlay;
             return castOverlay;
         }

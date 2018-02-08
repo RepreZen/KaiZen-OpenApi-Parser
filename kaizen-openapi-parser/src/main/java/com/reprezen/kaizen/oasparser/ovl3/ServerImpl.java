@@ -238,14 +238,7 @@ public class ServerImpl extends PropertiesOverlay<Server> implements Server {
         public JsonOverlay<Server> _create(Server server, JsonOverlay<?> parent, ReferenceRegistry refReg) {
             Class<? extends Server> subtype = getSubtypeOf(server);
             IJsonOverlay<?> overlay;
-            if (subtype == null || subtype == Server.class) {
-                overlay = new ServerImpl(server, parent, refReg);
-            } else {
-                switch(subtype.getSimpleName()) {
-                    default:
-                        overlay = null;
-                }
-            }
+            overlay = new ServerImpl((Server) server, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<Server> castOverlay = (JsonOverlay<Server>) overlay;
             return castOverlay;
         }
@@ -254,14 +247,7 @@ public class ServerImpl extends PropertiesOverlay<Server> implements Server {
         public JsonOverlay<Server> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
             Class<? extends Server> subtype = getSubtypeOf(json);
             IJsonOverlay<?> overlay;
-            if (subtype == null || subtype == Server.class) {
-                overlay = new ServerImpl(json, parent, refReg);
-            } else {
-                switch(subtype.getSimpleName()) {
-                    default:
-                        overlay = null;
-                }
-            }
+            overlay = new ServerImpl(json, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<Server> castOverlay = (JsonOverlay<Server>) overlay;
             return castOverlay;
         }

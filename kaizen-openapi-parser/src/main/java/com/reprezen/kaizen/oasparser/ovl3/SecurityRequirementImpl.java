@@ -95,14 +95,7 @@ public class SecurityRequirementImpl extends PropertiesOverlay<SecurityRequireme
         public JsonOverlay<SecurityRequirement> _create(SecurityRequirement securityRequirement, JsonOverlay<?> parent, ReferenceRegistry refReg) {
             Class<? extends SecurityRequirement> subtype = getSubtypeOf(securityRequirement);
             IJsonOverlay<?> overlay;
-            if (subtype == null || subtype == SecurityRequirement.class) {
-                overlay = new SecurityRequirementImpl(securityRequirement, parent, refReg);
-            } else {
-                switch(subtype.getSimpleName()) {
-                    default:
-                        overlay = null;
-                }
-            }
+            overlay = new SecurityRequirementImpl((SecurityRequirement) securityRequirement, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<SecurityRequirement> castOverlay = (JsonOverlay<SecurityRequirement>) overlay;
             return castOverlay;
         }
@@ -111,14 +104,7 @@ public class SecurityRequirementImpl extends PropertiesOverlay<SecurityRequireme
         public JsonOverlay<SecurityRequirement> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
             Class<? extends SecurityRequirement> subtype = getSubtypeOf(json);
             IJsonOverlay<?> overlay;
-            if (subtype == null || subtype == SecurityRequirement.class) {
-                overlay = new SecurityRequirementImpl(json, parent, refReg);
-            } else {
-                switch(subtype.getSimpleName()) {
-                    default:
-                        overlay = null;
-                }
-            }
+            overlay = new SecurityRequirementImpl(json, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<SecurityRequirement> castOverlay = (JsonOverlay<SecurityRequirement>) overlay;
             return castOverlay;
         }

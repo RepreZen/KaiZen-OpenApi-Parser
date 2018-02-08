@@ -286,14 +286,7 @@ public class LinkImpl extends PropertiesOverlay<Link> implements Link {
         public JsonOverlay<Link> _create(Link link, JsonOverlay<?> parent, ReferenceRegistry refReg) {
             Class<? extends Link> subtype = getSubtypeOf(link);
             IJsonOverlay<?> overlay;
-            if (subtype == null || subtype == Link.class) {
-                overlay = new LinkImpl(link, parent, refReg);
-            } else {
-                switch(subtype.getSimpleName()) {
-                    default:
-                        overlay = null;
-                }
-            }
+            overlay = new LinkImpl((Link) link, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<Link> castOverlay = (JsonOverlay<Link>) overlay;
             return castOverlay;
         }
@@ -302,14 +295,7 @@ public class LinkImpl extends PropertiesOverlay<Link> implements Link {
         public JsonOverlay<Link> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
             Class<? extends Link> subtype = getSubtypeOf(json);
             IJsonOverlay<?> overlay;
-            if (subtype == null || subtype == Link.class) {
-                overlay = new LinkImpl(json, parent, refReg);
-            } else {
-                switch(subtype.getSimpleName()) {
-                    default:
-                        overlay = null;
-                }
-            }
+            overlay = new LinkImpl(json, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<Link> castOverlay = (JsonOverlay<Link>) overlay;
             return castOverlay;
         }

@@ -297,14 +297,7 @@ public class ResponseImpl extends PropertiesOverlay<Response> implements Respons
         public JsonOverlay<Response> _create(Response response, JsonOverlay<?> parent, ReferenceRegistry refReg) {
             Class<? extends Response> subtype = getSubtypeOf(response);
             IJsonOverlay<?> overlay;
-            if (subtype == null || subtype == Response.class) {
-                overlay = new ResponseImpl(response, parent, refReg);
-            } else {
-                switch(subtype.getSimpleName()) {
-                    default:
-                        overlay = null;
-                }
-            }
+            overlay = new ResponseImpl((Response) response, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<Response> castOverlay = (JsonOverlay<Response>) overlay;
             return castOverlay;
         }
@@ -313,14 +306,7 @@ public class ResponseImpl extends PropertiesOverlay<Response> implements Respons
         public JsonOverlay<Response> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
             Class<? extends Response> subtype = getSubtypeOf(json);
             IJsonOverlay<?> overlay;
-            if (subtype == null || subtype == Response.class) {
-                overlay = new ResponseImpl(json, parent, refReg);
-            } else {
-                switch(subtype.getSimpleName()) {
-                    default:
-                        overlay = null;
-                }
-            }
+            overlay = new ResponseImpl(json, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<Response> castOverlay = (JsonOverlay<Response>) overlay;
             return castOverlay;
         }

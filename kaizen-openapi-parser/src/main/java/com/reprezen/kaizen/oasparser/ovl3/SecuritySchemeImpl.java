@@ -398,14 +398,7 @@ public class SecuritySchemeImpl extends PropertiesOverlay<SecurityScheme> implem
         public JsonOverlay<SecurityScheme> _create(SecurityScheme securityScheme, JsonOverlay<?> parent, ReferenceRegistry refReg) {
             Class<? extends SecurityScheme> subtype = getSubtypeOf(securityScheme);
             IJsonOverlay<?> overlay;
-            if (subtype == null || subtype == SecurityScheme.class) {
-                overlay = new SecuritySchemeImpl(securityScheme, parent, refReg);
-            } else {
-                switch(subtype.getSimpleName()) {
-                    default:
-                        overlay = null;
-                }
-            }
+            overlay = new SecuritySchemeImpl((SecurityScheme) securityScheme, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<SecurityScheme> castOverlay = (JsonOverlay<SecurityScheme>) overlay;
             return castOverlay;
         }
@@ -414,14 +407,7 @@ public class SecuritySchemeImpl extends PropertiesOverlay<SecurityScheme> implem
         public JsonOverlay<SecurityScheme> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
             Class<? extends SecurityScheme> subtype = getSubtypeOf(json);
             IJsonOverlay<?> overlay;
-            if (subtype == null || subtype == SecurityScheme.class) {
-                overlay = new SecuritySchemeImpl(json, parent, refReg);
-            } else {
-                switch(subtype.getSimpleName()) {
-                    default:
-                        overlay = null;
-                }
-            }
+            overlay = new SecuritySchemeImpl(json, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<SecurityScheme> castOverlay = (JsonOverlay<SecurityScheme>) overlay;
             return castOverlay;
         }

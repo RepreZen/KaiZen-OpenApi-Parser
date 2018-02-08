@@ -224,14 +224,7 @@ public class XmlImpl extends PropertiesOverlay<Xml> implements Xml {
         public JsonOverlay<Xml> _create(Xml xml, JsonOverlay<?> parent, ReferenceRegistry refReg) {
             Class<? extends Xml> subtype = getSubtypeOf(xml);
             IJsonOverlay<?> overlay;
-            if (subtype == null || subtype == Xml.class) {
-                overlay = new XmlImpl(xml, parent, refReg);
-            } else {
-                switch(subtype.getSimpleName()) {
-                    default:
-                        overlay = null;
-                }
-            }
+            overlay = new XmlImpl((Xml) xml, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<Xml> castOverlay = (JsonOverlay<Xml>) overlay;
             return castOverlay;
         }
@@ -240,14 +233,7 @@ public class XmlImpl extends PropertiesOverlay<Xml> implements Xml {
         public JsonOverlay<Xml> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
             Class<? extends Xml> subtype = getSubtypeOf(json);
             IJsonOverlay<?> overlay;
-            if (subtype == null || subtype == Xml.class) {
-                overlay = new XmlImpl(json, parent, refReg);
-            } else {
-                switch(subtype.getSimpleName()) {
-                    default:
-                        overlay = null;
-                }
-            }
+            overlay = new XmlImpl(json, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<Xml> castOverlay = (JsonOverlay<Xml>) overlay;
             return castOverlay;
         }

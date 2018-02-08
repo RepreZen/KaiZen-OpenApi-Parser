@@ -509,14 +509,7 @@ public class HeaderImpl extends PropertiesOverlay<Header> implements Header {
         public JsonOverlay<Header> _create(Header header, JsonOverlay<?> parent, ReferenceRegistry refReg) {
             Class<? extends Header> subtype = getSubtypeOf(header);
             IJsonOverlay<?> overlay;
-            if (subtype == null || subtype == Header.class) {
-                overlay = new HeaderImpl(header, parent, refReg);
-            } else {
-                switch(subtype.getSimpleName()) {
-                    default:
-                        overlay = null;
-                }
-            }
+            overlay = new HeaderImpl((Header) header, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<Header> castOverlay = (JsonOverlay<Header>) overlay;
             return castOverlay;
         }
@@ -525,14 +518,7 @@ public class HeaderImpl extends PropertiesOverlay<Header> implements Header {
         public JsonOverlay<Header> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
             Class<? extends Header> subtype = getSubtypeOf(json);
             IJsonOverlay<?> overlay;
-            if (subtype == null || subtype == Header.class) {
-                overlay = new HeaderImpl(json, parent, refReg);
-            } else {
-                switch(subtype.getSimpleName()) {
-                    default:
-                        overlay = null;
-                }
-            }
+            overlay = new HeaderImpl(json, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<Header> castOverlay = (JsonOverlay<Header>) overlay;
             return castOverlay;
         }

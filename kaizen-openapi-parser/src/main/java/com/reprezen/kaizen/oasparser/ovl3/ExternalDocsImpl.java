@@ -142,14 +142,7 @@ public class ExternalDocsImpl extends PropertiesOverlay<ExternalDocs> implements
         public JsonOverlay<ExternalDocs> _create(ExternalDocs externalDocs, JsonOverlay<?> parent, ReferenceRegistry refReg) {
             Class<? extends ExternalDocs> subtype = getSubtypeOf(externalDocs);
             IJsonOverlay<?> overlay;
-            if (subtype == null || subtype == ExternalDocs.class) {
-                overlay = new ExternalDocsImpl(externalDocs, parent, refReg);
-            } else {
-                switch(subtype.getSimpleName()) {
-                    default:
-                        overlay = null;
-                }
-            }
+            overlay = new ExternalDocsImpl((ExternalDocs) externalDocs, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<ExternalDocs> castOverlay = (JsonOverlay<ExternalDocs>) overlay;
             return castOverlay;
         }
@@ -158,14 +151,7 @@ public class ExternalDocsImpl extends PropertiesOverlay<ExternalDocs> implements
         public JsonOverlay<ExternalDocs> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
             Class<? extends ExternalDocs> subtype = getSubtypeOf(json);
             IJsonOverlay<?> overlay;
-            if (subtype == null || subtype == ExternalDocs.class) {
-                overlay = new ExternalDocsImpl(json, parent, refReg);
-            } else {
-                switch(subtype.getSimpleName()) {
-                    default:
-                        overlay = null;
-                }
-            }
+            overlay = new ExternalDocsImpl(json, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<ExternalDocs> castOverlay = (JsonOverlay<ExternalDocs>) overlay;
             return castOverlay;
         }

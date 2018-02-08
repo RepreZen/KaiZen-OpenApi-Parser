@@ -49,13 +49,16 @@ public class ListOverlay<V> extends JsonOverlay<Collection<V>> {
     private void fillWithJson() {
         value.clear();
         overlays.clear();
-        for (JsonNode itemJson : iterable(json.elements())) {
-            ChildOverlay<V> overlay = new ChildOverlay<>(null, itemJson, this, itemFactory, refReg);
-            overlays.add(overlay);
-            value.add(overlay.get(false));
+        if (!json.isMissingNode()) {
+            for (JsonNode itemJson : iterable(json.elements())) {
+                ChildOverlay<V> overlay = new ChildOverlay<>(null, itemJson, this, itemFactory, refReg);
+                overlays.add(overlay);
+                value.add(overlay.get(false));
+            }
         }
     }
 
+    @Override
     public Collection<V> get(boolean elaborate) {
         return value;
     }

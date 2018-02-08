@@ -450,14 +450,7 @@ public class PathImpl extends PropertiesOverlay<Path> implements Path {
         public JsonOverlay<Path> _create(Path path, JsonOverlay<?> parent, ReferenceRegistry refReg) {
             Class<? extends Path> subtype = getSubtypeOf(path);
             IJsonOverlay<?> overlay;
-            if (subtype == null || subtype == Path.class) {
-                overlay = new PathImpl(path, parent, refReg);
-            } else {
-                switch(subtype.getSimpleName()) {
-                    default:
-                        overlay = null;
-                }
-            }
+            overlay = new PathImpl((Path) path, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<Path> castOverlay = (JsonOverlay<Path>) overlay;
             return castOverlay;
         }
@@ -466,14 +459,7 @@ public class PathImpl extends PropertiesOverlay<Path> implements Path {
         public JsonOverlay<Path> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
             Class<? extends Path> subtype = getSubtypeOf(json);
             IJsonOverlay<?> overlay;
-            if (subtype == null || subtype == Path.class) {
-                overlay = new PathImpl(json, parent, refReg);
-            } else {
-                switch(subtype.getSimpleName()) {
-                    default:
-                        overlay = null;
-                }
-            }
+            overlay = new PathImpl(json, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<Path> castOverlay = (JsonOverlay<Path>) overlay;
             return castOverlay;
         }

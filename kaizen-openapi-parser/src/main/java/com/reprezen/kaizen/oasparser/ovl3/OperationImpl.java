@@ -739,14 +739,7 @@ public class OperationImpl extends PropertiesOverlay<Operation> implements Opera
         public JsonOverlay<Operation> _create(Operation operation, JsonOverlay<?> parent, ReferenceRegistry refReg) {
             Class<? extends Operation> subtype = getSubtypeOf(operation);
             IJsonOverlay<?> overlay;
-            if (subtype == null || subtype == Operation.class) {
-                overlay = new OperationImpl(operation, parent, refReg);
-            } else {
-                switch(subtype.getSimpleName()) {
-                    default:
-                        overlay = null;
-                }
-            }
+            overlay = new OperationImpl((Operation) operation, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<Operation> castOverlay = (JsonOverlay<Operation>) overlay;
             return castOverlay;
         }
@@ -755,14 +748,7 @@ public class OperationImpl extends PropertiesOverlay<Operation> implements Opera
         public JsonOverlay<Operation> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
             Class<? extends Operation> subtype = getSubtypeOf(json);
             IJsonOverlay<?> overlay;
-            if (subtype == null || subtype == Operation.class) {
-                overlay = new OperationImpl(json, parent, refReg);
-            } else {
-                switch(subtype.getSimpleName()) {
-                    default:
-                        overlay = null;
-                }
-            }
+            overlay = new OperationImpl(json, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<Operation> castOverlay = (JsonOverlay<Operation>) overlay;
             return castOverlay;
         }

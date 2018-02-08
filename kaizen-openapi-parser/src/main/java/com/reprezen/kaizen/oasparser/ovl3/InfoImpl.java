@@ -236,16 +236,14 @@ public class InfoImpl extends PropertiesOverlay<Info> implements Info {
 
         @Override
         public JsonOverlay<Info> _create(Info info, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            Class<? extends Info> subtype = getSubtypeOf(info);
             IJsonOverlay<?> overlay;
-            overlay = new InfoImpl((Info) info, parent, refReg);
+            overlay = new InfoImpl(info, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<Info> castOverlay = (JsonOverlay<Info>) overlay;
             return castOverlay;
         }
 
         @Override
         public JsonOverlay<Info> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            Class<? extends Info> subtype = getSubtypeOf(json);
             IJsonOverlay<?> overlay;
             overlay = new InfoImpl(json, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<Info> castOverlay = (JsonOverlay<Info>) overlay;

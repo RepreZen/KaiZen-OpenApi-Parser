@@ -186,16 +186,14 @@ public class ExampleImpl extends PropertiesOverlay<Example> implements Example {
 
         @Override
         public JsonOverlay<Example> _create(Example example, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            Class<? extends Example> subtype = getSubtypeOf(example);
             IJsonOverlay<?> overlay;
-            overlay = new ExampleImpl((Example) example, parent, refReg);
+            overlay = new ExampleImpl(example, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<Example> castOverlay = (JsonOverlay<Example>) overlay;
             return castOverlay;
         }
 
         @Override
         public JsonOverlay<Example> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            Class<? extends Example> subtype = getSubtypeOf(json);
             IJsonOverlay<?> overlay;
             overlay = new ExampleImpl(json, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<Example> castOverlay = (JsonOverlay<Example>) overlay;

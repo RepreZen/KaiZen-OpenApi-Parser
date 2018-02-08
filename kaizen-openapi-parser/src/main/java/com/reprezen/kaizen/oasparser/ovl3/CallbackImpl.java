@@ -141,16 +141,14 @@ public class CallbackImpl extends PropertiesOverlay<Callback> implements Callbac
 
         @Override
         public JsonOverlay<Callback> _create(Callback callback, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            Class<? extends Callback> subtype = getSubtypeOf(callback);
             IJsonOverlay<?> overlay;
-            overlay = new CallbackImpl((Callback) callback, parent, refReg);
+            overlay = new CallbackImpl(callback, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<Callback> castOverlay = (JsonOverlay<Callback>) overlay;
             return castOverlay;
         }
 
         @Override
         public JsonOverlay<Callback> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            Class<? extends Callback> subtype = getSubtypeOf(json);
             IJsonOverlay<?> overlay;
             overlay = new CallbackImpl(json, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<Callback> castOverlay = (JsonOverlay<Callback>) overlay;

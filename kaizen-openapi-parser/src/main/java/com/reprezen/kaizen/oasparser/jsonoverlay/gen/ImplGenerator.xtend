@@ -373,24 +373,32 @@ class ImplGenerator extends TypeGenerator {
 			
 				@Override
 				public JsonOverlay<«type.name»> _create(«type.name» «type.lcName», JsonOverlay<?> parent, ReferenceRegistry refReg) {
-				Class<? extends «type.name»> subtype = getSubtypeOf(«type.lcName»);
-				IJsonOverlay<?> overlay;
-				«getSubtypeCreate(type, type.lcName)»
-				@SuppressWarnings("unchecked")
-				JsonOverlay<«type.name»> castOverlay = (JsonOverlay<«type.name»>) overlay;
-				return castOverlay;
+					IJsonOverlay<?> overlay;
+					«IF type.subTypes.empty»
+						overlay = new «type.implType»(«type.lcName», parent, refReg);
+					«ELSE»
+						Class<? extends «type.name»> subtype = getSubtypeOf(«type.lcName»);
+						«getSubtypeCreate(type, type.lcName)»
+					«ENDIF»
+					@SuppressWarnings("unchecked")
+					JsonOverlay<«type.name»> castOverlay = (JsonOverlay<«type.name»>) overlay;
+					return castOverlay;
 				}
 			
 				@Override
 				public JsonOverlay<«type.name»> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-				Class<? extends «type.name»> subtype = getSubtypeOf(json);
-				IJsonOverlay<?> overlay;
-				«getSubtypeCreate(type, ".json")»
-				@SuppressWarnings("unchecked")
-				JsonOverlay<«type.name»> castOverlay = (JsonOverlay<«type.name»>) overlay;
-				return castOverlay;
+					IJsonOverlay<?> overlay;
+					«IF type.subTypes.empty»
+						overlay = new «type.implType»(json, parent, refReg);
+					«ELSE»
+						Class<? extends «type.name»> subtype = getSubtypeOf(json);
+						«getSubtypeCreate(type, ".json")»
+					«ENDIF»
+					@SuppressWarnings("unchecked")
+					JsonOverlay<«type.name»> castOverlay = (JsonOverlay<«type.name»>) overlay;
+					return castOverlay;
 				}
-			};
+			};	
 		''')
 	}
 
@@ -449,14 +457,14 @@ class ImplGenerator extends TypeGenerator {
 			'''
 		} else {
 			return '''
-				switch (subtype.getSimpleName()) {
+				switch (subtype != null ? subtype.getSimpleName() : "") {
 					«FOR sub : subtypes»
 						case "«sub.name»":
 							overlay = «sub.implType».factory.create(«sub.castArg0(arg0)», parent, refReg, null);
 							break;
 					«ENDFOR»
 					default:
-						overlay = null;
+						overlay = new «t.implType»(«t.castArg0(arg0)», parent, refReg);
 				}
 			'''
 		}

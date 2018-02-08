@@ -1339,16 +1339,14 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 
         @Override
         public JsonOverlay<Schema> _create(Schema schema, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            Class<? extends Schema> subtype = getSubtypeOf(schema);
             IJsonOverlay<?> overlay;
-            overlay = new SchemaImpl((Schema) schema, parent, refReg);
+            overlay = new SchemaImpl(schema, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<Schema> castOverlay = (JsonOverlay<Schema>) overlay;
             return castOverlay;
         }
 
         @Override
         public JsonOverlay<Schema> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            Class<? extends Schema> subtype = getSubtypeOf(json);
             IJsonOverlay<?> overlay;
             overlay = new SchemaImpl(json, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<Schema> castOverlay = (JsonOverlay<Schema>) overlay;

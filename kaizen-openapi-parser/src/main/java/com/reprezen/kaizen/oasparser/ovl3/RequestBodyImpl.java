@@ -196,16 +196,14 @@ public class RequestBodyImpl extends PropertiesOverlay<RequestBody> implements R
 
         @Override
         public JsonOverlay<RequestBody> _create(RequestBody requestBody, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            Class<? extends RequestBody> subtype = getSubtypeOf(requestBody);
             IJsonOverlay<?> overlay;
-            overlay = new RequestBodyImpl((RequestBody) requestBody, parent, refReg);
+            overlay = new RequestBodyImpl(requestBody, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<RequestBody> castOverlay = (JsonOverlay<RequestBody>) overlay;
             return castOverlay;
         }
 
         @Override
         public JsonOverlay<RequestBody> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            Class<? extends RequestBody> subtype = getSubtypeOf(json);
             IJsonOverlay<?> overlay;
             overlay = new RequestBodyImpl(json, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<RequestBody> castOverlay = (JsonOverlay<RequestBody>) overlay;

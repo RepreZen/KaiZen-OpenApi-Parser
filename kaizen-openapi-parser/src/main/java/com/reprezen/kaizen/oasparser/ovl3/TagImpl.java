@@ -165,16 +165,14 @@ public class TagImpl extends PropertiesOverlay<Tag> implements Tag {
 
         @Override
         public JsonOverlay<Tag> _create(Tag tag, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            Class<? extends Tag> subtype = getSubtypeOf(tag);
             IJsonOverlay<?> overlay;
-            overlay = new TagImpl((Tag) tag, parent, refReg);
+            overlay = new TagImpl(tag, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<Tag> castOverlay = (JsonOverlay<Tag>) overlay;
             return castOverlay;
         }
 
         @Override
         public JsonOverlay<Tag> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            Class<? extends Tag> subtype = getSubtypeOf(json);
             IJsonOverlay<?> overlay;
             overlay = new TagImpl(json, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<Tag> castOverlay = (JsonOverlay<Tag>) overlay;

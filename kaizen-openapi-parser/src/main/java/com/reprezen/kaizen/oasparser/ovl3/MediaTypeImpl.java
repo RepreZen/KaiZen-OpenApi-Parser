@@ -268,16 +268,14 @@ public class MediaTypeImpl extends PropertiesOverlay<MediaType> implements Media
 
         @Override
         public JsonOverlay<MediaType> _create(MediaType mediaType, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            Class<? extends MediaType> subtype = getSubtypeOf(mediaType);
             IJsonOverlay<?> overlay;
-            overlay = new MediaTypeImpl((MediaType) mediaType, parent, refReg);
+            overlay = new MediaTypeImpl(mediaType, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<MediaType> castOverlay = (JsonOverlay<MediaType>) overlay;
             return castOverlay;
         }
 
         @Override
         public JsonOverlay<MediaType> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            Class<? extends MediaType> subtype = getSubtypeOf(json);
             IJsonOverlay<?> overlay;
             overlay = new MediaTypeImpl(json, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<MediaType> castOverlay = (JsonOverlay<MediaType>) overlay;

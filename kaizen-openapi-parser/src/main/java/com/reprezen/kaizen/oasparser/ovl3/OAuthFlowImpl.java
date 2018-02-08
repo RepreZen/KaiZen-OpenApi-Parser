@@ -257,16 +257,14 @@ public class OAuthFlowImpl extends PropertiesOverlay<OAuthFlow> implements OAuth
 
         @Override
         public JsonOverlay<OAuthFlow> _create(OAuthFlow oAuthFlow, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            Class<? extends OAuthFlow> subtype = getSubtypeOf(oAuthFlow);
             IJsonOverlay<?> overlay;
-            overlay = new OAuthFlowImpl((OAuthFlow) oAuthFlow, parent, refReg);
+            overlay = new OAuthFlowImpl(oAuthFlow, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<OAuthFlow> castOverlay = (JsonOverlay<OAuthFlow>) overlay;
             return castOverlay;
         }
 
         @Override
         public JsonOverlay<OAuthFlow> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            Class<? extends OAuthFlow> subtype = getSubtypeOf(json);
             IJsonOverlay<?> overlay;
             overlay = new OAuthFlowImpl(json, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<OAuthFlow> castOverlay = (JsonOverlay<OAuthFlow>) overlay;

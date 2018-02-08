@@ -93,16 +93,14 @@ public class SecurityRequirementImpl extends PropertiesOverlay<SecurityRequireme
 
         @Override
         public JsonOverlay<SecurityRequirement> _create(SecurityRequirement securityRequirement, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            Class<? extends SecurityRequirement> subtype = getSubtypeOf(securityRequirement);
             IJsonOverlay<?> overlay;
-            overlay = new SecurityRequirementImpl((SecurityRequirement) securityRequirement, parent, refReg);
+            overlay = new SecurityRequirementImpl(securityRequirement, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<SecurityRequirement> castOverlay = (JsonOverlay<SecurityRequirement>) overlay;
             return castOverlay;
         }
 
         @Override
         public JsonOverlay<SecurityRequirement> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            Class<? extends SecurityRequirement> subtype = getSubtypeOf(json);
             IJsonOverlay<?> overlay;
             overlay = new SecurityRequirementImpl(json, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<SecurityRequirement> castOverlay = (JsonOverlay<SecurityRequirement>) overlay;

@@ -448,16 +448,14 @@ public class PathImpl extends PropertiesOverlay<Path> implements Path {
 
         @Override
         public JsonOverlay<Path> _create(Path path, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            Class<? extends Path> subtype = getSubtypeOf(path);
             IJsonOverlay<?> overlay;
-            overlay = new PathImpl((Path) path, parent, refReg);
+            overlay = new PathImpl(path, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<Path> castOverlay = (JsonOverlay<Path>) overlay;
             return castOverlay;
         }
 
         @Override
         public JsonOverlay<Path> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            Class<? extends Path> subtype = getSubtypeOf(json);
             IJsonOverlay<?> overlay;
             overlay = new PathImpl(json, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<Path> castOverlay = (JsonOverlay<Path>) overlay;

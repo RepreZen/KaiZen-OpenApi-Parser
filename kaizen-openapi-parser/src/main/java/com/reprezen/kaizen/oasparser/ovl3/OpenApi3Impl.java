@@ -1138,16 +1138,14 @@ public class OpenApi3Impl extends PropertiesOverlay<OpenApi3> implements OpenApi
 
         @Override
         public JsonOverlay<OpenApi3> _create(OpenApi3 openApi3, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            Class<? extends OpenApi3> subtype = getSubtypeOf(openApi3);
             IJsonOverlay<?> overlay;
-            overlay = new OpenApi3Impl((OpenApi3) openApi3, parent, refReg);
+            overlay = new OpenApi3Impl(openApi3, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<OpenApi3> castOverlay = (JsonOverlay<OpenApi3>) overlay;
             return castOverlay;
         }
 
         @Override
         public JsonOverlay<OpenApi3> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            Class<? extends OpenApi3> subtype = getSubtypeOf(json);
             IJsonOverlay<?> overlay;
             overlay = new OpenApi3Impl(json, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<OpenApi3> castOverlay = (JsonOverlay<OpenApi3>) overlay;

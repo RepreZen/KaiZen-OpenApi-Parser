@@ -140,16 +140,14 @@ public class ExternalDocsImpl extends PropertiesOverlay<ExternalDocs> implements
 
         @Override
         public JsonOverlay<ExternalDocs> _create(ExternalDocs externalDocs, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            Class<? extends ExternalDocs> subtype = getSubtypeOf(externalDocs);
             IJsonOverlay<?> overlay;
-            overlay = new ExternalDocsImpl((ExternalDocs) externalDocs, parent, refReg);
+            overlay = new ExternalDocsImpl(externalDocs, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<ExternalDocs> castOverlay = (JsonOverlay<ExternalDocs>) overlay;
             return castOverlay;
         }
 
         @Override
         public JsonOverlay<ExternalDocs> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            Class<? extends ExternalDocs> subtype = getSubtypeOf(json);
             IJsonOverlay<?> overlay;
             overlay = new ExternalDocsImpl(json, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<ExternalDocs> castOverlay = (JsonOverlay<ExternalDocs>) overlay;

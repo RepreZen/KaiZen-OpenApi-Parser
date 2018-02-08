@@ -396,16 +396,14 @@ public class SecuritySchemeImpl extends PropertiesOverlay<SecurityScheme> implem
 
         @Override
         public JsonOverlay<SecurityScheme> _create(SecurityScheme securityScheme, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            Class<? extends SecurityScheme> subtype = getSubtypeOf(securityScheme);
             IJsonOverlay<?> overlay;
-            overlay = new SecuritySchemeImpl((SecurityScheme) securityScheme, parent, refReg);
+            overlay = new SecuritySchemeImpl(securityScheme, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<SecurityScheme> castOverlay = (JsonOverlay<SecurityScheme>) overlay;
             return castOverlay;
         }
 
         @Override
         public JsonOverlay<SecurityScheme> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            Class<? extends SecurityScheme> subtype = getSubtypeOf(json);
             IJsonOverlay<?> overlay;
             overlay = new SecuritySchemeImpl(json, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<SecurityScheme> castOverlay = (JsonOverlay<SecurityScheme>) overlay;

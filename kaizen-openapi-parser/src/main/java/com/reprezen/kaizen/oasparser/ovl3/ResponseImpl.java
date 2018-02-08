@@ -295,16 +295,14 @@ public class ResponseImpl extends PropertiesOverlay<Response> implements Respons
 
         @Override
         public JsonOverlay<Response> _create(Response response, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            Class<? extends Response> subtype = getSubtypeOf(response);
             IJsonOverlay<?> overlay;
-            overlay = new ResponseImpl((Response) response, parent, refReg);
+            overlay = new ResponseImpl(response, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<Response> castOverlay = (JsonOverlay<Response>) overlay;
             return castOverlay;
         }
 
         @Override
         public JsonOverlay<Response> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            Class<? extends Response> subtype = getSubtypeOf(json);
             IJsonOverlay<?> overlay;
             overlay = new ResponseImpl(json, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<Response> castOverlay = (JsonOverlay<Response>) overlay;

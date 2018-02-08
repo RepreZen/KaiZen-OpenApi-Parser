@@ -222,16 +222,14 @@ public class XmlImpl extends PropertiesOverlay<Xml> implements Xml {
 
         @Override
         public JsonOverlay<Xml> _create(Xml xml, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            Class<? extends Xml> subtype = getSubtypeOf(xml);
             IJsonOverlay<?> overlay;
-            overlay = new XmlImpl((Xml) xml, parent, refReg);
+            overlay = new XmlImpl(xml, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<Xml> castOverlay = (JsonOverlay<Xml>) overlay;
             return castOverlay;
         }
 
         @Override
         public JsonOverlay<Xml> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            Class<? extends Xml> subtype = getSubtypeOf(json);
             IJsonOverlay<?> overlay;
             overlay = new XmlImpl(json, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<Xml> castOverlay = (JsonOverlay<Xml>) overlay;

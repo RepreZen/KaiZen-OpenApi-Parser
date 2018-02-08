@@ -236,16 +236,14 @@ public class ServerImpl extends PropertiesOverlay<Server> implements Server {
 
         @Override
         public JsonOverlay<Server> _create(Server server, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            Class<? extends Server> subtype = getSubtypeOf(server);
             IJsonOverlay<?> overlay;
-            overlay = new ServerImpl((Server) server, parent, refReg);
+            overlay = new ServerImpl(server, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<Server> castOverlay = (JsonOverlay<Server>) overlay;
             return castOverlay;
         }
 
         @Override
         public JsonOverlay<Server> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            Class<? extends Server> subtype = getSubtypeOf(json);
             IJsonOverlay<?> overlay;
             overlay = new ServerImpl(json, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<Server> castOverlay = (JsonOverlay<Server>) overlay;

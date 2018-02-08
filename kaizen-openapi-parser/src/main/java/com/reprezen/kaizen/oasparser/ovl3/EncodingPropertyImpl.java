@@ -233,16 +233,14 @@ public class EncodingPropertyImpl extends PropertiesOverlay<EncodingProperty> im
 
         @Override
         public JsonOverlay<EncodingProperty> _create(EncodingProperty encodingProperty, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            Class<? extends EncodingProperty> subtype = getSubtypeOf(encodingProperty);
             IJsonOverlay<?> overlay;
-            overlay = new EncodingPropertyImpl((EncodingProperty) encodingProperty, parent, refReg);
+            overlay = new EncodingPropertyImpl(encodingProperty, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<EncodingProperty> castOverlay = (JsonOverlay<EncodingProperty>) overlay;
             return castOverlay;
         }
 
         @Override
         public JsonOverlay<EncodingProperty> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            Class<? extends EncodingProperty> subtype = getSubtypeOf(json);
             IJsonOverlay<?> overlay;
             overlay = new EncodingPropertyImpl(json, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<EncodingProperty> castOverlay = (JsonOverlay<EncodingProperty>) overlay;

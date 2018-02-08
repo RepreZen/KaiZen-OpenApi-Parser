@@ -163,16 +163,14 @@ public class ContactImpl extends PropertiesOverlay<Contact> implements Contact {
 
         @Override
         public JsonOverlay<Contact> _create(Contact contact, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            Class<? extends Contact> subtype = getSubtypeOf(contact);
             IJsonOverlay<?> overlay;
-            overlay = new ContactImpl((Contact) contact, parent, refReg);
+            overlay = new ContactImpl(contact, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<Contact> castOverlay = (JsonOverlay<Contact>) overlay;
             return castOverlay;
         }
 
         @Override
         public JsonOverlay<Contact> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            Class<? extends Contact> subtype = getSubtypeOf(json);
             IJsonOverlay<?> overlay;
             overlay = new ContactImpl(json, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<Contact> castOverlay = (JsonOverlay<Contact>) overlay;

@@ -142,16 +142,14 @@ public class LicenseImpl extends PropertiesOverlay<License> implements License {
 
         @Override
         public JsonOverlay<License> _create(License license, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            Class<? extends License> subtype = getSubtypeOf(license);
             IJsonOverlay<?> overlay;
-            overlay = new LicenseImpl((License) license, parent, refReg);
+            overlay = new LicenseImpl(license, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<License> castOverlay = (JsonOverlay<License>) overlay;
             return castOverlay;
         }
 
         @Override
         public JsonOverlay<License> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            Class<? extends License> subtype = getSubtypeOf(json);
             IJsonOverlay<?> overlay;
             overlay = new LicenseImpl(json, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<License> castOverlay = (JsonOverlay<License>) overlay;

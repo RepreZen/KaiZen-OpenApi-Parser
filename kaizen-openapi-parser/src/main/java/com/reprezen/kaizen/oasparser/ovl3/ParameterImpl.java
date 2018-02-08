@@ -507,16 +507,14 @@ public class ParameterImpl extends PropertiesOverlay<Parameter> implements Param
 
         @Override
         public JsonOverlay<Parameter> _create(Parameter parameter, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            Class<? extends Parameter> subtype = getSubtypeOf(parameter);
             IJsonOverlay<?> overlay;
-            overlay = new ParameterImpl((Parameter) parameter, parent, refReg);
+            overlay = new ParameterImpl(parameter, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<Parameter> castOverlay = (JsonOverlay<Parameter>) overlay;
             return castOverlay;
         }
 
         @Override
         public JsonOverlay<Parameter> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            Class<? extends Parameter> subtype = getSubtypeOf(json);
             IJsonOverlay<?> overlay;
             overlay = new ParameterImpl(json, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<Parameter> castOverlay = (JsonOverlay<Parameter>) overlay;

@@ -737,16 +737,14 @@ public class OperationImpl extends PropertiesOverlay<Operation> implements Opera
 
         @Override
         public JsonOverlay<Operation> _create(Operation operation, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            Class<? extends Operation> subtype = getSubtypeOf(operation);
             IJsonOverlay<?> overlay;
-            overlay = new OperationImpl((Operation) operation, parent, refReg);
+            overlay = new OperationImpl(operation, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<Operation> castOverlay = (JsonOverlay<Operation>) overlay;
             return castOverlay;
         }
 
         @Override
         public JsonOverlay<Operation> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            Class<? extends Operation> subtype = getSubtypeOf(json);
             IJsonOverlay<?> overlay;
             overlay = new OperationImpl(json, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<Operation> castOverlay = (JsonOverlay<Operation>) overlay;

@@ -110,16 +110,14 @@ public class SecurityParameterImpl extends PropertiesOverlay<SecurityParameter> 
 
         @Override
         public JsonOverlay<SecurityParameter> _create(SecurityParameter securityParameter, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            Class<? extends SecurityParameter> subtype = getSubtypeOf(securityParameter);
             IJsonOverlay<?> overlay;
-            overlay = new SecurityParameterImpl((SecurityParameter) securityParameter, parent, refReg);
+            overlay = new SecurityParameterImpl(securityParameter, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<SecurityParameter> castOverlay = (JsonOverlay<SecurityParameter>) overlay;
             return castOverlay;
         }
 
         @Override
         public JsonOverlay<SecurityParameter> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            Class<? extends SecurityParameter> subtype = getSubtypeOf(json);
             IJsonOverlay<?> overlay;
             overlay = new SecurityParameterImpl(json, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<SecurityParameter> castOverlay = (JsonOverlay<SecurityParameter>) overlay;

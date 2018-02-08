@@ -507,16 +507,14 @@ public class HeaderImpl extends PropertiesOverlay<Header> implements Header {
 
         @Override
         public JsonOverlay<Header> _create(Header header, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            Class<? extends Header> subtype = getSubtypeOf(header);
             IJsonOverlay<?> overlay;
-            overlay = new HeaderImpl((Header) header, parent, refReg);
+            overlay = new HeaderImpl(header, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<Header> castOverlay = (JsonOverlay<Header>) overlay;
             return castOverlay;
         }
 
         @Override
         public JsonOverlay<Header> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-            Class<? extends Header> subtype = getSubtypeOf(json);
             IJsonOverlay<?> overlay;
             overlay = new HeaderImpl(json, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<Header> castOverlay = (JsonOverlay<Header>) overlay;

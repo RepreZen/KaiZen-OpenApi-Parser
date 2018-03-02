@@ -1,3 +1,4 @@
+
 /*******************************************************************************
  *  Copyright (c) 2017 ModelSolv, Inc. and others.
  *  All rights reserved. This program and the accompanying materials
@@ -15,10 +16,10 @@ import java.util.Map;
 
 import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.reprezen.kaizen.oasparser.jsonoverlay.SerializationOptions.Option;
-import com.reprezen.kaizen.oasparser.ovl3.SchemaImpl;
 
 public abstract class PropertiesOverlay<V extends IPropertiesOverlay<V>> extends JsonOverlay<V>
 		implements IPropertiesOverlay<V> {
@@ -186,6 +187,17 @@ public abstract class PropertiesOverlay<V extends IPropertiesOverlay<V>> extends
 		}
 		return null;
 	}
+	
+	
+
+	@Override
+	public <T extends IJsonOverlay<V>> void copyOverlayData(T from) {
+		super.copyOverlayData(from);
+		PropertiesOverlay<V> impl = (PropertiesOverlay<V>) from;
+		this.children = impl.children;
+	}
+
+
 
 	public abstract static class PropertiesOverlayFactory<V extends IPropertiesOverlay<V>> extends OverlayFactory<V> {
 
@@ -193,9 +205,8 @@ public abstract class PropertiesOverlay<V extends IPropertiesOverlay<V>> extends
 		protected JsonOverlay<V> createAndRegister(JsonNode json, JsonOverlay<?> parent, boolean partial,
 				ReferenceRegistry refReg) {
 			// initially instantiate and register an, to avoid infinite recursion when
-			// reference cycles
-			// are encountered
-			PropertiesOverlay<V> placeholder = (PropertiesOverlay<V>) _create(jsonObject(), parent, refReg);
+			// reference cycles are encountered
+			PropertiesOverlay<V> placeholder = (PropertiesOverlay<V>) _create(getPlaceholderJsonNode(), parent, refReg);
 			if (!partial) {
 				refReg.setOverlay(json, placeholder);
 			}
@@ -204,6 +215,10 @@ public abstract class PropertiesOverlay<V extends IPropertiesOverlay<V>> extends
 			placeholder.copyOverlayData(overlay);
 			placeholder.copyInPlace(overlay);
 			return placeholder;
+		}
+		
+		protected JsonNode getPlaceholderJsonNode() {
+			return JsonNodeFactory.instance.objectNode();
 		}
 	}
 }

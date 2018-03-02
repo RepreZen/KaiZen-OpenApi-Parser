@@ -12,6 +12,7 @@ package com.reprezen.kaizen.oasparser.jsonoverlay.gen
 
 import com.fasterxml.jackson.core.JsonPointer
 import com.fasterxml.jackson.databind.JsonNode
+import com.fasterxml.jackson.databind.node.JsonNodeFactory
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration
 import com.github.javaparser.ast.body.TypeDeclaration
 import com.google.common.collect.Queues
@@ -351,9 +352,10 @@ class ImplGenerator extends TypeGenerator {
 	}
 
 	def private Member getEnumFactoryMember(Type type) {
-		requireTypes(OverlayFactory, IJsonOverlay, JsonOverlay, JsonNode, ReferenceRegistry)
+		requireTypes(OverlayFactory, PropertiesOverlayFactory, IJsonOverlay, JsonOverlay, JsonNode, ReferenceRegistry,
+			JsonNodeFactory)
 		return new Member('''
-			public static OverlayFactory<«type.name»> factory = new OverlayFactory<«type.name»>() {
+			public static OverlayFactory<«type.name»> factory = new PropertiesOverlayFactory<«type.name»>() {
 				@Override
 				protected Class<? extends IJsonOverlay<? super «type.name»>> getOverlayClass() {
 					return «type.implType».class;
@@ -367,7 +369,8 @@ class ImplGenerator extends TypeGenerator {
 				@Override
 				public JsonOverlay<«type.name»> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
 					return new «type.implType»(json, parent, refReg);
-				}			
+				}
+				
 			};
 		''')
 	}
@@ -415,6 +418,13 @@ class ImplGenerator extends TypeGenerator {
 					JsonOverlay<«type.name»> castOverlay = (JsonOverlay<«type.name»>) overlay;
 					return castOverlay;
 				}
+			
+				«IF type.rootNodeType == "array"»
+				@Override
+				protected JsonNode getPlaceholderJsonNode() {
+					return JsonNodeFactory.instance.arrayNode();
+				}
+				«ENDIF» 
 			};	
 		''')
 	}

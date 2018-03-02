@@ -298,6 +298,7 @@ types:
         type: String
         parentPath: ""
         structure: collection
+    rootNodeType: array
                       
   - name: Response
     fields:

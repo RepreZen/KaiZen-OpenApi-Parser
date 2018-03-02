@@ -134,6 +134,11 @@ public class SecurityParameterImpl extends PropertiesOverlay<SecurityParameter> 
             @SuppressWarnings("unchecked") JsonOverlay<SecurityParameter> castOverlay = (JsonOverlay<SecurityParameter>) overlay;
             return castOverlay;
         }
+
+        @Override
+        protected JsonNode getPlaceholderJsonNode() {
+            return JsonNodeFactory.instance.arrayNode();
+        }
     };
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

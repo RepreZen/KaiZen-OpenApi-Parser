@@ -139,7 +139,16 @@ public class MapOverlay<V> extends JsonOverlay<Map<String, V>> {
         return pat != null ? Pattern.compile("^" + pat + "$") : null;
     }
 
-    protected static class MapOverlayFactory<V> extends OverlayFactory<Map<String, V>> {
+
+    @Override
+	public <T extends IJsonOverlay<Map<String, V>>> void copyOverlayData(T from) {
+		super.copyOverlayData(from);
+		MapOverlay<V> impl = (MapOverlay<V>) from;
+		this.overlays = impl.overlays;
+	}
+
+
+	protected static class MapOverlayFactory<V> extends OverlayFactory<Map<String, V>> {
 
         private OverlayFactory<V> valueFactory;
         private Pattern keyPattern;

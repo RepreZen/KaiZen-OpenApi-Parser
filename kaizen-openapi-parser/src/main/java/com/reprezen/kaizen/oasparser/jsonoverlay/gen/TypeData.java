@@ -94,6 +94,7 @@ public class TypeData {
 		private String discriminator = null;
 		private String discriminatorValue = null;
 		private List<String> enumValues = Lists.newArrayList();
+		private String rootNodeType = "object";
 
 		private TypeData typeData;
 
@@ -179,6 +180,10 @@ public class TypeData {
 
 		public List<String> getEnumValues() {
 			return enumValues;
+		}
+
+		public String getRootNodeType() {
+			return rootNodeType;
 		}
 
 		public String getImplType() {

@@ -29,7 +29,7 @@ public abstract class OverlayFactory<V> {
 	}
 
 	protected IJsonOverlay<V> create(JsonNode json, JsonOverlay<?> parent, boolean partial, ReferenceRegistry refReg) {
-		if (!partial && refReg.hasOverlay(json)) {
+		if (!partial && refReg.hasOverlay(json) && isCompatible(refReg.getOverlay(json))) {
 			@SuppressWarnings("unchecked")
 			JsonOverlay<V> overlay = (JsonOverlay<V>) refReg.getOverlay(json);
 			if (parent != null) {
@@ -37,11 +37,6 @@ public abstract class OverlayFactory<V> {
 			}
 			return overlay;
 		} else {
-			// JsonOverlay<V> overlay = _create(json, parent, refReg);
-			// if (!partial) {
-			// refReg.setOverlay(json, overlay);
-			// }
-			// return overlay;
 			if (json.isMissingNode()) {
 				return _create(json, parent, refReg);
 			} else {

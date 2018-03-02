@@ -16,7 +16,6 @@ import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import com.fasterxml.jackson.core.JsonPointer;
 import com.reprezen.kaizen.oasparser.ovl3.SchemaImpl;
-import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay.PropertiesOverlayFactory;
 import com.reprezen.kaizen.oasparser.model3.Example;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
@@ -259,27 +258,8 @@ public class MediaTypeImpl extends PropertiesOverlay<MediaType> implements Media
         extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }
 
-    @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void copyInPlace(MediaType from) {
-        super.copyInPlace(from);
-        MediaTypeImpl impl = (MediaTypeImpl) from;
-        this.schema = impl.schema;
-        ChildOverlay.reparent(schema, impl, this);
-        refables.put("schema", schema);
-        this.examples = impl.examples;
-        ChildOverlay.reparent(examples, impl, this);
-        refables.put("examples", examples);
-        this.example = impl.example;
-        ChildOverlay.reparent(example, impl, this);
-        this.encodingProperties = impl.encodingProperties;
-        ChildOverlay.reparent(encodingProperties, impl, this);
-        this.extensions = impl.extensions;
-        ChildOverlay.reparent(extensions, impl, this);
-    }
-
-    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static OverlayFactory<MediaType> factory = new PropertiesOverlayFactory<MediaType>() {
+    public static OverlayFactory<MediaType> factory = new OverlayFactory<MediaType>() {
 
         @Override
         protected Class<? extends IJsonOverlay<? super MediaType>> getOverlayClass() {

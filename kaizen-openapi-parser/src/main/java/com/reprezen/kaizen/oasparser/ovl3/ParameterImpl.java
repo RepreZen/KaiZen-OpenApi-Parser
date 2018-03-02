@@ -1,29 +1,28 @@
 package com.reprezen.kaizen.oasparser.ovl3;
 
 import com.reprezen.kaizen.oasparser.model3.Schema;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
-import com.reprezen.kaizen.oasparser.jsonoverlay.BooleanOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
-import com.fasterxml.jackson.core.JsonPointer;
-import javax.annotation.Generated;
-import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
-import com.reprezen.kaizen.oasparser.ovl3.SchemaImpl;
-import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay.PropertiesOverlayFactory;
-import com.reprezen.kaizen.oasparser.model3.Example;
-import java.util.Map;
-import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.reprezen.kaizen.oasparser.jsonoverlay.IJsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.ovl3.MediaTypeImpl;
 import com.reprezen.kaizen.oasparser.ovl3.ExampleImpl;
 import java.util.stream.Collectors;
 import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
 import com.reprezen.kaizen.oasparser.model3.*;
+import com.reprezen.kaizen.oasparser.jsonoverlay.BooleanOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
+import com.fasterxml.jackson.core.JsonPointer;
+import javax.annotation.Generated;
+import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
+import com.reprezen.kaizen.oasparser.ovl3.SchemaImpl;
 import com.reprezen.kaizen.oasparser.model3.MediaType;
+import com.reprezen.kaizen.oasparser.model3.Example;
+import java.util.Map;
+import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.reprezen.kaizen.oasparser.jsonoverlay.IJsonOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
 
 public class ParameterImpl extends PropertiesOverlay<Parameter> implements Parameter {
@@ -498,45 +497,8 @@ public class ParameterImpl extends PropertiesOverlay<Parameter> implements Param
         extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }
 
-    @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void copyInPlace(Parameter from) {
-        super.copyInPlace(from);
-        ParameterImpl impl = (ParameterImpl) from;
-        this.name = impl.name;
-        ChildOverlay.reparent(name, impl, this);
-        this.in = impl.in;
-        ChildOverlay.reparent(in, impl, this);
-        this.description = impl.description;
-        ChildOverlay.reparent(description, impl, this);
-        this.required = impl.required;
-        ChildOverlay.reparent(required, impl, this);
-        this.deprecated = impl.deprecated;
-        ChildOverlay.reparent(deprecated, impl, this);
-        this.allowEmptyValue = impl.allowEmptyValue;
-        ChildOverlay.reparent(allowEmptyValue, impl, this);
-        this.style = impl.style;
-        ChildOverlay.reparent(style, impl, this);
-        this.explode = impl.explode;
-        ChildOverlay.reparent(explode, impl, this);
-        this.allowReserved = impl.allowReserved;
-        ChildOverlay.reparent(allowReserved, impl, this);
-        this.schema = impl.schema;
-        ChildOverlay.reparent(schema, impl, this);
-        refables.put("schema", schema);
-        this.example = impl.example;
-        ChildOverlay.reparent(example, impl, this);
-        this.examples = impl.examples;
-        ChildOverlay.reparent(examples, impl, this);
-        refables.put("examples", examples);
-        this.contentMediaTypes = impl.contentMediaTypes;
-        ChildOverlay.reparent(contentMediaTypes, impl, this);
-        this.extensions = impl.extensions;
-        ChildOverlay.reparent(extensions, impl, this);
-    }
-
-    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static OverlayFactory<Parameter> factory = new PropertiesOverlayFactory<Parameter>() {
+    public static OverlayFactory<Parameter> factory = new OverlayFactory<Parameter>() {
 
         @Override
         protected Class<? extends IJsonOverlay<? super Parameter>> getOverlayClass() {

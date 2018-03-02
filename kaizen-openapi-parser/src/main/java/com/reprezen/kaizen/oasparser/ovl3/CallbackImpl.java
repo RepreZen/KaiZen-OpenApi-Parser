@@ -9,11 +9,9 @@ import com.reprezen.kaizen.oasparser.ovl3.PathImpl;
 import java.util.stream.Collectors;
 import com.reprezen.kaizen.oasparser.model3.*;
 import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import com.fasterxml.jackson.core.JsonPointer;
-import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay.PropertiesOverlayFactory;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -133,19 +131,8 @@ public class CallbackImpl extends PropertiesOverlay<Callback> implements Callbac
         extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }
 
-    @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void copyInPlace(Callback from) {
-        super.copyInPlace(from);
-        CallbackImpl impl = (CallbackImpl) from;
-        this.callbackPaths = impl.callbackPaths;
-        ChildOverlay.reparent(callbackPaths, impl, this);
-        this.extensions = impl.extensions;
-        ChildOverlay.reparent(extensions, impl, this);
-    }
-
-    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static OverlayFactory<Callback> factory = new PropertiesOverlayFactory<Callback>() {
+    public static OverlayFactory<Callback> factory = new OverlayFactory<Callback>() {
 
         @Override
         protected Class<? extends IJsonOverlay<? super Callback>> getOverlayClass() {

@@ -14,7 +14,6 @@ import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import com.fasterxml.jackson.core.JsonPointer;
 import com.reprezen.kaizen.oasparser.model3.MediaType;
-import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay.PropertiesOverlayFactory;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -187,23 +186,8 @@ public class RequestBodyImpl extends PropertiesOverlay<RequestBody> implements R
         extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }
 
-    @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void copyInPlace(RequestBody from) {
-        super.copyInPlace(from);
-        RequestBodyImpl impl = (RequestBodyImpl) from;
-        this.description = impl.description;
-        ChildOverlay.reparent(description, impl, this);
-        this.contentMediaTypes = impl.contentMediaTypes;
-        ChildOverlay.reparent(contentMediaTypes, impl, this);
-        this.required = impl.required;
-        ChildOverlay.reparent(required, impl, this);
-        this.extensions = impl.extensions;
-        ChildOverlay.reparent(extensions, impl, this);
-    }
-
-    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static OverlayFactory<RequestBody> factory = new PropertiesOverlayFactory<RequestBody>() {
+    public static OverlayFactory<RequestBody> factory = new OverlayFactory<RequestBody>() {
 
         @Override
         protected Class<? extends IJsonOverlay<? super RequestBody>> getOverlayClass() {

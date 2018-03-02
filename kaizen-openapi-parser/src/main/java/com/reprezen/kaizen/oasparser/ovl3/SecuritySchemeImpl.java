@@ -13,7 +13,6 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import com.fasterxml.jackson.core.JsonPointer;
-import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay.PropertiesOverlayFactory;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -387,41 +386,8 @@ public class SecuritySchemeImpl extends PropertiesOverlay<SecurityScheme> implem
         extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }
 
-    @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void copyInPlace(SecurityScheme from) {
-        super.copyInPlace(from);
-        SecuritySchemeImpl impl = (SecuritySchemeImpl) from;
-        this.type = impl.type;
-        ChildOverlay.reparent(type, impl, this);
-        this.description = impl.description;
-        ChildOverlay.reparent(description, impl, this);
-        this.name = impl.name;
-        ChildOverlay.reparent(name, impl, this);
-        this.in = impl.in;
-        ChildOverlay.reparent(in, impl, this);
-        this.scheme = impl.scheme;
-        ChildOverlay.reparent(scheme, impl, this);
-        this.bearerFormat = impl.bearerFormat;
-        ChildOverlay.reparent(bearerFormat, impl, this);
-        this.implicitOAuthFlow = impl.implicitOAuthFlow;
-        ChildOverlay.reparent(implicitOAuthFlow, impl, this);
-        this.passwordOAuthFlow = impl.passwordOAuthFlow;
-        ChildOverlay.reparent(passwordOAuthFlow, impl, this);
-        this.clientCredentialsOAuthFlow = impl.clientCredentialsOAuthFlow;
-        ChildOverlay.reparent(clientCredentialsOAuthFlow, impl, this);
-        this.authorizationCodeOAuthFlow = impl.authorizationCodeOAuthFlow;
-        ChildOverlay.reparent(authorizationCodeOAuthFlow, impl, this);
-        this.oAuthFlowsExtensions = impl.oAuthFlowsExtensions;
-        ChildOverlay.reparent(oAuthFlowsExtensions, impl, this);
-        this.openIdConnectUrl = impl.openIdConnectUrl;
-        ChildOverlay.reparent(openIdConnectUrl, impl, this);
-        this.extensions = impl.extensions;
-        ChildOverlay.reparent(extensions, impl, this);
-    }
-
-    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static OverlayFactory<SecurityScheme> factory = new PropertiesOverlayFactory<SecurityScheme>() {
+    public static OverlayFactory<SecurityScheme> factory = new OverlayFactory<SecurityScheme>() {
 
         @Override
         protected Class<? extends IJsonOverlay<? super SecurityScheme>> getOverlayClass() {

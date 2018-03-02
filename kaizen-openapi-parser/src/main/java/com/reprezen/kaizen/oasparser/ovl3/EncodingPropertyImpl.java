@@ -13,7 +13,6 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import com.fasterxml.jackson.core.JsonPointer;
-import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay.PropertiesOverlayFactory;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -224,26 +223,8 @@ public class EncodingPropertyImpl extends PropertiesOverlay<EncodingProperty> im
         extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }
 
-    @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void copyInPlace(EncodingProperty from) {
-        super.copyInPlace(from);
-        EncodingPropertyImpl impl = (EncodingPropertyImpl) from;
-        this.contentType = impl.contentType;
-        ChildOverlay.reparent(contentType, impl, this);
-        this.headers = impl.headers;
-        ChildOverlay.reparent(headers, impl, this);
-        refables.put("headers", headers);
-        this.style = impl.style;
-        ChildOverlay.reparent(style, impl, this);
-        this.explode = impl.explode;
-        ChildOverlay.reparent(explode, impl, this);
-        this.extensions = impl.extensions;
-        ChildOverlay.reparent(extensions, impl, this);
-    }
-
-    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static OverlayFactory<EncodingProperty> factory = new PropertiesOverlayFactory<EncodingProperty>() {
+    public static OverlayFactory<EncodingProperty> factory = new OverlayFactory<EncodingProperty>() {
 
         @Override
         protected Class<? extends IJsonOverlay<? super EncodingProperty>> getOverlayClass() {

@@ -7,11 +7,9 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
 import java.util.Collection;
 import java.util.stream.Collectors;
 import com.reprezen.kaizen.oasparser.model3.*;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import com.fasterxml.jackson.core.JsonPointer;
-import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay.PropertiesOverlayFactory;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -102,17 +100,8 @@ public class SecurityParameterImpl extends PropertiesOverlay<SecurityParameter> 
         parameters = createChildList("", this, StringOverlay.factory);
     }
 
-    @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void copyInPlace(SecurityParameter from) {
-        super.copyInPlace(from);
-        SecurityParameterImpl impl = (SecurityParameterImpl) from;
-        this.parameters = impl.parameters;
-        ChildOverlay.reparent(parameters, impl, this);
-    }
-
-    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static OverlayFactory<SecurityParameter> factory = new PropertiesOverlayFactory<SecurityParameter>() {
+    public static OverlayFactory<SecurityParameter> factory = new OverlayFactory<SecurityParameter>() {
 
         @Override
         protected Class<? extends IJsonOverlay<? super SecurityParameter>> getOverlayClass() {
@@ -133,11 +122,6 @@ public class SecurityParameterImpl extends PropertiesOverlay<SecurityParameter> 
             overlay = new SecurityParameterImpl(json, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<SecurityParameter> castOverlay = (JsonOverlay<SecurityParameter>) overlay;
             return castOverlay;
-        }
-
-        @Override
-        protected JsonNode getPlaceholderJsonNode() {
-            return JsonNodeFactory.instance.arrayNode();
         }
     };
 

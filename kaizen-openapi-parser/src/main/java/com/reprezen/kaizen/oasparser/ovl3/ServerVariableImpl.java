@@ -15,7 +15,6 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import com.fasterxml.jackson.core.JsonPointer;
-import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay.PropertiesOverlayFactory;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -194,23 +193,8 @@ public class ServerVariableImpl extends PropertiesOverlay<ServerVariable> implem
         extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }
 
-    @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void copyInPlace(ServerVariable from) {
-        super.copyInPlace(from);
-        ServerVariableImpl impl = (ServerVariableImpl) from;
-        this.enumValues = impl.enumValues;
-        ChildOverlay.reparent(enumValues, impl, this);
-        this.defaultValue = impl.defaultValue;
-        ChildOverlay.reparent(defaultValue, impl, this);
-        this.description = impl.description;
-        ChildOverlay.reparent(description, impl, this);
-        this.extensions = impl.extensions;
-        ChildOverlay.reparent(extensions, impl, this);
-    }
-
-    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static OverlayFactory<ServerVariable> factory = new PropertiesOverlayFactory<ServerVariable>() {
+    public static OverlayFactory<ServerVariable> factory = new OverlayFactory<ServerVariable>() {
 
         @Override
         protected Class<? extends IJsonOverlay<? super ServerVariable>> getOverlayClass() {

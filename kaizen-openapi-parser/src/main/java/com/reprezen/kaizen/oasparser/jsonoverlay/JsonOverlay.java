@@ -152,13 +152,6 @@ public abstract class JsonOverlay<V> implements IJsonOverlay<V> {
 
 	public abstract JsonNode toJson(SerializationOptions options);
 
-	public <T extends IJsonOverlay<V>> void copyOverlayData(T from) {
-		@SuppressWarnings("unused")
-		JsonOverlay<V> fromOverlay = (JsonOverlay<V>) from;
-		this.json = fromOverlay.json;
-		this.reference = fromOverlay.reference;
-	}
-
 	// some utility classes for overlays
 
 	protected static ObjectNode jsonObject() {

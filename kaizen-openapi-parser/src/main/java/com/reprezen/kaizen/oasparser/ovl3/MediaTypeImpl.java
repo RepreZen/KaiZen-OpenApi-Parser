@@ -16,7 +16,6 @@ import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import com.fasterxml.jackson.core.JsonPointer;
 import com.reprezen.kaizen.oasparser.ovl3.SchemaImpl;
-import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay.PropertiesOverlayFactory;
 import com.reprezen.kaizen.oasparser.model3.Example;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
@@ -279,7 +278,7 @@ public class MediaTypeImpl extends PropertiesOverlay<MediaType> implements Media
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static OverlayFactory<MediaType> factory = new PropertiesOverlayFactory<MediaType>() {
+    public static OverlayFactory<MediaType> factory = new OverlayFactory<MediaType>() {
 
         @Override
         protected Class<? extends IJsonOverlay<? super MediaType>> getOverlayClass() {

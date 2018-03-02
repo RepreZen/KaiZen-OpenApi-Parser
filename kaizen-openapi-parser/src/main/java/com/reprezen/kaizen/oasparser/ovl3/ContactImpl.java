@@ -11,7 +11,6 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import com.fasterxml.jackson.core.JsonPointer;
-import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay.PropertiesOverlayFactory;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -170,7 +169,7 @@ public class ContactImpl extends PropertiesOverlay<Contact> implements Contact {
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static OverlayFactory<Contact> factory = new PropertiesOverlayFactory<Contact>() {
+    public static OverlayFactory<Contact> factory = new OverlayFactory<Contact>() {
 
         @Override
         protected Class<? extends IJsonOverlay<? super Contact>> getOverlayClass() {

@@ -126,7 +126,18 @@ public class ListOverlay<V> extends JsonOverlay<Collection<V>> {
         return new ListOverlayFactory<V>(itemFactory);
     }
 
-    private static class ListOverlayFactory<V> extends OverlayFactory<Collection<V>> {
+    
+    
+    @Override
+	public <T extends IJsonOverlay<Collection<V>>> void copyOverlayData(T from) {
+		super.copyOverlayData(from);
+		ListOverlay<V> impl = (ListOverlay<V>) from;
+		this.overlays = impl.overlays;
+	}
+
+
+
+	private static class ListOverlayFactory<V> extends OverlayFactory<Collection<V>> {
 
         private OverlayFactory<V> itemFactory;
 

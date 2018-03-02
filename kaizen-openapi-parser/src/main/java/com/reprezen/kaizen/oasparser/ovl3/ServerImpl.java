@@ -229,8 +229,8 @@ public class ServerImpl extends PropertiesOverlay<Server> implements Server {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void copyInPlace(Server from) {
-        super.copyInPlace(from);
+    protected void copyChildProperties(JsonOverlay<?> from) {
+        super.copyChildProperties(from);
         ServerImpl impl = (ServerImpl) from;
         this.url = impl.url;
         ChildOverlay.reparent(url, impl, this);

@@ -730,8 +730,8 @@ public class OperationImpl extends PropertiesOverlay<Operation> implements Opera
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void copyInPlace(Operation from) {
-        super.copyInPlace(from);
+    protected void copyChildProperties(JsonOverlay<?> from) {
+        super.copyChildProperties(from);
         OperationImpl impl = (OperationImpl) from;
         this.tags = impl.tags;
         ChildOverlay.reparent(tags, impl, this);

@@ -215,8 +215,8 @@ public class XmlImpl extends PropertiesOverlay<Xml> implements Xml {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void copyInPlace(Xml from) {
-        super.copyInPlace(from);
+    protected void copyChildProperties(JsonOverlay<?> from) {
+        super.copyChildProperties(from);
         XmlImpl impl = (XmlImpl) from;
         this.name = impl.name;
         ChildOverlay.reparent(name, impl, this);

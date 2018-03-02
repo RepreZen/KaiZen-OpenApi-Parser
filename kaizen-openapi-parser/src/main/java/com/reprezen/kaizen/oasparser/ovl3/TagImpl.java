@@ -158,8 +158,8 @@ public class TagImpl extends PropertiesOverlay<Tag> implements Tag {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void copyInPlace(Tag from) {
-        super.copyInPlace(from);
+    protected void copyChildProperties(JsonOverlay<?> from) {
+        super.copyChildProperties(from);
         TagImpl impl = (TagImpl) from;
         this.name = impl.name;
         ChildOverlay.reparent(name, impl, this);

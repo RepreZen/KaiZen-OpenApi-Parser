@@ -389,8 +389,8 @@ public class SecuritySchemeImpl extends PropertiesOverlay<SecurityScheme> implem
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void copyInPlace(SecurityScheme from) {
-        super.copyInPlace(from);
+    protected void copyChildProperties(JsonOverlay<?> from) {
+        super.copyChildProperties(from);
         SecuritySchemeImpl impl = (SecuritySchemeImpl) from;
         this.type = impl.type;
         ChildOverlay.reparent(type, impl, this);

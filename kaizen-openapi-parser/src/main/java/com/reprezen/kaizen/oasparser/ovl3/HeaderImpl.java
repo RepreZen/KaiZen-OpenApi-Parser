@@ -500,8 +500,8 @@ public class HeaderImpl extends PropertiesOverlay<Header> implements Header {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void copyInPlace(Header from) {
-        super.copyInPlace(from);
+    protected void copyChildProperties(JsonOverlay<?> from) {
+        super.copyChildProperties(from);
         HeaderImpl impl = (HeaderImpl) from;
         this.name = impl.name;
         ChildOverlay.reparent(name, impl, this);

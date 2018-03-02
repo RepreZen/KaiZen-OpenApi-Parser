@@ -179,8 +179,8 @@ public class ExampleImpl extends PropertiesOverlay<Example> implements Example {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void copyInPlace(Example from) {
-        super.copyInPlace(from);
+    protected void copyChildProperties(JsonOverlay<?> from) {
+        super.copyChildProperties(from);
         ExampleImpl impl = (ExampleImpl) from;
         this.summary = impl.summary;
         ChildOverlay.reparent(summary, impl, this);

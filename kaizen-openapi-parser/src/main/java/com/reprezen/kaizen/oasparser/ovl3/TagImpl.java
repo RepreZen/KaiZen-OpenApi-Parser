@@ -12,7 +12,6 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import com.fasterxml.jackson.core.JsonPointer;
-import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay.PropertiesOverlayFactory;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -172,7 +171,7 @@ public class TagImpl extends PropertiesOverlay<Tag> implements Tag {
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static OverlayFactory<Tag> factory = new PropertiesOverlayFactory<Tag>() {
+    public static OverlayFactory<Tag> factory = new OverlayFactory<Tag>() {
 
         @Override
         protected Class<? extends IJsonOverlay<? super Tag>> getOverlayClass() {

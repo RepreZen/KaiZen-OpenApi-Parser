@@ -159,11 +159,5 @@ public class ListOverlay<V> extends JsonOverlay<Collection<V>> {
         public ListOverlay<V> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
             return new ListOverlay<V>(json, parent, itemFactory, refReg);
         }
-
-        @Override
-        protected boolean needPlaceholder() {
-            return true;
-        }
-
     }
 }

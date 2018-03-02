@@ -13,7 +13,6 @@ import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import com.fasterxml.jackson.core.JsonPointer;
 import com.reprezen.kaizen.oasparser.ovl3.ContactImpl;
-import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay.PropertiesOverlayFactory;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.reprezen.kaizen.oasparser.ovl3.LicenseImpl;
@@ -249,7 +248,7 @@ public class InfoImpl extends PropertiesOverlay<Info> implements Info {
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static OverlayFactory<Info> factory = new PropertiesOverlayFactory<Info>() {
+    public static OverlayFactory<Info> factory = new OverlayFactory<Info>() {
 
         @Override
         protected Class<? extends IJsonOverlay<? super Info>> getOverlayClass() {

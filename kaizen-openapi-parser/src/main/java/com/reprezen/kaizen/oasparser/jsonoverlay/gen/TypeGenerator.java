@@ -64,7 +64,6 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.reprezen.kaizen.oasparser.jsonoverlay.Primitive;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PrimitiveOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay.PropertiesOverlayFactory;
 import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
 import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
@@ -197,7 +196,6 @@ public abstract class TypeGenerator {
 				ChildMapOverlay.class, //
 				ChildListOverlay.class, //
 				OverlayFactory.class, //
-				PropertiesOverlayFactory.class, //
 				IModelPart.class, //
 				Reference.class, //
 				ReferenceRegistry.class, //

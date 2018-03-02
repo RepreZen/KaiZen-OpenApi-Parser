@@ -13,7 +13,6 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import com.fasterxml.jackson.core.JsonPointer;
-import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay.PropertiesOverlayFactory;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -145,7 +144,7 @@ public class CallbackImpl extends PropertiesOverlay<Callback> implements Callbac
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static OverlayFactory<Callback> factory = new PropertiesOverlayFactory<Callback>() {
+    public static OverlayFactory<Callback> factory = new OverlayFactory<Callback>() {
 
         @Override
         protected Class<? extends IJsonOverlay<? super Callback>> getOverlayClass() {

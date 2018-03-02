@@ -261,8 +261,8 @@ public class MediaTypeImpl extends PropertiesOverlay<MediaType> implements Media
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void copyChildProperties(JsonOverlay<?> from) {
-        super.copyChildProperties(from);
+    protected void copyInPlace(MediaType from) {
+        super.copyInPlace(from);
         MediaTypeImpl impl = (MediaTypeImpl) from;
         this.schema = impl.schema;
         ChildOverlay.reparent(schema, impl, this);

@@ -196,8 +196,8 @@ public class ServerVariableImpl extends PropertiesOverlay<ServerVariable> implem
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void copyChildProperties(JsonOverlay<?> from) {
-        super.copyChildProperties(from);
+    protected void copyInPlace(ServerVariable from) {
+        super.copyInPlace(from);
         ServerVariableImpl impl = (ServerVariableImpl) from;
         this.enumValues = impl.enumValues;
         ChildOverlay.reparent(enumValues, impl, this);

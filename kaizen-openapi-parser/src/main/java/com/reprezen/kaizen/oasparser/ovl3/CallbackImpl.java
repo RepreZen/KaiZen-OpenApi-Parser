@@ -135,8 +135,8 @@ public class CallbackImpl extends PropertiesOverlay<Callback> implements Callbac
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void copyChildProperties(JsonOverlay<?> from) {
-        super.copyChildProperties(from);
+    protected void copyInPlace(Callback from) {
+        super.copyInPlace(from);
         CallbackImpl impl = (CallbackImpl) from;
         this.callbackPaths = impl.callbackPaths;
         ChildOverlay.reparent(callbackPaths, impl, this);

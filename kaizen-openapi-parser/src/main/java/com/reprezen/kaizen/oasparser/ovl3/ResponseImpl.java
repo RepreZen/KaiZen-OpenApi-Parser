@@ -288,8 +288,8 @@ public class ResponseImpl extends PropertiesOverlay<Response> implements Respons
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void copyChildProperties(JsonOverlay<?> from) {
-        super.copyChildProperties(from);
+    protected void copyInPlace(Response from) {
+        super.copyInPlace(from);
         ResponseImpl impl = (ResponseImpl) from;
         this.description = impl.description;
         ChildOverlay.reparent(description, impl, this);

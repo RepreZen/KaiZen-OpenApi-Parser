@@ -250,8 +250,8 @@ public class OAuthFlowImpl extends PropertiesOverlay<OAuthFlow> implements OAuth
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void copyChildProperties(JsonOverlay<?> from) {
-        super.copyChildProperties(from);
+    protected void copyInPlace(OAuthFlow from) {
+        super.copyInPlace(from);
         OAuthFlowImpl impl = (OAuthFlowImpl) from;
         this.authorizationUrl = impl.authorizationUrl;
         ChildOverlay.reparent(authorizationUrl, impl, this);

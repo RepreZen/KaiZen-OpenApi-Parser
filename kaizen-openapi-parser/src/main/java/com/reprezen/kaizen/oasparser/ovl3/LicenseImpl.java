@@ -135,8 +135,8 @@ public class LicenseImpl extends PropertiesOverlay<License> implements License {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void copyChildProperties(JsonOverlay<?> from) {
-        super.copyChildProperties(from);
+    protected void copyInPlace(License from) {
+        super.copyInPlace(from);
         LicenseImpl impl = (LicenseImpl) from;
         this.name = impl.name;
         ChildOverlay.reparent(name, impl, this);

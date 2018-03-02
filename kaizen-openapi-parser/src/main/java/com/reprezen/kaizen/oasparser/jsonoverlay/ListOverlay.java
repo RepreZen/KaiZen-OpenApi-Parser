@@ -126,15 +126,18 @@ public class ListOverlay<V> extends JsonOverlay<Collection<V>> {
         return new ListOverlayFactory<V>(itemFactory);
     }
 
+    
+    
     @Override
-    public void copyOverlayData(JsonOverlay<?> from) {
-        super.copyOverlayData(from);
-        @SuppressWarnings("unchecked")
-        ListOverlay<V> impl = (ListOverlay<V>) from;
-        this.overlays = impl.overlays;
-    }
+	public <T extends IJsonOverlay<Collection<V>>> void copyOverlayData(T from) {
+		super.copyOverlayData(from);
+		ListOverlay<V> impl = (ListOverlay<V>) from;
+		this.overlays = impl.overlays;
+	}
 
-    private static class ListOverlayFactory<V> extends OverlayFactory<Collection<V>> {
+
+
+	private static class ListOverlayFactory<V> extends OverlayFactory<Collection<V>> {
 
         private OverlayFactory<V> itemFactory;
 
@@ -159,11 +162,5 @@ public class ListOverlay<V> extends JsonOverlay<Collection<V>> {
         public ListOverlay<V> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
             return new ListOverlay<V>(json, parent, itemFactory, refReg);
         }
-
-        @Override
-        protected boolean needPlaceholder() {
-            return true;
-        }
-
     }
 }

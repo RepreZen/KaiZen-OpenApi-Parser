@@ -500,8 +500,8 @@ public class ParameterImpl extends PropertiesOverlay<Parameter> implements Param
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void copyChildProperties(JsonOverlay<?> from) {
-        super.copyChildProperties(from);
+    protected void copyInPlace(Parameter from) {
+        super.copyInPlace(from);
         ParameterImpl impl = (ParameterImpl) from;
         this.name = impl.name;
         ChildOverlay.reparent(name, impl, this);

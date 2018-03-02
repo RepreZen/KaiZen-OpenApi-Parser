@@ -13,6 +13,7 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import com.fasterxml.jackson.core.JsonPointer;
+import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay.PropertiesOverlayFactory;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -420,7 +421,7 @@ public class SecuritySchemeImpl extends PropertiesOverlay<SecurityScheme> implem
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static OverlayFactory<SecurityScheme> factory = new OverlayFactory<SecurityScheme>() {
+    public static OverlayFactory<SecurityScheme> factory = new PropertiesOverlayFactory<SecurityScheme>() {
 
         @Override
         protected Class<? extends IJsonOverlay<? super SecurityScheme>> getOverlayClass() {

@@ -45,6 +45,7 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import com.reprezen.kaizen.oasparser.model3.Response;
 import com.reprezen.kaizen.oasparser.ovl3.SchemaImpl;
 import com.reprezen.kaizen.oasparser.model3.RequestBody;
+import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay.PropertiesOverlayFactory;
 import com.reprezen.kaizen.oasparser.model3.Example;
 import com.reprezen.kaizen.oasparser.model3.Path;
 import com.reprezen.kaizen.oasparser.model3.SecurityRequirement;
@@ -1184,7 +1185,7 @@ public class OpenApi3Impl extends PropertiesOverlay<OpenApi3> implements OpenApi
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static OverlayFactory<OpenApi3> factory = new OverlayFactory<OpenApi3>() {
+    public static OverlayFactory<OpenApi3> factory = new PropertiesOverlayFactory<OpenApi3>() {
 
         @Override
         protected Class<? extends IJsonOverlay<? super OpenApi3>> getOverlayClass() {

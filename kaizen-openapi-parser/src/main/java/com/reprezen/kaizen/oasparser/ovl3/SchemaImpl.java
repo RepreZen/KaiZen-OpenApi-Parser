@@ -1332,8 +1332,8 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void copyInPlace(Schema from) {
-        super.copyInPlace(from);
+    protected void copyChildProperties(JsonOverlay<?> from) {
+        super.copyChildProperties(from);
         SchemaImpl impl = (SchemaImpl) from;
         this.title = impl.title;
         ChildOverlay.reparent(title, impl, this);

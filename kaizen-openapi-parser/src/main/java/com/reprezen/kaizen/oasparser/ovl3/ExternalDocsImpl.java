@@ -133,8 +133,8 @@ public class ExternalDocsImpl extends PropertiesOverlay<ExternalDocs> implements
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void copyInPlace(ExternalDocs from) {
-        super.copyInPlace(from);
+    protected void copyChildProperties(JsonOverlay<?> from) {
+        super.copyChildProperties(from);
         ExternalDocsImpl impl = (ExternalDocsImpl) from;
         this.description = impl.description;
         ChildOverlay.reparent(description, impl, this);

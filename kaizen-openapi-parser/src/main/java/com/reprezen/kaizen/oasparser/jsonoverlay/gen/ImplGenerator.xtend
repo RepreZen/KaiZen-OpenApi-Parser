@@ -66,7 +66,7 @@ class ImplGenerator extends TypeGenerator {
 			members.add(type.enumFactoryMember)
 		} else {
 			members.add(getElaborateChildrenMethod(type))
-			members.add(getCopyInPlaceMethod(type))
+			members.add(getCopyChildPropertiesMethod(type))
 			members.addAll(getFactoryMembers(type))
 		}
 		return members
@@ -336,11 +336,11 @@ class ImplGenerator extends TypeGenerator {
 		''').override
 	}
 
-	def private Member getCopyInPlaceMethod(Type type) {
+	def private Member getCopyChildPropertiesMethod(Type type) {
 		requireTypes(ChildOverlay)
 		return new Member('''
-			protected void copyInPlace(«type.name» from) {
-				super.copyInPlace(from);
+			protected void copyChildProperties(JsonOverlay<?> from) {
+				super.copyChildProperties(from);
 				«type.implType» impl = («type.implType») from;
 				«FOR f : type.fields.values.filter[!it.noImpl]»
 					this.«f.propertyName» = impl.«f.propertyName»;

@@ -139,16 +139,15 @@ public class MapOverlay<V> extends JsonOverlay<Map<String, V>> {
         return pat != null ? Pattern.compile("^" + pat + "$") : null;
     }
 
-
     @Override
-	public <T extends IJsonOverlay<Map<String, V>>> void copyOverlayData(T from) {
-		super.copyOverlayData(from);
-		MapOverlay<V> impl = (MapOverlay<V>) from;
-		this.overlays = impl.overlays;
-	}
+    public void copyOverlayData(JsonOverlay<?> from) {
+        super.copyOverlayData(from);
+        @SuppressWarnings("unchecked")
+        MapOverlay<V> impl = (MapOverlay<V>) from;
+        this.overlays = impl.overlays;
+    }
 
-
-	protected static class MapOverlayFactory<V> extends OverlayFactory<Map<String, V>> {
+    protected static class MapOverlayFactory<V> extends OverlayFactory<Map<String, V>> {
 
         private OverlayFactory<V> valueFactory;
         private Pattern keyPattern;
@@ -178,6 +177,11 @@ public class MapOverlay<V> extends JsonOverlay<Map<String, V>> {
         @Override
         public MapOverlay<V> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
             return new MapOverlay<V>(json, parent, valueFactory, keyPattern, refReg);
+        }
+
+        @Override
+        protected boolean needPlaceholder() {
+            return true;
         }
     }
 }

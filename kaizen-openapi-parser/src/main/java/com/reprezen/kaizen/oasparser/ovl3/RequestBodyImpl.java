@@ -189,8 +189,8 @@ public class RequestBodyImpl extends PropertiesOverlay<RequestBody> implements R
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void copyInPlace(RequestBody from) {
-        super.copyInPlace(from);
+    protected void copyChildProperties(JsonOverlay<?> from) {
+        super.copyChildProperties(from);
         RequestBodyImpl impl = (RequestBodyImpl) from;
         this.description = impl.description;
         ChildOverlay.reparent(description, impl, this);

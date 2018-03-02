@@ -87,8 +87,8 @@ public class SecurityRequirementImpl extends PropertiesOverlay<SecurityRequireme
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void copyInPlace(SecurityRequirement from) {
-        super.copyInPlace(from);
+    protected void copyChildProperties(JsonOverlay<?> from) {
+        super.copyChildProperties(from);
         SecurityRequirementImpl impl = (SecurityRequirementImpl) from;
         this.requirements = impl.requirements;
         ChildOverlay.reparent(requirements, impl, this);

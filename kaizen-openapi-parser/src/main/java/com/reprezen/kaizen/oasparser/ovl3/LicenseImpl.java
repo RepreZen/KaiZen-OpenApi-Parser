@@ -11,7 +11,6 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import com.fasterxml.jackson.core.JsonPointer;
-import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay.PropertiesOverlayFactory;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -133,21 +132,8 @@ public class LicenseImpl extends PropertiesOverlay<License> implements License {
         extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }
 
-    @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void copyInPlace(License from) {
-        super.copyInPlace(from);
-        LicenseImpl impl = (LicenseImpl) from;
-        this.name = impl.name;
-        ChildOverlay.reparent(name, impl, this);
-        this.url = impl.url;
-        ChildOverlay.reparent(url, impl, this);
-        this.extensions = impl.extensions;
-        ChildOverlay.reparent(extensions, impl, this);
-    }
-
-    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static OverlayFactory<License> factory = new PropertiesOverlayFactory<License>() {
+    public static OverlayFactory<License> factory = new OverlayFactory<License>() {
 
         @Override
         protected Class<? extends IJsonOverlay<? super License>> getOverlayClass() {

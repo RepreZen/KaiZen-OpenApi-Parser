@@ -15,7 +15,6 @@ import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import com.reprezen.kaizen.oasparser.model3.Response;
 import com.reprezen.kaizen.oasparser.model3.RequestBody;
-import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay.PropertiesOverlayFactory;
 import com.reprezen.kaizen.oasparser.model3.Parameter;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
@@ -728,49 +727,8 @@ public class OperationImpl extends PropertiesOverlay<Operation> implements Opera
         extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }
 
-    @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void copyInPlace(Operation from) {
-        super.copyInPlace(from);
-        OperationImpl impl = (OperationImpl) from;
-        this.tags = impl.tags;
-        ChildOverlay.reparent(tags, impl, this);
-        this.summary = impl.summary;
-        ChildOverlay.reparent(summary, impl, this);
-        this.description = impl.description;
-        ChildOverlay.reparent(description, impl, this);
-        this.externalDocs = impl.externalDocs;
-        ChildOverlay.reparent(externalDocs, impl, this);
-        this.operationId = impl.operationId;
-        ChildOverlay.reparent(operationId, impl, this);
-        this.parameters = impl.parameters;
-        ChildOverlay.reparent(parameters, impl, this);
-        refables.put("parameters", parameters);
-        this.requestBody = impl.requestBody;
-        ChildOverlay.reparent(requestBody, impl, this);
-        refables.put("requestBody", requestBody);
-        this.responses = impl.responses;
-        ChildOverlay.reparent(responses, impl, this);
-        refables.put("responses", responses);
-        this.responsesExtensions = impl.responsesExtensions;
-        ChildOverlay.reparent(responsesExtensions, impl, this);
-        this.callbacks = impl.callbacks;
-        ChildOverlay.reparent(callbacks, impl, this);
-        refables.put("callbacks", callbacks);
-        this.callbacksExtensions = impl.callbacksExtensions;
-        ChildOverlay.reparent(callbacksExtensions, impl, this);
-        this.deprecated = impl.deprecated;
-        ChildOverlay.reparent(deprecated, impl, this);
-        this.securityRequirements = impl.securityRequirements;
-        ChildOverlay.reparent(securityRequirements, impl, this);
-        this.servers = impl.servers;
-        ChildOverlay.reparent(servers, impl, this);
-        this.extensions = impl.extensions;
-        ChildOverlay.reparent(extensions, impl, this);
-    }
-
-    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static OverlayFactory<Operation> factory = new PropertiesOverlayFactory<Operation>() {
+    public static OverlayFactory<Operation> factory = new OverlayFactory<Operation>() {
 
         @Override
         protected Class<? extends IJsonOverlay<? super Operation>> getOverlayClass() {

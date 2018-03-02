@@ -13,7 +13,6 @@ import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import com.fasterxml.jackson.core.JsonPointer;
 import com.reprezen.kaizen.oasparser.ovl3.ContactImpl;
-import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay.PropertiesOverlayFactory;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.reprezen.kaizen.oasparser.ovl3.LicenseImpl;
@@ -227,29 +226,8 @@ public class InfoImpl extends PropertiesOverlay<Info> implements Info {
         extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }
 
-    @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void copyInPlace(Info from) {
-        super.copyInPlace(from);
-        InfoImpl impl = (InfoImpl) from;
-        this.title = impl.title;
-        ChildOverlay.reparent(title, impl, this);
-        this.description = impl.description;
-        ChildOverlay.reparent(description, impl, this);
-        this.termsOfService = impl.termsOfService;
-        ChildOverlay.reparent(termsOfService, impl, this);
-        this.contact = impl.contact;
-        ChildOverlay.reparent(contact, impl, this);
-        this.license = impl.license;
-        ChildOverlay.reparent(license, impl, this);
-        this.version = impl.version;
-        ChildOverlay.reparent(version, impl, this);
-        this.extensions = impl.extensions;
-        ChildOverlay.reparent(extensions, impl, this);
-    }
-
-    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static OverlayFactory<Info> factory = new PropertiesOverlayFactory<Info>() {
+    public static OverlayFactory<Info> factory = new OverlayFactory<Info>() {
 
         @Override
         protected Class<? extends IJsonOverlay<? super Info>> getOverlayClass() {

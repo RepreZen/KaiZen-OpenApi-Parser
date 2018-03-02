@@ -113,17 +113,6 @@ public class ChildOverlay<V> implements IJsonOverlay<V> {
 		return parent;
 	}
 
-	public static void reparent(ChildOverlay<?> child, JsonOverlay<?> from, JsonOverlay<?> to) {
-		if (child != null) {
-			if (child.parent == from) {
-				child.parent = to;
-			}
-			if (child.overlay.parent == from) {
-				child.overlay.parent = to;
-			}
-		}
-	}
-
 	public String getPathInParent() {
 		return overlay.getPathInParent();
 	}

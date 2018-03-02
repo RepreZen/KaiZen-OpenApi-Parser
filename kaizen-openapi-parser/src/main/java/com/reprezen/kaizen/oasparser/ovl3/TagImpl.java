@@ -12,7 +12,6 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import com.fasterxml.jackson.core.JsonPointer;
-import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay.PropertiesOverlayFactory;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -156,23 +155,8 @@ public class TagImpl extends PropertiesOverlay<Tag> implements Tag {
         extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }
 
-    @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void copyInPlace(Tag from) {
-        super.copyInPlace(from);
-        TagImpl impl = (TagImpl) from;
-        this.name = impl.name;
-        ChildOverlay.reparent(name, impl, this);
-        this.description = impl.description;
-        ChildOverlay.reparent(description, impl, this);
-        this.externalDocs = impl.externalDocs;
-        ChildOverlay.reparent(externalDocs, impl, this);
-        this.extensions = impl.extensions;
-        ChildOverlay.reparent(extensions, impl, this);
-    }
-
-    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static OverlayFactory<Tag> factory = new PropertiesOverlayFactory<Tag>() {
+    public static OverlayFactory<Tag> factory = new OverlayFactory<Tag>() {
 
         @Override
         protected Class<? extends IJsonOverlay<? super Tag>> getOverlayClass() {

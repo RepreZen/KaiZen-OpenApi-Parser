@@ -11,7 +11,6 @@ import com.fasterxml.jackson.core.JsonPointer;
 import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import com.reprezen.kaizen.oasparser.ovl3.SchemaImpl;
-import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay.PropertiesOverlayFactory;
 import com.reprezen.kaizen.oasparser.model3.Example;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
@@ -1330,98 +1329,8 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
         extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }
 
-    @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void copyInPlace(Schema from) {
-        super.copyInPlace(from);
-        SchemaImpl impl = (SchemaImpl) from;
-        this.title = impl.title;
-        ChildOverlay.reparent(title, impl, this);
-        this.multipleOf = impl.multipleOf;
-        ChildOverlay.reparent(multipleOf, impl, this);
-        this.maximum = impl.maximum;
-        ChildOverlay.reparent(maximum, impl, this);
-        this.exclusiveMaximum = impl.exclusiveMaximum;
-        ChildOverlay.reparent(exclusiveMaximum, impl, this);
-        this.minimum = impl.minimum;
-        ChildOverlay.reparent(minimum, impl, this);
-        this.exclusiveMinimum = impl.exclusiveMinimum;
-        ChildOverlay.reparent(exclusiveMinimum, impl, this);
-        this.maxLength = impl.maxLength;
-        ChildOverlay.reparent(maxLength, impl, this);
-        this.minLength = impl.minLength;
-        ChildOverlay.reparent(minLength, impl, this);
-        this.pattern = impl.pattern;
-        ChildOverlay.reparent(pattern, impl, this);
-        this.maxItems = impl.maxItems;
-        ChildOverlay.reparent(maxItems, impl, this);
-        this.minItems = impl.minItems;
-        ChildOverlay.reparent(minItems, impl, this);
-        this.uniqueItems = impl.uniqueItems;
-        ChildOverlay.reparent(uniqueItems, impl, this);
-        this.maxProperties = impl.maxProperties;
-        ChildOverlay.reparent(maxProperties, impl, this);
-        this.minProperties = impl.minProperties;
-        ChildOverlay.reparent(minProperties, impl, this);
-        this.requiredFields = impl.requiredFields;
-        ChildOverlay.reparent(requiredFields, impl, this);
-        this.enums = impl.enums;
-        ChildOverlay.reparent(enums, impl, this);
-        this.type = impl.type;
-        ChildOverlay.reparent(type, impl, this);
-        this.allOfSchemas = impl.allOfSchemas;
-        ChildOverlay.reparent(allOfSchemas, impl, this);
-        refables.put("allOf", allOfSchemas);
-        this.oneOfSchemas = impl.oneOfSchemas;
-        ChildOverlay.reparent(oneOfSchemas, impl, this);
-        refables.put("oneOf", oneOfSchemas);
-        this.anyOfSchemas = impl.anyOfSchemas;
-        ChildOverlay.reparent(anyOfSchemas, impl, this);
-        refables.put("anyOf", anyOfSchemas);
-        this.notSchema = impl.notSchema;
-        ChildOverlay.reparent(notSchema, impl, this);
-        refables.put("not", notSchema);
-        this.itemsSchema = impl.itemsSchema;
-        ChildOverlay.reparent(itemsSchema, impl, this);
-        refables.put("items", itemsSchema);
-        this.properties = impl.properties;
-        ChildOverlay.reparent(properties, impl, this);
-        refables.put("properties", properties);
-        this.additionalPropertiesSchema = impl.additionalPropertiesSchema;
-        ChildOverlay.reparent(additionalPropertiesSchema, impl, this);
-        refables.put("additionalProperties", additionalPropertiesSchema);
-        this.additionalProperties = impl.additionalProperties;
-        ChildOverlay.reparent(additionalProperties, impl, this);
-        this.description = impl.description;
-        ChildOverlay.reparent(description, impl, this);
-        this.format = impl.format;
-        ChildOverlay.reparent(format, impl, this);
-        this.defaultValue = impl.defaultValue;
-        ChildOverlay.reparent(defaultValue, impl, this);
-        this.nullable = impl.nullable;
-        ChildOverlay.reparent(nullable, impl, this);
-        this.discriminator = impl.discriminator;
-        ChildOverlay.reparent(discriminator, impl, this);
-        this.readOnly = impl.readOnly;
-        ChildOverlay.reparent(readOnly, impl, this);
-        this.writeOnly = impl.writeOnly;
-        ChildOverlay.reparent(writeOnly, impl, this);
-        this.xml = impl.xml;
-        ChildOverlay.reparent(xml, impl, this);
-        this.externalDocs = impl.externalDocs;
-        ChildOverlay.reparent(externalDocs, impl, this);
-        this.examples = impl.examples;
-        ChildOverlay.reparent(examples, impl, this);
-        this.example = impl.example;
-        ChildOverlay.reparent(example, impl, this);
-        this.deprecated = impl.deprecated;
-        ChildOverlay.reparent(deprecated, impl, this);
-        this.extensions = impl.extensions;
-        ChildOverlay.reparent(extensions, impl, this);
-    }
-
-    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static OverlayFactory<Schema> factory = new PropertiesOverlayFactory<Schema>() {
+    public static OverlayFactory<Schema> factory = new OverlayFactory<Schema>() {
 
         @Override
         protected Class<? extends IJsonOverlay<? super Schema>> getOverlayClass() {

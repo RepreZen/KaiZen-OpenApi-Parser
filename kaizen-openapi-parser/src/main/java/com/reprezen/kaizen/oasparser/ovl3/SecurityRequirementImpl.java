@@ -8,9 +8,11 @@ import com.reprezen.kaizen.oasparser.model3.SecurityParameter;
 import java.util.stream.Collectors;
 import com.reprezen.kaizen.oasparser.model3.*;
 import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import com.fasterxml.jackson.core.JsonPointer;
+import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay.PropertiesOverlayFactory;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -83,8 +85,17 @@ public class SecurityRequirementImpl extends PropertiesOverlay<SecurityRequireme
         requirements = createChildMap("", this, SecurityParameterImpl.factory, "[a-zA-Z0-9\\._-]+");
     }
 
+    @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static OverlayFactory<SecurityRequirement> factory = new OverlayFactory<SecurityRequirement>() {
+    protected void copyInPlace(SecurityRequirement from) {
+        super.copyInPlace(from);
+        SecurityRequirementImpl impl = (SecurityRequirementImpl) from;
+        this.requirements = impl.requirements;
+        ChildOverlay.reparent(requirements, impl, this);
+    }
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public static OverlayFactory<SecurityRequirement> factory = new PropertiesOverlayFactory<SecurityRequirement>() {
 
         @Override
         protected Class<? extends IJsonOverlay<? super SecurityRequirement>> getOverlayClass() {

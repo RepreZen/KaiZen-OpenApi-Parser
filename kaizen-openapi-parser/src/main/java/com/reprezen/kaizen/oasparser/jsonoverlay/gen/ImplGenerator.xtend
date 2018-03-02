@@ -25,11 +25,12 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay
 import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay
 import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory
+import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay.PropertiesOverlayFactory
 import com.reprezen.kaizen.oasparser.jsonoverlay.Reference
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry
+import com.reprezen.kaizen.oasparser.jsonoverlay.gen.SimpleJavaGenerator.Member
 import com.reprezen.kaizen.oasparser.jsonoverlay.gen.TypeData.Field
 import com.reprezen.kaizen.oasparser.jsonoverlay.gen.TypeData.Type
-import com.reprezen.kaizen.oasparser.jsonoverlay.gen.SimpleJavaGenerator.Member
 import java.io.File
 import java.util.Collection
 import java.util.Map
@@ -64,6 +65,7 @@ class ImplGenerator extends TypeGenerator {
 			members.add(type.enumFactoryMember)
 		} else {
 			members.add(getElaborateChildrenMethod(type))
+			members.add(getCopyInPlaceMethod(type))
 			members.addAll(getFactoryMembers(type))
 		}
 		return members
@@ -333,6 +335,21 @@ class ImplGenerator extends TypeGenerator {
 		''').override
 	}
 
+	def private Member getCopyInPlaceMethod(Type type) {
+		requireTypes(ChildOverlay)
+		return new Member('''
+			protected void copyInPlace(«type.name» from) {
+				super.copyInPlace(from);
+				«type.implType» impl = («type.implType») from;
+				«FOR f : type.fields.values.filter[!it.noImpl]»
+					this.«f.propertyName» = impl.«f.propertyName»;
+					ChildOverlay.reparent(«f.propertyName», impl, this);
+					«IF f.refable»refables.put("«f.parentPath»", «f.propertyName»);«ENDIF»
+				«ENDFOR»
+			}
+		''').override
+	}
+
 	def private Member getEnumFactoryMember(Type type) {
 		requireTypes(OverlayFactory, IJsonOverlay, JsonOverlay, JsonNode, ReferenceRegistry)
 		return new Member('''
@@ -363,9 +380,9 @@ class ImplGenerator extends TypeGenerator {
 	}
 
 	def private Member getFactoryMember(Type type) {
-		requireTypes(OverlayFactory, JsonNode, ReferenceRegistry, IJsonOverlay)
+		requireTypes(OverlayFactory, PropertiesOverlayFactory, JsonNode, ReferenceRegistry, IJsonOverlay)
 		return new Member('''
-			public static OverlayFactory<«type.name»> factory = new OverlayFactory<«type.name»>(){
+			public static OverlayFactory<«type.name»> factory = new PropertiesOverlayFactory<«type.name»>(){
 				@Override
 				protected Class<? extends IJsonOverlay<? super «type.name»>> getOverlayClass() {
 					return «type.implType».class;

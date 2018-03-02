@@ -11,6 +11,7 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import com.fasterxml.jackson.core.JsonPointer;
+import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay.PropertiesOverlayFactory;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -153,8 +154,23 @@ public class ContactImpl extends PropertiesOverlay<Contact> implements Contact {
         extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }
 
+    @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static OverlayFactory<Contact> factory = new OverlayFactory<Contact>() {
+    protected void copyInPlace(Contact from) {
+        super.copyInPlace(from);
+        ContactImpl impl = (ContactImpl) from;
+        this.name = impl.name;
+        ChildOverlay.reparent(name, impl, this);
+        this.url = impl.url;
+        ChildOverlay.reparent(url, impl, this);
+        this.email = impl.email;
+        ChildOverlay.reparent(email, impl, this);
+        this.extensions = impl.extensions;
+        ChildOverlay.reparent(extensions, impl, this);
+    }
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public static OverlayFactory<Contact> factory = new PropertiesOverlayFactory<Contact>() {
 
         @Override
         protected Class<? extends IJsonOverlay<? super Contact>> getOverlayClass() {

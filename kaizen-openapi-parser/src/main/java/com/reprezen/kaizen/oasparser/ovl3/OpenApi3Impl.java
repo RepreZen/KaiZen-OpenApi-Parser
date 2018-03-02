@@ -45,6 +45,7 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import com.reprezen.kaizen.oasparser.model3.Response;
 import com.reprezen.kaizen.oasparser.ovl3.SchemaImpl;
 import com.reprezen.kaizen.oasparser.model3.RequestBody;
+import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay.PropertiesOverlayFactory;
 import com.reprezen.kaizen.oasparser.model3.Example;
 import com.reprezen.kaizen.oasparser.model3.Path;
 import com.reprezen.kaizen.oasparser.model3.SecurityRequirement;
@@ -1128,8 +1129,63 @@ public class OpenApi3Impl extends PropertiesOverlay<OpenApi3> implements OpenApi
         extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }
 
+    @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static OverlayFactory<OpenApi3> factory = new OverlayFactory<OpenApi3>() {
+    protected void copyInPlace(OpenApi3 from) {
+        super.copyInPlace(from);
+        OpenApi3Impl impl = (OpenApi3Impl) from;
+        this.openApi = impl.openApi;
+        ChildOverlay.reparent(openApi, impl, this);
+        this.info = impl.info;
+        ChildOverlay.reparent(info, impl, this);
+        this.servers = impl.servers;
+        ChildOverlay.reparent(servers, impl, this);
+        this.paths = impl.paths;
+        ChildOverlay.reparent(paths, impl, this);
+        refables.put("paths", paths);
+        this.pathsExtensions = impl.pathsExtensions;
+        ChildOverlay.reparent(pathsExtensions, impl, this);
+        this.schemas = impl.schemas;
+        ChildOverlay.reparent(schemas, impl, this);
+        refables.put("components/schemas", schemas);
+        this.responses = impl.responses;
+        ChildOverlay.reparent(responses, impl, this);
+        refables.put("components/responses", responses);
+        this.parameters = impl.parameters;
+        ChildOverlay.reparent(parameters, impl, this);
+        refables.put("components/parameters", parameters);
+        this.examples = impl.examples;
+        ChildOverlay.reparent(examples, impl, this);
+        refables.put("components/examples", examples);
+        this.requestBodies = impl.requestBodies;
+        ChildOverlay.reparent(requestBodies, impl, this);
+        refables.put("components/requestBodies", requestBodies);
+        this.headers = impl.headers;
+        ChildOverlay.reparent(headers, impl, this);
+        refables.put("components/headers", headers);
+        this.securitySchemes = impl.securitySchemes;
+        ChildOverlay.reparent(securitySchemes, impl, this);
+        refables.put("components/securitySchemes", securitySchemes);
+        this.links = impl.links;
+        ChildOverlay.reparent(links, impl, this);
+        refables.put("components/links", links);
+        this.callbacks = impl.callbacks;
+        ChildOverlay.reparent(callbacks, impl, this);
+        refables.put("components/callbacks", callbacks);
+        this.componentsExtensions = impl.componentsExtensions;
+        ChildOverlay.reparent(componentsExtensions, impl, this);
+        this.securityRequirements = impl.securityRequirements;
+        ChildOverlay.reparent(securityRequirements, impl, this);
+        this.tags = impl.tags;
+        ChildOverlay.reparent(tags, impl, this);
+        this.externalDocs = impl.externalDocs;
+        ChildOverlay.reparent(externalDocs, impl, this);
+        this.extensions = impl.extensions;
+        ChildOverlay.reparent(extensions, impl, this);
+    }
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public static OverlayFactory<OpenApi3> factory = new PropertiesOverlayFactory<OpenApi3>() {
 
         @Override
         protected Class<? extends IJsonOverlay<? super OpenApi3>> getOverlayClass() {

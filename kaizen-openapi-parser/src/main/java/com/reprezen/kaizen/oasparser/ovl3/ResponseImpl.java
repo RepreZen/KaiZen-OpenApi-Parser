@@ -1,7 +1,7 @@
 package com.reprezen.kaizen.oasparser.ovl3;
 
-import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildMapOverlay;
 import com.reprezen.kaizen.oasparser.ovl3.HeaderImpl;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry;
@@ -13,10 +13,11 @@ import com.reprezen.kaizen.oasparser.model3.Link;
 import com.reprezen.kaizen.oasparser.model3.*;
 import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
+import com.fasterxml.jackson.core.JsonPointer;
 import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
-import com.fasterxml.jackson.core.JsonPointer;
 import com.reprezen.kaizen.oasparser.model3.MediaType;
+import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay.PropertiesOverlayFactory;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -285,8 +286,27 @@ public class ResponseImpl extends PropertiesOverlay<Response> implements Respons
         extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }
 
+    @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static OverlayFactory<Response> factory = new OverlayFactory<Response>() {
+    protected void copyInPlace(Response from) {
+        super.copyInPlace(from);
+        ResponseImpl impl = (ResponseImpl) from;
+        this.description = impl.description;
+        ChildOverlay.reparent(description, impl, this);
+        this.headers = impl.headers;
+        ChildOverlay.reparent(headers, impl, this);
+        refables.put("headers", headers);
+        this.contentMediaTypes = impl.contentMediaTypes;
+        ChildOverlay.reparent(contentMediaTypes, impl, this);
+        this.links = impl.links;
+        ChildOverlay.reparent(links, impl, this);
+        refables.put("links", links);
+        this.extensions = impl.extensions;
+        ChildOverlay.reparent(extensions, impl, this);
+    }
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public static OverlayFactory<Response> factory = new PropertiesOverlayFactory<Response>() {
 
         @Override
         protected Class<? extends IJsonOverlay<? super Response>> getOverlayClass() {

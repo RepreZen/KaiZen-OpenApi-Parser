@@ -11,6 +11,7 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import com.fasterxml.jackson.core.JsonPointer;
+import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay.PropertiesOverlayFactory;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -247,8 +248,27 @@ public class OAuthFlowImpl extends PropertiesOverlay<OAuthFlow> implements OAuth
         extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }
 
+    @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static OverlayFactory<OAuthFlow> factory = new OverlayFactory<OAuthFlow>() {
+    protected void copyInPlace(OAuthFlow from) {
+        super.copyInPlace(from);
+        OAuthFlowImpl impl = (OAuthFlowImpl) from;
+        this.authorizationUrl = impl.authorizationUrl;
+        ChildOverlay.reparent(authorizationUrl, impl, this);
+        this.tokenUrl = impl.tokenUrl;
+        ChildOverlay.reparent(tokenUrl, impl, this);
+        this.refreshUrl = impl.refreshUrl;
+        ChildOverlay.reparent(refreshUrl, impl, this);
+        this.scopes = impl.scopes;
+        ChildOverlay.reparent(scopes, impl, this);
+        this.scopesExtensions = impl.scopesExtensions;
+        ChildOverlay.reparent(scopesExtensions, impl, this);
+        this.extensions = impl.extensions;
+        ChildOverlay.reparent(extensions, impl, this);
+    }
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public static OverlayFactory<OAuthFlow> factory = new PropertiesOverlayFactory<OAuthFlow>() {
 
         @Override
         protected Class<? extends IJsonOverlay<? super OAuthFlow>> getOverlayClass() {

@@ -14,6 +14,7 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import com.fasterxml.jackson.core.JsonPointer;
+import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay.PropertiesOverlayFactory;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -274,8 +275,29 @@ public class LinkImpl extends PropertiesOverlay<Link> implements Link {
         extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
     }
 
+    @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static OverlayFactory<Link> factory = new OverlayFactory<Link>() {
+    protected void copyInPlace(Link from) {
+        super.copyInPlace(from);
+        LinkImpl impl = (LinkImpl) from;
+        this.operationId = impl.operationId;
+        ChildOverlay.reparent(operationId, impl, this);
+        this.operationRef = impl.operationRef;
+        ChildOverlay.reparent(operationRef, impl, this);
+        this.parameters = impl.parameters;
+        ChildOverlay.reparent(parameters, impl, this);
+        this.headers = impl.headers;
+        ChildOverlay.reparent(headers, impl, this);
+        this.description = impl.description;
+        ChildOverlay.reparent(description, impl, this);
+        this.server = impl.server;
+        ChildOverlay.reparent(server, impl, this);
+        this.extensions = impl.extensions;
+        ChildOverlay.reparent(extensions, impl, this);
+    }
+
+    @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
+    public static OverlayFactory<Link> factory = new PropertiesOverlayFactory<Link>() {
 
         @Override
         protected Class<? extends IJsonOverlay<? super Link>> getOverlayClass() {

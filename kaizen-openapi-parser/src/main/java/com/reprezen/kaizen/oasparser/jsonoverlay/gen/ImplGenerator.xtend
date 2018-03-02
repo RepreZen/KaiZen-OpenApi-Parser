@@ -26,6 +26,7 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay
 import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay
 import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory
+import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay.PropertiesOverlayFactory
 import com.reprezen.kaizen.oasparser.jsonoverlay.Reference
 import com.reprezen.kaizen.oasparser.jsonoverlay.ReferenceRegistry
 import com.reprezen.kaizen.oasparser.jsonoverlay.gen.SimpleJavaGenerator.Member
@@ -351,10 +352,10 @@ class ImplGenerator extends TypeGenerator {
 	}
 
 	def private Member getEnumFactoryMember(Type type) {
-		requireTypes(OverlayFactory, IJsonOverlay, JsonOverlay, JsonNode, ReferenceRegistry,
+		requireTypes(OverlayFactory, PropertiesOverlayFactory, IJsonOverlay, JsonOverlay, JsonNode, ReferenceRegistry,
 			JsonNodeFactory)
 		return new Member('''
-			public static OverlayFactory<«type.name»> factory = new OverlayFactory<«type.name»>() {
+			public static OverlayFactory<«type.name»> factory = new PropertiesOverlayFactory<«type.name»>() {
 				@Override
 				protected Class<? extends IJsonOverlay<? super «type.name»>> getOverlayClass() {
 					return «type.implType».class;
@@ -382,9 +383,9 @@ class ImplGenerator extends TypeGenerator {
 	}
 
 	def private Member getFactoryMember(Type type) {
-		requireTypes(OverlayFactory, JsonNode, ReferenceRegistry, IJsonOverlay)
+		requireTypes(OverlayFactory, PropertiesOverlayFactory, JsonNode, ReferenceRegistry, IJsonOverlay)
 		return new Member('''
-			public static OverlayFactory<«type.name»> factory = new OverlayFactory<«type.name»>(){
+			public static OverlayFactory<«type.name»> factory = new PropertiesOverlayFactory<«type.name»>(){
 				@Override
 				protected Class<? extends IJsonOverlay<? super «type.name»>> getOverlayClass() {
 					return «type.implType».class;
@@ -417,14 +418,14 @@ class ImplGenerator extends TypeGenerator {
 					JsonOverlay<«type.name»> castOverlay = (JsonOverlay<«type.name»>) overlay;
 					return castOverlay;
 				}
-				
-				«IF type.discriminator !== null»
-					@Override
-					protected getDiscriminator() {
-						return "«type.discriminator»";
-					}
-				«ENDIF»
-			};
+			
+				«IF type.rootNodeType == "array"»
+				@Override
+				protected JsonNode getPlaceholderJsonNode() {
+					return JsonNodeFactory.instance.arrayNode();
+				}
+				«ENDIF» 
+			};	
 		''')
 	}
 

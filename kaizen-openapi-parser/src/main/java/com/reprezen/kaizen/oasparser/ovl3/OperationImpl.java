@@ -15,6 +15,7 @@ import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import com.reprezen.kaizen.oasparser.model3.Response;
 import com.reprezen.kaizen.oasparser.model3.RequestBody;
+import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay.PropertiesOverlayFactory;
 import com.reprezen.kaizen.oasparser.model3.Parameter;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
@@ -769,7 +770,7 @@ public class OperationImpl extends PropertiesOverlay<Operation> implements Opera
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static OverlayFactory<Operation> factory = new OverlayFactory<Operation>() {
+    public static OverlayFactory<Operation> factory = new PropertiesOverlayFactory<Operation>() {
 
         @Override
         protected Class<? extends IJsonOverlay<? super Operation>> getOverlayClass() {

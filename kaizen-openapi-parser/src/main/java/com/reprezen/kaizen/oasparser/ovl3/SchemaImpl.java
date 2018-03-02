@@ -11,6 +11,7 @@ import com.fasterxml.jackson.core.JsonPointer;
 import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import com.reprezen.kaizen.oasparser.ovl3.SchemaImpl;
+import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay.PropertiesOverlayFactory;
 import com.reprezen.kaizen.oasparser.model3.Example;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
@@ -1420,7 +1421,7 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static OverlayFactory<Schema> factory = new OverlayFactory<Schema>() {
+    public static OverlayFactory<Schema> factory = new PropertiesOverlayFactory<Schema>() {
 
         @Override
         protected Class<? extends IJsonOverlay<? super Schema>> getOverlayClass() {

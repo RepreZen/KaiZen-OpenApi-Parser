@@ -12,6 +12,7 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import com.fasterxml.jackson.core.JsonPointer;
+import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay.PropertiesOverlayFactory;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -232,7 +233,7 @@ public class XmlImpl extends PropertiesOverlay<Xml> implements Xml {
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static OverlayFactory<Xml> factory = new OverlayFactory<Xml>() {
+    public static OverlayFactory<Xml> factory = new PropertiesOverlayFactory<Xml>() {
 
         @Override
         protected Class<? extends IJsonOverlay<? super Xml>> getOverlayClass() {

@@ -13,6 +13,7 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import com.fasterxml.jackson.core.JsonPointer;
+import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay.PropertiesOverlayFactory;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -244,7 +245,7 @@ public class ServerImpl extends PropertiesOverlay<Server> implements Server {
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static OverlayFactory<Server> factory = new OverlayFactory<Server>() {
+    public static OverlayFactory<Server> factory = new PropertiesOverlayFactory<Server>() {
 
         @Override
         protected Class<? extends IJsonOverlay<? super Server>> getOverlayClass() {

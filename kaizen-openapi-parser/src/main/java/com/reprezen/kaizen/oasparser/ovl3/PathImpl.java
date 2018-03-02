@@ -9,6 +9,7 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
 import com.fasterxml.jackson.core.JsonPointer;
 import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
+import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay.PropertiesOverlayFactory;
 import com.reprezen.kaizen.oasparser.model3.Parameter;
 import java.util.Map;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
@@ -459,7 +460,7 @@ public class PathImpl extends PropertiesOverlay<Path> implements Path {
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static OverlayFactory<Path> factory = new OverlayFactory<Path>() {
+    public static OverlayFactory<Path> factory = new PropertiesOverlayFactory<Path>() {
 
         @Override
         protected Class<? extends IJsonOverlay<? super Path>> getOverlayClass() {

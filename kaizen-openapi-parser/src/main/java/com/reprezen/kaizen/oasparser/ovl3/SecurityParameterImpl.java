@@ -11,6 +11,7 @@ import com.reprezen.kaizen.oasparser.jsonoverlay.ChildOverlay;
 import javax.annotation.Generated;
 import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
 import com.fasterxml.jackson.core.JsonPointer;
+import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay.PropertiesOverlayFactory;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.reprezen.kaizen.oasparser.jsonoverlay.OverlayFactory;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -111,7 +112,7 @@ public class SecurityParameterImpl extends PropertiesOverlay<SecurityParameter> 
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    public static OverlayFactory<SecurityParameter> factory = new OverlayFactory<SecurityParameter>() {
+    public static OverlayFactory<SecurityParameter> factory = new PropertiesOverlayFactory<SecurityParameter>() {
 
         @Override
         protected Class<? extends IJsonOverlay<? super SecurityParameter>> getOverlayClass() {
@@ -132,6 +133,11 @@ public class SecurityParameterImpl extends PropertiesOverlay<SecurityParameter> 
             overlay = new SecurityParameterImpl(json, parent, refReg);
             @SuppressWarnings("unchecked") JsonOverlay<SecurityParameter> castOverlay = (JsonOverlay<SecurityParameter>) overlay;
             return castOverlay;
+        }
+
+        @Override
+        protected JsonNode getPlaceholderJsonNode() {
+            return JsonNodeFactory.instance.arrayNode();
         }
     };
 

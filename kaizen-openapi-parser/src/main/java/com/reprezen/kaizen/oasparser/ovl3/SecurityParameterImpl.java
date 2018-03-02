@@ -104,8 +104,8 @@ public class SecurityParameterImpl extends PropertiesOverlay<SecurityParameter> 
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void copyChildProperties(JsonOverlay<?> from) {
-        super.copyChildProperties(from);
+    protected void copyInPlace(SecurityParameter from) {
+        super.copyInPlace(from);
         SecurityParameterImpl impl = (SecurityParameterImpl) from;
         this.parameters = impl.parameters;
         ChildOverlay.reparent(parameters, impl, this);

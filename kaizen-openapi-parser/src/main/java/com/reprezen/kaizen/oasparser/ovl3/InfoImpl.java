@@ -229,8 +229,8 @@ public class InfoImpl extends PropertiesOverlay<Info> implements Info {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void copyChildProperties(JsonOverlay<?> from) {
-        super.copyChildProperties(from);
+    protected void copyInPlace(Info from) {
+        super.copyInPlace(from);
         InfoImpl impl = (InfoImpl) from;
         this.title = impl.title;
         ChildOverlay.reparent(title, impl, this);

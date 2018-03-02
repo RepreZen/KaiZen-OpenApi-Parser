@@ -441,8 +441,8 @@ public class PathImpl extends PropertiesOverlay<Path> implements Path {
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void copyChildProperties(JsonOverlay<?> from) {
-        super.copyChildProperties(from);
+    protected void copyInPlace(Path from) {
+        super.copyInPlace(from);
         PathImpl impl = (PathImpl) from;
         this.summary = impl.summary;
         ChildOverlay.reparent(summary, impl, this);

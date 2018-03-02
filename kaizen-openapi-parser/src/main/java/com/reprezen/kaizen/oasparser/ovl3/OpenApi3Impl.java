@@ -1131,8 +1131,8 @@ public class OpenApi3Impl extends PropertiesOverlay<OpenApi3> implements OpenApi
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void copyChildProperties(JsonOverlay<?> from) {
-        super.copyChildProperties(from);
+    protected void copyInPlace(OpenApi3 from) {
+        super.copyInPlace(from);
         OpenApi3Impl impl = (OpenApi3Impl) from;
         this.openApi = impl.openApi;
         ChildOverlay.reparent(openApi, impl, this);

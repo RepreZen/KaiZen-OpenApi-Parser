@@ -226,8 +226,8 @@ public class EncodingPropertyImpl extends PropertiesOverlay<EncodingProperty> im
 
     @Override
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
-    protected void copyChildProperties(JsonOverlay<?> from) {
-        super.copyChildProperties(from);
+    protected void copyInPlace(EncodingProperty from) {
+        super.copyInPlace(from);
         EncodingPropertyImpl impl = (EncodingPropertyImpl) from;
         this.contentType = impl.contentType;
         ChildOverlay.reparent(contentType, impl, this);

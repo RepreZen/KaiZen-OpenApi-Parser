@@ -192,6 +192,11 @@ public abstract class PropertiesOverlay<V extends IPropertiesOverlay<V>> extends
         super.copyOverlayData(from);
         PropertiesOverlay<?> impl = (PropertiesOverlay<?>) from;
         this.children = impl.children;
+        // super copies value from `from` to this, but for a PropertiesOverlay, the the overlay and its value
+        // need to be the same object, so we undo super's copy here
+        @SuppressWarnings("unchecked")
+		V castValue = (V) this;
+		this.value = castValue;
     }
 
     public abstract static class PropertiesOverlayFactory<V> extends OverlayFactory<V> {

@@ -183,4 +183,8 @@ public abstract class PropertiesOverlay<V extends IPropertiesOverlay<V>> extends
         return null;
     }
 
+	@Override
+	protected void elaborate() {
+		maybeElaborateChildrenAtCreation();
+	}
 }

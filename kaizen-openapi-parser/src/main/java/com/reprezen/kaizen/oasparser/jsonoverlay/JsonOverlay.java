@@ -138,6 +138,9 @@ public abstract class JsonOverlay<V> implements IJsonOverlay<V> {
 
 	protected abstract V fromJson(JsonNode json);
 
+	protected void elaborate() {
+	}
+	
 	private static final SerializationOptions emptyOptions = new SerializationOptions();
 
 	@Override

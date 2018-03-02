@@ -28,16 +28,23 @@ public class ListOverlay<V> extends JsonOverlay<Collection<V>> {
             ReferenceRegistry refReg) {
         super(value, parent, refReg);
         this.itemFactory = itemFactory;
-        fillWithValues();
     }
 
     public ListOverlay(JsonNode json, JsonOverlay<?> parent, OverlayFactory<V> itemFactory, ReferenceRegistry refReg) {
         super(json, parent, refReg);
         this.itemFactory = itemFactory;
-        fillWithJson();
     }
 
-    private void fillWithValues() {
+    @Override
+	protected void elaborate() {
+    	if (json != null) {
+    		fillWithJson();
+    	} else {
+    		fillWithValues();
+    	}
+	}
+
+	private void fillWithValues() {
         overlays.clear();
         if (value != null) {
             for (V item : value) {

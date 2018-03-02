@@ -22,13 +22,11 @@ public class ExampleImpl extends PropertiesOverlay<Example> implements Example {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public ExampleImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
-        super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public ExampleImpl(Example example, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(example, parent, refReg);
-        super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

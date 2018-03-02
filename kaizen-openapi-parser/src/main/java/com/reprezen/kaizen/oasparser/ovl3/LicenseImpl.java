@@ -24,13 +24,11 @@ public class LicenseImpl extends PropertiesOverlay<License> implements License {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public LicenseImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
-        super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public LicenseImpl(License license, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(license, parent, refReg);
-        super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

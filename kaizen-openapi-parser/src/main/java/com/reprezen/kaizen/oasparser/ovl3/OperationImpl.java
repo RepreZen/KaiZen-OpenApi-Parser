@@ -41,13 +41,11 @@ public class OperationImpl extends PropertiesOverlay<Operation> implements Opera
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public OperationImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
-        super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public OperationImpl(Operation operation, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(operation, parent, refReg);
-        super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

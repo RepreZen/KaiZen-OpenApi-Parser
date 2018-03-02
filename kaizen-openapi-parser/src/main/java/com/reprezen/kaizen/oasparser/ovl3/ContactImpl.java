@@ -22,13 +22,11 @@ public class ContactImpl extends PropertiesOverlay<Contact> implements Contact {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public ContactImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
-        super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public ContactImpl(Contact contact, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(contact, parent, refReg);
-        super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

@@ -24,13 +24,11 @@ public class ServerImpl extends PropertiesOverlay<Server> implements Server {
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public ServerImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
-        super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public ServerImpl(Server server, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(server, parent, refReg);
-        super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

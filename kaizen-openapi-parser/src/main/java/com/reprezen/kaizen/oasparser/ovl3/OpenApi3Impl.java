@@ -106,13 +106,11 @@ public class OpenApi3Impl extends PropertiesOverlay<OpenApi3> implements OpenApi
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public OpenApi3Impl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
-        super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public OpenApi3Impl(OpenApi3 openApi3, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(openApi3, parent, refReg);
-        super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

@@ -22,13 +22,11 @@ public class ExternalDocsImpl extends PropertiesOverlay<ExternalDocs> implements
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public ExternalDocsImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(json, parent, refReg);
-        super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")
     public ExternalDocsImpl(ExternalDocs externalDocs, JsonOverlay<?> parent, ReferenceRegistry refReg) {
         super(externalDocs, parent, refReg);
-        super.maybeElaborateChildrenAtCreation();
     }
 
     @Generated("com.reprezen.kaizen.oasparser.jsonoverlay.gen.CodeGenerator")

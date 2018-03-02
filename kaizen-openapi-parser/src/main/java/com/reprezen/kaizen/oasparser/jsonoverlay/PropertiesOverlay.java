@@ -198,11 +198,4 @@ public abstract class PropertiesOverlay<V extends IPropertiesOverlay<V>> extends
 		V castValue = (V) this;
 		this.value = castValue;
     }
-
-    public abstract static class PropertiesOverlayFactory<V> extends OverlayFactory<V> {
-        @Override
-        protected boolean needPlaceholder() {
-            return true;
-        }
-    }
 }

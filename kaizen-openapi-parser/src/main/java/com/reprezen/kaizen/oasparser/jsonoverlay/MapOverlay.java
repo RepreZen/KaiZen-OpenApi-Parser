@@ -30,7 +30,6 @@ public class MapOverlay<V> extends JsonOverlay<Map<String, V>> {
         super(value, parent, refReg);
         this.valueFactory = valueFactory;
         this.keyPattern = keyPattern;
-        fillWithValues();
     }
 
     public MapOverlay(JsonNode json, JsonOverlay<?> parent, OverlayFactory<V> valueFactory, Pattern keyPattern,
@@ -38,10 +37,18 @@ public class MapOverlay<V> extends JsonOverlay<Map<String, V>> {
         super(json, parent, refReg);
         this.valueFactory = valueFactory;
         this.keyPattern = keyPattern;
-        fillWithJson();
     }
 
-    private void fillWithValues() {
+    @Override
+	protected void elaborate() {
+    	if (json != null) {
+    		fillWithJson();
+    	} else {
+    		fillWithValues();
+    	}
+	}
+
+	private void fillWithValues() {
         overlays.clear();
         if (value != null) {
             for (Entry<String, V> entry : value.entrySet()) {

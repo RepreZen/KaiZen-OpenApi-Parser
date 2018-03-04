@@ -104,17 +104,11 @@ class ImplGenerator extends TypeGenerator {
 		members.addMember('''
 			public «type.implType»(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
 				super(json, parent, refReg);
-				«IF !type.isEnum»
-					super.maybeElaborateChildrenAtCreation();
-				«ENDIF»
 			}
 		''')
 		members.addMember('''
 			public «type.implType»(«type.name» «type.lcName», JsonOverlay<?> parent, ReferenceRegistry refReg) {
 				super(«type.lcName», parent, refReg);
-				«IF !type.isEnum»
-					super.maybeElaborateChildrenAtCreation();
-				«ENDIF»			
 			}
 		''')
 		return members

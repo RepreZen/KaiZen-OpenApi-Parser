@@ -10,6 +10,9 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val;
 
+import java.util.IdentityHashMap;
+import java.util.Map;
+
 import com.google.inject.Inject;
 import com.reprezen.kaizen.oasparser.jsonoverlay.IPropertiesOverlay;
 
@@ -19,16 +22,39 @@ public abstract class ObjectValidatorBase<T> extends ValidatorBase<T> {
 
 	public abstract void validateObject(T object, ValidationResults results);
 
+	protected static ThreadLocal<ValidationVisits> validationVisits = new ThreadLocal<ValidationVisits>();
+
+	protected static boolean visit(Object obj) {
+		if (validationVisits.get() == null) {
+			validationVisits.set(new ValidationVisits());
+		}
+		return validationVisits.get().visit(obj);
+	}
+
 	@Override
 	public void validate(T value, ValidationResults results) {
-		@SuppressWarnings("unchecked")
-		IPropertiesOverlay<T> propValue = (IPropertiesOverlay<T>) value;
-		if (propValue.isElaborated()) {
-			validateObject(value, results);
-			if (implValidator != null) {
-				implValidator.validateImpl(value, results);
+		if (!visit(value)) {
+			@SuppressWarnings("unchecked")
+			IPropertiesOverlay<T> propValue = (IPropertiesOverlay<T>) value;
+			if (propValue.isElaborated()) {
+				validateObject(value, results);
+				if (implValidator != null) {
+					implValidator.validateImpl(value, results);
+				}
 			}
 		}
 	}
 
+	protected static class ValidationVisits {
+		private Map<Object, Object> visits = new IdentityHashMap<Object, Object>();
+
+		public boolean visit(Object obj) {
+			if (visits.containsKey(obj)) {
+				return false;
+			} else {
+				visits.put(obj, obj);
+				return true;
+			}
+		}
+	}
 }

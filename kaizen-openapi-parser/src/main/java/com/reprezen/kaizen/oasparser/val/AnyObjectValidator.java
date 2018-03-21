@@ -10,7 +10,7 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val;
 
-import com.reprezen.kaizen.oasparser.jsonoverlay.ObjectOverlay;
+import com.reprezen.jsonoverlay.ObjectOverlay;
 
 public class AnyObjectValidator extends OverlayValidator<ObjectOverlay> {
 

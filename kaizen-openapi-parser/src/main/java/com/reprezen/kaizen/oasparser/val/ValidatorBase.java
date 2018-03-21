@@ -29,7 +29,7 @@ import javax.mail.internet.InternetAddress;
 import javax.print.attribute.standard.Severity;
 
 import com.google.common.collect.Sets;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
+import com.reprezen.jsonoverlay.JsonOverlay;
 import com.reprezen.kaizen.oasparser.val.oasparser.fake.scheme.Handler;
 
 public abstract class ValidatorBase<T> implements Validator<T> {

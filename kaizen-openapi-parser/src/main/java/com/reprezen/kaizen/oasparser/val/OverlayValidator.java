@@ -16,11 +16,11 @@ import java.util.Collections;
 import java.util.Set;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.ListOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.PropertiesOverlay;
-import com.reprezen.kaizen.oasparser.jsonoverlay.Reference;
+import com.reprezen.jsonoverlay.JsonOverlay;
+import com.reprezen.jsonoverlay.ListOverlay;
+import com.reprezen.jsonoverlay.MapOverlay;
+import com.reprezen.jsonoverlay.PropertiesOverlay;
+import com.reprezen.jsonoverlay.Reference;
 
 public class OverlayValidator<T> extends ValidatorBase<T> {
 

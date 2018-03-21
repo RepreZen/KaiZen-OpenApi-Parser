@@ -11,7 +11,7 @@
 package com.reprezen.kaizen.oasparser.val;
 
 import com.fasterxml.jackson.databind.node.NumericNode;
-import com.reprezen.kaizen.oasparser.jsonoverlay.NumberOverlay;
+import com.reprezen.jsonoverlay.NumberOverlay;
 
 public class NumberValidator extends OverlayValidator<NumberOverlay> {
 

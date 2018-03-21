@@ -23,7 +23,7 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Lists;
-import com.reprezen.kaizen.oasparser.jsonoverlay.JsonOverlay;
+import com.reprezen.jsonoverlay.JsonOverlay;
 
 public class ValidationResults {
 

@@ -11,7 +11,7 @@
 package com.reprezen.kaizen.oasparser.val;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.reprezen.kaizen.oasparser.jsonoverlay.MapOverlay;
+import com.reprezen.jsonoverlay.MapOverlay;
 
 public class MapValidator<T extends MapOverlay<T>> extends OverlayValidator<MapOverlay<T>> {
 

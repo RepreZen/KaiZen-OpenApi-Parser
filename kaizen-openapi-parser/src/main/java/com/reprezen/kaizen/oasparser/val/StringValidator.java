@@ -11,7 +11,7 @@
 package com.reprezen.kaizen.oasparser.val;
 
 import com.fasterxml.jackson.databind.node.TextNode;
-import com.reprezen.kaizen.oasparser.jsonoverlay.StringOverlay;
+import com.reprezen.jsonoverlay.StringOverlay;
 
 public class StringValidator extends OverlayValidator<StringOverlay> {
 

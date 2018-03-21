@@ -14,7 +14,7 @@ import java.util.IdentityHashMap;
 import java.util.Map;
 
 import com.google.inject.Inject;
-import com.reprezen.kaizen.oasparser.jsonoverlay.IPropertiesOverlay;
+import com.reprezen.jsonoverlay.IPropertiesOverlay;
 
 public abstract class ObjectValidatorBase<T> extends ValidatorBase<T> {
 	@Inject(optional = true)

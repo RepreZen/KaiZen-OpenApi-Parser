@@ -13,7 +13,7 @@ package com.reprezen.kaizen.oasparser.val3;
 import static com.reprezen.kaizen.oasparser.val.Messages.m;
 
 import com.google.inject.Inject;
-import com.reprezen.kaizen.oasparser.jsonoverlay.IPropertiesOverlay;
+import com.reprezen.jsonoverlay.IPropertiesOverlay;
 import com.reprezen.kaizen.oasparser.model3.MediaType;
 import com.reprezen.kaizen.oasparser.model3.Parameter;
 import com.reprezen.kaizen.oasparser.model3.Path;

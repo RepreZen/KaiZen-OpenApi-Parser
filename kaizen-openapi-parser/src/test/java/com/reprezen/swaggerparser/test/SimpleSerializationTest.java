@@ -35,6 +35,7 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import com.google.common.base.Charsets;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Queues;
+import com.reprezen.jsonoverlay.Overlay;
 import com.reprezen.jsonoverlay.SerializationOptions.Option;
 import com.reprezen.kaizen.oasparser.OpenApiParser;
 import com.reprezen.kaizen.oasparser.model3.OpenApi3;
@@ -90,7 +91,7 @@ public class SimpleSerializationTest extends Assert {
 		public void serializeExample() throws IOException, JSONException {
 			if (!exampleUrl.toString().contains("callback-example")) {
 				OpenApi3 model = (OpenApi3) new OpenApiParser().parse(exampleUrl);
-				JsonNode serialized = ((OpenApi3Impl) model).toJson();
+				JsonNode serialized = Overlay.toJson((OpenApi3Impl) model);
 				JsonNode expected = yamlMapper.readTree(exampleUrl);
 				JSONAssert.assertEquals(mapper.writeValueAsString(expected), mapper.writeValueAsString(serialized),
 						JSONCompareMode.STRICT);
@@ -104,20 +105,20 @@ public class SimpleSerializationTest extends Assert {
 		public void toJsonNoticesChanges() throws JsonProcessingException {
 			OpenApi3 model = parseLocalModel("simpleTest");
 			assertEquals("simple model", model.getInfo().getTitle());
-			assertEquals("simple model", model.toJson().at("/info/title").asText());
+			assertEquals("simple model", Overlay.toJson(model).at("/info/title").asText());
 			// this changes the overlay value but does not refresh cached JSON - just marks
 			// it as out-of-date
 			model.getInfo().setTitle("changed title");
 			assertEquals("changed title", model.getInfo().getTitle());
-			assertEquals("changed title", model.toJson().at("/info/title").asText());
+			assertEquals("changed title", Overlay.toJson(model).at("/info/title").asText());
 		}
 
 		@Test
 		public void toJsonFollowsRefs() {
 			OpenApi3 model = parseLocalModel("simpleTest");
 			Schema xSchema = model.getSchema("X");
-			assertEquals("#/components/schemas/Y", xSchema.toJson().at("/properties/y/$ref").asText());
-			assertEquals("integer", xSchema.toJson(Option.FOLLOW_REFS).at("/properties/y/type").asText());
+			assertEquals("#/components/schemas/Y", Overlay.toJson(xSchema).at("/properties/y/$ref").asText());
+			assertEquals("integer", Overlay.toJson(xSchema, Option.FOLLOW_REFS).at("/properties/y/type").asText());
 		}
 	}
 

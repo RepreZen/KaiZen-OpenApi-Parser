@@ -15,6 +15,7 @@ import static com.reprezen.kaizen.oasparser.val.Messages.m;
 import java.util.Set;
 
 import com.google.inject.Inject;
+import com.reprezen.jsonoverlay.Overlay;
 import com.reprezen.kaizen.oasparser.model3.EncodingProperty;
 import com.reprezen.kaizen.oasparser.model3.Example;
 import com.reprezen.kaizen.oasparser.model3.MediaType;
@@ -49,7 +50,7 @@ public class MediaTypeValidator extends ObjectValidatorBase<MediaType> {
 		// TODO Q: do allOf, anyOf, oneOf schemas participate? what about
 		// additionalProperties?
 		Schema schema = mediaType.getSchema(false);
-		if (schema.isElaborated()) {
+		if (Overlay.isElaborated(schema)) {
 			Set<String> propNames = schema.getProperties(false).keySet();
 			for (String encodingPropertyName : mediaType.getEncodingProperties(false).keySet()) {
 				if (!propNames.contains(encodingPropertyName)) {

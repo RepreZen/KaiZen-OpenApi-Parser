@@ -1,587 +1,542 @@
 package com.reprezen.kaizen.oasparser.model3;
 
-import com.reprezen.jsonoverlay.IPropertiesOverlay;
-import com.reprezen.kaizen.oasparser.model3.Schema;
-import com.reprezen.jsonoverlay.IModelPart;
-import com.reprezen.kaizen.oasparser.model3.Xml;
-import javax.annotation.Generated;
-import com.reprezen.kaizen.oasparser.model3.Example;
 import java.util.Collection;
 import java.util.Map;
-import com.reprezen.jsonoverlay.Reference;
-import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
 
-public interface Schema extends IPropertiesOverlay<Schema>, IModelPart<OpenApi3, Schema> {
+import javax.annotation.Generated;
 
-    // Title
-    @Generated("com.reprezen.gen.CodeGenerator")
-    String getTitle();
+import com.reprezen.jsonoverlay.IJsonOverlay;
+import com.reprezen.jsonoverlay.IModelPart;
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    String getTitle(boolean elaborate);
+public interface Schema extends IJsonOverlay<Schema>, IModelPart<OpenApi3, Schema> {
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setTitle(String title);
+	// Title
+	@Generated("com.reprezen.gen.CodeGenerator")
+	String getTitle();
 
-    // MultipleOf
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Number getMultipleOf();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	String getTitle(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Number getMultipleOf(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setTitle(String title);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setMultipleOf(Number multipleOf);
+	// MultipleOf
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Number getMultipleOf();
 
-    // Maximum
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Number getMaximum();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Number getMultipleOf(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Number getMaximum(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setMultipleOf(Number multipleOf);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setMaximum(Number maximum);
+	// Maximum
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Number getMaximum();
 
-    // ExclusiveMaximum
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Boolean getExclusiveMaximum();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Number getMaximum(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Boolean getExclusiveMaximum(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setMaximum(Number maximum);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    boolean isExclusiveMaximum();
+	// ExclusiveMaximum
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Boolean getExclusiveMaximum();
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setExclusiveMaximum(Boolean exclusiveMaximum);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Boolean getExclusiveMaximum(boolean elaborate);
 
-    // Minimum
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Number getMinimum();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	boolean isExclusiveMaximum();
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Number getMinimum(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setExclusiveMaximum(Boolean exclusiveMaximum);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setMinimum(Number minimum);
+	// Minimum
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Number getMinimum();
 
-    // ExclusiveMinimum
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Boolean getExclusiveMinimum();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Number getMinimum(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Boolean getExclusiveMinimum(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setMinimum(Number minimum);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    boolean isExclusiveMinimum();
+	// ExclusiveMinimum
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Boolean getExclusiveMinimum();
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setExclusiveMinimum(Boolean exclusiveMinimum);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Boolean getExclusiveMinimum(boolean elaborate);
 
-    // MaxLength
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Integer getMaxLength();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	boolean isExclusiveMinimum();
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Integer getMaxLength(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setExclusiveMinimum(Boolean exclusiveMinimum);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setMaxLength(Integer maxLength);
+	// MaxLength
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Integer getMaxLength();
 
-    // MinLength
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Integer getMinLength();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Integer getMaxLength(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Integer getMinLength(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setMaxLength(Integer maxLength);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setMinLength(Integer minLength);
+	// MinLength
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Integer getMinLength();
 
-    // Pattern
-    @Generated("com.reprezen.gen.CodeGenerator")
-    String getPattern();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Integer getMinLength(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    String getPattern(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setMinLength(Integer minLength);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setPattern(String pattern);
+	// Pattern
+	@Generated("com.reprezen.gen.CodeGenerator")
+	String getPattern();
 
-    // MaxItems
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Integer getMaxItems();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	String getPattern(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Integer getMaxItems(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setPattern(String pattern);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setMaxItems(Integer maxItems);
+	// MaxItems
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Integer getMaxItems();
 
-    // MinItems
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Integer getMinItems();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Integer getMaxItems(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Integer getMinItems(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setMaxItems(Integer maxItems);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setMinItems(Integer minItems);
+	// MinItems
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Integer getMinItems();
 
-    // UniqueItems
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Boolean getUniqueItems();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Integer getMinItems(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Boolean getUniqueItems(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setMinItems(Integer minItems);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    boolean isUniqueItems();
+	// UniqueItems
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Boolean getUniqueItems();
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setUniqueItems(Boolean uniqueItems);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Boolean getUniqueItems(boolean elaborate);
 
-    // MaxProperties
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Integer getMaxProperties();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	boolean isUniqueItems();
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Integer getMaxProperties(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setUniqueItems(Boolean uniqueItems);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setMaxProperties(Integer maxProperties);
+	// MaxProperties
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Integer getMaxProperties();
 
-    // MinProperties
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Integer getMinProperties();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Integer getMaxProperties(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Integer getMinProperties(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setMaxProperties(Integer maxProperties);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setMinProperties(Integer minProperties);
+	// MinProperties
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Integer getMinProperties();
 
-    // RequiredField
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Collection<String> getRequiredFields();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Integer getMinProperties(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Collection<String> getRequiredFields(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setMinProperties(Integer minProperties);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    boolean hasRequiredFields();
+	// RequiredField
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Collection<String> getRequiredFields();
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    String getRequiredField(int index);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Collection<String> getRequiredFields(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setRequiredFields(Collection<String> requiredFields);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	boolean hasRequiredFields();
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setRequiredField(int index, String requiredField);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	String getRequiredField(int index);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void addRequiredField(String requiredField);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setRequiredFields(Collection<String> requiredFields);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void insertRequiredField(int index, String requiredField);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setRequiredField(int index, String requiredField);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void removeRequiredField(int index);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void addRequiredField(String requiredField);
 
-    // Enum
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Collection<Object> getEnums();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void insertRequiredField(int index, String requiredField);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Collection<Object> getEnums(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void removeRequiredField(int index);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    boolean hasEnums();
+	// Enum
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Collection<Object> getEnums();
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Object getEnum(int index);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Collection<Object> getEnums(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setEnums(Collection<Object> enums);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	boolean hasEnums();
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setEnum(int index, Object enumValue);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Object getEnum(int index);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void addEnum(Object enumValue);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setEnums(Collection<Object> enums);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void insertEnum(int index, Object enumValue);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setEnum(int index, Object enumValue);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void removeEnum(int index);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void addEnum(Object enumValue);
 
-    // Type
-    @Generated("com.reprezen.gen.CodeGenerator")
-    String getType();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void insertEnum(int index, Object enumValue);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    String getType(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void removeEnum(int index);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setType(String type);
+	// Type
+	@Generated("com.reprezen.gen.CodeGenerator")
+	String getType();
 
-    // AllOfSchema
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Collection<Schema> getAllOfSchemas();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	String getType(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Collection<Schema> getAllOfSchemas(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setType(String type);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    boolean hasAllOfSchemas();
+	// AllOfSchema
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Collection<Schema> getAllOfSchemas();
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Schema getAllOfSchema(int index);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Collection<Schema> getAllOfSchemas(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setAllOfSchemas(Collection<Schema> allOfSchemas);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	boolean hasAllOfSchemas();
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setAllOfSchema(int index, Schema allOfSchema);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Schema getAllOfSchema(int index);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void addAllOfSchema(Schema allOfSchema);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setAllOfSchemas(Collection<Schema> allOfSchemas);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void insertAllOfSchema(int index, Schema allOfSchema);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setAllOfSchema(int index, Schema allOfSchema);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void removeAllOfSchema(int index);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void addAllOfSchema(Schema allOfSchema);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    boolean isAllOfSchemaReference(int index);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void insertAllOfSchema(int index, Schema allOfSchema);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Reference getAllOfSchemaReference(int index);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void removeAllOfSchema(int index);
 
-    // OneOfSchema
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Collection<Schema> getOneOfSchemas();
+	// OneOfSchema
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Collection<Schema> getOneOfSchemas();
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Collection<Schema> getOneOfSchemas(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Collection<Schema> getOneOfSchemas(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    boolean hasOneOfSchemas();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	boolean hasOneOfSchemas();
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Schema getOneOfSchema(int index);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Schema getOneOfSchema(int index);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setOneOfSchemas(Collection<Schema> oneOfSchemas);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setOneOfSchemas(Collection<Schema> oneOfSchemas);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setOneOfSchema(int index, Schema oneOfSchema);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setOneOfSchema(int index, Schema oneOfSchema);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void addOneOfSchema(Schema oneOfSchema);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void addOneOfSchema(Schema oneOfSchema);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void insertOneOfSchema(int index, Schema oneOfSchema);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void insertOneOfSchema(int index, Schema oneOfSchema);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void removeOneOfSchema(int index);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void removeOneOfSchema(int index);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    boolean isOneOfSchemaReference(int index);
+	// AnyOfSchema
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Collection<Schema> getAnyOfSchemas();
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Reference getOneOfSchemaReference(int index);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Collection<Schema> getAnyOfSchemas(boolean elaborate);
 
-    // AnyOfSchema
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Collection<Schema> getAnyOfSchemas();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	boolean hasAnyOfSchemas();
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Collection<Schema> getAnyOfSchemas(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Schema getAnyOfSchema(int index);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    boolean hasAnyOfSchemas();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setAnyOfSchemas(Collection<Schema> anyOfSchemas);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Schema getAnyOfSchema(int index);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setAnyOfSchema(int index, Schema anyOfSchema);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setAnyOfSchemas(Collection<Schema> anyOfSchemas);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void addAnyOfSchema(Schema anyOfSchema);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setAnyOfSchema(int index, Schema anyOfSchema);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void insertAnyOfSchema(int index, Schema anyOfSchema);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void addAnyOfSchema(Schema anyOfSchema);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void removeAnyOfSchema(int index);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void insertAnyOfSchema(int index, Schema anyOfSchema);
+	// NotSchema
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Schema getNotSchema();
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void removeAnyOfSchema(int index);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Schema getNotSchema(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    boolean isAnyOfSchemaReference(int index);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setNotSchema(Schema notSchema);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Reference getAnyOfSchemaReference(int index);
+	// ItemsSchema
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Schema getItemsSchema();
 
-    // NotSchema
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Schema getNotSchema();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Schema getItemsSchema(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Schema getNotSchema(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setItemsSchema(Schema itemsSchema);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setNotSchema(Schema notSchema);
+	// Property
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Map<String, Schema> getProperties();
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    boolean isNotSchemaReference();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Map<String, Schema> getProperties(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Reference getNotSchemaReference();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	boolean hasProperty(String name);
 
-    // ItemsSchema
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Schema getItemsSchema();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Schema getProperty(String name);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Schema getItemsSchema(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setProperties(Map<String, Schema> properties);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setItemsSchema(Schema itemsSchema);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setProperty(String name, Schema property);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    boolean isItemsSchemaReference();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void removeProperty(String name);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Reference getItemsSchemaReference();
+	// AdditionalPropertiesSchema
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Schema getAdditionalPropertiesSchema();
 
-    // Property
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Map<String, Schema> getProperties();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Schema getAdditionalPropertiesSchema(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Map<String, Schema> getProperties(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setAdditionalPropertiesSchema(Schema additionalPropertiesSchema);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    boolean hasProperty(String name);
+	// AdditionalProperties
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Boolean getAdditionalProperties();
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Schema getProperty(String name);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Boolean getAdditionalProperties(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setProperties(Map<String, Schema> properties);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	boolean isAdditionalProperties();
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setProperty(String name, Schema property);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setAdditionalProperties(Boolean additionalProperties);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void removeProperty(String name);
+	// Description
+	@Generated("com.reprezen.gen.CodeGenerator")
+	String getDescription();
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    boolean isPropertyReference(String name);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	String getDescription(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Reference getPropertyReference(String name);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setDescription(String description);
 
-    // AdditionalPropertiesSchema
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Schema getAdditionalPropertiesSchema();
+	// Format
+	@Generated("com.reprezen.gen.CodeGenerator")
+	String getFormat();
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Schema getAdditionalPropertiesSchema(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	String getFormat(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setAdditionalPropertiesSchema(Schema additionalPropertiesSchema);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setFormat(String format);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    boolean isAdditionalPropertiesSchemaReference();
+	// Default
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Object getDefault();
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Reference getAdditionalPropertiesSchemaReference();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Object getDefault(boolean elaborate);
 
-    // AdditionalProperties
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Boolean getAdditionalProperties();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setDefault(Object defaultValue);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Boolean getAdditionalProperties(boolean elaborate);
+	// Nullable
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Boolean getNullable();
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    boolean isAdditionalProperties();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Boolean getNullable(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setAdditionalProperties(Boolean additionalProperties);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	boolean isNullable();
 
-    // Description
-    @Generated("com.reprezen.gen.CodeGenerator")
-    String getDescription();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setNullable(Boolean nullable);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    String getDescription(boolean elaborate);
+	// Discriminator
+	@Generated("com.reprezen.gen.CodeGenerator")
+	String getDiscriminator();
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setDescription(String description);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	String getDiscriminator(boolean elaborate);
 
-    // Format
-    @Generated("com.reprezen.gen.CodeGenerator")
-    String getFormat();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setDiscriminator(String discriminator);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    String getFormat(boolean elaborate);
+	// ReadOnly
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Boolean getReadOnly();
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setFormat(String format);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Boolean getReadOnly(boolean elaborate);
 
-    // Default
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Object getDefault();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	boolean isReadOnly();
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Object getDefault(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setReadOnly(Boolean readOnly);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setDefault(Object defaultValue);
+	// WriteOnly
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Boolean getWriteOnly();
 
-    // Nullable
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Boolean getNullable();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Boolean getWriteOnly(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Boolean getNullable(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	boolean isWriteOnly();
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    boolean isNullable();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setWriteOnly(Boolean writeOnly);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setNullable(Boolean nullable);
+	// Xml
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Xml getXml();
 
-    // Discriminator
-    @Generated("com.reprezen.gen.CodeGenerator")
-    String getDiscriminator();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Xml getXml(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    String getDiscriminator(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setXml(Xml xml);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setDiscriminator(String discriminator);
+	// ExternalDocs
+	@Generated("com.reprezen.gen.CodeGenerator")
+	ExternalDocs getExternalDocs();
 
-    // ReadOnly
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Boolean getReadOnly();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	ExternalDocs getExternalDocs(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Boolean getReadOnly(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setExternalDocs(ExternalDocs externalDocs);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    boolean isReadOnly();
+	// Example
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Map<String, Example> getExamples();
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setReadOnly(Boolean readOnly);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Map<String, Example> getExamples(boolean elaborate);
 
-    // WriteOnly
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Boolean getWriteOnly();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	boolean hasExample(String name);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Boolean getWriteOnly(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Example getExample(String name);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    boolean isWriteOnly();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setExamples(Map<String, Example> examples);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setWriteOnly(Boolean writeOnly);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setExample(String name, Example example);
 
-    // Xml
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Xml getXml();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void removeExample(String name);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Xml getXml(boolean elaborate);
+	// Example
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Object getExample();
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setXml(Xml xml);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Object getExample(boolean elaborate);
 
-    // ExternalDocs
-    @Generated("com.reprezen.gen.CodeGenerator")
-    ExternalDocs getExternalDocs();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setExample(Object example);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    ExternalDocs getExternalDocs(boolean elaborate);
+	// Deprecated
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Boolean getDeprecated();
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setExternalDocs(ExternalDocs externalDocs);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Boolean getDeprecated(boolean elaborate);
 
-    // Example
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Map<String, Example> getExamples();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	boolean isDeprecated();
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Map<String, Example> getExamples(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setDeprecated(Boolean deprecated);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    boolean hasExample(String name);
+	// Extension
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Map<String, Object> getExtensions();
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Example getExample(String name);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Map<String, Object> getExtensions(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setExamples(Map<String, Example> examples);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	boolean hasExtension(String name);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setExample(String name, Example example);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Object getExtension(String name);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void removeExample(String name);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setExtensions(Map<String, Object> extensions);
 
-    // Example
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Object getExample();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setExtension(String name, Object extension);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Object getExample(boolean elaborate);
-
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setExample(Object example);
-
-    // Deprecated
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Boolean getDeprecated();
-
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Boolean getDeprecated(boolean elaborate);
-
-    @Generated("com.reprezen.gen.CodeGenerator")
-    boolean isDeprecated();
-
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setDeprecated(Boolean deprecated);
-
-    // Extension
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Map<String, Object> getExtensions();
-
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Map<String, Object> getExtensions(boolean elaborate);
-
-    @Generated("com.reprezen.gen.CodeGenerator")
-    boolean hasExtension(String name);
-
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Object getExtension(String name);
-
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setExtensions(Map<String, Object> extensions);
-
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setExtension(String name, Object extension);
-
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void removeExtension(String name);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void removeExtension(String name);
 }

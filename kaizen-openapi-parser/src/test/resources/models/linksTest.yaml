@@ -6,12 +6,8 @@ paths:
   /2.0/users/{username}: 
     get: 
       operationId: getUserByName
-      parameters: 
-      - name: username
-        in: path
-        required: true
-        schema:
-          type: string
+      parameters:
+        - $ref: "#/components/parameters/username" 
       responses: 
         '200':
           description: The User
@@ -26,11 +22,7 @@ paths:
     get:
       operationId: getRepositoriesByOwner
       parameters:
-        - name: username
-          in: path
-          required: true
-          schema:
-            type: string
+        - $ref: "#/components/parameters/username" 
       responses:
         '200':
           description: repositories owned by the supplied user
@@ -47,11 +39,7 @@ paths:
     get: 
       operationId: getRepository
       parameters: 
-        - name: username
-          in: path
-          required: true
-          schema:
-            type: string
+        - $ref: "#/components/parameters/username" 
         - name: slug
           in: path
           required: true
@@ -71,11 +59,7 @@ paths:
     get: 
       operationId: getPullRequestsByRepository
       parameters: 
-      - name: username
-        in: path
-        required: true
-        schema:
-          type: string
+      - $ref: "#/components/parameters/username" 
       - name: slug
         in: path
         required: true
@@ -102,11 +86,7 @@ paths:
     get: 
       operationId: getPullRequestsById
       parameters: 
-      - name: username
-        in: path
-        required: true
-        schema:
-          type: string
+      - $ref: "#/components/parameters/username" 
       - name: slug
         in: path
         required: true
@@ -131,11 +111,7 @@ paths:
     post: 
       operationId: mergePullRequest
       parameters: 
-      - name: username
-        in: path
-        required: true
-        schema:
-          type: string
+      - $ref: "#/components/parameters/username" 
       - name: slug
         in: path
         required: true
@@ -150,6 +126,14 @@ paths:
         '204':
           description: the PR was successfully merged
 components:
+  parameters:
+    username:
+      name: username
+      in: path
+      required: true
+      schema:
+        type: string
+    
   links:
     UserRepositories:
       # returns array of '#/components/schemas/repository'

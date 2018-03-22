@@ -1,51 +1,53 @@
 package com.reprezen.kaizen.oasparser.model3;
 
-import com.reprezen.jsonoverlay.IPropertiesOverlay;
-import com.reprezen.jsonoverlay.IModelPart;
-import javax.annotation.Generated;
 import java.util.Map;
 
-public interface ExternalDocs extends IPropertiesOverlay<ExternalDocs>, IModelPart<OpenApi3, ExternalDocs> {
+import javax.annotation.Generated;
 
-    // Description
-    @Generated("com.reprezen.gen.CodeGenerator")
-    String getDescription();
+import com.reprezen.jsonoverlay.IJsonOverlay;
+import com.reprezen.jsonoverlay.IModelPart;
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    String getDescription(boolean elaborate);
+public interface ExternalDocs extends IJsonOverlay<ExternalDocs>, IModelPart<OpenApi3, ExternalDocs> {
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setDescription(String description);
+	// Description
+	@Generated("com.reprezen.gen.CodeGenerator")
+	String getDescription();
 
-    // Url
-    @Generated("com.reprezen.gen.CodeGenerator")
-    String getUrl();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	String getDescription(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    String getUrl(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setDescription(String description);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setUrl(String url);
+	// Url
+	@Generated("com.reprezen.gen.CodeGenerator")
+	String getUrl();
 
-    // Extension
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Map<String, Object> getExtensions();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	String getUrl(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Map<String, Object> getExtensions(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setUrl(String url);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    boolean hasExtension(String name);
+	// Extension
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Map<String, Object> getExtensions();
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Object getExtension(String name);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Map<String, Object> getExtensions(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setExtensions(Map<String, Object> extensions);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	boolean hasExtension(String name);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setExtension(String name, Object extension);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Object getExtension(String name);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void removeExtension(String name);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setExtensions(Map<String, Object> extensions);
+
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setExtension(String name, Object extension);
+
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void removeExtension(String name);
 }

@@ -13,7 +13,8 @@ package com.reprezen.kaizen.oasparser.val3;
 import static com.reprezen.kaizen.oasparser.val.Messages.m;
 
 import com.google.inject.Inject;
-import com.reprezen.jsonoverlay.IPropertiesOverlay;
+import com.reprezen.jsonoverlay.Overlay;
+import com.reprezen.jsonoverlay.PropertiesOverlay;
 import com.reprezen.kaizen.oasparser.model3.Header;
 import com.reprezen.kaizen.oasparser.model3.MediaType;
 import com.reprezen.kaizen.oasparser.model3.Path;
@@ -79,10 +80,10 @@ public class HeaderValidator extends ObjectValidatorBase<Header> {
     }
 
     private String getPathString(Header header) {
-        IPropertiesOverlay<?> parent = header.getParentPropertiesObject();
+        PropertiesOverlay<?> parent = Overlay.getParentPropertiesOverlay(header);
         while (parent != null && !(parent instanceof Path)) {
-            parent = parent.getParentPropertiesObject();
+            parent = Overlay.of(parent).getParentPropertiesOverlay();
         }
-        return parent != null && parent instanceof Path ? parent.getPathInParent() : null;
+        return parent != null && parent instanceof Path ? Overlay.getPathInParent(parent) : null;
     }
 }

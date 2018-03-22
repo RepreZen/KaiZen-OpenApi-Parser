@@ -98,12 +98,12 @@ public class OpenApiParser {
 			Reference topRef = referenceRegistry.getRef(resolutionBase.toString(), base, true);
 			JsonNode tree = topRef.getJson();
 			if (isVersion3(tree)) {
-				OpenApi3 model = OpenApi3Impl.factory.create(tree, null, referenceRegistry, topRef).get();
-				injector.injectMembers(model.get());
+				OpenApi3 model = (OpenApi3) OpenApi3Impl.factory.create(tree, null, referenceRegistry, topRef);
+				injector.injectMembers(model);
 				if (validate) {
-					model.get().validate();
+					model.validate();
 				}
-				return model.get();
+				return model;
 			} else {
 				throw new SwaggerParserException(
 						"Could not determine OpenApi version - missing or invalid 'openapi' or 'swagger' property");

@@ -14,7 +14,7 @@ import java.util.IdentityHashMap;
 import java.util.Map;
 
 import com.google.inject.Inject;
-import com.reprezen.jsonoverlay.IPropertiesOverlay;
+import com.reprezen.jsonoverlay.PropertiesOverlay;
 
 public abstract class ObjectValidatorBase<T> extends ValidatorBase<T> {
 	@Inject(optional = true)
@@ -35,8 +35,8 @@ public abstract class ObjectValidatorBase<T> extends ValidatorBase<T> {
 	public void validate(T value, ValidationResults results) {
 		if (!visit(value)) {
 			@SuppressWarnings("unchecked")
-			IPropertiesOverlay<T> propValue = (IPropertiesOverlay<T>) value;
-			if (propValue.isElaborated()) {
+			PropertiesOverlay<T> propValue = (PropertiesOverlay<T>) value;
+			if (propValue._isElaborated()) {
 				validateObject(value, results);
 				if (implValidator != null) {
 					implValidator.validateImpl(value, results);

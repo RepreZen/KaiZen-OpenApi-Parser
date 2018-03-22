@@ -1,80 +1,82 @@
 package com.reprezen.kaizen.oasparser.model3;
 
-import com.reprezen.jsonoverlay.IPropertiesOverlay;
-import com.reprezen.jsonoverlay.IModelPart;
-import javax.annotation.Generated;
 import java.util.Collection;
 import java.util.Map;
 
-public interface ServerVariable extends IPropertiesOverlay<ServerVariable>, IModelPart<OpenApi3, ServerVariable> {
+import javax.annotation.Generated;
 
-    // EnumValue
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Collection<Object> getEnumValues();
+import com.reprezen.jsonoverlay.IJsonOverlay;
+import com.reprezen.jsonoverlay.IModelPart;
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Collection<Object> getEnumValues(boolean elaborate);
+public interface ServerVariable extends IJsonOverlay<ServerVariable>, IModelPart<OpenApi3, ServerVariable> {
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    boolean hasEnumValues();
+	// EnumValue
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Collection<Object> getEnumValues();
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Object getEnumValue(int index);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Collection<Object> getEnumValues(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setEnumValues(Collection<Object> enumValues);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	boolean hasEnumValues();
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setEnumValue(int index, Object enumValue);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Object getEnumValue(int index);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void addEnumValue(Object enumValue);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setEnumValues(Collection<Object> enumValues);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void insertEnumValue(int index, Object enumValue);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setEnumValue(int index, Object enumValue);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void removeEnumValue(int index);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void addEnumValue(Object enumValue);
 
-    // Default
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Object getDefault();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void insertEnumValue(int index, Object enumValue);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Object getDefault(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void removeEnumValue(int index);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setDefault(Object defaultValue);
+	// Default
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Object getDefault();
 
-    // Description
-    @Generated("com.reprezen.gen.CodeGenerator")
-    String getDescription();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Object getDefault(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    String getDescription(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setDefault(Object defaultValue);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setDescription(String description);
+	// Description
+	@Generated("com.reprezen.gen.CodeGenerator")
+	String getDescription();
 
-    // Extension
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Map<String, Object> getExtensions();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	String getDescription(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Map<String, Object> getExtensions(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setDescription(String description);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    boolean hasExtension(String name);
+	// Extension
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Map<String, Object> getExtensions();
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Object getExtension(String name);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Map<String, Object> getExtensions(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setExtensions(Map<String, Object> extensions);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	boolean hasExtension(String name);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setExtension(String name, Object extension);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Object getExtension(String name);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void removeExtension(String name);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setExtensions(Map<String, Object> extensions);
+
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setExtension(String name, Object extension);
+
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void removeExtension(String name);
 }

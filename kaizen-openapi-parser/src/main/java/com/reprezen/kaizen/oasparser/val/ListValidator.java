@@ -11,6 +11,7 @@
 package com.reprezen.kaizen.oasparser.val;
 
 import com.reprezen.jsonoverlay.ListOverlay;
+import com.reprezen.jsonoverlay.Overlay;
 
 public class ListValidator<T extends ListOverlay<T>> extends OverlayValidator<ListOverlay<T>> {
 
@@ -23,7 +24,7 @@ public class ListValidator<T extends ListOverlay<T>> extends OverlayValidator<Li
 	@Override
 	public void validate(ListOverlay<T> overlay, ValidationResults results) {
 		int i = 0;
-		for (T value : overlay.get()) {
+		for (T value : Overlay.get(overlay)) {
 			elementValidator.validate(value, results, getElementCrumb(i++));
 		}
 	}

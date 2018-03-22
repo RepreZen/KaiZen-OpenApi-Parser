@@ -13,6 +13,7 @@ package com.reprezen.kaizen.oasparser.val3;
 import static com.reprezen.kaizen.oasparser.val.Messages.m;
 
 import com.google.inject.Inject;
+import com.reprezen.jsonoverlay.Overlay;
 import com.reprezen.kaizen.oasparser.model3.Example;
 import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
 import com.reprezen.kaizen.oasparser.model3.Schema;
@@ -50,10 +51,10 @@ public class SchemaValidator extends ObjectValidatorBase<Schema> {
         validateList(schema.getAllOfSchemas(false), schema.hasAllOfSchemas(), results, false, "allOf", this);
         validateList(schema.getOneOfSchemas(false), schema.hasOneOfSchemas(), results, false, "oneOf", this);
         validateList(schema.getAnyOfSchemas(false), schema.hasAnyOfSchemas(), results, false, "anyOf", this);
-        if (schema.getNotSchema(false) != null && schema.getNotSchema(false).isPresent()) {
+        if (schema.getNotSchema(false) != null && Overlay.isPresent(schema.getNotSchema(false))) {
             validate(schema.getNotSchema(false), results, "not");
         }
-        if (schema.getItemsSchema(false) != null && schema.getItemsSchema(false).isPresent()) {
+        if (schema.getItemsSchema(false) != null && Overlay.isPresent(schema.getItemsSchema(false))) {
             validate(schema.getItemsSchema(false), results, "items");
         }
         validateMap(schema.getProperties(false), results, false, "properties", null, this);

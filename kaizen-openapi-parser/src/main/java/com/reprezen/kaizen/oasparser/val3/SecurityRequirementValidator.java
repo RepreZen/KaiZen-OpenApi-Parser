@@ -15,6 +15,7 @@ import static com.reprezen.kaizen.oasparser.val.Messages.m;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import com.reprezen.jsonoverlay.Overlay;
 import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.SecurityParameter;
 import com.reprezen.kaizen.oasparser.model3.SecurityRequirement;
@@ -26,7 +27,7 @@ public class SecurityRequirementValidator extends ObjectValidatorBase<SecurityRe
 
 	@Override
 	public void validateObject(SecurityRequirement securityRequirement, ValidationResults results) {
-		OpenApi3 model = (OpenApi3) securityRequirement.getModel();
+		OpenApi3 model = Overlay.getModel(securityRequirement);
 		Set<String> definedSchemes = model.getSecuritySchemes(false).keySet();
 		for (Entry<String, ? extends SecurityParameter> entry : securityRequirement.getRequirements(false).entrySet()) {
 			if (!definedSchemes.contains(entry.getKey())) {

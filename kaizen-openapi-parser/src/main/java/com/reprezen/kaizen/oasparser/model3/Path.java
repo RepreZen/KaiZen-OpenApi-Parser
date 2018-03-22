@@ -1,220 +1,212 @@
 package com.reprezen.kaizen.oasparser.model3;
 
-import com.reprezen.jsonoverlay.IPropertiesOverlay;
-import com.reprezen.jsonoverlay.IModelPart;
-import com.reprezen.kaizen.oasparser.model3.Server;
-import javax.annotation.Generated;
-import com.reprezen.kaizen.oasparser.model3.Operation;
-import com.reprezen.kaizen.oasparser.model3.Parameter;
 import java.util.Collection;
 import java.util.Map;
-import com.reprezen.jsonoverlay.Reference;
 
-public interface Path extends IPropertiesOverlay<Path>, IModelPart<OpenApi3, Path> {
+import javax.annotation.Generated;
 
-    // Summary
-    @Generated("com.reprezen.gen.CodeGenerator")
-    String getSummary();
+import com.reprezen.jsonoverlay.IJsonOverlay;
+import com.reprezen.jsonoverlay.IModelPart;
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    String getSummary(boolean elaborate);
+public interface Path extends IJsonOverlay<Path>, IModelPart<OpenApi3, Path> {
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setSummary(String summary);
+	// Summary
+	@Generated("com.reprezen.gen.CodeGenerator")
+	String getSummary();
 
-    // Description
-    @Generated("com.reprezen.gen.CodeGenerator")
-    String getDescription();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	String getSummary(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    String getDescription(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setSummary(String summary);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setDescription(String description);
+	// Description
+	@Generated("com.reprezen.gen.CodeGenerator")
+	String getDescription();
 
-    // Operation
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Map<String, Operation> getOperations();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	String getDescription(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Map<String, Operation> getOperations(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setDescription(String description);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    boolean hasOperation(String name);
+	// Operation
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Map<String, Operation> getOperations();
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Operation getOperation(String name);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Map<String, Operation> getOperations(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setOperations(Map<String, Operation> operations);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	boolean hasOperation(String name);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setOperation(String name, Operation operation);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Operation getOperation(String name);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void removeOperation(String name);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setOperations(Map<String, Operation> operations);
 
-    // Get
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Operation getGet();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setOperation(String name, Operation operation);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Operation getGet(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void removeOperation(String name);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setGet(Operation get);
+	// Get
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Operation getGet();
 
-    // Put
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Operation getPut();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Operation getGet(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Operation getPut(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setGet(Operation get);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setPut(Operation put);
+	// Put
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Operation getPut();
 
-    // Post
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Operation getPost();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Operation getPut(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Operation getPost(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setPut(Operation put);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setPost(Operation post);
+	// Post
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Operation getPost();
 
-    // Delete
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Operation getDelete();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Operation getPost(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Operation getDelete(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setPost(Operation post);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setDelete(Operation delete);
+	// Delete
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Operation getDelete();
 
-    // Options
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Operation getOptions();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Operation getDelete(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Operation getOptions(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setDelete(Operation delete);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setOptions(Operation options);
+	// Options
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Operation getOptions();
 
-    // Head
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Operation getHead();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Operation getOptions(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Operation getHead(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setOptions(Operation options);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setHead(Operation head);
+	// Head
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Operation getHead();
 
-    // Patch
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Operation getPatch();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Operation getHead(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Operation getPatch(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setHead(Operation head);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setPatch(Operation patch);
+	// Patch
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Operation getPatch();
 
-    // Trace
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Operation getTrace();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Operation getPatch(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Operation getTrace(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setPatch(Operation patch);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setTrace(Operation trace);
+	// Trace
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Operation getTrace();
 
-    // Server
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Collection<Server> getServers();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Operation getTrace(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Collection<Server> getServers(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setTrace(Operation trace);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    boolean hasServers();
+	// Server
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Collection<Server> getServers();
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Server getServer(int index);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Collection<Server> getServers(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setServers(Collection<Server> servers);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	boolean hasServers();
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setServer(int index, Server server);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Server getServer(int index);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void addServer(Server server);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setServers(Collection<Server> servers);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void insertServer(int index, Server server);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setServer(int index, Server server);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void removeServer(int index);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void addServer(Server server);
 
-    // Parameter
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Collection<Parameter> getParameters();
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void insertServer(int index, Server server);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Collection<Parameter> getParameters(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void removeServer(int index);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    boolean hasParameters();
+	// Parameter
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Collection<Parameter> getParameters();
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Parameter getParameter(int index);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Collection<Parameter> getParameters(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setParameters(Collection<Parameter> parameters);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	boolean hasParameters();
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setParameter(int index, Parameter parameter);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Parameter getParameter(int index);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void addParameter(Parameter parameter);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setParameters(Collection<Parameter> parameters);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void insertParameter(int index, Parameter parameter);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setParameter(int index, Parameter parameter);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void removeParameter(int index);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void addParameter(Parameter parameter);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    boolean isParameterReference(int index);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void insertParameter(int index, Parameter parameter);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Reference getParameterReference(int index);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void removeParameter(int index);
 
-    // Extension
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Map<String, Object> getExtensions();
+	// Extension
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Map<String, Object> getExtensions();
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Map<String, Object> getExtensions(boolean elaborate);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Map<String, Object> getExtensions(boolean elaborate);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    boolean hasExtension(String name);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	boolean hasExtension(String name);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    Object getExtension(String name);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	Object getExtension(String name);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setExtensions(Map<String, Object> extensions);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setExtensions(Map<String, Object> extensions);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void setExtension(String name, Object extension);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void setExtension(String name, Object extension);
 
-    @Generated("com.reprezen.gen.CodeGenerator")
-    void removeExtension(String name);
+	@Generated("com.reprezen.gen.CodeGenerator")
+	void removeExtension(String name);
 }

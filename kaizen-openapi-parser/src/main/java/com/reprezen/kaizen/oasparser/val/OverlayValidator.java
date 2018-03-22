@@ -19,6 +19,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.reprezen.jsonoverlay.JsonOverlay;
 import com.reprezen.jsonoverlay.ListOverlay;
 import com.reprezen.jsonoverlay.MapOverlay;
+import com.reprezen.jsonoverlay.Overlay;
 import com.reprezen.jsonoverlay.PropertiesOverlay;
 import com.reprezen.jsonoverlay.Reference;
 
@@ -35,7 +36,7 @@ public class OverlayValidator<T> extends ValidatorBase<T> {
 
 	public void validate(T object, ValidationResults results, Set<Class<? extends JsonNode>> allowedNodeTypes) {
 		JsonOverlay<?> overlay = (JsonOverlay<?>) object;
-		JsonNode json = overlay.toJson();
+		JsonNode json = Overlay.toJson(overlay);
 		boolean isValidJsonType = false;
 		for (Class<? extends JsonNode> type : allowedNodeTypes) {
 			if (type.isAssignableFrom(json.getClass())) {
@@ -61,26 +62,29 @@ public class OverlayValidator<T> extends ValidatorBase<T> {
 	}
 
 	private void checkReferences(ListOverlay<?> list, ValidationResults results) {
+		Overlay<?> listAdapter = Overlay.of(list);
 		for (int i = 0; i < list.size(); i++) {
-			if (list.isReference(i)) {
-				checkReference(list.getReference(i), results, Integer.toString(i));
+			if (listAdapter.isReference(i)) {
+				checkReference(listAdapter.getReference(i), results, Integer.toString(i));
 			}
 		}
 	}
 
-    private void checkReferences(MapOverlay<?> map, ValidationResults results) {
-		for (String key : map.get().keySet()) {
-			if (map.isReference(key)) {
-				checkReference(map.getReference(key), results, key);
+	private void checkReferences(MapOverlay<?> map, ValidationResults results) {
+		Overlay<?> mapAdapter = Overlay.of(map);
+		for (String key : map.keySet()) {
+			if (mapAdapter.isReference(key)) {
+				checkReference(mapAdapter.getReference(key), results, key);
 			}
 		}
 	}
 
 	private void checkReferences(PropertiesOverlay<?> props, ValidationResults results) {
-		if (props.isElaborated()) {
-			for (String path : props.getRefablePaths()) {
-				if (props.isReference(path)) {
-					checkReference(props.getReference(path), results, path);
+		if (props._isElaborated()) {
+			Overlay<?> propsAdapter = Overlay.of(props);
+			for (String name : propsAdapter.getPropertyNames()) {
+				if (propsAdapter.isReference(name)) {
+					checkReference(propsAdapter.getReference(name), results, name);
 				}
 			}
 		}

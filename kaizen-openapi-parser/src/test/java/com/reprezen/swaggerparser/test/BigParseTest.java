@@ -28,10 +28,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import com.google.common.base.Predicate;
-import com.reprezen.jsonoverlay.IJsonOverlay;
+import com.reprezen.jsonoverlay.AbstractJsonOverlay;
+import com.reprezen.jsonoverlay.JsonOverlay;
+import com.reprezen.jsonoverlay.Overlay;
 import com.reprezen.kaizen.oasparser.OpenApiParser;
 import com.reprezen.kaizen.oasparser.model3.OpenApi3;
-import com.reprezen.kaizen.oasparser.ovl3.OpenApi3Impl;
 import com.reprezen.swaggerparser.test.JsonTreeWalker.WalkMethod;
 
 /**
@@ -67,12 +68,12 @@ public class BigParseTest extends Assert {
 		WalkMethod valueChecker = new WalkMethod() {
 			@Override
 			public void run(JsonNode node, JsonPointer path) {
-				IJsonOverlay<?> overlay = ((OpenApi3Impl) model).find(path);
+				AbstractJsonOverlay<?> overlay = Overlay.find((JsonOverlay<OpenApi3>) model, path);
+				Object value = overlay != null ? Overlay.get(overlay) : null;
 				assertNotNull("No overlay object found for path: " + path, overlay);
 				Object fromJson = getValue(node);
-				String msg = String.format("Wrong overlay value for path '%s': expected '%s', got '%s'", path, fromJson,
-						overlay.get());
-				assertEquals(msg, fromJson, overlay.get());
+				String msg = String.format("Wrong overlay value for path '%s': expected '%s', got '%s'", path, fromJson, value);
+				assertEquals(msg, fromJson, value);
 			}
 		};
 		JsonTreeWalker.walkTree(tree, valueNodePredicate, valueChecker);

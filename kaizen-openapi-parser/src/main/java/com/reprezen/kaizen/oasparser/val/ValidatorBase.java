@@ -30,6 +30,7 @@ import javax.print.attribute.standard.Severity;
 
 import com.google.common.collect.Sets;
 import com.reprezen.jsonoverlay.JsonOverlay;
+import com.reprezen.jsonoverlay.Overlay;
 import com.reprezen.kaizen.oasparser.val.oasparser.fake.scheme.Handler;
 
 public abstract class ValidatorBase<T> implements Validator<T> {
@@ -324,6 +325,6 @@ public abstract class ValidatorBase<T> implements Validator<T> {
     }
 
     private boolean isPresent(Object value) {
-		return value instanceof JsonOverlay ? ((JsonOverlay<?>) value).isPresent() : value != null;
+		return value instanceof JsonOverlay ? Overlay.isPresent((JsonOverlay<?>) value) : value != null;
 	}
 }

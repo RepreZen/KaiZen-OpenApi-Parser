@@ -35,7 +35,6 @@ types:
       paths:
         structure: map
         keyPattern: *pathPat
-        refable: true
       pathsExtension:
         name: PathsExtension 
         <<: *extDef
@@ -44,42 +43,33 @@ types:
         structure: map
         type: Schema
         keyPattern: *namePat
-        refable: true
       components/responses:
         structure: map
         keyPattern: *namePat
-        refable: true
       components/parameters:
         structure: map
         keyPattern: *namePat
-        refable: true
       components/examples:
         type: Example
         structure: map
         keyPattern: *namePat
-        refable: true
       components/requestBodies:
         name: RequestBody
         plural: RequestBodies
         structure: map
         keyPattern: *namePat
-        refable: true
       components/headers:
         structure: map
         keyPattern: *namePat
-        refable: true
       components/securitySchemes:
         structure: map
         keyPattern: *namePat
-        refable: true
       components/links:
         structure: map
         keyPattern: *namePat
-        refable: true
       components/callbacks:
         structure: map
         keyPattern: *noextNamePat
-        refable: true
       componentsExtension:
         name: ComponentsExtension
         <<: *extDef
@@ -227,7 +217,6 @@ types:
         keyDecls:
           - String name
           - String in
-        refable: true
       *extName: *extDef
         
   - name: Operation
@@ -244,13 +233,10 @@ types:
         keyDecls:
           - String name
           - String id
-        refable: true
-      requestBody:
-        refable: true
+      requestBody: {}
       responses:
         structure: map
         keyPattern: "default|(\\d\\d\\d)"
-        refable: true
       responsesExtension:
         name: ResponsesExtension
         <<: *extDef
@@ -258,7 +244,6 @@ types:
       callbacks:
         structure: map
         keyPattern: *noextNamePat
-        refable: true
       callbacksExtension:
         name: CallbacksExtension
         <<: *extDef
@@ -304,14 +289,12 @@ types:
       description: {}
       headers:
         structure: map
-        refable: true
       content:
         name: ContentMediaType
         type: MediaType
         structure: map
       links:
         structure: map
-        refable: true
       *extName: *extDef
 
   - name: Link
@@ -342,13 +325,11 @@ types:
 
   - name: MediaType
     fields:
-      schema:
-        refable: true
+      schema: {}
       examples:
         type: Example
         structure: map
         keyPattern: *namePat
-        refable: true
       example:
         type: Object
       encoding:
@@ -364,7 +345,6 @@ types:
         structure: map
         type: String
         selfKeyed: true
-        refable: true
       style: {}
       explode:
         type: Boolean
@@ -392,15 +372,13 @@ types:
         type: Boolean
       allowReserved:
         type: Boolean
-      schema:
-        refable: true
+      schema: {}
       example:
         type: Object
       examples:
         type: Example
         structure: map
         keyPattern: *namePat
-        refable: true
       content:
         name: ContentMediaType
         type: MediaType
@@ -413,7 +391,7 @@ types:
         
   - name: Schema
     imports:
-      impl: [ Optional, JsonPointer, IJsonOverlay ]
+      impl: [ Optional, JsonPointer]
     fields:
       title: {}
       multipleOf:
@@ -453,36 +431,29 @@ types:
         name: AllOfSchema
         type: Schema
         structure: collection
-        refable: true
       oneOf:
         name: OneOfSchema
         type: Schema
         structure: collection
-        refable: true
       anyOf:
         name: AnyOfSchema
         type: Schema
         structure: collection
-        refable: true
       not:
         name: NotSchema
         type: Schema
-        refable: true
       items:
         name: ItemsSchema
         type: Schema
-        refable: true
       properties:
         name: Property
         plural: Properties
         type: Schema
         structure: map
-        refable: true
       additionalPropertiesSchema:
         parentPath: additionalProperties
         type: Schema
         createTest: .isObject() 
-        refable: true
       additionalPropertiesBoolean:
         name: AdditionalProperties
         parentPath: additionalProperties

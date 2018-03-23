@@ -16,9 +16,9 @@ import com.reprezen.kaizen.oasparser.val.ValidationResults;
 
 public class ExampleValidator extends ObjectValidatorBase<Example> {
 
-    @Override
-    public void validateObject(Example object, ValidationResults results) {
-        // TODO Auto-generated method stub
-    }
+	@Override
+	public void validateObject(Example object, ValidationResults results) {
+		// TODO Auto-generated method stub
+	}
 
 }

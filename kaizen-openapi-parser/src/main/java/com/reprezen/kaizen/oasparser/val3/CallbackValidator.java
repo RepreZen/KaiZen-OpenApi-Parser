@@ -19,13 +19,13 @@ import com.reprezen.kaizen.oasparser.val.Validator;
 
 public class CallbackValidator extends ObjectValidatorBase<Callback> {
 
-    @Inject
-    private Validator<Path> pathValidator;
+	@Inject
+	private Validator<Path> pathValidator;
 
-    @Override
-    public void validateObject(Callback callback, ValidationResults results) {
-        validateMap(callback.getCallbackPaths(false), results, false, null, Regexes.NOEXT_REGEX, pathValidator);
-        validateExtensions(callback.getExtensions(false), results);
-    }
+	@Override
+	public void validateObject(Callback callback, ValidationResults results) {
+		validateMap(callback.getCallbackPaths(), results, false, null, Regexes.NOEXT_REGEX, pathValidator);
+		validateExtensions(callback.getExtensions(), results);
+	}
 
 }

@@ -20,200 +20,176 @@ import com.reprezen.kaizen.oasparser.model3.Schema;
 
 public class MediaTypeImpl extends PropertiesOverlay<MediaType> implements MediaType {
 
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public MediaTypeImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
 		super(json, parent, refReg);
 	}
 
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public MediaTypeImpl(MediaType mediaType, JsonOverlay<?> parent, ReferenceRegistry refReg) {
 		super(mediaType, parent, refReg);
 	}
 
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	private ChildOverlay<Schema> schema;
 
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	private ChildMapOverlay<Example> examples;
 
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	private ChildOverlay<Object> example;
 
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	private ChildMapOverlay<EncodingProperty> encodingProperties;
 
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	private ChildMapOverlay<Object> extensions;
 
 	// Schema
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Schema getSchema() {
 		return schema._get();
 	}
 
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Schema getSchema(boolean elaborate) {
 		return schema._get(elaborate);
 	}
 
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setSchema(Schema schema) {
 		this.schema._set(schema);
 	}
 
 	// Example
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Map<String, Example> getExamples() {
 		return examples._get();
 	}
 
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
-	public Map<String, Example> getExamples(boolean elaborate) {
-		return examples._get(elaborate);
-	}
-
-	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public boolean hasExample(String name) {
 		return examples.containsKey(name);
 	}
 
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Example getExample(String name) {
 		return examples._get(name);
 	}
 
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setExamples(Map<String, Example> examples) {
 		this.examples._set(examples);
 	}
 
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setExample(String name, Example example) {
 		examples._set(name, example);
 	}
 
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void removeExample(String name) {
 		examples._remove(name);
 	}
 
 	// Example
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Object getExample() {
 		return example._get();
 	}
 
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
-	public Object getExample(boolean elaborate) {
-		return example._get(elaborate);
-	}
-
-	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setExample(Object example) {
 		this.example._set(example);
 	}
 
 	// EncodingProperty
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Map<String, EncodingProperty> getEncodingProperties() {
 		return encodingProperties._get();
 	}
 
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
-	public Map<String, EncodingProperty> getEncodingProperties(boolean elaborate) {
-		return encodingProperties._get(elaborate);
-	}
-
-	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public boolean hasEncodingProperty(String name) {
 		return encodingProperties.containsKey(name);
 	}
 
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public EncodingProperty getEncodingProperty(String name) {
 		return encodingProperties._get(name);
 	}
 
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setEncodingProperties(Map<String, EncodingProperty> encodingProperties) {
 		this.encodingProperties._set(encodingProperties);
 	}
 
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setEncodingProperty(String name, EncodingProperty encodingProperty) {
 		encodingProperties._set(name, encodingProperty);
 	}
 
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void removeEncodingProperty(String name) {
 		encodingProperties._remove(name);
 	}
 
 	// Extension
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Map<String, Object> getExtensions() {
 		return extensions._get();
 	}
 
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
-	public Map<String, Object> getExtensions(boolean elaborate) {
-		return extensions._get(elaborate);
-	}
-
-	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public boolean hasExtension(String name) {
 		return extensions.containsKey(name);
 	}
 
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Object getExtension(String name) {
 		return extensions._get(name);
 	}
 
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setExtensions(Map<String, Object> extensions) {
 		this.extensions._set(extensions);
 	}
 
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setExtension(String name, Object extension) {
 		extensions._set(name, extension);
 	}
 
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void removeExtension(String name) {
 		extensions._remove(name);
 	}
 
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	protected void elaborateChildren() {
 		super.elaborateChildren();
 		schema = createChild("schema", this, SchemaImpl.factory);
@@ -223,7 +199,7 @@ public class MediaTypeImpl extends PropertiesOverlay<MediaType> implements Media
 		extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
 	}
 
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public static OverlayFactory<MediaType> factory = new OverlayFactory<MediaType>() {
 
 		@Override
@@ -250,12 +226,12 @@ public class MediaTypeImpl extends PropertiesOverlay<MediaType> implements Media
 		}
 	};
 
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	private static Class<? extends MediaType> getSubtypeOf(MediaType mediaType) {
 		return MediaType.class;
 	}
 
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	private static Class<? extends MediaType> getSubtypeOf(JsonNode json) {
 		return MediaType.class;
 	}

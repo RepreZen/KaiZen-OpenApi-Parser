@@ -38,12 +38,11 @@ public class MediaTypeValidator extends ObjectValidatorBase<MediaType> {
 		// no validation for: example, examples
 		// TODO Q: Should schema be required in media type?
 		validateField(mediaType.getSchema(false), results, false, "schema", schemaValidator);
-		validateMap(mediaType.getEncodingProperties(false), results, false, "encoding", Regexes.NOEXT_NAME_REGEX,
+		validateMap(mediaType.getEncodingProperties(), results, false, "encoding", Regexes.NOEXT_NAME_REGEX,
 				encodingPropertyValidator);
 		checkEncodingPropsAreProps(mediaType, results);
-		validateExtensions(mediaType.getExtensions(false), results);
-		validateMap(mediaType.getExamples(false), results, false, "examples", Regexes.NOEXT_NAME_REGEX,
-				exampleValidator);
+		validateExtensions(mediaType.getExtensions(), results);
+		validateMap(mediaType.getExamples(), results, false, "examples", Regexes.NOEXT_NAME_REGEX, exampleValidator);
 	}
 
 	void checkEncodingPropsAreProps(MediaType mediaType, ValidationResults results) {
@@ -51,8 +50,8 @@ public class MediaTypeValidator extends ObjectValidatorBase<MediaType> {
 		// additionalProperties?
 		Schema schema = mediaType.getSchema(false);
 		if (Overlay.isElaborated(schema)) {
-			Set<String> propNames = schema.getProperties(false).keySet();
-			for (String encodingPropertyName : mediaType.getEncodingProperties(false).keySet()) {
+			Set<String> propNames = schema.getProperties().keySet();
+			for (String encodingPropertyName : mediaType.getEncodingProperties().keySet()) {
 				if (!propNames.contains(encodingPropertyName)) {
 					results.addError(m.msg(
 							"EncPropNotSchemaProp|Encoding property does not name a schema property for the media type",

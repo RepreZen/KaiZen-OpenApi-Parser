@@ -143,270 +143,234 @@ public class PathImpl extends PropertiesOverlay<Path> implements Path {
 		operations._set("trace", (OperationImpl) trace);
 	}
 
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public PathImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
 		super(json, parent, refReg);
 	}
 
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public PathImpl(Path path, JsonOverlay<?> parent, ReferenceRegistry refReg) {
 		super(path, parent, refReg);
 	}
 
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	private ChildOverlay<String> summary;
 
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	private ChildOverlay<String> description;
 
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	private ChildMapOverlay<Operation> operations;
 
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	private ChildListOverlay<Server> servers;
 
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	private ChildListOverlay<Parameter> parameters;
 
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	private ChildMapOverlay<Object> extensions;
 
 	// Summary
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getSummary() {
 		return summary._get();
 	}
 
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
-	public String getSummary(boolean elaborate) {
-		return summary._get(elaborate);
-	}
-
-	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setSummary(String summary) {
 		this.summary._set(summary);
 	}
 
 	// Description
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getDescription() {
 		return description._get();
 	}
 
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
-	public String getDescription(boolean elaborate) {
-		return description._get(elaborate);
-	}
-
-	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setDescription(String description) {
 		this.description._set(description);
 	}
 
 	// Operation
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Map<String, Operation> getOperations() {
 		return operations._get();
 	}
 
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
-	public Map<String, Operation> getOperations(boolean elaborate) {
-		return operations._get(elaborate);
-	}
-
-	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public boolean hasOperation(String name) {
 		return operations.containsKey(name);
 	}
 
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Operation getOperation(String name) {
 		return operations._get(name);
 	}
 
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setOperations(Map<String, Operation> operations) {
 		this.operations._set(operations);
 	}
 
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setOperation(String name, Operation operation) {
 		operations._set(name, operation);
 	}
 
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void removeOperation(String name) {
 		operations._remove(name);
 	}
 
 	// Server
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Collection<Server> getServers() {
 		return servers._get();
 	}
 
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
-	public Collection<Server> getServers(boolean elaborate) {
-		return servers._get(elaborate);
-	}
-
-	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public boolean hasServers() {
 		return servers._isPresent();
 	}
 
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Server getServer(int index) {
 		return servers._get(index);
 	}
 
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setServers(Collection<Server> servers) {
 		this.servers._set(servers);
 	}
 
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setServer(int index, Server server) {
 		servers._set(index, server);
 	}
 
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void addServer(Server server) {
 		servers._add(server);
 	}
 
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void insertServer(int index, Server server) {
 		servers._insert(index, server);
 	}
 
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void removeServer(int index) {
 		servers._remove(index);
 	}
 
 	// Parameter
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Collection<Parameter> getParameters() {
 		return parameters._get();
 	}
 
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
-	public Collection<Parameter> getParameters(boolean elaborate) {
-		return parameters._get(elaborate);
-	}
-
-	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public boolean hasParameters() {
 		return parameters._isPresent();
 	}
 
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Parameter getParameter(int index) {
 		return parameters._get(index);
 	}
 
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setParameters(Collection<Parameter> parameters) {
 		this.parameters._set(parameters);
 	}
 
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setParameter(int index, Parameter parameter) {
 		parameters._set(index, parameter);
 	}
 
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void addParameter(Parameter parameter) {
 		parameters._add(parameter);
 	}
 
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void insertParameter(int index, Parameter parameter) {
 		parameters._insert(index, parameter);
 	}
 
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void removeParameter(int index) {
 		parameters._remove(index);
 	}
 
 	// Extension
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Map<String, Object> getExtensions() {
 		return extensions._get();
 	}
 
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
-	public Map<String, Object> getExtensions(boolean elaborate) {
-		return extensions._get(elaborate);
-	}
-
-	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public boolean hasExtension(String name) {
 		return extensions.containsKey(name);
 	}
 
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Object getExtension(String name) {
 		return extensions._get(name);
 	}
 
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setExtensions(Map<String, Object> extensions) {
 		this.extensions._set(extensions);
 	}
 
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setExtension(String name, Object extension) {
 		extensions._set(name, extension);
 	}
 
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void removeExtension(String name) {
 		extensions._remove(name);
 	}
 
 	@Override
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	protected void elaborateChildren() {
 		super.elaborateChildren();
 		summary = createChild("summary", this, StringOverlay.factory);
@@ -417,7 +381,7 @@ public class PathImpl extends PropertiesOverlay<Path> implements Path {
 		extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
 	}
 
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public static OverlayFactory<Path> factory = new OverlayFactory<Path>() {
 
 		@Override
@@ -444,12 +408,12 @@ public class PathImpl extends PropertiesOverlay<Path> implements Path {
 		}
 	};
 
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	private static Class<? extends Path> getSubtypeOf(Path path) {
 		return Path.class;
 	}
 
-	@Generated("com.reprezen.gen.CodeGenerator")
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	private static Class<? extends Path> getSubtypeOf(JsonNode json) {
 		return Path.class;
 	}

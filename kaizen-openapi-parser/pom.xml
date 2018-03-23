@@ -8,7 +8,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.reprezen.kaizen</groupId>
     <artifactId>openapi-parser</artifactId>
-    <version>${openapi-parser-version}</version>
+    <version>2.0.0-SNAPSHOT</version>
     <name>${project.groupId}:${project.artifactId}</name>
     <description>KaiZen OpenAPI Parser by RepreZen</description>
     <url>https://github.com/RepreZen/KaiZen-OpenAPI-Parser</url>
@@ -249,8 +249,7 @@
         </plugins>
     </build>
     <properties>
-        <openapi-parser-version>1.0.0-SNAPSHOT</openapi-parser-version>
-        <json-overlay-version>[1.0,2.0)</json-overlay-version>
+        <json-overlay-version>[2.0,3.0)</json-overlay-version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

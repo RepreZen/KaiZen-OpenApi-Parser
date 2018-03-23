@@ -16,7 +16,7 @@ import org.apache.commons.cli.ParseException;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.reprezen.gen.CodeGenerator;
+import com.reprezen.jsonoverlay.gen.CodeGenerator;
 
 public class GenOpenApi3 {
     public static void main(String[] args)

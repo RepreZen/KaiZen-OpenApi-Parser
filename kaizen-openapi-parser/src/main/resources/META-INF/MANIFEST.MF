@@ -12,7 +12,7 @@ Require-Bundle: com.google.inject,
  com.fasterxml.jackson.dataformat.jackson-dataformat-yaml;bundle-version="2.5.0",
  com.modelsolv.reprezen.bundles,
  org.yaml.snakeyaml;bundle-version="1.14.0",
- com.reprezen.jsonoverly;bundle-version="[1.0,2.0)"
+ com.reprezen.jsonoverlay;bundle-version="[1.0,2.0)"
 Export-Package: com.reprezen.kaizen.oasparser,
  com.reprezen.kaizen.oasparser.jsonoverlay,
  com.reprezen.kaizen.oasparser.jsonoverlay.coll,

@@ -9,7 +9,9 @@ import com.reprezen.jsonoverlay.AbstractJsonOverlay;
 import com.reprezen.jsonoverlay.ChildMapOverlay;
 import com.reprezen.jsonoverlay.ChildOverlay;
 import com.reprezen.jsonoverlay.JsonOverlay;
+import com.reprezen.jsonoverlay.MapOverlay;
 import com.reprezen.jsonoverlay.ObjectOverlay;
+import com.reprezen.jsonoverlay.Overlay;
 import com.reprezen.jsonoverlay.OverlayFactory;
 import com.reprezen.jsonoverlay.PropertiesOverlay;
 import com.reprezen.jsonoverlay.ReferenceRegistry;
@@ -19,6 +21,13 @@ import com.reprezen.kaizen.oasparser.model3.Link;
 import com.reprezen.kaizen.oasparser.model3.Server;
 
 public class LinkImpl extends PropertiesOverlay<Link> implements Link {
+
+	private Overlay<Link> overlay = Overlay.of(this);
+
+	@Override
+	public String getName() {
+		return overlay.getParent() instanceof MapOverlay<?> ? overlay.getPathInParent() : null;
+	}
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public LinkImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {

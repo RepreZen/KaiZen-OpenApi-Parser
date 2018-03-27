@@ -10,6 +10,8 @@ import com.reprezen.jsonoverlay.IModelPart;
 
 public interface Schema extends IJsonOverlay<Schema>, IModelPart<OpenApi3, Schema> {
 
+	String getName();
+
 	// Title
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	String getTitle();

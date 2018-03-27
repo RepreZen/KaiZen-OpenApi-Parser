@@ -5,6 +5,7 @@ imports:
   ValidationResults: com.reprezen.kaizen.oasparser.val.ValidationResults
   Severity: com.reprezen.kaizen.oasparser.val.ValidationResults.Severity
   OpenApi3Validator: com.reprezen.kaizen.oasparser.val3.OpenApi3Validator
+  Overlay: com.reprezen.jsonoverlay.Overlay
   
 decls:
   - extPat: &extPat "x-.+"
@@ -104,6 +105,8 @@ types:
       *extName: *extDef
 
   - name: SecurityScheme
+    imports:
+      impl: [Overlay]
     fields:
       type: {}
       description: {}
@@ -179,6 +182,8 @@ types:
       *extName: *extDef
         
   - name: Path
+    imports:
+      impl: [ Overlay ]
     fields:
       summary: {}
       description: {}
@@ -258,6 +263,8 @@ types:
       *extName: *extDef
         
   - name: Callback
+    imports:
+      impl: [ Overlay ]
     fields:
       callbackPaths:
         type: Path
@@ -285,6 +292,8 @@ types:
         structure: collection
                       
   - name: Response
+    imports:
+      impl: [Overlay]
     fields:
       description: {}
       headers:
@@ -298,6 +307,8 @@ types:
       *extName: *extDef
 
   - name: Link
+    imports:
+      impl: [Overlay]
     fields:
       operationId: {}
       operationRef: {}
@@ -313,6 +324,8 @@ types:
       *extName: *extDef
 
   - name: RequestBody
+    imports:
+      impl: [Overlay]
     fields:
       description: {}
       content:
@@ -357,6 +370,8 @@ types:
       *extName: *extDef
 
   - name: Parameter
+    imports:
+      impl: [Overlay]
     fields: &paramFields
       name: {}
       in: {}
@@ -386,12 +401,14 @@ types:
       *extName: *extDef
 
   - name: Header
+    imports:
+      impl: [Overlay]
     # Header is identical to Parameter except in terms of where it's allowed
     fields: *paramFields
         
   - name: Schema
     imports:
-      impl: [ Optional, JsonPointer]
+      impl: [ Optional, JsonPointer, Overlay]
     fields:
       title: {}
       multipleOf:
@@ -494,6 +511,8 @@ types:
       *extName: *extDef
   
   - name: Example
+    imports: 
+      impl: [Overlay]
     fields:
       summary: {}
       description: {}

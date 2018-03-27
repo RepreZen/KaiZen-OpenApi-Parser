@@ -9,6 +9,8 @@ import com.reprezen.jsonoverlay.IModelPart;
 
 public interface SecurityScheme extends IJsonOverlay<SecurityScheme>, IModelPart<OpenApi3, SecurityScheme> {
 
+	String getKey();
+
 	// Type
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	String getType();

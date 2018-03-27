@@ -9,7 +9,9 @@ import com.reprezen.jsonoverlay.AbstractJsonOverlay;
 import com.reprezen.jsonoverlay.ChildMapOverlay;
 import com.reprezen.jsonoverlay.ChildOverlay;
 import com.reprezen.jsonoverlay.JsonOverlay;
+import com.reprezen.jsonoverlay.MapOverlay;
 import com.reprezen.jsonoverlay.ObjectOverlay;
+import com.reprezen.jsonoverlay.Overlay;
 import com.reprezen.jsonoverlay.OverlayFactory;
 import com.reprezen.jsonoverlay.PropertiesOverlay;
 import com.reprezen.jsonoverlay.ReferenceRegistry;
@@ -18,6 +20,13 @@ import com.reprezen.kaizen.oasparser.model3.OAuthFlow;
 import com.reprezen.kaizen.oasparser.model3.SecurityScheme;
 
 public class SecuritySchemeImpl extends PropertiesOverlay<SecurityScheme> implements SecurityScheme {
+
+	private Overlay<SecurityScheme> overlay = Overlay.of(this);
+
+	@Override
+	public String getKey() {
+		return overlay.getParent() instanceof MapOverlay<?> ? overlay.getPathInParent() : null;
+	}
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public SecuritySchemeImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {

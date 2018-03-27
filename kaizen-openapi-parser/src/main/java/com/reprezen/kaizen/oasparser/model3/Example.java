@@ -9,6 +9,8 @@ import com.reprezen.jsonoverlay.IModelPart;
 
 public interface Example extends IJsonOverlay<Example>, IModelPart<OpenApi3, Example> {
 
+	String getName();
+
 	// Summary
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	String getSummary();

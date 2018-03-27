@@ -9,6 +9,8 @@ import com.reprezen.jsonoverlay.IModelPart;
 
 public interface Link extends IJsonOverlay<Link>, IModelPart<OpenApi3, Link> {
 
+	String getName();
+
 	// OperationId
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	String getOperationId();

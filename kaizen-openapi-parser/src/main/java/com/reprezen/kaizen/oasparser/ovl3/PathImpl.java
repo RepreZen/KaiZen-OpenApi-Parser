@@ -11,7 +11,9 @@ import com.reprezen.jsonoverlay.ChildListOverlay;
 import com.reprezen.jsonoverlay.ChildMapOverlay;
 import com.reprezen.jsonoverlay.ChildOverlay;
 import com.reprezen.jsonoverlay.JsonOverlay;
+import com.reprezen.jsonoverlay.MapOverlay;
 import com.reprezen.jsonoverlay.ObjectOverlay;
+import com.reprezen.jsonoverlay.Overlay;
 import com.reprezen.jsonoverlay.OverlayFactory;
 import com.reprezen.jsonoverlay.PropertiesOverlay;
 import com.reprezen.jsonoverlay.ReferenceRegistry;
@@ -22,6 +24,13 @@ import com.reprezen.kaizen.oasparser.model3.Path;
 import com.reprezen.kaizen.oasparser.model3.Server;
 
 public class PathImpl extends PropertiesOverlay<Path> implements Path {
+
+	private Overlay<Path> overlay = Overlay.of(this);
+
+	@Override
+	public String getPathString() {
+		return overlay.getParent() instanceof MapOverlay<?> ? overlay.getPathInParent() : null;
+	}
 
 	@Override
 	public Operation getGet() {

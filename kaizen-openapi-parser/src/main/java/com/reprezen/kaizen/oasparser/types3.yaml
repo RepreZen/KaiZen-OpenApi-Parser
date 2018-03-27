@@ -408,7 +408,7 @@ types:
         
   - name: Schema
     imports:
-      impl: [ Optional, JsonPointer]
+      impl: [ Optional, JsonPointer, Overlay]
     fields:
       title: {}
       multipleOf:

@@ -14,8 +14,10 @@ import com.reprezen.jsonoverlay.ChildMapOverlay;
 import com.reprezen.jsonoverlay.ChildOverlay;
 import com.reprezen.jsonoverlay.IntegerOverlay;
 import com.reprezen.jsonoverlay.JsonOverlay;
+import com.reprezen.jsonoverlay.MapOverlay;
 import com.reprezen.jsonoverlay.NumberOverlay;
 import com.reprezen.jsonoverlay.ObjectOverlay;
+import com.reprezen.jsonoverlay.Overlay;
 import com.reprezen.jsonoverlay.OverlayFactory;
 import com.reprezen.jsonoverlay.PropertiesOverlay;
 import com.reprezen.jsonoverlay.ReferenceRegistry;
@@ -26,6 +28,13 @@ import com.reprezen.kaizen.oasparser.model3.Schema;
 import com.reprezen.kaizen.oasparser.model3.Xml;
 
 public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
+
+	private Overlay<Schema> overlay = Overlay.of(this);
+
+	@Override
+	public String getName() {
+		return overlay.getParent() instanceof MapOverlay<?> ? overlay.getPathInParent() : null;
+	}
 
 	@Override
 	public AbstractJsonOverlay<?> _findInternal(JsonPointer path) {

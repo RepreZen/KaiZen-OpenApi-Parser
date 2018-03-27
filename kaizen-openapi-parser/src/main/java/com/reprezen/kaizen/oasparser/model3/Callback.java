@@ -9,6 +9,8 @@ import com.reprezen.jsonoverlay.IModelPart;
 
 public interface Callback extends IJsonOverlay<Callback>, IModelPart<OpenApi3, Callback> {
 
+	String getName();
+
 	// CallbackPath
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	Map<String, Path> getCallbackPaths();

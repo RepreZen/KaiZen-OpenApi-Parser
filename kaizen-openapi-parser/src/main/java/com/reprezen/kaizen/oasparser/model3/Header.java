@@ -9,6 +9,8 @@ import com.reprezen.jsonoverlay.IModelPart;
 
 public interface Header extends IJsonOverlay<Header>, IModelPart<OpenApi3, Header> {
 
+	String getKey();
+
 	// Name
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	String getName();

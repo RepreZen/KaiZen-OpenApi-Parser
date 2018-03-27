@@ -29,6 +29,8 @@ public class PathsTest {
         assertEquals(2, model.getPaths().size());
         assertTrue(model.hasPath("/"));
         assertTrue(model.hasPath("/v2"));
+        assertEquals("/", model.getPath("/").getPathString());
+        assertEquals("/v2", model.getPath("/v2").getPathString());
         assertNotNull(model.getPath("/"));
         assertNotNull(model.getPath("/v2"));
     }

@@ -10,6 +10,8 @@ import com.reprezen.jsonoverlay.IModelPart;
 
 public interface Path extends IJsonOverlay<Path>, IModelPart<OpenApi3, Path> {
 
+	String getPathString();
+
 	// Summary
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	String getSummary();

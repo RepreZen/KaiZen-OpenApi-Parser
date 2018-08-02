@@ -5,195 +5,188 @@ import java.util.Map;
 import javax.annotation.Generated;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.reprezen.jsonoverlay.AbstractJsonOverlay;
 import com.reprezen.jsonoverlay.BooleanOverlay;
-import com.reprezen.jsonoverlay.ChildMapOverlay;
-import com.reprezen.jsonoverlay.ChildOverlay;
 import com.reprezen.jsonoverlay.JsonOverlay;
 import com.reprezen.jsonoverlay.ObjectOverlay;
 import com.reprezen.jsonoverlay.OverlayFactory;
 import com.reprezen.jsonoverlay.PropertiesOverlay;
-import com.reprezen.jsonoverlay.ReferenceRegistry;
+import com.reprezen.jsonoverlay.ReferenceManager;
 import com.reprezen.jsonoverlay.StringOverlay;
+import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.Xml;
 
 public class XmlImpl extends PropertiesOverlay<Xml> implements Xml {
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public XmlImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-		super(json, parent, refReg);
+	public XmlImpl(JsonNode json, JsonOverlay<?> parent, ReferenceManager refMgr) {
+		super(json, parent, factory, refMgr);
 	}
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public XmlImpl(Xml xml, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-		super(xml, parent, refReg);
+	public XmlImpl(Xml xml, JsonOverlay<?> parent, ReferenceManager refMgr) {
+		super(xml, parent, factory, refMgr);
 	}
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	private ChildOverlay<String> name;
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	private ChildOverlay<String> namespace;
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	private ChildOverlay<String> prefix;
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	private ChildOverlay<Boolean> attribute;
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	private ChildOverlay<Boolean> wrapped;
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	private ChildMapOverlay<Object> extensions;
 
 	// Name
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getName() {
-		return name._get();
+		return _get("name", String.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setName(String name) {
-		this.name._set(name);
+		_setScalar("name", name, String.class);
 	}
 
 	// Namespace
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getNamespace() {
-		return namespace._get();
+		return _get("namespace", String.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setNamespace(String namespace) {
-		this.namespace._set(namespace);
+		_setScalar("namespace", namespace, String.class);
 	}
 
 	// Prefix
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getPrefix() {
-		return prefix._get();
+		return _get("prefix", String.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setPrefix(String prefix) {
-		this.prefix._set(prefix);
+		_setScalar("prefix", prefix, String.class);
 	}
 
 	// Attribute
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Boolean getAttribute() {
-		return attribute._get();
+		return _get("attribute", Boolean.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public boolean isAttribute() {
-		return attribute._get() != null ? attribute._get() : false;
+		Boolean bool = _get("attribute", Boolean.class);
+		return bool != null ? bool : false;
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setAttribute(Boolean attribute) {
-		this.attribute._set(attribute);
+		_setScalar("attribute", attribute, Boolean.class);
 	}
 
 	// Wrapped
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Boolean getWrapped() {
-		return wrapped._get();
+		return _get("wrapped", Boolean.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public boolean isWrapped() {
-		return wrapped._get() != null ? wrapped._get() : false;
+		Boolean bool = _get("wrapped", Boolean.class);
+		return bool != null ? bool : false;
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setWrapped(Boolean wrapped) {
-		this.wrapped._set(wrapped);
+		_setScalar("wrapped", wrapped, Boolean.class);
 	}
 
 	// Extension
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Map<String, Object> getExtensions() {
-		return extensions._get();
+		return _getMap("extensions", Object.class);
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public Map<String, Object> getExtensions(boolean elaborate) {
+		return _getMap("extensions", elaborate, Object.class);
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public boolean hasExtensions() {
+		return _isPresent("extensions");
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public boolean hasExtension(String name) {
-		return extensions.containsKey(name);
+		return _getMap("extensions", Object.class).containsKey(name);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Object getExtension(String name) {
-		return extensions._get(name);
+		return _get("extensions", name, Object.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setExtensions(Map<String, Object> extensions) {
-		this.extensions._set(extensions);
+		_setMap("extensions", extensions, Object.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setExtension(String name, Object extension) {
-		extensions._set(name, extension);
+		_set("extensions", name, extension, Object.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void removeExtension(String name) {
-		extensions._remove(name);
+		_remove("extensions", name, Object.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	protected void elaborateChildren() {
-		super.elaborateChildren();
-		name = createChild("name", this, StringOverlay.factory);
-		namespace = createChild("namespace", this, StringOverlay.factory);
-		prefix = createChild("prefix", this, StringOverlay.factory);
-		attribute = createChild("attribute", this, BooleanOverlay.factory);
-		wrapped = createChild("wrapped", this, BooleanOverlay.factory);
-		extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
+	protected void _elaborateJson() {
+		_createScalar("name", "name", StringOverlay.factory);
+		_createScalar("namespace", "namespace", StringOverlay.factory);
+		_createScalar("prefix", "prefix", StringOverlay.factory);
+		_createScalar("attribute", "attribute", BooleanOverlay.factory);
+		_createScalar("wrapped", "wrapped", BooleanOverlay.factory);
+		_createMap("extensions", "", ObjectOverlay.factory, "x-.+");
 	}
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public static OverlayFactory<Xml> factory = new OverlayFactory<Xml>() {
 
 		@Override
-		protected Class<? extends AbstractJsonOverlay<? super Xml>> getOverlayClass() {
+		protected Class<? extends JsonOverlay<? super Xml>> getOverlayClass() {
 			return XmlImpl.class;
 		}
 
 		@Override
-		public JsonOverlay<Xml> _create(Xml xml, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-			AbstractJsonOverlay<?> overlay;
-			overlay = new XmlImpl(xml, parent, refReg);
+		public JsonOverlay<Xml> _create(Xml xml, JsonOverlay<?> parent, ReferenceManager refMgr) {
+			JsonOverlay<?> overlay;
+			overlay = new XmlImpl(xml, parent, refMgr);
 			@SuppressWarnings("unchecked")
 			JsonOverlay<Xml> castOverlay = (JsonOverlay<Xml>) overlay;
 			return castOverlay;
 		}
 
 		@Override
-		public JsonOverlay<Xml> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-			AbstractJsonOverlay<?> overlay;
-			overlay = new XmlImpl(json, parent, refReg);
+		public JsonOverlay<Xml> _create(JsonNode json, JsonOverlay<?> parent, ReferenceManager refMgr) {
+			JsonOverlay<?> overlay;
+			overlay = new XmlImpl(json, parent, refMgr);
 			@SuppressWarnings("unchecked")
 			JsonOverlay<Xml> castOverlay = (JsonOverlay<Xml>) overlay;
 			return castOverlay;
@@ -208,5 +201,11 @@ public class XmlImpl extends PropertiesOverlay<Xml> implements Xml {
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	private static Class<? extends Xml> getSubtypeOf(JsonNode json) {
 		return Xml.class;
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public Class<?> _getModelType() {
+		return OpenApi3.class;
 	}
 }

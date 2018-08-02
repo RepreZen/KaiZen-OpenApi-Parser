@@ -5,133 +5,133 @@ import java.util.Map;
 import javax.annotation.Generated;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.reprezen.jsonoverlay.AbstractJsonOverlay;
-import com.reprezen.jsonoverlay.ChildMapOverlay;
-import com.reprezen.jsonoverlay.ChildOverlay;
 import com.reprezen.jsonoverlay.JsonOverlay;
 import com.reprezen.jsonoverlay.ObjectOverlay;
 import com.reprezen.jsonoverlay.OverlayFactory;
 import com.reprezen.jsonoverlay.PropertiesOverlay;
-import com.reprezen.jsonoverlay.ReferenceRegistry;
+import com.reprezen.jsonoverlay.ReferenceManager;
 import com.reprezen.jsonoverlay.StringOverlay;
 import com.reprezen.kaizen.oasparser.model3.License;
+import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 
 public class LicenseImpl extends PropertiesOverlay<License> implements License {
 
-	JsonNode initJson = jsonMissing();
+	JsonNode initJson = _jsonMissing();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public LicenseImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-		super(json, parent, refReg);
+	public LicenseImpl(JsonNode json, JsonOverlay<?> parent, ReferenceManager refMgr) {
+		super(json, parent, factory, refMgr);
 	}
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public LicenseImpl(License license, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-		super(license, parent, refReg);
+	public LicenseImpl(License license, JsonOverlay<?> parent, ReferenceManager refMgr) {
+		super(license, parent, factory, refMgr);
 	}
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	private ChildOverlay<String> name;
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	private ChildOverlay<String> url;
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	private ChildMapOverlay<Object> extensions;
 
 	// Name
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getName() {
-		return name._get();
+		return _get("name", String.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setName(String name) {
-		this.name._set(name);
+		_setScalar("name", name, String.class);
 	}
 
 	// Url
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getUrl() {
-		return url._get();
+		return _get("url", String.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setUrl(String url) {
-		this.url._set(url);
+		_setScalar("url", url, String.class);
 	}
 
 	// Extension
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Map<String, Object> getExtensions() {
-		return extensions._get();
+		return _getMap("extensions", Object.class);
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public Map<String, Object> getExtensions(boolean elaborate) {
+		return _getMap("extensions", elaborate, Object.class);
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public boolean hasExtensions() {
+		return _isPresent("extensions");
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public boolean hasExtension(String name) {
-		return extensions.containsKey(name);
+		return _getMap("extensions", Object.class).containsKey(name);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Object getExtension(String name) {
-		return extensions._get(name);
+		return _get("extensions", name, Object.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setExtensions(Map<String, Object> extensions) {
-		this.extensions._set(extensions);
+		_setMap("extensions", extensions, Object.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setExtension(String name, Object extension) {
-		extensions._set(name, extension);
+		_set("extensions", name, extension, Object.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void removeExtension(String name) {
-		extensions._remove(name);
+		_remove("extensions", name, Object.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	protected void elaborateChildren() {
-		super.elaborateChildren();
-		name = createChild("name", this, StringOverlay.factory);
-		url = createChild("url", this, StringOverlay.factory);
-		extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
+	protected void _elaborateJson() {
+		_createScalar("name", "name", StringOverlay.factory);
+		_createScalar("url", "url", StringOverlay.factory);
+		_createMap("extensions", "", ObjectOverlay.factory, "x-.+");
 	}
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public static OverlayFactory<License> factory = new OverlayFactory<License>() {
 
 		@Override
-		protected Class<? extends AbstractJsonOverlay<? super License>> getOverlayClass() {
+		protected Class<? extends JsonOverlay<? super License>> getOverlayClass() {
 			return LicenseImpl.class;
 		}
 
 		@Override
-		public JsonOverlay<License> _create(License license, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-			AbstractJsonOverlay<?> overlay;
-			overlay = new LicenseImpl(license, parent, refReg);
+		public JsonOverlay<License> _create(License license, JsonOverlay<?> parent, ReferenceManager refMgr) {
+			JsonOverlay<?> overlay;
+			overlay = new LicenseImpl(license, parent, refMgr);
 			@SuppressWarnings("unchecked")
 			JsonOverlay<License> castOverlay = (JsonOverlay<License>) overlay;
 			return castOverlay;
 		}
 
 		@Override
-		public JsonOverlay<License> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-			AbstractJsonOverlay<?> overlay;
-			overlay = new LicenseImpl(json, parent, refReg);
+		public JsonOverlay<License> _create(JsonNode json, JsonOverlay<?> parent, ReferenceManager refMgr) {
+			JsonOverlay<?> overlay;
+			overlay = new LicenseImpl(json, parent, refMgr);
 			@SuppressWarnings("unchecked")
 			JsonOverlay<License> castOverlay = (JsonOverlay<License>) overlay;
 			return castOverlay;
@@ -146,5 +146,11 @@ public class LicenseImpl extends PropertiesOverlay<License> implements License {
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	private static Class<? extends License> getSubtypeOf(JsonNode json) {
 		return License.class;
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public Class<?> _getModelType() {
+		return OpenApi3.class;
 	}
 }

@@ -10,7 +10,6 @@
  *******************************************************************************/
 package com.reprezen.swaggerparser.test;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.Collection;
@@ -24,11 +23,9 @@ import org.junit.runners.Parameterized.Parameters;
 import org.yaml.snakeyaml.Yaml;
 
 import com.fasterxml.jackson.core.JsonPointer;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import com.google.common.base.Predicate;
-import com.reprezen.jsonoverlay.AbstractJsonOverlay;
 import com.reprezen.jsonoverlay.JsonOverlay;
 import com.reprezen.jsonoverlay.Overlay;
 import com.reprezen.kaizen.oasparser.OpenApiParser;
@@ -55,7 +52,7 @@ public class BigParseTest extends Assert {
 	public URL modelUrl;
 
 	@Test
-	public void test() throws JsonProcessingException, IOException {
+	public void test() throws Exception {
 		Object parsedYaml = new Yaml().load(modelUrl.openStream());
 		JsonNode tree = new YAMLMapper().convertValue(parsedYaml, JsonNode.class);
 		final OpenApi3 model = (OpenApi3) new OpenApiParser().parse(modelUrl, false);
@@ -68,11 +65,12 @@ public class BigParseTest extends Assert {
 		WalkMethod valueChecker = new WalkMethod() {
 			@Override
 			public void run(JsonNode node, JsonPointer path) {
-				AbstractJsonOverlay<?> overlay = Overlay.find((JsonOverlay<OpenApi3>) model, path);
+				JsonOverlay<?> overlay = Overlay.find((JsonOverlay<OpenApi3>) model, path);
 				Object value = overlay != null ? Overlay.get(overlay) : null;
 				assertNotNull("No overlay object found for path: " + path, overlay);
 				Object fromJson = getValue(node);
-				String msg = String.format("Wrong overlay value for path '%s': expected '%s', got '%s'", path, fromJson, value);
+				String msg = String.format("Wrong overlay value for path '%s': expected '%s', got '%s'", path, fromJson,
+						value);
 				assertEquals(msg, fromJson, value);
 			}
 		};

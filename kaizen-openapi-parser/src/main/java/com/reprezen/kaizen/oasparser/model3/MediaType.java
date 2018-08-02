@@ -24,6 +24,12 @@ public interface MediaType extends IJsonOverlay<MediaType>, IModelPart<OpenApi3,
 	Map<String, Example> getExamples();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Example> getExamples(boolean elaborate);
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExamples();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasExample(String name);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -50,6 +56,12 @@ public interface MediaType extends IJsonOverlay<MediaType>, IModelPart<OpenApi3,
 	Map<String, EncodingProperty> getEncodingProperties();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, EncodingProperty> getEncodingProperties(boolean elaborate);
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasEncodingProperties();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasEncodingProperty(String name);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -67,6 +79,12 @@ public interface MediaType extends IJsonOverlay<MediaType>, IModelPart<OpenApi3,
 	// Extension
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	Map<String, Object> getExtensions();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getExtensions(boolean elaborate);
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExtensions();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasExtension(String name);

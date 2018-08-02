@@ -23,6 +23,12 @@ public interface Response extends IJsonOverlay<Response>, IModelPart<OpenApi3, R
 	Map<String, Header> getHeaders();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Header> getHeaders(boolean elaborate);
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasHeaders();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasHeader(String name);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -40,6 +46,12 @@ public interface Response extends IJsonOverlay<Response>, IModelPart<OpenApi3, R
 	// ContentMediaType
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	Map<String, MediaType> getContentMediaTypes();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, MediaType> getContentMediaTypes(boolean elaborate);
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasContentMediaTypes();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasContentMediaType(String name);
@@ -61,6 +73,12 @@ public interface Response extends IJsonOverlay<Response>, IModelPart<OpenApi3, R
 	Map<String, Link> getLinks();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Link> getLinks(boolean elaborate);
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasLinks();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasLink(String name);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -78,6 +96,12 @@ public interface Response extends IJsonOverlay<Response>, IModelPart<OpenApi3, R
 	// Extension
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	Map<String, Object> getExtensions();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getExtensions(boolean elaborate);
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExtensions();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasExtension(String name);

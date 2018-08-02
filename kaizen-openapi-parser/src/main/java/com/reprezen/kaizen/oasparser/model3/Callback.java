@@ -16,6 +16,12 @@ public interface Callback extends IJsonOverlay<Callback>, IModelPart<OpenApi3, C
 	Map<String, Path> getCallbackPaths();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Path> getCallbackPaths(boolean elaborate);
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasCallbackPaths();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasCallbackPath(String expression);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -33,6 +39,12 @@ public interface Callback extends IJsonOverlay<Callback>, IModelPart<OpenApi3, C
 	// Extension
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	Map<String, Object> getExtensions();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getExtensions(boolean elaborate);
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExtensions();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasExtension(String name);

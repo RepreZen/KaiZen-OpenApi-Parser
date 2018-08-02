@@ -1,6 +1,6 @@
 package com.reprezen.kaizen.oasparser.model3;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Generated;
@@ -29,6 +29,12 @@ public interface Path extends IJsonOverlay<Path>, IModelPart<OpenApi3, Path> {
 	// Operation
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	Map<String, Operation> getOperations();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Operation> getOperations(boolean elaborate);
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasOperations();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasOperation(String name);
@@ -127,7 +133,10 @@ public interface Path extends IJsonOverlay<Path>, IModelPart<OpenApi3, Path> {
 
 	// Server
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	Collection<Server> getServers();
+	List<Server> getServers();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	List<Server> getServers(boolean elaborate);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasServers();
@@ -136,7 +145,7 @@ public interface Path extends IJsonOverlay<Path>, IModelPart<OpenApi3, Path> {
 	Server getServer(int index);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void setServers(Collection<Server> servers);
+	void setServers(List<Server> servers);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	void setServer(int index, Server server);
@@ -152,7 +161,10 @@ public interface Path extends IJsonOverlay<Path>, IModelPart<OpenApi3, Path> {
 
 	// Parameter
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	Collection<Parameter> getParameters();
+	List<Parameter> getParameters();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	List<Parameter> getParameters(boolean elaborate);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasParameters();
@@ -161,7 +173,7 @@ public interface Path extends IJsonOverlay<Path>, IModelPart<OpenApi3, Path> {
 	Parameter getParameter(int index);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void setParameters(Collection<Parameter> parameters);
+	void setParameters(List<Parameter> parameters);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	void setParameter(int index, Parameter parameter);
@@ -178,6 +190,12 @@ public interface Path extends IJsonOverlay<Path>, IModelPart<OpenApi3, Path> {
 	// Extension
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	Map<String, Object> getExtensions();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getExtensions(boolean elaborate);
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExtensions();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasExtension(String name);

@@ -5,98 +5,104 @@ import java.util.Map;
 import javax.annotation.Generated;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.reprezen.jsonoverlay.AbstractJsonOverlay;
-import com.reprezen.jsonoverlay.ChildMapOverlay;
 import com.reprezen.jsonoverlay.JsonOverlay;
 import com.reprezen.jsonoverlay.OverlayFactory;
 import com.reprezen.jsonoverlay.PropertiesOverlay;
-import com.reprezen.jsonoverlay.ReferenceRegistry;
+import com.reprezen.jsonoverlay.ReferenceManager;
+import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.SecurityParameter;
 import com.reprezen.kaizen.oasparser.model3.SecurityRequirement;
 
 public class SecurityRequirementImpl extends PropertiesOverlay<SecurityRequirement> implements SecurityRequirement {
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public SecurityRequirementImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-		super(json, parent, refReg);
+	public SecurityRequirementImpl(JsonNode json, JsonOverlay<?> parent, ReferenceManager refMgr) {
+		super(json, parent, factory, refMgr);
 	}
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public SecurityRequirementImpl(SecurityRequirement securityRequirement, JsonOverlay<?> parent,
-			ReferenceRegistry refReg) {
-		super(securityRequirement, parent, refReg);
+			ReferenceManager refMgr) {
+		super(securityRequirement, parent, factory, refMgr);
 	}
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	private ChildMapOverlay<SecurityParameter> requirements;
 
 	// Requirement
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Map<String, SecurityParameter> getRequirements() {
-		return requirements._get();
+		return _getMap("requirements", SecurityParameter.class);
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public Map<String, SecurityParameter> getRequirements(boolean elaborate) {
+		return _getMap("requirements", elaborate, SecurityParameter.class);
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public boolean hasRequirements() {
+		return _isPresent("requirements");
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public boolean hasRequirement(String name) {
-		return requirements.containsKey(name);
+		return _getMap("requirements", SecurityParameter.class).containsKey(name);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public SecurityParameter getRequirement(String name) {
-		return requirements._get(name);
+		return _get("requirements", name, SecurityParameter.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setRequirements(Map<String, SecurityParameter> requirements) {
-		this.requirements._set(requirements);
+		_setMap("requirements", requirements, SecurityParameter.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setRequirement(String name, SecurityParameter requirement) {
-		requirements._set(name, requirement);
+		_set("requirements", name, requirement, SecurityParameter.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void removeRequirement(String name) {
-		requirements._remove(name);
+		_remove("requirements", name, SecurityParameter.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	protected void elaborateChildren() {
-		super.elaborateChildren();
-		requirements = createChildMap("", this, SecurityParameterImpl.factory, "[a-zA-Z0-9\\._-]+");
+	protected void _elaborateJson() {
+		_createMap("requirements", "", SecurityParameterImpl.factory, "[a-zA-Z0-9\\._-]+");
 	}
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public static OverlayFactory<SecurityRequirement> factory = new OverlayFactory<SecurityRequirement>() {
 
 		@Override
-		protected Class<? extends AbstractJsonOverlay<? super SecurityRequirement>> getOverlayClass() {
+		protected Class<? extends JsonOverlay<? super SecurityRequirement>> getOverlayClass() {
 			return SecurityRequirementImpl.class;
 		}
 
 		@Override
 		public JsonOverlay<SecurityRequirement> _create(SecurityRequirement securityRequirement, JsonOverlay<?> parent,
-				ReferenceRegistry refReg) {
-			AbstractJsonOverlay<?> overlay;
-			overlay = new SecurityRequirementImpl(securityRequirement, parent, refReg);
+				ReferenceManager refMgr) {
+			JsonOverlay<?> overlay;
+			overlay = new SecurityRequirementImpl(securityRequirement, parent, refMgr);
 			@SuppressWarnings("unchecked")
 			JsonOverlay<SecurityRequirement> castOverlay = (JsonOverlay<SecurityRequirement>) overlay;
 			return castOverlay;
 		}
 
 		@Override
-		public JsonOverlay<SecurityRequirement> _create(JsonNode json, JsonOverlay<?> parent,
-				ReferenceRegistry refReg) {
-			AbstractJsonOverlay<?> overlay;
-			overlay = new SecurityRequirementImpl(json, parent, refReg);
+		public JsonOverlay<SecurityRequirement> _create(JsonNode json, JsonOverlay<?> parent, ReferenceManager refMgr) {
+			JsonOverlay<?> overlay;
+			overlay = new SecurityRequirementImpl(json, parent, refMgr);
 			@SuppressWarnings("unchecked")
 			JsonOverlay<SecurityRequirement> castOverlay = (JsonOverlay<SecurityRequirement>) overlay;
 			return castOverlay;
@@ -111,5 +117,11 @@ public class SecurityRequirementImpl extends PropertiesOverlay<SecurityRequireme
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	private static Class<? extends SecurityRequirement> getSubtypeOf(JsonNode json) {
 		return SecurityRequirement.class;
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public Class<?> _getModelType() {
+		return OpenApi3.class;
 	}
 }

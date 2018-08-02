@@ -35,6 +35,12 @@ public interface OAuthFlow extends IJsonOverlay<OAuthFlow>, IModelPart<OpenApi3,
 	Map<String, String> getScopes();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, String> getScopes(boolean elaborate);
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasScopes();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasScope(String name);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -54,6 +60,12 @@ public interface OAuthFlow extends IJsonOverlay<OAuthFlow>, IModelPart<OpenApi3,
 	Map<String, Object> getScopesExtensions();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getScopesExtensions(boolean elaborate);
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasScopesExtensions();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasScopesExtension(String name);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -71,6 +83,12 @@ public interface OAuthFlow extends IJsonOverlay<OAuthFlow>, IModelPart<OpenApi3,
 	// Extension
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	Map<String, Object> getExtensions();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getExtensions(boolean elaborate);
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExtensions();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasExtension(String name);

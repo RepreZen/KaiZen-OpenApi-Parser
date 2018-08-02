@@ -1,6 +1,6 @@
 package com.reprezen.kaizen.oasparser.model3;
 
-import java.util.Collection;
+import java.util.List;
 
 import javax.annotation.Generated;
 
@@ -11,7 +11,10 @@ public interface SecurityParameter extends IJsonOverlay<SecurityParameter>, IMod
 
 	// Parameter
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	Collection<String> getParameters();
+	List<String> getParameters();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	List<String> getParameters(boolean elaborate);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasParameters();
@@ -20,7 +23,7 @@ public interface SecurityParameter extends IJsonOverlay<SecurityParameter>, IMod
 	String getParameter(int index);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void setParameters(Collection<String> parameters);
+	void setParameters(List<String> parameters);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	void setParameter(int index, String parameter);

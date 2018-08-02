@@ -21,6 +21,12 @@ public interface EncodingProperty extends IJsonOverlay<EncodingProperty>, IModel
 	Map<String, String> getHeaders();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, String> getHeaders(boolean elaborate);
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasHeaders();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasHeader(String name);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -55,6 +61,12 @@ public interface EncodingProperty extends IJsonOverlay<EncodingProperty>, IModel
 	// Extension
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	Map<String, Object> getExtensions();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getExtensions(boolean elaborate);
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExtensions();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasExtension(String name);

@@ -28,6 +28,12 @@ public interface ExternalDocs extends IJsonOverlay<ExternalDocs>, IModelPart<Ope
 	Map<String, Object> getExtensions();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getExtensions(boolean elaborate);
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExtensions();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasExtension(String name);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")

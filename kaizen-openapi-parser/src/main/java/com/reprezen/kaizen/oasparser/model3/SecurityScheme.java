@@ -98,6 +98,12 @@ public interface SecurityScheme extends IJsonOverlay<SecurityScheme>, IModelPart
 	Map<String, Object> getOAuthFlowsExtensions();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getOAuthFlowsExtensions(boolean elaborate);
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasOAuthFlowsExtensions();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasOAuthFlowsExtension(String name);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -122,6 +128,12 @@ public interface SecurityScheme extends IJsonOverlay<SecurityScheme>, IModelPart
 	// Extension
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	Map<String, Object> getExtensions();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getExtensions(boolean elaborate);
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExtensions();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasExtension(String name);

@@ -35,6 +35,12 @@ public interface Contact extends IJsonOverlay<Contact>, IModelPart<OpenApi3, Con
 	Map<String, Object> getExtensions();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getExtensions(boolean elaborate);
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExtensions();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasExtension(String name);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")

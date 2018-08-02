@@ -55,6 +55,12 @@ public interface Xml extends IJsonOverlay<Xml>, IModelPart<OpenApi3, Xml> {
 	Map<String, Object> getExtensions();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getExtensions(boolean elaborate);
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExtensions();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasExtension(String name);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")

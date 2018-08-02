@@ -17,7 +17,6 @@ import java.util.Deque;
 import java.util.Iterator;
 
 import org.apache.commons.io.IOUtils;
-import org.json.JSONException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
@@ -28,7 +27,6 @@ import org.junit.runners.Parameterized.Parameters;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
@@ -88,7 +86,7 @@ public class SimpleSerializationTest extends Assert {
 		public String fileName;
 
 		@Test
-		public void serializeExample() throws IOException, JSONException {
+		public void serializeExample() throws Exception {
 			if (!exampleUrl.toString().contains("callback-example")) {
 				OpenApi3 model = (OpenApi3) new OpenApiParser().parse(exampleUrl);
 				JsonNode serialized = Overlay.toJson((OpenApi3Impl) model);
@@ -102,27 +100,27 @@ public class SimpleSerializationTest extends Assert {
 	public static class NonParameterizedTests {
 
 		@Test
-		public void toJsonNoticesChanges() throws JsonProcessingException {
+		public void toJsonNoticesChanges() throws Exception {
 			OpenApi3 model = parseLocalModel("simpleTest");
 			assertEquals("simple model", model.getInfo().getTitle());
-			assertEquals("simple model", Overlay.toJson(model).at("/info/title").asText());
+			assertEquals("simple model", Overlay.of(model).toJson().at("/info/title").asText());
 			// this changes the overlay value but does not refresh cached JSON - just marks
 			// it as out-of-date
 			model.getInfo().setTitle("changed title");
 			assertEquals("changed title", model.getInfo().getTitle());
-			assertEquals("changed title", Overlay.toJson(model).at("/info/title").asText());
+			assertEquals("changed title", Overlay.of(model).toJson().at("/info/title").asText());
 		}
 
 		@Test
-		public void toJsonFollowsRefs() {
+		public void toJsonFollowsRefs() throws Exception {
 			OpenApi3 model = parseLocalModel("simpleTest");
 			Schema xSchema = model.getSchema("X");
-			assertEquals("#/components/schemas/Y", Overlay.toJson(xSchema).at("/properties/y/$ref").asText());
-			assertEquals("integer", Overlay.toJson(xSchema, Option.FOLLOW_REFS).at("/properties/y/type").asText());
+			assertEquals("#/components/schemas/Y", Overlay.of(xSchema).toJson().at("/properties/y/$ref").asText());
+			assertEquals("integer", Overlay.of(xSchema).toJson(Option.FOLLOW_REFS).at("/properties/y/type").asText());
 		}
 	}
 
-	private static OpenApi3 parseLocalModel(String name) {
+	private static OpenApi3 parseLocalModel(String name) throws Exception {
 		URL url = SimpleSerializationTest.class.getResource("/models/" + name + ".yaml");
 		return (OpenApi3) new OpenApiParser().parse(url);
 	}

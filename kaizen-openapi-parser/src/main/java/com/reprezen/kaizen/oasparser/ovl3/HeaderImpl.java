@@ -5,21 +5,19 @@ import java.util.Map;
 import javax.annotation.Generated;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.reprezen.jsonoverlay.AbstractJsonOverlay;
 import com.reprezen.jsonoverlay.BooleanOverlay;
-import com.reprezen.jsonoverlay.ChildMapOverlay;
-import com.reprezen.jsonoverlay.ChildOverlay;
 import com.reprezen.jsonoverlay.JsonOverlay;
 import com.reprezen.jsonoverlay.MapOverlay;
 import com.reprezen.jsonoverlay.ObjectOverlay;
 import com.reprezen.jsonoverlay.Overlay;
 import com.reprezen.jsonoverlay.OverlayFactory;
 import com.reprezen.jsonoverlay.PropertiesOverlay;
-import com.reprezen.jsonoverlay.ReferenceRegistry;
+import com.reprezen.jsonoverlay.ReferenceManager;
 import com.reprezen.jsonoverlay.StringOverlay;
 import com.reprezen.kaizen.oasparser.model3.Example;
 import com.reprezen.kaizen.oasparser.model3.Header;
 import com.reprezen.kaizen.oasparser.model3.MediaType;
+import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.Schema;
 
 public class HeaderImpl extends PropertiesOverlay<Header> implements Header {
@@ -32,388 +30,386 @@ public class HeaderImpl extends PropertiesOverlay<Header> implements Header {
 	}
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public HeaderImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-		super(json, parent, refReg);
+	public HeaderImpl(JsonNode json, JsonOverlay<?> parent, ReferenceManager refMgr) {
+		super(json, parent, factory, refMgr);
 	}
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public HeaderImpl(Header header, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-		super(header, parent, refReg);
+	public HeaderImpl(Header header, JsonOverlay<?> parent, ReferenceManager refMgr) {
+		super(header, parent, factory, refMgr);
 	}
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	private ChildOverlay<String> name;
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	private ChildOverlay<String> in;
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	private ChildOverlay<String> description;
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	private ChildOverlay<Boolean> required;
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	private ChildOverlay<Boolean> deprecated;
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	private ChildOverlay<Boolean> allowEmptyValue;
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	private ChildOverlay<String> style;
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	private ChildOverlay<Boolean> explode;
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	private ChildOverlay<Boolean> allowReserved;
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	private ChildOverlay<Schema> schema;
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	private ChildOverlay<Object> example;
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	private ChildMapOverlay<Example> examples;
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	private ChildMapOverlay<MediaType> contentMediaTypes;
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	private ChildMapOverlay<Object> extensions;
 
 	// Name
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getName() {
-		return name._get();
+		return _get("name", String.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setName(String name) {
-		this.name._set(name);
+		_setScalar("name", name, String.class);
 	}
 
 	// In
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getIn() {
-		return in._get();
+		return _get("in", String.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setIn(String in) {
-		this.in._set(in);
+		_setScalar("in", in, String.class);
 	}
 
 	// Description
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getDescription() {
-		return description._get();
+		return _get("description", String.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setDescription(String description) {
-		this.description._set(description);
+		_setScalar("description", description, String.class);
 	}
 
 	// Required
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Boolean getRequired() {
-		return required._get();
+		return _get("required", Boolean.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public boolean isRequired() {
-		return required._get() != null ? required._get() : false;
+		Boolean bool = _get("required", Boolean.class);
+		return bool != null ? bool : false;
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setRequired(Boolean required) {
-		this.required._set(required);
+		_setScalar("required", required, Boolean.class);
 	}
 
 	// Deprecated
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Boolean getDeprecated() {
-		return deprecated._get();
+		return _get("deprecated", Boolean.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public boolean isDeprecated() {
-		return deprecated._get() != null ? deprecated._get() : false;
+		Boolean bool = _get("deprecated", Boolean.class);
+		return bool != null ? bool : false;
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setDeprecated(Boolean deprecated) {
-		this.deprecated._set(deprecated);
+		_setScalar("deprecated", deprecated, Boolean.class);
 	}
 
 	// AllowEmptyValue
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Boolean getAllowEmptyValue() {
-		return allowEmptyValue._get();
+		return _get("allowEmptyValue", Boolean.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public boolean isAllowEmptyValue() {
-		return allowEmptyValue._get() != null ? allowEmptyValue._get() : false;
+		Boolean bool = _get("allowEmptyValue", Boolean.class);
+		return bool != null ? bool : false;
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setAllowEmptyValue(Boolean allowEmptyValue) {
-		this.allowEmptyValue._set(allowEmptyValue);
+		_setScalar("allowEmptyValue", allowEmptyValue, Boolean.class);
 	}
 
 	// Style
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getStyle() {
-		return style._get();
+		return _get("style", String.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setStyle(String style) {
-		this.style._set(style);
+		_setScalar("style", style, String.class);
 	}
 
 	// Explode
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Boolean getExplode() {
-		return explode._get();
+		return _get("explode", Boolean.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public boolean isExplode() {
-		return explode._get() != null ? explode._get() : false;
+		Boolean bool = _get("explode", Boolean.class);
+		return bool != null ? bool : false;
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setExplode(Boolean explode) {
-		this.explode._set(explode);
+		_setScalar("explode", explode, Boolean.class);
 	}
 
 	// AllowReserved
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Boolean getAllowReserved() {
-		return allowReserved._get();
+		return _get("allowReserved", Boolean.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public boolean isAllowReserved() {
-		return allowReserved._get() != null ? allowReserved._get() : false;
+		Boolean bool = _get("allowReserved", Boolean.class);
+		return bool != null ? bool : false;
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setAllowReserved(Boolean allowReserved) {
-		this.allowReserved._set(allowReserved);
+		_setScalar("allowReserved", allowReserved, Boolean.class);
 	}
 
 	// Schema
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Schema getSchema() {
-		return schema._get();
+		return _get("schema", Schema.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Schema getSchema(boolean elaborate) {
-		return schema._get(elaborate);
+		return _get("schema", elaborate, Schema.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setSchema(Schema schema) {
-		this.schema._set(schema);
+		_setScalar("schema", schema, Schema.class);
 	}
 
 	// Example
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Object getExample() {
-		return example._get();
+		return _get("example", Object.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setExample(Object example) {
-		this.example._set(example);
+		_setScalar("example", example, Object.class);
 	}
 
 	// Example
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Map<String, Example> getExamples() {
-		return examples._get();
+		return _getMap("examples", Example.class);
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public Map<String, Example> getExamples(boolean elaborate) {
+		return _getMap("examples", elaborate, Example.class);
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public boolean hasExamples() {
+		return _isPresent("examples");
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public boolean hasExample(String name) {
-		return examples.containsKey(name);
+		return _getMap("examples", Example.class).containsKey(name);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Example getExample(String name) {
-		return examples._get(name);
+		return _get("examples", name, Example.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setExamples(Map<String, Example> examples) {
-		this.examples._set(examples);
+		_setMap("examples", examples, Example.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setExample(String name, Example example) {
-		examples._set(name, example);
+		_set("examples", name, example, Example.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void removeExample(String name) {
-		examples._remove(name);
+		_remove("examples", name, Example.class);
 	}
 
 	// ContentMediaType
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Map<String, MediaType> getContentMediaTypes() {
-		return contentMediaTypes._get();
+		return _getMap("contentMediaTypes", MediaType.class);
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public Map<String, MediaType> getContentMediaTypes(boolean elaborate) {
+		return _getMap("contentMediaTypes", elaborate, MediaType.class);
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public boolean hasContentMediaTypes() {
+		return _isPresent("contentMediaTypes");
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public boolean hasContentMediaType(String name) {
-		return contentMediaTypes.containsKey(name);
+		return _getMap("contentMediaTypes", MediaType.class).containsKey(name);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public MediaType getContentMediaType(String name) {
-		return contentMediaTypes._get(name);
+		return _get("contentMediaTypes", name, MediaType.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setContentMediaTypes(Map<String, MediaType> contentMediaTypes) {
-		this.contentMediaTypes._set(contentMediaTypes);
+		_setMap("contentMediaTypes", contentMediaTypes, MediaType.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setContentMediaType(String name, MediaType contentMediaType) {
-		contentMediaTypes._set(name, contentMediaType);
+		_set("contentMediaTypes", name, contentMediaType, MediaType.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void removeContentMediaType(String name) {
-		contentMediaTypes._remove(name);
+		_remove("contentMediaTypes", name, MediaType.class);
 	}
 
 	// Extension
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Map<String, Object> getExtensions() {
-		return extensions._get();
+		return _getMap("extensions", Object.class);
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public Map<String, Object> getExtensions(boolean elaborate) {
+		return _getMap("extensions", elaborate, Object.class);
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public boolean hasExtensions() {
+		return _isPresent("extensions");
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public boolean hasExtension(String name) {
-		return extensions.containsKey(name);
+		return _getMap("extensions", Object.class).containsKey(name);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Object getExtension(String name) {
-		return extensions._get(name);
+		return _get("extensions", name, Object.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setExtensions(Map<String, Object> extensions) {
-		this.extensions._set(extensions);
+		_setMap("extensions", extensions, Object.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setExtension(String name, Object extension) {
-		extensions._set(name, extension);
+		_set("extensions", name, extension, Object.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void removeExtension(String name) {
-		extensions._remove(name);
+		_remove("extensions", name, Object.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	protected void elaborateChildren() {
-		super.elaborateChildren();
-		name = createChild("name", this, StringOverlay.factory);
-		in = createChild("in", this, StringOverlay.factory);
-		description = createChild("description", this, StringOverlay.factory);
-		required = createChild("required", this, BooleanOverlay.factory);
-		deprecated = createChild("deprecated", this, BooleanOverlay.factory);
-		allowEmptyValue = createChild("allowEmptyValue", this, BooleanOverlay.factory);
-		style = createChild("style", this, StringOverlay.factory);
-		explode = createChild("explode", this, BooleanOverlay.factory);
-		allowReserved = createChild("allowReserved", this, BooleanOverlay.factory);
-		schema = createChild("schema", this, SchemaImpl.factory);
-		example = createChild("example", this, ObjectOverlay.factory);
-		examples = createChildMap("examples", this, ExampleImpl.factory, "[a-zA-Z0-9\\._-]+");
-		contentMediaTypes = createChildMap("content", this, MediaTypeImpl.factory, null);
-		extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
+	protected void _elaborateJson() {
+		_createScalar("name", "name", StringOverlay.factory);
+		_createScalar("in", "in", StringOverlay.factory);
+		_createScalar("description", "description", StringOverlay.factory);
+		_createScalar("required", "required", BooleanOverlay.factory);
+		_createScalar("deprecated", "deprecated", BooleanOverlay.factory);
+		_createScalar("allowEmptyValue", "allowEmptyValue", BooleanOverlay.factory);
+		_createScalar("style", "style", StringOverlay.factory);
+		_createScalar("explode", "explode", BooleanOverlay.factory);
+		_createScalar("allowReserved", "allowReserved", BooleanOverlay.factory);
+		_createScalar("schema", "schema", SchemaImpl.factory);
+		_createScalar("example", "example", ObjectOverlay.factory);
+		_createMap("examples", "examples", ExampleImpl.factory, "[a-zA-Z0-9\\._-]+");
+		_createMap("contentMediaTypes", "content", MediaTypeImpl.factory, null);
+		_createMap("extensions", "", ObjectOverlay.factory, "x-.+");
 	}
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public static OverlayFactory<Header> factory = new OverlayFactory<Header>() {
 
 		@Override
-		protected Class<? extends AbstractJsonOverlay<? super Header>> getOverlayClass() {
+		protected Class<? extends JsonOverlay<? super Header>> getOverlayClass() {
 			return HeaderImpl.class;
 		}
 
 		@Override
-		public JsonOverlay<Header> _create(Header header, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-			AbstractJsonOverlay<?> overlay;
-			overlay = new HeaderImpl(header, parent, refReg);
+		public JsonOverlay<Header> _create(Header header, JsonOverlay<?> parent, ReferenceManager refMgr) {
+			JsonOverlay<?> overlay;
+			overlay = new HeaderImpl(header, parent, refMgr);
 			@SuppressWarnings("unchecked")
 			JsonOverlay<Header> castOverlay = (JsonOverlay<Header>) overlay;
 			return castOverlay;
 		}
 
 		@Override
-		public JsonOverlay<Header> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-			AbstractJsonOverlay<?> overlay;
-			overlay = new HeaderImpl(json, parent, refReg);
+		public JsonOverlay<Header> _create(JsonNode json, JsonOverlay<?> parent, ReferenceManager refMgr) {
+			JsonOverlay<?> overlay;
+			overlay = new HeaderImpl(json, parent, refMgr);
 			@SuppressWarnings("unchecked")
 			JsonOverlay<Header> castOverlay = (JsonOverlay<Header>) overlay;
 			return castOverlay;
@@ -428,5 +424,11 @@ public class HeaderImpl extends PropertiesOverlay<Header> implements Header {
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	private static Class<? extends Header> getSubtypeOf(JsonNode json) {
 		return Header.class;
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public Class<?> _getModelType() {
+		return OpenApi3.class;
 	}
 }

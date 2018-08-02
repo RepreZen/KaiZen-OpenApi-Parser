@@ -1,6 +1,6 @@
 package com.reprezen.kaizen.oasparser.model3;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Generated;
@@ -12,7 +12,10 @@ public interface ServerVariable extends IJsonOverlay<ServerVariable>, IModelPart
 
 	// EnumValue
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	Collection<Object> getEnumValues();
+	List<Object> getEnumValues();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	List<Object> getEnumValues(boolean elaborate);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasEnumValues();
@@ -21,7 +24,7 @@ public interface ServerVariable extends IJsonOverlay<ServerVariable>, IModelPart
 	Object getEnumValue(int index);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void setEnumValues(Collection<Object> enumValues);
+	void setEnumValues(List<Object> enumValues);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	void setEnumValue(int index, Object enumValue);
@@ -52,6 +55,12 @@ public interface ServerVariable extends IJsonOverlay<ServerVariable>, IModelPart
 	// Extension
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	Map<String, Object> getExtensions();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getExtensions(boolean elaborate);
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExtensions();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasExtension(String name);

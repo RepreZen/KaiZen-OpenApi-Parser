@@ -1,6 +1,6 @@
 package com.reprezen.kaizen.oasparser.model3;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Generated;
@@ -12,7 +12,10 @@ public interface Operation extends IJsonOverlay<Operation>, IModelPart<OpenApi3,
 
 	// Tag
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	Collection<String> getTags();
+	List<String> getTags();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	List<String> getTags(boolean elaborate);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasTags();
@@ -21,7 +24,7 @@ public interface Operation extends IJsonOverlay<Operation>, IModelPart<OpenApi3,
 	String getTag(int index);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void setTags(Collection<String> tags);
+	void setTags(List<String> tags);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	void setTag(int index, String tag);
@@ -68,7 +71,10 @@ public interface Operation extends IJsonOverlay<Operation>, IModelPart<OpenApi3,
 
 	// Parameter
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	Collection<Parameter> getParameters();
+	List<Parameter> getParameters();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	List<Parameter> getParameters(boolean elaborate);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasParameters();
@@ -77,7 +83,7 @@ public interface Operation extends IJsonOverlay<Operation>, IModelPart<OpenApi3,
 	Parameter getParameter(int index);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void setParameters(Collection<Parameter> parameters);
+	void setParameters(List<Parameter> parameters);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	void setParameter(int index, Parameter parameter);
@@ -106,6 +112,12 @@ public interface Operation extends IJsonOverlay<Operation>, IModelPart<OpenApi3,
 	Map<String, Response> getResponses();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Response> getResponses(boolean elaborate);
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasResponses();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasResponse(String name);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -123,6 +135,12 @@ public interface Operation extends IJsonOverlay<Operation>, IModelPart<OpenApi3,
 	// ResponsesExtension
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	Map<String, Object> getResponsesExtensions();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getResponsesExtensions(boolean elaborate);
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasResponsesExtensions();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasResponsesExtension(String name);
@@ -144,6 +162,12 @@ public interface Operation extends IJsonOverlay<Operation>, IModelPart<OpenApi3,
 	Map<String, Callback> getCallbacks();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Callback> getCallbacks(boolean elaborate);
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasCallbacks();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasCallback(String name);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -161,6 +185,12 @@ public interface Operation extends IJsonOverlay<Operation>, IModelPart<OpenApi3,
 	// CallbacksExtension
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	Map<String, Object> getCallbacksExtensions();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getCallbacksExtensions(boolean elaborate);
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasCallbacksExtensions();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasCallbacksExtension(String name);
@@ -189,7 +219,10 @@ public interface Operation extends IJsonOverlay<Operation>, IModelPart<OpenApi3,
 
 	// SecurityRequirement
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	Collection<SecurityRequirement> getSecurityRequirements();
+	List<SecurityRequirement> getSecurityRequirements();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	List<SecurityRequirement> getSecurityRequirements(boolean elaborate);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasSecurityRequirements();
@@ -198,7 +231,7 @@ public interface Operation extends IJsonOverlay<Operation>, IModelPart<OpenApi3,
 	SecurityRequirement getSecurityRequirement(int index);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void setSecurityRequirements(Collection<SecurityRequirement> securityRequirements);
+	void setSecurityRequirements(List<SecurityRequirement> securityRequirements);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	void setSecurityRequirement(int index, SecurityRequirement securityRequirement);
@@ -214,7 +247,10 @@ public interface Operation extends IJsonOverlay<Operation>, IModelPart<OpenApi3,
 
 	// Server
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	Collection<Server> getServers();
+	List<Server> getServers();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	List<Server> getServers(boolean elaborate);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasServers();
@@ -223,7 +259,7 @@ public interface Operation extends IJsonOverlay<Operation>, IModelPart<OpenApi3,
 	Server getServer(int index);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void setServers(Collection<Server> servers);
+	void setServers(List<Server> servers);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	void setServer(int index, Server server);
@@ -240,6 +276,12 @@ public interface Operation extends IJsonOverlay<Operation>, IModelPart<OpenApi3,
 	// Extension
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	Map<String, Object> getExtensions();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getExtensions(boolean elaborate);
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExtensions();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasExtension(String name);

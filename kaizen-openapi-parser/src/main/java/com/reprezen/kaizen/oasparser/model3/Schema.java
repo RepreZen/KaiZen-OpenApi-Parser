@@ -1,6 +1,6 @@
 package com.reprezen.kaizen.oasparser.model3;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Generated;
@@ -121,7 +121,10 @@ public interface Schema extends IJsonOverlay<Schema>, IModelPart<OpenApi3, Schem
 
 	// RequiredField
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	Collection<String> getRequiredFields();
+	List<String> getRequiredFields();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	List<String> getRequiredFields(boolean elaborate);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasRequiredFields();
@@ -130,7 +133,7 @@ public interface Schema extends IJsonOverlay<Schema>, IModelPart<OpenApi3, Schem
 	String getRequiredField(int index);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void setRequiredFields(Collection<String> requiredFields);
+	void setRequiredFields(List<String> requiredFields);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	void setRequiredField(int index, String requiredField);
@@ -146,7 +149,10 @@ public interface Schema extends IJsonOverlay<Schema>, IModelPart<OpenApi3, Schem
 
 	// Enum
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	Collection<Object> getEnums();
+	List<Object> getEnums();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	List<Object> getEnums(boolean elaborate);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasEnums();
@@ -155,7 +161,7 @@ public interface Schema extends IJsonOverlay<Schema>, IModelPart<OpenApi3, Schem
 	Object getEnum(int index);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void setEnums(Collection<Object> enums);
+	void setEnums(List<Object> enums);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	void setEnum(int index, Object enumValue);
@@ -178,7 +184,10 @@ public interface Schema extends IJsonOverlay<Schema>, IModelPart<OpenApi3, Schem
 
 	// AllOfSchema
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	Collection<Schema> getAllOfSchemas();
+	List<Schema> getAllOfSchemas();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	List<Schema> getAllOfSchemas(boolean elaborate);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasAllOfSchemas();
@@ -187,7 +196,7 @@ public interface Schema extends IJsonOverlay<Schema>, IModelPart<OpenApi3, Schem
 	Schema getAllOfSchema(int index);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void setAllOfSchemas(Collection<Schema> allOfSchemas);
+	void setAllOfSchemas(List<Schema> allOfSchemas);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	void setAllOfSchema(int index, Schema allOfSchema);
@@ -203,7 +212,10 @@ public interface Schema extends IJsonOverlay<Schema>, IModelPart<OpenApi3, Schem
 
 	// OneOfSchema
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	Collection<Schema> getOneOfSchemas();
+	List<Schema> getOneOfSchemas();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	List<Schema> getOneOfSchemas(boolean elaborate);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasOneOfSchemas();
@@ -212,7 +224,7 @@ public interface Schema extends IJsonOverlay<Schema>, IModelPart<OpenApi3, Schem
 	Schema getOneOfSchema(int index);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void setOneOfSchemas(Collection<Schema> oneOfSchemas);
+	void setOneOfSchemas(List<Schema> oneOfSchemas);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	void setOneOfSchema(int index, Schema oneOfSchema);
@@ -228,7 +240,10 @@ public interface Schema extends IJsonOverlay<Schema>, IModelPart<OpenApi3, Schem
 
 	// AnyOfSchema
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	Collection<Schema> getAnyOfSchemas();
+	List<Schema> getAnyOfSchemas();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	List<Schema> getAnyOfSchemas(boolean elaborate);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasAnyOfSchemas();
@@ -237,7 +252,7 @@ public interface Schema extends IJsonOverlay<Schema>, IModelPart<OpenApi3, Schem
 	Schema getAnyOfSchema(int index);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void setAnyOfSchemas(Collection<Schema> anyOfSchemas);
+	void setAnyOfSchemas(List<Schema> anyOfSchemas);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	void setAnyOfSchema(int index, Schema anyOfSchema);
@@ -274,6 +289,12 @@ public interface Schema extends IJsonOverlay<Schema>, IModelPart<OpenApi3, Schem
 	// Property
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	Map<String, Schema> getProperties();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Schema> getProperties(boolean elaborate);
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasProperties();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasProperty(String name);
@@ -393,6 +414,12 @@ public interface Schema extends IJsonOverlay<Schema>, IModelPart<OpenApi3, Schem
 	Map<String, Example> getExamples();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Example> getExamples(boolean elaborate);
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExamples();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasExample(String name);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -427,6 +454,12 @@ public interface Schema extends IJsonOverlay<Schema>, IModelPart<OpenApi3, Schem
 	// Extension
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	Map<String, Object> getExtensions();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getExtensions(boolean elaborate);
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExtensions();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasExtension(String name);

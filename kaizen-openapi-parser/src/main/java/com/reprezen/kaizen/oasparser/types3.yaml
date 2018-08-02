@@ -6,7 +6,8 @@ imports:
   Severity: com.reprezen.kaizen.oasparser.val.ValidationResults.Severity
   OpenApi3Validator: com.reprezen.kaizen.oasparser.val3.OpenApi3Validator
   Overlay: com.reprezen.jsonoverlay.Overlay
-  
+  Collection: java.util.Collection
+  ReferenceRegistry: com.reprezen.jsonoverlay.ReferenceRegistry  
 decls:
   - extPat: &extPat "x-.+"
   - noextPat: &noextPat "(?!x-).*"
@@ -25,7 +26,7 @@ types:
   - name: OpenApi3
     imports: 
       intf:  [ ValidationResults, Collection ]
-      impl: [ OpenApi3Validator, Validator, ValidationResults, Severity, Inject, ReferenceRegistry, ObjectNode, JsonNodeFactory ]
+      impl: [ OpenApi3Validator, Validator, ValidationResults, Severity, Inject, ReferenceRegistry, ObjectNode, JsonNodeFactory, Collection ]
     extendInterfaces: [OpenApi<OpenApi3>]
     fields:
       openapi:
@@ -219,9 +220,9 @@ types:
         structure: collection
       parameters:
         structure: collection
-        keyDecls:
-          - String name
-          - String in
+#        keyDecls:
+#          - String name
+#          - String in
       *extName: *extDef
         
   - name: Operation
@@ -235,9 +236,9 @@ types:
       operationId: {}
       parameters:
         structure: collection
-        keyDecls:
-          - String name
-          - String id
+#        keyDecls:
+#          - String name
+#          - String id
       requestBody: {}
       responses:
         structure: map
@@ -357,7 +358,6 @@ types:
       headers:
         structure: map
         type: String
-        selfKeyed: true
       style: {}
       explode:
         type: Boolean
@@ -439,7 +439,6 @@ types:
       required:
         name: RequiredField
         structure: collection
-        selfKeyed: true
       enum:
         type: Object
         structure: collection
@@ -470,12 +469,10 @@ types:
       additionalPropertiesSchema:
         parentPath: additionalProperties
         type: Schema
-        createTest: .isObject() 
       additionalPropertiesBoolean:
         name: AdditionalProperties
         parentPath: additionalProperties
         type: Boolean
-        createTest: .isBoolean()
       description: {}
       format: {}
       default:

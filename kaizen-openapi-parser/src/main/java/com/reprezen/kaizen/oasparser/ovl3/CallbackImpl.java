@@ -5,16 +5,15 @@ import java.util.Map;
 import javax.annotation.Generated;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.reprezen.jsonoverlay.AbstractJsonOverlay;
-import com.reprezen.jsonoverlay.ChildMapOverlay;
 import com.reprezen.jsonoverlay.JsonOverlay;
 import com.reprezen.jsonoverlay.MapOverlay;
 import com.reprezen.jsonoverlay.ObjectOverlay;
 import com.reprezen.jsonoverlay.Overlay;
 import com.reprezen.jsonoverlay.OverlayFactory;
 import com.reprezen.jsonoverlay.PropertiesOverlay;
-import com.reprezen.jsonoverlay.ReferenceRegistry;
+import com.reprezen.jsonoverlay.ReferenceManager;
 import com.reprezen.kaizen.oasparser.model3.Callback;
+import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.Path;
 
 public class CallbackImpl extends PropertiesOverlay<Callback> implements Callback {
@@ -27,124 +26,141 @@ public class CallbackImpl extends PropertiesOverlay<Callback> implements Callbac
 	}
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public CallbackImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-		super(json, parent, refReg);
+	public CallbackImpl(JsonNode json, JsonOverlay<?> parent, ReferenceManager refMgr) {
+		super(json, parent, factory, refMgr);
 	}
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public CallbackImpl(Callback callback, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-		super(callback, parent, refReg);
+	public CallbackImpl(Callback callback, JsonOverlay<?> parent, ReferenceManager refMgr) {
+		super(callback, parent, factory, refMgr);
 	}
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	private ChildMapOverlay<Path> callbackPaths;
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	private ChildMapOverlay<Object> extensions;
 
 	// CallbackPath
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Map<String, Path> getCallbackPaths() {
-		return callbackPaths._get();
+		return _getMap("callbackPaths", Path.class);
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public Map<String, Path> getCallbackPaths(boolean elaborate) {
+		return _getMap("callbackPaths", elaborate, Path.class);
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public boolean hasCallbackPaths() {
+		return _isPresent("callbackPaths");
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public boolean hasCallbackPath(String expression) {
-		return callbackPaths.containsKey(expression);
+		return _getMap("callbackPaths", Path.class).containsKey(expression);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Path getCallbackPath(String expression) {
-		return callbackPaths._get(expression);
+		return _get("callbackPaths", expression, Path.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setCallbackPaths(Map<String, Path> callbackPaths) {
-		this.callbackPaths._set(callbackPaths);
+		_setMap("callbackPaths", callbackPaths, Path.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setCallbackPath(String expression, Path callbackPath) {
-		callbackPaths._set(expression, callbackPath);
+		_set("callbackPaths", expression, callbackPath, Path.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void removeCallbackPath(String expression) {
-		callbackPaths._remove(expression);
+		_remove("callbackPaths", expression, Path.class);
 	}
 
 	// Extension
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Map<String, Object> getExtensions() {
-		return extensions._get();
+		return _getMap("extensions", Object.class);
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public Map<String, Object> getExtensions(boolean elaborate) {
+		return _getMap("extensions", elaborate, Object.class);
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public boolean hasExtensions() {
+		return _isPresent("extensions");
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public boolean hasExtension(String name) {
-		return extensions.containsKey(name);
+		return _getMap("extensions", Object.class).containsKey(name);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Object getExtension(String name) {
-		return extensions._get(name);
+		return _get("extensions", name, Object.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setExtensions(Map<String, Object> extensions) {
-		this.extensions._set(extensions);
+		_setMap("extensions", extensions, Object.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setExtension(String name, Object extension) {
-		extensions._set(name, extension);
+		_set("extensions", name, extension, Object.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void removeExtension(String name) {
-		extensions._remove(name);
+		_remove("extensions", name, Object.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	protected void elaborateChildren() {
-		super.elaborateChildren();
-		callbackPaths = createChildMap("", this, PathImpl.factory, "(?!x-).*");
-		extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
+	protected void _elaborateJson() {
+		_createMap("callbackPaths", "", PathImpl.factory, "(?!x-).*");
+		_createMap("extensions", "", ObjectOverlay.factory, "x-.+");
 	}
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public static OverlayFactory<Callback> factory = new OverlayFactory<Callback>() {
 
 		@Override
-		protected Class<? extends AbstractJsonOverlay<? super Callback>> getOverlayClass() {
+		protected Class<? extends JsonOverlay<? super Callback>> getOverlayClass() {
 			return CallbackImpl.class;
 		}
 
 		@Override
-		public JsonOverlay<Callback> _create(Callback callback, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-			AbstractJsonOverlay<?> overlay;
-			overlay = new CallbackImpl(callback, parent, refReg);
+		public JsonOverlay<Callback> _create(Callback callback, JsonOverlay<?> parent, ReferenceManager refMgr) {
+			JsonOverlay<?> overlay;
+			overlay = new CallbackImpl(callback, parent, refMgr);
 			@SuppressWarnings("unchecked")
 			JsonOverlay<Callback> castOverlay = (JsonOverlay<Callback>) overlay;
 			return castOverlay;
 		}
 
 		@Override
-		public JsonOverlay<Callback> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-			AbstractJsonOverlay<?> overlay;
-			overlay = new CallbackImpl(json, parent, refReg);
+		public JsonOverlay<Callback> _create(JsonNode json, JsonOverlay<?> parent, ReferenceManager refMgr) {
+			JsonOverlay<?> overlay;
+			overlay = new CallbackImpl(json, parent, refMgr);
 			@SuppressWarnings("unchecked")
 			JsonOverlay<Callback> castOverlay = (JsonOverlay<Callback>) overlay;
 			return castOverlay;
@@ -159,5 +175,11 @@ public class CallbackImpl extends PropertiesOverlay<Callback> implements Callbac
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	private static Class<? extends Callback> getSubtypeOf(JsonNode json) {
 		return Callback.class;
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public Class<?> _getModelType() {
+		return OpenApi3.class;
 	}
 }

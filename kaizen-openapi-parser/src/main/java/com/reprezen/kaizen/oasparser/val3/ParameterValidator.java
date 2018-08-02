@@ -80,7 +80,7 @@ public class ParameterValidator extends ObjectValidatorBase<Parameter> {
 	}
 
 	private String getPathString(Parameter parameter) {
-		PropertiesOverlay<?> parent = Overlay.getParentPropertiesOverlay(parameter);
+		PropertiesOverlay<?> parent = Overlay.of(parameter).getParentPropertiesOverlay();
 		while (parent != null && !(parent instanceof Path)) {
 			parent = Overlay.of(parent).getParentPropertiesOverlay();
 		}

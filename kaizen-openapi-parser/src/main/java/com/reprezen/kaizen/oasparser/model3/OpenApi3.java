@@ -1,6 +1,7 @@
 package com.reprezen.kaizen.oasparser.model3;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Generated;
@@ -39,7 +40,10 @@ public interface OpenApi3 extends IJsonOverlay<OpenApi3>, IModelPart<OpenApi3, O
 
 	// Server
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	Collection<Server> getServers();
+	List<Server> getServers();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	List<Server> getServers(boolean elaborate);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasServers();
@@ -48,7 +52,7 @@ public interface OpenApi3 extends IJsonOverlay<OpenApi3>, IModelPart<OpenApi3, O
 	Server getServer(int index);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void setServers(Collection<Server> servers);
+	void setServers(List<Server> servers);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	void setServer(int index, Server server);
@@ -65,6 +69,12 @@ public interface OpenApi3 extends IJsonOverlay<OpenApi3>, IModelPart<OpenApi3, O
 	// Path
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	Map<String, Path> getPaths();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Path> getPaths(boolean elaborate);
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasPaths();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasPath(String name);
@@ -86,6 +96,12 @@ public interface OpenApi3 extends IJsonOverlay<OpenApi3>, IModelPart<OpenApi3, O
 	Map<String, Object> getPathsExtensions();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getPathsExtensions(boolean elaborate);
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasPathsExtensions();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasPathsExtension(String name);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -103,6 +119,12 @@ public interface OpenApi3 extends IJsonOverlay<OpenApi3>, IModelPart<OpenApi3, O
 	// Schema
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	Map<String, Schema> getSchemas();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Schema> getSchemas(boolean elaborate);
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasSchemas();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasSchema(String name);
@@ -124,6 +146,12 @@ public interface OpenApi3 extends IJsonOverlay<OpenApi3>, IModelPart<OpenApi3, O
 	Map<String, Response> getResponses();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Response> getResponses(boolean elaborate);
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasResponses();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasResponse(String name);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -141,6 +169,12 @@ public interface OpenApi3 extends IJsonOverlay<OpenApi3>, IModelPart<OpenApi3, O
 	// Parameter
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	Map<String, Parameter> getParameters();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Parameter> getParameters(boolean elaborate);
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasParameters();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasParameter(String name);
@@ -162,6 +196,12 @@ public interface OpenApi3 extends IJsonOverlay<OpenApi3>, IModelPart<OpenApi3, O
 	Map<String, Example> getExamples();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Example> getExamples(boolean elaborate);
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExamples();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasExample(String name);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -179,6 +219,12 @@ public interface OpenApi3 extends IJsonOverlay<OpenApi3>, IModelPart<OpenApi3, O
 	// RequestBody
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	Map<String, RequestBody> getRequestBodies();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, RequestBody> getRequestBodies(boolean elaborate);
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasRequestBodies();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasRequestBody(String name);
@@ -200,6 +246,12 @@ public interface OpenApi3 extends IJsonOverlay<OpenApi3>, IModelPart<OpenApi3, O
 	Map<String, Header> getHeaders();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Header> getHeaders(boolean elaborate);
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasHeaders();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasHeader(String name);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -217,6 +269,12 @@ public interface OpenApi3 extends IJsonOverlay<OpenApi3>, IModelPart<OpenApi3, O
 	// SecurityScheme
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	Map<String, SecurityScheme> getSecuritySchemes();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, SecurityScheme> getSecuritySchemes(boolean elaborate);
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasSecuritySchemes();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasSecurityScheme(String name);
@@ -238,6 +296,12 @@ public interface OpenApi3 extends IJsonOverlay<OpenApi3>, IModelPart<OpenApi3, O
 	Map<String, Link> getLinks();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Link> getLinks(boolean elaborate);
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasLinks();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasLink(String name);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -255,6 +319,12 @@ public interface OpenApi3 extends IJsonOverlay<OpenApi3>, IModelPart<OpenApi3, O
 	// Callback
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	Map<String, Callback> getCallbacks();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Callback> getCallbacks(boolean elaborate);
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasCallbacks();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasCallback(String name);
@@ -276,6 +346,12 @@ public interface OpenApi3 extends IJsonOverlay<OpenApi3>, IModelPart<OpenApi3, O
 	Map<String, Object> getComponentsExtensions();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getComponentsExtensions(boolean elaborate);
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasComponentsExtensions();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasComponentsExtension(String name);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -292,7 +368,10 @@ public interface OpenApi3 extends IJsonOverlay<OpenApi3>, IModelPart<OpenApi3, O
 
 	// SecurityRequirement
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	Collection<SecurityRequirement> getSecurityRequirements();
+	List<SecurityRequirement> getSecurityRequirements();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	List<SecurityRequirement> getSecurityRequirements(boolean elaborate);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasSecurityRequirements();
@@ -301,7 +380,7 @@ public interface OpenApi3 extends IJsonOverlay<OpenApi3>, IModelPart<OpenApi3, O
 	SecurityRequirement getSecurityRequirement(int index);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void setSecurityRequirements(Collection<SecurityRequirement> securityRequirements);
+	void setSecurityRequirements(List<SecurityRequirement> securityRequirements);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	void setSecurityRequirement(int index, SecurityRequirement securityRequirement);
@@ -317,7 +396,10 @@ public interface OpenApi3 extends IJsonOverlay<OpenApi3>, IModelPart<OpenApi3, O
 
 	// Tag
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	Collection<Tag> getTags();
+	List<Tag> getTags();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	List<Tag> getTags(boolean elaborate);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasTags();
@@ -326,7 +408,7 @@ public interface OpenApi3 extends IJsonOverlay<OpenApi3>, IModelPart<OpenApi3, O
 	Tag getTag(int index);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void setTags(Collection<Tag> tags);
+	void setTags(List<Tag> tags);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	void setTag(int index, Tag tag);
@@ -353,6 +435,12 @@ public interface OpenApi3 extends IJsonOverlay<OpenApi3>, IModelPart<OpenApi3, O
 	// Extension
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	Map<String, Object> getExtensions();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Map<String, Object> getExtensions(boolean elaborate);
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean hasExtensions();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasExtension(String name);

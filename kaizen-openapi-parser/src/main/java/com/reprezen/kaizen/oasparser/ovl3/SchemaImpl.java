@@ -36,7 +36,7 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 	@Override
 	public JsonOverlay<?> _findInternal(JsonPointer path) {
 		if (path.matchesProperty("additionalProperties")) {
-			return path.tail().matches() ? _get("additionalProperties", BooleanOverlay.class)
+			return path.tail().matches() ? _getOverlay("additionalProperties", BooleanOverlay.class)
 					: _get("additionalPropertiesSchema", SchemaImpl.class)._findInternal(path.tail());
 		} else {
 			return super._findInternal(path);
@@ -57,7 +57,7 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getTitle() {
-		return (String) _get("title", String.class);
+		return _get("title", String.class);
 	}
 
 	@Override
@@ -70,7 +70,7 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Number getMultipleOf() {
-		return (Number) _get("multipleOf", Number.class);
+		return _get("multipleOf", Number.class);
 	}
 
 	@Override
@@ -83,7 +83,7 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Number getMaximum() {
-		return (Number) _get("maximum", Number.class);
+		return _get("maximum", Number.class);
 	}
 
 	@Override
@@ -96,7 +96,7 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Boolean getExclusiveMaximum() {
-		return (Boolean) _get("exclusiveMaximum", Boolean.class);
+		return _get("exclusiveMaximum", Boolean.class);
 	}
 
 	@Override
@@ -116,7 +116,7 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Number getMinimum() {
-		return (Number) _get("minimum", Number.class);
+		return _get("minimum", Number.class);
 	}
 
 	@Override
@@ -129,7 +129,7 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Boolean getExclusiveMinimum() {
-		return (Boolean) _get("exclusiveMinimum", Boolean.class);
+		return _get("exclusiveMinimum", Boolean.class);
 	}
 
 	@Override
@@ -149,7 +149,7 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Integer getMaxLength() {
-		return (Integer) _get("maxLength", Integer.class);
+		return _get("maxLength", Integer.class);
 	}
 
 	@Override
@@ -162,7 +162,7 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Integer getMinLength() {
-		return (Integer) _get("minLength", Integer.class);
+		return _get("minLength", Integer.class);
 	}
 
 	@Override
@@ -175,7 +175,7 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getPattern() {
-		return (String) _get("pattern", String.class);
+		return _get("pattern", String.class);
 	}
 
 	@Override
@@ -188,7 +188,7 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Integer getMaxItems() {
-		return (Integer) _get("maxItems", Integer.class);
+		return _get("maxItems", Integer.class);
 	}
 
 	@Override
@@ -201,7 +201,7 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Integer getMinItems() {
-		return (Integer) _get("minItems", Integer.class);
+		return _get("minItems", Integer.class);
 	}
 
 	@Override
@@ -214,7 +214,7 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Boolean getUniqueItems() {
-		return (Boolean) _get("uniqueItems", Boolean.class);
+		return _get("uniqueItems", Boolean.class);
 	}
 
 	@Override
@@ -234,7 +234,7 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Integer getMaxProperties() {
-		return (Integer) _get("maxProperties", Integer.class);
+		return _get("maxProperties", Integer.class);
 	}
 
 	@Override
@@ -247,7 +247,7 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Integer getMinProperties() {
-		return (Integer) _get("minProperties", Integer.class);
+		return _get("minProperties", Integer.class);
 	}
 
 	@Override
@@ -370,7 +370,7 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getType() {
-		return (String) _get("type", String.class);
+		return _get("type", String.class);
 	}
 
 	@Override
@@ -548,13 +548,13 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Schema getNotSchema() {
-		return (Schema) _get("notSchema", Schema.class);
+		return _get("notSchema", Schema.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Schema getNotSchema(boolean elaborate) {
-		return (Schema) _get("notSchema", elaborate, Schema.class);
+		return _get("notSchema", elaborate, Schema.class);
 	}
 
 	@Override
@@ -567,13 +567,13 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Schema getItemsSchema() {
-		return (Schema) _get("itemsSchema", Schema.class);
+		return _get("itemsSchema", Schema.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Schema getItemsSchema(boolean elaborate) {
-		return (Schema) _get("itemsSchema", elaborate, Schema.class);
+		return _get("itemsSchema", elaborate, Schema.class);
 	}
 
 	@Override
@@ -635,13 +635,13 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Schema getAdditionalPropertiesSchema() {
-		return (Schema) _get("additionalPropertiesSchema", Schema.class);
+		return _get("additionalPropertiesSchema", Schema.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Schema getAdditionalPropertiesSchema(boolean elaborate) {
-		return (Schema) _get("additionalPropertiesSchema", elaborate, Schema.class);
+		return _get("additionalPropertiesSchema", elaborate, Schema.class);
 	}
 
 	@Override
@@ -654,7 +654,7 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Boolean getAdditionalProperties() {
-		return (Boolean) _get("additionalProperties", Boolean.class);
+		return _get("additionalProperties", Boolean.class);
 	}
 
 	@Override
@@ -674,7 +674,7 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getDescription() {
-		return (String) _get("description", String.class);
+		return _get("description", String.class);
 	}
 
 	@Override
@@ -687,7 +687,7 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getFormat() {
-		return (String) _get("format", String.class);
+		return _get("format", String.class);
 	}
 
 	@Override
@@ -700,7 +700,7 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Object getDefault() {
-		return (Object) _get("defaultValue", Object.class);
+		return _get("defaultValue", Object.class);
 	}
 
 	@Override
@@ -713,7 +713,7 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Boolean getNullable() {
-		return (Boolean) _get("nullable", Boolean.class);
+		return _get("nullable", Boolean.class);
 	}
 
 	@Override
@@ -733,7 +733,7 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getDiscriminator() {
-		return (String) _get("discriminator", String.class);
+		return _get("discriminator", String.class);
 	}
 
 	@Override
@@ -746,7 +746,7 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Boolean getReadOnly() {
-		return (Boolean) _get("readOnly", Boolean.class);
+		return _get("readOnly", Boolean.class);
 	}
 
 	@Override
@@ -766,7 +766,7 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Boolean getWriteOnly() {
-		return (Boolean) _get("writeOnly", Boolean.class);
+		return _get("writeOnly", Boolean.class);
 	}
 
 	@Override
@@ -786,13 +786,13 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Xml getXml() {
-		return (Xml) _get("xml", Xml.class);
+		return _get("xml", Xml.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Xml getXml(boolean elaborate) {
-		return (Xml) _get("xml", elaborate, Xml.class);
+		return _get("xml", elaborate, Xml.class);
 	}
 
 	@Override
@@ -805,13 +805,13 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public ExternalDocs getExternalDocs() {
-		return (ExternalDocs) _get("externalDocs", ExternalDocs.class);
+		return _get("externalDocs", ExternalDocs.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public ExternalDocs getExternalDocs(boolean elaborate) {
-		return (ExternalDocs) _get("externalDocs", elaborate, ExternalDocs.class);
+		return _get("externalDocs", elaborate, ExternalDocs.class);
 	}
 
 	@Override
@@ -873,7 +873,7 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Object getExample() {
-		return (Object) _get("example", Object.class);
+		return _get("example", Object.class);
 	}
 
 	@Override
@@ -886,7 +886,7 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Boolean getDeprecated() {
-		return (Boolean) _get("deprecated", Boolean.class);
+		return _get("deprecated", Boolean.class);
 	}
 
 	@Override

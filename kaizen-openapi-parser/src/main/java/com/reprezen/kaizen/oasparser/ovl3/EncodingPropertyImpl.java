@@ -31,7 +31,7 @@ public class EncodingPropertyImpl extends PropertiesOverlay<EncodingProperty> im
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getContentType() {
-		return (String) _get("contentType", String.class);
+		return _get("contentType", String.class);
 	}
 
 	@Override
@@ -93,7 +93,7 @@ public class EncodingPropertyImpl extends PropertiesOverlay<EncodingProperty> im
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getStyle() {
-		return (String) _get("style", String.class);
+		return _get("style", String.class);
 	}
 
 	@Override
@@ -106,7 +106,7 @@ public class EncodingPropertyImpl extends PropertiesOverlay<EncodingProperty> im
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Boolean getExplode() {
-		return (Boolean) _get("explode", Boolean.class);
+		return _get("explode", Boolean.class);
 	}
 
 	@Override

@@ -30,7 +30,7 @@ public class OAuthFlowImpl extends PropertiesOverlay<OAuthFlow> implements OAuth
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getAuthorizationUrl() {
-		return (String) _get("authorizationUrl", String.class);
+		return _get("authorizationUrl", String.class);
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class OAuthFlowImpl extends PropertiesOverlay<OAuthFlow> implements OAuth
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getTokenUrl() {
-		return (String) _get("tokenUrl", String.class);
+		return _get("tokenUrl", String.class);
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class OAuthFlowImpl extends PropertiesOverlay<OAuthFlow> implements OAuth
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getRefreshUrl() {
-		return (String) _get("refreshUrl", String.class);
+		return _get("refreshUrl", String.class);
 	}
 
 	@Override

@@ -32,7 +32,7 @@ public class InfoImpl extends PropertiesOverlay<Info> implements Info {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getTitle() {
-		return (String) _get("title", String.class);
+		return _get("title", String.class);
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public class InfoImpl extends PropertiesOverlay<Info> implements Info {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getDescription() {
-		return (String) _get("description", String.class);
+		return _get("description", String.class);
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class InfoImpl extends PropertiesOverlay<Info> implements Info {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getTermsOfService() {
-		return (String) _get("termsOfService", String.class);
+		return _get("termsOfService", String.class);
 	}
 
 	@Override
@@ -71,13 +71,13 @@ public class InfoImpl extends PropertiesOverlay<Info> implements Info {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Contact getContact() {
-		return (Contact) _get("contact", Contact.class);
+		return _get("contact", Contact.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Contact getContact(boolean elaborate) {
-		return (Contact) _get("contact", elaborate, Contact.class);
+		return _get("contact", elaborate, Contact.class);
 	}
 
 	@Override
@@ -90,13 +90,13 @@ public class InfoImpl extends PropertiesOverlay<Info> implements Info {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public License getLicense() {
-		return (License) _get("license", License.class);
+		return _get("license", License.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public License getLicense(boolean elaborate) {
-		return (License) _get("license", elaborate, License.class);
+		return _get("license", elaborate, License.class);
 	}
 
 	@Override
@@ -109,7 +109,7 @@ public class InfoImpl extends PropertiesOverlay<Info> implements Info {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getVersion() {
-		return (String) _get("version", String.class);
+		return _get("version", String.class);
 	}
 
 	@Override

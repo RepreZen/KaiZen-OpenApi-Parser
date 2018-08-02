@@ -41,7 +41,7 @@ public class RequestBodyImpl extends PropertiesOverlay<RequestBody> implements R
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getDescription() {
-		return (String) _get("description", String.class);
+		return _get("description", String.class);
 	}
 
 	@Override
@@ -103,7 +103,7 @@ public class RequestBodyImpl extends PropertiesOverlay<RequestBody> implements R
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Boolean getRequired() {
-		return (Boolean) _get("required", Boolean.class);
+		return _get("required", Boolean.class);
 	}
 
 	@Override

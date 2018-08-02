@@ -163,7 +163,7 @@ public class PathImpl extends PropertiesOverlay<Path> implements Path {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getSummary() {
-		return (String) _get("summary", String.class);
+		return _get("summary", String.class);
 	}
 
 	@Override
@@ -176,7 +176,7 @@ public class PathImpl extends PropertiesOverlay<Path> implements Path {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getDescription() {
-		return (String) _get("description", String.class);
+		return _get("description", String.class);
 	}
 
 	@Override

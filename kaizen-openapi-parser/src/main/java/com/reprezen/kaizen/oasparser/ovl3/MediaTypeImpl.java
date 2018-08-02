@@ -32,13 +32,13 @@ public class MediaTypeImpl extends PropertiesOverlay<MediaType> implements Media
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Schema getSchema() {
-		return (Schema) _get("schema", Schema.class);
+		return _get("schema", Schema.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Schema getSchema(boolean elaborate) {
-		return (Schema) _get("schema", elaborate, Schema.class);
+		return _get("schema", elaborate, Schema.class);
 	}
 
 	@Override
@@ -100,7 +100,7 @@ public class MediaTypeImpl extends PropertiesOverlay<MediaType> implements Media
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Object getExample() {
-		return (Object) _get("example", Object.class);
+		return _get("example", Object.class);
 	}
 
 	@Override

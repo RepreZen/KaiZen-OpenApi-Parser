@@ -40,7 +40,7 @@ public class SecuritySchemeImpl extends PropertiesOverlay<SecurityScheme> implem
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getType() {
-		return (String) _get("type", String.class);
+		return _get("type", String.class);
 	}
 
 	@Override
@@ -53,7 +53,7 @@ public class SecuritySchemeImpl extends PropertiesOverlay<SecurityScheme> implem
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getDescription() {
-		return (String) _get("description", String.class);
+		return _get("description", String.class);
 	}
 
 	@Override
@@ -66,7 +66,7 @@ public class SecuritySchemeImpl extends PropertiesOverlay<SecurityScheme> implem
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getName() {
-		return (String) _get("name", String.class);
+		return _get("name", String.class);
 	}
 
 	@Override
@@ -79,7 +79,7 @@ public class SecuritySchemeImpl extends PropertiesOverlay<SecurityScheme> implem
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getIn() {
-		return (String) _get("in", String.class);
+		return _get("in", String.class);
 	}
 
 	@Override
@@ -92,7 +92,7 @@ public class SecuritySchemeImpl extends PropertiesOverlay<SecurityScheme> implem
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getScheme() {
-		return (String) _get("scheme", String.class);
+		return _get("scheme", String.class);
 	}
 
 	@Override
@@ -105,7 +105,7 @@ public class SecuritySchemeImpl extends PropertiesOverlay<SecurityScheme> implem
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getBearerFormat() {
-		return (String) _get("bearerFormat", String.class);
+		return _get("bearerFormat", String.class);
 	}
 
 	@Override
@@ -118,13 +118,13 @@ public class SecuritySchemeImpl extends PropertiesOverlay<SecurityScheme> implem
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public OAuthFlow getImplicitOAuthFlow() {
-		return (OAuthFlow) _get("implicitOAuthFlow", OAuthFlow.class);
+		return _get("implicitOAuthFlow", OAuthFlow.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public OAuthFlow getImplicitOAuthFlow(boolean elaborate) {
-		return (OAuthFlow) _get("implicitOAuthFlow", elaborate, OAuthFlow.class);
+		return _get("implicitOAuthFlow", elaborate, OAuthFlow.class);
 	}
 
 	@Override
@@ -137,13 +137,13 @@ public class SecuritySchemeImpl extends PropertiesOverlay<SecurityScheme> implem
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public OAuthFlow getPasswordOAuthFlow() {
-		return (OAuthFlow) _get("passwordOAuthFlow", OAuthFlow.class);
+		return _get("passwordOAuthFlow", OAuthFlow.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public OAuthFlow getPasswordOAuthFlow(boolean elaborate) {
-		return (OAuthFlow) _get("passwordOAuthFlow", elaborate, OAuthFlow.class);
+		return _get("passwordOAuthFlow", elaborate, OAuthFlow.class);
 	}
 
 	@Override
@@ -156,13 +156,13 @@ public class SecuritySchemeImpl extends PropertiesOverlay<SecurityScheme> implem
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public OAuthFlow getClientCredentialsOAuthFlow() {
-		return (OAuthFlow) _get("clientCredentialsOAuthFlow", OAuthFlow.class);
+		return _get("clientCredentialsOAuthFlow", OAuthFlow.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public OAuthFlow getClientCredentialsOAuthFlow(boolean elaborate) {
-		return (OAuthFlow) _get("clientCredentialsOAuthFlow", elaborate, OAuthFlow.class);
+		return _get("clientCredentialsOAuthFlow", elaborate, OAuthFlow.class);
 	}
 
 	@Override
@@ -175,13 +175,13 @@ public class SecuritySchemeImpl extends PropertiesOverlay<SecurityScheme> implem
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public OAuthFlow getAuthorizationCodeOAuthFlow() {
-		return (OAuthFlow) _get("authorizationCodeOAuthFlow", OAuthFlow.class);
+		return _get("authorizationCodeOAuthFlow", OAuthFlow.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public OAuthFlow getAuthorizationCodeOAuthFlow(boolean elaborate) {
-		return (OAuthFlow) _get("authorizationCodeOAuthFlow", elaborate, OAuthFlow.class);
+		return _get("authorizationCodeOAuthFlow", elaborate, OAuthFlow.class);
 	}
 
 	@Override
@@ -243,7 +243,7 @@ public class SecuritySchemeImpl extends PropertiesOverlay<SecurityScheme> implem
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getOpenIdConnectUrl() {
-		return (String) _get("openIdConnectUrl", String.class);
+		return _get("openIdConnectUrl", String.class);
 	}
 
 	@Override

@@ -39,7 +39,7 @@ public class ExampleImpl extends PropertiesOverlay<Example> implements Example {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getSummary() {
-		return (String) _get("summary", String.class);
+		return _get("summary", String.class);
 	}
 
 	@Override
@@ -52,7 +52,7 @@ public class ExampleImpl extends PropertiesOverlay<Example> implements Example {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getDescription() {
-		return (String) _get("description", String.class);
+		return _get("description", String.class);
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class ExampleImpl extends PropertiesOverlay<Example> implements Example {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Object getValue() {
-		return (Object) _get("value", Object.class);
+		return _get("value", Object.class);
 	}
 
 	@Override
@@ -78,7 +78,7 @@ public class ExampleImpl extends PropertiesOverlay<Example> implements Example {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getExternalValue() {
-		return (String) _get("externalValue", String.class);
+		return _get("externalValue", String.class);
 	}
 
 	@Override

@@ -31,7 +31,7 @@ public class TagImpl extends PropertiesOverlay<Tag> implements Tag {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getName() {
-		return (String) _get("name", String.class);
+		return _get("name", String.class);
 	}
 
 	@Override
@@ -44,7 +44,7 @@ public class TagImpl extends PropertiesOverlay<Tag> implements Tag {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getDescription() {
-		return (String) _get("description", String.class);
+		return _get("description", String.class);
 	}
 
 	@Override
@@ -57,13 +57,13 @@ public class TagImpl extends PropertiesOverlay<Tag> implements Tag {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public ExternalDocs getExternalDocs() {
-		return (ExternalDocs) _get("externalDocs", ExternalDocs.class);
+		return _get("externalDocs", ExternalDocs.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public ExternalDocs getExternalDocs(boolean elaborate) {
-		return (ExternalDocs) _get("externalDocs", elaborate, ExternalDocs.class);
+		return _get("externalDocs", elaborate, ExternalDocs.class);
 	}
 
 	@Override

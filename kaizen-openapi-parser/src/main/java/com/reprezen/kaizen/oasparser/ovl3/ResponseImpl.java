@@ -42,7 +42,7 @@ public class ResponseImpl extends PropertiesOverlay<Response> implements Respons
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getDescription() {
-		return (String) _get("description", String.class);
+		return _get("description", String.class);
 	}
 
 	@Override

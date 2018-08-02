@@ -43,7 +43,7 @@ public class HeaderImpl extends PropertiesOverlay<Header> implements Header {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getName() {
-		return (String) _get("name", String.class);
+		return _get("name", String.class);
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class HeaderImpl extends PropertiesOverlay<Header> implements Header {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getIn() {
-		return (String) _get("in", String.class);
+		return _get("in", String.class);
 	}
 
 	@Override
@@ -69,7 +69,7 @@ public class HeaderImpl extends PropertiesOverlay<Header> implements Header {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getDescription() {
-		return (String) _get("description", String.class);
+		return _get("description", String.class);
 	}
 
 	@Override
@@ -82,7 +82,7 @@ public class HeaderImpl extends PropertiesOverlay<Header> implements Header {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Boolean getRequired() {
-		return (Boolean) _get("required", Boolean.class);
+		return _get("required", Boolean.class);
 	}
 
 	@Override
@@ -102,7 +102,7 @@ public class HeaderImpl extends PropertiesOverlay<Header> implements Header {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Boolean getDeprecated() {
-		return (Boolean) _get("deprecated", Boolean.class);
+		return _get("deprecated", Boolean.class);
 	}
 
 	@Override
@@ -122,7 +122,7 @@ public class HeaderImpl extends PropertiesOverlay<Header> implements Header {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Boolean getAllowEmptyValue() {
-		return (Boolean) _get("allowEmptyValue", Boolean.class);
+		return _get("allowEmptyValue", Boolean.class);
 	}
 
 	@Override
@@ -142,7 +142,7 @@ public class HeaderImpl extends PropertiesOverlay<Header> implements Header {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getStyle() {
-		return (String) _get("style", String.class);
+		return _get("style", String.class);
 	}
 
 	@Override
@@ -155,7 +155,7 @@ public class HeaderImpl extends PropertiesOverlay<Header> implements Header {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Boolean getExplode() {
-		return (Boolean) _get("explode", Boolean.class);
+		return _get("explode", Boolean.class);
 	}
 
 	@Override
@@ -175,7 +175,7 @@ public class HeaderImpl extends PropertiesOverlay<Header> implements Header {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Boolean getAllowReserved() {
-		return (Boolean) _get("allowReserved", Boolean.class);
+		return _get("allowReserved", Boolean.class);
 	}
 
 	@Override
@@ -195,13 +195,13 @@ public class HeaderImpl extends PropertiesOverlay<Header> implements Header {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Schema getSchema() {
-		return (Schema) _get("schema", Schema.class);
+		return _get("schema", Schema.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Schema getSchema(boolean elaborate) {
-		return (Schema) _get("schema", elaborate, Schema.class);
+		return _get("schema", elaborate, Schema.class);
 	}
 
 	@Override
@@ -214,7 +214,7 @@ public class HeaderImpl extends PropertiesOverlay<Header> implements Header {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Object getExample() {
-		return (Object) _get("example", Object.class);
+		return _get("example", Object.class);
 	}
 
 	@Override

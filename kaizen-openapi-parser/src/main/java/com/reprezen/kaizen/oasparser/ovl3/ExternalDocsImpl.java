@@ -30,7 +30,7 @@ public class ExternalDocsImpl extends PropertiesOverlay<ExternalDocs> implements
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getDescription() {
-		return (String) _get("description", String.class);
+		return _get("description", String.class);
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class ExternalDocsImpl extends PropertiesOverlay<ExternalDocs> implements
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getUrl() {
-		return (String) _get("url", String.class);
+		return _get("url", String.class);
 	}
 
 	@Override

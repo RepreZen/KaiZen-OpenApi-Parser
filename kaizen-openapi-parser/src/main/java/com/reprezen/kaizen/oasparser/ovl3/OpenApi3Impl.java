@@ -93,7 +93,7 @@ public class OpenApi3Impl extends PropertiesOverlay<OpenApi3> implements OpenApi
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getOpenApi() {
-		return (String) _get("openApi", String.class);
+		return _get("openApi", String.class);
 	}
 
 	@Override
@@ -106,13 +106,13 @@ public class OpenApi3Impl extends PropertiesOverlay<OpenApi3> implements OpenApi
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Info getInfo() {
-		return (Info) _get("info", Info.class);
+		return _get("info", Info.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Info getInfo(boolean elaborate) {
-		return (Info) _get("info", elaborate, Info.class);
+		return _get("info", elaborate, Info.class);
 	}
 
 	@Override
@@ -878,13 +878,13 @@ public class OpenApi3Impl extends PropertiesOverlay<OpenApi3> implements OpenApi
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public ExternalDocs getExternalDocs() {
-		return (ExternalDocs) _get("externalDocs", ExternalDocs.class);
+		return _get("externalDocs", ExternalDocs.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public ExternalDocs getExternalDocs(boolean elaborate) {
-		return (ExternalDocs) _get("externalDocs", elaborate, ExternalDocs.class);
+		return _get("externalDocs", elaborate, ExternalDocs.class);
 	}
 
 	@Override

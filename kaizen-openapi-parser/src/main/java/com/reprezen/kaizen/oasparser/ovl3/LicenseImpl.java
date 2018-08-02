@@ -32,7 +32,7 @@ public class LicenseImpl extends PropertiesOverlay<License> implements License {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getName() {
-		return (String) _get("name", String.class);
+		return _get("name", String.class);
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public class LicenseImpl extends PropertiesOverlay<License> implements License {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getUrl() {
-		return (String) _get("url", String.class);
+		return _get("url", String.class);
 	}
 
 	@Override

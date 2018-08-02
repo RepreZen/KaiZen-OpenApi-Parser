@@ -41,7 +41,7 @@ public class LinkImpl extends PropertiesOverlay<Link> implements Link {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getOperationId() {
-		return (String) _get("operationId", String.class);
+		return _get("operationId", String.class);
 	}
 
 	@Override
@@ -54,7 +54,7 @@ public class LinkImpl extends PropertiesOverlay<Link> implements Link {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getOperationRef() {
-		return (String) _get("operationRef", String.class);
+		return _get("operationRef", String.class);
 	}
 
 	@Override
@@ -165,7 +165,7 @@ public class LinkImpl extends PropertiesOverlay<Link> implements Link {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getDescription() {
-		return (String) _get("description", String.class);
+		return _get("description", String.class);
 	}
 
 	@Override
@@ -178,13 +178,13 @@ public class LinkImpl extends PropertiesOverlay<Link> implements Link {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Server getServer() {
-		return (Server) _get("server", Server.class);
+		return _get("server", Server.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Server getServer(boolean elaborate) {
-		return (Server) _get("server", elaborate, Server.class);
+		return _get("server", elaborate, Server.class);
 	}
 
 	@Override

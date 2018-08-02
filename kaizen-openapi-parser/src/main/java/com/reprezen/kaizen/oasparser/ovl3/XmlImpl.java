@@ -31,7 +31,7 @@ public class XmlImpl extends PropertiesOverlay<Xml> implements Xml {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getName() {
-		return (String) _get("name", String.class);
+		return _get("name", String.class);
 	}
 
 	@Override
@@ -44,7 +44,7 @@ public class XmlImpl extends PropertiesOverlay<Xml> implements Xml {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getNamespace() {
-		return (String) _get("namespace", String.class);
+		return _get("namespace", String.class);
 	}
 
 	@Override
@@ -57,7 +57,7 @@ public class XmlImpl extends PropertiesOverlay<Xml> implements Xml {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getPrefix() {
-		return (String) _get("prefix", String.class);
+		return _get("prefix", String.class);
 	}
 
 	@Override
@@ -70,7 +70,7 @@ public class XmlImpl extends PropertiesOverlay<Xml> implements Xml {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Boolean getAttribute() {
-		return (Boolean) _get("attribute", Boolean.class);
+		return _get("attribute", Boolean.class);
 	}
 
 	@Override
@@ -90,7 +90,7 @@ public class XmlImpl extends PropertiesOverlay<Xml> implements Xml {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Boolean getWrapped() {
-		return (Boolean) _get("wrapped", Boolean.class);
+		return _get("wrapped", Boolean.class);
 	}
 
 	@Override

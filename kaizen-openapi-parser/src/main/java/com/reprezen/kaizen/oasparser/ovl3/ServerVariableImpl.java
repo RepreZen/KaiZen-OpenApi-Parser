@@ -87,7 +87,7 @@ public class ServerVariableImpl extends PropertiesOverlay<ServerVariable> implem
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Object getDefault() {
-		return (Object) _get("defaultValue", Object.class);
+		return _get("defaultValue", Object.class);
 	}
 
 	@Override
@@ -100,7 +100,7 @@ public class ServerVariableImpl extends PropertiesOverlay<ServerVariable> implem
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getDescription() {
-		return (String) _get("description", String.class);
+		return _get("description", String.class);
 	}
 
 	@Override

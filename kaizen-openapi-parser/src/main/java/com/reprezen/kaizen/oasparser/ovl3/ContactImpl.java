@@ -30,7 +30,7 @@ public class ContactImpl extends PropertiesOverlay<Contact> implements Contact {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getName() {
-		return (String) _get("name", String.class);
+		return _get("name", String.class);
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class ContactImpl extends PropertiesOverlay<Contact> implements Contact {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getUrl() {
-		return (String) _get("url", String.class);
+		return _get("url", String.class);
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class ContactImpl extends PropertiesOverlay<Contact> implements Contact {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getEmail() {
-		return (String) _get("email", String.class);
+		return _get("email", String.class);
 	}
 
 	@Override

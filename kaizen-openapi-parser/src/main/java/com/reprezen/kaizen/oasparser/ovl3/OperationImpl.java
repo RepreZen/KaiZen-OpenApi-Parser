@@ -94,7 +94,7 @@ public class OperationImpl extends PropertiesOverlay<Operation> implements Opera
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getSummary() {
-		return (String) _get("summary", String.class);
+		return _get("summary", String.class);
 	}
 
 	@Override
@@ -107,7 +107,7 @@ public class OperationImpl extends PropertiesOverlay<Operation> implements Opera
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getDescription() {
-		return (String) _get("description", String.class);
+		return _get("description", String.class);
 	}
 
 	@Override
@@ -120,13 +120,13 @@ public class OperationImpl extends PropertiesOverlay<Operation> implements Opera
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public ExternalDocs getExternalDocs() {
-		return (ExternalDocs) _get("externalDocs", ExternalDocs.class);
+		return _get("externalDocs", ExternalDocs.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public ExternalDocs getExternalDocs(boolean elaborate) {
-		return (ExternalDocs) _get("externalDocs", elaborate, ExternalDocs.class);
+		return _get("externalDocs", elaborate, ExternalDocs.class);
 	}
 
 	@Override
@@ -139,7 +139,7 @@ public class OperationImpl extends PropertiesOverlay<Operation> implements Opera
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getOperationId() {
-		return (String) _get("operationId", String.class);
+		return _get("operationId", String.class);
 	}
 
 	@Override
@@ -207,13 +207,13 @@ public class OperationImpl extends PropertiesOverlay<Operation> implements Opera
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public RequestBody getRequestBody() {
-		return (RequestBody) _get("requestBody", RequestBody.class);
+		return _get("requestBody", RequestBody.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public RequestBody getRequestBody(boolean elaborate) {
-		return (RequestBody) _get("requestBody", elaborate, RequestBody.class);
+		return _get("requestBody", elaborate, RequestBody.class);
 	}
 
 	@Override
@@ -422,7 +422,7 @@ public class OperationImpl extends PropertiesOverlay<Operation> implements Opera
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Boolean getDeprecated() {
-		return (Boolean) _get("deprecated", Boolean.class);
+		return _get("deprecated", Boolean.class);
 	}
 
 	@Override

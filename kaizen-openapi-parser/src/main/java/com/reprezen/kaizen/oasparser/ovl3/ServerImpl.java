@@ -31,7 +31,7 @@ public class ServerImpl extends PropertiesOverlay<Server> implements Server {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getUrl() {
-		return (String) _get("url", String.class);
+		return _get("url", String.class);
 	}
 
 	@Override
@@ -44,7 +44,7 @@ public class ServerImpl extends PropertiesOverlay<Server> implements Server {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public String getDescription() {
-		return (String) _get("description", String.class);
+		return _get("description", String.class);
 	}
 
 	@Override

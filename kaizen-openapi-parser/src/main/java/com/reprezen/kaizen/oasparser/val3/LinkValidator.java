@@ -58,7 +58,7 @@ public class LinkValidator extends ObjectValidatorBase<Link> {
 					m.msg("OpIdAndOpRefInLink|Link may not contain both 'operationRef' and 'operationId' properties"));
 		}
 		if (opId != null) {
-			op = findOperationById(Overlay.getModel(link), opId);
+			op = findOperationById(Overlay.of(link).getModel(), opId);
 			if (op == null) {
 				results.addError(
 						m.msg("OpIdNotFound|OperationId in Link does not identify an operation in the containing model",
@@ -68,7 +68,7 @@ public class LinkValidator extends ObjectValidatorBase<Link> {
 		}
 		String relativePath = getRelativePath(operationRef, results);
 		if (relativePath != null) {
-			op = findOperationByPath(Overlay.getModel(link), relativePath, results);
+			op = findOperationByPath(Overlay.of(link).getModel(), relativePath, results);
 			if (op == null) {
 				results.addError(m.msg(
 						"OpPathNotFound|Relative OperationRef in Link does not identify a GET operation in the containing model",

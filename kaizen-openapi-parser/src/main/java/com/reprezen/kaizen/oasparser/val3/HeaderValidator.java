@@ -79,7 +79,7 @@ public class HeaderValidator extends ObjectValidatorBase<Header> {
 	}
 
 	private String getPathString(Header header) {
-		PropertiesOverlay<?> parent = Overlay.getParentPropertiesOverlay(header);
+		PropertiesOverlay<?> parent = Overlay.of(header).getParentPropertiesOverlay();
 		while (parent != null && !(parent instanceof Path)) {
 			parent = Overlay.of(parent).getParentPropertiesOverlay();
 		}

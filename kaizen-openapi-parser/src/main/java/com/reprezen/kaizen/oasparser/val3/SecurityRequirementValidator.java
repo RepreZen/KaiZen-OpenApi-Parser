@@ -27,7 +27,7 @@ public class SecurityRequirementValidator extends ObjectValidatorBase<SecurityRe
 
 	@Override
 	public void validateObject(SecurityRequirement securityRequirement, ValidationResults results) {
-		OpenApi3 model = Overlay.getModel(securityRequirement);
+		OpenApi3 model = Overlay.of(securityRequirement).getModel();
 		Set<String> definedSchemes = model.getSecuritySchemes().keySet();
 		for (Entry<String, ? extends SecurityParameter> entry : securityRequirement.getRequirements().entrySet()) {
 			if (!definedSchemes.contains(entry.getKey())) {

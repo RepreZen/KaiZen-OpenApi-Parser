@@ -93,7 +93,7 @@ public class OverlayValidator<T> extends ValidatorBase<T> {
 	private void checkReference(Reference ref, ValidationResults results, String crumb) {
 		if (ref.isInvalid()) {
 			results.addError(
-					m.msg("BadRef|JSON reference node was not resolved", ref.getRefString(), ref.getErrorReason()),
+					m.msg("BadRef|JSON reference node was not resolved", ref.getRefString(), ref.getInvalidReason()),
 					crumb);
 		}
 

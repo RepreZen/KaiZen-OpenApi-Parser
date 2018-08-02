@@ -12,10 +12,10 @@ import com.reprezen.kaizen.oasparser.model3.Schema;
 public class Issue131Test extends Assert {
 
 	@Test
-	public void testSchemaRefs() {
+	public void testSchemaRefs() throws Exception {
 		OpenApi3 model = (OpenApi3) new OpenApiParser().parse(Resources.getResource("models/issue131.yaml"), true);
-		assertEquals("SampleData", Overlay.getPathInParent(Overlay.find(model, "/components/schemas/SampleData")));
-		assertEquals("MoreData",Overlay.getPathInParent(Overlay.find(model,"/components/schemas/MoreData")));
+		assertEquals("SampleData", Overlay.getPathInParent(Overlay.of(model).find("/components/schemas/SampleData")));
+		assertEquals("MoreData", Overlay.getPathInParent(Overlay.of(model).find("/components/schemas/MoreData")));
 		Schema direct = model.getSchema("SampleData");
 		Schema viaMoreData = model.getSchema("MoreData").getProperty("master");
 		Schema viaPath = model.getPath("/sampledatamanagement/v1/sampledata/custom/{id}").getGet().getResponse("200")

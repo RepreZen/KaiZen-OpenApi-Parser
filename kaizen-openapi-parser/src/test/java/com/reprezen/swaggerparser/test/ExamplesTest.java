@@ -76,7 +76,7 @@ public class ExamplesTest extends Assert {
 	public String fileName;
 
 	@Test
-	public void exampleCanBeParsed() throws IOException {
+	public void exampleCanBeParsed() throws Exception {
 		if (!exampleUrl.toString().contains("callback-example")) {
 			OpenApi3 model = (OpenApi3) new OpenApiParser().parse(exampleUrl);
 			for (ValidationItem item : model.getValidationItems()) {

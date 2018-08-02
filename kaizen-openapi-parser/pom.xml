@@ -3,7 +3,8 @@
     terms of the Eclipse Public License v1.0 which accompanies this distribution, 
     and is available at http://www.eclipse.org/legal/epl-v10.html Contributors: 
     ModelSolv, Inc. - initial API and implementation and/or initial documentation -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.reprezen.kaizen</groupId>
@@ -100,6 +101,11 @@
             <groupId>com.reprezen.jsonoverlay</groupId>
             <artifactId>jsonoverlay</artifactId>
             <version>${json-overlay-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.norconex.commons</groupId>
+            <artifactId>norconex-commons-lang</artifactId>
+            <version>1.15.0</version>
         </dependency>
     </dependencies>
     <profiles>

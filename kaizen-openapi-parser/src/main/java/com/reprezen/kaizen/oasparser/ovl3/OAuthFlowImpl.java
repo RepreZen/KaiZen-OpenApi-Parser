@@ -1,247 +1,266 @@
 package com.reprezen.kaizen.oasparser.ovl3;
 
-import java.util.Map;
-
-import javax.annotation.Generated;
-
-import com.fasterxml.jackson.databind.JsonNode;
-import com.reprezen.jsonoverlay.AbstractJsonOverlay;
-import com.reprezen.jsonoverlay.ChildMapOverlay;
-import com.reprezen.jsonoverlay.ChildOverlay;
-import com.reprezen.jsonoverlay.JsonOverlay;
+import com.reprezen.jsonoverlay.StringOverlay;
 import com.reprezen.jsonoverlay.ObjectOverlay;
+import com.reprezen.jsonoverlay.MapOverlay;
+import java.util.stream.Collectors;
+import com.reprezen.kaizen.oasparser.model3.*;
 import com.reprezen.jsonoverlay.OverlayFactory;
 import com.reprezen.jsonoverlay.PropertiesOverlay;
-import com.reprezen.jsonoverlay.ReferenceRegistry;
-import com.reprezen.jsonoverlay.StringOverlay;
-import com.reprezen.kaizen.oasparser.model3.OAuthFlow;
+import javax.annotation.Generated;
+import com.fasterxml.jackson.core.JsonPointer;
+import com.reprezen.jsonoverlay.JsonOverlay;
+import java.util.Map;
+import com.reprezen.jsonoverlay.ReferenceManager;
+import com.fasterxml.jackson.databind.JsonNode;
 
 public class OAuthFlowImpl extends PropertiesOverlay<OAuthFlow> implements OAuthFlow {
 
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public OAuthFlowImpl(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-		super(json, parent, refReg);
-	}
+    @Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+    public OAuthFlowImpl(JsonNode json, JsonOverlay<?> parent, ReferenceManager refMgr) {
+        super(json, parent, factory, refMgr);
+    }
 
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public OAuthFlowImpl(OAuthFlow oAuthFlow, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-		super(oAuthFlow, parent, refReg);
-	}
+    @Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+    public OAuthFlowImpl(OAuthFlow oAuthFlow, JsonOverlay<?> parent, ReferenceManager refMgr) {
+        super(oAuthFlow, parent, factory, refMgr);
+    }
 
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	private ChildOverlay<String> authorizationUrl;
+    // AuthorizationUrl
+    @Override
+    @Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+    public String getAuthorizationUrl() {
+        return (String) _get("authorizationUrl", String.class);
+    }
 
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	private ChildOverlay<String> tokenUrl;
+    @Override
+    @Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+    public void setAuthorizationUrl(String authorizationUrl) {
+        _setScalar("authorizationUrl", authorizationUrl, String.class);
+    }
 
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	private ChildOverlay<String> refreshUrl;
+    // TokenUrl
+    @Override
+    @Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+    public String getTokenUrl() {
+        return (String) _get("tokenUrl", String.class);
+    }
 
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	private ChildMapOverlay<String> scopes;
+    @Override
+    @Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+    public void setTokenUrl(String tokenUrl) {
+        _setScalar("tokenUrl", tokenUrl, String.class);
+    }
 
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	private ChildMapOverlay<Object> scopesExtensions;
+    // RefreshUrl
+    @Override
+    @Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+    public String getRefreshUrl() {
+        return (String) _get("refreshUrl", String.class);
+    }
 
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	private ChildMapOverlay<Object> extensions;
+    @Override
+    @Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+    public void setRefreshUrl(String refreshUrl) {
+        _setScalar("refreshUrl", refreshUrl, String.class);
+    }
 
-	// AuthorizationUrl
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public String getAuthorizationUrl() {
-		return authorizationUrl._get();
-	}
+    // Scope
+    @Override
+    @Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+    public Map<String, String> getScopes() {
+        return _getMap("scopes", String.class);
+    }
 
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public void setAuthorizationUrl(String authorizationUrl) {
-		this.authorizationUrl._set(authorizationUrl);
-	}
+    @Override
+    @Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+    public Map<String, String> getScopes(boolean elaborate) {
+        return _getMap("scopes", elaborate, String.class);
+    }
 
-	// TokenUrl
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public String getTokenUrl() {
-		return tokenUrl._get();
-	}
+    @Override
+    @Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+    public boolean hasScopes() {
+        return _isPresent("scopes");
+    }
 
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public void setTokenUrl(String tokenUrl) {
-		this.tokenUrl._set(tokenUrl);
-	}
+    @Override
+    @Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+    public boolean hasScope(String name) {
+        return _getMap("scopes", String.class).containsKey(name);
+    }
 
-	// RefreshUrl
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public String getRefreshUrl() {
-		return refreshUrl._get();
-	}
+    @Override
+    @Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+    public String getScope(String name) {
+        return _get("scopes", name, String.class);
+    }
 
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public void setRefreshUrl(String refreshUrl) {
-		this.refreshUrl._set(refreshUrl);
-	}
+    @Override
+    @Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+    public void setScopes(Map<String, String> scopes) {
+        _setMap("scopes", scopes, String.class);
+    }
 
-	// Scope
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public Map<String, String> getScopes() {
-		return scopes._get();
-	}
+    @Override
+    @Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+    public void setScope(String name, String scope) {
+        _set("scopes", name, scope, String.class);
+    }
 
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public boolean hasScope(String name) {
-		return scopes.containsKey(name);
-	}
+    @Override
+    @Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+    public void removeScope(String name) {
+        _remove("scopes", name, String.class);
+    }
 
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public String getScope(String name) {
-		return scopes._get(name);
-	}
+    // ScopesExtension
+    @Override
+    @Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Object> getScopesExtensions() {
+        return _getMap("scopesExtensions", Object.class);
+    }
 
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public void setScopes(Map<String, String> scopes) {
-		this.scopes._set(scopes);
-	}
+    @Override
+    @Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Object> getScopesExtensions(boolean elaborate) {
+        return _getMap("scopesExtensions", elaborate, Object.class);
+    }
 
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public void setScope(String name, String scope) {
-		scopes._set(name, scope);
-	}
+    @Override
+    @Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+    public boolean hasScopesExtensions() {
+        return _isPresent("scopesExtensions");
+    }
 
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public void removeScope(String name) {
-		scopes._remove(name);
-	}
+    @Override
+    @Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+    public boolean hasScopesExtension(String name) {
+        return _getMap("scopesExtensions", Object.class).containsKey(name);
+    }
 
-	// ScopesExtension
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public Map<String, Object> getScopesExtensions() {
-		return scopesExtensions._get();
-	}
+    @Override
+    @Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+    public Object getScopesExtension(String name) {
+        return _get("scopesExtensions", name, Object.class);
+    }
 
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public boolean hasScopesExtension(String name) {
-		return scopesExtensions.containsKey(name);
-	}
+    @Override
+    @Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+    public void setScopesExtensions(Map<String, Object> scopesExtensions) {
+        _setMap("scopesExtensions", scopesExtensions, Object.class);
+    }
 
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public Object getScopesExtension(String name) {
-		return scopesExtensions._get(name);
-	}
+    @Override
+    @Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+    public void setScopesExtension(String name, Object scopesExtension) {
+        _set("scopesExtensions", name, scopesExtension, Object.class);
+    }
 
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public void setScopesExtensions(Map<String, Object> scopesExtensions) {
-		this.scopesExtensions._set(scopesExtensions);
-	}
+    @Override
+    @Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+    public void removeScopesExtension(String name) {
+        _remove("scopesExtensions", name, Object.class);
+    }
 
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public void setScopesExtension(String name, Object scopesExtension) {
-		scopesExtensions._set(name, scopesExtension);
-	}
+    // Extension
+    @Override
+    @Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Object> getExtensions() {
+        return _getMap("extensions", Object.class);
+    }
 
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public void removeScopesExtension(String name) {
-		scopesExtensions._remove(name);
-	}
+    @Override
+    @Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+    public Map<String, Object> getExtensions(boolean elaborate) {
+        return _getMap("extensions", elaborate, Object.class);
+    }
 
-	// Extension
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public Map<String, Object> getExtensions() {
-		return extensions._get();
-	}
+    @Override
+    @Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+    public boolean hasExtensions() {
+        return _isPresent("extensions");
+    }
 
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public boolean hasExtension(String name) {
-		return extensions.containsKey(name);
-	}
+    @Override
+    @Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+    public boolean hasExtension(String name) {
+        return _getMap("extensions", Object.class).containsKey(name);
+    }
 
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public Object getExtension(String name) {
-		return extensions._get(name);
-	}
+    @Override
+    @Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+    public Object getExtension(String name) {
+        return _get("extensions", name, Object.class);
+    }
 
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public void setExtensions(Map<String, Object> extensions) {
-		this.extensions._set(extensions);
-	}
+    @Override
+    @Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+    public void setExtensions(Map<String, Object> extensions) {
+        _setMap("extensions", extensions, Object.class);
+    }
 
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public void setExtension(String name, Object extension) {
-		extensions._set(name, extension);
-	}
+    @Override
+    @Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+    public void setExtension(String name, Object extension) {
+        _set("extensions", name, extension, Object.class);
+    }
 
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public void removeExtension(String name) {
-		extensions._remove(name);
-	}
+    @Override
+    @Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+    public void removeExtension(String name) {
+        _remove("extensions", name, Object.class);
+    }
 
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	protected void elaborateChildren() {
-		super.elaborateChildren();
-		authorizationUrl = createChild("authorizationUrl", this, StringOverlay.factory);
-		tokenUrl = createChild("tokenUrl", this, StringOverlay.factory);
-		refreshUrl = createChild("refreshUrl", this, StringOverlay.factory);
-		scopes = createChildMap("scopes", this, StringOverlay.factory, "(?!x-).*");
-		scopesExtensions = createChildMap("scopes", this, ObjectOverlay.factory, "x-.+");
-		extensions = createChildMap("", this, ObjectOverlay.factory, "x-.+");
-	}
+    @Override
+    @Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+    protected void _elaborateJson() {
+        _createScalar("authorizationUrl", "authorizationUrl", StringOverlay.factory);
+        _createScalar("tokenUrl", "tokenUrl", StringOverlay.factory);
+        _createScalar("refreshUrl", "refreshUrl", StringOverlay.factory);
+        _createMap("scopes", "scopes", StringOverlay.factory, "(?!x-).*");
+        _createMap("scopesExtensions", "scopes", ObjectOverlay.factory, "x-.+");
+        _createMap("extensions", "", ObjectOverlay.factory, "x-.+");
+    }
 
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public static OverlayFactory<OAuthFlow> factory = new OverlayFactory<OAuthFlow>() {
+    @Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+    public static OverlayFactory<OAuthFlow> factory = new OverlayFactory<OAuthFlow>() {
 
-		@Override
-		protected Class<? extends AbstractJsonOverlay<? super OAuthFlow>> getOverlayClass() {
-			return OAuthFlowImpl.class;
-		}
+        @Override
+        protected Class<? extends JsonOverlay<? super OAuthFlow>> getOverlayClass() {
+            return OAuthFlowImpl.class;
+        }
 
-		@Override
-		public JsonOverlay<OAuthFlow> _create(OAuthFlow oAuthFlow, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-			AbstractJsonOverlay<?> overlay;
-			overlay = new OAuthFlowImpl(oAuthFlow, parent, refReg);
-			@SuppressWarnings("unchecked")
-			JsonOverlay<OAuthFlow> castOverlay = (JsonOverlay<OAuthFlow>) overlay;
-			return castOverlay;
-		}
+        @Override
+        public JsonOverlay<OAuthFlow> _create(OAuthFlow oAuthFlow, JsonOverlay<?> parent, ReferenceManager refMgr) {
+            JsonOverlay<?> overlay;
+            overlay = new OAuthFlowImpl(oAuthFlow, parent, refMgr);
+            @SuppressWarnings("unchecked") JsonOverlay<OAuthFlow> castOverlay = (JsonOverlay<OAuthFlow>) overlay;
+            return castOverlay;
+        }
 
-		@Override
-		public JsonOverlay<OAuthFlow> _create(JsonNode json, JsonOverlay<?> parent, ReferenceRegistry refReg) {
-			AbstractJsonOverlay<?> overlay;
-			overlay = new OAuthFlowImpl(json, parent, refReg);
-			@SuppressWarnings("unchecked")
-			JsonOverlay<OAuthFlow> castOverlay = (JsonOverlay<OAuthFlow>) overlay;
-			return castOverlay;
-		}
-	};
+        @Override
+        public JsonOverlay<OAuthFlow> _create(JsonNode json, JsonOverlay<?> parent, ReferenceManager refMgr) {
+            JsonOverlay<?> overlay;
+            overlay = new OAuthFlowImpl(json, parent, refMgr);
+            @SuppressWarnings("unchecked") JsonOverlay<OAuthFlow> castOverlay = (JsonOverlay<OAuthFlow>) overlay;
+            return castOverlay;
+        }
+    };
 
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	private static Class<? extends OAuthFlow> getSubtypeOf(OAuthFlow oAuthFlow) {
-		return OAuthFlow.class;
-	}
+    @Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+    private static Class<? extends OAuthFlow> getSubtypeOf(OAuthFlow oAuthFlow) {
+        return OAuthFlow.class;
+    }
 
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	private static Class<? extends OAuthFlow> getSubtypeOf(JsonNode json) {
-		return OAuthFlow.class;
-	}
+    @Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+    private static Class<? extends OAuthFlow> getSubtypeOf(JsonNode json) {
+        return OAuthFlow.class;
+    }
+
+    @Override
+    @Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+    public Class<?> _getModelType() {
+        return OpenApi3.class;
+    }
 }

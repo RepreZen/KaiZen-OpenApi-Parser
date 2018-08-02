@@ -20,11 +20,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.reprezen.jsonoverlay.JsonLoader;
-import com.reprezen.jsonoverlay.Reference;
-import com.reprezen.jsonoverlay.ReferenceRegistry;
-import com.reprezen.jsonoverlay.ResolutionBase;
-import com.reprezen.jsonoverlay.ResolutionBaseRegistry;
-import com.reprezen.jsonoverlay.Resolver;
+import com.reprezen.jsonoverlay.ReferenceManager;
 import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.ovl3.OpenApi3Impl;
 import com.reprezen.kaizen.oasparser.val3.ValidationConfigurator;
@@ -48,71 +44,73 @@ public class OpenApiParser {
 
 	public OpenApi<?> parse(String spec, URL resolutionBase, boolean validate) {
 		try {
-			JsonLoader jsonLoader = new JsonLoader();
-			JsonNode tree = jsonLoader.loadString(resolutionBase, spec);
-			ResolutionBaseRegistry resolutionBaseRegistry = new ResolutionBaseRegistry(jsonLoader);
-			resolutionBaseRegistry.register(resolutionBase.toString(), tree);
-			return parse(resolutionBase, validate, resolutionBaseRegistry);
+			JsonNode tree = new JsonLoader().loadString(resolutionBase, spec);
+			return parse(tree, resolutionBase, validate);
 		} catch (IOException e) {
-			throw new SwaggerParserException("Failed to parse spec as JSON or YAML", e);
+			throw new OpenApiParserException("Failed to parse spec as JSON or YAML", e);
 		}
 	}
 
-	public OpenApi<?> parse(File specFile) {
+	public OpenApi<?> parse(File specFile) throws Exception {
 		return parse(specFile, true);
 	}
 
-	public OpenApi<?> parse(File specFile, boolean validate) {
+	public OpenApi<?> parse(File specFile, boolean validate) throws Exception {
 		try {
 			return parse(specFile.toURI().toURL(), validate);
 		} catch (IOException e) {
-			throw new SwaggerParserException("Failed to read spec from file", e);
+			throw new OpenApiParserException("Failed to read spec from file", e);
 		}
 	}
 
-	public OpenApi<?> parse(URI uri) {
+	public OpenApi<?> parse(URI uri) throws Exception {
 		return parse(uri, true);
 	}
 
-	public OpenApi<?> parse(URI uri, boolean validate) {
+	public OpenApi<?> parse(URI uri, boolean validate) throws Exception {
 		try {
 			return parse(uri.toURL(), validate);
 		} catch (MalformedURLException e) {
-			throw new SwaggerParserException("Invalid URI for Swagger spec", e);
+			throw new OpenApiParserException("Invalid URI for Swagger spec", e);
 		}
 	}
 
-	public OpenApi<?> parse(URL resolutionBase) {
+	public OpenApi<?> parse(URL resolutionBase) throws Exception {
 		return parse(resolutionBase, true);
 	}
 
-	public OpenApi<?> parse(URL resolutionBase, boolean validate) {
-		return parse(resolutionBase, validate, new ResolutionBaseRegistry(new JsonLoader()));
+	public OpenApi<?> parse(URL resolutionBase, boolean validate) throws Exception {
+		ReferenceManager manager = new ReferenceManager(resolutionBase);
+		return parse(manager, validate);
 	}
 
-	protected OpenApi<?> parse(URL resolutionBase, boolean validate, ResolutionBaseRegistry resolutionBaseRegistry) {
+	public OpenApi<?> parse(JsonNode tree, URL resolutionBase) {
+		return parse(tree, resolutionBase, true);
+	}
+
+	public OpenApi<?> parse(JsonNode tree, URL resolutionBase, boolean validate) {
+		ReferenceManager manager = new ReferenceManager(resolutionBase, tree);
+		return parse(manager, validate);
+	}
+
+	private OpenApi<?> parse(ReferenceManager manager, boolean validate) {
+		JsonNode tree;
 		try {
-			ReferenceRegistry referenceRegistry = new ReferenceRegistry();
-			new Resolver(referenceRegistry, resolutionBaseRegistry).preresolve(resolutionBase);
-			ResolutionBase base = resolutionBaseRegistry.get(resolutionBase.toString());
-			Reference topRef = referenceRegistry.getRef(resolutionBase.toString(), base, true);
-			JsonNode tree = topRef.getJson();
+			tree = manager.loadDoc();
 			if (isVersion3(tree)) {
-				OpenApi3 model = (OpenApi3) OpenApi3Impl.factory.create(tree, null, referenceRegistry, topRef);
+				OpenApi3 model = (OpenApi3) OpenApi3Impl.factory.create(tree, null, manager);
 				injector.injectMembers(model);
 				if (validate) {
 					model.validate();
 				}
 				return model;
 			} else {
-				throw new SwaggerParserException(
-						"Could not determine OpenApi version - missing or invalid 'openapi' or 'swagger' property");
+				throw new OpenApiParserException(
+						"Could not determine OpenApi version from model: no 'openapi' property");
 			}
-		} catch (Exception e) {
-			// throw new SwaggerParserException("Failed to parse Swagger spec", e);
-			throw e;
+		} catch (IOException e) {
+			throw new OpenApiParserException("Failed to parse model", e);
 		}
-
 	}
 
 	protected boolean isVersion3(JsonNode tree) {
@@ -120,28 +118,28 @@ public class OpenApiParser {
 		return versionNode.isTextual() && versionNode.asText().startsWith("3.");
 	}
 
-	public static class SwaggerParserException extends RuntimeException {
+	public static class OpenApiParserException extends RuntimeException {
 
 		private static final long serialVersionUID = 1L;
 
-		public SwaggerParserException() {
+		public OpenApiParserException() {
 			super();
 		}
 
-		public SwaggerParserException(String message, Throwable cause, boolean enableSuppression,
+		public OpenApiParserException(String message, Throwable cause, boolean enableSuppression,
 				boolean writableStackTrace) {
 			super(message, cause, enableSuppression, writableStackTrace);
 		}
 
-		public SwaggerParserException(String message, Throwable cause) {
+		public OpenApiParserException(String message, Throwable cause) {
 			super(message, cause);
 		}
 
-		public SwaggerParserException(String message) {
+		public OpenApiParserException(String message) {
 			super(message);
 		}
 
-		public SwaggerParserException(Throwable cause) {
+		public OpenApiParserException(Throwable cause) {
 			super(cause);
 		}
 	}

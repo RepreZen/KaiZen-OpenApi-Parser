@@ -16,7 +16,6 @@ import java.util.Collection;
 import java.util.Deque;
 import java.util.Iterator;
 
-import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,10 +24,9 @@ import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.base.Charsets;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Queues;
+import com.reprezen.jsonoverlay.JsonLoader;
 import com.reprezen.kaizen.oasparser.OpenApiParser;
 import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.val.ValidationResults.ValidationItem;
@@ -40,8 +38,6 @@ public class ExamplesTest extends Assert {
 	private static final String EXAMPLES_BRANCH = "master";
 	private static final String EXAMPLES_ROOT = "examples/v3.0";
 
-	private static ObjectMapper mapper = new ObjectMapper();
-
 	@Parameters(name = "{index}: {1}")
 	public static Collection<Object[]> findExamples() throws IOException {
 		Collection<Object[]> examples = Lists.newArrayList();
@@ -52,8 +48,7 @@ public class ExamplesTest extends Assert {
 		dirs.add(new URL(request));
 		while (!dirs.isEmpty()) {
 			URL url = dirs.remove();
-			String json = IOUtils.toString(url, Charsets.UTF_8);
-			JsonNode tree = mapper.readTree(json);
+			JsonNode tree = new JsonLoader().load(url);
 			for (JsonNode result : iterable(tree.elements())) {
 				String type = result.get("type").asText();
 				String path = result.get("path").asText();

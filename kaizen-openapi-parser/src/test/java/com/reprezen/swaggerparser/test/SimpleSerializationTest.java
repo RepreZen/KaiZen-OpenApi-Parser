@@ -16,7 +16,6 @@ import java.util.Collection;
 import java.util.Deque;
 import java.util.Iterator;
 
-import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
@@ -30,9 +29,9 @@ import org.skyscreamer.jsonassert.JSONCompareMode;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
-import com.google.common.base.Charsets;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Queues;
+import com.reprezen.jsonoverlay.JsonLoader;
 import com.reprezen.jsonoverlay.Overlay;
 import com.reprezen.jsonoverlay.SerializationOptions.Option;
 import com.reprezen.kaizen.oasparser.OpenApiParser;
@@ -62,8 +61,7 @@ public class SimpleSerializationTest extends Assert {
 			dirs.add(new URL(request));
 			while (!dirs.isEmpty()) {
 				URL url = dirs.remove();
-				String json = IOUtils.toString(url, Charsets.UTF_8);
-				JsonNode tree = mapper.readTree(json);
+				JsonNode tree = new JsonLoader().load(url);
 				for (JsonNode result : iterable(tree.elements())) {
 					String type = result.get("type").asText();
 					String path = result.get("path").asText();

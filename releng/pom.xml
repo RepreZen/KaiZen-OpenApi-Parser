@@ -17,7 +17,7 @@
 	    <configuration>
 	      <artifacts>
 		<artifact>
-		  <id>com.reprezen.kaizen:openapi-parser:2.1.1-201803281732</id>
+		  <id>com.reprezen.kaizen:openapi-parser:3.0.1-201808030030</id>
 		</artifact>
 	      </artifacts>
 	      <compressSite>false</compressSite>
@@ -35,4 +35,11 @@
     </pluginRepository>
   </pluginRepositories>
 
+  <repositories>
+    <repository>
+      <id>staging</id>
+      <url>https://oss.sonatype.org/content/repositories/comreprezenjsonoverlay-1013/</url>
+      <layout>default</layout>
+    </repository>
+  </repositories>
 </project>

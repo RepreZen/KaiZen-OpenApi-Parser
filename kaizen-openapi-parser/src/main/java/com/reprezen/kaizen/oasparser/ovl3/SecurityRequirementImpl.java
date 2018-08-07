@@ -78,6 +78,7 @@ public class SecurityRequirementImpl extends PropertiesOverlay<SecurityRequireme
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	protected void _elaborateJson() {
+		super._elaborateJson();
 		_createMap("requirements", "", SecurityParameterImpl.factory, "[a-zA-Z0-9\\._-]+");
 	}
 
@@ -107,6 +108,11 @@ public class SecurityRequirementImpl extends PropertiesOverlay<SecurityRequireme
 			JsonOverlay<SecurityRequirement> castOverlay = (JsonOverlay<SecurityRequirement>) overlay;
 			return castOverlay;
 		}
+
+		@Override
+		protected boolean isExtendedType() {
+			return false;
+		}
 	};
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -123,5 +129,11 @@ public class SecurityRequirementImpl extends PropertiesOverlay<SecurityRequireme
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Class<?> _getModelType() {
 		return OpenApi3.class;
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	protected OverlayFactory<?> _getFactory() {
+		return factory;
 	}
 }

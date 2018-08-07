@@ -954,6 +954,7 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	protected void _elaborateJson() {
+		super._elaborateJson();
 		_createScalar("title", "title", StringOverlay.factory);
 		_createScalar("multipleOf", "multipleOf", NumberOverlay.factory);
 		_createScalar("maximum", "maximum", NumberOverlay.factory);
@@ -1019,6 +1020,11 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 			JsonOverlay<Schema> castOverlay = (JsonOverlay<Schema>) overlay;
 			return castOverlay;
 		}
+
+		@Override
+		protected boolean isExtendedType() {
+			return false;
+		}
 	};
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -1035,5 +1041,11 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Class<?> _getModelType() {
 		return OpenApi3.class;
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	protected OverlayFactory<?> _getFactory() {
+		return factory;
 	}
 }

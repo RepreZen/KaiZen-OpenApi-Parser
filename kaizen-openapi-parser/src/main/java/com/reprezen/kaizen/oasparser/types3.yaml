@@ -7,7 +7,8 @@ imports:
   OpenApi3Validator: com.reprezen.kaizen.oasparser.val3.OpenApi3Validator
   Overlay: com.reprezen.jsonoverlay.Overlay
   Collection: java.util.Collection
-  ReferenceRegistry: com.reprezen.jsonoverlay.ReferenceRegistry  
+  ReferenceRegistry: com.reprezen.jsonoverlay.ReferenceRegistry
+  Inject: com.google.inject.Inject  
 decls:
   - extPat: &extPat "x-.+"
   - noextPat: &noextPat "(?!x-).*"

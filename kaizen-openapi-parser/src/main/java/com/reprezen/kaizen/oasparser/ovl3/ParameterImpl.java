@@ -373,6 +373,7 @@ public class ParameterImpl extends PropertiesOverlay<Parameter> implements Param
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	protected void _elaborateJson() {
+		super._elaborateJson();
 		_createScalar("name", "name", StringOverlay.factory);
 		_createScalar("in", "in", StringOverlay.factory);
 		_createScalar("description", "description", StringOverlay.factory);
@@ -414,6 +415,11 @@ public class ParameterImpl extends PropertiesOverlay<Parameter> implements Param
 			JsonOverlay<Parameter> castOverlay = (JsonOverlay<Parameter>) overlay;
 			return castOverlay;
 		}
+
+		@Override
+		protected boolean isExtendedType() {
+			return false;
+		}
 	};
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -430,5 +436,11 @@ public class ParameterImpl extends PropertiesOverlay<Parameter> implements Param
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Class<?> _getModelType() {
 		return OpenApi3.class;
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	protected OverlayFactory<?> _getFactory() {
+		return factory;
 	}
 }

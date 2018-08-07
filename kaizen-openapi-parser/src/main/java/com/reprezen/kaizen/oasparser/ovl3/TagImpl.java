@@ -124,6 +124,7 @@ public class TagImpl extends PropertiesOverlay<Tag> implements Tag {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	protected void _elaborateJson() {
+		super._elaborateJson();
 		_createScalar("name", "name", StringOverlay.factory);
 		_createScalar("description", "description", StringOverlay.factory);
 		_createScalar("externalDocs", "externalDocs", ExternalDocsImpl.factory);
@@ -155,6 +156,11 @@ public class TagImpl extends PropertiesOverlay<Tag> implements Tag {
 			JsonOverlay<Tag> castOverlay = (JsonOverlay<Tag>) overlay;
 			return castOverlay;
 		}
+
+		@Override
+		protected boolean isExtendedType() {
+			return false;
+		}
 	};
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -171,5 +177,11 @@ public class TagImpl extends PropertiesOverlay<Tag> implements Tag {
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Class<?> _getModelType() {
 		return OpenApi3.class;
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	protected OverlayFactory<?> _getFactory() {
+		return factory;
 	}
 }

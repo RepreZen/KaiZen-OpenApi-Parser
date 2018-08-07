@@ -396,6 +396,7 @@ public class PathImpl extends PropertiesOverlay<Path> implements Path {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	protected void _elaborateJson() {
+		super._elaborateJson();
 		_createScalar("summary", "summary", StringOverlay.factory);
 		_createScalar("description", "description", StringOverlay.factory);
 		_createMap("operations", "", OperationImpl.factory, "get|put|post|delete|options|head|patch|trace");
@@ -429,6 +430,11 @@ public class PathImpl extends PropertiesOverlay<Path> implements Path {
 			JsonOverlay<Path> castOverlay = (JsonOverlay<Path>) overlay;
 			return castOverlay;
 		}
+
+		@Override
+		protected boolean isExtendedType() {
+			return false;
+		}
 	};
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -445,5 +451,11 @@ public class PathImpl extends PropertiesOverlay<Path> implements Path {
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Class<?> _getModelType() {
 		return OpenApi3.class;
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	protected OverlayFactory<?> _getFactory() {
+		return factory;
 	}
 }

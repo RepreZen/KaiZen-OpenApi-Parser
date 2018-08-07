@@ -215,6 +215,7 @@ public class OAuthFlowImpl extends PropertiesOverlay<OAuthFlow> implements OAuth
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	protected void _elaborateJson() {
+		super._elaborateJson();
 		_createScalar("authorizationUrl", "authorizationUrl", StringOverlay.factory);
 		_createScalar("tokenUrl", "tokenUrl", StringOverlay.factory);
 		_createScalar("refreshUrl", "refreshUrl", StringOverlay.factory);
@@ -248,6 +249,11 @@ public class OAuthFlowImpl extends PropertiesOverlay<OAuthFlow> implements OAuth
 			JsonOverlay<OAuthFlow> castOverlay = (JsonOverlay<OAuthFlow>) overlay;
 			return castOverlay;
 		}
+
+		@Override
+		protected boolean isExtendedType() {
+			return false;
+		}
 	};
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -264,5 +270,11 @@ public class OAuthFlowImpl extends PropertiesOverlay<OAuthFlow> implements OAuth
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Class<?> _getModelType() {
 		return OpenApi3.class;
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	protected OverlayFactory<?> _getFactory() {
+		return factory;
 	}
 }

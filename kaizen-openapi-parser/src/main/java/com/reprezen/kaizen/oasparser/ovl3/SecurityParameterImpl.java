@@ -88,6 +88,7 @@ public class SecurityParameterImpl extends PropertiesOverlay<SecurityParameter> 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	protected void _elaborateJson() {
+		super._elaborateJson();
 		_createList("parameters", "", StringOverlay.factory);
 	}
 
@@ -117,6 +118,11 @@ public class SecurityParameterImpl extends PropertiesOverlay<SecurityParameter> 
 			JsonOverlay<SecurityParameter> castOverlay = (JsonOverlay<SecurityParameter>) overlay;
 			return castOverlay;
 		}
+
+		@Override
+		protected boolean isExtendedType() {
+			return false;
+		}
 	};
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -133,5 +139,11 @@ public class SecurityParameterImpl extends PropertiesOverlay<SecurityParameter> 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Class<?> _getModelType() {
 		return OpenApi3.class;
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	protected OverlayFactory<?> _getFactory() {
+		return factory;
 	}
 }

@@ -171,6 +171,7 @@ public class RequestBodyImpl extends PropertiesOverlay<RequestBody> implements R
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	protected void _elaborateJson() {
+		super._elaborateJson();
 		_createScalar("description", "description", StringOverlay.factory);
 		_createMap("contentMediaTypes", "content", MediaTypeImpl.factory, null);
 		_createScalar("required", "required", BooleanOverlay.factory);
@@ -203,6 +204,11 @@ public class RequestBodyImpl extends PropertiesOverlay<RequestBody> implements R
 			JsonOverlay<RequestBody> castOverlay = (JsonOverlay<RequestBody>) overlay;
 			return castOverlay;
 		}
+
+		@Override
+		protected boolean isExtendedType() {
+			return false;
+		}
 	};
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -219,5 +225,11 @@ public class RequestBodyImpl extends PropertiesOverlay<RequestBody> implements R
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Class<?> _getModelType() {
 		return OpenApi3.class;
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	protected OverlayFactory<?> _getFactory() {
+		return factory;
 	}
 }

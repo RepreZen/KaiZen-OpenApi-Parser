@@ -304,6 +304,7 @@ public class SecuritySchemeImpl extends PropertiesOverlay<SecurityScheme> implem
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	protected void _elaborateJson() {
+		super._elaborateJson();
 		_createScalar("type", "type", StringOverlay.factory);
 		_createScalar("description", "description", StringOverlay.factory);
 		_createScalar("name", "name", StringOverlay.factory);
@@ -345,6 +346,11 @@ public class SecuritySchemeImpl extends PropertiesOverlay<SecurityScheme> implem
 			JsonOverlay<SecurityScheme> castOverlay = (JsonOverlay<SecurityScheme>) overlay;
 			return castOverlay;
 		}
+
+		@Override
+		protected boolean isExtendedType() {
+			return false;
+		}
 	};
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -361,5 +367,11 @@ public class SecuritySchemeImpl extends PropertiesOverlay<SecurityScheme> implem
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Class<?> _getModelType() {
 		return OpenApi3.class;
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	protected OverlayFactory<?> _getFactory() {
+		return factory;
 	}
 }

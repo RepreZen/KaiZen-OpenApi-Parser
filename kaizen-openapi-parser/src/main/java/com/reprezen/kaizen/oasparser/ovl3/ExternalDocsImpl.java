@@ -104,6 +104,7 @@ public class ExternalDocsImpl extends PropertiesOverlay<ExternalDocs> implements
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	protected void _elaborateJson() {
+		super._elaborateJson();
 		_createScalar("description", "description", StringOverlay.factory);
 		_createScalar("url", "url", StringOverlay.factory);
 		_createMap("extensions", "", ObjectOverlay.factory, "x-.+");
@@ -135,6 +136,11 @@ public class ExternalDocsImpl extends PropertiesOverlay<ExternalDocs> implements
 			JsonOverlay<ExternalDocs> castOverlay = (JsonOverlay<ExternalDocs>) overlay;
 			return castOverlay;
 		}
+
+		@Override
+		protected boolean isExtendedType() {
+			return false;
+		}
 	};
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -151,5 +157,11 @@ public class ExternalDocsImpl extends PropertiesOverlay<ExternalDocs> implements
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Class<?> _getModelType() {
 		return OpenApi3.class;
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	protected OverlayFactory<?> _getFactory() {
+		return factory;
 	}
 }

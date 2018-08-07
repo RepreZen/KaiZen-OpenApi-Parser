@@ -600,6 +600,7 @@ public class OperationImpl extends PropertiesOverlay<Operation> implements Opera
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	protected void _elaborateJson() {
+		super._elaborateJson();
 		_createList("tags", "tags", StringOverlay.factory);
 		_createScalar("summary", "summary", StringOverlay.factory);
 		_createScalar("description", "description", StringOverlay.factory);
@@ -642,6 +643,11 @@ public class OperationImpl extends PropertiesOverlay<Operation> implements Opera
 			JsonOverlay<Operation> castOverlay = (JsonOverlay<Operation>) overlay;
 			return castOverlay;
 		}
+
+		@Override
+		protected boolean isExtendedType() {
+			return false;
+		}
 	};
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -658,5 +664,11 @@ public class OperationImpl extends PropertiesOverlay<Operation> implements Opera
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Class<?> _getModelType() {
 		return OpenApi3.class;
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	protected OverlayFactory<?> _getFactory() {
+		return factory;
 	}
 }

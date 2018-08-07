@@ -203,6 +203,7 @@ public class ServerImpl extends PropertiesOverlay<Server> implements Server {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	protected void _elaborateJson() {
+		super._elaborateJson();
 		_createScalar("url", "url", StringOverlay.factory);
 		_createScalar("description", "description", StringOverlay.factory);
 		_createMap("serverVariables", "variables", ServerVariableImpl.factory, "(?!x-)[a-zA-Z0-9\\._-]+");
@@ -235,6 +236,11 @@ public class ServerImpl extends PropertiesOverlay<Server> implements Server {
 			JsonOverlay<Server> castOverlay = (JsonOverlay<Server>) overlay;
 			return castOverlay;
 		}
+
+		@Override
+		protected boolean isExtendedType() {
+			return false;
+		}
 	};
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -251,5 +257,11 @@ public class ServerImpl extends PropertiesOverlay<Server> implements Server {
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Class<?> _getModelType() {
 		return OpenApi3.class;
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	protected OverlayFactory<?> _getFactory() {
+		return factory;
 	}
 }

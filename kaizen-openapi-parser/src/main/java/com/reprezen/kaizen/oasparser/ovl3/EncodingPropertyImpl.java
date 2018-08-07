@@ -174,6 +174,7 @@ public class EncodingPropertyImpl extends PropertiesOverlay<EncodingProperty> im
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	protected void _elaborateJson() {
+		super._elaborateJson();
 		_createScalar("contentType", "contentType", StringOverlay.factory);
 		_createMap("headers", "headers", StringOverlay.factory, null);
 		_createScalar("style", "style", StringOverlay.factory);
@@ -207,6 +208,11 @@ public class EncodingPropertyImpl extends PropertiesOverlay<EncodingProperty> im
 			JsonOverlay<EncodingProperty> castOverlay = (JsonOverlay<EncodingProperty>) overlay;
 			return castOverlay;
 		}
+
+		@Override
+		protected boolean isExtendedType() {
+			return false;
+		}
 	};
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -223,5 +229,11 @@ public class EncodingPropertyImpl extends PropertiesOverlay<EncodingProperty> im
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Class<?> _getModelType() {
 		return OpenApi3.class;
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	protected OverlayFactory<?> _getFactory() {
+		return factory;
 	}
 }

@@ -161,6 +161,7 @@ public class ServerVariableImpl extends PropertiesOverlay<ServerVariable> implem
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	protected void _elaborateJson() {
+		super._elaborateJson();
 		_createList("enumValues", "enum", PrimitiveOverlay.factory);
 		_createScalar("defaultValue", "default", PrimitiveOverlay.factory);
 		_createScalar("description", "description", StringOverlay.factory);
@@ -193,6 +194,11 @@ public class ServerVariableImpl extends PropertiesOverlay<ServerVariable> implem
 			JsonOverlay<ServerVariable> castOverlay = (JsonOverlay<ServerVariable>) overlay;
 			return castOverlay;
 		}
+
+		@Override
+		protected boolean isExtendedType() {
+			return false;
+		}
 	};
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -209,5 +215,11 @@ public class ServerVariableImpl extends PropertiesOverlay<ServerVariable> implem
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Class<?> _getModelType() {
 		return OpenApi3.class;
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	protected OverlayFactory<?> _getFactory() {
+		return factory;
 	}
 }

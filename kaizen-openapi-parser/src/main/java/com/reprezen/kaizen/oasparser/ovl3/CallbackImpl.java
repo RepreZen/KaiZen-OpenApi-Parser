@@ -136,6 +136,7 @@ public class CallbackImpl extends PropertiesOverlay<Callback> implements Callbac
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	protected void _elaborateJson() {
+		super._elaborateJson();
 		_createMap("callbackPaths", "", PathImpl.factory, "(?!x-).*");
 		_createMap("extensions", "", ObjectOverlay.factory, "x-.+");
 	}
@@ -165,6 +166,11 @@ public class CallbackImpl extends PropertiesOverlay<Callback> implements Callbac
 			JsonOverlay<Callback> castOverlay = (JsonOverlay<Callback>) overlay;
 			return castOverlay;
 		}
+
+		@Override
+		protected boolean isExtendedType() {
+			return false;
+		}
 	};
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -181,5 +187,11 @@ public class CallbackImpl extends PropertiesOverlay<Callback> implements Callbac
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Class<?> _getModelType() {
 		return OpenApi3.class;
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	protected OverlayFactory<?> _getFactory() {
+		return factory;
 	}
 }

@@ -170,6 +170,7 @@ public class InfoImpl extends PropertiesOverlay<Info> implements Info {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	protected void _elaborateJson() {
+		super._elaborateJson();
 		_createScalar("title", "title", StringOverlay.factory);
 		_createScalar("description", "description", StringOverlay.factory);
 		_createScalar("termsOfService", "termsOfService", StringOverlay.factory);
@@ -204,6 +205,11 @@ public class InfoImpl extends PropertiesOverlay<Info> implements Info {
 			JsonOverlay<Info> castOverlay = (JsonOverlay<Info>) overlay;
 			return castOverlay;
 		}
+
+		@Override
+		protected boolean isExtendedType() {
+			return false;
+		}
 	};
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -220,5 +226,11 @@ public class InfoImpl extends PropertiesOverlay<Info> implements Info {
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Class<?> _getModelType() {
 		return OpenApi3.class;
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	protected OverlayFactory<?> _getFactory() {
+		return factory;
 	}
 }

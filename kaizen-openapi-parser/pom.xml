@@ -235,11 +235,4 @@
         <nexus.autodrop>true</nexus.autodrop>
         <jackson-version>2.6.2</jackson-version>
     </properties>
-    <repositories>
-        <repository>
-            <id>jsonoverlay-staging</id>
-            <url>https://oss.sonatype.org/content/repositories/comreprezenjsonoverlay-1021/</url>
-            <layout>default</layout>
-        </repository>
-    </repositories>
 </project>

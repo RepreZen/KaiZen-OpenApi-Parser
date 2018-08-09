@@ -158,6 +158,7 @@ public class XmlImpl extends PropertiesOverlay<Xml> implements Xml {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	protected void _elaborateJson() {
+		super._elaborateJson();
 		_createScalar("name", "name", StringOverlay.factory);
 		_createScalar("namespace", "namespace", StringOverlay.factory);
 		_createScalar("prefix", "prefix", StringOverlay.factory);
@@ -191,6 +192,11 @@ public class XmlImpl extends PropertiesOverlay<Xml> implements Xml {
 			JsonOverlay<Xml> castOverlay = (JsonOverlay<Xml>) overlay;
 			return castOverlay;
 		}
+
+		@Override
+		protected boolean isExtendedType() {
+			return false;
+		}
 	};
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -207,5 +213,11 @@ public class XmlImpl extends PropertiesOverlay<Xml> implements Xml {
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Class<?> _getModelType() {
 		return OpenApi3.class;
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	protected OverlayFactory<?> _getFactory() {
+		return factory;
 	}
 }

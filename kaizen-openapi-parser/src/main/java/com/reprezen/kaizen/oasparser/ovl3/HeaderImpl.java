@@ -373,6 +373,7 @@ public class HeaderImpl extends PropertiesOverlay<Header> implements Header {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	protected void _elaborateJson() {
+		super._elaborateJson();
 		_createScalar("name", "name", StringOverlay.factory);
 		_createScalar("in", "in", StringOverlay.factory);
 		_createScalar("description", "description", StringOverlay.factory);
@@ -414,6 +415,11 @@ public class HeaderImpl extends PropertiesOverlay<Header> implements Header {
 			JsonOverlay<Header> castOverlay = (JsonOverlay<Header>) overlay;
 			return castOverlay;
 		}
+
+		@Override
+		protected boolean isExtendedType() {
+			return false;
+		}
 	};
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -430,5 +436,11 @@ public class HeaderImpl extends PropertiesOverlay<Header> implements Header {
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Class<?> _getModelType() {
 		return OpenApi3.class;
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	protected OverlayFactory<?> _getFactory() {
+		return factory;
 	}
 }

@@ -117,6 +117,7 @@ public class ContactImpl extends PropertiesOverlay<Contact> implements Contact {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	protected void _elaborateJson() {
+		super._elaborateJson();
 		_createScalar("name", "name", StringOverlay.factory);
 		_createScalar("url", "url", StringOverlay.factory);
 		_createScalar("email", "email", StringOverlay.factory);
@@ -148,6 +149,11 @@ public class ContactImpl extends PropertiesOverlay<Contact> implements Contact {
 			JsonOverlay<Contact> castOverlay = (JsonOverlay<Contact>) overlay;
 			return castOverlay;
 		}
+
+		@Override
+		protected boolean isExtendedType() {
+			return false;
+		}
 	};
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -164,5 +170,11 @@ public class ContactImpl extends PropertiesOverlay<Contact> implements Contact {
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Class<?> _getModelType() {
 		return OpenApi3.class;
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	protected OverlayFactory<?> _getFactory() {
+		return factory;
 	}
 }

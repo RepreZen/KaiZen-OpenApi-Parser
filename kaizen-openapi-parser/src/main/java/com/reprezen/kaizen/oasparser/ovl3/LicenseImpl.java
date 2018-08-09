@@ -106,6 +106,7 @@ public class LicenseImpl extends PropertiesOverlay<License> implements License {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	protected void _elaborateJson() {
+		super._elaborateJson();
 		_createScalar("name", "name", StringOverlay.factory);
 		_createScalar("url", "url", StringOverlay.factory);
 		_createMap("extensions", "", ObjectOverlay.factory, "x-.+");
@@ -136,6 +137,11 @@ public class LicenseImpl extends PropertiesOverlay<License> implements License {
 			JsonOverlay<License> castOverlay = (JsonOverlay<License>) overlay;
 			return castOverlay;
 		}
+
+		@Override
+		protected boolean isExtendedType() {
+			return false;
+		}
 	};
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -152,5 +158,11 @@ public class LicenseImpl extends PropertiesOverlay<License> implements License {
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Class<?> _getModelType() {
 		return OpenApi3.class;
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	protected OverlayFactory<?> _getFactory() {
+		return factory;
 	}
 }

@@ -210,6 +210,7 @@ public class MediaTypeImpl extends PropertiesOverlay<MediaType> implements Media
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	protected void _elaborateJson() {
+		super._elaborateJson();
 		_createScalar("schema", "schema", SchemaImpl.factory);
 		_createMap("examples", "examples", ExampleImpl.factory, "[a-zA-Z0-9\\._-]+");
 		_createScalar("example", "example", ObjectOverlay.factory);
@@ -242,6 +243,11 @@ public class MediaTypeImpl extends PropertiesOverlay<MediaType> implements Media
 			JsonOverlay<MediaType> castOverlay = (JsonOverlay<MediaType>) overlay;
 			return castOverlay;
 		}
+
+		@Override
+		protected boolean isExtendedType() {
+			return false;
+		}
 	};
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -258,5 +264,11 @@ public class MediaTypeImpl extends PropertiesOverlay<MediaType> implements Media
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Class<?> _getModelType() {
 		return OpenApi3.class;
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	protected OverlayFactory<?> _getFactory() {
+		return factory;
 	}
 }

@@ -245,6 +245,7 @@ public class LinkImpl extends PropertiesOverlay<Link> implements Link {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	protected void _elaborateJson() {
+		super._elaborateJson();
 		_createScalar("operationId", "operationId", StringOverlay.factory);
 		_createScalar("operationRef", "operationRef", StringOverlay.factory);
 		_createMap("parameters", "parameters", StringOverlay.factory, null);
@@ -279,6 +280,11 @@ public class LinkImpl extends PropertiesOverlay<Link> implements Link {
 			JsonOverlay<Link> castOverlay = (JsonOverlay<Link>) overlay;
 			return castOverlay;
 		}
+
+		@Override
+		protected boolean isExtendedType() {
+			return false;
+		}
 	};
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -295,5 +301,11 @@ public class LinkImpl extends PropertiesOverlay<Link> implements Link {
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Class<?> _getModelType() {
 		return OpenApi3.class;
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	protected OverlayFactory<?> _getFactory() {
+		return factory;
 	}
 }

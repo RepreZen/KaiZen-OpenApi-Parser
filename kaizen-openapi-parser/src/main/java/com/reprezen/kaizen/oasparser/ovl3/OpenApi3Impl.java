@@ -945,6 +945,7 @@ public class OpenApi3Impl extends PropertiesOverlay<OpenApi3> implements OpenApi
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	protected void _elaborateJson() {
+		super._elaborateJson();
 		_createScalar("openApi", "openapi", StringOverlay.factory);
 		_createScalar("info", "info", InfoImpl.factory);
 		_createList("servers", "servers", ServerImpl.factory);
@@ -991,6 +992,11 @@ public class OpenApi3Impl extends PropertiesOverlay<OpenApi3> implements OpenApi
 			JsonOverlay<OpenApi3> castOverlay = (JsonOverlay<OpenApi3>) overlay;
 			return castOverlay;
 		}
+
+		@Override
+		protected boolean isExtendedType() {
+			return false;
+		}
 	};
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -1007,5 +1013,11 @@ public class OpenApi3Impl extends PropertiesOverlay<OpenApi3> implements OpenApi
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Class<?> _getModelType() {
 		return OpenApi3.class;
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	protected OverlayFactory<?> _getFactory() {
+		return factory;
 	}
 }

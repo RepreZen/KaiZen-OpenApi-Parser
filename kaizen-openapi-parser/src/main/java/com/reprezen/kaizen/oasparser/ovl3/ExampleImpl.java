@@ -139,6 +139,7 @@ public class ExampleImpl extends PropertiesOverlay<Example> implements Example {
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	protected void _elaborateJson() {
+		super._elaborateJson();
 		_createScalar("summary", "summary", StringOverlay.factory);
 		_createScalar("description", "description", StringOverlay.factory);
 		_createScalar("value", "value", ObjectOverlay.factory);
@@ -171,6 +172,11 @@ public class ExampleImpl extends PropertiesOverlay<Example> implements Example {
 			JsonOverlay<Example> castOverlay = (JsonOverlay<Example>) overlay;
 			return castOverlay;
 		}
+
+		@Override
+		protected boolean isExtendedType() {
+			return false;
+		}
 	};
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -187,5 +193,11 @@ public class ExampleImpl extends PropertiesOverlay<Example> implements Example {
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Class<?> _getModelType() {
 		return OpenApi3.class;
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	protected OverlayFactory<?> _getFactory() {
+		return factory;
 	}
 }

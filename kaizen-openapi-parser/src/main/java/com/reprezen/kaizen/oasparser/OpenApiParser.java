@@ -46,6 +46,7 @@ public class OpenApiParser {
 		try {
 			JsonNode tree = new JsonLoader().loadString(resolutionBase, spec);
 			return parse(tree, resolutionBase, validate);
+
 		} catch (IOException e) {
 			throw new OpenApiParserException("Failed to parse spec as JSON or YAML", e);
 		}
@@ -99,6 +100,7 @@ public class OpenApiParser {
 			tree = manager.loadDoc();
 			if (isVersion3(tree)) {
 				OpenApi3 model = (OpenApi3) OpenApi3Impl.factory.create(tree, null, manager);
+				((OpenApi3Impl) model)._setCreatingRef(manager.getDocReference());
 				injector.injectMembers(model);
 				if (validate) {
 					model.validate();

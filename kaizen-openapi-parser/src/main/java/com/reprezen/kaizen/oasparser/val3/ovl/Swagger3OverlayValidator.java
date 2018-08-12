@@ -20,12 +20,12 @@ public class Swagger3OverlayValidator extends ObjectValidator<OpenApi3Impl> impl
 
     @Override
     public void validate(OpenApi3Impl overlay, ValidationResults results) {
-        super.validate(overlay, results);
+	super.validate(overlay, results);
     }
 
     @Override
     public void validateImpl(OpenApi3 swagger3, ValidationResults results) {
-        validate((OpenApi3Impl) swagger3, results);
+	validate((OpenApi3Impl) swagger3, results);
     }
 
 }

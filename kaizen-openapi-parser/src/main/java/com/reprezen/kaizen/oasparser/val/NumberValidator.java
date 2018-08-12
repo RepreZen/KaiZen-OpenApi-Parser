@@ -17,7 +17,7 @@ public class NumberValidator extends OverlayValidator<NumberOverlay> {
 
     @Override
     public void validate(NumberOverlay overlay, ValidationResults results) {
-        super.validate(overlay, results, NumericNode.class);
+	super.validate(overlay, results, NumericNode.class);
     }
 
 }

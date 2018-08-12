@@ -16,6 +16,6 @@ public class ObjectValidator<T> extends OverlayValidator<T> {
 
     @Override
     public void validate(T overlay, ValidationResults results) {
-        super.validate(overlay, results, ObjectNode.class);
+	super.validate(overlay, results, ObjectNode.class);
     }
 }

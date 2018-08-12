@@ -19,15 +19,15 @@ import com.reprezen.kaizen.oasparser.val.Validator;
 
 public class RequestBodyValidator extends ObjectValidatorBase<RequestBody> {
 
-	@Inject
-	private Validator<MediaType> mediaTypeValidator;
+    @Inject
+    private Validator<MediaType> mediaTypeValidator;
 
-	@Override
-	public void validateObject(RequestBody requestBody, ValidationResults results) {
-		// no validation for: description, required
-		validateMap(requestBody.getContentMediaTypes(), results, false, "content", Regexes.NOEXT_REGEX,
-				mediaTypeValidator);
-		validateExtensions(requestBody.getExtensions(), results);
-	}
+    @Override
+    public void validateObject(RequestBody requestBody, ValidationResults results) {
+	// no validation for: description, required
+	validateMap(requestBody.getContentMediaTypes(), results, false, "content", Regexes.NOEXT_REGEX,
+		mediaTypeValidator);
+	validateExtensions(requestBody.getExtensions(), results);
+    }
 
 }

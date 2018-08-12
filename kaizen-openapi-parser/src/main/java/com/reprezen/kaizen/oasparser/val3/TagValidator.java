@@ -19,14 +19,14 @@ import com.reprezen.kaizen.oasparser.val.Validator;
 
 public class TagValidator extends ObjectValidatorBase<Tag> {
 
-	@Inject
-	private Validator<ExternalDocs> externalDocsValidator;
+    @Inject
+    private Validator<ExternalDocs> externalDocsValidator;
 
-	@Override
-	public void validateObject(Tag tag, ValidationResults results) {
-		validateString(tag.getName(), results, true, "name");
-		validateField(tag.getExternalDocs(false), results, false, "externalDocs", externalDocsValidator);
-		validateExtensions(tag.getExtensions(), results);
-	}
+    @Override
+    public void validateObject(Tag tag, ValidationResults results) {
+	validateString(tag.getName(), results, true, "name");
+	validateField(tag.getExternalDocs(false), results, false, "externalDocs", externalDocsValidator);
+	validateExtensions(tag.getExtensions(), results);
+    }
 
 }

@@ -16,11 +16,11 @@ import com.reprezen.kaizen.oasparser.val.ValidationResults;
 
 public class ExternalDocsValidator extends ObjectValidatorBase<ExternalDocs> {
 
-	@Override
-	public void validateObject(ExternalDocs externalDocs, ValidationResults results) {
-		// no validation for: description
-		validateUrl(externalDocs.getUrl(), results, true, "externalDocs");
-		validateExtensions(externalDocs.getExtensions(), results);
-	}
+    @Override
+    public void validateObject(ExternalDocs externalDocs, ValidationResults results) {
+	// no validation for: description
+	validateUrl(externalDocs.getUrl(), results, true, "externalDocs");
+	validateExtensions(externalDocs.getExtensions(), results);
+    }
 
 }

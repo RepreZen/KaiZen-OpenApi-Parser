@@ -21,11 +21,11 @@ public class OverlayValidationConfigurator extends ValidationConfigurator {
 
     @Override
     protected void configureImplValidators() {
-        bind(new TypeLiteral<ImplValidator<OpenApi3>>() {
-        }).to(Swagger3OverlayValidator.class);
-        bind(new TypeLiteral<ImplValidator<Info>>() {
-        }).to(InfoOverlayValidator.class);
-        bind(new TypeLiteral<ImplValidator<Contact>>() {
-        }).to(ContactOverlayValidator.class);
+	bind(new TypeLiteral<ImplValidator<OpenApi3>>() {
+	}).to(Swagger3OverlayValidator.class);
+	bind(new TypeLiteral<ImplValidator<Info>>() {
+	}).to(InfoOverlayValidator.class);
+	bind(new TypeLiteral<ImplValidator<Contact>>() {
+	}).to(ContactOverlayValidator.class);
     }
 }

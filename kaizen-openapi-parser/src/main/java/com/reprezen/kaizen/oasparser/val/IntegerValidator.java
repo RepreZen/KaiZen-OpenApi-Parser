@@ -22,11 +22,11 @@ import com.reprezen.jsonoverlay.IntegerOverlay;
 public class IntegerValidator extends OverlayValidator<IntegerOverlay> {
 
     @SuppressWarnings("unchecked")
-    private static Set<Class<? extends JsonNode>> intTypes = Sets.<Class<? extends JsonNode>> newHashSet( //
-            IntNode.class, ShortNode.class, BigIntegerNode.class);
+    private static Set<Class<? extends JsonNode>> intTypes = Sets.<Class<? extends JsonNode>>newHashSet( //
+	    IntNode.class, ShortNode.class, BigIntegerNode.class);
 
     @Override
     public void validate(IntegerOverlay overlay, ValidationResults results) {
-        super.validate(overlay, results, intTypes);
+	super.validate(overlay, results, intTypes);
     }
 }

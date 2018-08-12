@@ -17,17 +17,17 @@ import com.reprezen.jsonoverlay.Overlay;
 
 public class MapValidator<T extends JsonOverlay<?>> extends OverlayValidator<MapOverlay<T>> {
 
-	private Validator<T> elementValidator;
+    private Validator<T> elementValidator;
 
-	public MapValidator(Validator<T> elementValidator) {
-		this.elementValidator = elementValidator;
-	}
+    public MapValidator(Validator<T> elementValidator) {
+	this.elementValidator = elementValidator;
+    }
 
-	@Override
-	public void validate(MapOverlay<T> overlay, ValidationResults results) {
-		super.validate(overlay, results, ObjectNode.class);
-		for (T value : Overlay.get(overlay).values()) {
-			elementValidator.validate(value, results, Overlay.getPathInParent(value));
-		}
+    @Override
+    public void validate(MapOverlay<T> overlay, ValidationResults results) {
+	super.validate(overlay, results, ObjectNode.class);
+	for (T value : Overlay.get(overlay).values()) {
+	    elementValidator.validate(value, results, Overlay.getPathInParent(value));
 	}
+    }
 }

@@ -20,7 +20,7 @@ public class ContactOverlayValidator extends ObjectValidator<ContactImpl> implem
 
     @Override
     public void validateImpl(Contact contact, ValidationResults results) {
-        super.validate((ContactImpl) contact, results);
+	super.validate((ContactImpl) contact, results);
     }
 
 }

@@ -20,7 +20,7 @@ public class InfoOverlayValidator extends ObjectValidator<InfoImpl> implements I
 
     @Override
     public void validateImpl(Info info, ValidationResults results) {
-        super.validate((InfoImpl) info, results);
+	super.validate((InfoImpl) info, results);
     }
 
 }

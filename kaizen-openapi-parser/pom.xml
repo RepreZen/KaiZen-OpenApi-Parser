@@ -83,6 +83,11 @@
             <version>1.6.1</version>
         </dependency>
         <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>1.6.1</version>
+        </dependency>
+        <dependency>
             <groupId>com.reprezen.jsonoverlay</groupId>
             <artifactId>jsonoverlay</artifactId>
             <version>${json-overlay-version}</version>
@@ -238,7 +243,7 @@
     <repositories>
         <repository>
         <id>jovl-staging</id>
-        <url>https://oss.sonatype.org/content/repositories/comreprezenjsonoverlay-1028/</url>
+        <url>https://oss.sonatype.org/content/repositories/comreprezenjsonoverlay-1029/</url>
      </repository>
     </repositories>
 </project>

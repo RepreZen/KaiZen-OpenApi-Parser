@@ -35,6 +35,7 @@ public class OpenApiParser {
 	}
 
 	public OpenApiParser(ValidationConfigurator validationConfigurator) {
+	    System.setProperty("guice_custom_class_loading", "OFF");
 		this.injector = Guice.createInjector(validationConfigurator);
 	}
 

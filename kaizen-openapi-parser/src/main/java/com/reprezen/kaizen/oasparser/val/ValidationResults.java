@@ -19,12 +19,11 @@ import static com.reprezen.kaizen.oasparser.val.ValidationResults.Severity.WARNI
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.google.common.collect.Lists;
 import com.reprezen.jsonoverlay.JsonOverlay;
 import com.reprezen.jsonoverlay.Overlay;
-import com.reprezen.jsonoverlay.parser.PositionInfo;
+import com.reprezen.jsonoverlay.PositionInfo;
 
 public class ValidationResults {
 
@@ -173,11 +172,8 @@ public class ValidationResults {
 
 		@Override
 		public String toString() {
-			String label = crumbs != null && !crumbs.isEmpty() //
-					? crumbs.stream().collect(Collectors.joining("."))
-					: "";
 			String posString = pos != null ? pos.toString(true) + " " : "";
-			return posString + label + ": " + msg;
+			return posString + ": " + msg;
 		}
 	}
 }

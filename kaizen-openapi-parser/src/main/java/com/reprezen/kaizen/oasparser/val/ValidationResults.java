@@ -170,6 +170,10 @@ public class ValidationResults {
 			return crumbs;
 		}
 
+		public PositionInfo getPositionInfo() {
+			return pos;
+		}
+
 		@Override
 		public String toString() {
 			String posString = pos != null ? pos.toString(true) + " " : "";

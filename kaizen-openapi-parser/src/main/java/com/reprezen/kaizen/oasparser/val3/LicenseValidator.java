@@ -11,16 +11,17 @@
 package com.reprezen.kaizen.oasparser.val3;
 
 import com.reprezen.kaizen.oasparser.model3.License;
+import com.reprezen.kaizen.oasparser.ovl3.LicenseImpl;
 import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
 import com.reprezen.kaizen.oasparser.val.ValidationResults;
 
 public class LicenseValidator extends ObjectValidatorBase<License> {
 
-    @Override
-    public void validateObject(License license, ValidationResults results) {
-	validateString(license.getName(), results, true, "name");
-	validateUrl(license.getUrl(), results, false, "url");
-	validateExtensions(license.getExtensions(), results);
-    }
+	@Override
+	public void validateObject(License license, ValidationResults results) {
+		validateString(license.getName(), results, true, "name");
+		validateUrl(license.getUrl(), results, false, "url", (LicenseImpl) license);
+		validateExtensions(license.getExtensions(), results);
+	}
 
 }

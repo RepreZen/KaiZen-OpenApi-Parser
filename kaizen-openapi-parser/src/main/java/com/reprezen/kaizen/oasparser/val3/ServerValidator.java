@@ -10,25 +10,28 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val3;
 
-import static com.reprezen.kaizen.oasparser.val3.Regexes.NAME_REGEX;
-
 import com.google.inject.Inject;
 import com.reprezen.kaizen.oasparser.model3.Server;
 import com.reprezen.kaizen.oasparser.model3.ServerVariable;
+import com.reprezen.kaizen.oasparser.ovl3.ServerImpl;
 import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
 import com.reprezen.kaizen.oasparser.val.ValidationResults;
 import com.reprezen.kaizen.oasparser.val.Validator;
 
+import javax.print.attribute.standard.Severity;
+
+import static com.reprezen.kaizen.oasparser.val3.Regexes.NAME_REGEX;
+
 public class ServerValidator extends ObjectValidatorBase<Server> {
 
-    @Inject
-    private Validator<ServerVariable> serverVariableValidator;
+	@Inject
+	private Validator<ServerVariable> serverVariableValidator;
 
-    @Override
-    public void validateObject(Server server, ValidationResults results) {
-	// no validation for: description
-	validateUrl(server.getUrl(), results, false, "url", true);
-	validateMap(server.getServerVariables(), results, false, "variables", NAME_REGEX, serverVariableValidator);
-	validateExtensions(server.getExtensions(), results);
-    }
+	@Override
+	public void validateObject(Server server, ValidationResults results) {
+		// no validation for: description
+		validateUrl(server.getUrl(), results, false, "url", true, Severity.ERROR, (ServerImpl) server);
+		validateMap(server.getServerVariables(), results, false, "variables", NAME_REGEX, serverVariableValidator);
+		validateExtensions(server.getExtensions(), results);
+	}
 }

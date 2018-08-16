@@ -11,16 +11,19 @@
 package com.reprezen.kaizen.oasparser.val3;
 
 import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
+import com.reprezen.kaizen.oasparser.ovl3.ExternalDocsImpl;
 import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
 import com.reprezen.kaizen.oasparser.val.ValidationResults;
 
+import javax.print.attribute.standard.Severity;
+
 public class ExternalDocsValidator extends ObjectValidatorBase<ExternalDocs> {
 
-    @Override
-    public void validateObject(ExternalDocs externalDocs, ValidationResults results) {
-	// no validation for: description
-	validateUrl(externalDocs.getUrl(), results, true, "externalDocs");
-	validateExtensions(externalDocs.getExtensions(), results);
-    }
+	@Override
+	public void validateObject(ExternalDocs externalDocs, ValidationResults results) {
+		// no validation for: description
+		validateUrl(externalDocs.getUrl(), results, true, "externalDocs", false, Severity.ERROR, (ExternalDocsImpl) externalDocs);
+		validateExtensions(externalDocs.getExtensions(), results);
+	}
 
 }

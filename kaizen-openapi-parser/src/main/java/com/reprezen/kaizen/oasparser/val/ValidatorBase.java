@@ -89,20 +89,15 @@ public abstract class ValidatorBase<T> implements Validator<T> {
 		}
 	}
 
-	public void validateUrl(String value, ValidationResults results, boolean required, String crumb) {
-		validateUrl(value, results, required, crumb, false);
+	public <V> void validateUrl(String value, ValidationResults results, boolean required, String crumb, PropertiesOverlay<V> overlay) {
+		validateUrl(value, results, required, crumb, false, Severity.ERROR, overlay);
 	}
 
-	public void validateUrl(String value, ValidationResults results, boolean required, String crumb,
-			boolean allowVars) {
-		validateUrl(value, results, required, crumb, allowVars, Severity.ERROR);
-	}
-
-	public void validateUrl(final String value, final ValidationResults results, boolean required, String crumb,
-			final boolean allowVars, final Severity severity) {
+	public <V> void validateUrl(final String value, final ValidationResults results, boolean required, String crumb,
+	                        final boolean allowVars, final Severity severity, PropertiesOverlay<V> overlay) {
 		validateString(value, results, required, crumb);
 		if (value != null) {
-			checkUrl(value, results, allowVars, severity, crumb);
+			checkUrl(value, results, allowVars, severity, crumb, overlay);
 		}
 	}
 
@@ -290,7 +285,7 @@ public abstract class ValidatorBase<T> implements Validator<T> {
 			.substring(ValidatorBase.class.getPackage().getName().length() + 1);
 	private static boolean specialSchemeInited = false;
 
-	private void checkUrl(String url, ValidationResults results, boolean allowVars, Severity severity, String crumb) {
+	private void checkUrl(String url, ValidationResults results, boolean allowVars, Severity severity, String crumb, PropertiesOverlay<?> overlay) {
 		// TODO Q: Any help from spec in being able to validate URLs with vars? E.g is
 		// our treatment here valid? We
 		// assume vars can only appear where simple text can appear, so handling vars
@@ -315,7 +310,7 @@ public abstract class ValidatorBase<T> implements Validator<T> {
 		try {
 			new URL(url);
 		} catch (MalformedURLException e) {
-			results.addError(m.msg("BadUrl|Invalid URL", origUrl, e.toString()), crumb);
+			results.addError(m.msg("BadUrl|Invalid URL", origUrl, e.toString()), crumb, Overlay.of(overlay, crumb, String.class));
 		}
 	}
 

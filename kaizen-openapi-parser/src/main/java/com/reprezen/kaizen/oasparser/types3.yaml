@@ -176,10 +176,10 @@ types:
     fields:
       enum:
         name: EnumValue
-        type: Primitive
+        type: String
         structure: collection
       default:
-        type: Primitive
+        type: String
       description: {}
       *extName: *extDef
         
@@ -317,9 +317,7 @@ types:
       parameters:
         type: String
         structure: map
-      headers:
-        type: Header
-        structure: map
+      requestBody: {}
       description: {}
       server:
         type: Server
@@ -487,10 +485,6 @@ types:
         type: Boolean
       xml: {}
       externalDocs: {}
-      examples:
-        type: Example
-        structure: map
-        keyPattern: *namePat
       example:
         type: Object
       deprecated:

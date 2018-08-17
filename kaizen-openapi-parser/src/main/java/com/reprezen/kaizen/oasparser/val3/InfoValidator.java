@@ -27,10 +27,12 @@ public class InfoValidator extends ObjectValidatorBase<Info> {
 
     @Override
     public void validateObject(Info info, ValidationResults results) {
-	validateString(info.getTitle(), results, true, "title");
-	validateField(info.getContact(false), results, false, "contact", contactValidator);
-	validateField(info.getLicense(false), results, false, "license", licenseValidator);
-	validateString(info.getVersion(), results, true, "version");
-	validateExtensions(info.getExtensions(), results);
+        validateString(info.getTitle(), results, true, "title");
+        validateDescription(info.getDescription(), results);
+        validateUrl(info.getTermsOfService(), results, false, "termsOfService");
+        validateField(info.getContact(false), results, false, "contact", contactValidator);
+        validateField(info.getLicense(false), results, false, "license", licenseValidator);
+        validateString(info.getVersion(), results, true, "version");
+        validateExtensions(info.getExtensions(), results);
     }
 }

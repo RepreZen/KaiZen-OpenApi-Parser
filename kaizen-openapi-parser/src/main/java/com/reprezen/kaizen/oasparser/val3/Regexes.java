@@ -22,6 +22,6 @@ public class Regexes {
     public static final Pattern METHOD_REGEX = Pattern.compile("get|put|post|delete|options|head|patch|trace");
     public static final Pattern PARAM_IN_REGEX = Pattern.compile("path|query|header|cookie");
     public static final Pattern STYLE_REGEX = Pattern
-	    .compile("matrix|label|form|simple|spaceDelimited|pipeDelimited|deepObject");
-    public static final Pattern RESPONSE_REGEX = Pattern.compile("default|\\d\\d\\d");
+            .compile("matrix|label|form|simple|spaceDelimited|pipeDelimited|deepObject");
+    public static final Pattern RESPONSE_REGEX = Pattern.compile("default|\\d[0-9X]{2}");
 }

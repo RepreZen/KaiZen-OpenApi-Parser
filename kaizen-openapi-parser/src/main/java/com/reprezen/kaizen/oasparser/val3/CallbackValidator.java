@@ -24,8 +24,8 @@ public class CallbackValidator extends ObjectValidatorBase<Callback> {
 
     @Override
     public void validateObject(Callback callback, ValidationResults results) {
-	validateMap(callback.getCallbackPaths(), results, false, null, Regexes.NOEXT_REGEX, pathValidator);
-	validateExtensions(callback.getExtensions(), results);
+        validateMap(callback.getCallbackPaths(), results, false, null, Regexes.NOEXT_REGEX, pathValidator);
+        validateExtensions(callback.getExtensions(), results);
     }
 
 }

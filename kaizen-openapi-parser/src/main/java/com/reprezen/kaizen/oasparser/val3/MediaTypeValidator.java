@@ -35,29 +35,30 @@ public class MediaTypeValidator extends ObjectValidatorBase<MediaType> {
 
     @Override
     public void validateObject(MediaType mediaType, ValidationResults results) {
-	// no validation for: example, examples
-	// TODO Q: Should schema be required in media type?
-	validateField(mediaType.getSchema(false), results, false, "schema", schemaValidator);
-	validateMap(mediaType.getEncodingProperties(), results, false, "encoding", Regexes.NOEXT_NAME_REGEX,
-		encodingPropertyValidator);
-	checkEncodingPropsAreProps(mediaType, results);
-	validateExtensions(mediaType.getExtensions(), results);
-	validateMap(mediaType.getExamples(), results, false, "examples", Regexes.NOEXT_NAME_REGEX, exampleValidator);
+        // TODO Q: Should schema be required in media type?
+        validateField(mediaType.getSchema(false), results, false, "schema", schemaValidator);
+        validateMap(mediaType.getEncodingProperties(), results, false, "encoding", Regexes.NOEXT_NAME_REGEX,
+                encodingPropertyValidator);
+        checkEncodingPropsAreProps(mediaType, results);
+        validateExtensions(mediaType.getExtensions(), results);
+        validateMap(mediaType.getExamples(), results, false, "examples", Regexes.NOEXT_NAME_REGEX, exampleValidator);
+        validateExample(mediaType.getExample(), results);
     }
 
     void checkEncodingPropsAreProps(MediaType mediaType, ValidationResults results) {
-	// TODO Q: do allOf, anyOf, oneOf schemas participate? what about
-	// additionalProperties?
-	Schema schema = mediaType.getSchema(false);
-	if (Overlay.of(schema).isElaborated()) {
-	    Set<String> propNames = schema.getProperties().keySet();
-	    for (String encodingPropertyName : mediaType.getEncodingProperties().keySet()) {
-		if (!propNames.contains(encodingPropertyName)) {
-		    results.addError(m.msg(
-			    "EncPropNotSchemaProp|Encoding property does not name a schema property for the media type",
-			    encodingPropertyName), encodingPropertyName);
-		}
-	    }
-	}
+        // TODO Q: do allOf, anyOf, oneOf schemas participate? what about
+        // additionalProperties?
+        Schema schema = mediaType.getSchema(false);
+        if (Overlay.of(schema).isElaborated()) {
+            Set<String> propNames = schema.getProperties().keySet();
+            for (String encodingPropertyName : mediaType.getEncodingProperties().keySet()) {
+                if (!propNames.contains(encodingPropertyName)) {
+                    results.addError(
+                            m.msg("EncPropNotSchemaProp|Encoding property does not name a schema property for the media type",
+                                    encodingPropertyName),
+                            encodingPropertyName);
+                }
+            }
+        }
     }
 }

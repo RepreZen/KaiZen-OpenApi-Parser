@@ -18,9 +18,10 @@ public class ContactValidator extends ObjectValidatorBase<Contact> {
 
     @Override
     public void validateObject(Contact contact, ValidationResults results) {
-	validateUrl(contact.getUrl(), results, false, "url");
-	validateEmail(contact.getEmail(), results, false, "email");
-	validateExtensions(contact.getExtensions(), results);
+        validateString(contact.getName(), results, false, "name");
+        validateUrl(contact.getUrl(), results, false, "url");
+        validateEmail(contact.getEmail(), results, false, "email");
+        validateExtensions(contact.getExtensions(), results);
     }
 
 }

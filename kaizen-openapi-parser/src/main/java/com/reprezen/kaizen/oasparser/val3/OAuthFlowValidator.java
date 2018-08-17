@@ -18,11 +18,14 @@ public class OAuthFlowValidator extends ObjectValidatorBase<OAuthFlow> {
 
     @Override
     public void validateObject(OAuthFlow oauthFlow, ValidationResults results) {
-	validateUrl(oauthFlow.getAuthorizationUrl(), results, true, "authorizationUrl");
-	validateUrl(oauthFlow.getTokenUrl(), results, true, "tokenUrl");
-	validateUrl(oauthFlow.getRefreshUrl(), results, true, "refreshUrl");
-	validateMap(oauthFlow.getScopes(), results, true, "scopes", Regexes.NOEXT_REGEX, null);
-	validateExtensions(oauthFlow.getExtensions(), results);
+        // TODO why are they all *required*? and why are they *always* required?
+        // e.g., authorizationUrl only applies to oauth2("implicit", "authorizationCode") 
+        // and does NOT apply to "password" and "clientCredentials"
+        validateUrl(oauthFlow.getAuthorizationUrl(), results, true, "authorizationUrl");
+        validateUrl(oauthFlow.getTokenUrl(), results, true, "tokenUrl");
+        validateUrl(oauthFlow.getRefreshUrl(), results, true, "refreshUrl");
+        validateMap(oauthFlow.getScopes(), results, true, "scopes", Regexes.NOEXT_REGEX, null);
+        validateExtensions(oauthFlow.getExtensions(), results);
     }
 
 }

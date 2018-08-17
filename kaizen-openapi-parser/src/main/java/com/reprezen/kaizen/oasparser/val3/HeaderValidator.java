@@ -15,6 +15,7 @@ import static com.reprezen.kaizen.oasparser.val.Messages.m;
 import com.google.inject.Inject;
 import com.reprezen.jsonoverlay.Overlay;
 import com.reprezen.jsonoverlay.PropertiesOverlay;
+import com.reprezen.kaizen.oasparser.model3.Example;
 import com.reprezen.kaizen.oasparser.model3.Header;
 import com.reprezen.kaizen.oasparser.model3.MediaType;
 import com.reprezen.kaizen.oasparser.model3.Path;
@@ -29,61 +30,68 @@ public class HeaderValidator extends ObjectValidatorBase<Header> {
     private Validator<Schema> schemaValidator;
     @Inject
     private Validator<MediaType> mediaTypeValidator;
+    @Inject
+    private Validator<Example> exampleValidator;
 
     @Override
     public void validateObject(Header header, ValidationResults results) {
-	// no validations for: description, deprecated, allowEmptyValue,
-	// explode,
-	// example, examples
-	validateString(header.getName(), results, false, "name");
-	validateString(header.getIn(), results, false, Regexes.PARAM_IN_REGEX, "in");
-	checkPathParam(header, results);
-	checkRequired(header, results);
-	validateString(header.getStyle(), results, false, Regexes.STYLE_REGEX, "style");
-	checkAllowReserved(header, results);
-	// TODO Q: Should schema be required in header object?
-	validateField(header.getSchema(false), results, false, "schema", schemaValidator);
-	validateMap(header.getContentMediaTypes(), results, false, "content", Regexes.NOEXT_REGEX, mediaTypeValidator);
-	validateExtensions(header.getExtensions(), results);
+        // no validations for: deprecated, allowEmptyValue,
+        // explode,
+        validateDescription(header.getDescription(), results);
+
+        // name and id MUST NOT be specified, as name is given in the corresponding headers map 
+        checkPathParam(header, results);
+        checkRequired(header, results);
+        validateString(header.getStyle(), results, false, Regexes.STYLE_REGEX, "style");
+        checkAllowReserved(header, results);
+        // TODO Q: Should schema be required in header object?
+        validateField(header.getSchema(false), results, false, "schema", schemaValidator);
+        validateMap(header.getContentMediaTypes(), results, false, "content", Regexes.NOEXT_REGEX, mediaTypeValidator);
+        
+        validateMap(header.getExamples(), results, false, "examples", Regexes.NOEXT_NAME_REGEX, exampleValidator);
+        validateExample(header.getExample(), results);
+        
+        validateExtensions(header.getExtensions(), results);
+
     }
 
     private void checkPathParam(Header header, ValidationResults results) {
-	if (header.getIn() != null && header.getIn().equals("path") && header.getName() != null) {
-	    String path = getPathString(header);
-	    if (path != null) {
-		if (!path.matches(".*/\\{" + header.getName() + "\\}(/.*)?")) {
-		    results.addError(m.msg("MissingPathTplt|No template for path parameter in path string",
-			    header.getName(), path), "name");
-		}
-	    } else {
-		results.addWarning(
-			m.msg("NoPath|Could not locate path for parameter", header.getName(), header.getIn()));
-	    }
-	}
+        if (header.getIn() != null && header.getIn().equals("path") && header.getName() != null) {
+            String path = getPathString(header);
+            if (path != null) {
+                if (!path.matches(".*/\\{" + header.getName() + "\\}(/.*)?")) {
+                    results.addError(m.msg("MissingPathTplt|No template for path parameter in path string",
+                            header.getName(), path), "name");
+                }
+            } else {
+                results.addWarning(
+                        m.msg("NoPath|Could not locate path for parameter", header.getName(), header.getIn()));
+            }
+        }
     }
 
     private void checkRequired(Header header, ValidationResults results) {
-	if ("path".equals(header.getIn())) {
-	    if (header.getRequired() != Boolean.TRUE) {
-		results.addError(
-			m.msg("PathParamReq|Path param must have 'required' property set true", header.getName()),
-			"required");
-	    }
-	}
+        if ("path".equals(header.getIn())) {
+            if (header.getRequired() != Boolean.TRUE) {
+                results.addError(
+                        m.msg("PathParamReq|Path param must have 'required' property set true", header.getName()),
+                        "required");
+            }
+        }
     }
 
     private void checkAllowReserved(Header header, ValidationResults results) {
-	if (header.isAllowReserved() && !"query".equals(header.getIn())) {
-	    results.addWarning(m.msg("NonQryAllowRsvd|AllowReserved is ignored for non-query parameter",
-		    header.getName(), header.getIn()), "allowReserved");
-	}
+        if (header.isAllowReserved() && !"query".equals(header.getIn())) {
+            results.addWarning(m.msg("NonQryAllowRsvd|AllowReserved is ignored for non-query parameter",
+                    header.getName(), header.getIn()), "allowReserved");
+        }
     }
 
     private String getPathString(Header header) {
-	PropertiesOverlay<?> parent = Overlay.of(header).getParentPropertiesOverlay();
-	while (parent != null && !(parent instanceof Path)) {
-	    parent = Overlay.of(parent).getParentPropertiesOverlay();
-	}
-	return parent != null && parent instanceof Path ? Overlay.getPathInParent(parent) : null;
+        PropertiesOverlay<?> parent = Overlay.of(header).getParentPropertiesOverlay();
+        while (parent != null && !(parent instanceof Path)) {
+            parent = Overlay.of(parent).getParentPropertiesOverlay();
+        }
+        return parent != null && parent instanceof Path ? Overlay.getPathInParent(parent) : null;
     }
 }

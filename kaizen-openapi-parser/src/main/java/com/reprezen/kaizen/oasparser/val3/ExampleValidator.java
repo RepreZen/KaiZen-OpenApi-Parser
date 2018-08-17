@@ -17,8 +17,10 @@ import com.reprezen.kaizen.oasparser.val.ValidationResults;
 public class ExampleValidator extends ObjectValidatorBase<Example> {
 
     @Override
-    public void validateObject(Example object, ValidationResults results) {
-	// TODO Auto-generated method stub
+    public void validateObject(Example example, ValidationResults results) {
+        // TODO validators for value, externalValue
+        validateSummary(example.getSummary(), results);
+        validateDescription(example.getDescription(), results);
     }
 
 }

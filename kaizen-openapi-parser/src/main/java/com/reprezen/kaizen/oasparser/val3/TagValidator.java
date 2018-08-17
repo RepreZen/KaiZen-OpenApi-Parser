@@ -24,9 +24,10 @@ public class TagValidator extends ObjectValidatorBase<Tag> {
 
     @Override
     public void validateObject(Tag tag, ValidationResults results) {
-	validateString(tag.getName(), results, true, "name");
-	validateField(tag.getExternalDocs(false), results, false, "externalDocs", externalDocsValidator);
-	validateExtensions(tag.getExtensions(), results);
+        validateString(tag.getName(), results, true, "name");
+        validateDescription(tag.getDescription(), results);
+        validateField(tag.getExternalDocs(false), results, false, "externalDocs", externalDocsValidator);
+        validateExtensions(tag.getExtensions(), results);
     }
 
 }

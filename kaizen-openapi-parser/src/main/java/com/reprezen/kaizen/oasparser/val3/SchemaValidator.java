@@ -14,7 +14,6 @@ import static com.reprezen.kaizen.oasparser.val.Messages.m;
 
 import com.google.inject.Inject;
 import com.reprezen.jsonoverlay.Overlay;
-import com.reprezen.kaizen.oasparser.model3.Example;
 import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
 import com.reprezen.kaizen.oasparser.model3.Schema;
 import com.reprezen.kaizen.oasparser.model3.Xml;
@@ -29,14 +28,13 @@ public class SchemaValidator extends ObjectValidatorBase<Schema> {
 	private Validator<Xml> xmlValidator;
 	@Inject
 	private Validator<ExternalDocs> externalDocsValidator;
-	@Inject
-	private Validator<Example> exampleValidator;
 
 	@Override
 	public void validateObject(Schema schema, ValidationResults results) {
-		// no validation for: title, description, maximum, exclusiveMaximum, minimum
+		// no validation for: title, maximum, exclusiveMaximum, minimum
 		// exclusiveMinimum, uniqueItems,
-		// nullable, example, deprecated
+		// nullable, deprecated
+	    validateDescription(schema.getDescription(), results);
 		validatePositive(schema.getMultipleOf(), results, false, "multipleOf");
 		validateNonNegative(schema.getMaxLength(), results, false, "maxLength");
 		validateNonNegative(schema.getMinLength(), results, false, "minLength");
@@ -67,7 +65,7 @@ public class SchemaValidator extends ObjectValidatorBase<Schema> {
 		checkReadWrite(schema, results);
 		validateField(schema.getXml(false), results, false, "xml", xmlValidator);
 		validateField(schema.getExternalDocs(false), results, false, "externalDocs", externalDocsValidator);
-		validateMap(schema.getExamples(), results, false, "examples", Regexes.NOEXT_NAME_REGEX, exampleValidator);
+		validateExample(schema.getExample(), results);
 		validateExtensions(schema.getExtensions(), results);
 	}
 

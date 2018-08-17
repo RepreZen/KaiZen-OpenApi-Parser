@@ -30,10 +30,11 @@ public class PathValidator extends ObjectValidatorBase<Path> {
 
     @Override
     public void validateObject(Path path, ValidationResults results) {
-	// no validation for: summary, description
-	validateMap(path.getOperations(), results, false, null, Regexes.METHOD_REGEX, operationValidator);
-	validateList(path.getServers(), path.hasServers(), results, false, "servers", serverValidator);
-	validateList(path.getParameters(), path.hasParameters(), results, false, "parameters", parameterValidator);
-	validateExtensions(path.getExtensions(), results);
+        validateSummary(path.getSummary(), results);
+        validateDescription(path.getDescription(), results);
+        validateMap(path.getOperations(), results, false, null, Regexes.METHOD_REGEX, operationValidator);
+        validateList(path.getServers(), path.hasServers(), results, false, "servers", serverValidator);
+        validateList(path.getParameters(), path.hasParameters(), results, false, "parameters", parameterValidator);
+        validateExtensions(path.getExtensions(), results);
     }
 }

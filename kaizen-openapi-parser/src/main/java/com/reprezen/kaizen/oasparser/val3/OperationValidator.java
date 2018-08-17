@@ -10,8 +10,6 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val3;
 
-import static com.reprezen.kaizen.oasparser.val.Messages.m;
-
 import com.google.inject.Inject;
 import com.reprezen.kaizen.oasparser.model3.Callback;
 import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
@@ -44,28 +42,24 @@ public class OperationValidator extends ObjectValidatorBase<Operation> {
 
     @Override
     public void validateObject(Operation operation, ValidationResults results) {
-	// no validation for: tags, description, deprecated
-	checkSummaryLength(operation, results);
-	validateField(operation.getExternalDocs(false), results, false, "externalDocs", externalDocsValidator);
-	// TODO Q: Not marked as required in spec, but spec says they all must
-	// be unique
-	// within the API. Seems like it
-	// should be required.
-	validateString(operation.getOperationId(), results, false, "operationId");
-	validateList(operation.getParameters(), operation.hasParameters(), results, false, "parameters",
-		parameterValidator);
-	validateField(operation.getRequestBody(false), results, false, "requestBody", requestBodyValidator);
-	validateMap(operation.getResponses(), results, true, "responses", Regexes.RESPONSE_REGEX, responseValidator);
-	validateMap(operation.getCallbacks(), results, false, "callbacks", Regexes.NOEXT_REGEX, callbackValidator);
-	validateList(operation.getSecurityRequirements(), operation.hasSecurityRequirements(), results, false,
-		"security", securityRequirementValidator);
-	validateList(operation.getServers(), operation.hasServers(), results, false, "servers", serverValidator);
+        // no validation for: deprecated (boolean)
+        validateList(operation.getTags(), operation.hasTags(), results, false, "tags", null);
+        validateSummary(operation.getSummary(), results);
+        validateDescription(operation.getDescription(), results);
+        validateField(operation.getExternalDocs(false), results, false, "externalDocs", externalDocsValidator);
+        // TODO Q: Not marked as required in spec, but spec says they all must be unique
+        // within the API. Seems like it
+        // should be required.
+        validateString(operation.getOperationId(), results, false, "operationId");
+        validateList(operation.getParameters(), operation.hasParameters(), results, false, "parameters",
+                parameterValidator);
+        validateField(operation.getRequestBody(false), results, false, "requestBody", requestBodyValidator);
+        validateMap(operation.getResponses(), results, true, "responses", Regexes.RESPONSE_REGEX, responseValidator);
+        validateMap(operation.getCallbacks(), results, false, "callbacks", Regexes.NOEXT_REGEX, callbackValidator);
+        validateList(operation.getSecurityRequirements(), operation.hasSecurityRequirements(), results, false,
+                "security", securityRequirementValidator);
+        validateList(operation.getServers(), operation.hasServers(), results, false, "servers", serverValidator);
+        validateExtensions(operation.getExtensions(), results);
     }
 
-    private void checkSummaryLength(Operation operation, ValidationResults results) {
-	String summary = operation.getSummary();
-	if (summary != null && summary.length() > 120) {
-	    results.addWarning(m.msg("LongSummary|Sumamry exceeds recommended limit of 120 chars"), "summary");
-	}
-    }
 }

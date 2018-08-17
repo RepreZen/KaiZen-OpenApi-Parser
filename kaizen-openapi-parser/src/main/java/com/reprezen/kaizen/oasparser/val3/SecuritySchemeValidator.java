@@ -24,33 +24,35 @@ public class SecuritySchemeValidator extends ObjectValidatorBase<SecurityScheme>
 
     @Override
     public void validateObject(SecurityScheme securityScheme, ValidationResults results) {
-	// no validation for: description, bearerFormat
-	validateString(securityScheme.getType(), results, true, "apiKey|http|oauth2|openIdConnect", "type");
-	switch (securityScheme.getType()) {
-	case "http":
-	    validateString(securityScheme.getScheme(), results, true, "scheme");
-	    // If bearer validate bearerFormat
-	    break;
-	case "apiKey":
-	    validateString(securityScheme.getName(), results, true, "name");
-	    validateString(securityScheme.getIn(), results, true, "query|header|cookie", "in");
-	    break;
-	case "oauth2":
-	    validateField(securityScheme.getImplicitOAuthFlow(false), results, false, "flow.implicit",
-		    oauthFlowValidator);
-	    validateField(securityScheme.getImplicitOAuthFlow(false), results, false, "flow.password",
-		    oauthFlowValidator);
-	    validateField(securityScheme.getImplicitOAuthFlow(false), results, false, "flow.clientCredentials",
-		    oauthFlowValidator);
-	    validateField(securityScheme.getImplicitOAuthFlow(false), results, false, "authorizationCode",
-		    oauthFlowValidator);
-	    validateExtensions(securityScheme.getOAuthFlowsExtensions(), results, "flow");
-	    break;
-	case "openIdConnect":
-	    validateUrl(securityScheme.getOpenIdConnectUrl(), results, true, "openIdConnectUrl");
-	    break;
-	}
-	validateExtensions(securityScheme.getExtensions(), results);
+        // no validation for: bearerFormat
+        validateDescription(securityScheme.getDescription(), results);
+        validateString(securityScheme.getType(), results, true, "apiKey|http|oauth2|openIdConnect", "type");
+        // TODO: should we also add checks that scheme is NOT present for types other than http, etc?
+        switch (securityScheme.getType()) {
+        case "http":
+            validateString(securityScheme.getScheme(), results, true, "scheme");
+            // If scheme == bearer validate bearerFormat, bearerFormat(optional) is a string
+            break;
+        case "apiKey":
+            validateString(securityScheme.getName(), results, true, "name");
+            validateString(securityScheme.getIn(), results, true, "query|header|cookie", "in");
+            break;
+        case "oauth2":
+            validateField(securityScheme.getImplicitOAuthFlow(false), results, false, "flow.implicit",
+                    oauthFlowValidator);
+            validateField(securityScheme.getPasswordOAuthFlow(false), results, false, "flow.password",
+                    oauthFlowValidator);
+            validateField(securityScheme.getClientCredentialsOAuthFlow(false), results, false, "flow.clientCredentials",
+                    oauthFlowValidator);
+            validateField(securityScheme.getAuthorizationCodeOAuthFlow(false), results, false, "flow.authorizationCode",
+                    oauthFlowValidator);
+            validateExtensions(securityScheme.getOAuthFlowsExtensions(), results, "flow");
+            break;
+        case "openIdConnect":
+            validateUrl(securityScheme.getOpenIdConnectUrl(), results, true, "openIdConnectUrl");
+            break;
+        }
+        validateExtensions(securityScheme.getExtensions(), results);
     }
 
 }

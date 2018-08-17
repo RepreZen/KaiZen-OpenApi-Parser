@@ -215,7 +215,22 @@ public abstract class ValidatorBase<T> implements Validator<T> {
 			String crumb) {
 		validateMap(extensions, results, false, crumb, null, null);
 	}
+	
+    public void validateExample(final Object example, final ValidationResults results) {
+        //
+    }
 
+    public void validateDescription(String description, ValidationResults results) {
+       validateString(description, results, false, "description");
+    }
+    
+    public void validateSummary(String summary, ValidationResults results) {
+        if (summary != null && summary.length() > 120) {
+            // Why 120? Why not 160? I didn't find it in the spec
+            results.addWarning(m.msg("LongSummary|Sumamry exceeds recommended limit of 120 chars"), "summary");
+        }
+    }
+    
 	public void validateFormat(String format, String type, ValidationResults results, String crumb) {
 		if (format != null && type != null) {
 			String normalType = null;

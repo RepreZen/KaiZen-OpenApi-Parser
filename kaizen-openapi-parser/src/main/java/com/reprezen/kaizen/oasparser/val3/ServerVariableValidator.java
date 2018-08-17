@@ -15,43 +15,17 @@ import javax.lang.model.type.NullType;
 import com.reprezen.kaizen.oasparser.model3.ServerVariable;
 import com.reprezen.kaizen.oasparser.val.Messages;
 import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
+import com.reprezen.kaizen.oasparser.val.StringValidator;
 import com.reprezen.kaizen.oasparser.val.ValidationResults;
 
 public class ServerVariableValidator extends ObjectValidatorBase<ServerVariable> {
 
     @Override
     public void validateObject(final ServerVariable variable, final ValidationResults results) {
-	results.withCrumb("enum", new Runnable() {
-	    @Override
-	    public void run() {
-		int i = 0;
-		for (Object primitive : variable.getEnumValues()) {
-		    checkPrimitive(primitive, results, i++);
-		}
-	    }
-	});
-	results.withCrumb("default", new Runnable() {
-	    @Override
-	    public void run() {
-		checkPrimitive(variable.getDefault(), results, "default");
-	    }
-	});
-	validateString(variable.getDescription(), results, false, "description");
+        validateList(variable.getEnumValues(), variable.hasEnumValues(), results, false, "enum", null);
+        validateString(variable.getDefault(), results, true, "default");
+        validateDescription(variable.getDescription(), results);
+        validateExtensions(variable.getExtensions(), results);
     }
 
-    private void checkPrimitive(Object primitive, ValidationResults results, int index) {
-	checkPrimitive(primitive, results, "[" + index + "]");
-    }
-
-    private void checkPrimitive(final Object primitive, ValidationResults results, String crumb) {
-	if (!(primitive instanceof String || primitive instanceof Number || primitive instanceof Boolean)) {
-	    results.withCrumb(crumb, new Runnable() {
-		@Override
-		public void run() {
-		    Messages.m.msg("BadPrimitive|Invalid primitive value", String.valueOf(primitive),
-			    (primitive != null ? primitive.getClass() : NullType.class).getName());
-		}
-	    });
-	}
-    }
 }

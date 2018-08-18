@@ -10,27 +10,20 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val3;
 
-import com.google.inject.Inject;
 import com.reprezen.kaizen.oasparser.model3.Contact;
 import com.reprezen.kaizen.oasparser.model3.Info;
 import com.reprezen.kaizen.oasparser.model3.License;
 import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
-import com.reprezen.kaizen.oasparser.val.ValidationResults;
-import com.reprezen.kaizen.oasparser.val.Validator;
 
 public class InfoValidator extends ObjectValidatorBase<Info> {
 
-    @Inject
-    private Validator<Contact> contactValidator;
-    @Inject
-    private Validator<License> licenseValidator;
-
-    @Override
-    public void validateObject(Info info, ValidationResults results) {
-	validateString(info.getTitle(), results, true, "title");
-	validateField(info.getContact(false), results, false, "contact", contactValidator);
-	validateField(info.getLicense(false), results, false, "license", licenseValidator);
-	validateString(info.getVersion(), results, true, "version");
-	validateExtensions(info.getExtensions(), results);
-    }
+	@Override
+	public void runObjectValidations() {
+		Info info = value.get();
+		validateStringField("title", true);
+		validateField("contact", false, Contact.class, new ContactValidator());
+		validateField("license", false, License.class, new LicenseValidator());
+		validateStringField("version", true);
+		validateExtensions(info.getExtensions());
+	}
 }

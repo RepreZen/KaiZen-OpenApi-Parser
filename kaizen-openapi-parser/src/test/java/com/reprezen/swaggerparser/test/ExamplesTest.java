@@ -29,7 +29,7 @@ import com.google.common.collect.Queues;
 import com.reprezen.jsonoverlay.JsonLoader;
 import com.reprezen.kaizen.oasparser.OpenApiParser;
 import com.reprezen.kaizen.oasparser.model3.OpenApi3;
-import com.reprezen.kaizen.oasparser.val.ValidationResults.ValidationItem;
+import com.reprezen.kaizen.oasparser.old.val.ValidationResults.ValidationItem;
 
 @RunWith(Parameterized.class)
 public class ExamplesTest extends Assert {

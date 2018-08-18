@@ -13,14 +13,16 @@ package com.reprezen.kaizen.oasparser.val;
 import java.util.IdentityHashMap;
 import java.util.Map;
 
-import com.google.inject.Inject;
-import com.reprezen.jsonoverlay.PropertiesOverlay;
+public abstract class ObjectValidatorBase<V> extends ValidatorBase<V> {
 
-public abstract class ObjectValidatorBase<T> extends ValidatorBase<T> {
-	@Inject(optional = true)
-	private ImplValidator<T> implValidator;
+	@Override
+	public void runValidations() {
+		if (value.isElaborated() && visit(value)) {
+			runObjectValidations();
+		}
+	}
 
-	public abstract void validateObject(T object, ValidationResults results);
+	public abstract void runObjectValidations();
 
 	protected static ThreadLocal<ValidationVisits> validationVisits = new ThreadLocal<ValidationVisits>();
 
@@ -29,20 +31,6 @@ public abstract class ObjectValidatorBase<T> extends ValidatorBase<T> {
 			validationVisits.set(new ValidationVisits());
 		}
 		return validationVisits.get().visit(obj);
-	}
-
-	@Override
-	public void validate(T value, ValidationResults results) {
-		if (visit(value)) {
-			@SuppressWarnings("unchecked")
-			PropertiesOverlay<T> propValue = (PropertiesOverlay<T>) value;
-			if (propValue._isElaborated()) {
-				validateObject(value, results);
-				if (implValidator != null) {
-					implValidator.validateImpl(value, results);
-				}
-			}
-		}
 	}
 
 	protected static class ValidationVisits {

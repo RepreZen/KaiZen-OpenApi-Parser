@@ -62,11 +62,6 @@
             <version>${jackson-version}</version>
         </dependency>
         <dependency>
-            <groupId>com.google.inject</groupId>
-            <artifactId>guice</artifactId>
-            <version>4.1.0</version>
-        </dependency>
-        <dependency>
             <groupId>org.skyscreamer</groupId>
             <artifactId>jsonassert</artifactId>
             <version>1.5.0</version>
@@ -88,9 +83,9 @@
             <version>1.6.1</version>
         </dependency>
         <dependency>
-            <groupId>com.reprezen.jsonoverlay</groupId>
-            <artifactId>jsonoverlay</artifactId>
-            <version>${json-overlay-version}</version>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>19.0</version>
         </dependency>
     </dependencies>
     <profiles>

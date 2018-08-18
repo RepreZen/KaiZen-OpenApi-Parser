@@ -11,21 +11,21 @@
 package com.reprezen.kaizen.oasparser.val3.ovl;
 
 import com.reprezen.kaizen.oasparser.model3.OpenApi3;
+import com.reprezen.kaizen.oasparser.old.val.ObjectValidator;
+import com.reprezen.kaizen.oasparser.old.valx.ImplValidator;
 import com.reprezen.kaizen.oasparser.ovl3.OpenApi3Impl;
-import com.reprezen.kaizen.oasparser.val.ImplValidator;
-import com.reprezen.kaizen.oasparser.val.ObjectValidator;
 import com.reprezen.kaizen.oasparser.val.ValidationResults;
 
 public class Swagger3OverlayValidator extends ObjectValidator<OpenApi3Impl> implements ImplValidator<OpenApi3> {
 
-    @Override
-    public void validate(OpenApi3Impl overlay, ValidationResults results) {
-	super.validate(overlay, results);
-    }
+	@Override
+	public void validate(OpenApi3Impl overlay, ValidationResults results) {
+		super.validate(overlay, results);
+	}
 
-    @Override
-    public void validateImpl(OpenApi3 swagger3, ValidationResults results) {
-	validate((OpenApi3Impl) swagger3, results);
-    }
+	@Override
+	public void validateImpl(OpenApi3 swagger3, ValidationResults results) {
+		validate((OpenApi3Impl) swagger3, results);
+	}
 
 }

@@ -11,10 +11,10 @@
 package com.reprezen.kaizen.oasparser.val3.ovl;
 
 import com.reprezen.kaizen.oasparser.model3.Contact;
+import com.reprezen.kaizen.oasparser.old.val.ImplValidator;
+import com.reprezen.kaizen.oasparser.old.val.ObjectValidator;
+import com.reprezen.kaizen.oasparser.old.val.ValidationResults;
 import com.reprezen.kaizen.oasparser.ovl3.ContactImpl;
-import com.reprezen.kaizen.oasparser.val.ImplValidator;
-import com.reprezen.kaizen.oasparser.val.ObjectValidator;
-import com.reprezen.kaizen.oasparser.val.ValidationResults;
 
 public class ContactOverlayValidator extends ObjectValidator<ContactImpl> implements ImplValidator<Contact> {
 

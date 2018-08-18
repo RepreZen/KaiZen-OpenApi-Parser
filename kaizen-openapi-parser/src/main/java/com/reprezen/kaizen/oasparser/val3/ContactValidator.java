@@ -12,15 +12,15 @@ package com.reprezen.kaizen.oasparser.val3;
 
 import com.reprezen.kaizen.oasparser.model3.Contact;
 import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
-import com.reprezen.kaizen.oasparser.val.ValidationResults;
 
 public class ContactValidator extends ObjectValidatorBase<Contact> {
 
-    @Override
-    public void validateObject(Contact contact, ValidationResults results) {
-	validateUrl(contact.getUrl(), results, false, "url");
-	validateEmail(contact.getEmail(), results, false, "email");
-	validateExtensions(contact.getExtensions(), results);
-    }
+	@Override
+	public void runObjectValidations() {
+		Contact contact = value.get();
+		validateUrlField("url", false, false);
+		validateEmailField("email", false);
+		validateExtensions(contact.getExtensions());
+	}
 
 }

@@ -10,12 +10,16 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val;
 
-import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.reprezen.jsonoverlay.Overlay;
+import com.reprezen.jsonoverlay.PropertiesOverlay;
 
-public class ObjectValidator<T> extends OverlayValidator<T> {
+public abstract class ObjectValidator extends ValidatorBase<PropertiesOverlay<?>> {
 
-    @Override
-    public void validate(T overlay, ValidationResults results) {
-	super.validate(overlay, results, ObjectNode.class);
-    }
+	@Override
+	public void runValidations() {
+		ReferencesChecker.checkReferences(Overlay.getPropertiesOverlay(value), results);
+		runPropertyValidations();
+	}
+
+	protected abstract void runPropertyValidations();
 }

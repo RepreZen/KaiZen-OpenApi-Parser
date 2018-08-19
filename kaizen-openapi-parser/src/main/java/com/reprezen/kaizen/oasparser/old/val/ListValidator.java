@@ -16,21 +16,21 @@ import com.reprezen.jsonoverlay.Overlay;
 
 public class ListValidator<T extends JsonOverlay<?>> extends OverlayValidator<ListOverlay<T>> {
 
-    Validator<T> elementValidator;
+	Validator<T> elementValidator;
 
-    public ListValidator(Validator<T> elementeValidator) {
-	this.elementValidator = elementeValidator;
-    }
-
-    @Override
-    public void validate(ListOverlay<T> overlay, ValidationResults results) {
-	int i = 0;
-	for (T value : Overlay.get(overlay)) {
-	    elementValidator.validate(value, results, getElementCrumb(i++));
+	public ListValidator(Validator<T> elementeValidator) {
+		this.elementValidator = elementeValidator;
 	}
-    }
 
-    protected String getElementCrumb(int index) {
-	return "[" + index + "]";
-    }
+	@Override
+	public void validate(ListOverlay<T> overlay, ValidationResults results) {
+		int i = 0;
+		for (T value : Overlay.get(overlay)) {
+			elementValidator.validate(value, results, getElementCrumb(i++));
+		}
+	}
+
+	protected String getElementCrumb(int index) {
+		return "[" + index + "]";
+	}
 }

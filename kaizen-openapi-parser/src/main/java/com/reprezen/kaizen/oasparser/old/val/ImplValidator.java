@@ -12,5 +12,5 @@ package com.reprezen.kaizen.oasparser.old.val;
 
 public interface ImplValidator<T> {
 
-    void validateImpl(T object, ValidationResults results);
+	void validateImpl(T object, ValidationResults results);
 }

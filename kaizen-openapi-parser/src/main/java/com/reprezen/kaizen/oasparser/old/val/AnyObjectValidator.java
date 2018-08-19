@@ -14,9 +14,9 @@ import com.reprezen.jsonoverlay.ObjectOverlay;
 
 public class AnyObjectValidator extends OverlayValidator<ObjectOverlay> {
 
-    @Override
-    public void validate(ObjectOverlay overlay, ValidationResults results) {
-	super.validate(overlay, results);
-    }
+	@Override
+	public void validate(ObjectOverlay overlay, ValidationResults results) {
+		super.validate(overlay, results);
+	}
 
 }

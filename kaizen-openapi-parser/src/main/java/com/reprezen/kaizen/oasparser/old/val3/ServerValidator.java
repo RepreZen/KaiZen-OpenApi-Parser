@@ -21,14 +21,14 @@ import com.reprezen.kaizen.oasparser.old.val.Validator;
 
 public class ServerValidator extends ObjectValidatorBase<Server> {
 
-    @Inject
-    private Validator<ServerVariable> serverVariableValidator;
+	@Inject
+	private Validator<ServerVariable> serverVariableValidator;
 
-    @Override
-    public void validateObject(Server server, ValidationResults results) {
-	// no validation for: description
-	validateUrl(server.getUrl(), results, false, "url", true);
-	validateMap(server.getServerVariables(), results, false, "variables", NAME_REGEX, serverVariableValidator);
-	validateExtensions(server.getExtensions(), results);
-    }
+	@Override
+	public void validateObject(Server server, ValidationResults results) {
+		// no validation for: description
+		validateUrl(server.getUrl(), results, false, "url", true);
+		validateMap(server.getServerVariables(), results, false, "variables", NAME_REGEX, serverVariableValidator);
+		validateExtensions(server.getExtensions(), results);
+	}
 }

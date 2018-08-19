@@ -21,19 +21,19 @@ import com.reprezen.kaizen.oasparser.old.val.Validator;
 
 public class ResponseValidator extends ObjectValidatorBase<Response> {
 
-    @Inject
-    private Validator<Header> headerValidator;
-    @Inject
-    private Validator<MediaType> mediaTypeValidator;
-    @Inject
-    private Validator<Link> linkValidator;
+	@Inject
+	private Validator<Header> headerValidator;
+	@Inject
+	private Validator<MediaType> mediaTypeValidator;
+	@Inject
+	private Validator<Link> linkValidator;
 
-    @Override
-    public void validateObject(Response response, ValidationResults results) {
-	validateMap(response.getHeaders(), results, false, "headers", null, headerValidator);
-	validateMap(response.getContentMediaTypes(), results, false, "content", Regexes.NOEXT_REGEX,
-		mediaTypeValidator);
-	validateMap(response.getLinks(), results, false, "links", Regexes.NOEXT_NAME_REGEX, linkValidator);
-	validateExtensions(response.getExtensions(), results);
-    }
+	@Override
+	public void validateObject(Response response, ValidationResults results) {
+		validateMap(response.getHeaders(), results, false, "headers", null, headerValidator);
+		validateMap(response.getContentMediaTypes(), results, false, "content", Regexes.NOEXT_REGEX,
+				mediaTypeValidator);
+		validateMap(response.getLinks(), results, false, "links", Regexes.NOEXT_NAME_REGEX, linkValidator);
+		validateExtensions(response.getExtensions(), results);
+	}
 }

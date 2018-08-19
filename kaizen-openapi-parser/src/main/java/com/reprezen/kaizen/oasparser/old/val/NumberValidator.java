@@ -15,9 +15,9 @@ import com.reprezen.jsonoverlay.NumberOverlay;
 
 public class NumberValidator extends OverlayValidator<NumberOverlay> {
 
-    @Override
-    public void validate(NumberOverlay overlay, ValidationResults results) {
-	super.validate(overlay, results, NumericNode.class);
-    }
+	@Override
+	public void validate(NumberOverlay overlay, ValidationResults results) {
+		super.validate(overlay, results, NumericNode.class);
+	}
 
 }

@@ -18,9 +18,9 @@ import com.reprezen.kaizen.oasparser.ovl3.ContactImpl;
 
 public class ContactOverlayValidator extends ObjectValidator<ContactImpl> implements ImplValidator<Contact> {
 
-    @Override
-    public void validateImpl(Contact contact, ValidationResults results) {
-	super.validate((ContactImpl) contact, results);
-    }
+	@Override
+	public void validateImpl(Contact contact, ValidationResults results) {
+		super.validate((ContactImpl) contact, results);
+	}
 
 }

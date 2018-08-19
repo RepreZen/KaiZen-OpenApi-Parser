@@ -18,14 +18,14 @@ import com.reprezen.kaizen.oasparser.ovl3.OpenApi3Impl;
 
 public class Swagger3OverlayValidator extends ObjectValidator<OpenApi3Impl> implements ImplValidator<OpenApi3> {
 
-    @Override
-    public void validate(OpenApi3Impl overlay, ValidationResults results) {
-	super.validate(overlay, results);
-    }
+	@Override
+	public void validate(OpenApi3Impl overlay, ValidationResults results) {
+		super.validate(overlay, results);
+	}
 
-    @Override
-    public void validateImpl(OpenApi3 swagger3, ValidationResults results) {
-	validate((OpenApi3Impl) swagger3, results);
-    }
+	@Override
+	public void validateImpl(OpenApi3 swagger3, ValidationResults results) {
+		validate((OpenApi3Impl) swagger3, results);
+	}
 
 }

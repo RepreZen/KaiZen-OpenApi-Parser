@@ -10,7 +10,8 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.old.val3.ovl;
 
-import com.google.inject.TypeLiteral;
+import org.apache.commons.lang3.reflect.TypeLiteral;
+
 import com.reprezen.kaizen.oasparser.model3.Contact;
 import com.reprezen.kaizen.oasparser.model3.Info;
 import com.reprezen.kaizen.oasparser.model3.OpenApi3;
@@ -19,13 +20,13 @@ import com.reprezen.kaizen.oasparser.old.val3.ValidationConfigurator;
 
 public class OverlayValidationConfigurator extends ValidationConfigurator {
 
-    @Override
-    protected void configureImplValidators() {
-	bind(new TypeLiteral<ImplValidator<OpenApi3>>() {
-	}).to(Swagger3OverlayValidator.class);
-	bind(new TypeLiteral<ImplValidator<Info>>() {
-	}).to(InfoOverlayValidator.class);
-	bind(new TypeLiteral<ImplValidator<Contact>>() {
-	}).to(ContactOverlayValidator.class);
-    }
+	@Override
+	protected void configureImplValidators() {
+		bind(new TypeLiteral<ImplValidator<OpenApi3>>() {
+		}).to(Swagger3OverlayValidator.class);
+		bind(new TypeLiteral<ImplValidator<Info>>() {
+		}).to(InfoOverlayValidator.class);
+		bind(new TypeLiteral<ImplValidator<Contact>>() {
+		}).to(ContactOverlayValidator.class);
+	}
 }

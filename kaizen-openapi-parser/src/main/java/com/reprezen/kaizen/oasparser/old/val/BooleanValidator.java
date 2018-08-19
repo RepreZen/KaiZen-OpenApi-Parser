@@ -15,8 +15,8 @@ import com.reprezen.jsonoverlay.BooleanOverlay;
 
 public class BooleanValidator extends OverlayValidator<BooleanOverlay> {
 
-    @Override
-    public void validate(BooleanOverlay overlay, ValidationResults results) {
-	super.validate(overlay, results, BooleanNode.class);
-    }
+	@Override
+	public void validate(BooleanOverlay overlay, ValidationResults results) {
+		super.validate(overlay, results, BooleanNode.class);
+	}
 }

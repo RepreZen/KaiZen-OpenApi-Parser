@@ -11,8 +11,8 @@
 package com.reprezen.kaizen.oasparser.val3.ovl;
 
 import com.reprezen.kaizen.oasparser.model3.OpenApi3;
+import com.reprezen.kaizen.oasparser.old.val.ImplValidator;
 import com.reprezen.kaizen.oasparser.old.val.ObjectValidator;
-import com.reprezen.kaizen.oasparser.old.valx.ImplValidator;
 import com.reprezen.kaizen.oasparser.ovl3.OpenApi3Impl;
 import com.reprezen.kaizen.oasparser.val.ValidationResults;
 

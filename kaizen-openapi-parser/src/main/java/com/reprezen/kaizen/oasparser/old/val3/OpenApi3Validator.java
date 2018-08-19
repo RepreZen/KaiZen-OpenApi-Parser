@@ -36,66 +36,66 @@ import com.reprezen.kaizen.oasparser.old.val.Validator;
 
 public class OpenApi3Validator extends ObjectValidatorBase<OpenApi3> {
 
-    @Inject
-    private Validator<Info> infoValidator;
-    @Inject
-    private Validator<Server> serverValidator;
-    @Inject
-    private Validator<Path> pathValidator;
-    @Inject
-    private Validator<Schema> schemaValidator;
-    @Inject
-    private Validator<Response> responseValidator;
-    @Inject
-    private Validator<Parameter> parameterValidator;
-    @Inject
-    private Validator<RequestBody> requestBodyValidator;
-    @Inject
-    private Validator<Header> headerValidator;
-    @Inject
-    private Validator<SecurityScheme> securitySchemeValidator;
-    @Inject
-    private Validator<Link> linkValidator;
-    @Inject
-    private Validator<Callback> callbackValidator;
-    @Inject
-    private Validator<SecurityRequirement> securityRequirementValidator;
-    @Inject
-    private Validator<Tag> tagValidator;
-    @Inject
-    private Validator<ExternalDocs> externalDocsValidator;
+	@Inject
+	private Validator<Info> infoValidator;
+	@Inject
+	private Validator<Server> serverValidator;
+	@Inject
+	private Validator<Path> pathValidator;
+	@Inject
+	private Validator<Schema> schemaValidator;
+	@Inject
+	private Validator<Response> responseValidator;
+	@Inject
+	private Validator<Parameter> parameterValidator;
+	@Inject
+	private Validator<RequestBody> requestBodyValidator;
+	@Inject
+	private Validator<Header> headerValidator;
+	@Inject
+	private Validator<SecurityScheme> securitySchemeValidator;
+	@Inject
+	private Validator<Link> linkValidator;
+	@Inject
+	private Validator<Callback> callbackValidator;
+	@Inject
+	private Validator<SecurityRequirement> securityRequirementValidator;
+	@Inject
+	private Validator<Tag> tagValidator;
+	@Inject
+	private Validator<ExternalDocs> externalDocsValidator;
 
-    @Override
-    public void validateObject(final OpenApi3 swagger, final ValidationResults results) {
-	results.withCrumb("model", new Runnable() {
-	    @Override
-	    public void run() {
-		validateString(swagger.getOpenApi(), results, true, "3\\.\\d+(\\.\\d+.*)?", "openapi");
-		validateField(swagger.getInfo(false), results, true, "info", infoValidator);
-		validateList(swagger.getServers(), swagger.hasServers(), results, false, "servers", serverValidator);
-		validateMap(swagger.getPaths(), results, true, "paths", PATH_REGEX, pathValidator);
-		validateMap(swagger.getPathsExtensions(), results, false, "paths", EXT_REGEX, null);
-		validateMap(swagger.getSchemas(), results, false, "collections/schemas", NAME_REGEX, schemaValidator);
-		validateMap(swagger.getResponses(), results, false, "collections/responses", NAME_REGEX,
-			responseValidator);
-		validateMap(swagger.getParameters(), results, false, "collections/parameters", NAME_REGEX,
-			parameterValidator);
-		validateMap(swagger.getExamples(), results, false, "collections/examples", NAME_REGEX, null);
-		validateMap(swagger.getRequestBodies(), results, false, "collection/requestBodies", NAME_REGEX,
-			requestBodyValidator);
-		validateMap(swagger.getHeaders(), results, false, "collections/headers", NAME_REGEX, headerValidator);
-		validateMap(swagger.getSecuritySchemes(), results, false, "collections/securitySchemes", NAME_REGEX,
-			securitySchemeValidator);
-		validateMap(swagger.getLinks(), results, false, "collections/links", NAME_REGEX, linkValidator);
-		validateMap(swagger.getCallbacks(), results, false, "collections/callbacks", NAME_REGEX,
-			callbackValidator);
-		validateMap(swagger.getComponentsExtensions(), results, false, "collections", EXT_REGEX, null);
-		validateList(swagger.getSecurityRequirements(), swagger.hasSecurityRequirements(), results, false,
-			"security", securityRequirementValidator);
-		validateList(swagger.getTags(), swagger.hasTags(), results, false, "tags", tagValidator);
-		validateField(swagger.getExternalDocs(false), results, false, "externalDocs", externalDocsValidator);
-		validateExtensions(swagger.getExtensions(), results);
-	    }
-	});
-    }
+	@Override
+	public void validateObject(final OpenApi3 swagger, final ValidationResults results) {
+		results.withCrumb("model", new Runnable() {
+			@Override
+			public void run() {
+				validateString(swagger.getOpenApi(), results, true, "3\\.\\d+(\\.\\d+.*)?", "openapi");
+				validateField(swagger.getInfo(false), results, true, "info", infoValidator);
+				validateList(swagger.getServers(), swagger.hasServers(), results, false, "servers", serverValidator);
+				validateMap(swagger.getPaths(), results, true, "paths", PATH_REGEX, pathValidator);
+				validateMap(swagger.getPathsExtensions(), results, false, "paths", EXT_REGEX, null);
+				validateMap(swagger.getSchemas(), results, false, "collections/schemas", NAME_REGEX, schemaValidator);
+				validateMap(swagger.getResponses(), results, false, "collections/responses", NAME_REGEX,
+						responseValidator);
+				validateMap(swagger.getParameters(), results, false, "collections/parameters", NAME_REGEX,
+						parameterValidator);
+				validateMap(swagger.getExamples(), results, false, "collections/examples", NAME_REGEX, null);
+				validateMap(swagger.getRequestBodies(), results, false, "collection/requestBodies", NAME_REGEX,
+						requestBodyValidator);
+				validateMap(swagger.getHeaders(), results, false, "collections/headers", NAME_REGEX, headerValidator);
+				validateMap(swagger.getSecuritySchemes(), results, false, "collections/securitySchemes", NAME_REGEX,
+						securitySchemeValidator);
+				validateMap(swagger.getLinks(), results, false, "collections/links", NAME_REGEX, linkValidator);
+				validateMap(swagger.getCallbacks(), results, false, "collections/callbacks", NAME_REGEX,
+						callbackValidator);
+				validateMap(swagger.getComponentsExtensions(), results, false, "collections", EXT_REGEX, null);
+				validateList(swagger.getSecurityRequirements(), swagger.hasSecurityRequirements(), results, false,
+						"security", securityRequirementValidator);
+				validateList(swagger.getTags(), swagger.hasTags(), results, false, "tags", tagValidator);
+				validateField(swagger.getExternalDocs(false), results, false, "externalDocs", externalDocsValidator);
+				validateExtensions(swagger.getExtensions(), results);
+			}
+		});
+	}
 }

@@ -27,45 +27,45 @@ import com.reprezen.kaizen.oasparser.old.val.Validator;
 
 public class OperationValidator extends ObjectValidatorBase<Operation> {
 
-    @Inject
-    private Validator<ExternalDocs> externalDocsValidator;
-    @Inject
-    private Validator<Parameter> parameterValidator;
-    @Inject
-    private Validator<RequestBody> requestBodyValidator;
-    @Inject
-    private Validator<Response> responseValidator;
-    @Inject
-    private Validator<Callback> callbackValidator;
-    @Inject
-    private Validator<SecurityRequirement> securityRequirementValidator;
-    @Inject
-    private Validator<Server> serverValidator;
+	@Inject
+	private Validator<ExternalDocs> externalDocsValidator;
+	@Inject
+	private Validator<Parameter> parameterValidator;
+	@Inject
+	private Validator<RequestBody> requestBodyValidator;
+	@Inject
+	private Validator<Response> responseValidator;
+	@Inject
+	private Validator<Callback> callbackValidator;
+	@Inject
+	private Validator<SecurityRequirement> securityRequirementValidator;
+	@Inject
+	private Validator<Server> serverValidator;
 
-    @Override
-    public void validateObject(Operation operation, ValidationResults results) {
-	// no validation for: tags, description, deprecated
-	checkSummaryLength(operation, results);
-	validateField(operation.getExternalDocs(false), results, false, "externalDocs", externalDocsValidator);
-	// TODO Q: Not marked as required in spec, but spec says they all must
-	// be unique
-	// within the API. Seems like it
-	// should be required.
-	validateString(operation.getOperationId(), results, false, "operationId");
-	validateList(operation.getParameters(), operation.hasParameters(), results, false, "parameters",
-		parameterValidator);
-	validateField(operation.getRequestBody(false), results, false, "requestBody", requestBodyValidator);
-	validateMap(operation.getResponses(), results, true, "responses", Regexes.RESPONSE_REGEX, responseValidator);
-	validateMap(operation.getCallbacks(), results, false, "callbacks", Regexes.NOEXT_REGEX, callbackValidator);
-	validateList(operation.getSecurityRequirements(), operation.hasSecurityRequirements(), results, false,
-		"security", securityRequirementValidator);
-	validateList(operation.getServers(), operation.hasServers(), results, false, "servers", serverValidator);
-    }
-
-    private void checkSummaryLength(Operation operation, ValidationResults results) {
-	String summary = operation.getSummary();
-	if (summary != null && summary.length() > 120) {
-	    results.addWarning(m.msg("LongSummary|Sumamry exceeds recommended limit of 120 chars"), "summary");
+	@Override
+	public void validateObject(Operation operation, ValidationResults results) {
+		// no validation for: tags, description, deprecated
+		checkSummaryLength(operation, results);
+		validateField(operation.getExternalDocs(false), results, false, "externalDocs", externalDocsValidator);
+		// TODO Q: Not marked as required in spec, but spec says they all must
+		// be unique
+		// within the API. Seems like it
+		// should be required.
+		validateString(operation.getOperationId(), results, false, "operationId");
+		validateList(operation.getParameters(), operation.hasParameters(), results, false, "parameters",
+				parameterValidator);
+		validateField(operation.getRequestBody(false), results, false, "requestBody", requestBodyValidator);
+		validateMap(operation.getResponses(), results, true, "responses", Regexes.RESPONSE_REGEX, responseValidator);
+		validateMap(operation.getCallbacks(), results, false, "callbacks", Regexes.NOEXT_REGEX, callbackValidator);
+		validateList(operation.getSecurityRequirements(), operation.hasSecurityRequirements(), results, false,
+				"security", securityRequirementValidator);
+		validateList(operation.getServers(), operation.hasServers(), results, false, "servers", serverValidator);
 	}
-    }
+
+	private void checkSummaryLength(Operation operation, ValidationResults results) {
+		String summary = operation.getSummary();
+		if (summary != null && summary.length() > 120) {
+			results.addWarning(m.msg("LongSummary|Sumamry exceeds recommended limit of 120 chars"), "summary");
+		}
+	}
 }

@@ -10,16 +10,14 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val3;
 
-import com.reprezen.kaizen.oasparser.model3.Contact;
+import com.reprezen.kaizen.oasparser.model3.Example;
 import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
 
-public class ContactValidator extends ObjectValidatorBase<Contact> {
+public class ExampleValidator extends ObjectValidatorBase<Example> {
 
 	@Override
 	public void runObjectValidations() {
-		Contact contact = (Contact) value.getOverlay();
-		validateUrlField("url", false, false);
-		validateEmailField("email", false);
-		validateExtensions(contact.getExtensions());
+		// nothing to check
 	}
+
 }

@@ -10,16 +10,20 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val3;
 
-import com.reprezen.kaizen.oasparser.model3.Contact;
+import com.reprezen.kaizen.oasparser.model3.Header;
+import com.reprezen.kaizen.oasparser.model3.Link;
+import com.reprezen.kaizen.oasparser.model3.MediaType;
+import com.reprezen.kaizen.oasparser.model3.Response;
 import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
 
-public class ContactValidator extends ObjectValidatorBase<Contact> {
+public class ResponseValidator extends ObjectValidatorBase<Response> {
 
 	@Override
 	public void runObjectValidations() {
-		Contact contact = (Contact) value.getOverlay();
-		validateUrlField("url", false, false);
-		validateEmailField("email", false);
-		validateExtensions(contact.getExtensions());
+		Response response = (Response) value.getOverlay();
+		validateMapField("headers", false, false, Header.class, new HeaderValidator());
+		validateMapField("contentMediaTypes", false, false, MediaType.class, new MediaTypeValidator());
+		validateMapField("links", false, false, Link.class, new LinkValidator());
+		validateExtensions(response.getExtensions());
 	}
 }

@@ -10,16 +10,17 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val3;
 
-import com.reprezen.kaizen.oasparser.model3.Contact;
+import com.reprezen.kaizen.oasparser.model3.Callback;
+import com.reprezen.kaizen.oasparser.model3.Path;
 import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
 
-public class ContactValidator extends ObjectValidatorBase<Contact> {
+public class CallbackValidator extends ObjectValidatorBase<Callback> {
 
 	@Override
 	public void runObjectValidations() {
-		Contact contact = (Contact) value.getOverlay();
-		validateUrlField("url", false, false);
-		validateEmailField("email", false);
-		validateExtensions(contact.getExtensions());
+		Callback callback = (Callback) value.getOverlay();
+		validateMapField("callbackPaths", false, false, Path.class, new PathValidator());
+		validateExtensions(callback.getExtensions());
 	}
+
 }

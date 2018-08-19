@@ -34,6 +34,7 @@ import com.reprezen.jsonoverlay.MapOverlay;
 import com.reprezen.jsonoverlay.NumberOverlay;
 import com.reprezen.jsonoverlay.ObjectOverlay;
 import com.reprezen.jsonoverlay.Overlay;
+import com.reprezen.jsonoverlay.PrimitiveOverlay;
 import com.reprezen.jsonoverlay.PropertiesOverlay;
 import com.reprezen.jsonoverlay.StringOverlay;
 
@@ -71,6 +72,7 @@ public class JsonTypeChecker {
 		types.put(BooleanOverlay.class, BooleanNode.class);
 		types.putAll(IntegerOverlay.class, Arrays.asList(IntNode.class, ShortNode.class, BigIntegerNode.class));
 		types.put(NumberOverlay.class, NumericNode.class);
+		types.putAll(PrimitiveOverlay.class, Arrays.asList(TextNode.class, NumericNode.class, BooleanNode.class));
 		types.put(ObjectOverlay.class, JsonNode.class);
 		types.put(MapOverlay.class, ObjectNode.class);
 		types.put(ListOverlay.class, ArrayNode.class);

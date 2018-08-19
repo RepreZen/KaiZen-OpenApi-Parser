@@ -17,8 +17,8 @@ public class LicenseValidator extends ObjectValidatorBase<License> {
 
 	@Override
 	public void runObjectValidations() {
-		License license = value.get();
-		validateStringField("license", true);
+		License license = (License) value.getOverlay();
+		validateStringField("name", true);
 		validateUrlField("url", false, false);
 		validateExtensions(license.getExtensions());
 	}

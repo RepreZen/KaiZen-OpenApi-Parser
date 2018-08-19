@@ -26,8 +26,10 @@ public class MapValidator<T> extends ValidatorBase<Map<String, T>> {
 	@Override
 	public void runValidations() {
 		MapOverlay<T> mapOverlay = Overlay.getMapOverlay(value);
-		for (String key : mapOverlay.keySet()) {
-			valueValidator.validate(Overlay.of(mapOverlay, key));
+		if (valueValidator != null) {
+			for (String key : mapOverlay.keySet()) {
+				valueValidator.validate(Overlay.of(mapOverlay, key));
+			}
 		}
 	}
 }

@@ -19,7 +19,7 @@ public class InfoValidator extends ObjectValidatorBase<Info> {
 
 	@Override
 	public void runObjectValidations() {
-		Info info = value.get();
+		Info info = (Info) value.getOverlay();
 		validateStringField("title", true);
 		validateField("contact", false, Contact.class, new ContactValidator());
 		validateField("license", false, License.class, new LicenseValidator());

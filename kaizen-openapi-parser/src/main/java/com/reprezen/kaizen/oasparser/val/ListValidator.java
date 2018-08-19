@@ -25,9 +25,11 @@ public class ListValidator<T> extends ValidatorBase<List<T>> {
 
 	@Override
 	public void runValidations() {
-		ListOverlay<T> list = Overlay.getListOverlay(value);
-		for (int i = 0; i < list.size(); i++) {
-			itemValidator.validate(Overlay.of(list, i));
+		if (itemValidator != null) {
+			ListOverlay<T> list = Overlay.getListOverlay(value);
+			for (int i = 0; i < list.size(); i++) {
+				itemValidator.validate(Overlay.of(list, i));
+			}
 		}
 	}
 }

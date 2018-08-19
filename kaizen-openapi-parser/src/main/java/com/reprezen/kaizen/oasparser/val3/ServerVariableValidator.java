@@ -10,16 +10,15 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val3;
 
-import com.reprezen.kaizen.oasparser.model3.Contact;
+import com.reprezen.jsonoverlay.Primitive;
+import com.reprezen.kaizen.oasparser.model3.ServerVariable;
 import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
 
-public class ContactValidator extends ObjectValidatorBase<Contact> {
+public class ServerVariableValidator extends ObjectValidatorBase<ServerVariable> {
 
 	@Override
 	public void runObjectValidations() {
-		Contact contact = (Contact) value.getOverlay();
-		validateUrlField("url", false, false);
-		validateEmailField("email", false);
-		validateExtensions(contact.getExtensions());
+		validateListField("enumValues", false, false, Primitive.class, null);
+		validateField("defaultValue", false, Primitive.class, null);
 	}
 }

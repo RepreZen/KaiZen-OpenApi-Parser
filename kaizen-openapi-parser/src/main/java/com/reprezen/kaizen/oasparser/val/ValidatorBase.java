@@ -1,6 +1,6 @@
 package com.reprezen.kaizen.oasparser.val;
 
-import static com.reprezen.kaizen.oasparser.old.val.Messages.m;
+import static com.reprezen.kaizen.oasparser.val.Messages.m;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -10,6 +10,7 @@ import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
@@ -35,25 +36,22 @@ public abstract class ValidatorBase<V> implements Validator<V> {
 
 	public abstract void runValidations();
 
-	public void validateStringField(String name, boolean required) {
-		validateStringField(name, name, required, null);
+	public Overlay<Boolean> validateBooleanField(String name, boolean required) {
+		return validateField(name, required, Boolean.class, null);
 	}
 
-	public void validateStringField(String name, boolean required, String pattern) {
-		validateStringField(name, name, required, Pattern.compile(pattern));
+	public Overlay<String> validateStringField(String name, boolean required) {
+		return validateStringField(name, required, (Pattern) null);
 	}
 
-	public void validateStringField(String name, boolean required, Pattern pattern) {
-		validateStringField(name, name, required, pattern);
+	public Overlay<String> validateStringField(String name, boolean required, String pattern) {
+		return validateStringField(name, required, Pattern.compile(pattern));
 	}
 
 	@SafeVarargs
-	public final void validateStringField(String name, String crumbs, boolean required, Pattern pattern,
+	public final Overlay<String> validateStringField(String name, boolean required, Pattern pattern,
 			Consumer<Overlay<String>>... otherChecks) {
-		@SuppressWarnings("unchecked")
-		PropertiesOverlay<V> propValue = (PropertiesOverlay<V>) value.get();
-		Overlay<String> field = Overlay.of(propValue, name, String.class);
-		JsonTypeChecker.checkJsonType(field, results);
+		Overlay<String> field = validateField(name, required, String.class, null);
 		checkMissing(field, required);
 		if (field != null && field.isPresent()) {
 			if (pattern != null) {
@@ -63,6 +61,7 @@ public abstract class ValidatorBase<V> implements Validator<V> {
 				otherCheck.accept(field);
 			}
 		}
+		return field;
 	}
 
 	void checkPattern(Overlay<String> field, Pattern pattern) {
@@ -73,16 +72,31 @@ public abstract class ValidatorBase<V> implements Validator<V> {
 		}
 	}
 
-	public void validateUrlField(String name, boolean required, boolean allowVars) {
-		validateUrlField(name, required, allowVars, (Pattern) null);
+	public Overlay<String> validatePatternField(String name, boolean required) {
+		return validateStringField(name, required, null, this::checkRegex);
 	}
 
-	public void validateUrlField(String name, boolean required, boolean allowVars, String pattern) {
-		validateUrlField(name, required, allowVars, Pattern.compile(pattern));
+	private void checkRegex(Overlay<String> field) {
+		String regex = field.get();
+		try {
+			Pattern.compile(regex);
+		} catch (PatternSyntaxException e) {
+			results.addWarning(
+					m.msg("BadPattern|Pattern is not a valid Java Regular Expression but may be valid ECMA 262", regex),
+					field);
+		}
 	}
 
-	public void validateUrlField(String name, boolean required, boolean allowVars, Pattern pattern) {
-		validateStringField(name, name, required, pattern, field -> checkUrl(field, allowVars));
+	public Overlay<String> validateUrlField(String name, boolean required, boolean allowVars) {
+		return validateUrlField(name, required, allowVars, (Pattern) null);
+	}
+
+	public Overlay<String> validateUrlField(String name, boolean required, boolean allowVars, String pattern) {
+		return validateUrlField(name, required, allowVars, Pattern.compile(pattern));
+	}
+
+	public Overlay<String> validateUrlField(String name, boolean required, boolean allowVars, Pattern pattern) {
+		return validateStringField(name, required, pattern, field -> checkUrl(field, allowVars));
 	}
 
 	public static final String SPECIAL_SCHEME = Handler.class.getPackage().getName()
@@ -133,16 +147,16 @@ public abstract class ValidatorBase<V> implements Validator<V> {
 		specialSchemeInited = true;
 	}
 
-	public void validateEmailField(String name, boolean required) {
-		validateEmailField(name, required, (Pattern) null);
+	public Overlay<String> validateEmailField(String name, boolean required) {
+		return validateEmailField(name, required, (Pattern) null);
 	}
 
-	public void validateUrlField(String name, boolean required, String pattern) {
-		validateEmailField(name, required, Pattern.compile(pattern));
+	public Overlay<String> validateUrlField(String name, boolean required, String pattern) {
+		return validateEmailField(name, required, Pattern.compile(pattern));
 	}
 
-	public void validateEmailField(String name, boolean required, Pattern pattern) {
-		validateStringField(name, name, required, pattern, this::checkEmail);
+	public Overlay<String> validateEmailField(String name, boolean required, Pattern pattern) {
+		return validateStringField(name, required, pattern, this::checkEmail);
 	}
 
 	private void checkEmail(Overlay<String> overlay) {
@@ -156,29 +170,30 @@ public abstract class ValidatorBase<V> implements Validator<V> {
 		}
 	}
 
-	public void validatePositiveField(String name, boolean required) {
-		validateNumericField(name, required, NumericUtils::isPositive, "be positive");
+	public Overlay<Number> validatePositiveField(String name, boolean required) {
+		return validateNumericField(name, required, NumericUtils::isPositive, "be positive");
 	}
 
-	public void validateNonNegativeField(String name, boolean required) {
-		validateNumericField(name, required, NumericUtils::isNonNegative, "not be positive");
+	public Overlay<Number> validateNonNegativeField(String name, boolean required) {
+		return validateNumericField(name, required, NumericUtils::isNonNegative, "not be positive");
 	}
 
-	private void validateNumericField(String name, boolean required, Function<Number, Boolean> test, String desc) {
-		@SuppressWarnings("unchecked")
-		PropertiesOverlay<V> propValue = (PropertiesOverlay<V>) value.get();
-		Overlay<Number> field = Overlay.of(propValue, name, Number.class);
-		JsonTypeChecker.checkJsonType(field, results);
+	public Overlay<Number> validateNumericField(String name, boolean required, Function<Number, Boolean> test,
+			String desc) {
+		Overlay<Number> field = validateField(name, required, Number.class, null);
 		checkMissing(field, required);
-		if (field != null && field.isPresent()) {
+		if (field != null && field.isPresent() && test != null) {
 			Number n = field.get();
 			if (!test.apply(n)) {
 				results.addError(m.msg("ReqPositive|Value must be " + desc, n), field);
 			}
 		}
+		return field;
 	}
 
-	public <F> void validateField(String name, boolean required, Class<F> fieldClass, Validator<F> validator) {
+	@SafeVarargs
+	public final <F> Overlay<F> validateField(String name, boolean required, Class<F> fieldClass,
+			Validator<F> validator, Consumer<Overlay<F>>... otherChecks) {
 		@SuppressWarnings("unchecked")
 		PropertiesOverlay<V> propValue = (PropertiesOverlay<V>) value.get();
 		Overlay<F> field = Overlay.of(propValue, name, fieldClass);
@@ -186,14 +201,23 @@ public abstract class ValidatorBase<V> implements Validator<V> {
 		checkMissing(field, required);
 		if (value != null && value.isPresent() && validator != null) {
 			validator.validate(field);
+			for (Consumer<Overlay<F>> otherCheck : otherChecks) {
+				otherCheck.accept(field);
+			}
 		}
+		return field;
 	}
 
-	public <X> void validateListField(String name, boolean nonEmpty, boolean unique, Class<X> itemClass,
+	public <X> Overlay<List<X>> validateListField(String name, boolean nonEmpty, boolean unique, Class<X> itemClass,
 			Validator<X> itemValidator) {
 		@SuppressWarnings("unchecked")
 		Overlay<List<X>> list = (Overlay<List<X>>) (Object) Overlay.of((PropertiesOverlay<V>) value.get(), name,
 				List.class);
+		validateList(list, nonEmpty, unique, itemValidator);
+		return list;
+	}
+
+	private <X> void validateList(Overlay<List<X>> list, boolean nonEmpty, boolean unique, Validator<X> itemValidator) {
 		new ListValidator<X>(itemValidator).validate(list);
 		checkListNotEmpty(list, nonEmpty);
 		checkListUnique(list, unique);
@@ -226,12 +250,13 @@ public abstract class ValidatorBase<V> implements Validator<V> {
 		}
 	}
 
-	public <X> void validateMapField(String name, boolean nonEmpty, boolean unique, Class<X> valueClass,
-			Validator<X> valueValidator) {
+	public <X> Overlay<Map<String, X>> validateMapField(String name, boolean nonEmpty, boolean unique,
+			Class<X> valueClass, Validator<X> valueValidator) {
 		@SuppressWarnings("unchecked")
 		Overlay<Map<String, X>> map = (Overlay<Map<String, X>>) (Object) Overlay.of((PropertiesOverlay<V>) value.get(),
 				name, Map.class);
 		validateMap(map, nonEmpty, unique, valueValidator);
+		return map;
 	}
 
 	private <X> void validateMap(Overlay<Map<String, X>> map, boolean nonEmpty, boolean unique,
@@ -274,22 +299,21 @@ public abstract class ValidatorBase<V> implements Validator<V> {
 		}
 	}
 
-	public void validateExtensions(Map<String, Object> extensions) {
-		validateExtensions(extensions, null);
+	public Overlay<Map<String, Object>> validateExtensions(Map<String, Object> extensions) {
+		return validateExtensions(extensions, null);
 	}
 
-	public void validateExtensions(Map<String, Object> extensions, String crumb) {
-		validateMap(Overlay.of(extensions), false, false, null);
+	public Overlay<Map<String, Object>> validateExtensions(Map<String, Object> extensions, String crumb) {
+		Overlay<Map<String, Object>> mapOverlay = Overlay.of(extensions);
+		validateMap(mapOverlay, false, false, null);
+		return mapOverlay;
 	}
 
-	public void validateFormatField() {
-		@SuppressWarnings("unchecked")
-		PropertiesOverlay<V> propValue = (PropertiesOverlay<V>) value.get();
-		Overlay<String> format = Overlay.of(propValue, "format", String.class);
-		Overlay<String> type = Overlay.of(propValue, "type", String.class);
-		if (format != null && format.isPresent()) {
+	public Overlay<String> validateFormatField(String name, boolean required, String type) {
+		Overlay<String> field = validateStringField(name, required);
+		if (field != null && field.isPresent()) {
 			String normalType = null;
-			switch (format.get()) {
+			switch (field.get()) {
 			case "int32":
 			case "int64":
 				normalType = "integer";
@@ -306,35 +330,33 @@ public abstract class ValidatorBase<V> implements Validator<V> {
 				normalType = "string";
 			}
 			if (normalType != null) {
-				if (type == null || !type.isPresent() || !type.get().equals(normalType)) {
+				if (type == null || !type.equals(normalType)) {
 					results.addWarning(
-							m.msg("WrongTypeFormat|OpenAPI-defined format used with nonstandard or missing type",
-									format, type, normalType),
-							format);
+							m.msg("WrongTypeFormat|OpenAPI-defined format used with nonstandard or missing type", field,
+									type, normalType),
+							field);
 				}
 			}
 		}
+		return field;
 	}
 
-	public void validateDefault() {
-		@SuppressWarnings("unchecked")
-		PropertiesOverlay<V> propValue = (PropertiesOverlay<V>) value.get();
-		Overlay<Object> defaultValue = Overlay.of(propValue, "default", Object.class);
-		Overlay<String> type = Overlay.of(propValue, "type", String.class);
-		if (defaultValue != null && defaultValue.isPresent() && type != null && type.isPresent()) {
+	public void checkDefault(Overlay<?> overlay, String type) {
+		if (overlay != null && overlay.isPresent() && type != null) {
+			Object defaultValue = overlay.get();
 			boolean ok = false;
-			switch (type.get()) {
+			switch (type) {
 			case "string":
-				ok = defaultValue.get() instanceof String;
+				ok = defaultValue instanceof String;
 				break;
 			case "number":
-				ok = NumericUtils.isNumeric(defaultValue.get());
+				ok = NumericUtils.isNumeric(defaultValue);
 				break;
 			case "integer":
-				ok = NumericUtils.isIntegral(defaultValue.get());
+				ok = NumericUtils.isIntegral(defaultValue);
 				break;
 			case "boolean":
-				ok = defaultValue.get() instanceof Boolean;
+				ok = defaultValue instanceof Boolean;
 				break;
 			case "object":
 				ok = defaultValue instanceof Map<?, ?>;
@@ -345,9 +367,8 @@ public abstract class ValidatorBase<V> implements Validator<V> {
 			}
 			if (!ok) {
 				results.addError(m.msg("WrongTypeValue|Value is incompatible with schema type", type, defaultValue),
-						defaultValue);
+						overlay);
 			}
 		}
 	}
-
 }

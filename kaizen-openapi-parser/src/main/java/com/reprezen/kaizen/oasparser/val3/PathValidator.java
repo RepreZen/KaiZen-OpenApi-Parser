@@ -10,16 +10,22 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val3;
 
-import com.reprezen.kaizen.oasparser.model3.Contact;
+import com.reprezen.kaizen.oasparser.model3.Operation;
+import com.reprezen.kaizen.oasparser.model3.Parameter;
+import com.reprezen.kaizen.oasparser.model3.Path;
+import com.reprezen.kaizen.oasparser.model3.Server;
 import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
 
-public class ContactValidator extends ObjectValidatorBase<Contact> {
+public class PathValidator extends ObjectValidatorBase<Path> {
 
 	@Override
 	public void runObjectValidations() {
-		Contact contact = (Contact) value.getOverlay();
-		validateUrlField("url", false, false);
-		validateEmailField("email", false);
-		validateExtensions(contact.getExtensions());
+		Path path = (Path) value.getOverlay();
+		validateStringField("summary", false);
+		validateStringField("description", false);
+		validateMapField("operations", false, false, Operation.class, new OperationValidator());
+		validateListField("servers", false, false, Server.class, new ServerValidator());
+		validateListField("parameters", false, false, Parameter.class, new ParameterValidator());
+		validateExtensions(path.getExtensions());
 	}
 }

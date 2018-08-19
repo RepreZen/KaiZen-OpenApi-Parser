@@ -10,16 +10,18 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val3;
 
-import com.reprezen.kaizen.oasparser.model3.Contact;
+import com.reprezen.kaizen.oasparser.model3.Xml;
 import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
 
-public class ContactValidator extends ObjectValidatorBase<Contact> {
+public class XmlValidator extends ObjectValidatorBase<Xml> {
 
 	@Override
 	public void runObjectValidations() {
-		Contact contact = (Contact) value.getOverlay();
-		validateUrlField("url", false, false);
-		validateEmailField("email", false);
-		validateExtensions(contact.getExtensions());
+		Xml xml = (Xml) value.getOverlay();
+		validateStringField("name", false);
+		validateStringField("prefix", false);
+		validateBooleanField("attribute", false);
+		validateUrlField("namespace", false, false);
+		validateExtensions(xml.getExtensions());
 	}
 }

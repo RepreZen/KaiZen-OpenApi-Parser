@@ -10,6 +10,10 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val3;
 
+import static com.reprezen.kaizen.oasparser.ovl3.ResponseImpl.F_contentMediaTypes;
+import static com.reprezen.kaizen.oasparser.ovl3.ResponseImpl.F_headers;
+import static com.reprezen.kaizen.oasparser.ovl3.ResponseImpl.F_links;
+
 import com.reprezen.kaizen.oasparser.model3.Header;
 import com.reprezen.kaizen.oasparser.model3.Link;
 import com.reprezen.kaizen.oasparser.model3.MediaType;
@@ -21,9 +25,9 @@ public class ResponseValidator extends ObjectValidatorBase<Response> {
 	@Override
 	public void runObjectValidations() {
 		Response response = (Response) value.getOverlay();
-		validateMapField("headers", false, false, Header.class, new HeaderValidator());
-		validateMapField("contentMediaTypes", false, false, MediaType.class, new MediaTypeValidator());
-		validateMapField("links", false, false, Link.class, new LinkValidator());
+		validateMapField(F_headers, false, false, Header.class, new HeaderValidator());
+		validateMapField(F_contentMediaTypes, false, false, MediaType.class, new MediaTypeValidator());
+		validateMapField(F_links, false, false, Link.class, new LinkValidator());
 		validateExtensions(response.getExtensions());
 	}
 }

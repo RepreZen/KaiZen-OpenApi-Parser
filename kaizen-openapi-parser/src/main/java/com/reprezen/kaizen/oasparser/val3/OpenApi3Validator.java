@@ -10,6 +10,23 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val3;
 
+import static com.reprezen.kaizen.oasparser.ovl3.OpenApi3Impl.F_callbacks;
+import static com.reprezen.kaizen.oasparser.ovl3.OpenApi3Impl.F_examples;
+import static com.reprezen.kaizen.oasparser.ovl3.OpenApi3Impl.F_externalDocs;
+import static com.reprezen.kaizen.oasparser.ovl3.OpenApi3Impl.F_headers;
+import static com.reprezen.kaizen.oasparser.ovl3.OpenApi3Impl.F_info;
+import static com.reprezen.kaizen.oasparser.ovl3.OpenApi3Impl.F_links;
+import static com.reprezen.kaizen.oasparser.ovl3.OpenApi3Impl.F_openApi;
+import static com.reprezen.kaizen.oasparser.ovl3.OpenApi3Impl.F_parameters;
+import static com.reprezen.kaizen.oasparser.ovl3.OpenApi3Impl.F_paths;
+import static com.reprezen.kaizen.oasparser.ovl3.OpenApi3Impl.F_requestBodies;
+import static com.reprezen.kaizen.oasparser.ovl3.OpenApi3Impl.F_responses;
+import static com.reprezen.kaizen.oasparser.ovl3.OpenApi3Impl.F_schemas;
+import static com.reprezen.kaizen.oasparser.ovl3.OpenApi3Impl.F_securityRequirements;
+import static com.reprezen.kaizen.oasparser.ovl3.OpenApi3Impl.F_securitySchemes;
+import static com.reprezen.kaizen.oasparser.ovl3.OpenApi3Impl.F_servers;
+import static com.reprezen.kaizen.oasparser.ovl3.OpenApi3Impl.F_tags;
+
 import com.reprezen.kaizen.oasparser.model3.Callback;
 import com.reprezen.kaizen.oasparser.model3.Example;
 import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
@@ -33,25 +50,25 @@ public class OpenApi3Validator extends ObjectValidatorBase<OpenApi3> {
 	@Override
 	public void runObjectValidations() {
 		OpenApi3 model = (OpenApi3) value.getOverlay();
-		validateStringField("openApi", true, "3\\.\\d+(\\.\\d+.*)?");
-		validateField("info", true, Info.class, new InfoValidator());
-		validateListField("servers", false, false, Server.class, new ServerValidator());
-		validateMapField("paths", true, false, Path.class, new PathValidator());
+		validateStringField(F_openApi, true, "3\\.\\d+(\\.\\d+.*)?");
+		validateField(F_info, true, Info.class, new InfoValidator());
+		validateListField(F_servers, false, false, Server.class, new ServerValidator());
+		validateMapField(F_paths, true, false, Path.class, new PathValidator());
 		validateExtensions(model.getPathsExtensions());
-		validateMapField("schemas", false, false, Schema.class, new SchemaValidator());
-		validateMapField("responses", false, false, Response.class, new ResponseValidator());
-		validateMapField("parameters", false, false, Parameter.class, new ParameterValidator());
-		validateMapField("examples", false, false, Example.class, new ExampleValidator());
-		validateMapField("requestBodies", false, false, RequestBody.class, new RequestBodyValidator());
-		validateMapField("headers", false, false, Header.class, new HeaderValidator());
-		validateMapField("securitySchemes", false, false, SecurityScheme.class, new SecuritySchemeValidator());
-		validateMapField("links", false, false, Link.class, new LinkValidator());
-		validateMapField("callbacks", false, false, Callback.class, new CallbackValidator());
+		validateMapField(F_schemas, false, false, Schema.class, new SchemaValidator());
+		validateMapField(F_responses, false, false, Response.class, new ResponseValidator());
+		validateMapField(F_parameters, false, false, Parameter.class, new ParameterValidator());
+		validateMapField(F_examples, false, false, Example.class, new ExampleValidator());
+		validateMapField(F_requestBodies, false, false, RequestBody.class, new RequestBodyValidator());
+		validateMapField(F_headers, false, false, Header.class, new HeaderValidator());
+		validateMapField(F_securitySchemes, false, false, SecurityScheme.class, new SecuritySchemeValidator());
+		validateMapField(F_links, false, false, Link.class, new LinkValidator());
+		validateMapField(F_callbacks, false, false, Callback.class, new CallbackValidator());
 		validateExtensions(model.getComponentsExtensions());
-		validateListField("securityRequirements", false, false, SecurityRequirement.class,
+		validateListField(F_securityRequirements, false, false, SecurityRequirement.class,
 				new SecurityRequirementValidator());
-		validateListField("tags", false, false, Tag.class, new TagValidator());
-		validateField("externalDocs", false, ExternalDocs.class, new ExternalDocsValidator());
+		validateListField(F_tags, false, false, Tag.class, new TagValidator());
+		validateField(F_externalDocs, false, ExternalDocs.class, new ExternalDocsValidator());
 		validateExtensions(model.getExtensions());
 	}
 }

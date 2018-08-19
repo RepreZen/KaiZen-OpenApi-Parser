@@ -10,6 +10,9 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val3;
 
+import static com.reprezen.kaizen.oasparser.ovl3.ServerVariableImpl.F_defaultValue;
+import static com.reprezen.kaizen.oasparser.ovl3.ServerVariableImpl.F_enumValues;
+
 import com.reprezen.jsonoverlay.Primitive;
 import com.reprezen.kaizen.oasparser.model3.ServerVariable;
 import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
@@ -18,7 +21,7 @@ public class ServerVariableValidator extends ObjectValidatorBase<ServerVariable>
 
 	@Override
 	public void runObjectValidations() {
-		validateListField("enumValues", false, false, Primitive.class, null);
-		validateField("defaultValue", false, Primitive.class, null);
+		validateListField(F_enumValues, false, false, Primitive.class, null);
+		validateField(F_defaultValue, false, Primitive.class, null);
 	}
 }

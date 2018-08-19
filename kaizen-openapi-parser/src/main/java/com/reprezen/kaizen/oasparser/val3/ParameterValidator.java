@@ -10,6 +10,17 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val3;
 
+import static com.reprezen.kaizen.oasparser.ovl3.ParameterImpl.F_allowEmptyValue;
+import static com.reprezen.kaizen.oasparser.ovl3.ParameterImpl.F_contentMediaTypes;
+import static com.reprezen.kaizen.oasparser.ovl3.ParameterImpl.F_deprecated;
+import static com.reprezen.kaizen.oasparser.ovl3.ParameterImpl.F_description;
+import static com.reprezen.kaizen.oasparser.ovl3.ParameterImpl.F_example;
+import static com.reprezen.kaizen.oasparser.ovl3.ParameterImpl.F_examples;
+import static com.reprezen.kaizen.oasparser.ovl3.ParameterImpl.F_explode;
+import static com.reprezen.kaizen.oasparser.ovl3.ParameterImpl.F_in;
+import static com.reprezen.kaizen.oasparser.ovl3.ParameterImpl.F_name;
+import static com.reprezen.kaizen.oasparser.ovl3.ParameterImpl.F_schema;
+import static com.reprezen.kaizen.oasparser.ovl3.ParameterImpl.F_style;
 import static com.reprezen.kaizen.oasparser.val.Messages.m;
 
 import com.reprezen.jsonoverlay.Overlay;
@@ -26,21 +37,21 @@ public class ParameterValidator extends ObjectValidatorBase<Parameter> {
 	@Override
 	public void runObjectValidations() {
 		Parameter parameter = (Parameter) value.getOverlay();
-		validateStringField("description", false);
-		validateBooleanField("deprecated", false);
-		validateBooleanField("allowEmptyValue", false);
-		validateBooleanField("explode", false);
-		validateField("example", false, Example.class, new ExampleValidator());
-		validateMapField("examples", false, false, Example.class, new ExampleValidator());
-		validateStringField("name", true);
-		validateStringField("in", true, Regexes.PARAM_IN_REGEX);
+		validateStringField(F_description, false);
+		validateBooleanField(F_deprecated, false);
+		validateBooleanField(F_allowEmptyValue, false);
+		validateBooleanField(F_explode, false);
+		validateField(F_example, false, Example.class, new ExampleValidator());
+		validateMapField(F_examples, false, false, Example.class, new ExampleValidator());
+		validateStringField(F_name, true);
+		validateStringField(F_in, true, Regexes.PARAM_IN_REGEX);
 		checkPathParam(parameter);
 		checkRequired(parameter);
-		validateStringField("style", false, Regexes.STYLE_REGEX);
+		validateStringField(F_style, false, Regexes.STYLE_REGEX);
 		checkAllowReserved(parameter);
 		// TODO Q: Should schema be required in parameter object?
-		validateField("schema", false, Schema.class, new SchemaValidator());
-		validateMapField("contentMediaTypes", false, false, MediaType.class, new MediaTypeValidator());
+		validateField(F_schema, false, Schema.class, new SchemaValidator());
+		validateMapField(F_contentMediaTypes, false, false, MediaType.class, new MediaTypeValidator());
 		validateExtensions(parameter.getExtensions());
 	}
 

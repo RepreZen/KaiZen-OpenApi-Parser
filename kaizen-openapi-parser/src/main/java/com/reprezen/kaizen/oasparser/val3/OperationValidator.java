@@ -10,6 +10,16 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val3;
 
+import static com.reprezen.kaizen.oasparser.ovl3.OperationImpl.F_callbacks;
+import static com.reprezen.kaizen.oasparser.ovl3.OperationImpl.F_externalDocs;
+import static com.reprezen.kaizen.oasparser.ovl3.OperationImpl.F_operationId;
+import static com.reprezen.kaizen.oasparser.ovl3.OperationImpl.F_parameters;
+import static com.reprezen.kaizen.oasparser.ovl3.OperationImpl.F_requestBody;
+import static com.reprezen.kaizen.oasparser.ovl3.OperationImpl.F_responses;
+import static com.reprezen.kaizen.oasparser.ovl3.OperationImpl.F_securityRequirements;
+import static com.reprezen.kaizen.oasparser.ovl3.OperationImpl.F_servers;
+import static com.reprezen.kaizen.oasparser.ovl3.OperationImpl.F_summary;
+import static com.reprezen.kaizen.oasparser.ovl3.OperationImpl.F_tags;
 import static com.reprezen.kaizen.oasparser.val.Messages.m;
 
 import java.util.regex.Pattern;
@@ -29,20 +39,20 @@ public class OperationValidator extends ObjectValidatorBase<Operation> {
 
 	@Override
 	public void runObjectValidations() {
-		validateListField("tags", false, false, String.class, null);
-		validateStringField("summary", false, (Pattern) null, this::checkSummaryLength);
-		validateField("externalDocs", false, ExternalDocs.class, new ExternalDocsValidator());
+		validateListField(F_tags, false, false, String.class, null);
+		validateStringField(F_summary, false, (Pattern) null, this::checkSummaryLength);
+		validateField(F_externalDocs, false, ExternalDocs.class, new ExternalDocsValidator());
 		// TODO Q: Not marked as required in spec, but spec says they all must be unique
 		// within the API. Seems like it
 		// should be required.
-		validateStringField("operationId", false);
-		validateListField("parameters", false, false, Parameter.class, new ParameterValidator());
-		validateField("requestBody", false, RequestBody.class, new RequestBodyValidator());
-		validateMapField("responses", true, false, Response.class, new ResponseValidator());
-		validateMapField("callbacks", false, false, Callback.class, new CallbackValidator());
-		validateListField("securityRequirements", false, false, SecurityRequirement.class,
+		validateStringField(F_operationId, false);
+		validateListField(F_parameters, false, false, Parameter.class, new ParameterValidator());
+		validateField(F_requestBody, false, RequestBody.class, new RequestBodyValidator());
+		validateMapField(F_responses, true, false, Response.class, new ResponseValidator());
+		validateMapField(F_callbacks, false, false, Callback.class, new CallbackValidator());
+		validateListField(F_securityRequirements, false, false, SecurityRequirement.class,
 				new SecurityRequirementValidator());
-		validateListField("servers", false, false, Server.class, new ServerValidator());
+		validateListField(F_servers, false, false, Server.class, new ServerValidator());
 	}
 
 	private void checkSummaryLength(Overlay<String> summary) {

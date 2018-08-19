@@ -10,6 +10,10 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val3;
 
+import static com.reprezen.kaizen.oasparser.ovl3.RequestBodyImpl.F_contentMediaTypes;
+import static com.reprezen.kaizen.oasparser.ovl3.RequestBodyImpl.F_description;
+import static com.reprezen.kaizen.oasparser.ovl3.RequestBodyImpl.F_required;
+
 import com.reprezen.kaizen.oasparser.model3.MediaType;
 import com.reprezen.kaizen.oasparser.model3.RequestBody;
 import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
@@ -19,9 +23,9 @@ public class RequestBodyValidator extends ObjectValidatorBase<RequestBody> {
 	@Override
 	public void runObjectValidations() {
 		RequestBody requestBody = (RequestBody) value.getOverlay();
-		validateStringField("description", false);
-		validateBooleanField("required", false);
-		validateMapField("contentMediaTypes", false, false, MediaType.class, new MediaTypeValidator());
+		validateStringField(F_description, false);
+		validateBooleanField(F_required, false);
+		validateMapField(F_contentMediaTypes, false, false, MediaType.class, new MediaTypeValidator());
 		validateExtensions(requestBody.getExtensions());
 	}
 }

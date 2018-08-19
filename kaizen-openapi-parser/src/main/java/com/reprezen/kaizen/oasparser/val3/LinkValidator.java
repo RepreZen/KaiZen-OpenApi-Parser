@@ -10,6 +10,7 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val3;
 
+import static com.reprezen.kaizen.oasparser.ovl3.LinkImpl.F_headers;
 import static com.reprezen.kaizen.oasparser.val.Messages.m;
 
 import java.util.Collection;
@@ -37,7 +38,7 @@ public class LinkValidator extends ObjectValidatorBase<Link> {
 		if (op != null) {
 			checkParameters(link, op, results);
 		}
-		validateMapField("headers", false, false, Header.class, new HeaderValidator());
+		validateMapField(F_headers, false, false, Header.class, new HeaderValidator());
 		validateExtensions(link.getExtensions());
 	}
 

@@ -171,6 +171,21 @@ public class EncodingPropertyImpl extends PropertiesOverlay<EncodingProperty> im
 		_remove("extensions", name, Object.class);
 	}
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_contentType = "contentType";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_headers = "headers";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_style = "style";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_explode = "explode";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_extensions = "extensions";
+
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	protected void _elaborateJson() {

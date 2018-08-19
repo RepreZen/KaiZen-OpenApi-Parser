@@ -943,6 +943,63 @@ public class OpenApi3Impl extends PropertiesOverlay<OpenApi3> implements OpenApi
 		_remove("extensions", name, Object.class);
 	}
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_openApi = "openApi";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_info = "info";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_servers = "servers";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_paths = "paths";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_pathsExtensions = "pathsExtensions";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_schemas = "schemas";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_responses = "responses";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_parameters = "parameters";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_examples = "examples";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_requestBodies = "requestBodies";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_headers = "headers";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_securitySchemes = "securitySchemes";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_links = "links";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_callbacks = "callbacks";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_componentsExtensions = "componentsExtensions";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_securityRequirements = "securityRequirements";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_tags = "tags";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_externalDocs = "externalDocs";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_extensions = "extensions";
+
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	protected void _elaborateJson() {

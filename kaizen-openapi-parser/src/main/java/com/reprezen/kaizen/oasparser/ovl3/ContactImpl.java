@@ -114,6 +114,18 @@ public class ContactImpl extends PropertiesOverlay<Contact> implements Contact {
 		_remove("extensions", name, Object.class);
 	}
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_name = "name";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_url = "url";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_email = "email";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_extensions = "extensions";
+
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	protected void _elaborateJson() {

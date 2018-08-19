@@ -10,6 +10,9 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val3;
 
+import static com.reprezen.kaizen.oasparser.ovl3.TagImpl.F_externalDocs;
+import static com.reprezen.kaizen.oasparser.ovl3.TagImpl.F_name;
+
 import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
 import com.reprezen.kaizen.oasparser.model3.Tag;
 import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
@@ -19,8 +22,8 @@ public class TagValidator extends ObjectValidatorBase<Tag> {
 	@Override
 	public void runObjectValidations() {
 		Tag tag = (Tag) value.getOverlay();
-		validateStringField("name", true);
-		validateField("externalDocs", false, ExternalDocs.class, new ExternalDocsValidator());
+		validateStringField(F_name, true);
+		validateField(F_externalDocs, false, ExternalDocs.class, new ExternalDocsValidator());
 		validateExtensions(tag.getExtensions());
 	}
 }

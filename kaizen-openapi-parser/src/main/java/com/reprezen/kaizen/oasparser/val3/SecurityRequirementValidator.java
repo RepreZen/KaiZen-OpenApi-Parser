@@ -10,6 +10,7 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val3;
 
+import static com.reprezen.kaizen.oasparser.ovl3.SecurityRequirementImpl.F_requirements;
 import static com.reprezen.kaizen.oasparser.val.Messages.m;
 
 import java.util.Map;
@@ -26,7 +27,7 @@ public class SecurityRequirementValidator extends ObjectValidatorBase<SecurityRe
 
 	@Override
 	public void runObjectValidations() {
-		Overlay<Map<String, SecurityParameter>> requirements = validateMapField("requirements", false, false,
+		Overlay<Map<String, SecurityParameter>> requirements = validateMapField(F_requirements, false, false,
 				SecurityParameter.class, new SecurityParameterValidator());
 		checkAllSchemesDefined(requirements);
 	}

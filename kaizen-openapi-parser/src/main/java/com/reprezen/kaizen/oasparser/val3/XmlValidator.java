@@ -10,6 +10,11 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val3;
 
+import static com.reprezen.kaizen.oasparser.ovl3.XmlImpl.F_attribute;
+import static com.reprezen.kaizen.oasparser.ovl3.XmlImpl.F_name;
+import static com.reprezen.kaizen.oasparser.ovl3.XmlImpl.F_namespace;
+import static com.reprezen.kaizen.oasparser.ovl3.XmlImpl.F_prefix;
+
 import com.reprezen.kaizen.oasparser.model3.Xml;
 import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
 
@@ -18,10 +23,10 @@ public class XmlValidator extends ObjectValidatorBase<Xml> {
 	@Override
 	public void runObjectValidations() {
 		Xml xml = (Xml) value.getOverlay();
-		validateStringField("name", false);
-		validateStringField("prefix", false);
-		validateBooleanField("attribute", false);
-		validateUrlField("namespace", false, false);
+		validateStringField(F_name, false);
+		validateStringField(F_prefix, false);
+		validateBooleanField(F_attribute, false);
+		validateUrlField(F_namespace, false, false);
 		validateExtensions(xml.getExtensions());
 	}
 }

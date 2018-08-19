@@ -951,6 +951,120 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 		_remove("extensions", name, Object.class);
 	}
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_title = "title";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_multipleOf = "multipleOf";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_maximum = "maximum";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_exclusiveMaximum = "exclusiveMaximum";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_minimum = "minimum";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_exclusiveMinimum = "exclusiveMinimum";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_maxLength = "maxLength";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_minLength = "minLength";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_pattern = "pattern";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_maxItems = "maxItems";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_minItems = "minItems";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_uniqueItems = "uniqueItems";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_maxProperties = "maxProperties";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_minProperties = "minProperties";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_requiredFields = "requiredFields";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_enums = "enums";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_type = "type";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_allOfSchemas = "allOfSchemas";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_oneOfSchemas = "oneOfSchemas";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_anyOfSchemas = "anyOfSchemas";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_notSchema = "notSchema";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_itemsSchema = "itemsSchema";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_properties = "properties";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_additionalPropertiesSchema = "additionalPropertiesSchema";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_additionalProperties = "additionalProperties";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_description = "description";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_format = "format";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_defaultValue = "defaultValue";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_nullable = "nullable";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_discriminator = "discriminator";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_readOnly = "readOnly";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_writeOnly = "writeOnly";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_xml = "xml";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_externalDocs = "externalDocs";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_examples = "examples";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_example = "example";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_deprecated = "deprecated";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_extensions = "extensions";
+
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	protected void _elaborateJson() {

@@ -10,6 +10,9 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val3;
 
+import static com.reprezen.kaizen.oasparser.ovl3.MediaTypeImpl.F_encodingProperties;
+import static com.reprezen.kaizen.oasparser.ovl3.MediaTypeImpl.F_examples;
+import static com.reprezen.kaizen.oasparser.ovl3.MediaTypeImpl.F_schema;
 import static com.reprezen.kaizen.oasparser.val.Messages.m;
 
 import java.util.Map;
@@ -29,11 +32,11 @@ public class MediaTypeValidator extends ObjectValidatorBase<MediaType> {
 	public void runObjectValidations() {
 		MediaType mediaType = (MediaType) value.getOverlay();
 		// TODO Q: Should schema be required in media type?
-		validateField("schema", false, Schema.class, new SchemaValidator());
-		validateMapField("encodingProperties", false, false, EncodingProperty.class, new EncodingPropertyValidator());
+		validateField(F_schema, false, Schema.class, new SchemaValidator());
+		validateMapField(F_encodingProperties, false, false, EncodingProperty.class, new EncodingPropertyValidator());
 		checkEncodingPropsAreProps(mediaType, results);
 		validateExtensions(mediaType.getExtensions());
-		validateMapField("examples", false, false, Example.class, new ExampleValidator());
+		validateMapField(F_examples, false, false, Example.class, new ExampleValidator());
 	}
 
 	void checkEncodingPropsAreProps(MediaType mediaType, ValidationResults results) {

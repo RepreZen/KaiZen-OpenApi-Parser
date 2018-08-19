@@ -10,6 +10,11 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val3;
 
+import static com.reprezen.kaizen.oasparser.ovl3.InfoImpl.F_contact;
+import static com.reprezen.kaizen.oasparser.ovl3.InfoImpl.F_license;
+import static com.reprezen.kaizen.oasparser.ovl3.InfoImpl.F_title;
+import static com.reprezen.kaizen.oasparser.ovl3.InfoImpl.F_version;
+
 import com.reprezen.kaizen.oasparser.model3.Contact;
 import com.reprezen.kaizen.oasparser.model3.Info;
 import com.reprezen.kaizen.oasparser.model3.License;
@@ -20,10 +25,10 @@ public class InfoValidator extends ObjectValidatorBase<Info> {
 	@Override
 	public void runObjectValidations() {
 		Info info = (Info) value.getOverlay();
-		validateStringField("title", true);
-		validateField("contact", false, Contact.class, new ContactValidator());
-		validateField("license", false, License.class, new LicenseValidator());
-		validateStringField("version", true);
+		validateStringField(F_title, true);
+		validateField(F_contact, false, Contact.class, new ContactValidator());
+		validateField(F_license, false, License.class, new LicenseValidator());
+		validateStringField(F_version, true);
 		validateExtensions(info.getExtensions());
 	}
 }

@@ -158,6 +158,18 @@ public class ServerVariableImpl extends PropertiesOverlay<ServerVariable> implem
 		_remove("extensions", name, Object.class);
 	}
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_enumValues = "enumValues";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_defaultValue = "defaultValue";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_description = "description";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_extensions = "extensions";
+
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	protected void _elaborateJson() {

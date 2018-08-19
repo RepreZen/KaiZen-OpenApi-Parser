@@ -10,6 +10,39 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val3;
 
+import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_allOfSchemas;
+import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_anyOfSchemas;
+import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_defaultValue;
+import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_deprecated;
+import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_description;
+import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_discriminator;
+import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_enums;
+import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_example;
+import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_examples;
+import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_exclusiveMaximum;
+import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_exclusiveMinimum;
+import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_externalDocs;
+import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_format;
+import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_itemsSchema;
+import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_maxItems;
+import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_maxLength;
+import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_maxProperties;
+import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_maximum;
+import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_minItems;
+import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_minLength;
+import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_minProperties;
+import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_minimum;
+import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_multipleOf;
+import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_notSchema;
+import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_nullable;
+import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_oneOfSchemas;
+import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_pattern;
+import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_properties;
+import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_requiredFields;
+import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_title;
+import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_type;
+import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_uniqueItems;
+import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_xml;
 import static com.reprezen.kaizen.oasparser.val.Messages.m;
 
 import com.reprezen.jsonoverlay.Overlay;
@@ -24,43 +57,43 @@ public class SchemaValidator extends ObjectValidatorBase<Schema> {
 	@Override
 	public void runObjectValidations() {
 		Schema schema = (Schema) value.getOverlay();
-		validateStringField("title", false);
-		validateStringField("description", false);
-		validateNumericField("maximum", false, null, null);
-		validateBooleanField("exclusiveMaximum", false);
-		validateNumericField("minimum", false, null, null);
-		validateBooleanField("exclusiveMinimum", false);
-		validateBooleanField("uniqueItems", false);
-		validateBooleanField("nullable", false);
-		validateField("example", false, Example.class, new ExampleValidator());
-		validateBooleanField("deprecated", false);
-		validatePositiveField("multipleOf", false);
-		validateNonNegativeField("maxLength", false);
-		validateNonNegativeField("minLength", false);
-		validatePatternField("pattern", false);
-		validateNonNegativeField("maxItems", false);
-		validateNonNegativeField("minItems", false);
-		validateNonNegativeField("maxProperties", false);
-		validateNonNegativeField("minProperties", false);
-		validateListField("requiredFields", false, true, String.class, null);
-		validateListField("enums", false, true, Object.class, null);
-		validateStringField("type", false, "boolean|object|array|number|integer|string");
+		validateStringField(F_title, false);
+		validateStringField(F_description, false);
+		validateNumericField(F_maximum, false, null, null);
+		validateBooleanField(F_exclusiveMaximum, false);
+		validateNumericField(F_minimum, false, null, null);
+		validateBooleanField(F_exclusiveMinimum, false);
+		validateBooleanField(F_uniqueItems, false);
+		validateBooleanField(F_nullable, false);
+		validateField(F_example, false, Example.class, new ExampleValidator());
+		validateBooleanField(F_deprecated, false);
+		validatePositiveField(F_multipleOf, false);
+		validateNonNegativeField(F_maxLength, false);
+		validateNonNegativeField(F_minLength, false);
+		validatePatternField(F_pattern, false);
+		validateNonNegativeField(F_maxItems, false);
+		validateNonNegativeField(F_minItems, false);
+		validateNonNegativeField(F_maxProperties, false);
+		validateNonNegativeField(F_minProperties, false);
+		validateListField(F_requiredFields, false, true, String.class, null);
+		validateListField(F_enums, false, true, Object.class, null);
+		validateStringField(F_type, false, "boolean|object|array|number|integer|string");
 		{
 			SchemaValidator schemaValidator = new SchemaValidator();
-			validateListField("allOfSchemas", false, false, Schema.class, schemaValidator);
-			validateListField("oneOfSchemas", false, false, Schema.class, schemaValidator);
-			validateListField("anyOfSchemas", false, false, Schema.class, schemaValidator);
-			validateField("notSchema", false, Schema.class, schemaValidator);
-			validateField("itemsSchema", false, Schema.class, schemaValidator);
-			validateMapField("properties", false, false, Schema.class, schemaValidator);
+			validateListField(F_allOfSchemas, false, false, Schema.class, schemaValidator);
+			validateListField(F_oneOfSchemas, false, false, Schema.class, schemaValidator);
+			validateListField(F_anyOfSchemas, false, false, Schema.class, schemaValidator);
+			validateField(F_notSchema, false, Schema.class, schemaValidator);
+			validateField(F_itemsSchema, false, Schema.class, schemaValidator);
+			validateMapField(F_properties, false, false, Schema.class, schemaValidator);
 		}
-		validateFormatField("format", false, schema.getType());
-		validateField("defaultValue", false, Object.class, null, field -> checkDefault(field, schema.getType()));
-		checkDiscriminator(schema, validateStringField("discriminator", false));
+		validateFormatField(F_format, false, schema.getType());
+		validateField(F_defaultValue, false, Object.class, null, field -> checkDefault(field, schema.getType()));
+		checkDiscriminator(schema, validateStringField(F_discriminator, false));
 		checkReadWrite(schema);
-		validateField("xml", false, Xml.class, new XmlValidator());
-		validateField("externalDocs", false, ExternalDocs.class, new ExternalDocsValidator());
-		validateMapField("examples", false, false, Example.class, new ExampleValidator());
+		validateField(F_xml, false, Xml.class, new XmlValidator());
+		validateField(F_externalDocs, false, ExternalDocs.class, new ExternalDocsValidator());
+		validateMapField(F_examples, false, false, Example.class, new ExampleValidator());
 		validateExtensions(schema.getExtensions());
 	}
 

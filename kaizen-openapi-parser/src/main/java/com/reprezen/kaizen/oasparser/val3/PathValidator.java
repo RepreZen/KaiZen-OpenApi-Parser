@@ -10,6 +10,12 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val3;
 
+import static com.reprezen.kaizen.oasparser.ovl3.PathImpl.F_description;
+import static com.reprezen.kaizen.oasparser.ovl3.PathImpl.F_operations;
+import static com.reprezen.kaizen.oasparser.ovl3.PathImpl.F_parameters;
+import static com.reprezen.kaizen.oasparser.ovl3.PathImpl.F_servers;
+import static com.reprezen.kaizen.oasparser.ovl3.PathImpl.F_summary;
+
 import com.reprezen.kaizen.oasparser.model3.Operation;
 import com.reprezen.kaizen.oasparser.model3.Parameter;
 import com.reprezen.kaizen.oasparser.model3.Path;
@@ -21,11 +27,11 @@ public class PathValidator extends ObjectValidatorBase<Path> {
 	@Override
 	public void runObjectValidations() {
 		Path path = (Path) value.getOverlay();
-		validateStringField("summary", false);
-		validateStringField("description", false);
-		validateMapField("operations", false, false, Operation.class, new OperationValidator());
-		validateListField("servers", false, false, Server.class, new ServerValidator());
-		validateListField("parameters", false, false, Parameter.class, new ParameterValidator());
+		validateStringField(F_summary, false);
+		validateStringField(F_description, false);
+		validateMapField(F_operations, false, false, Operation.class, new OperationValidator());
+		validateListField(F_servers, false, false, Server.class, new ServerValidator());
+		validateListField(F_parameters, false, false, Parameter.class, new ParameterValidator());
 		validateExtensions(path.getExtensions());
 	}
 }

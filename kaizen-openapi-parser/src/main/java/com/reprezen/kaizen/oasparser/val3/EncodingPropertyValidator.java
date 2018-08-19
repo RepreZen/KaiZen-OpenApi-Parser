@@ -10,6 +10,12 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val3;
 
+import static com.reprezen.kaizen.oasparser.ovl3.EncodingPropertyImpl.F_contentType;
+import static com.reprezen.kaizen.oasparser.ovl3.EncodingPropertyImpl.F_explode;
+import static com.reprezen.kaizen.oasparser.ovl3.EncodingPropertyImpl.F_headers;
+import static com.reprezen.kaizen.oasparser.ovl3.EncodingPropertyImpl.F_style;
+import static com.reprezen.kaizen.oasparser.ovl3.ParameterImpl.F_allowReserved;
+
 import com.reprezen.kaizen.oasparser.model3.EncodingProperty;
 import com.reprezen.kaizen.oasparser.model3.Header;
 import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
@@ -22,14 +28,14 @@ public class EncodingPropertyValidator extends ObjectValidatorBase<EncodingPrope
 
 		// TODO ought to have a pattern for acceptable values "a/b", "a/*", comma-lists
 		// of those.
-		validateStringField("contentType", false);
+		validateStringField(F_contentType, false);
 
 		// TODO Q: spec says "Headers" (capitalized) for property name -assuming it's a
 		// typo
-		validateMapField("headers", false, false, Header.class, null);
-		validateStringField("style", false, Regexes.STYLE_REGEX);
-		validateBooleanField("explode", false);
-		validateBooleanField("allowReserved", false);
+		validateMapField(F_headers, false, false, Header.class, null);
+		validateStringField(F_style, false, Regexes.STYLE_REGEX);
+		validateBooleanField(F_explode, false);
+		validateBooleanField(F_allowReserved, false);
 		validateExtensions(encodingProperty.getExtensions());
 	}
 

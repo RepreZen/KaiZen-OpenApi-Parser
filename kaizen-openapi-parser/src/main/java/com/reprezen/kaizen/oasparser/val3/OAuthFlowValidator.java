@@ -10,6 +10,11 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val3;
 
+import static com.reprezen.kaizen.oasparser.ovl3.OAuthFlowImpl.F_authorizationUrl;
+import static com.reprezen.kaizen.oasparser.ovl3.OAuthFlowImpl.F_refreshUrl;
+import static com.reprezen.kaizen.oasparser.ovl3.OAuthFlowImpl.F_scopes;
+import static com.reprezen.kaizen.oasparser.ovl3.OAuthFlowImpl.F_tokenUrl;
+
 import com.reprezen.kaizen.oasparser.model3.OAuthFlow;
 import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
 
@@ -18,10 +23,10 @@ public class OAuthFlowValidator extends ObjectValidatorBase<OAuthFlow> {
 	@Override
 	public void runObjectValidations() {
 		OAuthFlow oauthFlow = (OAuthFlow) value.getOverlay();
-		validateUrlField("authorizationUrl", true, false);
-		validateUrlField("tokenUrl", true, false);
-		validateUrlField("refreshUrl", true, false);
-		validateMapField("scopes", true, false, String.class, null);
+		validateUrlField(F_authorizationUrl, true, false);
+		validateUrlField(F_tokenUrl, true, false);
+		validateUrlField(F_refreshUrl, true, false);
+		validateMapField(F_scopes, true, false, String.class, null);
 		validateExtensions(oauthFlow.getExtensions());
 	}
 }

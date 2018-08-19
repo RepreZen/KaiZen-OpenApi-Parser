@@ -10,6 +10,8 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val3;
 
+import static com.reprezen.kaizen.oasparser.ovl3.CallbackImpl.F_callbackPaths;
+
 import com.reprezen.kaizen.oasparser.model3.Callback;
 import com.reprezen.kaizen.oasparser.model3.Path;
 import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
@@ -19,7 +21,7 @@ public class CallbackValidator extends ObjectValidatorBase<Callback> {
 	@Override
 	public void runObjectValidations() {
 		Callback callback = (Callback) value.getOverlay();
-		validateMapField("callbackPaths", false, false, Path.class, new PathValidator());
+		validateMapField(F_callbackPaths, false, false, Path.class, new PathValidator());
 		validateExtensions(callback.getExtensions());
 	}
 

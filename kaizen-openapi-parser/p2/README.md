@@ -1,19 +1,19 @@
-= P2 Update Site  Support
+# P2 Update Site  Support
 
 This directory includes a maven pom.xml file and a shell script to
 support creation of a p2 update site containing OSGi bundles for KZOP
 and all its dependent jar files, including JsonOverlay.
 
 The RepreZen team uses these features to create and publish p2 bundles
-for use in our []KaiZen
+for use in our [KaiZen
 OpenApiEditor](https://github.com/RepreZen/KaiZen-OpenAPI-Editor)
 open-source project, and our [API Studio](https://www.reprezen.com/)
-commercial product. Both built for execution within the Eclipse
+commercial product. Both are designed for execution within the Eclipse
 framework, which is OSGi-based.
 
 Our update site for a given version of  KZOP is:
 
-https://products.reprezen.com/kaizen/openapi-parser/updates/<version>.
+https://products.reprezen.com/kaizen/openapi-parser/updates/\<version\>.
 
 Note that we do not manage a composite site covering the available
 versions; you must use the site for the specific version you intend to
@@ -29,6 +29,11 @@ mechanism and avoid using the `-p` option.
 Here is the usage message for the script:
 
 ```
+Usage: ./build.sh <options>
+Builds a p2 repo for KZOP, including JsonOverlay and other dependencies, and
+optionally publishes as an update site.
+
+Options: (* marks required option)
 * -k or --kzop-version - specify full version number of KZOP to package
 * -j or --jovl-version - specify full version number of JsonOverlay to package
   -r or --repo - specify maven repo URL where indicated versions are available, if
@@ -49,13 +54,13 @@ To build without publishing, use a command like this, with
 
 ```
 ./build.sh \
-    -k <kaizen-openapi-version> \\
+    -k <kaizen-openapi-version> \
     -j <json-overlay-version>
 ```
 
 ## Building With Versions Not In Maven Central
 
-This assumes that the indicated versions of KZOP and JsonOverlay are
+The above assumes that the indicated versions of KZOP and JsonOverlay are
 available in maven central. If that's not the case (e.g. if you are
 buliding with versions that are present in OSS staging repos but not
 yet released to central), you can follow this procedure:
@@ -68,8 +73,8 @@ yet released to central), you can follow this procedure:
    cache repo (typically in `.m2/repository` in your home
    directory). For example, running either of the following commands
    with that as your working directory should work:
-** `python -m SimpleHTTPServer`
-** `python3 -m http.server`
+   * `python -m SimpleHTTPServer`
+   * `python3 -m http.server`
 3. Run the build script as shown above. If your local HTTP server is
    not listening on port 8000, you can use the `-r` option to  specify
    the root URL serving your local repo, which defaults to
@@ -78,10 +83,10 @@ yet released to central), you can follow this procedure:
 ## Publishing
 
 If you use the `-p` option, the script will publish the newly-built
-update site. The scripts assumes that this will be accomplished using
+update site. The script assumes that this will be accomplished using
 RepreZen's standard publishing script, which is in a private GitHub
-repository. Otherwise you should use some other means to publish your
-update site.
+repository. If you do not work for RepreZen, you should use some other 
+means to publish your update site.
 
 If you use `-p` , you must also specify the location where the
 `publish` script is located on your machine. This should be the

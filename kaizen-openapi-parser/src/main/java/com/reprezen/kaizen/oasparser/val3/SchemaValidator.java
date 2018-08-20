@@ -18,7 +18,6 @@ import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_description;
 import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_discriminator;
 import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_enums;
 import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_example;
-import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_examples;
 import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_exclusiveMaximum;
 import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_exclusiveMinimum;
 import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_externalDocs;
@@ -93,7 +92,6 @@ public class SchemaValidator extends ObjectValidatorBase<Schema> {
 		checkReadWrite(schema);
 		validateField(F_xml, false, Xml.class, new XmlValidator());
 		validateField(F_externalDocs, false, ExternalDocs.class, new ExternalDocsValidator());
-		validateMapField(F_examples, false, false, Example.class, new ExampleValidator());
 		validateExtensions(schema.getExtensions());
 	}
 

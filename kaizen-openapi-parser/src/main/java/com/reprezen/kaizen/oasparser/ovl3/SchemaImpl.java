@@ -18,7 +18,6 @@ import com.reprezen.jsonoverlay.OverlayFactory;
 import com.reprezen.jsonoverlay.PropertiesOverlay;
 import com.reprezen.jsonoverlay.ReferenceManager;
 import com.reprezen.jsonoverlay.StringOverlay;
-import com.reprezen.kaizen.oasparser.model3.Example;
 import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
 import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.Schema;
@@ -823,55 +822,6 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 	// Example
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public Map<String, Example> getExamples() {
-		return _getMap("examples", Example.class);
-	}
-
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public Map<String, Example> getExamples(boolean elaborate) {
-		return _getMap("examples", elaborate, Example.class);
-	}
-
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public boolean hasExamples() {
-		return _isPresent("examples");
-	}
-
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public boolean hasExample(String name) {
-		return _getMap("examples", Example.class).containsKey(name);
-	}
-
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public Example getExample(String name) {
-		return _get("examples", name, Example.class);
-	}
-
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public void setExamples(Map<String, Example> examples) {
-		_setMap("examples", examples, Example.class);
-	}
-
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public void setExample(String name, Example example) {
-		_set("examples", name, example, Example.class);
-	}
-
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public void removeExample(String name) {
-		_remove("examples", name, Example.class);
-	}
-
-	// Example
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public Object getExample() {
 		return _get("example", Object.class);
 	}
@@ -1054,9 +1004,6 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 	public static final String F_externalDocs = "externalDocs";
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public static final String F_examples = "examples";
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public static final String F_example = "example";
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -1103,7 +1050,6 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 		_createScalar("writeOnly", "writeOnly", BooleanOverlay.factory);
 		_createScalar("xml", "xml", XmlImpl.factory);
 		_createScalar("externalDocs", "externalDocs", ExternalDocsImpl.factory);
-		_createMap("examples", "examples", ExampleImpl.factory, "[a-zA-Z0-9\\._-]+");
 		_createScalar("example", "example", ObjectOverlay.factory);
 		_createScalar("deprecated", "deprecated", BooleanOverlay.factory);
 		_createMap("extensions", "", ObjectOverlay.factory, "x-.+");

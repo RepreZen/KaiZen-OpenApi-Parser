@@ -10,7 +10,6 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val3;
 
-import static com.reprezen.kaizen.oasparser.ovl3.LinkImpl.F_headers;
 import static com.reprezen.kaizen.oasparser.val.Messages.m;
 
 import java.util.Collection;
@@ -18,7 +17,6 @@ import java.util.Map;
 
 import com.google.common.collect.Maps;
 import com.reprezen.jsonoverlay.Overlay;
-import com.reprezen.kaizen.oasparser.model3.Header;
 import com.reprezen.kaizen.oasparser.model3.Link;
 import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.Operation;
@@ -38,7 +36,6 @@ public class LinkValidator extends ObjectValidatorBase<Link> {
 		if (op != null) {
 			checkParameters(link, op, results);
 		}
-		validateMapField(F_headers, false, false, Header.class, new HeaderValidator());
 		validateExtensions(link.getExtensions());
 	}
 

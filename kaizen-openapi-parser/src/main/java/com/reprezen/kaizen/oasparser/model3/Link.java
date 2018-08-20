@@ -50,31 +50,6 @@ public interface Link extends IJsonOverlay<Link>, IModelPart<OpenApi3, Link> {
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	void removeParameter(String name);
 
-	// Header
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	Map<String, Header> getHeaders();
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	Map<String, Header> getHeaders(boolean elaborate);
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	boolean hasHeaders();
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	boolean hasHeader(String name);
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	Header getHeader(String name);
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void setHeaders(Map<String, Header> headers);
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void setHeader(String name, Header header);
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void removeHeader(String name);
-
 	// Description
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	String getDescription();

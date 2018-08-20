@@ -65,6 +65,7 @@ public class BigParseTest extends Assert {
 		WalkMethod valueChecker = new WalkMethod() {
 			@Override
 			public void run(JsonNode node, JsonPointer path) {
+				@SuppressWarnings("unchecked")
 				JsonOverlay<?> overlay = Overlay.find((JsonOverlay<OpenApi3>) model, path);
 				Object value = overlay != null ? Overlay.get(overlay) : null;
 				assertNotNull("No overlay object found for path: " + path, overlay);

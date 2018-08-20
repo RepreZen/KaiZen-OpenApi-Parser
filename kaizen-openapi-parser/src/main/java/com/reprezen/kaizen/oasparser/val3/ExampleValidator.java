@@ -12,13 +12,12 @@ package com.reprezen.kaizen.oasparser.val3;
 
 import com.reprezen.kaizen.oasparser.model3.Example;
 import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
-import com.reprezen.kaizen.oasparser.val.ValidationResults;
 
 public class ExampleValidator extends ObjectValidatorBase<Example> {
 
 	@Override
-	public void validateObject(Example object, ValidationResults results) {
-		// TODO Auto-generated method stub
+	public void runObjectValidations() {
+		// nothing to check
 	}
 
 }

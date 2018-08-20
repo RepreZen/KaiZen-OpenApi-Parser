@@ -10,22 +10,19 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val3;
 
-import com.google.inject.Inject;
+import static com.reprezen.kaizen.oasparser.ovl3.CallbackImpl.F_callbackPaths;
+
 import com.reprezen.kaizen.oasparser.model3.Callback;
 import com.reprezen.kaizen.oasparser.model3.Path;
 import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
-import com.reprezen.kaizen.oasparser.val.ValidationResults;
-import com.reprezen.kaizen.oasparser.val.Validator;
 
 public class CallbackValidator extends ObjectValidatorBase<Callback> {
 
-	@Inject
-	private Validator<Path> pathValidator;
-
 	@Override
-	public void validateObject(Callback callback, ValidationResults results) {
-		validateMap(callback.getCallbackPaths(), results, false, null, Regexes.NOEXT_REGEX, pathValidator);
-		validateExtensions(callback.getExtensions(), results);
+	public void runObjectValidations() {
+		Callback callback = (Callback) value.getOverlay();
+		validateMapField(F_callbackPaths, false, false, Path.class, new PathValidator());
+		validateExtensions(callback.getExtensions());
 	}
 
 }

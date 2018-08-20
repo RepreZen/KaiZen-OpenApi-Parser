@@ -10,19 +10,23 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val3;
 
-import javax.print.attribute.standard.Severity;
+import static com.reprezen.kaizen.oasparser.ovl3.XmlImpl.F_attribute;
+import static com.reprezen.kaizen.oasparser.ovl3.XmlImpl.F_name;
+import static com.reprezen.kaizen.oasparser.ovl3.XmlImpl.F_namespace;
+import static com.reprezen.kaizen.oasparser.ovl3.XmlImpl.F_prefix;
 
 import com.reprezen.kaizen.oasparser.model3.Xml;
 import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
-import com.reprezen.kaizen.oasparser.val.ValidationResults;
 
 public class XmlValidator extends ObjectValidatorBase<Xml> {
 
 	@Override
-	public void validateObject(Xml xml, ValidationResults results) {
-		// no validation for: name, prefix, attribute, wrapped
-		validateUrl(xml.getNamespace(), results, false, "namespace", false, Severity.WARNING);
-		validateExtensions(xml.getExtensions(), results);
+	public void runObjectValidations() {
+		Xml xml = (Xml) value.getOverlay();
+		validateStringField(F_name, false);
+		validateStringField(F_prefix, false);
+		validateBooleanField(F_attribute, false);
+		validateUrlField(F_namespace, false, false);
+		validateExtensions(xml.getExtensions());
 	}
-
 }

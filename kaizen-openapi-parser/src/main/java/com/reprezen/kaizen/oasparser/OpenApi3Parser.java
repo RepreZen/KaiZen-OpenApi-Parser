@@ -16,17 +16,8 @@ import java.net.URL;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.reprezen.kaizen.oasparser.model3.OpenApi3;
-import com.reprezen.kaizen.oasparser.val3.ValidationConfigurator;
 
 public class OpenApi3Parser extends OpenApiParser {
-
-	public OpenApi3Parser() {
-		super();
-	}
-
-	public OpenApi3Parser(ValidationConfigurator validationConfigurator) {
-		super(validationConfigurator);
-	}
 
 	@Override
 	public OpenApi3 parse(String spec, URL resolutionBase) {
@@ -80,7 +71,8 @@ public class OpenApi3Parser extends OpenApiParser {
 
 	@Override
 	protected boolean isVersion3(JsonNode tree) {
-		return true; // if 'openapi' property is missing or incorrect, that will show up as a
-						// validation error
+		return true; // if 'openapi' property is missing or incorrect, that will
+		// show up as a
+		// validation error
 	}
 }

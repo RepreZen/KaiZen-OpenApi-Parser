@@ -10,30 +10,24 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val3;
 
-import com.google.inject.Inject;
+import static com.reprezen.kaizen.oasparser.ovl3.ResponseImpl.F_contentMediaTypes;
+import static com.reprezen.kaizen.oasparser.ovl3.ResponseImpl.F_headers;
+import static com.reprezen.kaizen.oasparser.ovl3.ResponseImpl.F_links;
+
 import com.reprezen.kaizen.oasparser.model3.Header;
 import com.reprezen.kaizen.oasparser.model3.Link;
 import com.reprezen.kaizen.oasparser.model3.MediaType;
 import com.reprezen.kaizen.oasparser.model3.Response;
 import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
-import com.reprezen.kaizen.oasparser.val.ValidationResults;
-import com.reprezen.kaizen.oasparser.val.Validator;
 
 public class ResponseValidator extends ObjectValidatorBase<Response> {
 
-	@Inject
-	private Validator<Header> headerValidator;
-	@Inject
-	private Validator<MediaType> mediaTypeValidator;
-	@Inject
-	private Validator<Link> linkValidator;
-
 	@Override
-	public void validateObject(Response response, ValidationResults results) {
-		validateMap(response.getHeaders(), results, false, "headers", null, headerValidator);
-		validateMap(response.getContentMediaTypes(), results, false, "content", Regexes.NOEXT_REGEX,
-				mediaTypeValidator);
-		validateMap(response.getLinks(), results, false, "links", Regexes.NOEXT_NAME_REGEX, linkValidator);
-		validateExtensions(response.getExtensions(), results);
+	public void runObjectValidations() {
+		Response response = (Response) value.getOverlay();
+		validateMapField(F_headers, false, false, Header.class, new HeaderValidator());
+		validateMapField(F_contentMediaTypes, false, false, MediaType.class, new MediaTypeValidator());
+		validateMapField(F_links, false, false, Link.class, new LinkValidator());
+		validateExtensions(response.getExtensions());
 	}
 }

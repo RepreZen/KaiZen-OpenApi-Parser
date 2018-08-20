@@ -10,27 +10,25 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val3;
 
-import com.google.inject.Inject;
+import static com.reprezen.kaizen.oasparser.ovl3.InfoImpl.F_contact;
+import static com.reprezen.kaizen.oasparser.ovl3.InfoImpl.F_license;
+import static com.reprezen.kaizen.oasparser.ovl3.InfoImpl.F_title;
+import static com.reprezen.kaizen.oasparser.ovl3.InfoImpl.F_version;
+
 import com.reprezen.kaizen.oasparser.model3.Contact;
 import com.reprezen.kaizen.oasparser.model3.Info;
 import com.reprezen.kaizen.oasparser.model3.License;
 import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
-import com.reprezen.kaizen.oasparser.val.ValidationResults;
-import com.reprezen.kaizen.oasparser.val.Validator;
 
 public class InfoValidator extends ObjectValidatorBase<Info> {
 
-	@Inject
-	private Validator<Contact> contactValidator;
-	@Inject
-	private Validator<License> licenseValidator;
-
 	@Override
-	public void validateObject(Info info, ValidationResults results) {
-		validateString(info.getTitle(), results, true, "title");
-		validateField(info.getContact(false), results, false, "contact", contactValidator);
-		validateField(info.getLicense(false), results, false, "license", licenseValidator);
-		validateString(info.getVersion(), results, true, "version");
-		validateExtensions(info.getExtensions(), results);
+	public void runObjectValidations() {
+		Info info = (Info) value.getOverlay();
+		validateStringField(F_title, true);
+		validateField(F_contact, false, Contact.class, new ContactValidator());
+		validateField(F_license, false, License.class, new LicenseValidator());
+		validateStringField(F_version, true);
+		validateExtensions(info.getExtensions());
 	}
 }

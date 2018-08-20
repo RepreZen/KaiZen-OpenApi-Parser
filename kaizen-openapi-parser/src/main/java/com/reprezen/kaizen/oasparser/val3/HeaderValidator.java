@@ -10,40 +10,46 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val3;
 
+import static com.reprezen.kaizen.oasparser.ovl3.HeaderImpl.F_allowEmptyValue;
+import static com.reprezen.kaizen.oasparser.ovl3.HeaderImpl.F_contentMediaTypes;
+import static com.reprezen.kaizen.oasparser.ovl3.HeaderImpl.F_deprecated;
+import static com.reprezen.kaizen.oasparser.ovl3.HeaderImpl.F_description;
+import static com.reprezen.kaizen.oasparser.ovl3.HeaderImpl.F_example;
+import static com.reprezen.kaizen.oasparser.ovl3.HeaderImpl.F_examples;
+import static com.reprezen.kaizen.oasparser.ovl3.HeaderImpl.F_explode;
+import static com.reprezen.kaizen.oasparser.ovl3.HeaderImpl.F_schema;
+import static com.reprezen.kaizen.oasparser.ovl3.HeaderImpl.F_style;
 import static com.reprezen.kaizen.oasparser.val.Messages.m;
 
-import com.google.inject.Inject;
 import com.reprezen.jsonoverlay.Overlay;
 import com.reprezen.jsonoverlay.PropertiesOverlay;
+import com.reprezen.kaizen.oasparser.model3.Example;
 import com.reprezen.kaizen.oasparser.model3.Header;
 import com.reprezen.kaizen.oasparser.model3.MediaType;
 import com.reprezen.kaizen.oasparser.model3.Path;
 import com.reprezen.kaizen.oasparser.model3.Schema;
 import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
 import com.reprezen.kaizen.oasparser.val.ValidationResults;
-import com.reprezen.kaizen.oasparser.val.Validator;
 
 public class HeaderValidator extends ObjectValidatorBase<Header> {
 
-	@Inject
-	private Validator<Schema> schemaValidator;
-	@Inject
-	private Validator<MediaType> mediaTypeValidator;
-
 	@Override
-	public void validateObject(Header header, ValidationResults results) {
-		// no validations for: description, deprecated, allowEmptyValue, explode,
-		// example, examples
-		validateString(header.getName(), results, false, "name");
-		validateString(header.getIn(), results, false, Regexes.PARAM_IN_REGEX, "in");
+	public void runObjectValidations() {
+		Header header = (Header) value.getOverlay();
+		validateStringField(F_description, false);
+		validateBooleanField(F_deprecated, false);
+		validateBooleanField(F_allowEmptyValue, false);
+		validateBooleanField(F_explode, false);
+		validateField(F_example, false, Example.class, new ExampleValidator());
+		validateMapField(F_examples, false, false, Example.class, new ExampleValidator());
 		checkPathParam(header, results);
 		checkRequired(header, results);
-		validateString(header.getStyle(), results, false, Regexes.STYLE_REGEX, "style");
+		validateStringField(F_style, false, Regexes.STYLE_REGEX);
 		checkAllowReserved(header, results);
 		// TODO Q: Should schema be required in header object?
-		validateField(header.getSchema(false), results, false, "schema", schemaValidator);
-		validateMap(header.getContentMediaTypes(), results, false, "content", Regexes.NOEXT_REGEX, mediaTypeValidator);
-		validateExtensions(header.getExtensions(), results);
+		validateField(F_schema, false, Schema.class, new SchemaValidator());
+		validateMapField(F_contentMediaTypes, false, false, MediaType.class, new MediaTypeValidator());
+		validateExtensions(header.getExtensions());
 	}
 
 	private void checkPathParam(Header header, ValidationResults results) {
@@ -52,11 +58,11 @@ public class HeaderValidator extends ObjectValidatorBase<Header> {
 			if (path != null) {
 				if (!path.matches(".*/\\{" + header.getName() + "\\}(/.*)?")) {
 					results.addError(m.msg("MissingPathTplt|No template for path parameter in path string",
-							header.getName(), path), "name");
+							header.getName(), path), value);
 				}
 			} else {
 				results.addWarning(
-						m.msg("NoPath|Could not locate path for parameter", header.getName(), header.getIn()));
+						m.msg("NoPath|Could not locate path for parameter", header.getName(), header.getIn()), value);
 			}
 		}
 	}
@@ -66,7 +72,7 @@ public class HeaderValidator extends ObjectValidatorBase<Header> {
 			if (header.getRequired() != Boolean.TRUE) {
 				results.addError(
 						m.msg("PathParamReq|Path param must have 'required' property set true", header.getName()),
-						"required");
+						value);
 			}
 		}
 	}
@@ -74,7 +80,7 @@ public class HeaderValidator extends ObjectValidatorBase<Header> {
 	private void checkAllowReserved(Header header, ValidationResults results) {
 		if (header.isAllowReserved() && !"query".equals(header.getIn())) {
 			results.addWarning(m.msg("NonQryAllowRsvd|AllowReserved is ignored for non-query parameter",
-					header.getName(), header.getIn()), "allowReserved");
+					header.getName(), header.getIn()), value);
 		}
 	}
 

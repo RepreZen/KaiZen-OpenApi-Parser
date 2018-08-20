@@ -10,19 +10,23 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val3;
 
+import static com.reprezen.kaizen.oasparser.ovl3.OAuthFlowImpl.F_authorizationUrl;
+import static com.reprezen.kaizen.oasparser.ovl3.OAuthFlowImpl.F_refreshUrl;
+import static com.reprezen.kaizen.oasparser.ovl3.OAuthFlowImpl.F_scopes;
+import static com.reprezen.kaizen.oasparser.ovl3.OAuthFlowImpl.F_tokenUrl;
+
 import com.reprezen.kaizen.oasparser.model3.OAuthFlow;
 import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
-import com.reprezen.kaizen.oasparser.val.ValidationResults;
 
 public class OAuthFlowValidator extends ObjectValidatorBase<OAuthFlow> {
 
 	@Override
-	public void validateObject(OAuthFlow oauthFlow, ValidationResults results) {
-		validateUrl(oauthFlow.getAuthorizationUrl(), results, true, "authorizationUrl");
-		validateUrl(oauthFlow.getTokenUrl(), results, true, "tokenUrl");
-		validateUrl(oauthFlow.getRefreshUrl(), results, true, "refreshUrl");
-		validateMap(oauthFlow.getScopes(), results, true, "scopes", Regexes.NOEXT_REGEX, null);
-		validateExtensions(oauthFlow.getExtensions(), results);
+	public void runObjectValidations() {
+		OAuthFlow oauthFlow = (OAuthFlow) value.getOverlay();
+		validateUrlField(F_authorizationUrl, true, false);
+		validateUrlField(F_tokenUrl, true, false);
+		validateUrlField(F_refreshUrl, true, false);
+		validateMapField(F_scopes, true, false, String.class, null);
+		validateExtensions(oauthFlow.getExtensions());
 	}
-
 }

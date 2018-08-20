@@ -3,12 +3,13 @@ imports:
   OpenApi: com.reprezen.kaizen.oasparser.OpenApi
   Validator: com.reprezen.kaizen.oasparser.val.Validator
   ValidationResults: com.reprezen.kaizen.oasparser.val.ValidationResults
+  ValidationResultsInstance: com.reprezen.kaizen.oasparser.val.ValidationResults.ValidationResultsInstance  
   Severity: com.reprezen.kaizen.oasparser.val.ValidationResults.Severity
   OpenApi3Validator: com.reprezen.kaizen.oasparser.val3.OpenApi3Validator
   Overlay: com.reprezen.jsonoverlay.Overlay
   Collection: java.util.Collection
   ReferenceRegistry: com.reprezen.jsonoverlay.ReferenceRegistry
-  Inject: com.google.inject.Inject  
+  Inject: com.google.inject.Inject
 decls:
   - extPat: &extPat "x-.+"
   - noextPat: &noextPat "(?!x-).*"
@@ -27,7 +28,7 @@ types:
   - name: OpenApi3
     imports: 
       intf:  [ ValidationResults, Collection ]
-      impl: [ OpenApi3Validator, Validator, ValidationResults, Severity, Inject, ReferenceRegistry, ObjectNode, JsonNodeFactory, Collection ]
+      impl: [ OpenApi3Validator, Validator, ValidationResults, ValidationResultsInstance, Severity, ReferenceRegistry, Overlay, ObjectNode, JsonNodeFactory, Collection ]
     extendInterfaces: [OpenApi<OpenApi3>]
     fields:
       openapi:

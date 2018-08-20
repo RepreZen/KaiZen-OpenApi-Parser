@@ -1,7 +1,6 @@
 package com.reprezen.swaggerparser.test;
 
 import java.net.URL;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -47,10 +46,11 @@ public class OverlayAdapterTests extends Assert {
 
 	@Test
 	public void testMapAdapter() {
-		Overlay<?> mapOverlay = Overlay.of(model, "paths", Map.class);
-		assertTrue(mapOverlay.getMapOverlay() instanceof MapOverlay);
 		@SuppressWarnings("unchecked")
-		MapOverlay<Path> castMapOverlay = (MapOverlay<Path>) mapOverlay.getMapOverlay();
+		Overlay<Map<String, Path>> mapOverlay = (Overlay<Map<String, Path>>) (Object) Overlay.of(model, "paths",
+				Map.class);
+		MapOverlay<Path> castMapOverlay = Overlay.getMapOverlay(mapOverlay);
+		assertTrue(castMapOverlay instanceof MapOverlay);
 		Path path = Overlay.of(castMapOverlay, "/2.0/users/{username}").get();
 		assertTrue(model.getPath("/2.0/users/{username}") == path);
 	}
@@ -58,10 +58,11 @@ public class OverlayAdapterTests extends Assert {
 	@Test
 	public void testListAdapter() {
 		Operation method = model.getPath("/2.0/repositories/{username}/{slug}").getGet();
-		Overlay<?> listOverlay = Overlay.of(method, "parameters", Collection.class);
-		assertTrue(listOverlay.getListOverlay() instanceof ListOverlay);
 		@SuppressWarnings("unchecked")
-		ListOverlay<Parameter> castListOverlay = (ListOverlay<Parameter>) listOverlay.getListOverlay();
+		Overlay<List<Parameter>> listOverlay = (Overlay<List<Parameter>>) (Object) Overlay.of(method, "parameters",
+				List.class);
+		ListOverlay<Parameter> castListOverlay = Overlay.getListOverlay(listOverlay);
+		assertTrue(castListOverlay instanceof ListOverlay);
 		Parameter param = Overlay.of(castListOverlay, 1).get();
 		assertTrue(method.getParameter(1) == param);
 	}

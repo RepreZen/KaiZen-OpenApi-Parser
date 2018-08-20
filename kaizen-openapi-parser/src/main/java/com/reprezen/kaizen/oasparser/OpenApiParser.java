@@ -17,26 +17,12 @@ import java.net.URI;
 import java.net.URL;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
 import com.reprezen.jsonoverlay.JsonLoader;
 import com.reprezen.jsonoverlay.ReferenceManager;
 import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.ovl3.OpenApi3Impl;
-import com.reprezen.kaizen.oasparser.val3.ValidationConfigurator;
-import com.reprezen.kaizen.oasparser.val3.ovl.OverlayValidationConfigurator;
 
 public class OpenApiParser {
-
-	private Injector injector;
-
-	public OpenApiParser() {
-		this(new OverlayValidationConfigurator());
-	}
-
-	public OpenApiParser(ValidationConfigurator validationConfigurator) {
-		this.injector = Guice.createInjector(validationConfigurator);
-	}
 
 	public OpenApi<?> parse(String spec, URL resolutionBase) {
 		return parse(spec, resolutionBase, true);
@@ -101,7 +87,6 @@ public class OpenApiParser {
 			if (isVersion3(tree)) {
 				OpenApi3 model = (OpenApi3) OpenApi3Impl.factory.create(tree, null, manager);
 				((OpenApi3Impl) model)._setCreatingRef(manager.getDocReference());
-				injector.injectMembers(model);
 				if (validate) {
 					model.validate();
 				}

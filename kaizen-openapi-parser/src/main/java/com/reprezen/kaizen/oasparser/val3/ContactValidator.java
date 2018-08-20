@@ -10,17 +10,19 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val3;
 
+import static com.reprezen.kaizen.oasparser.ovl3.ContactImpl.F_email;
+import static com.reprezen.kaizen.oasparser.ovl3.ContactImpl.F_url;
+
 import com.reprezen.kaizen.oasparser.model3.Contact;
 import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
-import com.reprezen.kaizen.oasparser.val.ValidationResults;
 
 public class ContactValidator extends ObjectValidatorBase<Contact> {
 
 	@Override
-	public void validateObject(Contact contact, ValidationResults results) {
-		validateUrl(contact.getUrl(), results, false, "url");
-		validateEmail(contact.getEmail(), results, false, "email");
-		validateExtensions(contact.getExtensions(), results);
+	public void runObjectValidations() {
+		Contact contact = (Contact) value.getOverlay();
+		validateUrlField(F_url, false, false);
+		validateEmailField(F_email, false);
+		validateExtensions(contact.getExtensions());
 	}
-
 }

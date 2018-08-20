@@ -10,17 +10,19 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val3;
 
+import static com.reprezen.kaizen.oasparser.ovl3.ExternalDocsImpl.F_description;
+import static com.reprezen.kaizen.oasparser.ovl3.ExternalDocsImpl.F_url;
+
 import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
 import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
-import com.reprezen.kaizen.oasparser.val.ValidationResults;
 
 public class ExternalDocsValidator extends ObjectValidatorBase<ExternalDocs> {
 
 	@Override
-	public void validateObject(ExternalDocs externalDocs, ValidationResults results) {
-		// no validation for: description
-		validateUrl(externalDocs.getUrl(), results, true, "externalDocs");
-		validateExtensions(externalDocs.getExtensions(), results);
+	public void runObjectValidations() {
+		ExternalDocs externalDocs = (ExternalDocs) value.getOverlay();
+		validateStringField(F_description, false);
+		validateUrlField(F_url, true, false);
+		validateExtensions(externalDocs.getExtensions());
 	}
-
 }

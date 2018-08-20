@@ -10,23 +10,20 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val3;
 
-import com.google.inject.Inject;
+import static com.reprezen.kaizen.oasparser.ovl3.TagImpl.F_externalDocs;
+import static com.reprezen.kaizen.oasparser.ovl3.TagImpl.F_name;
+
 import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
 import com.reprezen.kaizen.oasparser.model3.Tag;
 import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
-import com.reprezen.kaizen.oasparser.val.ValidationResults;
-import com.reprezen.kaizen.oasparser.val.Validator;
 
 public class TagValidator extends ObjectValidatorBase<Tag> {
 
-	@Inject
-	private Validator<ExternalDocs> externalDocsValidator;
-
 	@Override
-	public void validateObject(Tag tag, ValidationResults results) {
-		validateString(tag.getName(), results, true, "name");
-		validateField(tag.getExternalDocs(false), results, false, "externalDocs", externalDocsValidator);
-		validateExtensions(tag.getExtensions(), results);
+	public void runObjectValidations() {
+		Tag tag = (Tag) value.getOverlay();
+		validateStringField(F_name, true);
+		validateField(F_externalDocs, false, ExternalDocs.class, new ExternalDocsValidator());
+		validateExtensions(tag.getExtensions());
 	}
-
 }

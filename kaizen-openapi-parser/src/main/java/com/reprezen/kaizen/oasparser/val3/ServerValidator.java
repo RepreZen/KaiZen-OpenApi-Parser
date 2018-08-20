@@ -10,25 +10,22 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val3;
 
-import static com.reprezen.kaizen.oasparser.val3.Regexes.NAME_REGEX;
+import static com.reprezen.kaizen.oasparser.ovl3.ServerImpl.F_description;
+import static com.reprezen.kaizen.oasparser.ovl3.ServerImpl.F_serverVariables;
+import static com.reprezen.kaizen.oasparser.ovl3.ServerImpl.F_url;
 
-import com.google.inject.Inject;
 import com.reprezen.kaizen.oasparser.model3.Server;
 import com.reprezen.kaizen.oasparser.model3.ServerVariable;
 import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
-import com.reprezen.kaizen.oasparser.val.ValidationResults;
-import com.reprezen.kaizen.oasparser.val.Validator;
 
 public class ServerValidator extends ObjectValidatorBase<Server> {
 
-	@Inject
-	private Validator<ServerVariable> serverVariableValidator;
-
 	@Override
-	public void validateObject(Server server, ValidationResults results) {
-		// no validation for: description
-		validateUrl(server.getUrl(), results, false, "url", true);
-		validateMap(server.getServerVariables(), results, false, "variables", NAME_REGEX, serverVariableValidator);
-		validateExtensions(server.getExtensions(), results);
+	public void runObjectValidations() {
+		Server server = (Server) value.getOverlay();
+		validateStringField(F_description, false);
+		validateUrlField(F_url, false, true);
+		validateMapField(F_serverVariables, false, false, ServerVariable.class, new ServerVariableValidator());
+		validateExtensions(server.getExtensions());
 	}
 }

@@ -17,150 +17,133 @@ import static com.reprezen.kaizen.oasparser.val.ValidationResults.Severity.NONE;
 import static com.reprezen.kaizen.oasparser.val.ValidationResults.Severity.WARNING;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.Lists;
-import com.reprezen.jsonoverlay.JsonOverlay;
+import com.reprezen.jsonoverlay.Overlay;
+import com.reprezen.jsonoverlay.PositionInfo;
 
 public class ValidationResults {
 
-    public enum Severity {
-        NONE, INFO, WARNING, ERROR;
+	private static ThreadLocal<ValidationResults> threadInstance = new ThreadLocal<ValidationResults>();
 
-        public static final Severity MAX_SEVERITY = ERROR;
+	private ValidationResults() {
+	}
 
-        public boolean lt(Severity other) {
-            return this.compareTo(other) < 0;
-        }
+	public static class ValidationResultsInstance implements AutoCloseable {
 
-        public boolean le(Severity other) {
-            return this.compareTo(other) <= 0;
-        }
+		private ValidationResults results;
 
-        public boolean gt(Severity other) {
-            return this.compareTo(other) > 0;
-        }
+		public ValidationResultsInstance() {
+			results = threadInstance.get();
+			if (results == null) {
+				results = new ValidationResults();
+				threadInstance.set(results);
+			}
+		}
 
-        public boolean ge(Severity other) {
-            return this.compareTo(other) >= 0;
-        }
-    };
+		public ValidationResults get() {
+			return results;
+		}
 
-    List<ValidationItem> items = Lists.newArrayList();
-    List<String> crumbs = Collections.emptyList();
+		@Override
+		public void close() {
+			threadInstance.remove();
+		}
+	}
 
-    public void addInfo(String msg) {
-        items.add(new ValidationItem(INFO, msg, crumbs));
-    }
+	public static ValidationResultsInstance open() {
+		return new ValidationResultsInstance();
+	}
 
-    public void addInfo(String msg, String crumb) {
-        items.add(new ValidationItem(INFO, msg, crumbs, crumb));
-    }
+	public static ValidationResults get() {
+		return threadInstance.get();
+	}
 
-    public void addWarning(String msg) {
-        items.add(new ValidationItem(WARNING, msg, crumbs));
-    }
+	public enum Severity {
+		NONE, INFO, WARNING, ERROR;
 
-    public void addWarning(String msg, String crumb) {
-        items.add(new ValidationItem(WARNING, msg, crumbs, crumb));
-    }
+		public static final Severity MAX_SEVERITY = ERROR;
 
-    public void addError(String msg) {
-        items.add(new ValidationItem(ERROR, msg, crumbs));
-    }
+		public boolean lt(Severity other) {
+			return this.compareTo(other) < 0;
+		}
 
-    public void addError(String msg, String crumb) {
-        items.add(new ValidationItem(ERROR, msg, crumbs, crumb));
-    }
+		public boolean le(Severity other) {
+			return this.compareTo(other) <= 0;
+		}
 
-    public void add(ValidationResults results) {
-        items.addAll(results.getItems());
-    }
+		public boolean gt(Severity other) {
+			return this.compareTo(other) > 0;
+		}
 
-    public Collection<ValidationItem> getItems() {
-        return items;
-    }
+		public boolean ge(Severity other) {
+			return this.compareTo(other) >= 0;
+		}
+	};
 
-    public Severity getSeverity() {
-        Severity severity = NONE;
-        for (ValidationItem item : items) {
-            if (item.getSeverity().gt(severity)) {
-                severity = item.getSeverity();
-                if (severity == MAX_SEVERITY) {
-                    break;
-                }
-            }
-        }
-        return severity;
-    }
+	List<ValidationItem> items = Lists.newArrayList();
 
-    public <T extends JsonOverlay<?>> void validateWithCrumb(String crumb, Validator<T> validator, T object) {
-        List<String> priorCrumbs = crumbs;
-        try {
-            if (crumb != null) {
-                crumbs = appendCrumb(crumb, priorCrumbs);
-            }
-            validator.validate(object, this);
-        } finally {
-            crumbs = priorCrumbs;
-        }
-    }
+	public <V> void addInfo(String msg, Overlay<V> context) {
+		items.add(new ValidationItem(INFO, msg, context));
+	}
 
-    public void withCrumb(String crumb, Runnable code) {
-        List<String> priorCrumbs = crumbs;
-        try {
-            crumbs = appendCrumb(crumb, priorCrumbs);
-            code.run();
-        } finally {
-            crumbs = priorCrumbs;
-        }
-    }
+	public void addWarning(String msg, Overlay<?> context) {
+		items.add(new ValidationItem(WARNING, msg, context));
+	}
 
-    private static List<String> appendCrumb(String crumb, List<String> existingCrumbs) {
-        if (crumb != null) {
-            List<String> newCrumbs = Lists.newArrayList(existingCrumbs);
-            newCrumbs.add(crumb);
-            return newCrumbs;
-        } else {
-            return existingCrumbs;
-        }
-    }
+	public void addError(String msg, Overlay<?> context) {
+		items.add(new ValidationItem(ERROR, msg, context));
+	}
 
-    public static class ValidationItem {
-        private Severity severity;
-        private String msg;
-        private List<String> crumbs;
+	public void add(ValidationResults results) {
+		items.addAll(results.getItems());
+	}
 
-        public ValidationItem(Severity severity, String msg, List<String> crumbs) {
-            super();
-            this.severity = severity;
-            this.msg = msg;
-            this.crumbs = crumbs;
-        }
+	public Collection<ValidationItem> getItems() {
+		return items;
+	}
 
-        public ValidationItem(Severity severity, String msg, List<String> crumbs, String crumb) {
-            this(severity, msg, appendCrumb(crumb, crumbs));
-        }
+	public Severity getSeverity() {
+		Severity severity = NONE;
+		for (ValidationItem item : items) {
+			if (item.getSeverity().gt(severity)) {
+				severity = item.getSeverity();
+				if (severity == MAX_SEVERITY) {
+					break;
+				}
+			}
+		}
+		return severity;
+	}
 
-        public Severity getSeverity() {
-            return severity;
-        }
+	public static class ValidationItem {
+		private Severity severity;
+		private String msg;
+		private PositionInfo positionInfo;
 
-        public String getMsg() {
-            return msg;
-        }
+		public ValidationItem(Severity severity, String msg, Overlay<?> context) {
+			this.severity = severity;
+			this.msg = msg;
+			this.positionInfo = context != null ? context.getPositionInfo().orElse(null) : null;
+		}
 
-        public List<String> getCrumbs() {
-            return crumbs;
-        }
+		public Severity getSeverity() {
+			return severity;
+		}
 
-        @Override
-        public String toString() {
-            String label = crumbs != null & !crumbs.isEmpty() ? StringUtils.join(crumbs, '.') + ": " : "";
-            return label + msg;
-        }
-    }
+		public String getMsg() {
+			return msg;
+		}
+
+		public PositionInfo getPositionInfo() {
+			return positionInfo;
+		}
+
+		@Override
+		public String toString() {
+			String posString = positionInfo != null ? positionInfo.toString(true) + ": " : "";
+			return posString + msg;
+		}
+	}
 }

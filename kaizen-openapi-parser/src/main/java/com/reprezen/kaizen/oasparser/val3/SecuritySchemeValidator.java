@@ -10,47 +10,53 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val3;
 
-import com.google.inject.Inject;
+import static com.reprezen.kaizen.oasparser.ovl3.SecuritySchemeImpl.F_authorizationCodeOAuthFlow;
+import static com.reprezen.kaizen.oasparser.ovl3.SecuritySchemeImpl.F_bearerFormat;
+import static com.reprezen.kaizen.oasparser.ovl3.SecuritySchemeImpl.F_clientCredentialsOAuthFlow;
+import static com.reprezen.kaizen.oasparser.ovl3.SecuritySchemeImpl.F_description;
+import static com.reprezen.kaizen.oasparser.ovl3.SecuritySchemeImpl.F_implicitOAuthFlow;
+import static com.reprezen.kaizen.oasparser.ovl3.SecuritySchemeImpl.F_in;
+import static com.reprezen.kaizen.oasparser.ovl3.SecuritySchemeImpl.F_name;
+import static com.reprezen.kaizen.oasparser.ovl3.SecuritySchemeImpl.F_openIdConnectUrl;
+import static com.reprezen.kaizen.oasparser.ovl3.SecuritySchemeImpl.F_passwordOAuthFlow;
+import static com.reprezen.kaizen.oasparser.ovl3.SecuritySchemeImpl.F_scheme;
+import static com.reprezen.kaizen.oasparser.ovl3.SecuritySchemeImpl.F_type;
+
 import com.reprezen.kaizen.oasparser.model3.OAuthFlow;
 import com.reprezen.kaizen.oasparser.model3.SecurityScheme;
 import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
-import com.reprezen.kaizen.oasparser.val.ValidationResults;
-import com.reprezen.kaizen.oasparser.val.Validator;
 
 public class SecuritySchemeValidator extends ObjectValidatorBase<SecurityScheme> {
 
-	@Inject
-	private Validator<OAuthFlow> oauthFlowValidator;
-
 	@Override
-	public void validateObject(SecurityScheme securityScheme, ValidationResults results) {
-		// no validation for: description, bearerFormat
-		validateString(securityScheme.getType(), results, true, "apiKey|http|oauth2|openIdConnect", "type");
-		switch (securityScheme.getType()) {
-		case "http":
-			validateString(securityScheme.getScheme(), results, true, "scheme");
-			// If bearer validate bearerFormat
-			break;
-		case "apiKey":
-			validateString(securityScheme.getName(), results, true, "name");
-			validateString(securityScheme.getIn(), results, true, "query|header|cookie", "in");
-			break;
-		case "oauth2":
-			validateField(securityScheme.getImplicitOAuthFlow(false), results, false, "flow.implicit",
-					oauthFlowValidator);
-			validateField(securityScheme.getImplicitOAuthFlow(false), results, false, "flow.password",
-					oauthFlowValidator);
-			validateField(securityScheme.getImplicitOAuthFlow(false), results, false, "flow.clientCredentials",
-					oauthFlowValidator);
-			validateField(securityScheme.getImplicitOAuthFlow(false), results, false, "authorizationCode",
-					oauthFlowValidator);
-			validateExtensions(securityScheme.getOAuthFlowsExtensions(), results, "flow");
-			break;
-		case "openIdConnect":
-			validateUrl(securityScheme.getOpenIdConnectUrl(), results, true, "openIdConnectUrl");
-			break;
+	public void runObjectValidations() {
+		SecurityScheme securityScheme = (SecurityScheme) value.getOverlay();
+		validateStringField(F_description, false);
+		validateStringField(F_type, true, "apiKey|http|oauth2|openIdConnect");
+		String type = securityScheme.getType();
+		if (type != null) {
+			switch (type) {
+			case "http":
+				validateStringField(F_scheme, true);
+				validateStringField(F_bearerFormat, false);
+				break;
+			case "apiKey":
+				validateStringField(F_name, true);
+				validateStringField(F_in, true, "query|header|cookie");
+				break;
+			case "oauth2": {
+				OAuthFlowValidator oauthFlowValidator = new OAuthFlowValidator();
+				validateField(F_implicitOAuthFlow, false, OAuthFlow.class, oauthFlowValidator);
+				validateField(F_passwordOAuthFlow, false, OAuthFlow.class, oauthFlowValidator);
+				validateField(F_clientCredentialsOAuthFlow, false, OAuthFlow.class, oauthFlowValidator);
+				validateField(F_authorizationCodeOAuthFlow, false, OAuthFlow.class, oauthFlowValidator);
+				break;
+			}
+			case "openIdConnect":
+				validateUrlField(F_openIdConnectUrl, true, false);
+				break;
+			}
 		}
-		validateExtensions(securityScheme.getExtensions(), results);
+		validateExtensions(securityScheme.getExtensions());
 	}
-
 }

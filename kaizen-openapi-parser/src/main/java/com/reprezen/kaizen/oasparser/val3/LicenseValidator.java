@@ -10,17 +10,20 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val3;
 
+import static com.reprezen.kaizen.oasparser.ovl3.LicenseImpl.F_name;
+import static com.reprezen.kaizen.oasparser.ovl3.LicenseImpl.F_url;
+
 import com.reprezen.kaizen.oasparser.model3.License;
 import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
-import com.reprezen.kaizen.oasparser.val.ValidationResults;
 
 public class LicenseValidator extends ObjectValidatorBase<License> {
 
 	@Override
-	public void validateObject(License license, ValidationResults results) {
-		validateString(license.getName(), results, true, "name");
-		validateUrl(license.getUrl(), results, false, "url");
-		validateExtensions(license.getExtensions(), results);
+	public void runObjectValidations() {
+		License license = (License) value.getOverlay();
+		validateStringField(F_name, true);
+		validateUrlField(F_url, false, false);
+		validateExtensions(license.getExtensions());
 	}
 
 }

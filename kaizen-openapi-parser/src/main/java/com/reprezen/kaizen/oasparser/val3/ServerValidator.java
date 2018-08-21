@@ -24,7 +24,7 @@ public class ServerValidator extends ObjectValidatorBase<Server> {
 	public void runObjectValidations() {
 		Server server = (Server) value.getOverlay();
 		validateStringField(F_description, false);
-		validateUrlField(F_url, false, true);
+		validateUrlField(F_url, true, true);
 		validateMapField(F_serverVariables, false, false, ServerVariable.class, new ServerVariableValidator());
 		validateExtensions(server.getExtensions());
 	}

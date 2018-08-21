@@ -45,7 +45,6 @@ import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_xml;
 import static com.reprezen.kaizen.oasparser.val.Messages.m;
 
 import com.reprezen.jsonoverlay.Overlay;
-import com.reprezen.kaizen.oasparser.model3.Example;
 import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
 import com.reprezen.kaizen.oasparser.model3.Schema;
 import com.reprezen.kaizen.oasparser.model3.Xml;
@@ -64,7 +63,7 @@ public class SchemaValidator extends ObjectValidatorBase<Schema> {
 		validateBooleanField(F_exclusiveMinimum, false);
 		validateBooleanField(F_uniqueItems, false);
 		validateBooleanField(F_nullable, false);
-		validateField(F_example, false, Example.class, new ExampleValidator());
+		validateField(F_example, false, Object.class, null);
 		validateBooleanField(F_deprecated, false);
 		validatePositiveField(F_multipleOf, false);
 		validateNonNegativeField(F_maxLength, false);

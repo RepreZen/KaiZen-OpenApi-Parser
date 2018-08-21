@@ -25,7 +25,7 @@ public class OAuthFlowValidator extends ObjectValidatorBase<OAuthFlow> {
 		OAuthFlow oauthFlow = (OAuthFlow) value.getOverlay();
 		validateUrlField(F_authorizationUrl, true, false);
 		validateUrlField(F_tokenUrl, true, false);
-		validateUrlField(F_refreshUrl, true, false);
+		validateUrlField(F_refreshUrl, false, false);
 		validateMapField(F_scopes, true, false, String.class, null);
 		validateExtensions(oauthFlow.getExtensions());
 	}

@@ -67,6 +67,13 @@ public interface Link extends IJsonOverlay<Link>, IModelPart<OpenApi3, Link> {
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	void setServer(Server server);
 
+	// RequestBody
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Object getRequestBody();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setRequestBody(Object requestBody);
+
 	// Extension
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	Map<String, Object> getExtensions();

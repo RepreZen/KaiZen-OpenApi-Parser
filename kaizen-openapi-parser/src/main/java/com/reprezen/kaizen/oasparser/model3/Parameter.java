@@ -11,125 +11,30 @@ public interface Parameter extends IJsonOverlay<Parameter>, IModelPart<OpenApi3,
 
 	String getKey();
 
-	// Name
+	// Extension
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	String getName();
+	Map<String, Object> getExtensions();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void setName(String name);
-
-	// In
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	String getIn();
+	Map<String, Object> getExtensions(boolean elaborate);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void setIn(String in);
-
-	// Description
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	String getDescription();
+	boolean hasExtensions();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void setDescription(String description);
-
-	// Required
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	Boolean getRequired();
+	boolean hasExtension(String name);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	boolean isRequired();
+	Object getExtension(String name);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void setRequired(Boolean required);
-
-	// Deprecated
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	Boolean getDeprecated();
+	void setExtensions(Map<String, Object> extensions);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	boolean isDeprecated();
+	void setExtension(String name, Object extension);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void setDeprecated(Boolean deprecated);
-
-	// AllowEmptyValue
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	Boolean getAllowEmptyValue();
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	boolean isAllowEmptyValue();
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void setAllowEmptyValue(Boolean allowEmptyValue);
-
-	// Style
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	String getStyle();
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void setStyle(String style);
-
-	// Explode
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	Boolean getExplode();
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	boolean isExplode();
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void setExplode(Boolean explode);
-
-	// AllowReserved
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	Boolean getAllowReserved();
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	boolean isAllowReserved();
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void setAllowReserved(Boolean allowReserved);
-
-	// Schema
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	Schema getSchema();
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	Schema getSchema(boolean elaborate);
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void setSchema(Schema schema);
-
-	// Example
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	Object getExample();
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void setExample(Object example);
-
-	// Example
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	Map<String, Example> getExamples();
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	Map<String, Example> getExamples(boolean elaborate);
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	boolean hasExamples();
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	boolean hasExample(String name);
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	Example getExample(String name);
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void setExamples(Map<String, Example> examples);
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void setExample(String name, Example example);
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void removeExample(String name);
+	void removeExtension(String name);
 
 	// ContentMediaType
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -156,28 +61,123 @@ public interface Parameter extends IJsonOverlay<Parameter>, IModelPart<OpenApi3,
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	void removeContentMediaType(String name);
 
-	// Extension
+	// Example
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	Map<String, Object> getExtensions();
+	Map<String, Example> getExamples();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	Map<String, Object> getExtensions(boolean elaborate);
+	Map<String, Example> getExamples(boolean elaborate);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	boolean hasExtensions();
+	boolean hasExamples();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	boolean hasExtension(String name);
+	boolean hasExample(String name);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	Object getExtension(String name);
+	Example getExample(String name);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void setExtensions(Map<String, Object> extensions);
+	void setExamples(Map<String, Example> examples);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void setExtension(String name, Object extension);
+	void setExample(String name, Example example);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void removeExtension(String name);
+	void removeExample(String name);
+
+	// Example
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Object getExample();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setExample(Object example);
+
+	// Schema
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Schema getSchema();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Schema getSchema(boolean elaborate);
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setSchema(Schema schema);
+
+	// AllowReserved
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Boolean getAllowReserved();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean isAllowReserved();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setAllowReserved(Boolean allowReserved);
+
+	// Explode
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Boolean getExplode();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean isExplode();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setExplode(Boolean explode);
+
+	// Style
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getStyle();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setStyle(String style);
+
+	// AllowEmptyValue
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Boolean getAllowEmptyValue();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean isAllowEmptyValue();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setAllowEmptyValue(Boolean allowEmptyValue);
+
+	// Deprecated
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Boolean getDeprecated();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean isDeprecated();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setDeprecated(Boolean deprecated);
+
+	// Required
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Boolean getRequired();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean isRequired();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setRequired(Boolean required);
+
+	// Description
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getDescription();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setDescription(String description);
+
+	// Name
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getName();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setName(String name);
+
+	// In
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	String getIn();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setIn(String in);
 }

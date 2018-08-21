@@ -143,6 +143,19 @@ public class LinkImpl extends PropertiesOverlay<Link> implements Link {
 		_setScalar("server", server, Server.class);
 	}
 
+	// RequestBody
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public Object getRequestBody() {
+		return _get("requestBody", Object.class);
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public void setRequestBody(Object requestBody) {
+		_setScalar("requestBody", requestBody, Object.class);
+	}
+
 	// Extension
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -208,6 +221,9 @@ public class LinkImpl extends PropertiesOverlay<Link> implements Link {
 	public static final String F_server = "server";
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_requestBody = "requestBody";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public static final String F_extensions = "extensions";
 
 	@Override
@@ -219,6 +235,7 @@ public class LinkImpl extends PropertiesOverlay<Link> implements Link {
 		_createMap("parameters", "parameters", StringOverlay.factory, null);
 		_createScalar("description", "description", StringOverlay.factory);
 		_createScalar("server", "server", ServerImpl.factory);
+		_createScalar("requestBody", "requestBody", ObjectOverlay.factory);
 		_createMap("extensions", "", ObjectOverlay.factory, "x-.+");
 	}
 

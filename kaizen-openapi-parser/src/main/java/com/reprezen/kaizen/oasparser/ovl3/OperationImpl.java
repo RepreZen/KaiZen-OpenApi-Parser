@@ -653,7 +653,7 @@ public class OperationImpl extends PropertiesOverlay<Operation> implements Opera
 		_createScalar("operationId", "operationId", StringOverlay.factory);
 		_createList("parameters", "parameters", ParameterImpl.factory);
 		_createScalar("requestBody", "requestBody", RequestBodyImpl.factory);
-		_createMap("responses", "responses", ResponseImpl.factory, "default|(\\d\\d\\d)");
+		_createMap("responses", "responses", ResponseImpl.factory, "default|(\\d[0-9X]{2})");
 		_createMap("responsesExtensions", "responses", ObjectOverlay.factory, "x-.+");
 		_createMap("callbacks", "callbacks", CallbackImpl.factory, "(?!x-)[a-zA-Z0-9\\._-]+");
 		_createMap("callbacksExtensions", "callbacks", ObjectOverlay.factory, "x-.+");

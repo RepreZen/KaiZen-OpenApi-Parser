@@ -22,7 +22,7 @@
 		<artifact>
 		  <id>com.reprezen.kaizen:openapi-parser:${kzop-version}</id>
 		  <instructions>
-		    <Import-Package>*;resolution=optional</Import-Package>
+		    <Import-Package>*, javax.mail.internet</Import-Package>
 		    <Export-Package>
 		      com.reprezen.kaizen.oasparser,
 		      com.reprezen.kaizen.oasparser.model3,
@@ -34,6 +34,7 @@
 		<artifact>
 		  <id>com.reprezen.jsonoverlay:jsonoverlay:${jovl-version}</id>
 		  <instructions>
+		    <Import-Package>*</Import-Package>
 		    <Export-Package>
 		      com.reprezen.jsonoverlay,
 		      com.reprezen.jsonoverlay.gen

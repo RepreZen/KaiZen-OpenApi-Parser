@@ -427,30 +427,27 @@ types:
   imports:
     impl:
     - Overlay
-  fields:
-    description: &id012 {
-      }
-    required: &id011
+  fields: &headerFields
+    description: {}
+    required: 
       type: Boolean
-    deprecated: &id010
+    deprecated:
       type: Boolean
-    allowEmptyValue: &id009
+    allowEmptyValue:
       type: Boolean
-    style: &id008 {
-      }
-    explode: &id007
+    style: {}
+    explode: 
       type: Boolean
-    allowReserved: &id006
+    allowReserved: 
       type: Boolean
-    schema: &id005 {
-      }
-    example: &id004
+    schema: {}
+    example: 
       type: Object
-    examples: &id003
+    examples: 
       type: Example
       structure: map
       keyPattern: '[a-zA-Z0-9\._-]+'
-    content: &id002
+    content: 
       name: ContentMediaType
       type: MediaType
       structure: map
@@ -460,22 +457,11 @@ types:
     impl:
     - Overlay
   fields:
-    extension: *id001
-    content: *id002
-    examples: *id003
-    example: *id004
-    schema: *id005
-    allowReserved: *id006
-    explode: *id007
-    style: *id008
-    allowEmptyValue: *id009
-    deprecated: *id010
-    required: *id011
-    description: *id012
     in: {
       }
     name: {
       }
+    <<: *headerFields
 - name: Schema
   imports:
     impl:

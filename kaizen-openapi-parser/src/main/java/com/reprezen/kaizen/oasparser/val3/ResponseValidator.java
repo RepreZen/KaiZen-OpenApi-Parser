@@ -11,6 +11,7 @@
 package com.reprezen.kaizen.oasparser.val3;
 
 import static com.reprezen.kaizen.oasparser.ovl3.ResponseImpl.F_contentMediaTypes;
+import static com.reprezen.kaizen.oasparser.ovl3.ResponseImpl.F_description;
 import static com.reprezen.kaizen.oasparser.ovl3.ResponseImpl.F_headers;
 import static com.reprezen.kaizen.oasparser.ovl3.ResponseImpl.F_links;
 
@@ -25,6 +26,7 @@ public class ResponseValidator extends ObjectValidatorBase<Response> {
 	@Override
 	public void runObjectValidations() {
 		Response response = (Response) value.getOverlay();
+		validateStringField(F_description, false);
 		validateMapField(F_headers, false, false, Header.class, new HeaderValidator());
 		validateMapField(F_contentMediaTypes, false, false, MediaType.class, new MediaTypeValidator());
 		validateMapField(F_links, false, false, Link.class, new LinkValidator());

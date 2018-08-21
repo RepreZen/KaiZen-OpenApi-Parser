@@ -34,6 +34,8 @@ public class SecuritySchemeValidator extends ObjectValidatorBase<SecurityScheme>
 		validateStringField(F_description, false);
 		validateStringField(F_type, true, "apiKey|http|oauth2|openIdConnect");
 		String type = securityScheme.getType();
+		// TODO should these type-specific fields be disallowed for non-applicable
+		// types? (At least a warning)
 		if (type != null) {
 			switch (type) {
 			case "http":

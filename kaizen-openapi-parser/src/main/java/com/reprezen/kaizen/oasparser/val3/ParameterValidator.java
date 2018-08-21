@@ -23,6 +23,8 @@ import static com.reprezen.kaizen.oasparser.ovl3.ParameterImpl.F_schema;
 import static com.reprezen.kaizen.oasparser.ovl3.ParameterImpl.F_style;
 import static com.reprezen.kaizen.oasparser.val.Messages.m;
 
+import java.util.Map;
+
 import com.reprezen.jsonoverlay.Overlay;
 import com.reprezen.jsonoverlay.PropertiesOverlay;
 import com.reprezen.kaizen.oasparser.model3.Example;
@@ -41,8 +43,10 @@ public class ParameterValidator extends ObjectValidatorBase<Parameter> {
 		validateBooleanField(F_deprecated, false);
 		validateBooleanField(F_allowEmptyValue, false);
 		validateBooleanField(F_explode, false);
-		validateField(F_example, false, Example.class, new ExampleValidator());
-		validateMapField(F_examples, false, false, Example.class, new ExampleValidator());
+		Overlay<Object> example = validateField(F_example, false, Object.class, null);
+		Overlay<Map<String, Example>> examples = validateMapField(F_examples, false, false, Example.class,
+				new ExampleValidator());
+		checkExampleExclusion(examples, example);
 		validateStringField(F_name, true);
 		validateStringField(F_in, true, Regexes.PARAM_IN_REGEX);
 		checkPathParam(parameter);
@@ -94,5 +98,14 @@ public class ParameterValidator extends ObjectValidatorBase<Parameter> {
 			parent = Overlay.of(parent).getParentPropertiesOverlay();
 		}
 		return parent != null && parent instanceof Path ? Overlay.getPathInParent(parent) : null;
+	}
+
+	void checkExampleExclusion(Overlay<Map<String, Example>> examples, Overlay<Object> example) {
+		boolean examplesPresent = examples != null && examples.isPresent()
+				&& Overlay.getMapOverlay(examples).size() > 0;
+		boolean examplePresent = example != null && example.isPresent();
+		if (examplesPresent && examplePresent) {
+			results.addError("ExmplExclusion|The 'example' and 'exmaples' properties may not both appear", value);
+		}
 	}
 }

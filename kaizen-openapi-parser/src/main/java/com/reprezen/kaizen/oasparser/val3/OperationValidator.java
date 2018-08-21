@@ -11,6 +11,7 @@
 package com.reprezen.kaizen.oasparser.val3;
 
 import static com.reprezen.kaizen.oasparser.ovl3.OperationImpl.F_callbacks;
+import static com.reprezen.kaizen.oasparser.ovl3.OperationImpl.F_description;
 import static com.reprezen.kaizen.oasparser.ovl3.OperationImpl.F_externalDocs;
 import static com.reprezen.kaizen.oasparser.ovl3.OperationImpl.F_operationId;
 import static com.reprezen.kaizen.oasparser.ovl3.OperationImpl.F_parameters;
@@ -20,11 +21,7 @@ import static com.reprezen.kaizen.oasparser.ovl3.OperationImpl.F_securityRequire
 import static com.reprezen.kaizen.oasparser.ovl3.OperationImpl.F_servers;
 import static com.reprezen.kaizen.oasparser.ovl3.OperationImpl.F_summary;
 import static com.reprezen.kaizen.oasparser.ovl3.OperationImpl.F_tags;
-import static com.reprezen.kaizen.oasparser.val.Messages.m;
 
-import java.util.regex.Pattern;
-
-import com.reprezen.jsonoverlay.Overlay;
 import com.reprezen.kaizen.oasparser.model3.Callback;
 import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
 import com.reprezen.kaizen.oasparser.model3.Operation;
@@ -39,12 +36,13 @@ public class OperationValidator extends ObjectValidatorBase<Operation> {
 
 	@Override
 	public void runObjectValidations() {
+		Operation operation = (Operation) value.getOverlay();
 		validateListField(F_tags, false, false, String.class, null);
-		validateStringField(F_summary, false, (Pattern) null, this::checkSummaryLength);
+		validateStringField(F_summary, false);
+		validateStringField(F_description, false);
 		validateField(F_externalDocs, false, ExternalDocs.class, new ExternalDocsValidator());
 		// TODO Q: Not marked as required in spec, but spec says they all must be unique
-		// within the API. Seems like it
-		// should be required.
+		// within the API. Seems like it should be required.
 		validateStringField(F_operationId, false);
 		validateListField(F_parameters, false, false, Parameter.class, new ParameterValidator());
 		validateField(F_requestBody, false, RequestBody.class, new RequestBodyValidator());
@@ -53,11 +51,6 @@ public class OperationValidator extends ObjectValidatorBase<Operation> {
 		validateListField(F_securityRequirements, false, false, SecurityRequirement.class,
 				new SecurityRequirementValidator());
 		validateListField(F_servers, false, false, Server.class, new ServerValidator());
-	}
-
-	private void checkSummaryLength(Overlay<String> summary) {
-		if (summary != null && summary.isPresent() && summary.get().length() > 120) {
-			results.addWarning(m.msg("LongSummary|Sumamry exceeds recommended limit of 120 chars"), summary);
-		}
+		validateExtensions(operation.getExtensions());
 	}
 }

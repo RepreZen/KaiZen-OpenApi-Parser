@@ -11,6 +11,7 @@
 package com.reprezen.kaizen.oasparser.val3;
 
 import static com.reprezen.kaizen.oasparser.ovl3.MediaTypeImpl.F_encodingProperties;
+import static com.reprezen.kaizen.oasparser.ovl3.MediaTypeImpl.F_example;
 import static com.reprezen.kaizen.oasparser.ovl3.MediaTypeImpl.F_examples;
 import static com.reprezen.kaizen.oasparser.ovl3.MediaTypeImpl.F_schema;
 import static com.reprezen.kaizen.oasparser.val.Messages.m;
@@ -36,7 +37,10 @@ public class MediaTypeValidator extends ObjectValidatorBase<MediaType> {
 		validateMapField(F_encodingProperties, false, false, EncodingProperty.class, new EncodingPropertyValidator());
 		checkEncodingPropsAreProps(mediaType, results);
 		validateExtensions(mediaType.getExtensions());
-		validateMapField(F_examples, false, false, Example.class, new ExampleValidator());
+		Overlay<Map<String, Example>> examples = validateMapField(F_examples, false, false, Example.class,
+				new ExampleValidator());
+		Overlay<Object> example = validateField(F_example, false, Object.class, null);
+		checkExampleExclusion(examples, example);
 	}
 
 	void checkEncodingPropsAreProps(MediaType mediaType, ValidationResults results) {
@@ -53,6 +57,15 @@ public class MediaTypeValidator extends ObjectValidatorBase<MediaType> {
 							encodingPropertyName), Overlay.of(encProps, encodingPropertyName));
 				}
 			}
+		}
+	}
+
+	void checkExampleExclusion(Overlay<Map<String, Example>> examples, Overlay<Object> example) {
+		boolean examplesPresent = examples != null && examples.isPresent()
+				&& Overlay.getMapOverlay(examples).size() > 0;
+		boolean examplePresent = example != null && example.isPresent();
+		if (examplesPresent && examplePresent) {
+			results.addError("ExmplExclusion|The 'example' and 'exmaples' properties may not both appear", value);
 		}
 	}
 }

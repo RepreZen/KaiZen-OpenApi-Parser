@@ -10,7 +10,8 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val3;
 
-import static com.reprezen.kaizen.oasparser.ovl3.LinkImpl.F_headers;
+import static com.reprezen.kaizen.oasparser.ovl3.LinkImpl.F_description;
+import static com.reprezen.kaizen.oasparser.ovl3.LinkImpl.F_requestBody;
 import static com.reprezen.kaizen.oasparser.val.Messages.m;
 
 import java.util.Collection;
@@ -18,12 +19,13 @@ import java.util.Map;
 
 import com.google.common.collect.Maps;
 import com.reprezen.jsonoverlay.Overlay;
-import com.reprezen.kaizen.oasparser.model3.Header;
 import com.reprezen.kaizen.oasparser.model3.Link;
 import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.Operation;
 import com.reprezen.kaizen.oasparser.model3.Parameter;
 import com.reprezen.kaizen.oasparser.model3.Path;
+import com.reprezen.kaizen.oasparser.model3.Server;
+import com.reprezen.kaizen.oasparser.ovl3.LinkImpl;
 import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
 import com.reprezen.kaizen.oasparser.val.ValidationResults;
 
@@ -34,15 +36,18 @@ public class LinkValidator extends ObjectValidatorBase<Link> {
 		// TODO: Validate operationRef value (why didn't they must make it a ref
 		// object???!)
 		Link link = (Link) value.getOverlay();
-		Operation op = checkValidOperation(link, results);
+		validateStringField(F_description, false);
+		Operation op = checkValidOperation(link);
 		if (op != null) {
-			checkParameters(link, op, results);
+			checkParameters(link, op);
 		}
-		validateMapField(F_headers, false, false, Header.class, new HeaderValidator());
+		Overlay<Object> requestBody = validateField(F_requestBody, false, Object.class, null);
+		checkRequestBody(requestBody);
+		validateField(LinkImpl.F_server, false, Server.class, new ServerValidator());
 		validateExtensions(link.getExtensions());
 	}
 
-	private Operation checkValidOperation(Link link, ValidationResults results) {
+	private Operation checkValidOperation(Link link) {
 		String opId = link.getOperationId();
 		String operationRef = link.getOperationRef();
 		Operation op = null;
@@ -77,7 +82,7 @@ public class LinkValidator extends ObjectValidatorBase<Link> {
 		return op;
 	}
 
-	private void checkParameters(Link link, Operation op, ValidationResults results) {
+	private void checkParameters(Link link, Operation op) {
 		// TODO Q: parameter name is not sufficient to identify param in
 		// operation; will
 		// allow if it's unique, warn if
@@ -133,5 +138,12 @@ public class LinkValidator extends ObjectValidatorBase<Link> {
 			}
 		}
 		return counts;
+	}
+
+	private void checkRequestBody(Overlay<Object> rbField) {
+		if (rbField != null && rbField.isPresent() && rbField.get() instanceof String) {
+			// TODO if this looks like it's meant to be an expression, check that it's a
+			// valid one, and warn if not
+		}
 	}
 }

@@ -123,11 +123,6 @@ paths:
               parameters: 
                 param1: xxxx
                 param2: yyyy
-              headers:
-                foo: 
-                  description: description
-                bar:
-                  description: description
               description: description
               x-foo: foo
         200:
@@ -226,15 +221,6 @@ components:
         description: description
         url: url
       example: xxx
-      examples:
-        first:
-          value: 1.0
-        second:
-          value: true
-        third:
-          value: null
-        fourth:
-          value: xyzzy
       deprecated: true
       x-foo: foo
     schema2:

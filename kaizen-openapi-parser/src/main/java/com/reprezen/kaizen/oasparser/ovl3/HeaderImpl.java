@@ -39,32 +39,6 @@ public class HeaderImpl extends PropertiesOverlay<Header> implements Header {
 		super(header, parent, factory, refMgr);
 	}
 
-	// Name
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public String getName() {
-		return _get("name", String.class);
-	}
-
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public void setName(String name) {
-		_setScalar("name", name, String.class);
-	}
-
-	// In
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public String getIn() {
-		return _get("in", String.class);
-	}
-
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public void setIn(String in) {
-		_setScalar("in", in, String.class);
-	}
-
 	// Description
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -371,12 +345,6 @@ public class HeaderImpl extends PropertiesOverlay<Header> implements Header {
 	}
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public static final String F_name = "name";
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public static final String F_in = "in";
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public static final String F_description = "description";
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -416,8 +384,6 @@ public class HeaderImpl extends PropertiesOverlay<Header> implements Header {
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	protected void _elaborateJson() {
 		super._elaborateJson();
-		_createScalar("name", "name", StringOverlay.factory);
-		_createScalar("in", "in", StringOverlay.factory);
 		_createScalar("description", "description", StringOverlay.factory);
 		_createScalar("required", "required", BooleanOverlay.factory);
 		_createScalar("deprecated", "deprecated", BooleanOverlay.factory);

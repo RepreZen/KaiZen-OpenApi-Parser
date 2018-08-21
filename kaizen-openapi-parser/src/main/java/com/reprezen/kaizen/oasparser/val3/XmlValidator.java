@@ -16,6 +16,7 @@ import static com.reprezen.kaizen.oasparser.ovl3.XmlImpl.F_namespace;
 import static com.reprezen.kaizen.oasparser.ovl3.XmlImpl.F_prefix;
 
 import com.reprezen.kaizen.oasparser.model3.Xml;
+import com.reprezen.kaizen.oasparser.ovl3.XmlImpl;
 import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
 
 public class XmlValidator extends ObjectValidatorBase<Xml> {
@@ -26,6 +27,7 @@ public class XmlValidator extends ObjectValidatorBase<Xml> {
 		validateStringField(F_name, false);
 		validateStringField(F_prefix, false);
 		validateBooleanField(F_attribute, false);
+		validateBooleanField(XmlImpl.F_wrapped, false);
 		validateUrlField(F_namespace, false, false);
 		validateExtensions(xml.getExtensions());
 	}

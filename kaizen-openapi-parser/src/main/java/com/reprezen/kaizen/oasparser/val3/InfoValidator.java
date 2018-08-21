@@ -11,7 +11,9 @@
 package com.reprezen.kaizen.oasparser.val3;
 
 import static com.reprezen.kaizen.oasparser.ovl3.InfoImpl.F_contact;
+import static com.reprezen.kaizen.oasparser.ovl3.InfoImpl.F_description;
 import static com.reprezen.kaizen.oasparser.ovl3.InfoImpl.F_license;
+import static com.reprezen.kaizen.oasparser.ovl3.InfoImpl.F_termsOfService;
 import static com.reprezen.kaizen.oasparser.ovl3.InfoImpl.F_title;
 import static com.reprezen.kaizen.oasparser.ovl3.InfoImpl.F_version;
 
@@ -26,6 +28,8 @@ public class InfoValidator extends ObjectValidatorBase<Info> {
 	public void runObjectValidations() {
 		Info info = (Info) value.getOverlay();
 		validateStringField(F_title, true);
+		validateStringField(F_description, false);
+		validateUrlField(F_termsOfService, false, false);
 		validateField(F_contact, false, Contact.class, new ContactValidator());
 		validateField(F_license, false, License.class, new LicenseValidator());
 		validateStringField(F_version, true);

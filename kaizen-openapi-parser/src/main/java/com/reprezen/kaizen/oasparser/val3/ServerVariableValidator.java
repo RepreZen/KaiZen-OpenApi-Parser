@@ -11,9 +11,9 @@
 package com.reprezen.kaizen.oasparser.val3;
 
 import static com.reprezen.kaizen.oasparser.ovl3.ServerVariableImpl.F_defaultValue;
+import static com.reprezen.kaizen.oasparser.ovl3.ServerVariableImpl.F_description;
 import static com.reprezen.kaizen.oasparser.ovl3.ServerVariableImpl.F_enumValues;
 
-import com.reprezen.jsonoverlay.Primitive;
 import com.reprezen.kaizen.oasparser.model3.ServerVariable;
 import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
 
@@ -21,7 +21,11 @@ public class ServerVariableValidator extends ObjectValidatorBase<ServerVariable>
 
 	@Override
 	public void runObjectValidations() {
-		validateListField(F_enumValues, false, false, Primitive.class, null);
-		validateField(F_defaultValue, false, Primitive.class, null);
+		ServerVariable var = (ServerVariable) value.getOverlay();
+		validateStringField(F_description, false);
+		validateListField(F_enumValues, false, false, String.class, null);
+		// TODO Q: What the heck is does the description in the spec mean???
+		validateField(F_defaultValue, true, String.class, null);
+		validateExtensions(var.getExtensions());
 	}
 }

@@ -13,7 +13,6 @@ import com.reprezen.jsonoverlay.OverlayFactory;
 import com.reprezen.jsonoverlay.PropertiesOverlay;
 import com.reprezen.jsonoverlay.ReferenceManager;
 import com.reprezen.jsonoverlay.StringOverlay;
-import com.reprezen.kaizen.oasparser.model3.Header;
 import com.reprezen.kaizen.oasparser.model3.Link;
 import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.Server;
@@ -112,55 +111,6 @@ public class LinkImpl extends PropertiesOverlay<Link> implements Link {
 		_remove("parameters", name, String.class);
 	}
 
-	// Header
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public Map<String, Header> getHeaders() {
-		return _getMap("headers", Header.class);
-	}
-
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public Map<String, Header> getHeaders(boolean elaborate) {
-		return _getMap("headers", elaborate, Header.class);
-	}
-
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public boolean hasHeaders() {
-		return _isPresent("headers");
-	}
-
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public boolean hasHeader(String name) {
-		return _getMap("headers", Header.class).containsKey(name);
-	}
-
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public Header getHeader(String name) {
-		return _get("headers", name, Header.class);
-	}
-
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public void setHeaders(Map<String, Header> headers) {
-		_setMap("headers", headers, Header.class);
-	}
-
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public void setHeader(String name, Header header) {
-		_set("headers", name, header, Header.class);
-	}
-
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public void removeHeader(String name) {
-		_remove("headers", name, Header.class);
-	}
-
 	// Description
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -191,6 +141,19 @@ public class LinkImpl extends PropertiesOverlay<Link> implements Link {
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setServer(Server server) {
 		_setScalar("server", server, Server.class);
+	}
+
+	// RequestBody
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public Object getRequestBody() {
+		return _get("requestBody", Object.class);
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public void setRequestBody(Object requestBody) {
+		_setScalar("requestBody", requestBody, Object.class);
 	}
 
 	// Extension
@@ -252,13 +215,13 @@ public class LinkImpl extends PropertiesOverlay<Link> implements Link {
 	public static final String F_parameters = "parameters";
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public static final String F_headers = "headers";
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public static final String F_description = "description";
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public static final String F_server = "server";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_requestBody = "requestBody";
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public static final String F_extensions = "extensions";
@@ -270,9 +233,9 @@ public class LinkImpl extends PropertiesOverlay<Link> implements Link {
 		_createScalar("operationId", "operationId", StringOverlay.factory);
 		_createScalar("operationRef", "operationRef", StringOverlay.factory);
 		_createMap("parameters", "parameters", StringOverlay.factory, null);
-		_createMap("headers", "headers", HeaderImpl.factory, null);
 		_createScalar("description", "description", StringOverlay.factory);
 		_createScalar("server", "server", ServerImpl.factory);
+		_createScalar("requestBody", "requestBody", ObjectOverlay.factory);
 		_createMap("extensions", "", ObjectOverlay.factory, "x-.+");
 	}
 

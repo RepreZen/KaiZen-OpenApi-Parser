@@ -3,7 +3,7 @@ imports:
   OpenApi: com.reprezen.kaizen.oasparser.OpenApi
   Validator: com.reprezen.kaizen.oasparser.val.Validator
   ValidationResults: com.reprezen.kaizen.oasparser.val.ValidationResults
-  ValidationResultsInstance: com.reprezen.kaizen.oasparser.val.ValidationResults.ValidationResultsInstance  
+  ValidationResultsInstance: com.reprezen.kaizen.oasparser.val.ValidationResults.ValidationResultsInstance
   Severity: com.reprezen.kaizen.oasparser.val.ValidationResults.Severity
   OpenApi3Validator: com.reprezen.kaizen.oasparser.val3.OpenApi3Validator
   Overlay: com.reprezen.jsonoverlay.Overlay
@@ -11,504 +11,591 @@ imports:
   ReferenceRegistry: com.reprezen.jsonoverlay.ReferenceRegistry
   Inject: com.google.inject.Inject
 decls:
-  - extPat: &extPat "x-.+"
-  - noextPat: &noextPat "(?!x-).*"
-  - namePat: &namePat "[a-zA-Z0-9\\._-]+"
-  - noextNamePat: &noextNamePat "(?!x-)[a-zA-Z0-9\\._-]+"
-  - pathPat: &pathPat "/.*"
-  - extName: &extName extension
-  - extDef: &extDef
-      name: Extension
-      type: Object
-      parentPath: ""
-      structure: map
-      keyPattern: *extPat
-  
+- extPat: x-.+
+- noextPat: (?!x-).*
+- namePat: '[a-zA-Z0-9\._-]+'
+- noextNamePat: (?!x-)[a-zA-Z0-9\._-]+
+- pathPat: /.*
+- extName: extension
+- extDef: &id001
+    name: Extension
+    type: Object
+    parentPath: ''
+    structure: map
+    keyPattern: x-.+
 types:
-  - name: OpenApi3
-    imports: 
-      intf:  [ ValidationResults, Collection ]
-      impl: [ OpenApi3Validator, Validator, ValidationResults, ValidationResultsInstance, Severity, ReferenceRegistry, Overlay, ObjectNode, JsonNodeFactory, Collection ]
-    extendInterfaces: [OpenApi<OpenApi3>]
-    fields:
-      openapi:
-        name: OpenApi
-      info: {}
-      servers:
-        structure: collection
-      paths:
-        structure: map
-        keyPattern: *pathPat
-      pathsExtension:
-        name: PathsExtension 
-        <<: *extDef
-        parentPath: paths
-      components/schemas:
-        structure: map
-        type: Schema
-        keyPattern: *namePat
-      components/responses:
-        structure: map
-        keyPattern: *namePat
-      components/parameters:
-        structure: map
-        keyPattern: *namePat
-      components/examples:
-        type: Example
-        structure: map
-        keyPattern: *namePat
-      components/requestBodies:
-        name: RequestBody
-        plural: RequestBodies
-        structure: map
-        keyPattern: *namePat
-      components/headers:
-        structure: map
-        keyPattern: *namePat
-      components/securitySchemes:
-        structure: map
-        keyPattern: *namePat
-      components/links:
-        structure: map
-        keyPattern: *namePat
-      components/callbacks:
-        structure: map
-        keyPattern: *noextNamePat
-      componentsExtension:
-        name: ComponentsExtension
-        <<: *extDef
-        parentPath: components
-      security:
-        name: SecurityRequirement
-        structure: collection
-      tags:
-        structure: collection
-      externalDocs: {}
-      *extName: *extDef
-      
-  - name: OAuthFlow
-    fields:
-      authorizationUrl: {}
-      tokenUrl: {}
-      refreshUrl: {}
-      scopes:
-        structure: map
-        keyPattern: *noextPat
-      scopesExtension:
-        name: ScopesExtension
-        <<: *extDef
-        parentPath: scopes
-      *extName: *extDef
-                      
-  - name: Tag
-    fields:
-      name: {}
-      description: {}
-      externalDocs: {}
-      *extName: *extDef
-
-  - name: SecurityScheme
-    imports:
-      impl: [Overlay]
-    fields:
-      type: {}
-      description: {}
-      name: {}
-      in: {}
-      scheme: {}
-      bearerFormat: {}
-      flow/implicit:
-        name: ImplicitOAuthFlow
-        type: OAuthFlow
-      flow/password:
-        name: PasswordOAuthFlow
-        type: OAuthFlow
-      flow/clientCredentials:
-        name: ClientCredentialsOAuthFlow
-        type: OAuthFlow
-      flow/authorizationCode:
-        name: AuthorizationCodeOAuthFlow
-        type: OAuthFlow
-      flowExtension:
-        <<: *extDef
-        name: OAuthFlowsExtension
-        parentPath: flow
-      openIdConnectUrl: {}
-      *extName: *extDef
-                
-  - name: Info
-    fields:
-      title: {}
-      description: {}
-      termsOfService: {}
-      contact: {}
-      license: {}
-      version: {}
-      *extName: *extDef
-
-  - name: Contact
-    fields: 
-      name: {}
-      url: {}
-      email: {}
-      *extName: *extDef
-
-  - name: License
-    fields:
-      name: {}
-      url: {}
-      *extName: *extDef
-  
-  - name: Server
-    fields:
-      url: {}
-      description: {}
-      variables:
-        name: ServerVariable
-        structure: map
-        keyPattern: *noextNamePat
-      variablesExtension:
-        name: VariablesExtension
-        <<: *extDef
-        parentPath: variables
-      *extName: *extDef
-
-  - name: ServerVariable
-    fields:
-      enum:
-        name: EnumValue
-        type: String
-        structure: collection
-      default:
-        type: String
-      description: {}
-      *extName: *extDef
-        
-  - name: Path
-    imports:
-      impl: [ Overlay ]
-    fields:
-      summary: {}
-      description: {}
-      operations:
-        structure: map
-        parentPath: ""
-        keyPattern: get|put|post|delete|options|head|patch|trace
-      get:
-        type: Operation
-        noImpl: true
-      put:
-        type: Operation
-        noImpl: true
-      post:
-        type: Operation
-        noImpl: true
-      delete:
-        type: Operation
-        noImpl: true
-      options:
-        type: Operation
-        noImpl: true
-      head:
-        type: Operation
-        noImpl: true
-      patch:
-        type: Operation
-        noImpl: true
-      trace:
-        type: Operation
-        noImpl: true
-      servers:
-        structure: collection
-      parameters:
-        structure: collection
-#        keyDecls:
-#          - String name
-#          - String in
-      *extName: *extDef
-        
-  - name: Operation
-    fields:
-      tags:
-        type: String
-        structure: collection
-      summary: {}
-      description: {}
-      externalDocs: {}
-      operationId: {}
-      parameters:
-        structure: collection
-#        keyDecls:
-#          - String name
-#          - String id
-      requestBody: {}
-      responses:
-        structure: map
-        keyPattern: "default|(\\d\\d\\d)"
-      responsesExtension:
-        name: ResponsesExtension
-        <<: *extDef
-        parentPath: responses
-      callbacks:
-        structure: map
-        keyPattern: *noextNamePat
-      callbacksExtension:
-        name: CallbacksExtension
-        <<: *extDef
-        parentPath: callbacks
-      deprecated:
-        type: Boolean
-      security:
-        name: SecurityRequirement
-        structure: collection
-      servers:
-        structure: collection
-      *extName: *extDef
-        
-  - name: Callback
-    imports:
-      impl: [ Overlay ]
-    fields:
-      callbackPaths:
-        type: Path
-        structure: map
-        parentPath: ""
-        keyPattern: *noextPat
-        keyName: expression
-      *extName: *extDef
-
-  - name: SecurityRequirement
-    fields:
-      requirement:
-        type: SecurityParameter
-        parentPath: ""
-        structure: map
-        keyPattern: *namePat
-
-  - name: SecurityParameter
-    imports:
-      impl: [JsonNodeFactory]
-    fields:
-      parameter:
-        type: String
-        parentPath: ""
-        structure: collection
-                      
-  - name: Response
-    imports:
-      impl: [Overlay]
-    fields:
-      description: {}
-      headers:
-        structure: map
-      content:
-        name: ContentMediaType
-        type: MediaType
-        structure: map
-      links:
-        structure: map
-      *extName: *extDef
-
-  - name: Link
-    imports:
-      impl: [Overlay]
-    fields:
-      operationId: {}
-      operationRef: {}
-      parameters:
-        type: String
-        structure: map
-      description: {}
-      server:
-        type: Server
-      *extName: *extDef
-
-  - name: RequestBody
-    imports:
-      impl: [Overlay]
-    fields:
-      description: {}
-      content:
-        name: ContentMediaType
-        type: MediaType
-        structure: map
-      required:
-        type: Boolean
-      *extName: *extDef
-
-  - name: MediaType
-    fields:
-      schema: {}
-      examples:
-        type: Example
-        structure: map
-        keyPattern: *namePat
-      example:
-        type: Object
-      encoding:
-        name: EncodingProperty
-        plural: EncodingProperties
-        structure: map
-      *extName: *extDef
-
-  - name: EncodingProperty
-    fields:
-      contentType: {}
-      headers:
-        structure: map
-        type: String
-      style: {}
-      explode:
-        type: Boolean
-      *extName: *extDef
-             
-  - name: ExternalDocs
-    fields:
-      description: {}
-      url: {}
-      *extName: *extDef
-
-  - name: Parameter
-    imports:
-      impl: [Overlay]
-    fields: &paramFields
-      name: {}
-      in: {}
-      description: {}
-      required:
-        type: Boolean
-      deprecated:
-        type: Boolean
-      allowEmptyValue:
-        type: Boolean
-      style: {}
-      explode:
-        type: Boolean
-      allowReserved:
-        type: Boolean
-      schema: {}
-      example:
-        type: Object
-      examples:
-        type: Example
-        structure: map
-        keyPattern: *namePat
-      content:
-        name: ContentMediaType
-        type: MediaType
-        structure: map
-      *extName: *extDef
-
-  - name: Header
-    imports:
-      impl: [Overlay]
-    # Header is identical to Parameter except in terms of where it's allowed
-    fields: *paramFields
-        
-  - name: Schema
-    imports:
-      impl: [ Optional, JsonPointer, Overlay]
-    fields:
-      title: {}
-      multipleOf:
-        type: Number
-      maximum:
-        type: Number
-      exclusiveMaximum:
-        type: Boolean
-      minimum:
-        type: Number
-      exclusiveMinimum:
-        type: Boolean
-      maxLength:
-        type: Integer
-      minLength:
-        type: Integer
-      pattern: {}
-      maxItems:
-        type: Integer
-      minItems:
-        type: Integer
-      uniqueItems:
-        type: Boolean
-      maxProperties:
-        type: Integer
-      minProperties:
-        type: Integer
-      required:
-        name: RequiredField
-        structure: collection
-      enum:
-        type: Object
-        structure: collection
-      type: {}
-      allOf:
-        name: AllOfSchema
-        type: Schema
-        structure: collection
-      oneOf:
-        name: OneOfSchema
-        type: Schema
-        structure: collection
-      anyOf:
-        name: AnyOfSchema
-        type: Schema
-        structure: collection
-      not:
-        name: NotSchema
-        type: Schema
-      items:
-        name: ItemsSchema
-        type: Schema
-      properties:
-        name: Property
-        plural: Properties
-        type: Schema
-        structure: map
-      additionalPropertiesSchema:
-        parentPath: additionalProperties
-        type: Schema
-      additionalPropertiesBoolean:
-        name: AdditionalProperties
-        parentPath: additionalProperties
-        type: Boolean
-      description: {}
-      format: {}
-      default:
-        type: Object
-      nullable:
-        type: Boolean
-      discriminator: {}
-      readOnly:
-        type: Boolean
-      writeOnly:
-        type: Boolean
-      xml: {}
-      externalDocs: {}
-      example:
-        type: Object
-      deprecated:
-        type: Boolean
-      *extName: *extDef
- 
-  - name: Xml
-    fields:
-      name: {}
-      namespace: {}
-      prefix: {}
-      attribute:
-        type: Boolean
-      wrapped:
-        type: Boolean        
-      *extName: *extDef
-  
-  - name: Example
-    imports: 
-      impl: [Overlay]
-    fields:
-      summary: {}
-      description: {}
-      value:
-        type: Object        
-      externalValue: {}
-      *extName: *extDef
+- name: OpenApi3
+  imports:
+    intf:
+    - ValidationResults
+    - Collection
+    impl:
+    - OpenApi3Validator
+    - Validator
+    - ValidationResults
+    - ValidationResultsInstance
+    - Severity
+    - ReferenceRegistry
+    - Overlay
+    - ObjectNode
+    - JsonNodeFactory
+    - Collection
+  extendInterfaces:
+  - OpenApi<OpenApi3>
+  fields:
+    openapi:
+      name: OpenApi
+    info: {
+      }
+    servers:
+      structure: collection
+    paths:
+      structure: map
+      keyPattern: /.*
+    pathsExtension:
+      parentPath: paths
+      keyPattern: x-.+
+      structure: map
+      type: Object
+      name: PathsExtension
+    components/schemas:
+      structure: map
+      type: Schema
+      keyPattern: '[a-zA-Z0-9\._-]+'
+    components/responses:
+      structure: map
+      keyPattern: '[a-zA-Z0-9\._-]+'
+    components/parameters:
+      structure: map
+      keyPattern: '[a-zA-Z0-9\._-]+'
+    components/examples:
+      type: Example
+      structure: map
+      keyPattern: '[a-zA-Z0-9\._-]+'
+    components/requestBodies:
+      name: RequestBody
+      plural: RequestBodies
+      structure: map
+      keyPattern: '[a-zA-Z0-9\._-]+'
+    components/headers:
+      structure: map
+      keyPattern: '[a-zA-Z0-9\._-]+'
+    components/securitySchemes:
+      structure: map
+      keyPattern: '[a-zA-Z0-9\._-]+'
+    components/links:
+      structure: map
+      keyPattern: '[a-zA-Z0-9\._-]+'
+    components/callbacks:
+      structure: map
+      keyPattern: (?!x-)[a-zA-Z0-9\._-]+
+    componentsExtension:
+      parentPath: components
+      name: ComponentsExtension
+      type: Object
+      structure: map
+      keyPattern: x-.+
+    security:
+      name: SecurityRequirement
+      structure: collection
+    tags:
+      structure: collection
+    externalDocs: {
+      }
+    extension: *id001
+- name: OAuthFlow
+  fields:
+    authorizationUrl: {
+      }
+    tokenUrl: {
+      }
+    refreshUrl: {
+      }
+    scopes:
+      structure: map
+      keyPattern: (?!x-).*
+    scopesExtension:
+      parentPath: scopes
+      keyPattern: x-.+
+      structure: map
+      type: Object
+      name: ScopesExtension
+    extension: *id001
+- name: Tag
+  fields:
+    name: {
+      }
+    description: {
+      }
+    externalDocs: {
+      }
+    extension: *id001
+- name: SecurityScheme
+  imports:
+    impl:
+    - Overlay
+  fields:
+    type: {
+      }
+    description: {
+      }
+    name: {
+      }
+    in: {
+      }
+    scheme: {
+      }
+    bearerFormat: {
+      }
+    flow/implicit:
+      name: ImplicitOAuthFlow
+      type: OAuthFlow
+    flow/password:
+      name: PasswordOAuthFlow
+      type: OAuthFlow
+    flow/clientCredentials:
+      name: ClientCredentialsOAuthFlow
+      type: OAuthFlow
+    flow/authorizationCode:
+      name: AuthorizationCodeOAuthFlow
+      type: OAuthFlow
+    flowExtension:
+      parentPath: flow
+      name: OAuthFlowsExtension
+      type: Object
+      structure: map
+      keyPattern: x-.+
+    openIdConnectUrl: {
+      }
+    extension: *id001
+- name: Info
+  fields:
+    title: {
+      }
+    description: {
+      }
+    termsOfService: {
+      }
+    contact: {
+      }
+    license: {
+      }
+    version: {
+      }
+    extension: *id001
+- name: Contact
+  fields:
+    name: {
+      }
+    url: {
+      }
+    email: {
+      }
+    extension: *id001
+- name: License
+  fields:
+    name: {
+      }
+    url: {
+      }
+    extension: *id001
+- name: Server
+  fields:
+    url: {
+      }
+    description: {
+      }
+    variables:
+      name: ServerVariable
+      structure: map
+      keyPattern: (?!x-)[a-zA-Z0-9\._-]+
+    variablesExtension:
+      parentPath: variables
+      keyPattern: x-.+
+      structure: map
+      type: Object
+      name: VariablesExtension
+    extension: *id001
+- name: ServerVariable
+  fields:
+    enum:
+      name: EnumValue
+      type: String
+      structure: collection
+    default:
+      type: String
+    description: {
+      }
+    extension: *id001
+- name: Path
+  imports:
+    impl:
+    - Overlay
+  fields:
+    summary: {
+      }
+    description: {
+      }
+    operations:
+      structure: map
+      parentPath: ''
+      keyPattern: get|put|post|delete|options|head|patch|trace
+    get:
+      type: Operation
+      noImpl: true
+    put:
+      type: Operation
+      noImpl: true
+    post:
+      type: Operation
+      noImpl: true
+    delete:
+      type: Operation
+      noImpl: true
+    options:
+      type: Operation
+      noImpl: true
+    head:
+      type: Operation
+      noImpl: true
+    patch:
+      type: Operation
+      noImpl: true
+    trace:
+      type: Operation
+      noImpl: true
+    servers:
+      structure: collection
+    parameters:
+      structure: collection
+    extension: *id001
+- name: Operation
+  fields:
+    tags:
+      type: String
+      structure: collection
+    summary: {
+      }
+    description: {
+      }
+    externalDocs: {
+      }
+    operationId: {
+      }
+    parameters:
+      structure: collection
+    requestBody: {
+      }
+    responses:
+      structure: map
+      keyPattern: default|(\d[0-9X]{2})
+    responsesExtension:
+      parentPath: responses
+      name: ResponsesExtension
+      type: Object
+      structure: map
+      keyPattern: x-.+
+    callbacks:
+      structure: map
+      keyPattern: (?!x-)[a-zA-Z0-9\._-]+
+    callbacksExtension:
+      parentPath: callbacks
+      keyPattern: x-.+
+      structure: map
+      type: Object
+      name: CallbacksExtension
+    deprecated:
+      type: Boolean
+    security:
+      name: SecurityRequirement
+      structure: collection
+    servers:
+      structure: collection
+    extension: *id001
+- name: Callback
+  imports:
+    impl:
+    - Overlay
+  fields:
+    callbackPaths:
+      type: Path
+      structure: map
+      parentPath: ''
+      keyPattern: (?!x-).*
+      keyName: expression
+    extension: *id001
+- name: SecurityRequirement
+  fields:
+    requirement:
+      type: SecurityParameter
+      parentPath: ''
+      structure: map
+      keyPattern: '[a-zA-Z0-9\._-]+'
+- name: SecurityParameter
+  imports:
+    impl:
+    - JsonNodeFactory
+  fields:
+    parameter:
+      type: String
+      parentPath: ''
+      structure: collection
+- name: Response
+  imports:
+    impl:
+    - Overlay
+  fields:
+    description: {
+      }
+    headers:
+      structure: map
+    content:
+      name: ContentMediaType
+      type: MediaType
+      structure: map
+    links:
+      structure: map
+    extension: *id001
+- name: Link
+  imports:
+    impl:
+    - Overlay
+  fields:
+    operationId: {
+      }
+    operationRef: {
+      }
+    parameters:
+      type: String
+      structure: map
+    description: {
+      }
+    server:
+      type: Server
+    requestBody:
+      type: Object
+    extension: *id001
+- name: RequestBody
+  imports:
+    impl:
+    - Overlay
+  fields:
+    description: {
+      }
+    content:
+      name: ContentMediaType
+      type: MediaType
+      structure: map
+    required:
+      type: Boolean
+    extension: *id001
+- name: MediaType
+  fields:
+    schema: {
+      }
+    examples:
+      type: Example
+      structure: map
+      keyPattern: '[a-zA-Z0-9\._-]+'
+    example:
+      type: Object
+    encoding:
+      name: EncodingProperty
+      plural: EncodingProperties
+      structure: map
+    extension: *id001
+- name: EncodingProperty
+  fields:
+    contentType: {
+      }
+    headers:
+      structure: map
+      type: String
+    style: {
+      }
+    explode:
+      type: Boolean
+    extension: *id001
+- name: ExternalDocs
+  fields:
+    description: {
+      }
+    url: {
+      }
+    extension: *id001
+- name: Header
+  imports:
+    impl:
+    - Overlay
+  fields:
+    description: &id012 {
+      }
+    required: &id011
+      type: Boolean
+    deprecated: &id010
+      type: Boolean
+    allowEmptyValue: &id009
+      type: Boolean
+    style: &id008 {
+      }
+    explode: &id007
+      type: Boolean
+    allowReserved: &id006
+      type: Boolean
+    schema: &id005 {
+      }
+    example: &id004
+      type: Object
+    examples: &id003
+      type: Example
+      structure: map
+      keyPattern: '[a-zA-Z0-9\._-]+'
+    content: &id002
+      name: ContentMediaType
+      type: MediaType
+      structure: map
+    extension: *id001
+- name: Parameter
+  imports:
+    impl:
+    - Overlay
+  fields:
+    extension: *id001
+    content: *id002
+    examples: *id003
+    example: *id004
+    schema: *id005
+    allowReserved: *id006
+    explode: *id007
+    style: *id008
+    allowEmptyValue: *id009
+    deprecated: *id010
+    required: *id011
+    description: *id012
+    in: {
+      }
+    name: {
+      }
+- name: Schema
+  imports:
+    impl:
+    - Optional
+    - JsonPointer
+    - Overlay
+  fields:
+    title: {
+      }
+    multipleOf:
+      type: Number
+    maximum:
+      type: Number
+    exclusiveMaximum:
+      type: Boolean
+    minimum:
+      type: Number
+    exclusiveMinimum:
+      type: Boolean
+    maxLength:
+      type: Integer
+    minLength:
+      type: Integer
+    pattern: {
+      }
+    maxItems:
+      type: Integer
+    minItems:
+      type: Integer
+    uniqueItems:
+      type: Boolean
+    maxProperties:
+      type: Integer
+    minProperties:
+      type: Integer
+    required:
+      name: RequiredField
+      structure: collection
+    enum:
+      type: Object
+      structure: collection
+    type: {
+      }
+    allOf:
+      name: AllOfSchema
+      type: Schema
+      structure: collection
+    oneOf:
+      name: OneOfSchema
+      type: Schema
+      structure: collection
+    anyOf:
+      name: AnyOfSchema
+      type: Schema
+      structure: collection
+    not:
+      name: NotSchema
+      type: Schema
+    items:
+      name: ItemsSchema
+      type: Schema
+    properties:
+      name: Property
+      plural: Properties
+      type: Schema
+      structure: map
+    additionalPropertiesSchema:
+      parentPath: additionalProperties
+      type: Schema
+    additionalPropertiesBoolean:
+      name: AdditionalProperties
+      parentPath: additionalProperties
+      type: Boolean
+    description: {
+      }
+    format: {
+      }
+    default:
+      type: Object
+    nullable:
+      type: Boolean
+    discriminator: {
+      }
+    readOnly:
+      type: Boolean
+    writeOnly:
+      type: Boolean
+    xml: {
+      }
+    externalDocs: {
+      }
+    example:
+      type: Object
+    deprecated:
+      type: Boolean
+    extension: *id001
+- name: Xml
+  fields:
+    name: {
+      }
+    namespace: {
+      }
+    prefix: {
+      }
+    attribute:
+      type: Boolean
+    wrapped:
+      type: Boolean
+    extension: *id001
+- name: Example
+  imports:
+    impl:
+    - Overlay
+  fields:
+    summary: {
+      }
+    description: {
+      }
+    value:
+      type: Object
+    externalValue: {
+      }
+    extension: *id001

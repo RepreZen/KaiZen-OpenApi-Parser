@@ -42,9 +42,7 @@ import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_title;
 import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_type;
 import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_uniqueItems;
 import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_xml;
-import static com.reprezen.kaizen.oasparser.val.msg.Messages.msg;
-import static com.reprezen.kaizen.oasparser.val3.OpenApi3Messages.DiscNotProp;
-import static com.reprezen.kaizen.oasparser.val3.OpenApi3Messages.ROnlyAndWOnly;
+import static com.reprezen.kaizen.oasparser.val.Messages.m;
 
 import com.reprezen.jsonoverlay.Overlay;
 import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
@@ -100,17 +98,20 @@ public class SchemaValidator extends ObjectValidatorBase<Schema> {
 		String discriminator = schema.getDiscriminator();
 		if (discriminator != null) {
 			if (!schema.getProperties().keySet().contains(discriminator)) {
-				results.addError(msg(DiscNotProp, discriminator), context);
+				results.addError(m.msg("DiscNotProp|The discriminator is not a property of this schema", discriminator),
+						context);
 			}
 			if (!schema.getRequiredFields().contains(discriminator)) {
-				results.addError(msg(OpenApi3Messages.DiscNotReq, discriminator), context);
+				results.addError(
+						m.msg("DiscNotReq|The discriminator property is not required in this schema", discriminator),
+						context);
 			}
 		}
 	}
 
 	private void checkReadWrite(Schema schema) {
 		if (schema.isReadOnly() && schema.isWriteOnly()) {
-			results.addError(msg(ROnlyAndWOnly), value);
+			results.addError(m.msg("ROnlyAndWOnly|Schema cannot be both ReadOnly and WriteOnly"), value);
 		}
 	}
 }

@@ -21,9 +21,7 @@ import static com.reprezen.kaizen.oasparser.ovl3.ParameterImpl.F_in;
 import static com.reprezen.kaizen.oasparser.ovl3.ParameterImpl.F_name;
 import static com.reprezen.kaizen.oasparser.ovl3.ParameterImpl.F_schema;
 import static com.reprezen.kaizen.oasparser.ovl3.ParameterImpl.F_style;
-import static com.reprezen.kaizen.oasparser.val.msg.Messages.msg;
-import static com.reprezen.kaizen.oasparser.val3.OpenApi3Messages.NoPath;
-import static com.reprezen.kaizen.oasparser.val3.OpenApi3Messages.PathParamReq;
+import static com.reprezen.kaizen.oasparser.val.Messages.m;
 
 import java.util.Map;
 
@@ -66,10 +64,13 @@ public class ParameterValidator extends ObjectValidatorBase<Parameter> {
 			String path = getPathString(parameter);
 			if (path != null) {
 				if (!path.matches(".*/\\{" + parameter.getName() + "\\}(/.*)?")) {
-					results.addError(msg(OpenApi3Messages.MissingPathTplt, parameter.getName(), path), value);
+					results.addError(m.msg("MissingPathTplt|No template for path parameter in path string",
+							parameter.getName(), path), value);
 				}
 			} else {
-				results.addWarning(msg(NoPath, parameter.getName(), parameter.getIn()), value);
+				results.addWarning(
+						m.msg("NoPath|Could not locate path for parameter", parameter.getName(), parameter.getIn()),
+						value);
 			}
 		}
 	}
@@ -77,14 +78,17 @@ public class ParameterValidator extends ObjectValidatorBase<Parameter> {
 	private void checkRequired(Parameter parameter) {
 		if ("path".equals(parameter.getIn())) {
 			if (parameter.getRequired() != Boolean.TRUE) {
-				results.addError(msg(PathParamReq, parameter.getName()), value);
+				results.addError(
+						m.msg("PathParamReq|Path param must have 'required' property set true", parameter.getName()),
+						value);
 			}
 		}
 	}
 
 	private void checkAllowReserved(Parameter parameter) {
 		if (parameter.isAllowReserved() && !"query".equals(parameter.getIn())) {
-			results.addWarning(msg(OpenApi3Messages.NonQryAllowRsvd, parameter.getName(), parameter.getIn()), value);
+			results.addWarning(m.msg("NonQryAllowRsvd|AllowReserved is ignored for non-query parameter",
+					parameter.getName(), parameter.getIn()), value);
 		}
 	}
 

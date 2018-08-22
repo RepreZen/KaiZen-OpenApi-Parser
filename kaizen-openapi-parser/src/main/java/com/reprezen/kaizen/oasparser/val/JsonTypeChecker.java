@@ -11,10 +11,10 @@
 package com.reprezen.kaizen.oasparser.val;
 
 import static com.reprezen.kaizen.oasparser.val.BaseValidationMessages.WrongTypeJson;
-import static com.reprezen.kaizen.oasparser.val.msg.Messages.msg;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -39,6 +39,7 @@ import com.reprezen.jsonoverlay.Overlay;
 import com.reprezen.jsonoverlay.PrimitiveOverlay;
 import com.reprezen.jsonoverlay.PropertiesOverlay;
 import com.reprezen.jsonoverlay.StringOverlay;
+import com.reprezen.kaizen.oasparser.val.msg.Messages;
 
 public class JsonTypeChecker {
 
@@ -51,15 +52,10 @@ public class JsonTypeChecker {
 					return;
 				}
 			}
-			String allowed = allowedJsonTypes.stream().map(type -> getJsonValueType(type))
-					.collect(Collectors.joining(", "));
-			results.addError(msg(WrongTypeJson, getJsonValueType(json.getClass()), allowed), value);
+			List<String> allowed = allowedJsonTypes.stream().map(type -> type.getSimpleName())
+					.collect(Collectors.toList());
+			results.addError(Messages.msg(WrongTypeJson, json.getClass().getSimpleName(), allowed), value);
 		}
-	}
-
-	private static String getJsonValueType(Class<? extends JsonNode> node) {
-		String type = node.getSimpleName();
-		return type.endsWith("Node") ? type.substring(0, type.length() - 4) : type;
 	}
 
 	private static Multimap<Class<?>, Class<? extends JsonNode>> allowedJsonTypes = null;

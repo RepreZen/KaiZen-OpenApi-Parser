@@ -14,9 +14,7 @@ import static com.reprezen.kaizen.oasparser.ovl3.ExampleImpl.F_description;
 import static com.reprezen.kaizen.oasparser.ovl3.ExampleImpl.F_externalValue;
 import static com.reprezen.kaizen.oasparser.ovl3.ExampleImpl.F_summary;
 import static com.reprezen.kaizen.oasparser.ovl3.ExampleImpl.F_value;
-import static com.reprezen.kaizen.oasparser.val.msg.Messages.msg;
-import static com.reprezen.kaizen.oasparser.val3.OpenApi3Messages.ExampleNoValue;
-import static com.reprezen.kaizen.oasparser.val3.OpenApi3Messages.ExmplTwoValues;
+import static com.reprezen.kaizen.oasparser.val.Messages.m;
 
 import com.reprezen.jsonoverlay.Overlay;
 import com.reprezen.kaizen.oasparser.model3.Example;
@@ -41,11 +39,14 @@ public class ExampleValidator extends ObjectValidatorBase<Example> {
 		boolean valuePresent = valueField != null & valueField.isPresent();
 		boolean externalPresent = externalField != null && externalField.isPresent();
 		if (valuePresent && externalPresent) {
-			results.addError(msg(ExmplTwoValues), value);
+			results.addError(
+					m.msg("ExmplTwoValues|Example may not specify both a direct value and an external value URL"),
+					value);
 		} else if (!valuePresent && !externalPresent) {
 			// the specification doesn't actually state that a value is required, but the
 			// object seems pointless without one, so we'll go with a warning
-			results.addWarning(msg(ExampleNoValue), value);
+			results.addWarning(m.msg("ExmplNoValue|Example specifies neither a direct value nor an external value URL"),
+					value);
 		}
 	}
 }

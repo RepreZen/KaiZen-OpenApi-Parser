@@ -11,8 +11,7 @@
 package com.reprezen.kaizen.oasparser.val3;
 
 import static com.reprezen.kaizen.oasparser.ovl3.SecurityRequirementImpl.F_requirements;
-import static com.reprezen.kaizen.oasparser.val.msg.Messages.msg;
-import static com.reprezen.kaizen.oasparser.val3.OpenApi3Messages.UnkSecScheme;
+import static com.reprezen.kaizen.oasparser.val.Messages.m;
 
 import java.util.Map;
 import java.util.Set;
@@ -39,7 +38,8 @@ public class SecurityRequirementValidator extends ObjectValidatorBase<SecurityRe
 		MapOverlay<SecurityParameter> mapOverlay = Overlay.getMapOverlay(requirements);
 		for (String name : mapOverlay.keySet()) {
 			if (!definedSchemes.contains(name)) {
-				results.addError(msg(UnkSecScheme, name), Overlay.of(mapOverlay, name));
+				results.addError(m.msg("UnkSecScheme|Security scheme not defined in model", name),
+						Overlay.of(mapOverlay, name));
 			}
 		}
 

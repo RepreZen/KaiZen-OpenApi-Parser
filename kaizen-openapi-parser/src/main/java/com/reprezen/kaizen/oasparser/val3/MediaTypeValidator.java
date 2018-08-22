@@ -14,8 +14,7 @@ import static com.reprezen.kaizen.oasparser.ovl3.MediaTypeImpl.F_encodingPropert
 import static com.reprezen.kaizen.oasparser.ovl3.MediaTypeImpl.F_example;
 import static com.reprezen.kaizen.oasparser.ovl3.MediaTypeImpl.F_examples;
 import static com.reprezen.kaizen.oasparser.ovl3.MediaTypeImpl.F_schema;
-import static com.reprezen.kaizen.oasparser.val.msg.Messages.msg;
-import static com.reprezen.kaizen.oasparser.val3.OpenApi3Messages.EncPropNotSchemaProp;
+import static com.reprezen.kaizen.oasparser.val.Messages.m;
 
 import java.util.Map;
 import java.util.Set;
@@ -53,8 +52,9 @@ public class MediaTypeValidator extends ObjectValidatorBase<MediaType> {
 			Map<String, EncodingProperty> encProps = mediaType.getEncodingProperties();
 			for (String encodingPropertyName : encProps.keySet()) {
 				if (!propNames.contains(encodingPropertyName)) {
-					results.addError(msg(EncPropNotSchemaProp, encodingPropertyName),
-							Overlay.of(encProps, encodingPropertyName));
+					results.addError(m.msg(
+							"EncPropNotSchemaProp|Encoding property does not name a schema property for the media type",
+							encodingPropertyName), Overlay.of(encProps, encodingPropertyName));
 				}
 			}
 		}

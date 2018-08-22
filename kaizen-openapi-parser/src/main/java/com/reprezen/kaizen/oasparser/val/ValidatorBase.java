@@ -1,14 +1,6 @@
 package com.reprezen.kaizen.oasparser.val;
 
-import static com.reprezen.kaizen.oasparser.val.BaseValidationMessages.BadEmail;
-import static com.reprezen.kaizen.oasparser.val.BaseValidationMessages.BadPattern;
-import static com.reprezen.kaizen.oasparser.val.BaseValidationMessages.BadUrl;
-import static com.reprezen.kaizen.oasparser.val.BaseValidationMessages.DuplicateValue;
-import static com.reprezen.kaizen.oasparser.val.BaseValidationMessages.EmptyList;
-import static com.reprezen.kaizen.oasparser.val.BaseValidationMessages.MissingField;
-import static com.reprezen.kaizen.oasparser.val.BaseValidationMessages.NumberConstraint;
-import static com.reprezen.kaizen.oasparser.val.BaseValidationMessages.PatternMatchFail;
-import static com.reprezen.kaizen.oasparser.val.msg.Messages.msg;
+import static com.reprezen.kaizen.oasparser.val.Messages.m;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -74,7 +66,9 @@ public abstract class ValidatorBase<V> implements Validator<V> {
 
 	void checkPattern(Overlay<String> field, Pattern pattern) {
 		if (!pattern.matcher(field.get()).matches()) {
-			results.addError(msg(PatternMatchFail, field.get(), pattern), field);
+			results.addError(
+					m.msg("PatternMatchFail|String value does not match required pattern", field.get(), pattern),
+					field);
 		}
 	}
 
@@ -87,7 +81,9 @@ public abstract class ValidatorBase<V> implements Validator<V> {
 		try {
 			Pattern.compile(regex);
 		} catch (PatternSyntaxException e) {
-			results.addWarning(msg(BadPattern, regex), field);
+			results.addWarning(
+					m.msg("BadPattern|Pattern is not a valid Java Regular Expression but may be valid ECMA 262", regex),
+					field);
 		}
 	}
 
@@ -130,7 +126,7 @@ public abstract class ValidatorBase<V> implements Validator<V> {
 		try {
 			new URL(url);
 		} catch (MalformedURLException e) {
-			results.addError(msg(BadUrl, origUrl, e.toString()), overlay);
+			results.addError(m.msg("BadUrl|Invalid URL", origUrl, e.toString()), overlay);
 		}
 	}
 
@@ -170,7 +166,7 @@ public abstract class ValidatorBase<V> implements Validator<V> {
 			addr.setAddress(email);
 			addr.validate();
 		} catch (AddressException e) {
-			results.addError(msg(BadEmail, email, e.toString()), overlay);
+			results.addError(m.msg("BadEmail|Invalid email address", email, e.toString()), overlay);
 		}
 	}
 
@@ -189,7 +185,7 @@ public abstract class ValidatorBase<V> implements Validator<V> {
 		if (field != null && field.isPresent() && test != null) {
 			Number n = field.get();
 			if (!test.apply(n)) {
-				results.addError(msg(NumberConstraint, desc, n), field);
+				results.addError(m.msg("ReqPositive|Value must be " + desc, n), field);
 			}
 		}
 		return field;
@@ -232,7 +228,7 @@ public abstract class ValidatorBase<V> implements Validator<V> {
 			ListOverlay<X> listOverlay = Overlay.getListOverlay(list);
 			if (list != null && !list.isPresent()) {
 				if (nonEmpty && listOverlay.size() == 0) {
-					results.addError(msg(EmptyList), list);
+					results.addError(m.msg("EmptyList|List may not be empty"), list);
 				}
 			}
 		}
@@ -245,7 +241,8 @@ public abstract class ValidatorBase<V> implements Validator<V> {
 			for (int i = 0; i < listOverlay.size(); i++) {
 				X item = listOverlay.get(i);
 				if (seen.contains(item)) {
-					results.addError(msg(DuplicateValue, item, i), Overlay.of(listOverlay, i));
+					results.addError(m.msg("DuplicateValue|Value appeared already", item, i),
+							Overlay.of(listOverlay, i));
 				} else {
 					seen.add(item);
 				}
@@ -274,7 +271,7 @@ public abstract class ValidatorBase<V> implements Validator<V> {
 			MapOverlay<X> mapOverlay = Overlay.getMapOverlay(list);
 			if (list != null && !list.isPresent()) {
 				if (nonEmpty && mapOverlay.size() == 0) {
-					results.addError(msg(EmptyList), list);
+					results.addError(m.msg("EmptyList|List may not be empty"), list);
 				}
 			}
 		}
@@ -287,7 +284,8 @@ public abstract class ValidatorBase<V> implements Validator<V> {
 			for (String key : mapOverlay.keySet()) {
 				X value = mapOverlay.get(key);
 				if (seen.contains(value)) {
-					results.addError(msg(DuplicateValue, value, key), Overlay.of(mapOverlay, key));
+					results.addError(m.msg("DuplicateValue|Value appeared already", value, key),
+							Overlay.of(mapOverlay, key));
 				} else {
 					seen.add(value);
 				}
@@ -297,7 +295,7 @@ public abstract class ValidatorBase<V> implements Validator<V> {
 
 	void checkMissing(Overlay<?> field, boolean required) {
 		if (required && (field == null || !field.isPresent())) {
-			results.addError(msg(MissingField, field.getPathInParent()), value);
+			results.addError(m.msg("MissingField|required field is missing", field.getPathInParent()), value);
 		}
 	}
 
@@ -333,7 +331,10 @@ public abstract class ValidatorBase<V> implements Validator<V> {
 			}
 			if (normalType != null) {
 				if (type == null || !type.equals(normalType)) {
-					results.addWarning(msg(BaseValidationMessages.WrongTypeFormat, field, type, normalType), field);
+					results.addWarning(
+							m.msg("WrongTypeFormat|OpenAPI-defined format used with nonstandard or missing type", field,
+									type, normalType),
+							field);
 				}
 			}
 		}
@@ -365,7 +366,8 @@ public abstract class ValidatorBase<V> implements Validator<V> {
 				break;
 			}
 			if (!ok) {
-				results.addError(msg(BaseValidationMessages.WrongTypeValue, type, defaultValue), overlay);
+				results.addError(m.msg("WrongTypeValue|Value is incompatible with schema type", type, defaultValue),
+						overlay);
 			}
 		}
 	}

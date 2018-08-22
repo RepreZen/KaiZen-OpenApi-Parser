@@ -10,8 +10,7 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val;
 
-import static com.reprezen.kaizen.oasparser.val.BaseValidationMessages.BadRef;
-import static com.reprezen.kaizen.oasparser.val.msg.Messages.msg;
+import static com.reprezen.kaizen.oasparser.val.Messages.m;
 
 import com.reprezen.jsonoverlay.ListOverlay;
 import com.reprezen.jsonoverlay.MapOverlay;
@@ -52,7 +51,9 @@ public class ReferencesChecker {
 
 	public static void checkReference(Reference ref, ValidationResults results, Overlay<?> context) {
 		if (ref.isInvalid()) {
-			results.addError(msg(BadRef, ref.getRefString(), ref.getInvalidReason()), context);
+			results.addError(
+					m.msg("BadRef|JSON reference node was not resolved", ref.getRefString(), ref.getInvalidReason()),
+					context);
 		}
 	}
 }

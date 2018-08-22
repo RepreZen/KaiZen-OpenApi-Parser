@@ -12,7 +12,11 @@ package com.reprezen.kaizen.oasparser.val3;
 
 import static com.reprezen.kaizen.oasparser.ovl3.LinkImpl.F_description;
 import static com.reprezen.kaizen.oasparser.ovl3.LinkImpl.F_requestBody;
-import static com.reprezen.kaizen.oasparser.val.Messages.m;
+import static com.reprezen.kaizen.oasparser.val.msg.Messages.msg;
+import static com.reprezen.kaizen.oasparser.val3.OpenApi3Messages.NoOpIdNoOpRefInLink;
+import static com.reprezen.kaizen.oasparser.val3.OpenApi3Messages.OpIdAndOpRefInLink;
+import static com.reprezen.kaizen.oasparser.val3.OpenApi3Messages.OpIdNotFound;
+import static com.reprezen.kaizen.oasparser.val3.OpenApi3Messages.OpPathNotFound;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -52,32 +56,22 @@ public class LinkValidator extends ObjectValidatorBase<Link> {
 		String operationRef = link.getOperationRef();
 		Operation op = null;
 		if (opId == null && operationRef == null) {
-			results.addError(
-					m.msg("NoOpIdNoOpRefInLink|Link must contain eitehr 'operationRef' or 'operationId' properties"),
-					value);
+			results.addError(msg(NoOpIdNoOpRefInLink), value);
 		} else if (opId != null && operationRef != null) {
-			results.addError(
-					m.msg("OpIdAndOpRefInLink|Link may not contain both 'operationRef' and 'operationId' properties"),
-					value);
+			results.addError(msg(OpIdAndOpRefInLink), value);
 		}
 		if (opId != null) {
 			op = findOperationById(Overlay.of(link).getModel(), opId);
 			if (op == null) {
-				results.addError(
-						m.msg("OpIdNotFound|OperationId in Link does not identify an operation in the containing model",
-								opId),
-						value);
+				results.addError(msg(OpIdNotFound, opId), value);
 			}
 		}
 		String relativePath = getRelativePath(operationRef, results);
 		if (relativePath != null) {
 			op = findOperationByPath(Overlay.of(link).getModel(), relativePath, results);
 			if (op == null) {
-				results.addError(m.msg(
-						"OpPathNotFound|Relative OperationRef in Link does not identify a GET operation in the containing model",
-						operationRef), value);
+				results.addError(msg(OpPathNotFound, operationRef), value);
 			}
-			//
 		}
 		return op;
 	}
@@ -92,13 +86,9 @@ public class LinkValidator extends ObjectValidatorBase<Link> {
 		for (String paramName : params.keySet()) {
 			int count = opParamCounts.get(paramName);
 			if (count == 0) {
-				results.addError(m.msg("BadLinkParam|Link parameter does not appear in linked operation", paramName),
-						Overlay.of(params, paramName));
+				results.addError(msg(OpenApi3Messages.BadLinkParam, paramName), Overlay.of(params, paramName));
 			} else if (count > 1) {
-				results.addWarning(
-						m.msg("AmbigLinkParam|Link parameter name appears more than once in linked operation",
-								paramName),
-						Overlay.of(params, paramName));
+				results.addWarning(msg(OpenApi3Messages.AmbigLinkParam, paramName), Overlay.of(params, paramName));
 			}
 		}
 	}
@@ -122,7 +112,7 @@ public class LinkValidator extends ObjectValidatorBase<Link> {
 	private String getRelativePath(String operationRef, ValidationResults results) {
 		// TODO Q: will braces be pct-encoded as required for URIs?
 		if (operationRef != null) {
-			results.addWarning(m.msg("OperationRefUnSupp|Link.operationRef is not yet supported"), value);
+			results.addWarning(msg(OpenApi3Messages.OperationRefUnSupp), value);
 		}
 		return null;
 	}

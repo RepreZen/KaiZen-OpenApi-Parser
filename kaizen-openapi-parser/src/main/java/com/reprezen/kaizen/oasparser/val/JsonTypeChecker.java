@@ -10,13 +10,14 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val;
 
-import static com.reprezen.kaizen.oasparser.val.Messages.m;
+import static com.reprezen.kaizen.oasparser.val.BaseValidationMessages.WrongTypeJson;
+import static com.reprezen.kaizen.oasparser.val.msg.Messages.msg;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -50,9 +51,15 @@ public class JsonTypeChecker {
 					return;
 				}
 			}
-			results.addError(m.msg("WrongTypeJson|Property bound to incompatible JSON Node type", json.getNodeType(),
-					allowedJsonTypes), value);
+			String allowed = allowedJsonTypes.stream().map(type -> getJsonValueType(type))
+					.collect(Collectors.joining(", "));
+			results.addError(msg(WrongTypeJson, getJsonValueType(json.getClass()), allowed), value);
 		}
+	}
+
+	private static String getJsonValueType(Class<? extends JsonNode> node) {
+		String type = node.getSimpleName();
+		return type.endsWith("Node") ? type.substring(0, type.length() - 4) : type;
 	}
 
 	private static Map<Class<?>, List<Class<? extends JsonNode>>> allowedJsonTypes = null;

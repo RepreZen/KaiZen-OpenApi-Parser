@@ -36,7 +36,8 @@
 					    com.reprezen.kaizen.oasparser,
 					    com.reprezen.kaizen.oasparser.model3,
 					    com.reprezen.kaizen.oasparser.ovl3,
-					    com.reprezen.kaizen.oasparser.val
+					    com.reprezen.kaizen.oasparser.val,
+					    com.reprezen.kaizen.oasparser.val.msg
 					</Export-Package>
 				    </instructions>
 				    <excludes>

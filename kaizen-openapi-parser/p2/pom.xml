@@ -43,6 +43,7 @@
 					<!-- this is specified
 					     explicitly below -->
 					<exclude>com.reprezen.jsonoverlay:jsonoverlay</exclude>
+					<exclude>com.google.guava</exclude>
 				    </excludes>
 				</artifact>
 				<artifact>
@@ -63,6 +64,7 @@
 					     which is generally not done at runtime -->
 					<exclude>commons-cli</exclude>
 					<exclude>com.github.javaparser</exclude>
+					<exclude>com.google.guava</exclude>
 					<exclude>org.eclipse.xtend</exclude>
 				    </excludes>
 				</artifact>

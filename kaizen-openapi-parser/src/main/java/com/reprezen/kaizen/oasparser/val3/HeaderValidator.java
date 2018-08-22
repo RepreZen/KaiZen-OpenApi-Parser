@@ -19,7 +19,9 @@ import static com.reprezen.kaizen.oasparser.ovl3.HeaderImpl.F_examples;
 import static com.reprezen.kaizen.oasparser.ovl3.HeaderImpl.F_explode;
 import static com.reprezen.kaizen.oasparser.ovl3.HeaderImpl.F_schema;
 import static com.reprezen.kaizen.oasparser.ovl3.HeaderImpl.F_style;
-import static com.reprezen.kaizen.oasparser.val.Messages.m;
+import static com.reprezen.kaizen.oasparser.val.msg.Messages.msg;
+import static com.reprezen.kaizen.oasparser.val3.OpenApi3Messages.IgnContType;
+import static com.reprezen.kaizen.oasparser.val3.OpenApi3Messages.NonQryAllowRsvd;
 
 import com.reprezen.kaizen.oasparser.model3.Example;
 import com.reprezen.kaizen.oasparser.model3.Header;
@@ -54,13 +56,13 @@ public class HeaderValidator extends ObjectValidatorBase<Header> {
 		// TODO Q: Shouldn't "allowReserved" be disallowed for headers, as are "name"
 		// and "in"?
 		if (header.isAllowReserved()) {
-			results.addWarning(m.msg("NonQryAllowRsvd|AllowReserved is ignored for non-query parameter"), value);
+			results.addWarning(msg(NonQryAllowRsvd, value.getPathInParent(), "header"), value);
 		}
 	}
 
 	private void checkContentType() {
 		if (value.getPathInParent().equalsIgnoreCase("Content-Type")) {
-			results.addWarning(m.msg("IgnContType|Content-Type headers are ignored"), value);
+			results.addWarning(msg(IgnContType), value);
 		}
 	}
 }

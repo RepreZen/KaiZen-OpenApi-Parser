@@ -4,6 +4,12 @@ import java.util.Locale;
 import java.util.Properties;
 
 public interface Messages {
+
+	// TODO: add a method to test a localization file for missing and invalid
+	// property names (compare all the property keys to the enum value names). This
+	// should be easily executed by a main method in the enum class. It would be
+	// great to also flag localized messages whose list of placeholder positions
+	// does not match that of the default message.
 	public String getFormatString();
 
 	public String name();

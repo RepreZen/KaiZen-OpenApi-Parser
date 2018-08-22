@@ -16,10 +16,10 @@ import static com.reprezen.kaizen.oasparser.val.ValidationResults.Severity.MAX_S
 import static com.reprezen.kaizen.oasparser.val.ValidationResults.Severity.NONE;
 import static com.reprezen.kaizen.oasparser.val.ValidationResults.Severity.WARNING;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import com.google.common.collect.Lists;
 import com.reprezen.jsonoverlay.Overlay;
 import com.reprezen.jsonoverlay.PositionInfo;
 
@@ -82,7 +82,7 @@ public class ValidationResults {
 		}
 	};
 
-	List<ValidationItem> items = Lists.newArrayList();
+	List<ValidationItem> items = new ArrayList<>();
 
 	public <V> void addInfo(String msg, Overlay<V> context) {
 		items.add(new ValidationItem(INFO, msg, context));

@@ -30,23 +30,32 @@ Here is the usage message for the script:
 
 ```
 Usage: ./build.sh <options>
-Builds a p2 repo for KZOP, including JsonOverlay and other dependencies, and
+Builds a p2 repository for KZOP, including JsonOverlay and other dependencies, and
 optionally publishes as an update site.
 
 Options: (* marks required option)
 * -k or --kzop-version - specify full version number of KZOP to package
 * -j or --jovl-version - specify full version number of JsonOverlay to package
-  -r or --repo - specify maven repo URL where indicated versions are available, if
-     they are not in maven central. Defaults to http://localhost:8000
-     This script will attempt to stage the indicated versions to your
-     lcoal maven repo cache prior to building the bundle.
-     Hint: start a web server that delivers files from your .m2.repository
-     directory, e.g. using "python -m SimpleHTTPServer" 
-     or "python3 -m http.server"
+  -K or --kzop-repo - specify maven repo URL where indicated KXOP version is
+     available, if is not in maven central
+  -J or --jovl-repo - specify maven repo URL where indicated JsonOverlay
+     version is available, if is not in maven central
   -p or --publish - publish the newly built update site
 * -b or --build-scripts - speicfy location of RepreZen build scripts, including 
      the "publish" script. This is required only if "-p" is specified
   -h or --help - print this message and do nothing else
+
+Note on repos: Both ---kzop-repo and --jovl-repo default to
+http://localhost:8000, so if you already have the needed versions in
+your local maven repo cache, you can set up a simple HTTP server to
+serve those files and go with these defaults. But you can also explicitly
+specify, e.g., staging repository URLs. 
+
+To use the defualt repo, you can use either of the following to launch
+a local web server, after positioning yourself in the root of your
+local maven cacche (typically .m2/repository in your home directory):
+  * python -m SimpleHTTPServer
+  * python3 -m http.server
 ```
 
 To build without publishing, use a command like this, with
@@ -79,6 +88,10 @@ yet released to central), you can follow this procedure:
    not listening on port 8000, you can use the `-r` option to  specify
    the root URL serving your local repo, which defaults to
    `http://localhost:8000`.
+
+Alterantively, you can use the `--kzop-repo` (`-K`) and/or
+`--jovl-repo` (`-J`) options to specify URLs for staging repositories
+that contain the needed versions.
 
 ## Publishing
 

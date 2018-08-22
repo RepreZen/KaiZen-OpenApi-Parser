@@ -1,66 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
 <project>
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.reprezen.kaizen</groupId>
-  <artifactId>com.reprezen.kaizen.openapi-parser.osgi</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>pom</packaging>
-  <properties>
-    <local-repo>http://localhost:8000</local-repo>
-  </properties>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.reprezen.kaizen</groupId>
+    <artifactId>com.reprezen.kaizen.openapi-parser.osgi</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <properties>
+	<kzop-repo>http://localhost:8000</kzop-repo>
+	<jovl-repo>http://localhost:8000</jovl-repo>
+    </properties>
 
-  <build>
-    <plugins>
-      <plugin>
-	<groupId>org.reficio</groupId>
-	<artifactId>p2-maven-plugin</artifactId>
-	<version>1.1.2-SNAPSHOT</version>
-	<executions>
-	  <execution>
-	    <id>default-cli</id>
-	    <configuration>
-	      <artifacts>
-		<artifact>
-		  <id>com.reprezen.kaizen:openapi-parser:${kzop-version}</id>
-		  <instructions>
-		    <Import-Package>*;resolution=optional</Import-Package>
-		    <Export-Package>
-		      com.reprezen.kaizen.oasparser,
-		      com.reprezen.kaizen.oasparser.model3,
-		      com.reprezen.kaizen.oasparser.ovl3,
-		      com.reprezen.kaizen.oasparser.val
-		    </Export-Package>
-		  </instructions>
-		</artifact>
-		<artifact>
-		  <id>com.reprezen.jsonoverlay:jsonoverlay:${jovl-version}</id>
-		  <instructions>
-		    <Export-Package>
-		      com.reprezen.jsonoverlay,
-		      com.reprezen.jsonoverlay.gen
-		    </Export-Package>
-		  </instructions>
-		</artifact>
-	      </artifacts>
-	      <compressSite>false</compressSite>
-	    </configuration>
-	  </execution>
-	</executions>
-      </plugin>
-    </plugins>
-  </build>
-  
-  <pluginRepositories>
-    <pluginRepository>
-      <id>reficio</id>
-      <url>http://repo.reficio.org/maven/</url>
-    </pluginRepository>
-  </pluginRepositories>
+    <build>
+	<plugins>
+	    <plugin>
+		<groupId>org.reficio</groupId>
+		<artifactId>p2-maven-plugin</artifactId>
+		<version>1.1.2-SNAPSHOT</version>
+		<executions>
+		    <execution>
+			<id>default-cli</id>
+			<configuration>
+			    <artifacts>
+				<artifact>
+				    <id>com.reprezen.kaizen:openapi-parser:${kzop-version}</id>
+				    <!-- early verssions of this artifact have bundle manifests that we
+					 now ignore -->
+				    <override>true</override>
+				    <instructions>
+					<Import-Package>
+					    javax.mail.internet,
+					    com.reprezen.jsonoverlay.gen;resolution:=optional,
+					    *
+					</Import-Package>
+					<Export-Package>
+					    com.reprezen.kaizen.oasparser,
+					    com.reprezen.kaizen.oasparser.model3,
+					    com.reprezen.kaizen.oasparser.ovl3,
+					    com.reprezen.kaizen.oasparser.val,
+					    com.reprezen.kaizen.oasparser.val.msg
+					</Export-Package>
+				    </instructions>
+				    <excludes>
+					<!-- this is specified
+					     explicitly below -->
+					<exclude>com.reprezen.jsonoverlay:jsonoverlay</exclude>
+					<exclude>com.google.guava</exclude>
+				    </excludes>
+				</artifact>
+				<artifact>
+				    <id>com.reprezen.jsonoverlay:jsonoverlay:${jovl-version}</id>
+				    <!-- early verssions of this artifact have bundle manifests that
+					 we now ignore -->
+				    <override>true</override>
+				    <instructions>
+					<Import-Package>
+					    *
+					</Import-Package>
+					<Export-Package>
+					    com.reprezen.jsonoverlay
+					</Export-Package>
+				    </instructions>
+				    <excludes>
+					<!-- following are only required for model class generation,
+					     which is generally not done at runtime -->
+					<exclude>commons-cli</exclude>
+					<exclude>com.github.javaparser</exclude>
+					<exclude>com.google.guava</exclude>
+					<exclude>org.eclipse.xtend</exclude>
+				    </excludes>
+				</artifact>
+			    </artifacts>
+			    <compressSite>false</compressSite>
+			</configuration>
+		    </execution>
+		</executions>
+	    </plugin>
+	</plugins>
+    </build>
+    
+    <pluginRepositories>
+	<pluginRepository>
+	    <id>reficio</id>
+	    <url>http://repo.reficio.org/maven/</url>
+	</pluginRepository>
+    </pluginRepositories>
 
-  <repositories>
-    <repository>
-      <id>local-cache</id>
-      <url>${local-repo}</url>
-      <layout>default</layout>
-    </repository>
-  </repositories>
+    <repositories>
+	<repository>
+	    <id>kzop-repo</id>
+	    <url>${kzop-repo}</url>
+	    <layout>default</layout>
+	</repository>
+	<repository>
+	    <id>jovl-repo</id>
+	    <url>${jovl-repo}</url>
+	    <layout>default</layout>
+	</repository>
+    </repositories>
 </project>

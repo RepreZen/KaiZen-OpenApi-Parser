@@ -12,9 +12,8 @@ package com.reprezen.kaizen.oasparser.val;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.HashMap;
 import java.util.Map;
-
-import com.google.common.collect.Maps;
 
 public class NumericUtils {
 	public static boolean isNumeric(Object obj) {
@@ -162,7 +161,7 @@ public class NumericUtils {
 
 		private void register(Class<? extends Number> cls, NumericType type) {
 			if (NumericType.types == null)
-				NumericType.types = Maps.newHashMap();
+				NumericType.types = new HashMap<>();
 			types.put(cls, type);
 		}
 

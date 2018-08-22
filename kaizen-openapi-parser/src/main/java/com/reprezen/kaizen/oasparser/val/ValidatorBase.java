@@ -4,6 +4,7 @@ import static com.reprezen.kaizen.oasparser.val.Messages.m;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -15,7 +16,6 @@ import java.util.regex.PatternSyntaxException;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
-import com.google.common.collect.Sets;
 import com.reprezen.jsonoverlay.ListOverlay;
 import com.reprezen.jsonoverlay.MapOverlay;
 import com.reprezen.jsonoverlay.Overlay;
@@ -237,7 +237,7 @@ public abstract class ValidatorBase<V> implements Validator<V> {
 	private <X> void checkListUnique(Overlay<List<X>> list, boolean unique) {
 		if (unique) {
 			ListOverlay<X> listOverlay = Overlay.getListOverlay(list);
-			Set<X> seen = Sets.newHashSet();
+			Set<X> seen = new HashSet<>();
 			for (int i = 0; i < listOverlay.size(); i++) {
 				X item = listOverlay.get(i);
 				if (seen.contains(item)) {
@@ -280,7 +280,7 @@ public abstract class ValidatorBase<V> implements Validator<V> {
 	private <X> void checkMapUnique(Overlay<Map<String, X>> map, boolean unique) {
 		if (unique) {
 			MapOverlay<X> mapOverlay = Overlay.getMapOverlay(map);
-			Set<X> seen = Sets.newHashSet();
+			Set<X> seen = new HashSet<>();
 			for (String key : mapOverlay.keySet()) {
 				X value = mapOverlay.get(key);
 				if (seen.contains(value)) {

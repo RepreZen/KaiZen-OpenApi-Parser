@@ -15,9 +15,9 @@ import static com.reprezen.kaizen.oasparser.ovl3.LinkImpl.F_requestBody;
 import static com.reprezen.kaizen.oasparser.val.Messages.m;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 
-import com.google.common.collect.Maps;
 import com.reprezen.jsonoverlay.Overlay;
 import com.reprezen.kaizen.oasparser.model3.Link;
 import com.reprezen.kaizen.oasparser.model3.OpenApi3;
@@ -128,7 +128,7 @@ public class LinkValidator extends ObjectValidatorBase<Link> {
 	}
 
 	private Map<String, Integer> getParamNameCounts(Collection<? extends Parameter> parameters) {
-		Map<String, Integer> counts = Maps.newHashMap();
+		Map<String, Integer> counts = new HashMap<>();
 		for (Parameter parameter : parameters) {
 			String name = parameter.getName();
 			if (counts.containsKey(name)) {

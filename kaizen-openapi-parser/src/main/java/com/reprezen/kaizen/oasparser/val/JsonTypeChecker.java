@@ -14,6 +14,9 @@ import static com.reprezen.kaizen.oasparser.val.Messages.m;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -24,8 +27,6 @@ import com.fasterxml.jackson.databind.node.NumericNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.ShortNode;
 import com.fasterxml.jackson.databind.node.TextNode;
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Multimap;
 import com.reprezen.jsonoverlay.BooleanOverlay;
 import com.reprezen.jsonoverlay.IntegerOverlay;
 import com.reprezen.jsonoverlay.JsonOverlay;
@@ -54,7 +55,7 @@ public class JsonTypeChecker {
 		}
 	}
 
-	private static Multimap<Class<?>, Class<? extends JsonNode>> allowedJsonTypes = null;
+	private static Map<Class<?>, List<Class<? extends JsonNode>>> allowedJsonTypes = null;
 
 	private static Collection<Class<? extends JsonNode>> getAllowedJsonTypes(Overlay<?> value) {
 		if (allowedJsonTypes == null) {
@@ -66,17 +67,16 @@ public class JsonTypeChecker {
 	}
 
 	private static void createAllowedJsonTypes() {
-		Multimap<Class<?>, Class<? extends JsonNode>> types = ArrayListMultimap
-				.<Class<?>, Class<? extends JsonNode>>create();
-		types.put(StringOverlay.class, TextNode.class);
-		types.put(BooleanOverlay.class, BooleanNode.class);
-		types.putAll(IntegerOverlay.class, Arrays.asList(IntNode.class, ShortNode.class, BigIntegerNode.class));
-		types.put(NumberOverlay.class, NumericNode.class);
-		types.putAll(PrimitiveOverlay.class, Arrays.asList(TextNode.class, NumericNode.class, BooleanNode.class));
-		types.put(ObjectOverlay.class, JsonNode.class);
-		types.put(MapOverlay.class, ObjectNode.class);
-		types.put(ListOverlay.class, ArrayNode.class);
-		types.put(PropertiesOverlay.class, ObjectNode.class);
+		Map<Class<?>, List<Class<? extends JsonNode>>> types = new HashMap<>();
+		types.put(StringOverlay.class, Arrays.asList(TextNode.class));
+		types.put(BooleanOverlay.class, Arrays.asList(BooleanNode.class));
+		types.put(IntegerOverlay.class, Arrays.asList(IntNode.class, ShortNode.class, BigIntegerNode.class));
+		types.put(NumberOverlay.class, Arrays.asList(NumericNode.class));
+		types.put(PrimitiveOverlay.class, Arrays.asList(TextNode.class, NumericNode.class, BooleanNode.class));
+		types.put(ObjectOverlay.class, Arrays.asList(JsonNode.class));
+		types.put(MapOverlay.class, Arrays.asList(ObjectNode.class));
+		types.put(ListOverlay.class, Arrays.asList(ArrayNode.class));
+		types.put(PropertiesOverlay.class, Arrays.asList(ObjectNode.class));
 		allowedJsonTypes = types;
 	}
 }

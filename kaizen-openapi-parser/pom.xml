@@ -243,7 +243,7 @@
     <repositories>
         <repository>
             <id>jovl-staging</id>
-            <url>https://oss.sonatype.org/content/repositories/comreprezenjsonoverlay-1034/</url>
+            <url>https://oss.sonatype.org/content/repositories/comreprezenjsonoverlay-1036/</url>
         </repository>
     </repositories>
 </project>

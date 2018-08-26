@@ -30,8 +30,9 @@ public class OpenApiParser {
 
 	public OpenApi<?> parse(String spec, URL resolutionBase, boolean validate) {
 		try {
-			JsonNode tree = new JsonLoader().loadString(resolutionBase, spec);
-			return parse(tree, resolutionBase, validate);
+			JsonLoader loader = new JsonLoader();
+			JsonNode tree = loader.loadString(resolutionBase, spec);
+			return parse(tree, resolutionBase, validate, loader);
 
 		} catch (IOException e) {
 			throw new OpenApiParserException("Failed to parse spec as JSON or YAML", e);
@@ -76,7 +77,11 @@ public class OpenApiParser {
 	}
 
 	public OpenApi<?> parse(JsonNode tree, URL resolutionBase, boolean validate) {
-		ReferenceManager manager = new ReferenceManager(resolutionBase, tree);
+		return parse(tree, resolutionBase, validate, null);
+	}
+
+	public OpenApi<?> parse(JsonNode tree, URL resolutionBase, boolean validate, JsonLoader loader) {
+		ReferenceManager manager = new ReferenceManager(resolutionBase, tree, loader);
 		return parse(manager, validate);
 	}
 

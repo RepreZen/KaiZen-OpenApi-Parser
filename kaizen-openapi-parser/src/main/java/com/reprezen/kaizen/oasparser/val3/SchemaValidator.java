@@ -43,10 +43,9 @@ import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_type;
 import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_uniqueItems;
 import static com.reprezen.kaizen.oasparser.ovl3.SchemaImpl.F_xml;
 import static com.reprezen.kaizen.oasparser.val.msg.Messages.msg;
-import static com.reprezen.kaizen.oasparser.val3.OpenApi3Messages.DiscNotProp;
 import static com.reprezen.kaizen.oasparser.val3.OpenApi3Messages.ROnlyAndWOnly;
 
-import com.reprezen.jsonoverlay.Overlay;
+import com.reprezen.kaizen.oasparser.model3.Discriminator;
 import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
 import com.reprezen.kaizen.oasparser.model3.Schema;
 import com.reprezen.kaizen.oasparser.model3.Xml;
@@ -89,23 +88,11 @@ public class SchemaValidator extends ObjectValidatorBase<Schema> {
 		}
 		validateFormatField(F_format, false, schema.getType());
 		validateField(F_defaultValue, false, Object.class, null, field -> checkDefault(field, schema.getType()));
-		checkDiscriminator(schema, validateStringField(F_discriminator, false));
+		validateField(F_discriminator, false, Discriminator.class, new DiscriminatorValidator());
 		checkReadWrite(schema);
 		validateField(F_xml, false, Xml.class, new XmlValidator());
 		validateField(F_externalDocs, false, ExternalDocs.class, new ExternalDocsValidator());
 		validateExtensions(schema.getExtensions());
-	}
-
-	private void checkDiscriminator(Schema schema, Overlay<?> context) {
-		String discriminator = schema.getDiscriminator();
-		if (discriminator != null) {
-			if (!schema.getProperties().keySet().contains(discriminator)) {
-				results.addError(msg(DiscNotProp, discriminator), context);
-			}
-			if (!schema.getRequiredFields().contains(discriminator)) {
-				results.addError(msg(OpenApi3Messages.DiscNotReq, discriminator), context);
-			}
-		}
 	}
 
 	private void checkReadWrite(Schema schema) {

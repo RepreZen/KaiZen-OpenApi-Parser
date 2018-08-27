@@ -18,6 +18,7 @@ import com.reprezen.jsonoverlay.OverlayFactory;
 import com.reprezen.jsonoverlay.PropertiesOverlay;
 import com.reprezen.jsonoverlay.ReferenceManager;
 import com.reprezen.jsonoverlay.StringOverlay;
+import com.reprezen.kaizen.oasparser.model3.Discriminator;
 import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
 import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.Schema;
@@ -731,14 +732,20 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 	// Discriminator
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public String getDiscriminator() {
-		return _get("discriminator", String.class);
+	public Discriminator getDiscriminator() {
+		return _get("discriminator", Discriminator.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public void setDiscriminator(String discriminator) {
-		_setScalar("discriminator", discriminator, String.class);
+	public Discriminator getDiscriminator(boolean elaborate) {
+		return _get("discriminator", elaborate, Discriminator.class);
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public void setDiscriminator(Discriminator discriminator) {
+		_setScalar("discriminator", discriminator, Discriminator.class);
 	}
 
 	// ReadOnly
@@ -1045,7 +1052,7 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 		_createScalar("format", "format", StringOverlay.factory);
 		_createScalar("defaultValue", "default", ObjectOverlay.factory);
 		_createScalar("nullable", "nullable", BooleanOverlay.factory);
-		_createScalar("discriminator", "discriminator", StringOverlay.factory);
+		_createScalar("discriminator", "discriminator", DiscriminatorImpl.factory);
 		_createScalar("readOnly", "readOnly", BooleanOverlay.factory);
 		_createScalar("writeOnly", "writeOnly", BooleanOverlay.factory);
 		_createScalar("xml", "xml", XmlImpl.factory);

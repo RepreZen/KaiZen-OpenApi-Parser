@@ -427,27 +427,30 @@ types:
   imports:
     impl:
     - Overlay
-  fields: &headerFields
-    description: {}
-    required: 
+  fields:
+    description: &id012 {
+      }
+    required: &id011
       type: Boolean
-    deprecated:
+    deprecated: &id010
       type: Boolean
-    allowEmptyValue:
+    allowEmptyValue: &id009
       type: Boolean
-    style: {}
-    explode: 
+    style: &id008 {
+      }
+    explode: &id007
       type: Boolean
-    allowReserved: 
+    allowReserved: &id006
       type: Boolean
-    schema: {}
-    example: 
+    schema: &id005 {
+      }
+    example: &id004
       type: Object
-    examples: 
+    examples: &id003
       type: Example
       structure: map
       keyPattern: '[a-zA-Z0-9\._-]+'
-    content: 
+    content: &id002
       name: ContentMediaType
       type: MediaType
       structure: map
@@ -457,11 +460,22 @@ types:
     impl:
     - Overlay
   fields:
-    in: {
-      }
+    extension: *id001
+    content: *id002
+    examples: *id003
+    example: *id004
+    schema: *id005
+    allowReserved: *id006
+    explode: *id007
+    style: *id008
+    allowEmptyValue: *id009
+    deprecated: *id010
+    required: *id011
+    description: *id012
     name: {
       }
-    <<: *headerFields
+    in: {
+      }
 - name: Schema
   imports:
     impl:
@@ -585,3 +599,10 @@ types:
     externalValue: {
       }
     extension: *id001
+- name: Discriminator
+  fields:
+    propertyName: {
+      }
+    mapping:
+      type: String
+      structure: map

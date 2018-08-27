@@ -224,7 +224,7 @@ public abstract class ValidatorBase<V> implements Validator<V> {
 		Overlay<F> field = Overlay.of(propValue, name, fieldClass);
 		checkJsonType(field, getAllowedJsonTypes(field), results);
 		checkMissing(field, required);
-		if (value != null && value.isPresent() && validator != null) {
+		if (field != null && field.isPresent() && validator != null) {
 			validator.validate(field);
 			for (Consumer<Overlay<F>> otherCheck : otherChecks) {
 				otherCheck.accept(field);

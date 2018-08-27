@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.annotation.Generated;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.reprezen.jsonoverlay.Builder;
 import com.reprezen.jsonoverlay.JsonOverlay;
 import com.reprezen.jsonoverlay.ObjectOverlay;
 import com.reprezen.jsonoverlay.OverlayFactory;
@@ -164,5 +165,15 @@ public class LicenseImpl extends PropertiesOverlay<License> implements License {
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	protected OverlayFactory<?> _getFactory() {
 		return factory;
+	}
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static Builder<License> builder(JsonOverlay<?> modelMember) {
+		return new Builder<License>(factory, modelMember);
+	}
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static JsonOverlay<License> create(JsonOverlay<?> modelMember) {
+		return builder(modelMember).build();
 	}
 }

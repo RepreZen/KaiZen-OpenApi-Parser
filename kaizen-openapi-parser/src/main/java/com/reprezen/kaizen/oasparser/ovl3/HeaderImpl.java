@@ -6,6 +6,7 @@ import javax.annotation.Generated;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.reprezen.jsonoverlay.BooleanOverlay;
+import com.reprezen.jsonoverlay.Builder;
 import com.reprezen.jsonoverlay.JsonOverlay;
 import com.reprezen.jsonoverlay.MapOverlay;
 import com.reprezen.jsonoverlay.ObjectOverlay;
@@ -442,5 +443,15 @@ public class HeaderImpl extends PropertiesOverlay<Header> implements Header {
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	protected OverlayFactory<?> _getFactory() {
 		return factory;
+	}
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static Builder<Header> builder(JsonOverlay<?> modelMember) {
+		return new Builder<Header>(factory, modelMember);
+	}
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static JsonOverlay<Header> create(JsonOverlay<?> modelMember) {
+		return builder(modelMember).build();
 	}
 }

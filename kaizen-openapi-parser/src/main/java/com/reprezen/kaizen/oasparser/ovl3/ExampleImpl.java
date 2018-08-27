@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.annotation.Generated;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.reprezen.jsonoverlay.Builder;
 import com.reprezen.jsonoverlay.JsonOverlay;
 import com.reprezen.jsonoverlay.MapOverlay;
 import com.reprezen.jsonoverlay.ObjectOverlay;
@@ -199,5 +200,15 @@ public class ExampleImpl extends PropertiesOverlay<Example> implements Example {
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	protected OverlayFactory<?> _getFactory() {
 		return factory;
+	}
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static Builder<Example> builder(JsonOverlay<?> modelMember) {
+		return new Builder<Example>(factory, modelMember);
+	}
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static JsonOverlay<Example> create(JsonOverlay<?> modelMember) {
+		return builder(modelMember).build();
 	}
 }

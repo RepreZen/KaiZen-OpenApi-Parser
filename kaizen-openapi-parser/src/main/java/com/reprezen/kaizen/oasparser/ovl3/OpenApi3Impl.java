@@ -9,6 +9,7 @@ import javax.annotation.Generated;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.inject.Inject;
+import com.reprezen.jsonoverlay.Builder;
 import com.reprezen.jsonoverlay.JsonOverlay;
 import com.reprezen.jsonoverlay.ObjectOverlay;
 import com.reprezen.jsonoverlay.OverlayFactory;
@@ -1019,5 +1020,15 @@ public class OpenApi3Impl extends PropertiesOverlay<OpenApi3> implements OpenApi
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	protected OverlayFactory<?> _getFactory() {
 		return factory;
+	}
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static Builder<OpenApi3> builder(JsonOverlay<?> modelMember) {
+		return new Builder<OpenApi3>(factory, modelMember);
+	}
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static JsonOverlay<OpenApi3> create(JsonOverlay<?> modelMember) {
+		return builder(modelMember).build();
 	}
 }

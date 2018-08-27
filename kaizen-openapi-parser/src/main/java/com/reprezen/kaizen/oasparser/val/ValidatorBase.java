@@ -8,10 +8,14 @@ import static com.reprezen.kaizen.oasparser.val.BaseValidationMessages.EmptyList
 import static com.reprezen.kaizen.oasparser.val.BaseValidationMessages.MissingField;
 import static com.reprezen.kaizen.oasparser.val.BaseValidationMessages.NumberConstraint;
 import static com.reprezen.kaizen.oasparser.val.BaseValidationMessages.PatternMatchFail;
+import static com.reprezen.kaizen.oasparser.val.BaseValidationMessages.WrongTypeJson;
 import static com.reprezen.kaizen.oasparser.val.msg.Messages.msg;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -20,14 +24,31 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
+import java.util.stream.Collectors;
 
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.BigIntegerNode;
+import com.fasterxml.jackson.databind.node.BooleanNode;
+import com.fasterxml.jackson.databind.node.IntNode;
+import com.fasterxml.jackson.databind.node.NumericNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.databind.node.ShortNode;
+import com.fasterxml.jackson.databind.node.TextNode;
+import com.reprezen.jsonoverlay.BooleanOverlay;
+import com.reprezen.jsonoverlay.IntegerOverlay;
+import com.reprezen.jsonoverlay.JsonOverlay;
 import com.reprezen.jsonoverlay.ListOverlay;
 import com.reprezen.jsonoverlay.MapOverlay;
+import com.reprezen.jsonoverlay.NumberOverlay;
+import com.reprezen.jsonoverlay.ObjectOverlay;
 import com.reprezen.jsonoverlay.Overlay;
+import com.reprezen.jsonoverlay.PrimitiveOverlay;
 import com.reprezen.jsonoverlay.PropertiesOverlay;
+import com.reprezen.jsonoverlay.StringOverlay;
 import com.reprezen.kaizen.oasparser.val.oasparser.fake.scheme.Handler;
 
 public abstract class ValidatorBase<V> implements Validator<V> {
@@ -38,7 +59,7 @@ public abstract class ValidatorBase<V> implements Validator<V> {
 	public final void validate(Overlay<V> value) {
 		this.value = value;
 		this.results = ValidationResults.get();
-		JsonTypeChecker.checkJsonType(value, results);
+		checkJsonType(value, getAllowedJsonTypes(value), results);
 		runValidations();
 	}
 
@@ -201,7 +222,7 @@ public abstract class ValidatorBase<V> implements Validator<V> {
 		@SuppressWarnings("unchecked")
 		PropertiesOverlay<V> propValue = (PropertiesOverlay<V>) value.get();
 		Overlay<F> field = Overlay.of(propValue, name, fieldClass);
-		JsonTypeChecker.checkJsonType(field, results);
+		checkJsonType(field, getAllowedJsonTypes(field), results);
 		checkMissing(field, required);
 		if (value != null && value.isPresent() && validator != null) {
 			validator.validate(field);
@@ -368,5 +389,50 @@ public abstract class ValidatorBase<V> implements Validator<V> {
 				results.addError(msg(BaseValidationMessages.WrongTypeValue, type, defaultValue), overlay);
 			}
 		}
+	}
+
+	public void checkJsonType(Overlay<?> value, Collection<Class<? extends JsonNode>> allowedJsonTypes,
+			ValidationResults results) {
+		JsonNode json = value.getParsedJson();
+		if (json != null && !json.isMissingNode()) {
+			for (Class<? extends JsonNode> type : allowedJsonTypes) {
+				if (type.isAssignableFrom(json.getClass())) {
+					return;
+				}
+			}
+			String allowed = allowedJsonTypes.stream().map(type -> getJsonValueType(type))
+					.collect(Collectors.joining(", "));
+			results.addError(msg(WrongTypeJson, getJsonValueType(json.getClass()), allowed), value);
+		}
+	}
+
+	private String getJsonValueType(Class<? extends JsonNode> node) {
+		String type = node.getSimpleName();
+		return type.endsWith("Node") ? type.substring(0, type.length() - 4) : type;
+	}
+
+	protected static Map<Class<?>, List<Class<? extends JsonNode>>> allowedJsonTypes = null;
+
+	protected Collection<Class<? extends JsonNode>> getAllowedJsonTypes(Overlay<?> value) {
+		if (allowedJsonTypes == null) {
+			createAllowedJsonTypes();
+		}
+		JsonOverlay<?> overlay = value.getOverlay();
+		return allowedJsonTypes
+				.get(overlay instanceof PropertiesOverlay ? PropertiesOverlay.class : overlay.getClass());
+	}
+
+	private static void createAllowedJsonTypes() {
+		Map<Class<?>, List<Class<? extends JsonNode>>> types = new HashMap<>();
+		types.put(StringOverlay.class, Arrays.asList(TextNode.class));
+		types.put(BooleanOverlay.class, Arrays.asList(BooleanNode.class));
+		types.put(IntegerOverlay.class, Arrays.asList(IntNode.class, ShortNode.class, BigIntegerNode.class));
+		types.put(NumberOverlay.class, Arrays.asList(NumericNode.class));
+		types.put(PrimitiveOverlay.class, Arrays.asList(TextNode.class, NumericNode.class, BooleanNode.class));
+		types.put(ObjectOverlay.class, Arrays.asList(JsonNode.class));
+		types.put(MapOverlay.class, Arrays.asList(ObjectNode.class));
+		types.put(ListOverlay.class, Arrays.asList(ArrayNode.class));
+		types.put(PropertiesOverlay.class, Arrays.asList(ObjectNode.class));
+		allowedJsonTypes = types;
 	}
 }

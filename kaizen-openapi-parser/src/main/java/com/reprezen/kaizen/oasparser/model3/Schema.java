@@ -364,10 +364,13 @@ public interface Schema extends IJsonOverlay<Schema>, IModelPart<OpenApi3, Schem
 
 	// Discriminator
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	String getDiscriminator();
+	Discriminator getDiscriminator();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void setDiscriminator(String discriminator);
+	Discriminator getDiscriminator(boolean elaborate);
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setDiscriminator(Discriminator discriminator);
 
 	// ReadOnly
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")

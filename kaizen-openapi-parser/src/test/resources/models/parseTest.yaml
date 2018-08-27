@@ -208,7 +208,10 @@ components:
       format: format
       default: xyzzy
       nullable: true
-      discriminator: foo
+      discriminator: 
+        propertyName: foo
+        mapping:
+          Foo: foo
       readOnly: true
       writeOnly: false
       xml:

@@ -58,7 +58,7 @@ public abstract class ValidatorBase<V> implements Validator<V> {
 	@Override
 	public final void validate(Overlay<V> value) {
 		this.value = value;
-		this.results = ValidationResults.get();
+		this.results = ValidationContext.getValidationResults();
 		checkJsonType(value, getAllowedJsonTypes(value), results);
 		runValidations();
 	}

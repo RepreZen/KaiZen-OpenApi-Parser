@@ -47,5 +47,8 @@ public class ValidationContext implements AutoCloseable {
 	@Override
 	public void close() {
 		threadInstance.remove();
+		if (threadInstance.get() != null) {
+			throw new IllegalStateException();
+		}
 	}
 }

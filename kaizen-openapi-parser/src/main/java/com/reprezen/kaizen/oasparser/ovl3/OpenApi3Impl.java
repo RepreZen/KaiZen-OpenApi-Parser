@@ -54,7 +54,7 @@ public class OpenApi3Impl extends PropertiesOverlay<OpenApi3> implements OpenApi
 	@Override
 	public void validate() {
 		try (ValidationContext context = ValidationContext.open()) {
-			validationResults = context.getValidationResults();
+			validationResults = ValidationContext.getValidationResults();
 			new OpenApi3Validator().validate(Overlay.of(this));
 		}
 	}

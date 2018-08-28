@@ -25,41 +25,6 @@ import com.reprezen.jsonoverlay.PositionInfo;
 
 public class ValidationResults {
 
-	private static ThreadLocal<ValidationResults> threadInstance = new ThreadLocal<ValidationResults>();
-
-	private ValidationResults() {
-	}
-
-	public static class ValidationResultsInstance implements AutoCloseable {
-
-		private ValidationResults results;
-
-		public ValidationResultsInstance() {
-			results = threadInstance.get();
-			if (results == null) {
-				results = new ValidationResults();
-				threadInstance.set(results);
-			}
-		}
-
-		public ValidationResults get() {
-			return results;
-		}
-
-		@Override
-		public void close() {
-			threadInstance.remove();
-		}
-	}
-
-	public static ValidationResultsInstance open() {
-		return new ValidationResultsInstance();
-	}
-
-	public static ValidationResults get() {
-		return threadInstance.get();
-	}
-
 	public enum Severity {
 		NONE, INFO, WARNING, ERROR;
 
@@ -82,7 +47,7 @@ public class ValidationResults {
 		}
 	};
 
-	List<ValidationItem> items = new ArrayList<>();
+	private List<ValidationItem> items = new ArrayList<>();
 
 	public <V> void addInfo(String msg, Overlay<V> context) {
 		items.add(new ValidationItem(INFO, msg, context));

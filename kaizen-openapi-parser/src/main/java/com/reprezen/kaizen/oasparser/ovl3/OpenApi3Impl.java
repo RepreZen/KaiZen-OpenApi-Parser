@@ -31,9 +31,9 @@ import com.reprezen.kaizen.oasparser.model3.SecurityRequirement;
 import com.reprezen.kaizen.oasparser.model3.SecurityScheme;
 import com.reprezen.kaizen.oasparser.model3.Server;
 import com.reprezen.kaizen.oasparser.model3.Tag;
+import com.reprezen.kaizen.oasparser.val.ValidationContext;
 import com.reprezen.kaizen.oasparser.val.ValidationResults;
 import com.reprezen.kaizen.oasparser.val.ValidationResults.Severity;
-import com.reprezen.kaizen.oasparser.val.ValidationResults.ValidationResultsInstance;
 import com.reprezen.kaizen.oasparser.val3.OpenApi3Validator;
 
 public class OpenApi3Impl extends PropertiesOverlay<OpenApi3> implements OpenApi3 {
@@ -53,8 +53,8 @@ public class OpenApi3Impl extends PropertiesOverlay<OpenApi3> implements OpenApi
 
 	@Override
 	public void validate() {
-		try (ValidationResultsInstance instance = ValidationResults.open()) {
-			validationResults = instance.get();
+		try (ValidationContext context = ValidationContext.open()) {
+			validationResults = context.getValidationResults();
 			new OpenApi3Validator().validate(Overlay.of(this));
 		}
 	}

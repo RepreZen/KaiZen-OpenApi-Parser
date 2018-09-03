@@ -60,13 +60,12 @@ At the time of this writing, validation fails on the
 `callback-example` because that example does not include the required
 `openapi` and `info` properties.
 
-```java
-package test;
+```package test;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.Arrays;
 
+import com.reprezen.jsonoverlay.Overlay;
 import com.reprezen.kaizen.oasparser.OpenApi3Parser;
 import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.Operation;
@@ -77,17 +76,17 @@ import com.reprezen.kaizen.oasparser.val.ValidationResults.ValidationItem;
 
 public class GettingStarted {
 
-	public static void main(String[] args) throws URISyntaxException {
+	public static void main(String[] args) throws Exception {
 		boolean validate = !(args.length >= 1 && args[0].equals("-n"));
 		for (String modelName : Arrays.asList("api-with-examples", "callback-example", "link-example", "petstore",
-				"petstore-expanded", "uber")) {
+				"petstore-expanded", "uspto")) {
 			URI modelUri = new URI("https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/examples/v3.0/"
 					+ modelName + ".yaml");
 			processModel(modelUri, validate);
 		}
 	}
 
-	private static void processModel(URI modelUri, boolean validate) {
+	private static void processModel(URI modelUri, boolean validate) throws Exception {
 		OpenApi3 model = new OpenApi3Parser().parse(modelUri, validate);
 		System.out.printf("== Model %s\n", modelUri);
 		if (!validate || model.isValid()) {
@@ -103,10 +102,10 @@ public class GettingStarted {
 	private static void describeModel(OpenApi3 model) {
 		System.out.printf("Title: %s\n", model.getInfo().getTitle());
 		for (Path path : model.getPaths().values()) {
-			System.out.printf("Path %s:\n", path.getPathInParent());
+			System.out.printf("Path %s:\n", Overlay.of(path).getPathInParent());
 			for (Operation op : path.getOperations().values()) {
-				System.out.printf("  %s: [%s] %s\n", op.getPathInParent().toUpperCase(), op.getOperationId(),
-						op.getSummary());
+				System.out.printf("  %s: [%s] %s\n", Overlay.of(op).getPathInParent().toUpperCase(),
+						op.getOperationId(), op.getSummary());
 				for (Parameter param : op.getParameters()) {
 					System.out.printf("    %s[%s]:, %s - %s\n", param.getName(), param.getIn(), getParameterType(param),
 							param.getDescription());
@@ -120,5 +119,4 @@ public class GettingStarted {
 		return schema != null ? schema.getType() : "unknown";
 	}
 
-}
-```
+}```

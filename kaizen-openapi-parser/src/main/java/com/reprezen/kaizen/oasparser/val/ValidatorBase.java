@@ -112,23 +112,26 @@ public abstract class ValidatorBase<V> implements Validator<V> {
 		}
 	}
 
-	public Overlay<String> validateUrlField(String name, boolean required, boolean allowVars) {
-		return validateUrlField(name, required, allowVars, (Pattern) null);
+	public Overlay<String> validateUrlField(String name, boolean required, boolean allowRelative, boolean allowVars) {
+		return validateUrlField(name, required, allowRelative, allowVars, (Pattern) null);
 	}
 
-	public Overlay<String> validateUrlField(String name, boolean required, boolean allowVars, String pattern) {
-		return validateUrlField(name, required, allowVars, Pattern.compile(pattern));
+	public Overlay<String> validateUrlField(String name, boolean required, boolean allowRelative, boolean allowVars,
+			String pattern) {
+		return validateUrlField(name, required, allowRelative, allowVars, Pattern.compile(pattern));
 	}
 
-	public Overlay<String> validateUrlField(String name, boolean required, boolean allowVars, Pattern pattern) {
-		return validateStringField(name, required, pattern, field -> checkUrl(field, allowVars));
+	public Overlay<String> validateUrlField(String name, boolean required, boolean allowRelative, boolean allowVars,
+			Pattern pattern) {
+		return validateStringField(name, required, pattern, field -> checkUrl(field, allowRelative, allowVars));
 	}
 
 	public static final String SPECIAL_SCHEME = Handler.class.getPackage().getName()
 			.substring(ValidatorBase.class.getPackage().getName().length() + 1);
 	private static boolean specialSchemeInited = false;
 
-	private void checkUrl(Overlay<String> overlay, boolean allowVars) {
+	private void checkUrl(Overlay<String> overlay, boolean allowRelative, boolean allowVars) {
+		initSpecialScheme();
 		// TODO Q: Any help from spec in being able to validate URLs with vars? E.g is
 		// our treatment here valid? We assume vars can only appear where simple text
 		// can appear, so handling vars means relacing {.*} with "1" and testing for URL
@@ -142,34 +145,39 @@ public abstract class ValidatorBase<V> implements Validator<V> {
 				// "1" is not a valid scheme name, so we need to replace it with special scheme,
 				// for which we provide a do-nothing protocol handler implementation
 				url = SPECIAL_SCHEME + url.substring(1);
-				if (!specialSchemeInited) {
-					// register protocol handler for special scheme
-					initSpecialScheme();
-				}
 			}
 		}
 		try {
 			new URL(url);
 		} catch (MalformedURLException e) {
-			results.addError(msg(BadUrl, origUrl, e.toString()), overlay);
+			try {
+				new URL(new URL(SPECIAL_SCHEME + ":/"), url);
+				if (!allowRelative) {
+					results.addError(msg(BaseValidationMessages.NoRelUrl, origUrl, e.toString()), overlay);
+				}
+			} catch (MalformedURLException e1) {
+				results.addError(msg(BadUrl, origUrl, e.toString()), overlay);
+			}
 		}
 	}
 
 	private void initSpecialScheme() {
-		String prop = "java.protocol.handler.pkgs";
-		String former = System.getProperty(prop);
-		try {
-			System.setProperty(prop, ValidatorBase.class.getPackage().getName());
-			new URL(SPECIAL_SCHEME + ":");
-		} catch (MalformedURLException e) {
-		} finally {
-			if (former != null) {
-				System.setProperty(prop, former);
-			} else {
-				System.getProperties().remove(prop);
+		if (!specialSchemeInited) {
+			String prop = "java.protocol.handler.pkgs";
+			String former = System.getProperty(prop);
+			try {
+				System.setProperty(prop, ValidatorBase.class.getPackage().getName());
+				new URL(SPECIAL_SCHEME + ":");
+			} catch (MalformedURLException e) {
+			} finally {
+				if (former != null) {
+					System.setProperty(prop, former);
+				} else {
+					System.getProperties().remove(prop);
+				}
 			}
+			specialSchemeInited = true;
 		}
-		specialSchemeInited = true;
 	}
 
 	public Overlay<String> validateEmailField(String name, boolean required) {

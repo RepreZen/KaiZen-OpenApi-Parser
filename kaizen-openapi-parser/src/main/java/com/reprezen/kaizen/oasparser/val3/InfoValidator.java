@@ -29,7 +29,7 @@ public class InfoValidator extends ObjectValidatorBase<Info> {
 		Info info = (Info) value.getOverlay();
 		validateStringField(F_title, true);
 		validateStringField(F_description, false);
-		validateUrlField(F_termsOfService, false, false);
+		validateUrlField(F_termsOfService, false, true, false);
 		validateField(F_contact, false, Contact.class, new ContactValidator());
 		validateField(F_license, false, License.class, new LicenseValidator());
 		validateStringField(F_version, true);

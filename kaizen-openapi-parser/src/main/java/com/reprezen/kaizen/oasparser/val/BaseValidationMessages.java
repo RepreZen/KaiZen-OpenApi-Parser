@@ -14,7 +14,8 @@ public enum BaseValidationMessages implements Messages {
 	DuplicateValue("Value at '%2' appeared already: %1"), //
 	MissingField("Required field '%1' is missing"), //
 	WrongTypeFormat("OpenAPI-defined format '%1' requires type '%3' but appears with missing or invalid type %2"), //
-	WrongTypeValue("Value is incompatible with schema type");
+	WrongTypeValue("Value is incompatible with schema type"), //
+	NoRelUrl("URL must not be a relative URL: %1");
 
 	private String formatString;
 

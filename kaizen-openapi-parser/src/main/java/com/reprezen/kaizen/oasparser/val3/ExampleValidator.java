@@ -30,7 +30,7 @@ public class ExampleValidator extends ObjectValidatorBase<Example> {
 		validateStringField(F_summary, false);
 		validateStringField(F_description, false);
 		Overlay<Object> valueField = validateField(F_value, false, Object.class, null);
-		Overlay<String> externalField = validateUrlField(F_externalValue, false, false);
+		Overlay<String> externalField = validateUrlField(F_externalValue, false, true, false);
 		validateExtensions(example.getExtensions());
 		checkExactlyOneValue(valueField, externalField);
 		// TODO check that a direct value is compatible with the containng parameter or

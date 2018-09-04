@@ -60,7 +60,8 @@ At the time of this writing, validation fails on the
 `callback-example` because that example does not include the required
 `openapi` and `info` properties.
 
-```package test;
+```java
+package test;
 
 import java.net.URI;
 import java.util.Arrays;

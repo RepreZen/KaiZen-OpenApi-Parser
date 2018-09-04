@@ -19,34 +19,24 @@ Feature highlights of KaiZen OpenAPI Parser include:
   `JsonNode` objects, rather than deserializing to internal POJOs.
   
 * **Read/Write API** - All aspects of a model may be interrogated and
-  modified. We also provide fluent builders for all
+  modified. We also plan to provide fluent builders for all
   model object types. We provide bidirectional navigation throughout the
   model, and every object that is a property value of its containing
-  object (whether as a named field or a map entry) knows its own key.
+  object (whether as a named field or a map entry) knows its own name.
   
 * **Tolerant Reader** - The parser yields a fully accessible result
   from any valid JSON or YAML input - whether or not the input is a
   valid OpenAPI specification.
   
-* **Separate, extensible validation** - All validation beyond base
+* **Separate validation** - All validation beyond basic
   JSON/YAML parsing is performed after the initial parse, and it can
-  be disabled for speed. Model-level validation (i.e. anything that can
-  be checked with our provided Java API) is separated from
-  injectable implementation-level validation. The latter covers anything
-  that needs to look "under the covers", using methods of the implementation
-  classes that lie outside the model API. For example, this
-  is where unrecognized JSON properties would be noted and flagged, 
-  as they are not visible from the model API.
+  be disabled for speed. Validation goes beyond checking what can be
+  expressed in JSON Schema, to include all requirements described in
+  the OpenAPI specification.
 
 * **Serialization** - Serialization to JSON or YAML is supported, and
   by default, round-tripping will not cause any reordering of model
   content.
-  
-* **DI-Ready** - Our API is interface-based and allows substitution of
-  custom implementations that either augment or completely replace our
-  provided implementation, using
-  [Google Guice](https://github.com/google/guice) dependency
-  injection.
   
 * **Easy Evolution** - A YAML-based DSL is used to capture most of the
   details of the OpenAPI Specification. We use code generation to
@@ -54,15 +44,18 @@ Feature highlights of KaiZen OpenAPI Parser include:
   `@Generated` annotations make it possible to augment the generated
   sources with manual code that is preserved during re-generation.
   
-* **Flexible Reference Handling** - References are detected and
-  resolved after JSON/YAML parsing but before model-level parsing. All
-  JSON references are processed, resulting in effective inlining for
-  non-conforming references (i.e. anything other than path or
-  component references specifically allowed in the
-  specification). References are normally traversed automatically by
-  the API, but full details of references and their resolution status
-  are also available.
+* **Flexible Reference Handling** - All references are detected and
+  during parsing, including references not technically permitted by
+  the OpenAPI specification. References are normally traversed 
+  automatically by the API, but full details of references and 
+  their resolution status are also available.
   
+* **Unpolluted API** - Many features of the parser API are not directly
+  accessible from modeled objects, but are accessed via adapter objects.
+  This ensures that these features will not collide with generated
+  methods of the model API, even as new features are added to the
+  OpenAPI specification in the future.
+    
 ## Documentation
 
 The [Getting Started Guide](GettingStarted.md) shows how to build the 
@@ -85,37 +78,23 @@ Here's a starting list of projects that are currently using KaiZen OpenAPI Parse
 
 ## Current State
 
-* `JsonOverlay` framework is fairly stable and working well.
+* The parser is currently based on the pre-release [revision 3.0.0-rc0](https://github.com/OAI/OpenAPI-Specification/blob/d232e6d3e1ea4038a533329a82876ae868e9cf13/versions/3.0.md). We are nearly ready with an upgrade to the [3.0.2 draft revision](https://github.com/OAI/OpenAPI-Specification/blob/v3.0.2-dev/versions/3.0.2.md).
 
-* OpenAPI 3.0 type specification, and the generated code passes some
-  early tests.
+* The [JsonOverlay Project](https://github.com/RepreZen/JsonOverlay) is a framework for creating parsers and APIs for YAML/JSON based DSLs. It is the backbone of the KaiZen OpenApi Parser. Features that that it provides include:
+ 
+  * Read-Write API for all model objects, based on a YAML document that describes the OpenAPI model structure
+  * Factories for model objects (used internally, but not currently well exposed to user code; that will change shortly)
+  * Full handling of all references.
+  * Serialization, reference inspection, navigation, and numerous other features via its `Overlay` adapter classes.
+  * Position-aware parser providing URL, line and file number for all parsed objects, available through `Overlay` adapters and used by the KaiZen parser in its validation messages.
 
-* Both read and write APIs are mostly implemented, though not well
-  tested. No builders have been created as yet. Visibility into and
-  modification of references is not yet implemented.
+* Validations are currently all contained within this project, however many routine validations (e.g. validating proper JSON types throughout a model document, checking that required properties are present, etc.) will at some point be moved into the JsonOverlay project.
 
-* Model-level validation is mostly complete, but requires development
-  of extensive tests, as well as a careful inventory of all
-  requirements appearing in the specification (noting all uses of
-  MUST, SHOULD, etc.) to ensure that validation is complete.
+* Most validations are present, but there are a number that are currently missing, and some existing validations still reflect the OpenAPI specification in its pre-release revision 3.0.0-rc0. Work is underway on Issue #26](https://github.com/RepreZen/KaiZen-OpenApi-Parser/issues/26), which should result in a complete and robust implementation of all model validations, updated to the 3.0.2 revision (currently in draft status).
 
-* Serialization is partially implemented.
-  - Public method `toJson()` will return a `JsonNode` object
-    representing the model.
-  - Optional boolean arg (default false) controls whether references
-    are followed (true) or left as references (false) in the output.
-  - Reference recursion will break reference-following serialization
-  - Preservation of order of JSON object properties is not yet
-    implemented in all cases.
-  - See
-    [Issue 84](https://github.com/RepreZen/KaiZen-OpenApi-Parser/issues/84)
-    for some indication of what else is planned for serialization. 
+* Serialization is available via the `Overlay` adapter's `toJson` method. By default references appear in the serialized output, but an option causes references to be followed and inlined in the output. Recursive references cause serialization to blow up if this option is used.
+  - A separate component, called "OpenAPI Normalizer," will soon be made available that will provide much greater control over the treatment of references. This is currently a private feature embedded in [RepreZen API Studio](https://www.reprezen.com/). Its primary function is to turn an OpenAPI model spread across multiple files into an equivalent single-file model. Options control which references are inlined, and which are _localized_ as named component objects in the constructed single-file model.
   
-* DI for implementation-level validators exists, but validators need
-  to be written. This is likely to be limited to a small number of
-  JSON-level validators, namely detecting where incompatible JSON
-  types appear, and detecting unexpected property names. 
-
 * A handful of high-level tests have been implemented:
   - *BigParseTest* parses a large model without validation and checks
     that every value node in the input is accessible in the expected
@@ -136,31 +115,15 @@ component Maven projects._
 All packages are prefixed by `com.reprezen.kaizen`
 
 * `oasparser`: Top-level package, directly includes
-  `OpenApiParser` class and some things related to code generation
-  that will probably move elsewehere.
+  `OpenApiParser` class and some things related to code generation.
   
-* `oasparser.jsonoverlay`: The JSON Overlay framework underpinning
-  the parser.
-  
-* `oasparser.jsonoverlay.std,coll`: Overlay classes for standard
-  scalar types and collection types, respectively.
-  
-* `oasparser.jsonoverlay.gen`: Code generators for interfaces and
-  overlay-based implementations of object types
+* `oasparser.model3`: Generated model interfaces (generated by JsonOverlay)
 
-* `oasparser.model3`: Generated model interfaces
+* `oasparser.ovl3`: Generated model implementation classes (generated by JsonOverlay)
 
-* `oasparser.ovl3`: Generated model implementation classes (using
-  JSON Overlay)
+* `oasparser.val`: Base classes for validators
 
-* `oasparser.val`: Base classes for validators, and primitive type
-  validators.
-
-* `oasparser.val3`: Model-level validators for all OpenAPI
-  objects.
-
-* `oasparser.val3.ovl`: Implementation-level validators for
-  OpenAPI objects.
+* `oasparser.val3`: Validators for all OpenAPI objects.
 
 * `oasparser.test`: The handful of tests that have been
   implemented so far. More needed

@@ -10,44 +10,38 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val3;
 
-import static com.reprezen.kaizen.oasparser.val.Messages.m;
+import static com.reprezen.kaizen.oasparser.ovl3.SecurityRequirementImpl.F_requirements;
+import static com.reprezen.kaizen.oasparser.val.msg.Messages.msg;
+import static com.reprezen.kaizen.oasparser.val3.OpenApi3Messages.UnkSecScheme;
 
-import java.util.Map.Entry;
+import java.util.Map;
 import java.util.Set;
 
+import com.reprezen.jsonoverlay.MapOverlay;
 import com.reprezen.jsonoverlay.Overlay;
 import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.SecurityParameter;
 import com.reprezen.kaizen.oasparser.model3.SecurityRequirement;
-import com.reprezen.kaizen.oasparser.val.Messages;
 import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
-import com.reprezen.kaizen.oasparser.val.ValidationResults;
 
 public class SecurityRequirementValidator extends ObjectValidatorBase<SecurityRequirement> {
 
 	@Override
-	public void validateObject(SecurityRequirement securityRequirement, ValidationResults results) {
-		OpenApi3 model = Overlay.of(securityRequirement).getModel();
+	public void runObjectValidations() {
+		Overlay<Map<String, SecurityParameter>> requirements = validateMapField(F_requirements, false, false,
+				SecurityParameter.class, new SecurityParameterValidator());
+		checkAllSchemesDefined(requirements);
+	}
+
+	public void checkAllSchemesDefined(Overlay<Map<String, SecurityParameter>> requirements) {
+		OpenApi3 model = value.getModel();
 		Set<String> definedSchemes = model.getSecuritySchemes().keySet();
-		for (Entry<String, ? extends SecurityParameter> entry : securityRequirement.getRequirements().entrySet()) {
-			if (!definedSchemes.contains(entry.getKey())) {
-				results.addError(
-						m.msg("UnkSecScheme|Security scheme not defined in components object", entry.getKey()));
-			} else {
-				String type = model.getSecurityScheme(entry.getKey()).getType();
-				switch (type) {
-				case "oauth2":
-				case "openIdConnect":
-					// TODO Q: anything to test here? do we know what the allowed scope names are?
-					break;
-				default:
-					if (!entry.getValue().getParameters().isEmpty()) {
-						results.addError(Messages.m.msg(
-								"NonEmptySecReqParms|Security requirement parameters must be empty unless scheme type is oauth2 or openIdConnect",
-								entry.getKey(), type));
-					}
-				}
+		MapOverlay<SecurityParameter> mapOverlay = Overlay.getMapOverlay(requirements);
+		for (String name : mapOverlay.keySet()) {
+			if (!definedSchemes.contains(name)) {
+				results.addError(msg(UnkSecScheme, name), Overlay.of(mapOverlay, name));
 			}
 		}
+
 	}
 }

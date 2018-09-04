@@ -87,6 +87,9 @@ public class SecurityParameterImpl extends PropertiesOverlay<SecurityParameter> 
 		_remove("parameters", index, String.class);
 	}
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_parameters = "parameters";
+
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	protected void _elaborateJson() {

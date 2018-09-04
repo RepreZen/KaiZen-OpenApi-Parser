@@ -14,7 +14,7 @@ info:
     x-foo: foo
   version: version
   x-foo: foo
-servers: &id001
+servers:
 - url: url
   description: description
   variables:
@@ -52,7 +52,7 @@ paths:
         url: url
         x-foo: foo
       operationId: operationId
-      parameters: &id002
+      parameters:
       - name: name
         in: in
         description: description
@@ -78,7 +78,7 @@ paths:
               x:
                 value: x
               y:
-                value: y
+                value: "y"
               z:
                 value: z
             example: 10
@@ -123,11 +123,6 @@ paths:
               parameters: 
                 param1: xxxx
                 param2: yyyy
-              headers:
-                foo: 
-                  description: description
-                bar:
-                  description: description
               description: description
               x-foo: foo
         200:
@@ -162,10 +157,8 @@ paths:
         - sec1: [a, b, c]
           sec2: []
         - sec3: []
-      servers: *id001
       x-foo: foo
     x-foo: foo
-    parameters: *id002
   x-foo: foo
 components:
   schemas:
@@ -215,7 +208,10 @@ components:
       format: format
       default: xyzzy
       nullable: true
-      discriminator: foo
+      discriminator: 
+        propertyName: foo
+        mapping:
+          Foo: foo
       readOnly: true
       writeOnly: false
       xml:
@@ -228,15 +224,6 @@ components:
         description: description
         url: url
       example: xxx
-      examples:
-        first:
-          value: 1.0
-        second:
-          value: true
-        third:
-          value: null
-        fourth:
-          value: xyzzy
       deprecated: true
       x-foo: foo
     schema2:

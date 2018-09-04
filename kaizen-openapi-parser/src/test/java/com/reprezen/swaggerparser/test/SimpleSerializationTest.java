@@ -102,7 +102,8 @@ public class SimpleSerializationTest extends Assert {
 			OpenApi3 model = parseLocalModel("simpleTest");
 			assertEquals("simple model", model.getInfo().getTitle());
 			assertEquals("simple model", Overlay.of(model).toJson().at("/info/title").asText());
-			// this changes the overlay value but does not refresh cached JSON - just marks
+			// this changes the overlay value but does not refresh cached JSON -
+			// just marks
 			// it as out-of-date
 			model.getInfo().setTitle("changed title");
 			assertEquals("changed title", model.getInfo().getTitle());

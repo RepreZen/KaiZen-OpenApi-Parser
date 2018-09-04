@@ -1,4 +1,3 @@
-
 # Created by https://www.gitignore.io/api/java,maven,eclipse
 
 ### Eclipse ###
@@ -9,7 +8,8 @@ tmp/
 *.tmp
 *.bak
 *.swp
-*~.nib
+*~
+*.nib
 local.properties
 .settings/
 .loadpath
@@ -100,3 +100,6 @@ buildNumber.properties
 
 
 # End of https://www.gitignore.io/api/java,maven,eclipse
+
+# Created by the GFM eclipse marketplace plugin
+*.md.html

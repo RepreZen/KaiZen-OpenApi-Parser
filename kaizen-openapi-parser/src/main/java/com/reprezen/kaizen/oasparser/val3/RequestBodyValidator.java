@@ -10,24 +10,22 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val3;
 
-import com.google.inject.Inject;
+import static com.reprezen.kaizen.oasparser.ovl3.RequestBodyImpl.F_contentMediaTypes;
+import static com.reprezen.kaizen.oasparser.ovl3.RequestBodyImpl.F_description;
+import static com.reprezen.kaizen.oasparser.ovl3.RequestBodyImpl.F_required;
+
 import com.reprezen.kaizen.oasparser.model3.MediaType;
 import com.reprezen.kaizen.oasparser.model3.RequestBody;
 import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
-import com.reprezen.kaizen.oasparser.val.ValidationResults;
-import com.reprezen.kaizen.oasparser.val.Validator;
 
 public class RequestBodyValidator extends ObjectValidatorBase<RequestBody> {
 
-	@Inject
-	private Validator<MediaType> mediaTypeValidator;
-
 	@Override
-	public void validateObject(RequestBody requestBody, ValidationResults results) {
-		// no validation for: description, required
-		validateMap(requestBody.getContentMediaTypes(), results, false, "content", Regexes.NOEXT_REGEX,
-				mediaTypeValidator);
-		validateExtensions(requestBody.getExtensions(), results);
+	public void runObjectValidations() {
+		RequestBody requestBody = (RequestBody) value.getOverlay();
+		validateStringField(F_description, false);
+		validateBooleanField(F_required, false);
+		validateMapField(F_contentMediaTypes, false, false, MediaType.class, new MediaTypeValidator());
+		validateExtensions(requestBody.getExtensions());
 	}
-
 }

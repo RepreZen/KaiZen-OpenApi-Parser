@@ -12,38 +12,38 @@ public interface ServerVariable extends IJsonOverlay<ServerVariable>, IModelPart
 
 	// EnumValue
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	List<Object> getEnumValues();
+	List<String> getEnumValues();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	List<Object> getEnumValues(boolean elaborate);
+	List<String> getEnumValues(boolean elaborate);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	boolean hasEnumValues();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	Object getEnumValue(int index);
+	String getEnumValue(int index);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void setEnumValues(List<Object> enumValues);
+	void setEnumValues(List<String> enumValues);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void setEnumValue(int index, Object enumValue);
+	void setEnumValue(int index, String enumValue);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void addEnumValue(Object enumValue);
+	void addEnumValue(String enumValue);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void insertEnumValue(int index, Object enumValue);
+	void insertEnumValue(int index, String enumValue);
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	void removeEnumValue(int index);
 
 	// Default
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	Object getDefault();
+	String getDefault();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void setDefault(Object defaultValue);
+	void setDefault(String defaultValue);
 
 	// Description
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")

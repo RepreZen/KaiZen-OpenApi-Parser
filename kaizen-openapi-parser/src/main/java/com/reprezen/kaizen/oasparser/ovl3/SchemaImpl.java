@@ -20,7 +20,7 @@ import com.reprezen.jsonoverlay.OverlayFactory;
 import com.reprezen.jsonoverlay.PropertiesOverlay;
 import com.reprezen.jsonoverlay.ReferenceManager;
 import com.reprezen.jsonoverlay.StringOverlay;
-import com.reprezen.kaizen.oasparser.model3.Example;
+import com.reprezen.kaizen.oasparser.model3.Discriminator;
 import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
 import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.model3.Schema;
@@ -734,14 +734,20 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 	// Discriminator
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public String getDiscriminator() {
-		return _get("discriminator", String.class);
+	public Discriminator getDiscriminator() {
+		return _get("discriminator", Discriminator.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public void setDiscriminator(String discriminator) {
-		_setScalar("discriminator", discriminator, String.class);
+	public Discriminator getDiscriminator(boolean elaborate) {
+		return _get("discriminator", elaborate, Discriminator.class);
+	}
+
+	@Override
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public void setDiscriminator(Discriminator discriminator) {
+		_setScalar("discriminator", discriminator, Discriminator.class);
 	}
 
 	// ReadOnly
@@ -820,55 +826,6 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void setExternalDocs(ExternalDocs externalDocs) {
 		_setScalar("externalDocs", externalDocs, ExternalDocs.class);
-	}
-
-	// Example
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public Map<String, Example> getExamples() {
-		return _getMap("examples", Example.class);
-	}
-
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public Map<String, Example> getExamples(boolean elaborate) {
-		return _getMap("examples", elaborate, Example.class);
-	}
-
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public boolean hasExamples() {
-		return _isPresent("examples");
-	}
-
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public boolean hasExample(String name) {
-		return _getMap("examples", Example.class).containsKey(name);
-	}
-
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public Example getExample(String name) {
-		return _get("examples", name, Example.class);
-	}
-
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public void setExamples(Map<String, Example> examples) {
-		_setMap("examples", examples, Example.class);
-	}
-
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public void setExample(String name, Example example) {
-		_set("examples", name, example, Example.class);
-	}
-
-	@Override
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public void removeExample(String name) {
-		_remove("examples", name, Example.class);
 	}
 
 	// Example
@@ -953,6 +910,117 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 		_remove("extensions", name, Object.class);
 	}
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_title = "title";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_multipleOf = "multipleOf";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_maximum = "maximum";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_exclusiveMaximum = "exclusiveMaximum";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_minimum = "minimum";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_exclusiveMinimum = "exclusiveMinimum";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_maxLength = "maxLength";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_minLength = "minLength";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_pattern = "pattern";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_maxItems = "maxItems";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_minItems = "minItems";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_uniqueItems = "uniqueItems";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_maxProperties = "maxProperties";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_minProperties = "minProperties";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_requiredFields = "requiredFields";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_enums = "enums";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_type = "type";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_allOfSchemas = "allOfSchemas";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_oneOfSchemas = "oneOfSchemas";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_anyOfSchemas = "anyOfSchemas";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_notSchema = "notSchema";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_itemsSchema = "itemsSchema";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_properties = "properties";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_additionalPropertiesSchema = "additionalPropertiesSchema";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_additionalProperties = "additionalProperties";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_description = "description";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_format = "format";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_defaultValue = "defaultValue";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_nullable = "nullable";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_discriminator = "discriminator";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_readOnly = "readOnly";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_writeOnly = "writeOnly";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_xml = "xml";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_externalDocs = "externalDocs";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_example = "example";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_deprecated = "deprecated";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_extensions = "extensions";
+
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	protected void _elaborateJson() {
@@ -986,12 +1054,11 @@ public class SchemaImpl extends PropertiesOverlay<Schema> implements Schema {
 		_createScalar("format", "format", StringOverlay.factory);
 		_createScalar("defaultValue", "default", ObjectOverlay.factory);
 		_createScalar("nullable", "nullable", BooleanOverlay.factory);
-		_createScalar("discriminator", "discriminator", StringOverlay.factory);
+		_createScalar("discriminator", "discriminator", DiscriminatorImpl.factory);
 		_createScalar("readOnly", "readOnly", BooleanOverlay.factory);
 		_createScalar("writeOnly", "writeOnly", BooleanOverlay.factory);
 		_createScalar("xml", "xml", XmlImpl.factory);
 		_createScalar("externalDocs", "externalDocs", ExternalDocsImpl.factory);
-		_createMap("examples", "examples", ExampleImpl.factory, "[a-zA-Z0-9\\._-]+");
 		_createScalar("example", "example", ObjectOverlay.factory);
 		_createScalar("deprecated", "deprecated", BooleanOverlay.factory);
 		_createMap("extensions", "", ObjectOverlay.factory, "x-.+");

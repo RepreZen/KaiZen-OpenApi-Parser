@@ -77,6 +77,9 @@ public class SecurityRequirementImpl extends PropertiesOverlay<SecurityRequireme
 		_remove("requirements", name, SecurityParameter.class);
 	}
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_requirements = "requirements";
+
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	protected void _elaborateJson() {

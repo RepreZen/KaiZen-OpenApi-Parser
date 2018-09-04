@@ -82,7 +82,7 @@ the `exclusiveMaximum` property of a Schema object for the example):
 As an example of list values, we'll use the `servers` property of an
 OpenAPI 3.0 model object.
 
-* `Collection<? extends Server> getServers()` - get the list of server
+* `List<Server> getServers()` - get the list of server
   objects. This list will never be null, even if the `servers`
   property is missing in the top-level object. (This is an instance of
   a general preference in the API to avoid returning `null` for
@@ -97,7 +97,7 @@ OpenAPI 3.0 model object.
 * `Server getServer(int index)` - obtain a specific server object from
   the list.
 
-* `void setSetServers(Collection<? extends Server> servers)` - set the
+* `void setSetServers(List<Server> servers)` - set the
   servers to the given list.
 
 * `void setServer(int index, Server server)` - replace the server at
@@ -108,6 +108,8 @@ OpenAPI 3.0 model object.
 
 * `void addServer(Server server)` - add the given server to the end of
   the servers list.
+  
+* `void insertServer(int index, Server server)` - move existing servers at or beyond the specified index one position to the right, and then insert the given server at the now vacated position.
 
 * `void removeServer(int index)` - remove the server at the given list
   position.
@@ -117,7 +119,7 @@ OpenAPI 3.0 model object.
 As an example of a map value, we'll use the `paths` property of an
 OpenAPI 3.0 model.
 
-* `Map<String, ? extends Path> getPaths()` - obtain the map of path
+* `Map<String, Path> getPaths()` - obtain the map of path
   strings to path item objects. As in the case for lists, an empty map
   is returned if the `paths` property is missing from the model.
 
@@ -129,7 +131,7 @@ OpenAPI 3.0 model.
 * `Path getPath(String name)` - obtain the path item with the given
   path string.
 
-* `void setPaths(Map<String, ? extends Path> paths)` - set the `paths`
+* `void setPaths(Map<String, Path> paths)` - set the `paths`
   value to the given map.
 
 * `void setPath(String name, Path path)` - sets the path item object
@@ -146,15 +148,12 @@ As an example of a properties value, we'll use the `info` property of
 an OpenApi 3.0 model.
 
 * `Info getInfo()` - return the `info` property, packaged as a
-  properties object, from the model. As with lists and maps, this will
-  never be null.
+  an instance of the generated `InfoImpl` class (which implements the generated `Info` interface), from the model. As with lists and maps, this will never be null.
 
-* `Info getInfo(boolean elaborate)` - like `getInfo()`, but allows the
-  caller to determine whether "elaboration" of the `Info` object
-  occurs as a side-effect. See the following sub-section.
+* `Info getInfo(boolean elaborate)` - like `getInfo()`, but allows the caller to determine whether "elaboration" of the `Info` object occurs as a side-effect. See the following sub-section.
 
 * `void setInfo(Info info)` - set the model's `info` value to the
-  given properties object.
+  given `Info` instance.
 
 #### Properties Value Elaboration
 
@@ -190,7 +189,7 @@ elaborated as follows:
   type required for the property.
 
 The elaboration of missing scalar, list or map values always
-teriminates immediately. However, this is not the case with properties
+terminates immediately. However, this is not the case with properties
 objects.
 
 Consider an OpenAPI 3.0 model with no `info` property. Elaborating the
@@ -205,18 +204,16 @@ Things are different for a `Schema` object. A schema includes a few
 properties whose values may themselves be schemas: `items`, `not`, and
 `additionalProperties`. Elaborating a `Schema` object therefore
 creates new `Schema` objects as a side-effect. Elaborating those
-objects would then create additional `Schema` objects, and so forth.
+objects would then create additional `Schema` objects, and so on without end.
 
-As a result of this potential for recursive elaboration, the KaiZen
-OpenAPI parser adopts a lazy elaboration strategy for properties
+As a result of this potential for recursive elaboration of missing properties objects, the KaiZen
+OpenApi Parser (actually this is built into the JsonOverlay framework) adopts a lazy elaboration strategy for properties
 values whose corresponding JSON structures are missing. During the
 initial parse, these values are created, but their own properties are
 not elaborated at that time. Elaboration is triggered the first time
-the object is retrieved. For example, `schema.getItemsSchema()` will
-trigger the elaboration of a schema's `items` value, if that value was
-not previously elaborated. The object will have been *created* during
-the initial parse, but it will not be elaborated until it is first
-accessed.
+the object is retrieved. For example, `schema.getDescription()` will
+trigger the elaboration of the schema object's property values, if the schema had not previously been elaborated. The object would have been *created* during
+the initial parse (or when its parent object was elaborated), but it will not be elaborated until one of its properties is accessed..
 
 #### Avoiding Triggered Elaboration
 
@@ -229,8 +226,8 @@ in this context would lead to infinite recursion.)
 To avoid elaboration, `get` methods for properties values come with an
 optional boolean argument, named `elaborate`. If `true` (the default),
 the `get` operation will trigger elaboration; `false` will
-not. Attempts to retrieve properties values of an unelaborated
-properties value will always return `null`.
+not. Attempts to retrieve property values of an unelaborated
+properties object, using elaboration suppression in this way, will always return `null`, even for properties with list, map, or properties object value types.
 
 ## References
 
@@ -243,8 +240,8 @@ embodies a valid schema object.
 
 ### Shared Representations
 
-The KaiZen OpenAPI parser attempts to resolve all references that
-encountered when parsing a model, including references references
+The KaiZen OpenAPI parser attempts to resolve all references that are
+encountered when parsing a model, including references
 appearing in JSON data that was itself obtained to satisfy a
 reference. If the same JSON value is referenced in more than one place
 in a model, that value is parsed only once, and the result is linked
@@ -256,7 +253,7 @@ internal represenation.
 
 As an example, consider this model:
 
-```
+```yaml
 ---
 openapi: 3.0.0
 info:
@@ -290,42 +287,37 @@ The shared representation is a very handy feature of the parser, but
 it is sometimes important to be able to distinguish references from
 inlined structures, and to obtain details of references.
 
-For this reason *reference-enabled* values in the OpenAPI
-specification have a special treatment in the API. These are generally
-values that, in the specification, include "Reference Object" in their
-description.
+This is possible using `Overlay` adapters created from the values being examined. This is just one of many features provided by these adapters.
 
-A good example is any of the numerous places where a `Schema Object`
-may appear in a model. In all such cases, `is...Reference()` and
-`get...Reference()` methods are available, in a form that depends on
-the struture of the containing value. Examples are:
+For example, imagine that we have an `Operation` object, and we want know whether its first (i.e. zeroth) parameter is defined via a reference. For this we could write:
 
-* A single schema as property object, e.g. the `items` property of a
-  `Schema Object`:
+```java
+if (Overlay.of(op.getParameters()).isReference(0)) {
+  ...
+}
+```
 
-  * `schema.isItemsSchemaReference()` - `true` if the `items` property
-    is a reference object
-  
-  * `schema.getItemsSchemaReference()` - retreive a `Reference` object
-    containing full details of the reference.
+If we wish to inspect the reference, we use `getReference(int)` instead of `isReference(int)`, to obtain a representation of the reference itself.
 
-* A schema object in a list of schema objects, e.g. in the `allOf`
-  property of a `Schema Object`:
+Note that reference information is obtained from an `Overlay` object for the `Operation`, not for the `Parameter` we're interested in. The reason is that the `Parameter` object itself may appear in several places within the model, some by reference and (at most) one not by reference. That's the whole point of references, after all. So asking whether an object is included by reference is really asking a question not about the object but about the point of inclusion.
 
-  * `schema.isAllofSchemaReference(int index)` - `true` if the
-    indicated schema is specified by a reference.
+JSON has two means by which one value can be included within another - an array with its child elements, and an object with its property values. We've seen, above, how the first case can be handled, and it applies to list properties like `Operation.parameters` and `Path.servers`. JSON object properties come in two forms for us - entries in map values, and properties of what we are calling "properties objects." In both cases, there are variants of `isReference()` and `getReference()` that take a string value as a parameter instead of an `int`.
 
-  * `schema.getAllofSchemaReference(int index)` - retreive the
-  `Reference` object for the reference.
+As an example, to see whether a particular operation response is included by reference, you could use:
 
-* A schema object in a map of schema objects, e.g. in the `properties`
-  property of a `Schema Object`:
+```java
+if (Overlay.of(op.getResponses()).isReference("200")) {
+  ...
+}
+```
 
-  * `schema.isPropertyReference(String name)` - `true` if the schema
-    for the indicated property is specified by a reference.
+To see whether the schema associated with that response is included by reference, we could use something like this:
 
-  * `schema.getPropertyReference(String name)` - retrieve the
-    `Reference` object for the reference.
+```java
+if (Overlay.of(op.getResponse("200").getContentMediaType("*/*")).isReference("schema")) {
+  ...
+}
+```
 
 ### Canonical Reference Strings
 
@@ -333,7 +325,7 @@ The reference string appearing in a reference (the value of the `$ref`
 property in the JSON object) may come in any of three forms - all just
 variants of the general URL syntax:
 
-* Local reference - consists of nothing but a *fragment*, beging with
+* Local reference - consists of nothing but a *fragment*, beginning with
   `#`, e.g. `#/components/schemas/Foo`. The fragment must be a valid
   JSON Pointer.
 
@@ -363,8 +355,7 @@ appearing in the reference to the (canonicalized) context URL.
 When two references have the same canonical reference string, the
 corresponding references are treated as identical, and will yield
 shared representations as described above. Otherwise they will not,
-even if the retrieved JSON structures are identical for the two
-references.
+even the two canonicalized URLs actually address the same location on the internet. For example, `http://www.example.com/example.yaml` and `http://153.43.29.173/example.yaml` will be treated as different reference strings, even if at the time of resolution IP address `153.43.29.173` addresses the server known as `www.example.com`. The content retrieved from the server by the two addresses will be parsed independently, and the resulting parsed structures will not be shared.
 
 ### Reference Resolution
 
@@ -377,7 +368,7 @@ including:
 
 * Canonicalizaation of a relative reference fails (e.g. `../foo.yaml`
   cannot be canonicalized with a `http://example.com/bar.yaml` as a
-  context URL).
+  context URL, because there is no container in the `/bar.yaml` context path with which to resolve the `..` component in the reference).
 
 * The parser fails to retrieve content from the canonicalized URL.
 
@@ -388,18 +379,17 @@ including:
   contained in the JSON object retrieved from the canonicalized URL.
 
 In all such cases, the corresponding model value will appear to be
-missing, but its corresponding `is...Reference()` and
-`get...Reference()` methods will apply. The fact that the reference
-was found to be invalid - as well as details of the reason - can be
-obtained from the `Reference` object.
+missing, but you will still be able to obtain reference information about it as described earlier. The fact that the reference
+was found to be invalid - as well as details of the reason - will be
+available the `Reference` object obtained via `getReference(...)`.
 
 
 ### The Reference Object
 
-A `Reference` object supports the following methods:
+A `Reference` object, obtained via the `Overlay#getReference(...)` methods, supports the following methods:
 
 * `String getRefString()` - returns the reference string appearing in
-  the reference object (the `$ref` property value)
+  the source reference object (the `$ref` property value)
 
 * `String getCanonicalRefString()` returns the canonicalized reference
   string. 
@@ -408,18 +398,17 @@ A `Reference` object supports the following methods:
   there was none.
 
 * `JsonNode getJson()` - returns the retrieved and parsed JSON
-  structure addressed by the reference.
+  structure addressed by the reference, or `null` if no value could be obtained (in this case the reference will be invalid).
 
 * `boolean isValid()` - `true` if the reference could be resolved.
 
 * `boolean isInvalid()` - `true` if the reference could not be
   resolved.
 
-* `ResolutionException getError()` - returns an exception explaining
+* `ResolutionException getInvalidReason()` - returns an exception explaining
   the reason behind a resolution failure (including a stack trace).
 
-* `String getErrorReason()` - returns the message contained in the
-  exception.
+* `String getErrorReason().getMessage()` - get a human-readable explanation of the resolution failure.
 
 ## Manually Defined Methods for OpenAPI 3.0
 
@@ -441,6 +430,7 @@ the standard behavior in some way. They are as follows:
 
 ### Path Object
 
+* `String getPathString()` - returns this path's path string (i.e. its key in the model's `paths` map)
 * `Operation getGet()` - returns the `get` operation for this path.
 * `Operation getPut()` - returns the `put` operation for this path.
 * `Operation getPost()` - returns the `post` operation for this path.
@@ -452,33 +442,32 @@ the standard behavior in some way. They are as follows:
 
 Each of the above also comes with corresponding non-elaborating `get`,
 and `set` methods. E.g. `getGet(boolean elaborate)` and
-`setSet(Operation get)`. In all cases, the effect is identical to
+`setGet(Operation get)`. In all cases, the effect is identical to
 accessing the operations via the generated methods for the
 `operations` map value, e.g. `getOperation("get")`.
 
-## Miscellaneous Methods
+## Overlay Methods
 
-The following methods are available in all properties values:
+The following methods are available in all `Overlay` objects:
 
-* `IJsonOverlay<?> find(String path)` - navigate through the model
+* `JsonOverlay<?> find(String path)` - navigate through the model
   from this point using the given JSONPointer, and return the located
   model object, or `null` if not found. The path is according to the
   actual JSON structure of the model. For example,
-  `method.find("/responses/200/headers/MyHeader/schema/enum/3")` would
+  `Overlay.of(method).find("/responses/200/headers/MyHeader/schema/enum/3").get()` would
   be equivalent to
-  `method.getResponse("200").getHeader("MyHeader").getSchema().getEnum(3).get()`. (See
-  [JSON Overlay Framework](json-overlay-framework) to understand the reason for the
-  final `get()` method.)
+  `method.getResponse("200").getHeader("MyHeader").getSchema().getEnum(3)`. (Note: the final `get()` call in the first case is used to obtain the `Object` value from the `JsonOverlay<Object>` value used to represent it in the parsed structure). 
 
-* `1IJsonOverlay<?> find(JsonPointer path)` - same as `String` version
+
+* `IJsonOverlay<?> find(JsonPointer path)` - same as `String` version
   but with a `JsonPointer` object compiled from the same string.
 
 * `boolean isPresent()`  - `true` if the object is actually considered
   present in the model - i.e. it was present in the JSON/YAML file
   from which the model was parsed, or it was added using the mutation
-  API. (This method is not reliable at the time of this writing).
+  API.
 
-* `boolean isElaborated()` - `true` of this properties value has
+* `boolean isElaborated()` - `true` if the object has
   already been elaborated - see
   [Properties Value Elaboration](#properties-value-elaboration).
 
@@ -489,34 +478,36 @@ The following methods are available in all properties values:
   content does so. For example, imagine a schema named `Foo` defined
   in `/components/schemas/Foo` in a model, and referenced as the
   `items` schema in another schema named `FooList`. Then
-  `model.getSchema("Foo").getParent()` and
-  `model.getSchema("FooList").getItemsSchema().getParent()` will both
+  `Overlay.of(model.getSchema("Foo")).getParent()` and
+  `Overlay.of(model.getSchema("FooList").getItemsSchema()).getParent()` will both
   return the map overlay object corresponding to the
   `model.getSchemas()` map. It is entirely possible for a value to be
   included in a model only through external references, and in such a
   case its parent will be `null`.
 
 * `String getPathInParent()` - returns a slash-separated list of JSON
-  property names that, in the JSON structure, would navigate from this
+  property names that, in the JSON structure, would navigate from the
   parent's JSON value to this value. For example,
-  `model.getInfo().getPathInParent()` is `"info"` and
+  `Overlay.of(model.getInfo()).getPathInParent()` is `"info"` and
   `model.getSchemas("Foo").getPathInParent()` is `"Foo"`. An example
   with a multi-component path is
-  `model.getSchemas().getPathInParent()`, which is
+  `Overlay.of(model.getSchemas()).getPathInParent()`, which is
   `"components/schemas"`.
 
-* `OpenApi3 getModel()` - performs `getParent()` repeatedly until a
-  `null` value is obtained, and returns the final non-null overlay
-  object in the sequence, if any. Note that this method returns a
+* `JsonOverlay<?> getRoot()` - performs `getParent()` repeatedly until a
+  `null` value is obtained, and return the final non-null overlay
+  object in the sequence. This may not correspond to the root JSON value in a parsed file. For example, if a schema is included by reference and none of its ancestors in the referenced files is included, then that schema will be considered its own root.
+  
+* `OpenApi3 getModel()` Locates the root node in the parsed model of in which this value appears. Unlike `getRoot()`, this method navigates references. Note that this method returns a
   value of type `M` in an instance of the type `OpenApi<M>` that
   corresponds to the type of OpenAPI model that was parsed or
-  created. (Currently this will always be `OpenApi3`, but in the
-  future, other type like Swagger 2.0 may be supported.)
+  created. Currently this will always be `OpenApi3`, but in the
+  future, other types like Swagger 2.0 may be supported.
 
 ## Structural Choices
 
-In creating an overal object model for to represent an OpenAPI 3.0
-model, a nubmer of choices were made, and some may be somewhat
+In creating an overall object model  to represent an OpenAPI 3.0
+model, a number of choices were made, and some may be somewhat
 unexpected. Here are the most likely cases of that:
 
 ### Vendor Extensions
@@ -527,7 +518,7 @@ Object>`).
 Vendor extensions that are embedded in an object that
 corresponds to a properties value in this API will appear as a map
 value named `extensions` in that object. Thus we have
-`schema.getExtensions()`, `schema.getExtension("x-whatevfer")`, etc.
+`schema.getExtensions()`, `schema.getExtension("x-whatever")`, etc.
 
 Sometimes, vendor extensions appear embedded in other map values, and
 they apply to that map as a whole. An example is the `paths` object in
@@ -580,22 +571,22 @@ of `OpenApiParser` (and, we expect, parsers for other versions of
 OpenAPI).
 
 Create a new parser using the empty constructor:
-```
+```java
 OpenApi3Parser parser = new OpenApi3Parser();
 ```
 
 ### Parsing Options
 
-A varient of method signatures exist for parsing a model:
+Several method signatures exist for parsing a model:
 
 * `OpenApi3 parse(String model, URL resolutionBase)` - parse a JSON or
   YAML string, with the given URL used for resolving any relative
-  references encountered in the model.
+  references encountered in the model. If `resolutionBase` is null, relative references will all fail resolution.
 
 * `OpenApi3 parse(File specFile)` - parse the content of the given
   file, and use the corresponding file URL as the resolution base.
 
-* `OpenApi3 parse(URI uri)` - parse the content retrived from the
+* `OpenApi3 parse(URI uri)` - parse the content retrieved from the
  given URI and use the corresponding URL as the resolution base.
 
 * `OpenApi3 parse(URL url)` - parse the content retrieved from the
@@ -609,17 +600,17 @@ above `parse` methods.
 
 ## Serialization API
 
-The serialization API applies to any
-[overlay object](json-overlay-framework), but most commonly will be applied
-to complete models. It consists of a single method:
+The serialization API applies to any `Overlay` adapter object but most commonly will be applied to complete models. It consists of a single method:
 
-```JsonNode toJson(SerializationOptions.options... options)```
+```java
+JsonNode toJson(SerializationOptions.options... options)
+```
 
 The return value is of type `JsonNode` from the Jackson library. It
 can be easily translated into either a JSON or YAML string using
 so-called *mapper* objects from that library. For example:
 
-```
+```java
 JsonNode serial = model.toJson();
 String json = new ObjectMapper().writeValueAsString(serial);
 String yaml = new YAMLMapper().writeValueAsString(serial);
@@ -631,7 +622,7 @@ Available options for the `toJson()` method include:
 * `FOLLOW_REFS` - By default, objects that are defined by references
   are serialized using reference objects containing the
   (un-canonocalized) referene strings. With `FOLLOW_REFS`, the
-  refenced structures will be inlined instead. If your model includes
+  referenced structures will be inlined instead. If your model includes
   recursive reference structures, this will currently blow up, but we
   intend to fix that by emitting a reference object whenever recursion
   would otherwise occur.
@@ -668,12 +659,6 @@ Available options for the `toJson()` method include:
 ## Builders
 
 Builder APIs have not yet been implemented.
-
-## JSON Overlay Framework
-
-The KaiZen OpenAPI Parser makes use of a framework designed (with this
-as the driving first example) to facilitate the creation of tooling
-for JSON/YAML based DSLs.
 
 Additional information TBA.
 

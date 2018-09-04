@@ -9,7 +9,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.reprezen.kaizen</groupId>
     <artifactId>openapi-parser</artifactId>
-    <version>2.2.0-SNAPSHOT</version>
+    <version>3.0.2-SNAPSHOT</version>
     <name>${project.groupId}:${project.artifactId}</name>
     <description>KaiZen OpenAPI Parser by RepreZen</description>
     <url>https://github.com/RepreZen/KaiZen-OpenAPI-Parser</url>
@@ -62,11 +62,6 @@
             <version>${jackson-version}</version>
         </dependency>
         <dependency>
-            <groupId>com.google.inject</groupId>
-            <artifactId>guice</artifactId>
-            <version>4.1.0</version>
-        </dependency>
-        <dependency>
             <groupId>org.skyscreamer</groupId>
             <artifactId>jsonassert</artifactId>
             <version>1.5.0</version>
@@ -83,9 +78,19 @@
             <version>1.6.1</version>
         </dependency>
         <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>1.6.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>19.0</version>
+        </dependency>
+        <dependency>
             <groupId>com.reprezen.jsonoverlay</groupId>
             <artifactId>jsonoverlay</artifactId>
-            <version>${json-overlay-version}</version>
+            <version>[3.0,4.0)</version>
         </dependency>
     </dependencies>
     <profiles>
@@ -235,4 +240,10 @@
         <nexus.autodrop>true</nexus.autodrop>
         <jackson-version>2.6.2</jackson-version>
     </properties>
+    <repositories>
+        <repository>
+            <id>jovl-staging</id>
+            <url>https://oss.sonatype.org/content/repositories/comreprezenjsonoverlay-1036/</url>
+        </repository>
+    </repositories>
 </project>

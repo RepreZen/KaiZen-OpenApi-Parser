@@ -17,26 +17,12 @@ import java.net.URI;
 import java.net.URL;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
 import com.reprezen.jsonoverlay.JsonLoader;
 import com.reprezen.jsonoverlay.ReferenceManager;
 import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 import com.reprezen.kaizen.oasparser.ovl3.OpenApi3Impl;
-import com.reprezen.kaizen.oasparser.val3.ValidationConfigurator;
-import com.reprezen.kaizen.oasparser.val3.ovl.OverlayValidationConfigurator;
 
 public class OpenApiParser {
-
-	private Injector injector;
-
-	public OpenApiParser() {
-		this(new OverlayValidationConfigurator());
-	}
-
-	public OpenApiParser(ValidationConfigurator validationConfigurator) {
-		this.injector = Guice.createInjector(validationConfigurator);
-	}
 
 	public OpenApi<?> parse(String spec, URL resolutionBase) {
 		return parse(spec, resolutionBase, true);
@@ -44,8 +30,9 @@ public class OpenApiParser {
 
 	public OpenApi<?> parse(String spec, URL resolutionBase, boolean validate) {
 		try {
-			JsonNode tree = new JsonLoader().loadString(resolutionBase, spec);
-			return parse(tree, resolutionBase, validate);
+			JsonLoader loader = new JsonLoader();
+			JsonNode tree = loader.loadString(resolutionBase, spec);
+			return parse(tree, resolutionBase, validate, loader);
 
 		} catch (IOException e) {
 			throw new OpenApiParserException("Failed to parse spec as JSON or YAML", e);
@@ -90,7 +77,11 @@ public class OpenApiParser {
 	}
 
 	public OpenApi<?> parse(JsonNode tree, URL resolutionBase, boolean validate) {
-		ReferenceManager manager = new ReferenceManager(resolutionBase, tree);
+		return parse(tree, resolutionBase, validate, null);
+	}
+
+	public OpenApi<?> parse(JsonNode tree, URL resolutionBase, boolean validate, JsonLoader loader) {
+		ReferenceManager manager = new ReferenceManager(resolutionBase, tree, loader);
 		return parse(manager, validate);
 	}
 
@@ -101,7 +92,6 @@ public class OpenApiParser {
 			if (isVersion3(tree)) {
 				OpenApi3 model = (OpenApi3) OpenApi3Impl.factory.create(tree, null, manager);
 				((OpenApi3Impl) model)._setCreatingRef(manager.getDocReference());
-				injector.injectMembers(model);
 				if (validate) {
 					model.validate();
 				}

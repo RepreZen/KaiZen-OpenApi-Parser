@@ -10,30 +10,28 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val3;
 
-import com.google.inject.Inject;
+import static com.reprezen.kaizen.oasparser.ovl3.PathImpl.F_description;
+import static com.reprezen.kaizen.oasparser.ovl3.PathImpl.F_operations;
+import static com.reprezen.kaizen.oasparser.ovl3.PathImpl.F_parameters;
+import static com.reprezen.kaizen.oasparser.ovl3.PathImpl.F_servers;
+import static com.reprezen.kaizen.oasparser.ovl3.PathImpl.F_summary;
+
 import com.reprezen.kaizen.oasparser.model3.Operation;
 import com.reprezen.kaizen.oasparser.model3.Parameter;
 import com.reprezen.kaizen.oasparser.model3.Path;
 import com.reprezen.kaizen.oasparser.model3.Server;
 import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
-import com.reprezen.kaizen.oasparser.val.ValidationResults;
-import com.reprezen.kaizen.oasparser.val.Validator;
 
 public class PathValidator extends ObjectValidatorBase<Path> {
 
-	@Inject
-	private Validator<Operation> operationValidator;
-	@Inject
-	private Validator<Server> serverValidator;
-	@Inject
-	private Validator<Parameter> parameterValidator;
-
 	@Override
-	public void validateObject(Path path, ValidationResults results) {
-		// no validation for: summary, description
-		validateMap(path.getOperations(), results, false, null, Regexes.METHOD_REGEX, operationValidator);
-		validateList(path.getServers(), path.hasServers(), results, false, "servers", serverValidator);
-		validateList(path.getParameters(), path.hasParameters(), results, false, "parameters", parameterValidator);
-		validateExtensions(path.getExtensions(), results);
+	public void runObjectValidations() {
+		Path path = (Path) value.getOverlay();
+		validateStringField(F_summary, false);
+		validateStringField(F_description, false);
+		validateMapField(F_operations, false, false, Operation.class, new OperationValidator());
+		validateListField(F_servers, false, false, Server.class, new ServerValidator());
+		validateListField(F_parameters, false, false, Parameter.class, new ParameterValidator());
+		validateExtensions(path.getExtensions());
 	}
 }

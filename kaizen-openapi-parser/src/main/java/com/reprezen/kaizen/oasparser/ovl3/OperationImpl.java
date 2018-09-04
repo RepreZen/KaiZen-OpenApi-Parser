@@ -599,6 +599,51 @@ public class OperationImpl extends PropertiesOverlay<Operation> implements Opera
 		_remove("extensions", name, Object.class);
 	}
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_tags = "tags";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_summary = "summary";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_description = "description";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_externalDocs = "externalDocs";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_operationId = "operationId";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_parameters = "parameters";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_requestBody = "requestBody";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_responses = "responses";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_responsesExtensions = "responsesExtensions";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_callbacks = "callbacks";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_callbacksExtensions = "callbacksExtensions";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_deprecated = "deprecated";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_securityRequirements = "securityRequirements";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_servers = "servers";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_extensions = "extensions";
+
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	protected void _elaborateJson() {
@@ -610,7 +655,7 @@ public class OperationImpl extends PropertiesOverlay<Operation> implements Opera
 		_createScalar("operationId", "operationId", StringOverlay.factory);
 		_createList("parameters", "parameters", ParameterImpl.factory);
 		_createScalar("requestBody", "requestBody", RequestBodyImpl.factory);
-		_createMap("responses", "responses", ResponseImpl.factory, "default|(\\d\\d\\d)");
+		_createMap("responses", "responses", ResponseImpl.factory, "default|(\\d[0-9X]{2})");
 		_createMap("responsesExtensions", "responses", ObjectOverlay.factory, "x-.+");
 		_createMap("callbacks", "callbacks", CallbackImpl.factory, "(?!x-)[a-zA-Z0-9\\._-]+");
 		_createMap("callbacksExtensions", "callbacks", ObjectOverlay.factory, "x-.+");

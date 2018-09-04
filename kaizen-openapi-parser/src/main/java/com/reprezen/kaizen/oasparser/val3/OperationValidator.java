@@ -10,9 +10,18 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val3;
 
-import static com.reprezen.kaizen.oasparser.val.Messages.m;
+import static com.reprezen.kaizen.oasparser.ovl3.OperationImpl.F_callbacks;
+import static com.reprezen.kaizen.oasparser.ovl3.OperationImpl.F_description;
+import static com.reprezen.kaizen.oasparser.ovl3.OperationImpl.F_externalDocs;
+import static com.reprezen.kaizen.oasparser.ovl3.OperationImpl.F_operationId;
+import static com.reprezen.kaizen.oasparser.ovl3.OperationImpl.F_parameters;
+import static com.reprezen.kaizen.oasparser.ovl3.OperationImpl.F_requestBody;
+import static com.reprezen.kaizen.oasparser.ovl3.OperationImpl.F_responses;
+import static com.reprezen.kaizen.oasparser.ovl3.OperationImpl.F_securityRequirements;
+import static com.reprezen.kaizen.oasparser.ovl3.OperationImpl.F_servers;
+import static com.reprezen.kaizen.oasparser.ovl3.OperationImpl.F_summary;
+import static com.reprezen.kaizen.oasparser.ovl3.OperationImpl.F_tags;
 
-import com.google.inject.Inject;
 import com.reprezen.kaizen.oasparser.model3.Callback;
 import com.reprezen.kaizen.oasparser.model3.ExternalDocs;
 import com.reprezen.kaizen.oasparser.model3.Operation;
@@ -22,49 +31,26 @@ import com.reprezen.kaizen.oasparser.model3.Response;
 import com.reprezen.kaizen.oasparser.model3.SecurityRequirement;
 import com.reprezen.kaizen.oasparser.model3.Server;
 import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
-import com.reprezen.kaizen.oasparser.val.ValidationResults;
-import com.reprezen.kaizen.oasparser.val.Validator;
 
 public class OperationValidator extends ObjectValidatorBase<Operation> {
 
-	@Inject
-	private Validator<ExternalDocs> externalDocsValidator;
-	@Inject
-	private Validator<Parameter> parameterValidator;
-	@Inject
-	private Validator<RequestBody> requestBodyValidator;
-	@Inject
-	private Validator<Response> responseValidator;
-	@Inject
-	private Validator<Callback> callbackValidator;
-	@Inject
-	private Validator<SecurityRequirement> securityRequirementValidator;
-	@Inject
-	private Validator<Server> serverValidator;
-
 	@Override
-	public void validateObject(Operation operation, ValidationResults results) {
-		// no validation for: tags, description, deprecated
-		checkSummaryLength(operation, results);
-		validateField(operation.getExternalDocs(false), results, false, "externalDocs", externalDocsValidator);
+	public void runObjectValidations() {
+		Operation operation = (Operation) value.getOverlay();
+		validateListField(F_tags, false, false, String.class, null);
+		validateStringField(F_summary, false);
+		validateStringField(F_description, false);
+		validateField(F_externalDocs, false, ExternalDocs.class, new ExternalDocsValidator());
 		// TODO Q: Not marked as required in spec, but spec says they all must be unique
-		// within the API. Seems like it
-		// should be required.
-		validateString(operation.getOperationId(), results, false, "operationId");
-		validateList(operation.getParameters(), operation.hasParameters(), results, false, "parameters",
-				parameterValidator);
-		validateField(operation.getRequestBody(false), results, false, "requestBody", requestBodyValidator);
-		validateMap(operation.getResponses(), results, true, "responses", Regexes.RESPONSE_REGEX, responseValidator);
-		validateMap(operation.getCallbacks(), results, false, "callbacks", Regexes.NOEXT_REGEX, callbackValidator);
-		validateList(operation.getSecurityRequirements(), operation.hasSecurityRequirements(), results, false,
-				"security", securityRequirementValidator);
-		validateList(operation.getServers(), operation.hasServers(), results, false, "servers", serverValidator);
-	}
-
-	private void checkSummaryLength(Operation operation, ValidationResults results) {
-		String summary = operation.getSummary();
-		if (summary != null && summary.length() > 120) {
-			results.addWarning(m.msg("LongSummary|Sumamry exceeds recommended limit of 120 chars"), "summary");
-		}
+		// within the API. Seems like it should be required.
+		validateStringField(F_operationId, false);
+		validateListField(F_parameters, false, false, Parameter.class, new ParameterValidator());
+		validateField(F_requestBody, false, RequestBody.class, new RequestBodyValidator());
+		validateMapField(F_responses, true, false, Response.class, new ResponseValidator());
+		validateMapField(F_callbacks, false, false, Callback.class, new CallbackValidator());
+		validateListField(F_securityRequirements, false, false, SecurityRequirement.class,
+				new SecurityRequirementValidator());
+		validateListField(F_servers, false, false, Server.class, new ServerValidator());
+		validateExtensions(operation.getExtensions());
 	}
 }

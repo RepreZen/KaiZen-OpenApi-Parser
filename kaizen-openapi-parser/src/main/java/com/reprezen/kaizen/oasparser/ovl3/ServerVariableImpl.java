@@ -11,7 +11,6 @@ import com.reprezen.jsonoverlay.IJsonOverlay;
 import com.reprezen.jsonoverlay.JsonOverlay;
 import com.reprezen.jsonoverlay.ObjectOverlay;
 import com.reprezen.jsonoverlay.OverlayFactory;
-import com.reprezen.jsonoverlay.PrimitiveOverlay;
 import com.reprezen.jsonoverlay.PropertiesOverlay;
 import com.reprezen.jsonoverlay.ReferenceManager;
 import com.reprezen.jsonoverlay.StringOverlay;
@@ -33,14 +32,14 @@ public class ServerVariableImpl extends PropertiesOverlay<ServerVariable> implem
 	// EnumValue
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public List<Object> getEnumValues() {
-		return _getList("enumValues", Object.class);
+	public List<String> getEnumValues() {
+		return _getList("enumValues", String.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public List<Object> getEnumValues(boolean elaborate) {
-		return _getList("enumValues", elaborate, Object.class);
+	public List<String> getEnumValues(boolean elaborate) {
+		return _getList("enumValues", elaborate, String.class);
 	}
 
 	@Override
@@ -51,51 +50,51 @@ public class ServerVariableImpl extends PropertiesOverlay<ServerVariable> implem
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public Object getEnumValue(int index) {
-		return _get("enumValues", index, Object.class);
+	public String getEnumValue(int index) {
+		return _get("enumValues", index, String.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public void setEnumValues(List<Object> enumValues) {
-		_setList("enumValues", enumValues, Object.class);
+	public void setEnumValues(List<String> enumValues) {
+		_setList("enumValues", enumValues, String.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public void setEnumValue(int index, Object enumValue) {
-		_set("enumValues", index, enumValue, Object.class);
+	public void setEnumValue(int index, String enumValue) {
+		_set("enumValues", index, enumValue, String.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public void addEnumValue(Object enumValue) {
-		_add("enumValues", enumValue, Object.class);
+	public void addEnumValue(String enumValue) {
+		_add("enumValues", enumValue, String.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public void insertEnumValue(int index, Object enumValue) {
-		_insert("enumValues", index, enumValue, Object.class);
+	public void insertEnumValue(int index, String enumValue) {
+		_insert("enumValues", index, enumValue, String.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public void removeEnumValue(int index) {
-		_remove("enumValues", index, Object.class);
+		_remove("enumValues", index, String.class);
 	}
 
 	// Default
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public Object getDefault() {
-		return _get("defaultValue", Object.class);
+	public String getDefault() {
+		return _get("defaultValue", String.class);
 	}
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public void setDefault(Object defaultValue) {
-		_setScalar("defaultValue", defaultValue, Object.class);
+	public void setDefault(String defaultValue) {
+		_setScalar("defaultValue", defaultValue, String.class);
 	}
 
 	// Description
@@ -160,12 +159,24 @@ public class ServerVariableImpl extends PropertiesOverlay<ServerVariable> implem
 		_remove("extensions", name, Object.class);
 	}
 
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_enumValues = "enumValues";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_defaultValue = "defaultValue";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_description = "description";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_extensions = "extensions";
+
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	protected void _elaborateJson() {
 		super._elaborateJson();
-		_createList("enumValues", "enum", PrimitiveOverlay.factory);
-		_createScalar("defaultValue", "default", PrimitiveOverlay.factory);
+		_createList("enumValues", "enum", StringOverlay.factory);
+		_createScalar("defaultValue", "default", StringOverlay.factory);
 		_createScalar("description", "description", StringOverlay.factory);
 		_createMap("extensions", "", ObjectOverlay.factory, "x-.+");
 	}

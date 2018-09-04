@@ -364,10 +364,13 @@ public interface Schema extends IJsonOverlay<Schema>, IModelPart<OpenApi3, Schem
 
 	// Discriminator
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	String getDiscriminator();
+	Discriminator getDiscriminator();
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void setDiscriminator(String discriminator);
+	Discriminator getDiscriminator(boolean elaborate);
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setDiscriminator(Discriminator discriminator);
 
 	// ReadOnly
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -408,31 +411,6 @@ public interface Schema extends IJsonOverlay<Schema>, IModelPart<OpenApi3, Schem
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	void setExternalDocs(ExternalDocs externalDocs);
-
-	// Example
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	Map<String, Example> getExamples();
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	Map<String, Example> getExamples(boolean elaborate);
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	boolean hasExamples();
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	boolean hasExample(String name);
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	Example getExample(String name);
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void setExamples(Map<String, Example> examples);
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void setExample(String name, Example example);
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void removeExample(String name);
 
 	// Example
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")

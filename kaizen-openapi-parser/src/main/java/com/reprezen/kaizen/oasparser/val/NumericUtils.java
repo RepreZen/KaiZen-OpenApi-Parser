@@ -12,12 +12,10 @@ package com.reprezen.kaizen.oasparser.val;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.HashMap;
 import java.util.Map;
 
-import com.google.common.collect.Maps;
-
 public class NumericUtils {
-
 	public static boolean isNumeric(Object obj) {
 		return NumericType.of(obj) != null;
 	}
@@ -94,6 +92,30 @@ public class NumericUtils {
 		return compare(x, y) != 0;
 	}
 
+	public static <T extends Number> boolean isPositive(T x) {
+		return gt(x, zero(x));
+	}
+
+	public static <T extends Number> boolean isZero(T x) {
+		return eq(x, zero(x));
+	}
+
+	public static <T extends Number> boolean isNegative(T x) {
+		return lt(x, zero(x));
+	}
+
+	public static <T extends Number> boolean isNonNegative(T x) {
+		return ge(x, zero(x));
+	}
+
+	public static <T extends Number> boolean isnonZero(T x) {
+		return ne(x, zero(x));
+	}
+
+	public static <T extends Number> boolean isNonPostive(T x) {
+		return le(x, zero(x));
+	}
+
 	public static <T extends Number> int compare(T x, T y) {
 		NumericType type = NumericType.of(x);
 		if (type != NumericType.of(y)) {
@@ -139,7 +161,7 @@ public class NumericUtils {
 
 		private void register(Class<? extends Number> cls, NumericType type) {
 			if (NumericType.types == null)
-				NumericType.types = Maps.newHashMap();
+				NumericType.types = new HashMap<>();
 			types.put(cls, type);
 		}
 

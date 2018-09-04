@@ -8,11 +8,11 @@ import javax.annotation.Generated;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.google.inject.Inject;
 import com.reprezen.jsonoverlay.Builder;
 import com.reprezen.jsonoverlay.IJsonOverlay;
 import com.reprezen.jsonoverlay.JsonOverlay;
 import com.reprezen.jsonoverlay.ObjectOverlay;
+import com.reprezen.jsonoverlay.Overlay;
 import com.reprezen.jsonoverlay.OverlayFactory;
 import com.reprezen.jsonoverlay.PropertiesOverlay;
 import com.reprezen.jsonoverlay.ReferenceManager;
@@ -33,9 +33,10 @@ import com.reprezen.kaizen.oasparser.model3.SecurityRequirement;
 import com.reprezen.kaizen.oasparser.model3.SecurityScheme;
 import com.reprezen.kaizen.oasparser.model3.Server;
 import com.reprezen.kaizen.oasparser.model3.Tag;
+import com.reprezen.kaizen.oasparser.val.ValidationContext;
 import com.reprezen.kaizen.oasparser.val.ValidationResults;
 import com.reprezen.kaizen.oasparser.val.ValidationResults.Severity;
-import com.reprezen.kaizen.oasparser.val.Validator;
+import com.reprezen.kaizen.oasparser.val3.OpenApi3Validator;
 
 public class OpenApi3Impl extends PropertiesOverlay<OpenApi3> implements OpenApi3 {
 
@@ -52,12 +53,12 @@ public class OpenApi3Impl extends PropertiesOverlay<OpenApi3> implements OpenApi
 		return json;
 	}
 
-	@Inject
-	private Validator<OpenApi3> validator;
-
 	@Override
 	public void validate() {
-		validationResults = validator.validate(this);
+		try (ValidationContext context = ValidationContext.open()) {
+			validationResults = ValidationContext.getValidationResults();
+			new OpenApi3Validator().validate(Overlay.of(this));
+		}
 	}
 
 	@Override
@@ -943,6 +944,63 @@ public class OpenApi3Impl extends PropertiesOverlay<OpenApi3> implements OpenApi
 	public void removeExtension(String name) {
 		_remove("extensions", name, Object.class);
 	}
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_openApi = "openApi";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_info = "info";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_servers = "servers";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_paths = "paths";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_pathsExtensions = "pathsExtensions";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_schemas = "schemas";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_responses = "responses";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_parameters = "parameters";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_examples = "examples";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_requestBodies = "requestBodies";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_headers = "headers";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_securitySchemes = "securitySchemes";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_links = "links";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_callbacks = "callbacks";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_componentsExtensions = "componentsExtensions";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_securityRequirements = "securityRequirements";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_tags = "tags";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_externalDocs = "externalDocs";
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	public static final String F_extensions = "extensions";
 
 	@Override
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")

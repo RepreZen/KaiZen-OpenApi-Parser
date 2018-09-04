@@ -10,79 +10,59 @@
  *******************************************************************************/
 package com.reprezen.kaizen.oasparser.val3;
 
-import static com.reprezen.kaizen.oasparser.val.Messages.m;
+import static com.reprezen.kaizen.oasparser.ovl3.HeaderImpl.F_allowEmptyValue;
+import static com.reprezen.kaizen.oasparser.ovl3.HeaderImpl.F_contentMediaTypes;
+import static com.reprezen.kaizen.oasparser.ovl3.HeaderImpl.F_deprecated;
+import static com.reprezen.kaizen.oasparser.ovl3.HeaderImpl.F_description;
+import static com.reprezen.kaizen.oasparser.ovl3.HeaderImpl.F_example;
+import static com.reprezen.kaizen.oasparser.ovl3.HeaderImpl.F_examples;
+import static com.reprezen.kaizen.oasparser.ovl3.HeaderImpl.F_explode;
+import static com.reprezen.kaizen.oasparser.ovl3.HeaderImpl.F_schema;
+import static com.reprezen.kaizen.oasparser.ovl3.HeaderImpl.F_style;
+import static com.reprezen.kaizen.oasparser.val.msg.Messages.msg;
+import static com.reprezen.kaizen.oasparser.val3.OpenApi3Messages.IgnContType;
+import static com.reprezen.kaizen.oasparser.val3.OpenApi3Messages.NonQryAllowRsvd;
 
-import com.google.inject.Inject;
-import com.reprezen.jsonoverlay.Overlay;
-import com.reprezen.jsonoverlay.PropertiesOverlay;
+import com.reprezen.kaizen.oasparser.model3.Example;
 import com.reprezen.kaizen.oasparser.model3.Header;
 import com.reprezen.kaizen.oasparser.model3.MediaType;
-import com.reprezen.kaizen.oasparser.model3.Path;
 import com.reprezen.kaizen.oasparser.model3.Schema;
 import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
-import com.reprezen.kaizen.oasparser.val.ValidationResults;
-import com.reprezen.kaizen.oasparser.val.Validator;
 
 public class HeaderValidator extends ObjectValidatorBase<Header> {
 
-	@Inject
-	private Validator<Schema> schemaValidator;
-	@Inject
-	private Validator<MediaType> mediaTypeValidator;
-
 	@Override
-	public void validateObject(Header header, ValidationResults results) {
-		// no validations for: description, deprecated, allowEmptyValue, explode,
-		// example, examples
-		validateString(header.getName(), results, false, "name");
-		validateString(header.getIn(), results, false, Regexes.PARAM_IN_REGEX, "in");
-		checkPathParam(header, results);
-		checkRequired(header, results);
-		validateString(header.getStyle(), results, false, Regexes.STYLE_REGEX, "style");
-		checkAllowReserved(header, results);
+	public void runObjectValidations() {
+		Header header = (Header) value.getOverlay();
+		validateStringField(F_description, false);
+		validateBooleanField(F_deprecated, false);
+		validateBooleanField(F_allowEmptyValue, false);
+		validateBooleanField(F_explode, false);
+		validateField(F_example, false, Object.class, null);
+		validateMapField(F_examples, false, false, Example.class, new ExampleValidator());
+		validateStringField(F_style, false, Regexes.STYLE_REGEX);
+		checkAllowReserved(header);
 		// TODO Q: Should schema be required in header object?
-		validateField(header.getSchema(false), results, false, "schema", schemaValidator);
-		validateMap(header.getContentMediaTypes(), results, false, "content", Regexes.NOEXT_REGEX, mediaTypeValidator);
-		validateExtensions(header.getExtensions(), results);
+		validateField(F_schema, false, Schema.class, new SchemaValidator());
+		validateMapField(F_contentMediaTypes, false, false, MediaType.class, new MediaTypeValidator());
+		validateExtensions(header.getExtensions());
+		checkContentType();
+		// TODO validate that location-related values (like style) are consistent with
+		// header location
+		// TODO warn if this appears on a request body whose media type is not multipart
 	}
 
-	private void checkPathParam(Header header, ValidationResults results) {
-		if (header.getIn() != null && header.getIn().equals("path") && header.getName() != null) {
-			String path = getPathString(header);
-			if (path != null) {
-				if (!path.matches(".*/\\{" + header.getName() + "\\}(/.*)?")) {
-					results.addError(m.msg("MissingPathTplt|No template for path parameter in path string",
-							header.getName(), path), "name");
-				}
-			} else {
-				results.addWarning(
-						m.msg("NoPath|Could not locate path for parameter", header.getName(), header.getIn()));
-			}
+	private void checkAllowReserved(Header header) {
+		// TODO Q: Shouldn't "allowReserved" be disallowed for headers, as are "name"
+		// and "in"?
+		if (header.isAllowReserved()) {
+			results.addWarning(msg(NonQryAllowRsvd, value.getPathInParent(), "header"), value);
 		}
 	}
 
-	private void checkRequired(Header header, ValidationResults results) {
-		if ("path".equals(header.getIn())) {
-			if (header.getRequired() != Boolean.TRUE) {
-				results.addError(
-						m.msg("PathParamReq|Path param must have 'required' property set true", header.getName()),
-						"required");
-			}
+	private void checkContentType() {
+		if (value.getPathInParent().equalsIgnoreCase("Content-Type")) {
+			results.addWarning(msg(IgnContType), value);
 		}
-	}
-
-	private void checkAllowReserved(Header header, ValidationResults results) {
-		if (header.isAllowReserved() && !"query".equals(header.getIn())) {
-			results.addWarning(m.msg("NonQryAllowRsvd|AllowReserved is ignored for non-query parameter",
-					header.getName(), header.getIn()), "allowReserved");
-		}
-	}
-
-	private String getPathString(Header header) {
-		PropertiesOverlay<?> parent = Overlay.of(header).getParentPropertiesOverlay();
-		while (parent != null && !(parent instanceof Path)) {
-			parent = Overlay.of(parent).getParentPropertiesOverlay();
-		}
-		return parent != null && parent instanceof Path ? Overlay.getPathInParent(parent) : null;
 	}
 }

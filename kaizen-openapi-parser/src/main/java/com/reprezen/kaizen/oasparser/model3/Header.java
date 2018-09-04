@@ -11,20 +11,6 @@ public interface Header extends IJsonOverlay<Header>, IModelPart<OpenApi3, Heade
 
 	String getKey();
 
-	// Name
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	String getName();
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void setName(String name);
-
-	// In
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	String getIn();
-
-	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	void setIn(String in);
-
 	// Description
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	String getDescription();

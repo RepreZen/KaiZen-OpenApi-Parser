@@ -55,7 +55,7 @@ public class SecuritySchemeValidator extends ObjectValidatorBase<SecurityScheme>
 				break;
 			}
 			case "openIdConnect":
-				validateUrlField(F_openIdConnectUrl, true, false);
+				validateUrlField(F_openIdConnectUrl, true, true, false);
 				break;
 			}
 		}

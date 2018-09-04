@@ -22,7 +22,7 @@ public class ExternalDocsValidator extends ObjectValidatorBase<ExternalDocs> {
 	public void runObjectValidations() {
 		ExternalDocs externalDocs = (ExternalDocs) value.getOverlay();
 		validateStringField(F_description, false);
-		validateUrlField(F_url, true, false);
+		validateUrlField(F_url, true, true, false);
 		validateExtensions(externalDocs.getExtensions());
 	}
 }

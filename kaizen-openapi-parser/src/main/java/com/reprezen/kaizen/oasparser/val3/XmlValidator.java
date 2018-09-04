@@ -28,7 +28,7 @@ public class XmlValidator extends ObjectValidatorBase<Xml> {
 		validateStringField(F_prefix, false);
 		validateBooleanField(F_attribute, false);
 		validateBooleanField(XmlImpl.F_wrapped, false);
-		validateUrlField(F_namespace, false, false);
+		validateUrlField(F_namespace, false, true, false);
 		validateExtensions(xml.getExtensions());
 	}
 }

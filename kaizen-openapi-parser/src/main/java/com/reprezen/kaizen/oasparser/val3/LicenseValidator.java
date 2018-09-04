@@ -22,7 +22,7 @@ public class LicenseValidator extends ObjectValidatorBase<License> {
 	public void runObjectValidations() {
 		License license = (License) value.getOverlay();
 		validateStringField(F_name, true);
-		validateUrlField(F_url, false, false);
+		validateUrlField(F_url, false, true, false);
 		validateExtensions(license.getExtensions());
 	}
 

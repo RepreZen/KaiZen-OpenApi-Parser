@@ -23,7 +23,7 @@ public class ContactValidator extends ObjectValidatorBase<Contact> {
 	public void runObjectValidations() {
 		Contact contact = (Contact) value.getOverlay();
 		validateStringField(F_name, false);
-		validateUrlField(F_url, false, false);
+		validateUrlField(F_url, false, true, false);
 		validateEmailField(F_email, false);
 		validateExtensions(contact.getExtensions());
 	}

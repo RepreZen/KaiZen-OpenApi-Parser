@@ -253,7 +253,7 @@ internal represenation.
 
 As an example, consider this model:
 
-```
+```yaml
 ---
 openapi: 3.0.0
 info:
@@ -291,8 +291,8 @@ This is possible using `Overlay` adapters created from the values being examined
 
 For example, imagine that we have an `Operation` object, and we want know whether its first (i.e. zeroth) parameter is defined via a reference. For this we could write:
 
-```
-if (Overaly.of(op.getParameters()).isReference(0)) {
+```java
+if (Overlay.of(op.getParameters()).isReference(0)) {
   ...
 }
 ```
@@ -305,7 +305,7 @@ JSON has two means by which one value can be included within another - an array 
 
 As an example, to see whether a particular operation response is included by reference, you could use:
 
-```
+```java
 if (Overlay.of(op.getResponses()).isReference("200")) {
   ...
 }
@@ -313,7 +313,7 @@ if (Overlay.of(op.getResponses()).isReference("200")) {
 
 To see whether the schema associated with that response is included by reference, we could use something like this:
 
-```
+```java
 if (Overlay.of(op.getResponse("200").getContentMediaType("*/*")).isReference("schema")) {
   ...
 }
@@ -446,7 +446,7 @@ and `set` methods. E.g. `getGet(boolean elaborate)` and
 accessing the operations via the generated methods for the
 `operations` map value, e.g. `getOperation("get")`.
 
-## Overaly Methods
+## Overlay Methods
 
 The following methods are available in all `Overlay` objects:
 
@@ -571,7 +571,7 @@ of `OpenApiParser` (and, we expect, parsers for other versions of
 OpenAPI).
 
 Create a new parser using the empty constructor:
-```
+```javva
 OpenApi3Parser parser = new OpenApi3Parser();
 ```
 
@@ -602,13 +602,15 @@ above `parse` methods.
 
 The serialization API applies to any `Overlay` adapter object but most commonly will be applied to complete models. It consists of a single method:
 
-```JsonNode toJson(SerializationOptions.options... options)```
+```java
+JsonNode toJson(SerializationOptions.options... options)
+```
 
 The return value is of type `JsonNode` from the Jackson library. It
 can be easily translated into either a JSON or YAML string using
 so-called *mapper* objects from that library. For example:
 
-```
+```java
 JsonNode serial = model.toJson();
 String json = new ObjectMapper().writeValueAsString(serial);
 String yaml = new YAMLMapper().writeValueAsString(serial);

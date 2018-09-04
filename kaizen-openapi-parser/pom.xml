@@ -90,7 +90,7 @@
         <dependency>
             <groupId>com.reprezen.jsonoverlay</groupId>
             <artifactId>jsonoverlay</artifactId>
-            <version>[3.0,4.0)</version>
+            <version>${json-overlay-version}</version>
         </dependency>
     </dependencies>
     <profiles>
@@ -232,7 +232,7 @@
         </plugins>
     </build>
     <properties>
-        <json-overlay-version>[3.0,4.0)</json-overlay-version>
+        <json-overlay-version>[4.0,5.0)</json-overlay-version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -243,7 +243,7 @@
     <repositories>
         <repository>
             <id>jovl-staging</id>
-            <url>https://oss.sonatype.org/content/repositories/comreprezenjsonoverlay-1036/</url>
+            <url>https://oss.sonatype.org/content/repositories/comreprezenjsonoverlay-1037/</url>
         </repository>
     </repositories>
 </project>

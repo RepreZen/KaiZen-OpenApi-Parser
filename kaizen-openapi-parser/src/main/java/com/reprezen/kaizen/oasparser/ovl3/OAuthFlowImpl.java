@@ -6,6 +6,7 @@ import javax.annotation.Generated;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.reprezen.jsonoverlay.Builder;
+import com.reprezen.jsonoverlay.IJsonOverlay;
 import com.reprezen.jsonoverlay.JsonOverlay;
 import com.reprezen.jsonoverlay.ObjectOverlay;
 import com.reprezen.jsonoverlay.OverlayFactory;
@@ -280,12 +281,12 @@ public class OAuthFlowImpl extends PropertiesOverlay<OAuthFlow> implements OAuth
 	}
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public static Builder<OAuthFlow> builder(JsonOverlay<?> modelMember) {
+	public static <OV extends IJsonOverlay<?>> Builder<OAuthFlow> builder(OV modelMember) {
 		return new Builder<OAuthFlow>(factory, modelMember);
 	}
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public static JsonOverlay<OAuthFlow> create(JsonOverlay<?> modelMember) {
-		return builder(modelMember).build();
+	public static <OV extends IJsonOverlay<?>> OAuthFlow create(OV modelMember) {
+		return (OAuthFlow) builder(modelMember).build();
 	}
 }

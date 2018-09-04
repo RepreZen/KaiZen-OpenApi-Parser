@@ -7,6 +7,7 @@ import javax.annotation.Generated;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.reprezen.jsonoverlay.BooleanOverlay;
 import com.reprezen.jsonoverlay.Builder;
+import com.reprezen.jsonoverlay.IJsonOverlay;
 import com.reprezen.jsonoverlay.JsonOverlay;
 import com.reprezen.jsonoverlay.ObjectOverlay;
 import com.reprezen.jsonoverlay.OverlayFactory;
@@ -239,12 +240,12 @@ public class EncodingPropertyImpl extends PropertiesOverlay<EncodingProperty> im
 	}
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public static Builder<EncodingProperty> builder(JsonOverlay<?> modelMember) {
+	public static <OV extends IJsonOverlay<?>> Builder<EncodingProperty> builder(OV modelMember) {
 		return new Builder<EncodingProperty>(factory, modelMember);
 	}
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
-	public static JsonOverlay<EncodingProperty> create(JsonOverlay<?> modelMember) {
-		return builder(modelMember).build();
+	public static <OV extends IJsonOverlay<?>> EncodingProperty create(OV modelMember) {
+		return (EncodingProperty) builder(modelMember).build();
 	}
 }

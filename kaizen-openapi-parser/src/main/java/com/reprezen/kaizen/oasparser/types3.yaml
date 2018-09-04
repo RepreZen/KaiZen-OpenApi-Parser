@@ -3,7 +3,7 @@ imports:
   OpenApi: com.reprezen.kaizen.oasparser.OpenApi
   Validator: com.reprezen.kaizen.oasparser.val.Validator
   ValidationResults: com.reprezen.kaizen.oasparser.val.ValidationResults
-  ValidationResultsInstance: com.reprezen.kaizen.oasparser.val.ValidationResults.ValidationResultsInstance
+  ValidationContext: com.reprezen.kaizen.oasparser.val.ValidationContext
   Severity: com.reprezen.kaizen.oasparser.val.ValidationResults.Severity
   OpenApi3Validator: com.reprezen.kaizen.oasparser.val3.OpenApi3Validator
   Overlay: com.reprezen.jsonoverlay.Overlay
@@ -33,7 +33,7 @@ types:
     - OpenApi3Validator
     - Validator
     - ValidationResults
-    - ValidationResultsInstance
+    - ValidationContext
     - Severity
     - ReferenceRegistry
     - Overlay

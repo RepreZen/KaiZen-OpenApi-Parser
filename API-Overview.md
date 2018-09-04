@@ -571,7 +571,7 @@ of `OpenApiParser` (and, we expect, parsers for other versions of
 OpenAPI).
 
 Create a new parser using the empty constructor:
-```javva
+```java
 OpenApi3Parser parser = new OpenApi3Parser();
 ```
 

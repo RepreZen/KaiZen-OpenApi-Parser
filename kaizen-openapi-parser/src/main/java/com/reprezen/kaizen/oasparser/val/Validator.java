@@ -12,10 +12,10 @@ package com.reprezen.kaizen.oasparser.val;
 
 public interface Validator<T> {
 
-    ValidationResults validate(T object);
+	ValidationResults validate(T object);
 
-    void validate(T object, ValidationResults results);
+	void validate(T object, ValidationResults results);
 
-    void validate(T object, ValidationResults results, String crumb);
+	void validate(T object, ValidationResults results, String crumb);
 
 }

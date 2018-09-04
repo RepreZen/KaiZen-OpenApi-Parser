@@ -15,9 +15,9 @@ import com.reprezen.jsonoverlay.StringOverlay;
 
 public class StringValidator extends OverlayValidator<StringOverlay> {
 
-    @Override
-    public void validate(StringOverlay overlay, ValidationResults results) {
-        super.validate(overlay, results, TextNode.class);
-    }
+	@Override
+	public void validate(StringOverlay overlay, ValidationResults results) {
+		super.validate(overlay, results, TextNode.class);
+	}
 
 }

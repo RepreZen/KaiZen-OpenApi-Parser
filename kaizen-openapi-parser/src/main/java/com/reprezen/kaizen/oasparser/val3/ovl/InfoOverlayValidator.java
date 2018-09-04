@@ -18,9 +18,9 @@ import com.reprezen.kaizen.oasparser.val.ValidationResults;
 
 public class InfoOverlayValidator extends ObjectValidator<InfoImpl> implements ImplValidator<Info> {
 
-    @Override
-    public void validateImpl(Info info, ValidationResults results) {
-        super.validate((InfoImpl) info, results);
-    }
+	@Override
+	public void validateImpl(Info info, ValidationResults results) {
+		super.validate((InfoImpl) info, results);
+	}
 
 }

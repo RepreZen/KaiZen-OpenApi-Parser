@@ -11,8 +11,11 @@ import static com.reprezen.kaizen.oasparser.val.BaseValidationMessages.PatternMa
 import static com.reprezen.kaizen.oasparser.val.BaseValidationMessages.WrongTypeJson;
 import static com.reprezen.kaizen.oasparser.val.msg.Messages.msg;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLStreamHandler;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
@@ -49,7 +52,6 @@ import com.reprezen.jsonoverlay.Overlay;
 import com.reprezen.jsonoverlay.PrimitiveOverlay;
 import com.reprezen.jsonoverlay.PropertiesOverlay;
 import com.reprezen.jsonoverlay.StringOverlay;
-import com.reprezen.kaizen.oasparser.val.oasparser.fake.scheme.Handler;
 
 public abstract class ValidatorBase<V> implements Validator<V> {
 	protected Overlay<V> value;
@@ -126,12 +128,15 @@ public abstract class ValidatorBase<V> implements Validator<V> {
 		return validateStringField(name, required, pattern, field -> checkUrl(field, allowRelative, allowVars));
 	}
 
-	public static final String SPECIAL_SCHEME = Handler.class.getPackage().getName()
-			.substring(ValidatorBase.class.getPackage().getName().length() + 1);
-	private static boolean specialSchemeInited = false;
+	private static String FAKE_SCHEME = "oasparser.fake.scheme";
+	private static URLStreamHandler fakeHandler = new URLStreamHandler() {
+		@Override
+		protected URLConnection openConnection(URL u) throws IOException {
+			return null;
+		}
+	};
 
 	private void checkUrl(Overlay<String> overlay, boolean allowRelative, boolean allowVars) {
-		initSpecialScheme();
 		// TODO Q: Any help from spec in being able to validate URLs with vars? E.g is
 		// our treatment here valid? We assume vars can only appear where simple text
 		// can appear, so handling vars means relacing {.*} with "1" and testing for URL
@@ -139,44 +144,28 @@ public abstract class ValidatorBase<V> implements Validator<V> {
 		// port, and elsewhere digits are always allowed where letters are.
 		String origUrl = overlay.get();
 		String url = origUrl;
+		boolean fake = false;
 		if (allowVars) {
 			url = url.replaceAll("\\{[^}]+\\}", "1");
 			if (url.startsWith("1:")) {
 				// "1" is not a valid scheme name, so we need to replace it with special scheme,
 				// for which we provide a do-nothing protocol handler implementation
-				url = SPECIAL_SCHEME + url.substring(1);
+				url = FAKE_SCHEME + url.substring(1);
+				fake = true;
 			}
 		}
 		try {
-			new URL(url);
+			new URL(null, url, fake ? fakeHandler : null);
 		} catch (MalformedURLException e) {
 			try {
-				new URL(new URL(SPECIAL_SCHEME + ":/"), url);
+				URL context = new URL(null, FAKE_SCHEME + ":/", fakeHandler);
+				new URL(context, url);
 				if (!allowRelative) {
 					results.addError(msg(BaseValidationMessages.NoRelUrl, origUrl, e.toString()), overlay);
 				}
 			} catch (MalformedURLException e1) {
 				results.addError(msg(BadUrl, origUrl, e.toString()), overlay);
 			}
-		}
-	}
-
-	private void initSpecialScheme() {
-		if (!specialSchemeInited) {
-			String prop = "java.protocol.handler.pkgs";
-			String former = System.getProperty(prop);
-			try {
-				System.setProperty(prop, ValidatorBase.class.getPackage().getName());
-				new URL(SPECIAL_SCHEME + ":");
-			} catch (MalformedURLException e) {
-			} finally {
-				if (former != null) {
-					System.setProperty(prop, former);
-				} else {
-					System.getProperties().remove(prop);
-				}
-			}
-			specialSchemeInited = true;
 		}
 	}
 

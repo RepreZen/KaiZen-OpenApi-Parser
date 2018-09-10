@@ -13,5 +13,5 @@ package com.reprezen.kaizen.oasparser.val;
 import com.reprezen.jsonoverlay.Overlay;
 
 public interface Validator<V> {
-	void validate(Overlay<V> value);
+    void validate(Overlay<V> value);
 }

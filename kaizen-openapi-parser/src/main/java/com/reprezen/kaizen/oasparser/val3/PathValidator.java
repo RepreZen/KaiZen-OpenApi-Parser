@@ -24,14 +24,14 @@ import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
 
 public class PathValidator extends ObjectValidatorBase<Path> {
 
-	@Override
-	public void runObjectValidations() {
-		Path path = (Path) value.getOverlay();
-		validateStringField(F_summary, false);
-		validateStringField(F_description, false);
-		validateMapField(F_operations, false, false, Operation.class, new OperationValidator());
-		validateListField(F_servers, false, false, Server.class, new ServerValidator());
-		validateListField(F_parameters, false, false, Parameter.class, new ParameterValidator());
-		validateExtensions(path.getExtensions());
-	}
+    @Override
+    public void runObjectValidations() {
+        Path path = (Path) value.getOverlay();
+        validateStringField(F_summary, false);
+        validateStringField(F_description, false);
+        validateMapField(F_operations, false, false, Operation.class, new OperationValidator());
+        validateListField(F_servers, false, false, Server.class, new ServerValidator());
+        validateListField(F_parameters, false, false, Parameter.class, new ParameterValidator());
+        validateExtensions(path.getExtensions());
+    }
 }

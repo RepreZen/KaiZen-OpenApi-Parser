@@ -21,16 +21,16 @@ import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 
 public class LinksTest {
 
-	@Test
-	public void testLinks() throws Exception {
-		OpenApi3 model = (OpenApi3) new OpenApiParser().parse(Resources.getResource("models/linksTest.yaml"), false);
+    @Test
+    public void testLinks() throws Exception {
+        OpenApi3 model = (OpenApi3) new OpenApiParser().parse(Resources.getResource("models/linksTest.yaml"), false);
 
-		assertNotNull(model.getLink("PullRequestMerge").getOperationId());
-		assertNotNull(model.getLink("PullRequestMerge").getOperationRef());
-		assertNotNull(model.getLink("PullRequestMerge").getServer());
+        assertNotNull(model.getLink("PullRequestMerge").getOperationId());
+        assertNotNull(model.getLink("PullRequestMerge").getOperationRef());
+        assertNotNull(model.getLink("PullRequestMerge").getServer());
 
-		assertEquals("http://localhost", model.getLink("PullRequestMerge").getServer().getUrl());
-		assertEquals("server", model.getLink("PullRequestMerge").getServer().getDescription());
-	}
+        assertEquals("http://localhost", model.getLink("PullRequestMerge").getServer().getUrl());
+        assertEquals("server", model.getLink("PullRequestMerge").getServer().getDescription());
+    }
 
 }

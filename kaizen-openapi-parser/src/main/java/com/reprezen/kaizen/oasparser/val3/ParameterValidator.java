@@ -38,70 +38,70 @@ import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
 
 public class ParameterValidator extends ObjectValidatorBase<Parameter> {
 
-	@Override
-	public void runObjectValidations() {
-		Parameter parameter = (Parameter) value.getOverlay();
-		validateStringField(F_description, false);
-		validateBooleanField(F_deprecated, false);
-		validateBooleanField(F_allowEmptyValue, false);
-		validateBooleanField(F_explode, false);
-		Overlay<Object> example = validateField(F_example, false, Object.class, null);
-		Overlay<Map<String, Example>> examples = validateMapField(F_examples, false, false, Example.class,
-				new ExampleValidator());
-		checkExampleExclusion(examples, example);
-		validateStringField(F_name, true);
-		validateStringField(F_in, true, Regexes.PARAM_IN_REGEX);
-		checkPathParam(parameter);
-		checkRequired(parameter);
-		validateStringField(F_style, false, Regexes.STYLE_REGEX);
-		checkAllowReserved(parameter);
-		// TODO Q: Should schema be required in parameter object?
-		validateField(F_schema, false, Schema.class, new SchemaValidator());
-		validateMapField(F_contentMediaTypes, false, false, MediaType.class, new MediaTypeValidator());
-		validateExtensions(parameter.getExtensions());
-	}
+    @Override
+    public void runObjectValidations() {
+        Parameter parameter = (Parameter) value.getOverlay();
+        validateStringField(F_description, false);
+        validateBooleanField(F_deprecated, false);
+        validateBooleanField(F_allowEmptyValue, false);
+        validateBooleanField(F_explode, false);
+        Overlay<Object> example = validateField(F_example, false, Object.class, null);
+        Overlay<Map<String, Example>> examples = validateMapField(F_examples, false, false, Example.class,
+                new ExampleValidator());
+        checkExampleExclusion(examples, example);
+        validateStringField(F_name, true);
+        validateStringField(F_in, true, Regexes.PARAM_IN_REGEX);
+        checkPathParam(parameter);
+        checkRequired(parameter);
+        validateStringField(F_style, false, Regexes.STYLE_REGEX);
+        checkAllowReserved(parameter);
+        // TODO Q: Should schema be required in parameter object?
+        validateField(F_schema, false, Schema.class, new SchemaValidator());
+        validateMapField(F_contentMediaTypes, false, false, MediaType.class, new MediaTypeValidator());
+        validateExtensions(parameter.getExtensions());
+    }
 
-	private void checkPathParam(Parameter parameter) {
-		if (parameter.getIn() != null && parameter.getIn().equals("path") && parameter.getName() != null) {
-			String path = getPathString(parameter);
-			if (path != null) {
-				if (!path.matches(".*/\\{" + parameter.getName() + "\\}(/.*)?")) {
-					results.addError(msg(OpenApi3Messages.MissingPathTplt, parameter.getName(), path), value);
-				}
-			} else {
-				results.addWarning(msg(NoPath, parameter.getName(), parameter.getIn()), value);
-			}
-		}
-	}
+    private void checkPathParam(Parameter parameter) {
+        if (parameter.getIn() != null && parameter.getIn().equals("path") && parameter.getName() != null) {
+            String path = getPathString(parameter);
+            if (path != null) {
+                if (!path.matches(".*/\\{" + parameter.getName() + "\\}(/.*)?")) {
+                    results.addError(msg(OpenApi3Messages.MissingPathTplt, parameter.getName(), path), value);
+                }
+            } else {
+                results.addWarning(msg(NoPath, parameter.getName(), parameter.getIn()), value);
+            }
+        }
+    }
 
-	private void checkRequired(Parameter parameter) {
-		if ("path".equals(parameter.getIn())) {
-			if (parameter.getRequired() != Boolean.TRUE) {
-				results.addError(msg(PathParamReq, parameter.getName()), value);
-			}
-		}
-	}
+    private void checkRequired(Parameter parameter) {
+        if ("path".equals(parameter.getIn())) {
+            if (parameter.getRequired() != Boolean.TRUE) {
+                results.addError(msg(PathParamReq, parameter.getName()), value);
+            }
+        }
+    }
 
-	private void checkAllowReserved(Parameter parameter) {
-		if (parameter.isAllowReserved() && !"query".equals(parameter.getIn())) {
-			results.addWarning(msg(OpenApi3Messages.NonQryAllowRsvd, parameter.getName(), parameter.getIn()), value);
-		}
-	}
+    private void checkAllowReserved(Parameter parameter) {
+        if (parameter.isAllowReserved() && !"query".equals(parameter.getIn())) {
+            results.addWarning(msg(OpenApi3Messages.NonQryAllowRsvd, parameter.getName(), parameter.getIn()), value);
+        }
+    }
 
-	private String getPathString(Parameter parameter) {
-		PropertiesOverlay<?> parent = Overlay.of(parameter).getParentPropertiesOverlay();
-		while (parent != null && !(parent instanceof Path)) {
-			parent = Overlay.of(parent).getParentPropertiesOverlay();
-		}
-		return parent != null && parent instanceof Path ? Overlay.getPathInParent(parent) : null;
-	}
+    private String getPathString(Parameter parameter) {
+        PropertiesOverlay<?> parent = Overlay.of(parameter).getParentPropertiesOverlay();
+        while (parent != null && !(parent instanceof Path)) {
+            parent = Overlay.of(parent).getParentPropertiesOverlay();
+        }
+        return parent != null && parent instanceof Path ? Overlay.getPathInParent(parent) : null;
+    }
 
-	void checkExampleExclusion(Overlay<Map<String, Example>> examples, Overlay<Object> example) {
-		boolean examplesPresent = examples != null && examples.isPresent()
-				&& Overlay.getMapOverlay(examples).size() > 0;
-		boolean examplePresent = example != null && example.isPresent();
-		if (examplesPresent && examplePresent) {
-			results.addError("ExmplExclusion|The 'example' and 'exmaples' properties may not both appear", value);
-		}
-	}
+    void checkExampleExclusion(Overlay<Map<String, Example>> examples, Overlay<Object> example) {
+        boolean examplesPresent = examples != null && examples.isPresent()
+                && Overlay.getMapOverlay(examples).size() > 0;
+        boolean examplePresent = example != null && example.isPresent();
+        if (examplesPresent && examplePresent) {
+            results.addError("ExmplExclusion|The 'example' and 'exmaples' properties may not both appear", value);
+        }
+    }
 }

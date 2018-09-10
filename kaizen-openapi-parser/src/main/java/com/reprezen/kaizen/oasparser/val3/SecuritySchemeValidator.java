@@ -28,37 +28,37 @@ import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
 
 public class SecuritySchemeValidator extends ObjectValidatorBase<SecurityScheme> {
 
-	@Override
-	public void runObjectValidations() {
-		SecurityScheme securityScheme = (SecurityScheme) value.getOverlay();
-		validateStringField(F_description, false);
-		validateStringField(F_type, true, "apiKey|http|oauth2|openIdConnect");
-		String type = securityScheme.getType();
-		// TODO should these type-specific fields be disallowed for non-applicable
-		// types? (At least a warning)
-		if (type != null) {
-			switch (type) {
-			case "http":
-				validateStringField(F_scheme, true);
-				validateStringField(F_bearerFormat, false);
-				break;
-			case "apiKey":
-				validateStringField(F_name, true);
-				validateStringField(F_in, true, "query|header|cookie");
-				break;
-			case "oauth2": {
-				OAuthFlowValidator oauthFlowValidator = new OAuthFlowValidator();
-				validateField(F_implicitOAuthFlow, false, OAuthFlow.class, oauthFlowValidator);
-				validateField(F_passwordOAuthFlow, false, OAuthFlow.class, oauthFlowValidator);
-				validateField(F_clientCredentialsOAuthFlow, false, OAuthFlow.class, oauthFlowValidator);
-				validateField(F_authorizationCodeOAuthFlow, false, OAuthFlow.class, oauthFlowValidator);
-				break;
-			}
-			case "openIdConnect":
-				validateUrlField(F_openIdConnectUrl, true, true, false);
-				break;
-			}
-		}
-		validateExtensions(securityScheme.getExtensions());
-	}
+    @Override
+    public void runObjectValidations() {
+        SecurityScheme securityScheme = (SecurityScheme) value.getOverlay();
+        validateStringField(F_description, false);
+        validateStringField(F_type, true, "apiKey|http|oauth2|openIdConnect");
+        String type = securityScheme.getType();
+        // TODO should these type-specific fields be disallowed for non-applicable
+        // types? (At least a warning)
+        if (type != null) {
+            switch (type) {
+            case "http":
+                validateStringField(F_scheme, true);
+                validateStringField(F_bearerFormat, false);
+                break;
+            case "apiKey":
+                validateStringField(F_name, true);
+                validateStringField(F_in, true, "query|header|cookie");
+                break;
+            case "oauth2": {
+                OAuthFlowValidator oauthFlowValidator = new OAuthFlowValidator();
+                validateField(F_implicitOAuthFlow, false, OAuthFlow.class, oauthFlowValidator);
+                validateField(F_passwordOAuthFlow, false, OAuthFlow.class, oauthFlowValidator);
+                validateField(F_clientCredentialsOAuthFlow, false, OAuthFlow.class, oauthFlowValidator);
+                validateField(F_authorizationCodeOAuthFlow, false, OAuthFlow.class, oauthFlowValidator);
+                break;
+            }
+            case "openIdConnect":
+                validateUrlField(F_openIdConnectUrl, true, true, false);
+                break;
+            }
+        }
+        validateExtensions(securityScheme.getExtensions());
+    }
 }

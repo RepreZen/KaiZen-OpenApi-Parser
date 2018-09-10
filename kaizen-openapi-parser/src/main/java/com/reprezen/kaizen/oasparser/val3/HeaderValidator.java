@@ -31,38 +31,38 @@ import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
 
 public class HeaderValidator extends ObjectValidatorBase<Header> {
 
-	@Override
-	public void runObjectValidations() {
-		Header header = (Header) value.getOverlay();
-		validateStringField(F_description, false);
-		validateBooleanField(F_deprecated, false);
-		validateBooleanField(F_allowEmptyValue, false);
-		validateBooleanField(F_explode, false);
-		validateField(F_example, false, Object.class, null);
-		validateMapField(F_examples, false, false, Example.class, new ExampleValidator());
-		validateStringField(F_style, false, Regexes.STYLE_REGEX);
-		checkAllowReserved(header);
-		// TODO Q: Should schema be required in header object?
-		validateField(F_schema, false, Schema.class, new SchemaValidator());
-		validateMapField(F_contentMediaTypes, false, false, MediaType.class, new MediaTypeValidator());
-		validateExtensions(header.getExtensions());
-		checkContentType();
-		// TODO validate that location-related values (like style) are consistent with
-		// header location
-		// TODO warn if this appears on a request body whose media type is not multipart
-	}
+    @Override
+    public void runObjectValidations() {
+        Header header = (Header) value.getOverlay();
+        validateStringField(F_description, false);
+        validateBooleanField(F_deprecated, false);
+        validateBooleanField(F_allowEmptyValue, false);
+        validateBooleanField(F_explode, false);
+        validateField(F_example, false, Object.class, null);
+        validateMapField(F_examples, false, false, Example.class, new ExampleValidator());
+        validateStringField(F_style, false, Regexes.STYLE_REGEX);
+        checkAllowReserved(header);
+        // TODO Q: Should schema be required in header object?
+        validateField(F_schema, false, Schema.class, new SchemaValidator());
+        validateMapField(F_contentMediaTypes, false, false, MediaType.class, new MediaTypeValidator());
+        validateExtensions(header.getExtensions());
+        checkContentType();
+        // TODO validate that location-related values (like style) are consistent with
+        // header location
+        // TODO warn if this appears on a request body whose media type is not multipart
+    }
 
-	private void checkAllowReserved(Header header) {
-		// TODO Q: Shouldn't "allowReserved" be disallowed for headers, as are "name"
-		// and "in"?
-		if (header.isAllowReserved()) {
-			results.addWarning(msg(NonQryAllowRsvd, value.getPathInParent(), "header"), value);
-		}
-	}
+    private void checkAllowReserved(Header header) {
+        // TODO Q: Shouldn't "allowReserved" be disallowed for headers, as are "name"
+        // and "in"?
+        if (header.isAllowReserved()) {
+            results.addWarning(msg(NonQryAllowRsvd, value.getPathInParent(), "header"), value);
+        }
+    }
 
-	private void checkContentType() {
-		if (value.getPathInParent().equalsIgnoreCase("Content-Type")) {
-			results.addWarning(msg(IgnContType), value);
-		}
-	}
+    private void checkContentType() {
+        if (value.getPathInParent().equalsIgnoreCase("Content-Type")) {
+            results.addWarning(msg(IgnContType), value);
+        }
+    }
 }

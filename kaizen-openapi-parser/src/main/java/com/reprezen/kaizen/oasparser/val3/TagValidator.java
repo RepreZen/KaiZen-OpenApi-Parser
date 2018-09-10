@@ -20,12 +20,12 @@ import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
 
 public class TagValidator extends ObjectValidatorBase<Tag> {
 
-	@Override
-	public void runObjectValidations() {
-		Tag tag = (Tag) value.getOverlay();
-		validateStringField(F_name, true);
-		validateStringField(F_description, false);
-		validateField(F_externalDocs, false, ExternalDocs.class, new ExternalDocsValidator());
-		validateExtensions(tag.getExtensions());
-	}
+    @Override
+    public void runObjectValidations() {
+        Tag tag = (Tag) value.getOverlay();
+        validateStringField(F_name, true);
+        validateStringField(F_description, false);
+        validateField(F_externalDocs, false, ExternalDocs.class, new ExternalDocsValidator());
+        validateExtensions(tag.getExtensions());
+    }
 }

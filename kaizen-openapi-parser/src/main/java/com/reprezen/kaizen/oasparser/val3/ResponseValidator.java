@@ -23,13 +23,13 @@ import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
 
 public class ResponseValidator extends ObjectValidatorBase<Response> {
 
-	@Override
-	public void runObjectValidations() {
-		Response response = (Response) value.getOverlay();
-		validateStringField(F_description, false);
-		validateMapField(F_headers, false, false, Header.class, new HeaderValidator());
-		validateMapField(F_contentMediaTypes, false, false, MediaType.class, new MediaTypeValidator());
-		validateMapField(F_links, false, false, Link.class, new LinkValidator());
-		validateExtensions(response.getExtensions());
-	}
+    @Override
+    public void runObjectValidations() {
+        Response response = (Response) value.getOverlay();
+        validateStringField(F_description, false);
+        validateMapField(F_headers, false, false, Header.class, new HeaderValidator());
+        validateMapField(F_contentMediaTypes, false, false, MediaType.class, new MediaTypeValidator());
+        validateMapField(F_links, false, false, Link.class, new LinkValidator());
+        validateExtensions(response.getExtensions());
+    }
 }

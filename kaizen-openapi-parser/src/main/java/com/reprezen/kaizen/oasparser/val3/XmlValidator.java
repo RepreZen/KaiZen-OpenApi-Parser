@@ -21,14 +21,14 @@ import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
 
 public class XmlValidator extends ObjectValidatorBase<Xml> {
 
-	@Override
-	public void runObjectValidations() {
-		Xml xml = (Xml) value.getOverlay();
-		validateStringField(F_name, false);
-		validateStringField(F_prefix, false);
-		validateBooleanField(F_attribute, false);
-		validateBooleanField(XmlImpl.F_wrapped, false);
-		validateUrlField(F_namespace, false, true, false);
-		validateExtensions(xml.getExtensions());
-	}
+    @Override
+    public void runObjectValidations() {
+        Xml xml = (Xml) value.getOverlay();
+        validateStringField(F_name, false);
+        validateStringField(F_prefix, false);
+        validateBooleanField(F_attribute, false);
+        validateBooleanField(XmlImpl.F_wrapped, false);
+        validateUrlField(F_namespace, false, true, false);
+        validateExtensions(xml.getExtensions());
+    }
 }

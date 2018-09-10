@@ -22,21 +22,21 @@ import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
 
 public class EncodingPropertyValidator extends ObjectValidatorBase<EncodingProperty> {
 
-	@Override
-	public void runObjectValidations() {
-		EncodingProperty encodingProperty = (EncodingProperty) value.getOverlay();
+    @Override
+    public void runObjectValidations() {
+        EncodingProperty encodingProperty = (EncodingProperty) value.getOverlay();
 
-		// TODO ought to have a pattern for acceptable values "a/b", "a/*", comma-lists
-		// of those.
-		validateStringField(F_contentType, false);
+        // TODO ought to have a pattern for acceptable values "a/b", "a/*", comma-lists
+        // of those.
+        validateStringField(F_contentType, false);
 
-		// TODO Q: spec says "Headers" (capitalized) for property name -assuming it's a
-		// typo
-		validateMapField(F_headers, false, false, Header.class, null);
-		validateStringField(F_style, false, Regexes.STYLE_REGEX);
-		validateBooleanField(F_explode, false);
-		validateBooleanField(F_allowReserved, false);
-		validateExtensions(encodingProperty.getExtensions());
-	}
+        // TODO Q: spec says "Headers" (capitalized) for property name -assuming it's a
+        // typo
+        validateMapField(F_headers, false, false, Header.class, null);
+        validateStringField(F_style, false, Regexes.STYLE_REGEX);
+        validateBooleanField(F_explode, false);
+        validateBooleanField(F_allowReserved, false);
+        validateExtensions(encodingProperty.getExtensions());
+    }
 
 }

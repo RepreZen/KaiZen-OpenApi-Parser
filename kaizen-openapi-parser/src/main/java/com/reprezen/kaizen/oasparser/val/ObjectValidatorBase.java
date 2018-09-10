@@ -12,13 +12,13 @@ package com.reprezen.kaizen.oasparser.val;
 
 public abstract class ObjectValidatorBase<V> extends ValidatorBase<V> {
 
-	@Override
-	public void runValidations() {
-		if (value.isElaborated() && ValidationContext.visitIfUnvisited(value)) {
-			runObjectValidations();
-		}
-	}
+    @Override
+    public void runValidations() {
+        if (value.isElaborated() && ValidationContext.visitIfUnvisited(value)) {
+            runObjectValidations();
+        }
+    }
 
-	public abstract void runObjectValidations();
+    public abstract void runObjectValidations();
 
 }

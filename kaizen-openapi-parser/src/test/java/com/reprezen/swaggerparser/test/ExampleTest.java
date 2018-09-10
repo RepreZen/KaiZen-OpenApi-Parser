@@ -26,49 +26,49 @@ import com.reprezen.kaizen.oasparser.model3.OpenApi3;
 
 public class ExampleTest {
 
-	private static OpenApi3 model;
-	private Map<String, Object> exampleFixture = ImmutableMap.<String, Object>of( //
-			"foo", "bar", //
-			"person", ImmutableMap.<String, Object>of( //
-					"name", "Paul"));
+    private static OpenApi3 model;
+    private Map<String, Object> exampleFixture = ImmutableMap.<String, Object> of( //
+            "foo", "bar", //
+            "person", ImmutableMap.<String, Object> of( //
+                    "name", "Paul"));
 
-	@BeforeClass
-	public static void beforeClass() throws Exception {
-		model = (OpenApi3) new OpenApiParser().parse(Resources.getResource("models/examplesTest.yaml"), true);
-	}
+    @BeforeClass
+    public static void beforeClass() throws Exception {
+        model = (OpenApi3) new OpenApiParser().parse(Resources.getResource("models/examplesTest.yaml"), true);
+    }
 
-	@Test
-	public void testExample() {
-		Object example = model.getPath("/v2") //
-				.getOperation("get") //
-				.getResponse("203") //
-				.getContentMediaType("application/json") //
-				.getExample();
+    @Test
+    public void testExample() {
+        Object example = model.getPath("/v2") //
+                .getOperation("get") //
+                .getResponse("203") //
+                .getContentMediaType("application/json") //
+                .getExample();
 
-		assertEquals(exampleFixture, example);
-	}
+        assertEquals(exampleFixture, example);
+    }
 
-	@Test
-	public void testExamples() {
-		Map<String, ? extends Example> examples = model.getPath("/v2") //
-				.getOperation("get") //
-				.getResponse("200") //
-				.getContentMediaType("application/json") //
-				.getExamples();
+    @Test
+    public void testExamples() {
+        Map<String, ? extends Example> examples = model.getPath("/v2") //
+                .getOperation("get") //
+                .getResponse("200") //
+                .getContentMediaType("application/json") //
+                .getExamples();
 
-		assertEquals(1, examples.size());
-		assertTrue(examples.containsKey("foo"));
+        assertEquals(1, examples.size());
+        assertTrue(examples.containsKey("foo"));
 
-		Example example = examples.get("foo");
+        Example example = examples.get("foo");
 
-		assertEquals(exampleFixture, example.getValue());
-		assertEquals("First Example", example.getSummary());
-		assertEquals("An Example", example.getDescription());
-	}
+        assertEquals(exampleFixture, example.getValue());
+        assertEquals("First Example", example.getSummary());
+        assertEquals("An Example", example.getDescription());
+    }
 
-	@Test
-	public void testValidate() {
-		assertTrue(model.isValid());
-	}
+    @Test
+    public void testValidate() {
+        assertTrue(model.isValid());
+    }
 
 }

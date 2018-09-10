@@ -124,6 +124,26 @@ public class EncodingPropertyImpl extends PropertiesOverlay<EncodingProperty> im
         _setScalar("explode", explode, Boolean.class);
     }
 
+    // AllowReserved
+    @Override
+    @Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+    public Boolean getAllowReserved() {
+        return _get("allowReserved", Boolean.class);
+    }
+
+    @Override
+    @Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+    public boolean isAllowReserved() {
+        Boolean bool = _get("allowReserved", Boolean.class);
+        return bool != null ? bool : false;
+    }
+
+    @Override
+    @Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+    public void setAllowReserved(Boolean allowReserved) {
+        _setScalar("allowReserved", allowReserved, Boolean.class);
+    }
+
     // Extension
     @Override
     @Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
@@ -186,6 +206,9 @@ public class EncodingPropertyImpl extends PropertiesOverlay<EncodingProperty> im
     public static final String F_explode = "explode";
 
     @Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+    public static final String F_allowReserved = "allowReserved";
+
+    @Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
     public static final String F_extensions = "extensions";
 
     @Override
@@ -196,6 +219,7 @@ public class EncodingPropertyImpl extends PropertiesOverlay<EncodingProperty> im
         _createMap("headers", "headers", StringOverlay.factory, null);
         _createScalar("style", "style", StringOverlay.factory);
         _createScalar("explode", "explode", BooleanOverlay.factory);
+        _createScalar("allowReserved", "allowReserved", BooleanOverlay.factory);
         _createMap("extensions", "", ObjectOverlay.factory, "x-.+");
     }
 

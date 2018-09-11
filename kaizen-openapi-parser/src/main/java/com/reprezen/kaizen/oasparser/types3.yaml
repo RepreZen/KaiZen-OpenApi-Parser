@@ -415,6 +415,8 @@ types:
       }
     explode:
       type: Boolean
+    allowReserved:
+      type: Boolean
     extension: *id001
 - name: ExternalDocs
   fields:

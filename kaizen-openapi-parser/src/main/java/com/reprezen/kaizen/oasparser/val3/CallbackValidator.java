@@ -18,11 +18,11 @@ import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
 
 public class CallbackValidator extends ObjectValidatorBase<Callback> {
 
-    @Override
-    public void runObjectValidations() {
-        Callback callback = (Callback) value.getOverlay();
-        validateMapField(F_callbackPaths, false, false, Path.class, new PathValidator());
-        validateExtensions(callback.getExtensions());
-    }
+	@Override
+	public void runObjectValidations() {
+		Callback callback = (Callback) value.getOverlay();
+		validateMapField(F_callbackPaths, false, false, Path.class, new PathValidator());
+		validateExtensions(callback.getExtensions());
+	}
 
 }

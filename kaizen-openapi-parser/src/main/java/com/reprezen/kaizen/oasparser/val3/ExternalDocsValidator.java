@@ -18,11 +18,11 @@ import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
 
 public class ExternalDocsValidator extends ObjectValidatorBase<ExternalDocs> {
 
-    @Override
-    public void runObjectValidations() {
-        ExternalDocs externalDocs = (ExternalDocs) value.getOverlay();
-        validateStringField(F_description, false);
-        validateUrlField(F_url, true, true, false);
-        validateExtensions(externalDocs.getExtensions());
-    }
+	@Override
+	public void runObjectValidations() {
+		ExternalDocs externalDocs = (ExternalDocs) value.getOverlay();
+		validateStringField(F_description, false);
+		validateUrlField(F_url, true, true, false);
+		validateExtensions(externalDocs.getExtensions());
+	}
 }

@@ -19,13 +19,13 @@ import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
 
 public class ServerVariableValidator extends ObjectValidatorBase<ServerVariable> {
 
-    @Override
-    public void runObjectValidations() {
-        ServerVariable var = (ServerVariable) value.getOverlay();
-        validateStringField(F_description, false);
-        validateListField(F_enumValues, false, false, String.class, null);
-        // TODO Q: What the heck is does the description in the spec mean???
-        validateField(F_defaultValue, true, String.class, null);
-        validateExtensions(var.getExtensions());
-    }
+	@Override
+	public void runObjectValidations() {
+		ServerVariable var = (ServerVariable) value.getOverlay();
+		validateStringField(F_description, false);
+		validateListField(F_enumValues, false, false, String.class, null);
+		// TODO Q: What the heck is does the description in the spec mean???
+		validateField(F_defaultValue, true, String.class, null);
+		validateExtensions(var.getExtensions());
+	}
 }

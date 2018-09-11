@@ -17,19 +17,19 @@ import com.reprezen.jsonoverlay.Overlay;
 
 public class ListValidator<T> extends ValidatorBase<List<T>> {
 
-    Validator<T> itemValidator;
+	Validator<T> itemValidator;
 
-    public ListValidator(Validator<T> elementeValidator) {
-        this.itemValidator = elementeValidator;
-    }
+	public ListValidator(Validator<T> elementeValidator) {
+		this.itemValidator = elementeValidator;
+	}
 
-    @Override
-    public void runValidations() {
-        if (itemValidator != null) {
-            ListOverlay<T> list = Overlay.getListOverlay(value);
-            for (int i = 0; i < list.size(); i++) {
-                itemValidator.validate(Overlay.of(list, i));
-            }
-        }
-    }
+	@Override
+	public void runValidations() {
+		if (itemValidator != null) {
+			ListOverlay<T> list = Overlay.getListOverlay(value);
+			for (int i = 0; i < list.size(); i++) {
+				itemValidator.validate(Overlay.of(list, i));
+			}
+		}
+	}
 }

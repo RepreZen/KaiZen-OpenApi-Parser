@@ -17,19 +17,19 @@ import com.reprezen.jsonoverlay.Overlay;
 
 public class MapValidator<T> extends ValidatorBase<Map<String, T>> {
 
-    private Validator<T> valueValidator;
+	private Validator<T> valueValidator;
 
-    public MapValidator(Validator<T> valueValidator) {
-        this.valueValidator = valueValidator;
-    }
+	public MapValidator(Validator<T> valueValidator) {
+		this.valueValidator = valueValidator;
+	}
 
-    @Override
-    public void runValidations() {
-        MapOverlay<T> mapOverlay = Overlay.getMapOverlay(value);
-        if (valueValidator != null) {
-            for (String key : mapOverlay.keySet()) {
-                valueValidator.validate(Overlay.of(mapOverlay, key));
-            }
-        }
-    }
+	@Override
+	public void runValidations() {
+		MapOverlay<T> mapOverlay = Overlay.getMapOverlay(value);
+		if (valueValidator != null) {
+			for (String key : mapOverlay.keySet()) {
+				valueValidator.validate(Overlay.of(mapOverlay, key));
+			}
+		}
+	}
 }

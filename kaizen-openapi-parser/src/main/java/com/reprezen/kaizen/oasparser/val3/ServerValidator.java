@@ -20,12 +20,12 @@ import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
 
 public class ServerValidator extends ObjectValidatorBase<Server> {
 
-    @Override
-    public void runObjectValidations() {
-        Server server = (Server) value.getOverlay();
-        validateStringField(F_description, false);
-        validateUrlField(F_url, true, true, true);
-        validateMapField(F_serverVariables, false, false, ServerVariable.class, new ServerVariableValidator());
-        validateExtensions(server.getExtensions());
-    }
+	@Override
+	public void runObjectValidations() {
+		Server server = (Server) value.getOverlay();
+		validateStringField(F_description, false);
+		validateUrlField(F_url, true, true, true);
+		validateMapField(F_serverVariables, false, false, ServerVariable.class, new ServerVariableValidator());
+		validateExtensions(server.getExtensions());
+	}
 }

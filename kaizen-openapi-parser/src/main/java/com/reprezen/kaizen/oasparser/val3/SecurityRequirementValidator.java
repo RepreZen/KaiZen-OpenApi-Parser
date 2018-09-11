@@ -26,22 +26,22 @@ import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
 
 public class SecurityRequirementValidator extends ObjectValidatorBase<SecurityRequirement> {
 
-    @Override
-    public void runObjectValidations() {
-        Overlay<Map<String, SecurityParameter>> requirements = validateMapField(F_requirements, false, false,
-                SecurityParameter.class, new SecurityParameterValidator());
-        checkAllSchemesDefined(requirements);
-    }
+	@Override
+	public void runObjectValidations() {
+		Overlay<Map<String, SecurityParameter>> requirements = validateMapField(F_requirements, false, false,
+				SecurityParameter.class, new SecurityParameterValidator());
+		checkAllSchemesDefined(requirements);
+	}
 
-    public void checkAllSchemesDefined(Overlay<Map<String, SecurityParameter>> requirements) {
-        OpenApi3 model = value.getModel();
-        Set<String> definedSchemes = model.getSecuritySchemes().keySet();
-        MapOverlay<SecurityParameter> mapOverlay = Overlay.getMapOverlay(requirements);
-        for (String name : mapOverlay.keySet()) {
-            if (!definedSchemes.contains(name)) {
-                results.addError(msg(UnkSecScheme, name), Overlay.of(mapOverlay, name));
-            }
-        }
+	public void checkAllSchemesDefined(Overlay<Map<String, SecurityParameter>> requirements) {
+		OpenApi3 model = value.getModel();
+		Set<String> definedSchemes = model.getSecuritySchemes().keySet();
+		MapOverlay<SecurityParameter> mapOverlay = Overlay.getMapOverlay(requirements);
+		for (String name : mapOverlay.keySet()) {
+			if (!definedSchemes.contains(name)) {
+				results.addError(msg(UnkSecScheme, name), Overlay.of(mapOverlay, name));
+			}
+		}
 
-    }
+	}
 }

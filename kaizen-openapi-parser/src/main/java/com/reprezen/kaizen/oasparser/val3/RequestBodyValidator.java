@@ -20,12 +20,12 @@ import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
 
 public class RequestBodyValidator extends ObjectValidatorBase<RequestBody> {
 
-    @Override
-    public void runObjectValidations() {
-        RequestBody requestBody = (RequestBody) value.getOverlay();
-        validateStringField(F_description, false);
-        validateBooleanField(F_required, false);
-        validateMapField(F_contentMediaTypes, false, false, MediaType.class, new MediaTypeValidator());
-        validateExtensions(requestBody.getExtensions());
-    }
+	@Override
+	public void runObjectValidations() {
+		RequestBody requestBody = (RequestBody) value.getOverlay();
+		validateStringField(F_description, false);
+		validateBooleanField(F_required, false);
+		validateMapField(F_contentMediaTypes, false, false, MediaType.class, new MediaTypeValidator());
+		validateExtensions(requestBody.getExtensions());
+	}
 }

@@ -6,9 +6,9 @@ import com.reprezen.kaizen.oasparser.val.ValidatorBase;
 
 public class DiscriminatorValidator extends ValidatorBase<Discriminator> {
 
-    @Override
-    public void runValidations() {
-        validateStringField(DiscriminatorImpl.F_propertyName, true);
-        validateMapField("mappings", false, false, String.class, null);
-    }
+	@Override
+	public void runValidations() {
+		validateStringField(DiscriminatorImpl.F_propertyName, true);
+		validateMapField("mappings", false, false, String.class, null);
+	}
 }

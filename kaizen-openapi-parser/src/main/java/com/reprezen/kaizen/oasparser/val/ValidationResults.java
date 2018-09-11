@@ -25,90 +25,90 @@ import com.reprezen.jsonoverlay.PositionInfo;
 
 public class ValidationResults {
 
-    public enum Severity {
-        NONE, INFO, WARNING, ERROR;
+	public enum Severity {
+		NONE, INFO, WARNING, ERROR;
 
-        public static final Severity MAX_SEVERITY = ERROR;
+		public static final Severity MAX_SEVERITY = ERROR;
 
-        public boolean lt(Severity other) {
-            return this.compareTo(other) < 0;
-        }
+		public boolean lt(Severity other) {
+			return this.compareTo(other) < 0;
+		}
 
-        public boolean le(Severity other) {
-            return this.compareTo(other) <= 0;
-        }
+		public boolean le(Severity other) {
+			return this.compareTo(other) <= 0;
+		}
 
-        public boolean gt(Severity other) {
-            return this.compareTo(other) > 0;
-        }
+		public boolean gt(Severity other) {
+			return this.compareTo(other) > 0;
+		}
 
-        public boolean ge(Severity other) {
-            return this.compareTo(other) >= 0;
-        }
-    };
+		public boolean ge(Severity other) {
+			return this.compareTo(other) >= 0;
+		}
+	};
 
-    private List<ValidationItem> items = new ArrayList<>();
+	private List<ValidationItem> items = new ArrayList<>();
 
-    public <V> void addInfo(String msg, Overlay<V> context) {
-        items.add(new ValidationItem(INFO, msg, context));
-    }
+	public <V> void addInfo(String msg, Overlay<V> context) {
+		items.add(new ValidationItem(INFO, msg, context));
+	}
 
-    public void addWarning(String msg, Overlay<?> context) {
-        items.add(new ValidationItem(WARNING, msg, context));
-    }
+	public void addWarning(String msg, Overlay<?> context) {
+		items.add(new ValidationItem(WARNING, msg, context));
+	}
 
-    public void addError(String msg, Overlay<?> context) {
-        items.add(new ValidationItem(ERROR, msg, context));
-    }
+	public void addError(String msg, Overlay<?> context) {
+		items.add(new ValidationItem(ERROR, msg, context));
+	}
 
-    public void add(ValidationResults results) {
-        items.addAll(results.getItems());
-    }
+	public void add(ValidationResults results) {
+		items.addAll(results.getItems());
+	}
 
-    public Collection<ValidationItem> getItems() {
-        return items;
-    }
+	public Collection<ValidationItem> getItems() {
+		return items;
+	}
 
-    public Severity getSeverity() {
-        Severity severity = NONE;
-        for (ValidationItem item : items) {
-            if (item.getSeverity().gt(severity)) {
-                severity = item.getSeverity();
-                if (severity == MAX_SEVERITY) {
-                    break;
-                }
-            }
-        }
-        return severity;
-    }
+	public Severity getSeverity() {
+		Severity severity = NONE;
+		for (ValidationItem item : items) {
+			if (item.getSeverity().gt(severity)) {
+				severity = item.getSeverity();
+				if (severity == MAX_SEVERITY) {
+					break;
+				}
+			}
+		}
+		return severity;
+	}
 
-    public static class ValidationItem {
-        private Severity severity;
-        private String msg;
-        private PositionInfo positionInfo;
+	public static class ValidationItem {
+		private Severity severity;
+		private String msg;
+		private PositionInfo positionInfo;
 
-        public ValidationItem(Severity severity, String msg, Overlay<?> context) {
-            this.severity = severity;
-            this.msg = msg;
-            this.positionInfo = context != null ? context.getPositionInfo().orElse(null) : null;
-        }
+		public ValidationItem(Severity severity, String msg, Overlay<?> context) {
+			this.severity = severity;
+			this.msg = msg;
+			this.positionInfo = context != null ? context.getPositionInfo().orElse(null) : null;
+		}
 
-        public Severity getSeverity() {
-            return severity;
-        }
+		public Severity getSeverity() {
+			return severity;
+		}
 
-        public String getMsg() {
-            return msg;
-        }
+		public String getMsg() {
+			return msg;
+		}
 
-        public PositionInfo getPositionInfo() {
-            return positionInfo;
-        }
+		public PositionInfo getPositionInfo() {
+			return positionInfo;
+		}
 
-        @Override
-        public String toString() {
-            String posString = positionInfo != null ? positionInfo.toString(true) + ": " : "";
-            return posString + msg;
-        }
-    }
+		@Override
+		public String toString() {
+			String posString = positionInfo != null ? positionInfo.toString(true) + ": " : "";
+			return posString + msg;
+		}
+	}
 }

@@ -21,38 +21,38 @@ import com.reprezen.jsonoverlay.Reference;
 
 public class ReferencesChecker {
 
-    public static void checkReferences(ListOverlay<?> list, ValidationResults results) {
-        Overlay<?> listAdapter = Overlay.of(list);
-        for (int i = 0; i < list.size(); i++) {
-            if (listAdapter.isReference(i)) {
-                checkReference(listAdapter.getReference(i), results, Overlay.of(list, i));
-            }
-        }
-    }
+	public static void checkReferences(ListOverlay<?> list, ValidationResults results) {
+		Overlay<?> listAdapter = Overlay.of(list);
+		for (int i = 0; i < list.size(); i++) {
+			if (listAdapter.isReference(i)) {
+				checkReference(listAdapter.getReference(i), results, Overlay.of(list, i));
+			}
+		}
+	}
 
-    public static void checkReferences(MapOverlay<?> map, ValidationResults results) {
-        Overlay<?> mapAdapter = Overlay.of(map);
-        for (String key : map.keySet()) {
-            if (mapAdapter.isReference(key)) {
-                checkReference(mapAdapter.getReference(key), results, Overlay.of(map, key));
-            }
-        }
-    }
+	public static void checkReferences(MapOverlay<?> map, ValidationResults results) {
+		Overlay<?> mapAdapter = Overlay.of(map);
+		for (String key : map.keySet()) {
+			if (mapAdapter.isReference(key)) {
+				checkReference(mapAdapter.getReference(key), results, Overlay.of(map, key));
+			}
+		}
+	}
 
-    public static void checkReferences(PropertiesOverlay<?> props, ValidationResults results) {
-        if (props._isElaborated()) {
-            Overlay<?> propsAdapter = Overlay.of(props);
-            for (String name : propsAdapter.getPropertyNames()) {
-                if (propsAdapter.isReference(name)) {
-                    checkReference(propsAdapter.getReference(name), results, Overlay.of(props, name, Object.class));
-                }
-            }
-        }
-    }
+	public static void checkReferences(PropertiesOverlay<?> props, ValidationResults results) {
+		if (props._isElaborated()) {
+			Overlay<?> propsAdapter = Overlay.of(props);
+			for (String name : propsAdapter.getPropertyNames()) {
+				if (propsAdapter.isReference(name)) {
+					checkReference(propsAdapter.getReference(name), results, Overlay.of(props, name, Object.class));
+				}
+			}
+		}
+	}
 
-    public static void checkReference(Reference ref, ValidationResults results, Overlay<?> context) {
-        if (ref.isInvalid()) {
-            results.addError(msg(BadRef, ref.getRefString(), ref.getInvalidReason()), context);
-        }
-    }
+	public static void checkReference(Reference ref, ValidationResults results, Overlay<?> context) {
+		if (ref.isInvalid()) {
+			results.addError(msg(BadRef, ref.getRefString(), ref.getInvalidReason()), context);
+		}
+	}
 }

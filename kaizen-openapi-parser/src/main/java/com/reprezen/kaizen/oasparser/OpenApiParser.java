@@ -24,115 +24,115 @@ import com.reprezen.kaizen.oasparser.ovl3.OpenApi3Impl;
 
 public class OpenApiParser {
 
-    public OpenApi<?> parse(String spec, URL resolutionBase) {
-        return parse(spec, resolutionBase, true);
-    }
+	public OpenApi<?> parse(String spec, URL resolutionBase) {
+		return parse(spec, resolutionBase, true);
+	}
 
-    public OpenApi<?> parse(String spec, URL resolutionBase, boolean validate) {
-        try {
-            JsonLoader loader = new JsonLoader();
-            JsonNode tree = loader.loadString(resolutionBase, spec);
-            return parse(tree, resolutionBase, validate, loader);
+	public OpenApi<?> parse(String spec, URL resolutionBase, boolean validate) {
+		try {
+			JsonLoader loader = new JsonLoader();
+			JsonNode tree = loader.loadString(resolutionBase, spec);
+			return parse(tree, resolutionBase, validate, loader);
 
-        } catch (IOException e) {
-            throw new OpenApiParserException("Failed to parse spec as JSON or YAML", e);
-        }
-    }
+		} catch (IOException e) {
+			throw new OpenApiParserException("Failed to parse spec as JSON or YAML", e);
+		}
+	}
 
-    public OpenApi<?> parse(File specFile) throws Exception {
-        return parse(specFile, true);
-    }
+	public OpenApi<?> parse(File specFile) throws Exception {
+		return parse(specFile, true);
+	}
 
-    public OpenApi<?> parse(File specFile, boolean validate) throws Exception {
-        try {
-            return parse(specFile.toURI().toURL(), validate);
-        } catch (IOException e) {
-            throw new OpenApiParserException("Failed to read spec from file", e);
-        }
-    }
+	public OpenApi<?> parse(File specFile, boolean validate) throws Exception {
+		try {
+			return parse(specFile.toURI().toURL(), validate);
+		} catch (IOException e) {
+			throw new OpenApiParserException("Failed to read spec from file", e);
+		}
+	}
 
-    public OpenApi<?> parse(URI uri) throws Exception {
-        return parse(uri, true);
-    }
+	public OpenApi<?> parse(URI uri) throws Exception {
+		return parse(uri, true);
+	}
 
-    public OpenApi<?> parse(URI uri, boolean validate) throws Exception {
-        try {
-            return parse(uri.toURL(), validate);
-        } catch (MalformedURLException e) {
-            throw new OpenApiParserException("Invalid URI for Swagger spec", e);
-        }
-    }
+	public OpenApi<?> parse(URI uri, boolean validate) throws Exception {
+		try {
+			return parse(uri.toURL(), validate);
+		} catch (MalformedURLException e) {
+			throw new OpenApiParserException("Invalid URI for Swagger spec", e);
+		}
+	}
 
-    public OpenApi<?> parse(URL resolutionBase) throws Exception {
-        return parse(resolutionBase, true);
-    }
+	public OpenApi<?> parse(URL resolutionBase) throws Exception {
+		return parse(resolutionBase, true);
+	}
 
-    public OpenApi<?> parse(URL resolutionBase, boolean validate) throws Exception {
-        ReferenceManager manager = new ReferenceManager(resolutionBase);
-        return parse(manager, validate);
-    }
+	public OpenApi<?> parse(URL resolutionBase, boolean validate) throws Exception {
+		ReferenceManager manager = new ReferenceManager(resolutionBase);
+		return parse(manager, validate);
+	}
 
-    public OpenApi<?> parse(JsonNode tree, URL resolutionBase) {
-        return parse(tree, resolutionBase, true);
-    }
+	public OpenApi<?> parse(JsonNode tree, URL resolutionBase) {
+		return parse(tree, resolutionBase, true);
+	}
 
-    public OpenApi<?> parse(JsonNode tree, URL resolutionBase, boolean validate) {
-        return parse(tree, resolutionBase, validate, null);
-    }
+	public OpenApi<?> parse(JsonNode tree, URL resolutionBase, boolean validate) {
+		return parse(tree, resolutionBase, validate, null);
+	}
 
-    public OpenApi<?> parse(JsonNode tree, URL resolutionBase, boolean validate, JsonLoader loader) {
-        ReferenceManager manager = new ReferenceManager(resolutionBase, tree, loader);
-        return parse(manager, validate);
-    }
+	public OpenApi<?> parse(JsonNode tree, URL resolutionBase, boolean validate, JsonLoader loader) {
+		ReferenceManager manager = new ReferenceManager(resolutionBase, tree, loader);
+		return parse(manager, validate);
+	}
 
-    private OpenApi<?> parse(ReferenceManager manager, boolean validate) {
-        JsonNode tree;
-        try {
-            tree = manager.loadDoc();
-            if (isVersion3(tree)) {
-                OpenApi3 model = (OpenApi3) OpenApi3Impl.factory.create(tree, null, manager);
-                ((OpenApi3Impl) model)._setCreatingRef(manager.getDocReference());
-                if (validate) {
-                    model.validate();
-                }
-                return model;
-            } else {
-                throw new OpenApiParserException(
-                        "Could not determine OpenApi version from model: no 'openapi' property");
-            }
-        } catch (IOException e) {
-            throw new OpenApiParserException("Failed to parse model", e);
-        }
-    }
+	private OpenApi<?> parse(ReferenceManager manager, boolean validate) {
+		JsonNode tree;
+		try {
+			tree = manager.loadDoc();
+			if (isVersion3(tree)) {
+				OpenApi3 model = (OpenApi3) OpenApi3Impl.factory.create(tree, null, manager);
+				((OpenApi3Impl) model)._setCreatingRef(manager.getDocReference());
+				if (validate) {
+					model.validate();
+				}
+				return model;
+			} else {
+				throw new OpenApiParserException(
+						"Could not determine OpenApi version from model: no 'openapi' property");
+			}
+		} catch (IOException e) {
+			throw new OpenApiParserException("Failed to parse model", e);
+		}
+	}
 
-    protected boolean isVersion3(JsonNode tree) {
-        JsonNode versionNode = tree.path("openapi");
-        return versionNode.isTextual() && versionNode.asText().startsWith("3.");
-    }
+	protected boolean isVersion3(JsonNode tree) {
+		JsonNode versionNode = tree.path("openapi");
+		return versionNode.isTextual() && versionNode.asText().startsWith("3.");
+	}
 
-    public static class OpenApiParserException extends RuntimeException {
+	public static class OpenApiParserException extends RuntimeException {
 
-        private static final long serialVersionUID = 1L;
+		private static final long serialVersionUID = 1L;
 
-        public OpenApiParserException() {
-            super();
-        }
+		public OpenApiParserException() {
+			super();
+		}
 
-        public OpenApiParserException(String message, Throwable cause, boolean enableSuppression,
-                boolean writableStackTrace) {
-            super(message, cause, enableSuppression, writableStackTrace);
-        }
+		public OpenApiParserException(String message, Throwable cause, boolean enableSuppression,
+				boolean writableStackTrace) {
+			super(message, cause, enableSuppression, writableStackTrace);
+		}
 
-        public OpenApiParserException(String message, Throwable cause) {
-            super(message, cause);
-        }
+		public OpenApiParserException(String message, Throwable cause) {
+			super(message, cause);
+		}
 
-        public OpenApiParserException(String message) {
-            super(message);
-        }
+		public OpenApiParserException(String message) {
+			super(message);
+		}
 
-        public OpenApiParserException(Throwable cause) {
-            super(cause);
-        }
-    }
+		public OpenApiParserException(Throwable cause) {
+			super(cause);
+		}
+	}
 }

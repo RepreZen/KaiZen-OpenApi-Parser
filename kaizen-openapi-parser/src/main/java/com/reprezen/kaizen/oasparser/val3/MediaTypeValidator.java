@@ -30,42 +30,42 @@ import com.reprezen.kaizen.oasparser.val.ValidationResults;
 
 public class MediaTypeValidator extends ObjectValidatorBase<MediaType> {
 
-    @Override
-    public void runObjectValidations() {
-        MediaType mediaType = (MediaType) value.getOverlay();
-        // TODO Q: Should schema be required in media type?
-        validateField(F_schema, false, Schema.class, new SchemaValidator());
-        validateMapField(F_encodingProperties, false, false, EncodingProperty.class, new EncodingPropertyValidator());
-        checkEncodingPropsAreProps(mediaType, results);
-        validateExtensions(mediaType.getExtensions());
-        Overlay<Map<String, Example>> examples = validateMapField(F_examples, false, false, Example.class,
-                new ExampleValidator());
-        Overlay<Object> example = validateField(F_example, false, Object.class, null);
-        checkExampleExclusion(examples, example);
-    }
+	@Override
+	public void runObjectValidations() {
+		MediaType mediaType = (MediaType) value.getOverlay();
+		// TODO Q: Should schema be required in media type?
+		validateField(F_schema, false, Schema.class, new SchemaValidator());
+		validateMapField(F_encodingProperties, false, false, EncodingProperty.class, new EncodingPropertyValidator());
+		checkEncodingPropsAreProps(mediaType, results);
+		validateExtensions(mediaType.getExtensions());
+		Overlay<Map<String, Example>> examples = validateMapField(F_examples, false, false, Example.class,
+				new ExampleValidator());
+		Overlay<Object> example = validateField(F_example, false, Object.class, null);
+		checkExampleExclusion(examples, example);
+	}
 
-    void checkEncodingPropsAreProps(MediaType mediaType, ValidationResults results) {
-        // TODO Q: do allOf, anyOf, oneOf schemas participate? what about
-        // additionalProperties?
-        Schema schema = mediaType.getSchema(false);
-        if (Overlay.of(schema).isElaborated()) {
-            Set<String> propNames = schema.getProperties().keySet();
-            Map<String, EncodingProperty> encProps = mediaType.getEncodingProperties();
-            for (String encodingPropertyName : encProps.keySet()) {
-                if (!propNames.contains(encodingPropertyName)) {
-                    results.addError(msg(EncPropNotSchemaProp, encodingPropertyName),
-                            Overlay.of(encProps, encodingPropertyName));
-                }
-            }
-        }
-    }
+	void checkEncodingPropsAreProps(MediaType mediaType, ValidationResults results) {
+		// TODO Q: do allOf, anyOf, oneOf schemas participate? what about
+		// additionalProperties?
+		Schema schema = mediaType.getSchema(false);
+		if (Overlay.of(schema).isElaborated()) {
+			Set<String> propNames = schema.getProperties().keySet();
+			Map<String, EncodingProperty> encProps = mediaType.getEncodingProperties();
+			for (String encodingPropertyName : encProps.keySet()) {
+				if (!propNames.contains(encodingPropertyName)) {
+					results.addError(msg(EncPropNotSchemaProp, encodingPropertyName),
+							Overlay.of(encProps, encodingPropertyName));
+				}
+			}
+		}
+	}
 
-    void checkExampleExclusion(Overlay<Map<String, Example>> examples, Overlay<Object> example) {
-        boolean examplesPresent = examples != null && examples.isPresent()
-                && Overlay.getMapOverlay(examples).size() > 0;
-        boolean examplePresent = example != null && example.isPresent();
-        if (examplesPresent && examplePresent) {
-            results.addError("ExmplExclusion|The 'example' and 'exmaples' properties may not both appear", value);
-        }
-    }
+	void checkExampleExclusion(Overlay<Map<String, Example>> examples, Overlay<Object> example) {
+		boolean examplesPresent = examples != null && examples.isPresent()
+				&& Overlay.getMapOverlay(examples).size() > 0;
+		boolean examplePresent = example != null && example.isPresent();
+		if (examplesPresent && examplePresent) {
+			results.addError("ExmplExclusion|The 'example' and 'exmaples' properties may not both appear", value);
+		}
+	}
 }

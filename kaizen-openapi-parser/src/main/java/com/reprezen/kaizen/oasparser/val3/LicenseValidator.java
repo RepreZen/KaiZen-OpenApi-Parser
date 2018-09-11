@@ -18,12 +18,12 @@ import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
 
 public class LicenseValidator extends ObjectValidatorBase<License> {
 
-    @Override
-    public void runObjectValidations() {
-        License license = (License) value.getOverlay();
-        validateStringField(F_name, true);
-        validateUrlField(F_url, false, true, false);
-        validateExtensions(license.getExtensions());
-    }
+	@Override
+	public void runObjectValidations() {
+		License license = (License) value.getOverlay();
+		validateStringField(F_name, true);
+		validateUrlField(F_url, false, true, false);
+		validateExtensions(license.getExtensions());
+	}
 
 }

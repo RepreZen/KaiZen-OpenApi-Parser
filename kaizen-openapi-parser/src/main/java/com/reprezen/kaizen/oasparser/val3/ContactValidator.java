@@ -19,12 +19,12 @@ import com.reprezen.kaizen.oasparser.val.ObjectValidatorBase;
 
 public class ContactValidator extends ObjectValidatorBase<Contact> {
 
-    @Override
-    public void runObjectValidations() {
-        Contact contact = (Contact) value.getOverlay();
-        validateStringField(F_name, false);
-        validateUrlField(F_url, false, true, false);
-        validateEmailField(F_email, false);
-        validateExtensions(contact.getExtensions());
-    }
+	@Override
+	public void runObjectValidations() {
+		Contact contact = (Contact) value.getOverlay();
+		validateStringField(F_name, false);
+		validateUrlField(F_url, false, true, false);
+		validateEmailField(F_email, false);
+		validateExtensions(contact.getExtensions());
+	}
 }

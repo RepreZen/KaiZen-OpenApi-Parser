@@ -58,6 +58,16 @@ public interface EncodingProperty extends IJsonOverlay<EncodingProperty>, IModel
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	void setExplode(Boolean explode);
 
+	// AllowReserved
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	Boolean getAllowReserved();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	boolean isAllowReserved();
+
+	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
+	void setAllowReserved(Boolean allowReserved);
+
 	// Extension
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	Map<String, Object> getExtensions();

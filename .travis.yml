@@ -1,0 +1,5 @@
+language: java
+script: mvn -f kaizen-openapi-parser/pom.xml test
+pcache:
+  directories:
+    - $HOME/.m2

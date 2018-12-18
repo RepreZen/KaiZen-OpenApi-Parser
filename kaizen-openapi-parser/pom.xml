@@ -7,7 +7,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.reprezen.kaizen</groupId>
     <artifactId>openapi-parser</artifactId>
-    <version>4.0.2</version>
+    <version>4.0.3-SNAPSHOT</version>
     <name>${project.groupId}:${project.artifactId}</name>
     <description>KaiZen OpenAPI Parser by RepreZen</description>
     <url>https://github.com/RepreZen/KaiZen-OpenAPI-Parser</url>
@@ -39,7 +39,7 @@
     </developers>
     <scm>
         <connection>scm:git:git://github.com/RepreZen/KaiZen-OpenAPI-Parser.git</connection>
-        <developerConnection>scm:git:ssh://github.com:RepreZen/KaiZen-OpenAPI-Parser.git</developerConnection>
+        <developerConnection>scm:git:git@github.com:RepreZen/KaiZen-OpenAPI-Parser.git</developerConnection>
         <url>https://github.com/RepreZen/KaiZen-OpenAPI-Parser/tree/master</url>
       <tag>v4.0.2</tag>
   </scm>

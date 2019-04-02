@@ -73,6 +73,7 @@ Here's a starting list of projects that are currently using KaiZen OpenAPI Parse
 | Project Link | Description |
 | --- | --- | 
 | [Eclipse Vert.x](http://vertx.io/) | Eclipse Vert.x is a tool-kit for building reactive applications on the JVM. | 
+| [Light-rest-4j](https://github.com/networknt/light-rest-4j) | Light-4j RESTful framework for building fast, lightweight microservices on the JVM. | 
 | [RepreZen API Studio](http://reprezen.com/OpenAPI) | RepreZen API Studio is an integrated workbench for API design, documentation and development, built on the Eclipse platform. | 
 
 

@@ -1,0 +1,50 @@
+openapi: "3.0.0"
+info:
+  title: Tessting Security requirements
+  version: v2
+
+# empty object in the array means optional security, e.g. where operations
+# may return different results if the user is authorized
+# https://github.com/OAI/OpenAPI-Specification/pull/1886  
+security:
+- {}  
+- oauthScheme:
+  - foo
+  - bar
+- oauthSchemeWithEmptyScopes: []
+  
+paths:
+  /widgets:
+    get:
+      # empty array as security value overrides security specified at top level,
+      # allowing anonymous access to this method. 
+      # https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md#user-content-operationsecurity
+      security: []
+      operationId: getWidgets
+      summary: Show all the widgets
+      responses:
+        200:
+          description: Ok
+
+components:
+  securitySchemes:
+    apiKeyScheme:
+      type: apiKey
+      in: query
+      name: api_key
+    oauthScheme:
+      type: oauth2
+      flows: 
+        implicit:
+          authorizationUrl: "https://myco.com/auth"
+          scopes:
+            foo: The foo scope
+            bar: The bar scope
+    oauthSchemeWithEmptyScopes:
+      type: oauth2
+      flows: 
+        implicit:
+          authorizationUrl: "https://myco.com/auth"
+          # empty scopes means scopes are not required or not specified.
+          # https://github.com/OAI/OpenAPI-Specification/pull/1888
+          scopes: []

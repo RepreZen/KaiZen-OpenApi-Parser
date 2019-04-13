@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.annotation.Generated;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.reprezen.jsonoverlay.BooleanOverlay;
 import com.reprezen.jsonoverlay.Builder;
 import com.reprezen.jsonoverlay.IJsonOverlay;
@@ -26,6 +27,14 @@ import com.reprezen.kaizen.oasparser.model3.SecurityRequirement;
 import com.reprezen.kaizen.oasparser.model3.Server;
 
 public class OperationImpl extends PropertiesOverlay<Operation> implements Operation {
+
+	@Override
+	protected JsonNode _fixJson(JsonNode json) {
+		if (!json.has("security") && _isPresent("security")) {
+			((ObjectNode) json).putArray("security");
+		}
+		return json;
+	}
 
 	@Generated("com.reprezen.jsonoverlay.gen.CodeGenerator")
 	public OperationImpl(JsonNode json, JsonOverlay<?> parent, ReferenceManager refMgr) {

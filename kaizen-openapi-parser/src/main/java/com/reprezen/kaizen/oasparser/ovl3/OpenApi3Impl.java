@@ -50,6 +50,9 @@ public class OpenApi3Impl extends PropertiesOverlay<OpenApi3> implements OpenApi
 		if (!json.has("paths")) {
 			((ObjectNode) json).putObject("paths");
 		}
+		if (!json.has("security") || json.get("security").isMissingNode()) {
+			((ObjectNode) json).putArray("security");
+		}
 		return json;
 	}
 

@@ -7,11 +7,18 @@ info:
 # may return different results if the user is authorized
 # https://github.com/OAI/OpenAPI-Specification/pull/1886  
 security:
+
 - {}  
+
+#- apiKeyScheme: []
+
 - oauthScheme:
   - foo
   - bar
 - oauthSchemeWithEmptyScopes: []
+#- oauthSchemeWithEmptyScopes:
+#  - foo
+#  - bar
   
 paths:
   /widgets:
@@ -47,4 +54,7 @@ components:
           authorizationUrl: "https://myco.com/auth"
           # empty scopes means scopes are not required or not specified.
           # https://github.com/OAI/OpenAPI-Specification/pull/1888
-          scopes: []
+#          scopes: []
+          scopes:
+            foo: The foo scope
+            bar: The bar scope

@@ -2,8 +2,9 @@
 
 ## Build
 
-All the software currently resides in a single Eclipse/Maven project
-located in `kaizen-openapi-parser`.
+KaiZen-OpenAPI-Parser requires a Java 8 JDK, and will require changes 
+to build on later Java versions. All the software currently resides 
+in a single Eclipse/Maven project located in `kaizen-openapi-parser`.
 
 From this directory, you can use:
 * `mvn package` to build locally

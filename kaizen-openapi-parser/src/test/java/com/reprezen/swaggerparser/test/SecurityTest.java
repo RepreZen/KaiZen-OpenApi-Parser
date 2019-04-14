@@ -43,7 +43,9 @@ public class SecurityTest {
 	
 	@Test
 	public void testParse() throws Exception {
-		OpenApi3 model = (OpenApi3) new OpenApiParser().parse(Resources.getResource("models/securityRequirementsTest.yaml"), false);
+		
+		URL exampleUrl = Resources.getResource("models/securityRequirementsTest.yaml");
+		OpenApi3 model = (OpenApi3) new OpenApiParser().parse(exampleUrl, false);
 		
 		// Security scheme
 		SecuritySchemeImpl scheme = (SecuritySchemeImpl) model.getSecurityScheme("oauthSchemeWithEmptyScopes");
@@ -73,6 +75,7 @@ public class SecurityTest {
 		List<SecurityRequirement> secReqOperation = model.getPath("/widgets").getGet().getSecurityRequirements();
 		assertNotNull(secReqOperation);
 		assertEquals(0, secReqOperation.size());	
+
 	}
 	
 	@Test
@@ -80,12 +83,13 @@ public class SecurityTest {
 		URL exampleUrl = Resources.getResource("models/securityRequirementsTest.yaml");
 		OpenApi3 model = (OpenApi3) new OpenApiParser().parse(exampleUrl, false);
 		JsonNode serialized = Overlay.toJson((OpenApi3Impl) model);
-		String serializedAsText = serialized.toString();
-		System.out.print(serializedAsText);
+//		String yamlString = new YAMLMapper().writerWithDefaultPrettyPrinter().writeValueAsString(serialized);
+//		System.out.print(yamlString);
+		String jsonString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(serialized);
+		System.out.print(jsonString);
 		JsonNode expected = yamlMapper.readTree(exampleUrl);
 		JSONAssert.assertEquals(mapper.writeValueAsString(expected), mapper.writeValueAsString(serialized),
 				JSONCompareMode.STRICT);
+		
 	}
-
-
 }

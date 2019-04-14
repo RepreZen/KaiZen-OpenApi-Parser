@@ -50,7 +50,6 @@ public class SecurityTest {
 		// Security scheme
 		SecuritySchemeImpl scheme = (SecuritySchemeImpl) model.getSecurityScheme("oauthSchemeWithEmptyScopes");
 		assertNotNull(scheme);
-//		assert(Overlay.of(scheme).isPresent());
 		OAuthFlow flow = scheme.getImplicitOAuthFlow();
 		assertNotNull(flow);
 		Map<String, String> scopeDefinitions = flow.getScopes();

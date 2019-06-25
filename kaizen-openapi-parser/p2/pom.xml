@@ -8,7 +8,7 @@
 
 	<properties>
 		<kzop-version>4.0.4-SNAPSHOT</kzop-version>
-		<jovl-version>4.0.3</jovl-version>
+		<jovl-version>4.0.4-SNAPSHOT</jovl-version>
 		<kzop-repo>http://localhost:8000</kzop-repo>
 		<jovl-repo>http://localhost:8000</jovl-repo>
 	</properties>
@@ -26,7 +26,7 @@
 							<artifacts>
 								<artifact>
 									<id>com.reprezen.jsonoverlay:jsonoverlay:${jovl-version}</id>
-									<!-- early verssions of this artifact have bundle manifests that 
+									<!-- early verssions of this artifact have bundle manifests that
 										we now ignore -->
 									<override>true</override>
 									<source>false</source>
@@ -51,7 +51,7 @@
 										</Export-Package>
 									</instructions>
 									<excludes>
-										<!-- following are only required for model class generation, which 
+										<!-- following are only required for model class generation, which
 											is generally not done at runtime -->
 										<exclude>commons-cli</exclude>
 										<exclude>com.github.javaparser</exclude>
@@ -62,7 +62,7 @@
 								</artifact>
 								<artifact>
 									<id>com.reprezen.kaizen:openapi-parser:${kzop-version}</id>
-									<!-- early verssions of this artifact have bundle manifests that 
+									<!-- early verssions of this artifact have bundle manifests that
 										we now ignore -->
 									<override>true</override>
 									<source>false</source>
@@ -83,7 +83,7 @@
 										<!-- this is specified explicitly below -->
 										<exclude>com.reprezen.jsonoverlay:jsonoverlay</exclude>
 										<exclude>com.google.guava</exclude>
-										<!-- following are only required for model class generation, which 
+										<!-- following are only required for model class generation, which
 											is generally not done at runtime -->
 										<exclude>commons-cli</exclude>
 										<exclude>com.github.javaparser</exclude>

@@ -1,9 +1,10 @@
-<!-- Copyright (c) 2017 ModelSolv, Inc. and others. All rights reserved. 
-    This program and the accompanying materials are made available under the 
-    terms of the Eclipse Public License v1.0 which accompanies this distribution, 
-    and is available at http://www.eclipse.org/legal/epl-v10.html Contributors: 
+<!-- Copyright (c) 2017 ModelSolv, Inc. and others. All rights reserved.
+    This program and the accompanying materials are made available under the
+    terms of the Eclipse Public License v1.0 which accompanies this distribution,
+    and is available at http://www.eclipse.org/legal/epl-v10.html Contributors:
     ModelSolv, Inc. - initial API and implementation and/or initial documentation -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.reprezen.kaizen</groupId>
     <artifactId>openapi-parser</artifactId>
@@ -41,14 +42,32 @@
         <connection>scm:git:git://github.com/RepreZen/KaiZen-OpenAPI-Parser.git</connection>
         <developerConnection>scm:git:git@github.com:RepreZen/KaiZen-OpenAPI-Parser.git</developerConnection>
         <url>https://github.com/RepreZen/KaiZen-OpenAPI-Parser/tree/master</url>
-      <tag>v4.0.2</tag>
-  </scm>
+        <tag>HEAD</tag>
+    </scm>
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
+            <groupId>com.reprezen.jsonoverlay</groupId>
+            <artifactId>jsonoverlay</artifactId>
+            <version>${json-overlay-version}</version>
+            <exclusions>
+                <!-- exclude dependencies used for code generation -->
+                <exclusion>
+                    <groupId>com.google.guava</groupId>
+                    <artifactId>guava</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>commons-cli</groupId>
+                    <artifactId>commons-cli</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.github.javaparser</groupId>
+                    <artifactId>javaparser-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.eclipse.xtend</groupId>
+                    <artifactId>org.eclipse.xtend.lib</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -59,6 +78,29 @@
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-yaml</artifactId>
             <version>${jackson-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>javax.mail-api</artifactId>
+            <version>1.6.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>1.6.1</version>
+        </dependency>
+        <!-- tests -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>19.0</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.skyscreamer</groupId>
@@ -72,30 +114,32 @@
             <version>3.7</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>javax.mail</groupId>
-            <artifactId>javax.mail-api</artifactId>
-            <version>1.6.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.mail</groupId>
-            <artifactId>javax.mail</artifactId>
-            <version>1.6.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>19.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.reprezen.jsonoverlay</groupId>
-            <artifactId>jsonoverlay</artifactId>
-            <version>${json-overlay-version}</version>
-        </dependency>
     </dependencies>
     <profiles>
         <profile>
             <id>gen</id>
+            <dependencies>
+                <dependency>
+                    <groupId>com.google.guava</groupId>
+                    <artifactId>guava</artifactId>
+                    <version>19.0</version>
+                </dependency>
+                <dependency>
+                    <groupId>commons-cli</groupId>
+                    <artifactId>commons-cli</artifactId>
+                    <version>1.4</version>
+                </dependency>
+                <dependency>
+                    <groupId>com.github.javaparser</groupId>
+                    <artifactId>javaparser-core</artifactId>
+                    <version>3.5.7</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.eclipse.xtend</groupId>
+                    <artifactId>org.eclipse.xtend.lib</artifactId>
+                    <version>2.11.0</version>
+                </dependency>
+            </dependencies>
             <build>
                 <plugins>
                     <plugin>
@@ -120,11 +164,34 @@
         </profile>
         <profile>
             <id>compile-for-gen</id>
+            <dependencies>
+                <dependency>
+                    <groupId>com.google.guava</groupId>
+                    <artifactId>guava</artifactId>
+                    <version>19.0</version>
+                </dependency>
+                <dependency>
+                    <groupId>commons-cli</groupId>
+                    <artifactId>commons-cli</artifactId>
+                    <version>1.4</version>
+                </dependency>
+                <dependency>
+                    <groupId>com.github.javaparser</groupId>
+                    <artifactId>javaparser-core</artifactId>
+                    <version>3.5.7</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.eclipse.xtend</groupId>
+                    <artifactId>org.eclipse.xtend.lib</artifactId>
+                    <version>2.11.0</version>
+                </dependency>
+            </dependencies>
             <build>
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-compiler-plugin</artifactId>
+                        <version>3.8.1</version>
                         <configuration>
                             <includes>
                                 <include>**/oasparser/GenOpenApi3.java</include>
@@ -141,6 +208,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.6</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
@@ -154,29 +222,35 @@
                 </plugins>
             </build>
         </profile>
-		<profile>
-			<id>snap</id>
-			<repositories>
-				<repository>
-					<id>sonatype-snapshots</id>
-					<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-					<layout>default</layout>
-					<releases><enabled>false</enabled></releases>
-					<snapshots><enabled>true</enabled></snapshots>
-				</repository>
-			</repositories>
-		</profile>
+        <profile>
+            <id>snap</id>
+            <repositories>
+                <repository>
+                    <id>sonatype-snapshots</id>
+                    <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+                    <layout>default</layout>
+                    <releases>
+                        <enabled>false</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+            </repositories>
+        </profile>
     </profiles>
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
+                <version>3.1.0</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
+                        <phase>verify</phase>
                         <goals>
-                            <goal>jar</goal>
+                            <goal>jar-no-fork</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -184,6 +258,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.1.0</version>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
@@ -200,7 +275,7 @@
                 <configuration>
                     <tagNameFormat>v@{project.version}</tagNameFormat>
                     <autoVersionSubmodules>true</autoVersionSubmodules>
-                    <!-- We don't use release:perform - deployment is done in TeamCity. 
+                    <!-- We don't use release:perform - deployment is done in TeamCity.
 						This just makes an errant perform operation harmless -->
                     <goals>clean</goals>
                 </configuration>
@@ -229,7 +304,7 @@
         </snapshotRepository>
     </distributionManagement>
     <properties>
-        <json-overlay-version>4.0.3</json-overlay-version>
+        <json-overlay-version>4.0.4-SNAPSHOT</json-overlay-version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -40,9 +40,10 @@ public class MessagesHelper {
 	 * The result is obtained by replacing each placeholder with the corresponding
 	 * argument's {@link #toString()} value (except that null arguments are rendered
 	 * as empty strings).
-	 * 
-	 * @param message
-	 * @param args
+	 *
+	 * @param locale  locale to use
+	 * @param message message to format
+	 * @param args    values
 	 * @return message with interpolated arguments
 	 */
 	public static String format(Locale locale, Messages message, Object... args) {
@@ -56,7 +57,7 @@ public class MessagesHelper {
 
 	private static Object[] sortArgs(String format, Object[] args) {
 		List<Integer> sites = findInterpolationSites(format);
-		sites.stream().forEach(site -> {
+		sites.forEach(site -> {
 			if (site < 1 || site > args.length) {
 				String msg = String.format("Interpolation position must be from 1 to %d: %%%d", args.length, site);
 				throw new IndexOutOfBoundsException(msg);

@@ -304,7 +304,7 @@
         </snapshotRepository>
     </distributionManagement>
     <properties>
-        <json-overlay-version>4.0.4-SNAPSHOT</json-overlay-version>
+        <json-overlay-version>4.0.4-ZEN-4688-SNAPSHOT</json-overlay-version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

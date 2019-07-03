@@ -1,6 +1,6 @@
 <gitVersioning>
 <branch>
-    <pattern>master</pattern>
+    <pattern><![CDATA[.*master]]></pattern>
     <versionFormat>${version}</versionFormat>
 </branch>
 <branch>

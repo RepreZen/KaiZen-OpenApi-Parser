@@ -49,4 +49,13 @@ public class ParameterValidatorTest {
 		assertTrue(model.isValid());
 	}
 
+	@Test
+	public void shouldAllow_MultiHybridPathParam() throws Exception {
+		OpenApi3 model = new OpenApi3Parser().parse(getClass().getResource("/models/params/multiHybridParam.yaml"),
+				true);
+
+		assertEquals(0, model.getValidationItems().size());
+		assertTrue(model.isValid());
+	}
+
 }

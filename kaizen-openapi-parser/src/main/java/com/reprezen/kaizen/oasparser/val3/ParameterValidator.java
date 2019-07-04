@@ -65,7 +65,7 @@ public class ParameterValidator extends ObjectValidatorBase<Parameter> {
 		if (parameter.getIn() != null && parameter.getIn().equals("path") && parameter.getName() != null) {
 			String path = getPathString(parameter);
 			if (path != null) {
-				if (!path.matches(".*/\\{" + parameter.getName() + "\\}(/.*)?")) {
+				if (!path.matches(".*\\{" + parameter.getName() + "\\}(.*)?")) {
 					results.addError(msg(OpenApi3Messages.MissingPathTplt, parameter.getName(), path), value);
 				}
 			} else {

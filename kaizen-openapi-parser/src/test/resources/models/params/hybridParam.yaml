@@ -1,0 +1,15 @@
+---
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: My API Spec
+paths:
+  /admin/roles{params}:
+    get:
+      parameters:
+      - in: path
+        name: params
+        required: true
+      responses:
+        200:
+          description: Ok

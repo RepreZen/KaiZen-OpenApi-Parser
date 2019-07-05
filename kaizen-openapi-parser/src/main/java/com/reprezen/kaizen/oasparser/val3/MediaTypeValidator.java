@@ -48,7 +48,7 @@ public class MediaTypeValidator extends ObjectValidatorBase<MediaType> {
 		// TODO Q: do allOf, anyOf, oneOf schemas participate? what about
 		// additionalProperties?
 		Schema schema = mediaType.getSchema(false);
-		if (Overlay.of(schema).isElaborated()) {
+		if (schema != null && Overlay.of(schema).isElaborated()) {
 			Set<String> propNames = schema.getProperties().keySet();
 			Map<String, EncodingProperty> encProps = mediaType.getEncodingProperties();
 			for (String encodingPropertyName : encProps.keySet()) {

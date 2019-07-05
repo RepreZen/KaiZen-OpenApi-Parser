@@ -22,7 +22,6 @@ import static com.reprezen.kaizen.oasparser.ovl3.ParameterImpl.F_name;
 import static com.reprezen.kaizen.oasparser.ovl3.ParameterImpl.F_schema;
 import static com.reprezen.kaizen.oasparser.ovl3.ParameterImpl.F_style;
 import static com.reprezen.kaizen.oasparser.val.msg.Messages.msg;
-import static com.reprezen.kaizen.oasparser.val3.OpenApi3Messages.NoPath;
 import static com.reprezen.kaizen.oasparser.val3.OpenApi3Messages.PathParamReq;
 
 import java.util.Map;
@@ -68,8 +67,6 @@ public class ParameterValidator extends ObjectValidatorBase<Parameter> {
 				if (!path.matches(".*\\{" + parameter.getName() + "\\}(.*)?")) {
 					results.addError(msg(OpenApi3Messages.MissingPathTplt, parameter.getName(), path), value);
 				}
-			} else {
-				results.addWarning(msg(NoPath, parameter.getName(), parameter.getIn()), value);
 			}
 		}
 	}

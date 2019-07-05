@@ -16,7 +16,6 @@ public enum OpenApi3Messages implements Messages {
 	OperationRefUnSupp("Link.operationRef is not yet supported"), //
 	EncPropNotSchemaProp("Encoding property '%1' does not name a schema property for the media type"), //
 	MissingPathTplt("No template for path parameter '%1' in path string"), //
-	NoPath("Could not locate path for parameter '%1'"), //
 	PathParamReq("Path param '%1' must have 'required' property set true"), //
 	DiscNotProp("The discriminator '%1' is not a property of this schema"), //
 	DiscNotReq("The discriminator property '%1' must be required in this schema"), //

@@ -3,13 +3,11 @@
 	terms of the Eclipse Public License v1.0 which accompanies this distribution, 
 	and is available at http://www.eclipse.org/legal/epl-v10.html Contributors: 
 	ModelSolv, Inc. - initial API and implementation and/or initial documentation -->
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.reprezen.kaizen</groupId>
 	<artifactId>openapi-parser</artifactId>
-	<version>4.0.4-SNAPSHOT</version>
+	<version>4.0.4</version>
 	<name>${project.groupId}:${project.artifactId}</name>
 	<description>KaiZen OpenAPI Parser by RepreZen</description>
 	<url>https://github.com/RepreZen/KaiZen-OpenAPI-Parser</url>
@@ -43,7 +41,7 @@
 		<connection>scm:git:git://github.com/RepreZen/KaiZen-OpenAPI-Parser.git</connection>
 		<developerConnection>scm:git:git@github.com:RepreZen/KaiZen-OpenAPI-Parser.git</developerConnection>
 		<url>https://github.com/RepreZen/KaiZen-OpenAPI-Parser/tree/master</url>
-		<tag>HEAD</tag>
+		<tag>v4.0.4</tag>
 	</scm>
 	<dependencies>
 		<dependency>

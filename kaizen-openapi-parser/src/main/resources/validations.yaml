@@ -1,0 +1,1402 @@
+openapiVersion: 3.0.2
+objects:
+  OpenAPI:
+    type: object
+    properties:
+      openapi:
+        type: string
+        required: true
+        pattern: "3\\.\\d+\\.\\d+"
+      info:
+        type: object
+        objectType: Info
+        required: true
+      servers:
+        type: array
+        items:
+          type: object
+          objectType: Server
+        emptySameAsMissing: true
+        default:
+          - url: "/"
+      paths:
+        type: object
+        objectType: Paths
+        required: true
+      components:
+        type: object
+        objectType: Components
+      security:
+        type: array
+        items:
+          type: object
+          objectType: SecurityRequirement
+      tags:
+        type: array
+        items:
+          type: object
+          objectType: Tag
+        validations:
+          - id: TAGS_UNIQUE_NAMES
+            description: |-
+              Each tag name in the list MUST be unique.
+      externalDocs:
+        type: object
+        objectType: ExternalDocumentation
+      extensions:
+        type: map
+        values:
+          type: any
+        keyFormat: extensionName
+        embedded: true
+    validations:
+      - id: OPERATIONS_ID_UNIQUE
+        description: |-
+          All operations defined within a model must have unique ids          
+
+  Info:
+    type: object
+    properties:
+      title:
+        type: string
+        required: true
+      description:
+        type: string
+        format: commonMark
+      termsOfService:
+        type: string
+        format: url
+      contact:
+        type: object
+        objectType: Contact
+      license:
+        type: object
+        objectType: License
+      version:
+        type: string
+        required: true
+      extensions:
+        type: map
+        values:
+          type: any
+        keyFormat: extensionName
+        embedded: true
+    validations:
+      - id: TERMS_OF_SERVICE_UNREACHABLE
+        inSpecification: false
+        severity: warning
+        description: |-
+          A HEAD request to the termsOfService URL failed, suggesting that there may be a typo
+
+  Contact:
+    type: object
+    properties:
+      name:
+        type: string
+      url:
+        type: string
+        format: url
+      email:
+        type: string
+        format: email
+      extensions:
+        type: map
+        values:
+          type: any
+        keyFormat: extensionName
+        embedded: true
+    validations:
+      - id: CONTACT_URL_UNREACHABLE
+        inSpecification: false
+        severity: warning
+        description: |-
+          A HEAD request to the contact URL failed, suggesting that there may be a typo.
+      
+  License:
+    type: object
+    properties:
+      name:
+        type: string
+        required: true
+      url:
+        type: string
+        format: url
+      extensions:
+        type: map
+        valuse:
+          type: any
+        keyFormat: extensionName
+        embedded: true
+    validations:
+      - id: LICENSE_URL_UNREACHABLE
+        inSpecification: false
+        severity: warning
+        description: |-
+          A HEAD request to the license URL failed, suggesting that there may be a typo.
+
+  Server:
+    type: object
+    properties:
+      url:
+        type: string
+        format: url
+        variablesAllowedInUrl: true
+        relativeUrlAllowed: true
+        required: true
+      description:
+        type: string
+        format: commonMark
+      variables:
+        type: map
+        values:
+          type: object
+          objectType: ServerVariable
+      extensions:
+        type: map
+        values:
+          type: any
+        keyFormat: extensionName
+        embedded: true
+
+  ServerVariable:
+    type: object
+    properties:
+      enum:
+        type: array
+        items:
+          type: string
+      default:
+        type: string
+        required: true
+      description:
+        type: string
+        format: commonMark
+      extensions:
+        type: map
+        values:
+          type: any
+        keyFormat: extensionName
+        embedded: true
+    validations:
+      - id: VAR_DEFAULT_IN_ENUM
+        inSpecification: false
+        description: |-
+          If enum values are present, the default value must be among them.
+        note: |-
+          The enum value defines the allowed values for a server variable. In that case, the default shoudl presumably be among them. This is not
+          explicitly stated in the spec.
+      - id: ENUM_NOT_EMTPY
+        inSpecification: false
+        description:
+          If enum array is present it must not be empty.
+        note: |-
+          An empty enum array would appear to make it impossible to use the server variable, since no value would match an enum value.
+
+  Components:
+    type: object
+    properties:
+      schemas:
+        type: map
+        values:
+          type: object
+          objectType: Schema
+        keyFormat: name
+        referenceAllowed: true
+      responses:
+        type: map
+        values:
+          type: object
+          objectType: Response
+        keyFormat: name
+        referenceAllowed: true
+      parameters:
+        type: map
+        values:
+          type: object
+          objectType: Parameter
+        keyFormat: name
+        referenceAllowed: true
+      examples:
+        type: map
+        values:
+          type: object
+          objectType: Example
+        keyFormat: name
+        referenceAllowed: true
+      requestBodies:
+        type: map
+        values:
+          type: object
+          objectType: RequestBody
+        keyFormat: name
+        referenceAllowed: true
+      headers:
+        type: map
+        values:
+          type: object
+          objectType: Header
+        keyFormat: name
+        referenceAllowed: true
+      securitySchemes:
+        type: map
+        values:
+          type: object
+          objectType: SecurityScheme
+        keyFormat: name
+        referenceAllowed: true
+      links:
+        type: map
+        values:
+          type: object
+          objectType: Link
+        keyFormat: name
+        referenceAllowed: true
+      callbacks:
+        type: map
+        values:
+          type: object
+          objectType: Callback
+        keyFormat: name
+        referenceAllowed: true
+      extensions:
+        type: map
+        values:
+          type: any
+        keyFormat: extensionName
+        embedded: true
+
+  Paths:
+    type: object
+    properties:
+      paths:
+        type: object
+        objectType: PathItem
+        keyFormat: path
+        embedded: true
+        referenceAllowed: true
+      extensions:
+        type: map
+        values:
+          type: any
+        keyFormat: extensionName
+        embedded: true
+    validations:
+      - id: PATHS_DISTINCT_MODULO_TEMPLATE_NAMES
+        description: |-
+          Templated paths with the same hierarchy but different templated may not exist. I.e. if p1 can be transformed into p2 by renaming its
+          template parameters, and vice-versa, then p1 and p2 may not appear together in the Paths object.
+      - id: BAD_TMEPLATE_SYNTAX
+        inSpecification: false
+        severity: warning
+        description: |-
+          Braces in a path string should be balanced and must not be nested.
+      - id: INVALID_TEMPLATE_PARAM_NAME
+        inSpecification: false
+        severity: warning
+        description: |-
+          All template parmaeters should be valid parameter names.
+      - id: AMBIGUOUS_PATH_RESOLUTION
+        inSpecification: false
+        severity: warning
+        description: |-
+          Two templateed path strings overalp in the sets of actual paths that they may match, leading to the potential for ambiguous path resolution.
+
+  PathItem:
+    type: object
+    properties:
+      "$ref":
+        type: string
+        format: reference
+      summary:
+        type: string
+      description:
+        type: string
+        format: commonMark
+      get:
+        type: object
+        objectType: Operation
+      put:
+        type: object
+        objectType: Operation
+      post:
+        type: object
+        objectType: Operation
+      delete:
+        type: object
+        objectType: Operation
+      options:
+        type: object
+        objectType: Operation
+      head:
+        type: object
+        objectType: Operation
+      patch:
+        type: object
+        objectType: Operation
+      trace::
+        type: object
+        objectType: Operation
+      servers:
+        type: array
+        items:
+          type: object
+          valueType: Server
+      parameters:
+        type: array
+        values:
+          type: object
+          objectType: Parameter
+          referenceAllowed: true
+      extensions:
+        type: map
+        values:
+          type: any
+        keyFormat: extensionName
+        embedded: true
+    validationss:
+      - id: REF_MUST_RESOLVE_TO_PATH_ITEM
+        description: |-
+          The "$ref" property must be a reference string that resolves to a JSON value that structurally satisfies the requirements of a PathItem.
+      - id: REFERERNCED_PATH_ITEM_CONFLICTS
+        severity: warning
+        description: |-
+          The PathItem value that the "$ref" value resolves to should not include any field values that conflict with values local to this
+          PathItem. that is, if a given property exists in both, the property values must be equal. This includes extension values.
+      - id: DUPLICATE_PARAMETERS_PATH_LEVEL
+        description: |-
+          No two parameters in a parameter list may have both the same name and the same location ("in" property value).
+    notes:
+      - id: PATH_LEVEL_SERVERS_DEFAULT
+        description: |-
+          The spec defines a default servers list at model-level that applies if the servers list is either missing or empty. No such default is
+          provided at path-level, which means a path could specify an empty servers list, and for that path the effective servers list would be
+          empty. The fact that the model-level defualt applies to an explicitly empty servers list would suggest that this should not be allowed. So
+          either the path-level list should not be allowed to be empty, or that should cause the same default to be applied.
+
+  Operation:
+    type: object
+    properties:
+      tags:
+        type: array
+        values:
+          type: string
+      summary:
+        type: string
+      description:
+        type: string
+        format: commonMark
+      externalDocs:
+        type: object
+        objectType: ExternalDocumentation
+      operationId:
+        type: string
+      extensions:
+        type: map
+        values:
+          type: any
+        keyFormat: extensionName
+        embedded: true
+      parameters:
+       type: array
+       items:
+         type: object
+         objectType: Parameter
+         referenceAllowed: true
+      requestBody:
+        type: object
+        objectType: RequestBody
+        referenceAllowed: true
+      responses:
+        type: object
+        objectType: Responses
+        required: true
+      callbacks:
+        type: map
+        values:
+          type: object
+          objectType: Callback
+          referenceAllowed: true
+        keyFormat: expression
+      deprecated:
+        type: boolean
+        default: false
+      security:
+        type: array
+        items:
+          type: object
+          objectType: SecurityRequirement
+        emptyAllowed: true
+      servers:
+        type: array
+        items:
+          type: object
+          objectType: Server
+      extensions:
+        type: map
+        values:
+          type: any
+        keyFormat: extensionName
+        embedded: true
+      validations:
+      - id: OPERATION_ID_REQUIRED
+        inSpecification: false
+        description: |-
+          The specification states that the operation id must be unique among all operations descripted in the API, and further, that tools may use
+          operationId in generated code, so common programming naming conventions are recommended. But it does not mark the field as required, which
+          seems a mistake.
+      - id: OPERATION_ID_REASONABLE_NAME
+        severity: warning
+        description: |-
+          The spec recommends that operationId be suitable as a programming name. Of course, languages differ on their identifier syntax, but it seems
+          reasonable to check that the id matches something fairly generic like "[A-Z_][A-Za-z0-9_]+"
+      - id: DUPLICATE_PARAMETERS_OPERATION_LEVEL
+        description: |-
+          No two parameters in a parameter list may have both the same name and the same location ("in" property value). This validation applies ot
+          the parameter list obtained after adding un-overridden path-level parameters to the operation-level parameters.
+      - id: REQUEST_BODY_DISALLOWED
+        description: |-
+          Operations can define request bodies only wehre RFC7231 (https://tools.ietf.org/html/rfc7231#section-4.3.1) explicitly defines their
+          semantics. That means only POST, PUT, PATCH
+        note: |-
+          This requirement, and a related warning-level requirement, are worded in a very inconvenient way, by reference to RFC 7231, especially
+          because the stated criteria are not easily applied, even after careful study.
+
+          The error-level requirement states: "The requestBody is only supported in HTTP methods where the HTTP 1.1 specification RFC7231 has
+          explicitly defined semantics for request bodies." That is the case only for PUT. For POST, there are several illustrative examples of how
+          the request might be applied by the origin server, but no explicit mention of the payload at all. PATCH is not described in the RFC, except
+          that in the description of PUT, a separate RFC defining PATCH is linked when comparing PUT and PATCH. So according to the requirement, only
+          PUT is allowed to have a request body.
+
+          The warning-level requiremnet states: "In other cases where the HTTP spec is vague, requestBody SHALL be ignored by consumers." OK, so maybe
+          that applies to POST, because the RFC doesn't ever actually refer to the request payload in its description of POST. But that would imply
+          that receivers of POST requests in an API modeled with OpenAPI3 must not look at the request payload, which is, of course, absurd. And
+          besides, if a request body is already not allowed (becuase a method description that "has explicitly defined semantics for request bodies"
+          could not be vague on the point), then there's no point in warning that it will be ignored by consumers.
+
+          Recommendation: Explicitly list the operations for which request bodies are allowed, and include a reference to the RFCs to support the
+          requirement. The RFC does explicitly state that there are no defined semantics for request payloads with several of the HTTP methods.
+    notes:
+      - id: OPERATION_LEVEL_SERVERS_DEFAULT
+        description: |-
+          The spec defines a default servers list at model-level that applies if the servers list is either missing or empty. No such default is
+          provided at operation-level, which means an operation could specify an empty servers list, and the effective servers list for that operaiton
+          would be empty. The fact that the model-level defualt applies to an explicitly empty servers list would suggest that this should not be
+          allowed. So either the operation-level list should not be allowed to be empty, or that should cause the same default to be applied.
+
+  ExternalDocumentation:
+    type: object
+    properties:
+      description:
+        type: string
+        format: commonMark
+      url:
+        type: string
+        format: url
+        required: true
+      extensions:
+        type: map
+        values:
+          type: any
+        keyFormat: extensionName
+        embedded: true
+    validations:
+      - id: EXTERNAL_DOCS_URL_UNREACHABLE
+        inSpecification: false
+        severity: warning
+        description: |-
+          A HEAD request to the external documentation URL failed, suggesting there may be a typo.
+
+  Parameter:
+    type: object
+    properties:
+      name:
+        type: string
+        required: true
+      in:
+        type: string
+        enum: [query, header, path, cookie]
+        required: true
+      description:
+        type: string
+        format: commonMark
+      required:
+        type: boolean
+        default: false
+      deprecated:
+        type: boolean
+        default: false
+      allowEmptyValue:
+        type: boolean
+        default: false
+      style:
+        type: string
+        enum: [matrix, label, form, simple, spaceDelimited, pipeDelimited, deepObject]
+        # dfault is based on in: query => form, path => simple, header => simple. cookie => form
+        defaultComputedBy: PARAMETER_STYLE_DEFAULT
+      explode:
+        type: boolean
+        # default is true if style is "form", else false
+        defaultComputedBy: PARAMETER_EXPLODE_DEFAULT
+      allowReserved:
+        type: boolean
+        default: false
+      schema:
+        type: object
+        objectType: Schema
+        referenceAllowed: true
+      example:
+        type: any
+      examples:
+        type: map
+        values:
+          type: object
+          objectType: Example
+          referenceAllowed: true
+      content:
+        type: map
+        values:
+          type: object
+          objectType: MediaType
+        keyFormat: mediaType
+      extensions:
+        type: map
+        values:
+          type: any
+        keyFormat: extensionName
+        embedded: true
+    validations:
+      - id: IGNORED_HEADER_PARAMETER
+        severity: warning
+        description: |-
+          Header parameters named Accept, Content-Type, or Authorization are ignored.
+      - id: PATH_PARAMETER_MUST_BE_REQUIRED
+        description: |-
+          The "required" property must appear with value "true" in the definition of any path parameter.
+      - id: ALLOW_EMPTY_VALUE_NOT_RECOMMENDED
+        severity: warning
+        description: |-
+          The allowEmptyValue property is discouraged, as it is likely to be removed in a later OAS revision.
+      - id: ALLOW_EMPTY_VALUE_QUERY_ONLY
+        descriptor: |-          
+          The allowEmptyValue property is allowed to be true only for query parameters.
+      - id: ALLOW_EMPTY_VALUE_IGNORED
+        severity: warning
+        description: |-
+          With the combination of "style" and "explode" property values provided on this parmaeter, the allowEmptyValues property value is ignored.
+      - id: EXPLODE_NOT_APPLICABLE
+        severity: warning
+        description: The explode paramter only applies to parameters of either array or object type. For others it has no effect.
+      - id: ALLOW_RESERVED_NOT_APPLICABLE
+        severity: warning
+        description: |-
+          The allowReserved property applies only to query parameters.
+      - id: PARAMETER_EXAMPLE_AND_EXAMPLES_MUTUALLY_EXCLUSIVE
+        description: |-
+          The "example" and "examples" properties may not both be specified.
+      - id: PARAMETER_EXAMPLE_BAD_FORMAT
+        severity: warning
+        description: |-
+          Example values (either the "example" property value or the the "value property value in an Example object provided in the "examples" map)
+          "SHOULD match the specified schema and encoding properties, if present."
+      - id: EXAMPLE_BAD_SERIALIZATION
+        description: |-
+          Specification states: "When example or examples are provided in conjunction with the schema object, the example MUST follow the prescribed
+          serialization strategy for the parameter""
+      - id: PARAMTER_CONTENT_HAS_MULTIPLE_MEDIA_TYPES
+        description: |-
+          The content map, if present, must contain only one entry.
+      - id: PARAMETER_CONTENT_IS_EMPTY
+        inSpecification: false
+        description: |-
+          The spec states that the content map must contain "only one entry." It does not state that the the map, if present, may not be empty, but
+          that seems to be required as well, since otherwise an empty content map in parameter that lacks a "schema" property would fail to specify an
+          effective schema.
+      - id: PARAMETER_CONTENT_INVALID_MEDIA_TYPE
+        inSpecification: false
+        description: |-
+          The content map key is required to be a media type, which implies that it should satisfy the syntax for "media-type" appearing in RFC7231
+          (https://tools.ietf.org/html/rfc7231#appendix-D). Presumably, media ranges are not permitted here, as they are in other areas.  
+      - id: STYLE_NOT_APPLICABLE
+        description: |-
+          The specificaiton includes a table of style values
+          (https://github.com/OAI/OpenAPI-Specification/blob/v3.0.2-dev/versions/3.0.2.md#style-values) that appears to define meaningful
+          style/type/location combinations. This validation should flag style values that do not apply to the parameter based on its type and
+          location.
+    notes:
+      - id: HEADER_PARAMS_NOT_CASE_SENSITIVE
+        description: |-
+          The spec says that parameter names are case-sensitive. But header parameters are taken as names of headers, which are defined by RFC to be
+          case-insensitive. As it stands, I could define two headers params that differ only by case, and who knows what the result would be?
+      - id: UNCLEAR_NAME_DESCRIPTION
+        description: |-
+          The third bullet point in the description of Parameter.name is very hard to understand. I'm guessing it means that header paraemter names
+          must conform to HTTP header name requirements, and cookie parameter names need to conform to cookie name requirements. If so, saying that in
+          two separate bullet points, with links to relevant standards defining those requirements, would be much clearer.
+      - id: UNCLEAR_EXAMPLES DESCRIPTION
+        description: |-
+          The phrase "Examples of the media type." at the beginning of the "examples" property description does not seem meaningful. What media type?
+
+  ReuestBody:
+    type: object
+    properties:
+      description:
+        type: string
+        format: commonMark
+      content:
+        type: map
+        values:
+          type: object
+          objectType: MediaType
+        keyFormat: mediaRange
+        required: true
+      required:
+        type: boolean
+        default: false
+      extensions:
+        type: map
+        values:
+          type: any
+        keyFormat: extensionName
+        embedded: true 
+    validations:
+      - id: REQUEST_BODY_CONTENT_EMTPTY
+        inSpecification: false
+        description: |-
+          The specification marks this as required but does not indicate that it may not be empty. Presumably, this is the intent.
+
+  MediaType:
+    type: object
+    properties:
+      schema:
+        type: object
+        objectType: Schema
+        required: true # see MEDIA_TYPE_SCHEMA_NOT_REQUIRED note
+        referenceAllowed: true
+      example:
+        type: any
+      examples:
+        type: map
+        values:
+          type: object
+          objectType: Example
+      encoding:
+        type: map
+        values:
+          type: object
+          objectType: Encoding
+      extensions:
+        type: map
+        values:
+          type: any
+        keyFormat: extensionName
+        embedded: true
+    validations:
+      - id: MEDIA_TYPE_BAD_FORMAT
+        severity: warning
+        description: |-
+          Example values should match the specified schema.
+      - id: ENCODING_PROPERTY_NOT_IN_SCHEMA
+        description: |-
+          The keys in the encoding map must correspond to property names in the schema.
+    notes:
+      - id: MEDIA_TYPE_SCHEMA_NOT_REQUIRED
+        description: |-
+          Is it intended that schema be optional in a media type object? It seems that media type is relied upon to provide type information in several
+          contexts, and lack of a schema would mean failing in that role.
+      - id: MEDIA_TYPE_EXAMPLE_AND_EXAMPLES_MUTUALLY_EXCLUSIVE
+        description: |-
+          The "example" and "examples" properties may not both be specified.
+      - id: MEDIA_TYPE_EXAMPLE_CONFORM_TO_SCHEMA
+        description: |-
+          Elsewhere, examples are required to be compatible with governing schema (including in the desription of the media type "examples"
+          property). There is no such requirement in the media type "example" property"" description.
+      - id: EXAMPLE_MATCH_MEDIA_TYPE_IMPOSSIBLE
+        description: |-
+          The description for the "examples" property states: Each example SHOULD match the media type and specified schema if present. But a media
+          type object does know its media type, i.e. its key in the content-type map. In fact, a media type object may be referenced in multiple
+          content maps using different keys, so this would seem to be impossible to enforce. This could be addressed by using simple names rather than
+          media type strings as keys in content maps, and making the media type string be a property of the media type object. This would also have
+          the beneficial effect of avoiding the ugly "~1" sequences needed for JSON pointers to these content map entries. (Same could also be done
+          with the "paths" map, which I think would be a big improvement, especially since those end up frequently in references. General
+          recommendaitons: don't use anything but simple keys in any map!)
+
+  Encoding:
+    type: object
+    properties:
+      contentType:
+        type: string
+        # covers single media type, single media range, or two media types separated by comma
+        format: mediaRanges 
+        # string:binary => application/octet-stream; other primitve => text/plain; object => application/json; array => not well defined in OAS
+        defaultComputedBy: ENCODING_CONTENT_TYPE_DEFAULT
+      headers:
+        type: map
+        values:
+          type: object
+          objectType: Header
+          referenceAllowed: true
+        keyFormat: httpHeader
+      style:
+        type: string
+        enum: [matrix, label, form, simple, spaceDelimited, pipeDelimited, deepObject]
+      explode:
+        type: boolean
+        # style = form => true, else false
+        defaultCopmutedBy: ENCODING_EXPLODE_DEFAULT
+      allowReserved:
+        type: boolean
+        default: false
+      extensions:
+        type: map
+        values:
+          type: any
+        keyFormat: extensionName
+        embedded: true
+    validations:
+      - id: CONTENT_TYPE_HEADER_IGNORED
+        description: |-
+          Content-Type header is ignored in the headers map in an encoding object. (It's specified by the "contentType" property.)
+    notes:
+      - id: ARRAY_CONTENT_TYPE_NOT_WELL_SPECIFIED
+        description: |-
+          Spec states: for array – the default is defined based on the inner type. The value can be a specific media type (e.g. application/json), a
+          wildcard media type (e.g. image/*), or a comma-separated list of the two types. It's not clear that the second sentence applies to arrays
+          (bulleted list in description would help). And it's not clear how default should be determined for arrays.'
+      - id: CONTENT_TYPE_NOT_REQUIRED
+        description: |-
+          Content-Type header is ignored because its value is specified in the contentType property, but the latter is not listed as required. Seems
+          like it ought to be.
+    todo: 
+      -
+        description: |-
+          Several properties apply only when the encoding is for a request body, and then only when when the media type is multipart or
+          application/x-www-form-urlencoded. These should made into validations on RequestBody.
+
+  Responses:
+    type: object
+    properties:
+      default:
+        type: object
+        objectType: Response
+        referenceAllowed: true
+      responses:
+        type: map
+        values:
+          type: object
+          objectType: Response
+          referenceAllowed: true
+        keyFormat: httpStatus
+      extensions:
+        type: map
+        values:
+          type: any
+        keyFormat: extensionName
+        embedded: true
+    validations:
+      id: RESPONSE_INVALID_CODE_RANGE
+      inSpecification: false
+      description: |-
+        This error may be flagged by tooling that recognizes what would be a proper wildcard status code were it not for a simple typo, like using
+        lower-case "x" instead of upper-case "X". This error would be preferable to a generic error indicating an unrecoznigzed property name.
+
+  Response:
+    type: object
+    properties:
+      description:
+        type: string
+        format: commonMark
+        required: true
+      headers:
+        type: map
+        values:
+          type: object
+          objectType: Header
+          referenceAllowed: true
+      content:
+        type: map
+        values:
+          type: object
+          objectType: MediaType
+        keyFormat: mediaRange
+      links:
+        type: map
+        values:
+          type: object
+          objectType: Link
+        keyFormat: name
+      extensions:
+        type: map
+        values:
+          type: any
+        keyFormat: extensionName
+        embedded: true
+    validations:
+      id: RESPONSE_CONTENT_TYPE_HEADER_IGNORED
+      severity: warning
+      description: |-
+        Any Content-Type header in a response object is ignored. (Because it is always specified by the key in the content map for the selected media
+        type.)
+
+  Callback:
+    type: object
+    properties:
+      paths:
+        type: map
+        values:
+          type: object
+          objectType: PathItem
+        keyFormat: expression
+        embedded: true
+      extensions:
+        type: map
+        values:
+          type: any
+        keyFormat: extensionName
+        embedded: true
+    validations:
+      - id: CALLBACK_EMPTY_PATHS_MAP
+        inSpecification: false
+        description: |-
+          The specification does not the possibility of a callback with no entries, but it's hard to understand the motivation for allowing that.
+
+  Example:
+    type: object
+    properties:
+      summary:
+        type: string
+      description:
+        type: string
+        format: commonMark
+      value:
+        type: any
+      externalValue:
+        type: string
+        format: url
+      extensions:
+        type: map
+        values:
+          type: any
+        keyFormat: extensionName
+        embedded: true
+    validations:
+      - id: EXAMPLE_VALUE_AND_EXTERNAL_VALUE_MUTUALLY_EXCLUSIVE
+        description: |-
+          The value and externalValue properties may not both be present.
+      - id: EXAMPLE_EXTERNAL_VALUE_UNREACHABLE
+        description: |-
+          A HEAD request to the example external value  URL failed, suggesting there may be a typo.
+
+  Link:
+    type: object
+    properties:
+      operationRef:
+        type: string
+        format: reference
+        relativeUrlAllowed: true
+      opeartionId:
+        type: string
+      parameters:
+        type: map
+        values:
+          type: object
+          # string values should be treated as expressions, including syntax checks
+          objectType: any
+        # recognizes both a simple name and a location-qualified name (<in>.<name>)
+        keyFormat: parameterName
+      requestBody:
+        # string value should be treated as an exrpression, including syntax checks
+        type: any
+      description:
+        type: string
+        format: commonMark
+      server:
+        type: object
+        objectType: Server
+      extensions:
+        type: map
+        values:
+          type: any
+        keyFormat: extensionName
+        embedded: true
+    validations:
+      - id: LINK_OPERATION_ID_AND_REF_MUTUALLY_EXCLUSIVE
+        description: |-
+          A link object may not specify both operationId and opertionRef.
+      - id: LINK_NO_OPERATION_SPECIFIED
+        description: |-
+          Either operationId or operationRef must be specified in a link object
+      - id: LINK_OPERATION_NOT_FOUND
+        description: |-
+          The operation id or operation ref could not be resolved to an operation object.
+      - id: LINK_UNKNOWN_PARAMETER_NAME
+        inSpecification: false
+        description: |-
+          Every parameter  named in a link object must match a parameter defined for the linked operation.
+      - id: LINK_AMBIGUOUS_PARAMETER
+        inSpecification: false
+        description: |-
+          A parameter named without a qualifying ("in") value appears in more than one location in the linked operation.
+    notes:
+      - id: AMBIGUOUS_QUALIFIED_PARAM_NAME_SYNTAX
+        description: |-
+         The keys in the parameters array can be either a simple parameter name, or a parameter name qualified by a preceding location value, separate
+          d by a period. But in all locations except path, relevant standards permit periods within names. There's probably no way to address this
+          other than by making this a list rather than a map, and making the map values be a new object type comprising a required parameter name, an
+          optional location, and a required value. That's probably not practical for what is admittedly an unlikely edge case.
+          
+  Header:
+    # identical to Pamaramter, but without "name" and "in" properties, and with location fixed to "header" (with all that implies)
+    type: object
+    properties:
+      description:
+        type: string
+        format: commonMark
+      required:
+        type: boolean
+        default: false
+      deprecated:
+        type: boolean
+        default: false
+      allowEmptyValue:
+        type: boolean
+        default: false
+      style:
+        type: string
+        enum: [matrix, label, form, simple, spaceDelimited, pipeDelimited, deepObject]
+        # default is based on in: query => form, path => simple, header => simple. cookie => form
+        defaultComputedBy: HEADER_STYLE_DEFAULT
+      explode:
+        type: boolean
+        # default is true if style is "form", else false
+        defaultComputedBy: HEADER_EXPLODE_DEFAULT 
+      allowReserved:
+        type: boolean
+        default: false
+      schema:
+        type: object
+        objectType: Schema
+        referenceAllowed: true
+      example:
+        type: any
+      examples:
+        type: map
+        values:
+          type: object
+          objectType: Example
+          referenceAllowed: true
+      content:
+        type: map
+        values:
+          type: object
+          objectType: MediaType
+      extensions:
+        type: map
+        values:
+          type: any
+        keyFormat: extensionName
+        embedded: true
+    validations:
+      - id: HEADER_ALLOW_EMPTY_VALUE_NOT_RECOMMENDED
+        severity: warning
+        description: |-
+          The allowEmptyValue property is discouraged, as it is likely to be removed in a later OAS revision.
+      - id: HEADER_ALLOW_EMPTY_VALUE_QUERY_ONLY
+        descriptor: |-          
+          The allowEmptyValue property is allowed to be true only for query parameters, and hence is not allowed in a Header object.
+      - id: EXPLODE_NOT_APPLICABLE
+        severity: warning
+        description: The explode paramter only applies to parameters of either array or object type. For others it has no effect.
+      - id: HEADER ALLOW_RESERVED_NOT_APPLICABLE
+        severity: warning
+        description: |-
+          The allowReserved property applies only to query parameters, and hence is not allowed in a Header object.
+      - id: HEADER_EXAMPLE_AND_EXAMPLES_MUTUALLY_EXCLUSIVE
+        description: |-
+          The "example" and "examples" properties may not both be specified.
+      - id: HEADER_EXAMPLE_BAD_FORMAT
+        severity: warning
+        description: |-
+          Example values (either the "example" property value or the the "value property value in an Example object provided in the "examples" map)
+          "SHOULD match the specified schema and encoding properties, if present." 
+      - id: HEADER_EXAMPLE_BAD_SERIALIZATION
+        description: |-
+          Specification states: "When example or examples are provided in conjunction with the schema object, the example MUST follow the prescribed
+          serialization strategy for the parameter""
+      - id: HEADER_CONTENT_HAS_MULTIPLE_MEDIA_TYPES
+        description: |-
+          The content map, if present, must contain only one entry.
+      - id: HEADER_CONTENT_IS_EMPTY
+        inSpecification: false
+        description: |-
+          The spec states that the content map must contain "only one entry." It does not state that the the map, if present, may not be empty, but
+          that seems to be required as well, since otherwise an empty content map in a header that lacks a "schema" property would fail to specify an
+          effective schema.
+      - id: HEADER_CONTENT_INVALID_MEDIA_TYPE
+        inSpecification: false
+        description: |-
+          The content map key is required to be a media type, which implies that it should satisfy the syntax for "media-type" appearing in RFC7231
+          (https://tools.ietf.org/html/rfc7231#appendix-D). Presumably, media ranges are not permitted here, as they are in other areas.  
+      - id: STYLE_NOT_APPLICABLE
+        description: |-
+          The specificaiton includes a table of style values
+          (https://github.com/OAI/OpenAPI-Specification/blob/v3.0.2-dev/versions/3.0.2.md#style-values) that appears to define meaningful
+          style/type/location combinations. The only case applicable to a header parameter in that table is style/type=simple/array.'
+    notes:
+      - id: ALLOW_EMPTY_VALUE_MEANINGLESS_IN_HEADER
+        description: |-
+          allowEmptyValue applies only to query parameters, so it seems it should not appear in Header object.
+      - id: ALLOW_RESERVED_MEANINGLESS_IN_HEADER
+        description: |-
+          allowReserved applies only to query parameters, so it seems it should not appear in Header object.
+    todo:
+      - 
+        description: |-
+          Define validation on objects that have header maps, corresponding to Parameter's IGNORED_HEADER_PARAMETER validation'
+
+  Tag:
+    type: object
+    properties:
+      name:
+        type: string
+        required: true
+      description:
+        type: string
+        format: commonMark
+      externalDocs:
+        type: object
+        objectType: ExternalDocumentation
+      extensions:
+        type: map
+        values:
+          type: any
+        keyFormat: extensionName
+        embedded: true
+
+  Schema:
+    type: object
+    todo: Fill this in
+    validations:
+      - id: XML_WRAAPPED_ON_NON_ARRAY
+        description: |-
+          The "wrapped" in an attached XML object is allowed only in array types.
+      - id: XML_ATTRIBUTE_ON_COMPLEX_TYPE
+        inSpecification: false
+        severity: warning
+        description: |-
+          Since there is nothing like style or explode in a schema, there's no information available on how to serialize complex types to a simple
+          string value. Therefore, only strings, numbers, and booleans can possibly be represented in an XML attribute.
+
+  Discriminator:
+    type: object
+    properties:
+      propertyName:
+        type: string
+        required: true
+      mapping:
+        type: map
+        values:
+          type: string
+    notes:
+      - id: DISCRIMINATOR_LEGAL_ONLY_IN_ONEOF_ANYOF_ALLOF
+        description: |-
+          The spec states: The discriminator object is legal only when using one of the composite keywords oneOf, anyOf, allOf. However, the final
+          example in this section contradicts this requirement, defining a discriminator in a Pet type that's a supertype of Cat, Dog, and Lizard. The
+          Pet type is jsut a normal object schema, except that it defines a discriminator that's inherited by the three pet types. Seems like this
+          requirement can't be enforced without breaking this useful pattern.
+      - id: DISCRIMINATOR_NO_EXTENSIONS
+        description: |-
+          The spec does not indicate that a discriminator may be defined with extensions. Is this an oversight, or is there a reason for it?
+
+  XML:
+    type: object
+    properties:
+      name:
+        type: string
+        format: xmlName
+      namespace:
+        type: string
+        format: url
+        relativeUrlAllowed: false
+      prefix:
+        type: string
+        format: xmlName
+      attribute:
+        type: boolean
+        default: false
+      wrapped:
+        type: boolean
+        default: false
+      extensions:
+        type: map
+        values:
+          type: any
+        keyFormat: extensionName
+        embedded: true
+
+  SecurityScheme:
+    type: object
+    properties:
+      type:
+        type: string
+        enum: [apiKey, http, oauth2, openIdConnect]
+        required: true
+      description:
+        type: string
+        format: commonMark
+      name:
+        type: string
+        required: true
+      in:
+        type: string
+        enum: [query, header, cookie]
+        required: true
+      scheme:
+        type: string
+        enum: [Basic, Bearer, Digest, HOBA, Mutual, Negotiate, OAuth, SCRAM-SHA-1, SCRAM-SHA-256, vapid, "*"]
+        required: true
+      bearerFormat:
+        type: string
+      flows:
+        type: object
+        objectType: OAuthFlows
+      openIdConnectUrl:
+        type: string
+        format: url
+      extensions:
+        type: map
+        values:
+          type: any
+        keyFormat: extensionName
+        embedded: true
+    validations:
+      - id: NAME_MISSING_IN_APIKEY_SCHEME
+        description: |-
+          THe "name" property is required in a security scheme of type "apiKey."
+      - id: NAME_INVALID_IN_NON_APIKEY_SCHEME
+        severity: warning
+        description: |-
+          The "name" property should appear only in security schemes of tyoe "apiKey."
+      - id: LOCATION_MISSING_IN_APIKEY_SCHEME
+        description: |-
+          The "in" property is required in a security scheme of type "apiKey."
+      - id: LOCATION_INVALID_IN_NON_APIKEY_SCHEME
+        severity: warning
+        description: |-
+          The "in" property should appear only in security schemes of tyoe "apiKey."
+      - id: BEARER_FORMAT_INVALID_IN_NON_HTTP_BEARER_SCHEME
+        severity: warning
+        description: |-
+          The "bearerFormat" property should appear only in security schemes of type "http" with "Bearer" scheme.
+      - id: FLOWS_MISSING_IN_OAUTH2_SCHEME
+        description: |-
+          THe "flows" property is required in a security scheme of type "oauth2."
+      - id: FLOWS_INVALID_IN_NON_OAUTH2_SCHEME
+        severity: warning
+        description: |-
+          The "flows" property should appear only in security schemes of tyoe "oauth2."
+      - id: OPENIDCONNECTURL_MISSING_IN_OPENIDCONNECT_SCHEME
+        description: |-
+          THe "openIdConnect" property is required in a security scheme of type "openIdConnect"
+      - id: OPENIDCONNECTURL_INVALID_IN_NON_OPENIDCONNECT_SCHEME
+        severity: warning
+        description: |-
+          The "openIdConnectUrl" property should appear only in security schemes of tyoe "openIdConnect."
+    notes:
+      - id: CONFUSING_USE_OF_REQUIRED_IN_SECURITY_SCHEME
+        description: |-
+          Throughout the specification, in the property tables for the various object types, "REQUIRED" at the front of the description means that
+          this is a required property. In the Seucrity Scheme description, that's not true. The properties are required in the the contexts specified
+          in the "Applies To" column. This is easily overlooked and can lead to confusion. Perhaps "REQUIRED" could be changed to "REQUIRED where
+          applicable" to make the dependence on the "Applies To" column more obvious. It still might require a tiny bit of head-scratching to make the
+          connection, but at least now there's very little chance that someone won't notice there's something unusual going on.
+
+  OAuthFlows:
+    type: object
+    properties:
+      implicit:
+        type: object
+        objectType: OAuthFlow
+      password:
+        type: object
+        objectType: OAuthFlow
+      clientCredentials:
+        type: object
+        objectType: OAuthFlow
+      authorizationCode:
+        type: object
+        objectType: OAuthFlow
+      extensions:
+        type: map
+        values:
+          type: any
+        keyFormat: extensionName
+        embedded: true
+    validations:
+      - id: OAUTH_FLOW_MISSING_AUTHORIZATIONURL
+        description: |-
+          The "authorizationUrl" property is required in "implicit" and "authorizationCode" OAuth Flow objects.
+      - id: OAUTH_FLOW_INVALID_AUTHORIZATIONURL
+        description: |-
+          The "authorizationUrl" property is allowed only in "implicit" and "authorizationCode" OAuth Flow objects.
+      - id: OAUTH_FLOW_MISSING_TOKENURL
+        description: |-
+          The "tokenUrl" property is required in "password," "clientCredentials," and "authorizationCode" OAuth Flow objects.
+      - id: OAUTH_FLOW_INVALID_TOKENURL
+        description: |-
+          The "tokenUrl" property is allowed only in "implicit," "clientCredentials," and "authorizationCode" OAuth Flow objects.
+        
+  OAuthFlow:
+    type: object
+    properties:
+      authorizationUrl:
+        type: string
+        format: url
+      tokenUrl:
+        type: string
+        format: url
+      refreshUrl:
+        type: string
+        format: url
+      scopes:
+        type: map
+        values:
+          type: string
+        required: true
+        emptyAllowed: false
+    notes:
+      - id: CONFUSING_USE_OF_REQUIRED_IN_OAUTH_FLOW
+        description: |-
+          Throughout the specification, in the property tables for the various object types, "REQUIRED" at the front of the description means that
+          this is a required property. In the OAuth Flow description, that's not true. The properties are required in the the contexts specified
+          in the "Applies To" column. This is easily overlooked and can lead to confusion. Perhaps "REQUIRED" could be changed to "REQUIRED where
+          applicable" to make the dependence on the "Applies To" column more obvious. It still might require a tiny bit of head-scratching to make the
+          connection, but at least now there's very little chance that someone won't notice there's something unusual going on.
+        
+  SecurityRequirement:
+    type: object
+    properties:
+      requirements:
+        type: map
+        values:
+          type: array
+          items:
+            type: string
+        embedded: true
+    validations:
+      - id: UNKNOWN_SECURITY_SCHEME
+        description: |-
+          Every key in a security requirement must be the name of a security scheme defined in this model.
+      - id: EMPTY_OAUTH2_SCOPE_NAMES
+        description: |-
+          A security requirement for an OAuth2 or OpenIdConnet security scheme must include a list of OAuth2 scope names."
+      - id: NON_EMPTY_VALUE_LIST_FOR_NON_OAUTH2_SCOPE
+        description: |-
+          The values list for a non-OAuth2 security requirement must be empty.
+    notes:
+      - id: OAUTH2_SCOPES_VALIDATION
+        description: |-
+          In the case of a requirement for an "oauth2" security scheme, should the scope names listed in the requirement be checked against the scopes
+          defined for the scheme? If so, how? The scopes map appears not in the OAuthFlows object, but on individual OAuthFlow objects. Should the
+          union of names appearing in all the flow objects of a given oauth2 scheme be used for this validation?
+
+regularExpressions:
+  token: |-
+    [A-Za-z0-9!#$%&'*+-.^_`-]+
+  qstring: |-
+    [\"][^\"]*[\"]
+  mediaParam: |-
+    (\s*;\s*${token}=(${token}|${qstring}))
+  mediaType: |-
+    ${token}/${token}${mediaParam}*
+  mediaRange: |-
+    ([*]/[*]|${token}]/[*]|${token}/${token})${mediaParam}*
+  mediaRangePair: |-
+    ${mediaRange})\s*,\s*${mediaRange}
+  mediaRanges: |-
+    ${mediaRange}|${mediaRangePair}
+  location: |-
+    path|query|header|cookie
+    
+stringFormats:
+  commonMark:
+    description: |-
+      Indicates that tooling may process the value as CommonMark to produce rich text.
+    regex: ".*"
+  email:
+    description: |-
+      An email address. Too complex for a regex.
+    computed: true
+  expresion:
+    description: |-
+
+    computed: true
+  extensionName:
+    description: |-
+      An object property that is treated as a specification extension.
+    regex:
+      "x-.*"
+  httpHeader:
+    description: |-
+      An HTTP header name. See https://tools.ietf.org/html/rfc7230#appendix-B.
+    regexName: token
+  httpStatus:
+    description: |-
+      Allowed keys in a Responses object. Validators are encouraged to recognize likely typos (e.g. using lower-case 'x') and calling them out in
+      validation messages, rather than treating them as generic unrecognized properties.
+    regex: "[1-5][0-9X]{2}"
+  mediaRange:
+    description: |-
+      A media range (which includes a non-wildcarded media type)
+    regexName: mediaRange
+  mediaRanges:
+    description: |-
+      A media range (which includes a non-wildcarded media type), or a pair of them separated by a comma
+    regexName: mediaRanges
+  mediaType:
+    description: |-
+      A media type, in the syntax described in the 'media-type' terminal in https://tools.ietf.org/html/rfc7231#appendix-D.
+    regexName: mediaType
+  name:
+    description: |-
+      Names of individual objects appearing in the maps that comprise the Components object. Copied from the specification, except without anchors
+      (since that's implicit in this document)'
+    regex: "[a-zA-Z0-9\\.\\-_]+"
+  parameterName:
+    description: |-
+      A simple parameter name, or a location-qualified parameter name
+    regex: "(${location}.)?${token}"
+  path:
+    description: |-
+      A key in the Paths object.
+    regex: "/.*"
+  reference:
+    description: |-
+      A JSON Reference
+    computed: true
+  url:
+    descripption: |-
+      A URL string.
+    computed: true
+  xmlName:
+    description: |-
+      A name that adheres to the syntax for an XML "NCName"
+    computed: true
+
+notes:
+  - id: NAMING_ISSUES
+    description: |-
+      There are many places in the specification where various external naming standards may come into play, e.g.
+
+      * Media Type (keys in a MediaType map)
+      * HTTP Header (names of Parameter and Header objects)
+      * Cookie (parameter names)
+      * URL query parameter (parameter names)
+      * XML NCName (name and prefix fields in an XML object)
+      * JSON Object property (schema property names)
+      * others?
+
+      It probably is impossible to accept all names that are allowed by these external standards, in all contexts where they are relevant, since a
+      single name may appear in multiple contexts (e.g. a schema property name configured in an accompanying XML object). It might be worthwhile
+      nailing down a reasonable recommended naming syntax for the various contexts where names appear. Validators might issue warnings instead of
+      errors when names do not comply to these requirements, and tools would do the best they can in the presence of nonconforming names. Sticking to
+      the recommendations should result in greater reliability and fewer surprises when working with the model.

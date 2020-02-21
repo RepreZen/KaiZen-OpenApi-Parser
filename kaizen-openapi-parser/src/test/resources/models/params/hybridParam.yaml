@@ -10,6 +10,8 @@ paths:
       - in: path
         name: params
         required: true
+        schema:
+          type: string
       responses:
         200:
           description: Ok

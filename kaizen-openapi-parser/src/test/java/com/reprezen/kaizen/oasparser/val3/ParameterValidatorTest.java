@@ -42,6 +42,15 @@ public class ParameterValidatorTest {
 	}
 
 	@Test
+	public void shouldFail_OnInValidParamType() throws Exception {
+		OpenApi3 model = new OpenApi3Parser().parse(getClass().getResource("/models/params/invalidParamType.yaml"), true);
+
+		assertEquals(1, model.getValidationItems().size());
+		assertEquals("Exactly one of schema|content must be present", model.getValidationItems().iterator().next().getMsg() );
+		assertFalse(model.isValid());
+	}
+
+	@Test
 	public void shouldAllow_HybridPathParam() throws Exception {
 		OpenApi3 model = new OpenApi3Parser().parse(getClass().getResource("/models/params/hybridParam.yaml"), true);
 

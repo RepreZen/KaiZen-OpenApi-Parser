@@ -9,6 +9,8 @@ paths:
       parameters:
       - in: path
         name: id
+        schema:
+          type: string
       responses:
         200:
           description: Ok

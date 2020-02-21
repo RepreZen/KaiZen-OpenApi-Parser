@@ -1,7 +1,7 @@
-<!-- Copyright (c) 2017 ModelSolv, Inc. and others. All rights reserved. 
-	This program and the accompanying materials are made available under the 
-	terms of the Eclipse Public License v1.0 which accompanies this distribution, 
-	and is available at http://www.eclipse.org/legal/epl-v10.html Contributors: 
+<!-- Copyright (c) 2017 ModelSolv, Inc. and others. All rights reserved.
+	This program and the accompanying materials are made available under the
+	terms of the Eclipse Public License v1.0 which accompanies this distribution,
+	and is available at http://www.eclipse.org/legal/epl-v10.html Contributors:
 	ModelSolv, Inc. - initial API and implementation and/or initial documentation -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
@@ -87,6 +87,11 @@
 			<groupId>com.sun.mail</groupId>
 			<artifactId>javax.mail</artifactId>
 			<version>1.6.1</version>
+		</dependency>
+		<dependency>
+		    <groupId>javax.annotation</groupId>
+		    <artifactId>javax.annotation-api</artifactId>
+		    <version>1.3.2</version>
 		</dependency>
 		<!-- tests -->
 		<dependency>
@@ -241,7 +246,7 @@
 									<artifacts>
 										<artifact>
 											<id>com.reprezen.jsonoverlay:jsonoverlay:${json-overlay-version}</id>
-											<!-- early verssions of this artifact have bundle manifests that 
+											<!-- early verssions of this artifact have bundle manifests that
 												we now ignore -->
 											<override>true</override>
 											<source>false</source>
@@ -266,7 +271,7 @@
 												</Export-Package>
 											</instructions>
 											<excludes>
-												<!-- following are only required for model class generation, 
+												<!-- following are only required for model class generation,
 													which is generally not done at runtime -->
 												<exclude>commons-cli</exclude>
 												<exclude>com.github.javaparser</exclude>
@@ -277,7 +282,7 @@
 										</artifact>
 										<artifact>
 											<id>com.reprezen.kaizen:openapi-parser:${project.version}</id>
-											<!-- early verssions of this artifact have bundle manifests that 
+											<!-- early verssions of this artifact have bundle manifests that
 												we now ignore -->
 											<override>true</override>
 											<source>false</source>
@@ -298,7 +303,7 @@
 												<!-- this is specified explicitly below -->
 												<exclude>com.reprezen.jsonoverlay:jsonoverlay</exclude>
 												<exclude>com.google.guava</exclude>
-												<!-- following are only required for model class generation, 
+												<!-- following are only required for model class generation,
 													which is generally not done at runtime -->
 												<exclude>commons-cli</exclude>
 												<exclude>com.github.javaparser</exclude>
@@ -374,7 +379,7 @@
 				<configuration>
 					<tagNameFormat>v@{project.version}</tagNameFormat>
 					<autoVersionSubmodules>true</autoVersionSubmodules>
-					<!-- We don't use release:perform - deployment is done in TeamCity. 
+					<!-- We don't use release:perform - deployment is done in TeamCity.
 						This just makes an errant perform operation harmless -->
 					<goals>clean</goals>
 				</configuration>

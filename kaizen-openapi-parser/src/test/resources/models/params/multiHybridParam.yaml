@@ -10,9 +10,13 @@ paths:
       - in: path
         name: customerID
         required: true
+        schema:
+          type: string
       - in: path
         name: orderID
         required: true
+        schema:
+          type: integer
       responses:
         200:
           description: Ok

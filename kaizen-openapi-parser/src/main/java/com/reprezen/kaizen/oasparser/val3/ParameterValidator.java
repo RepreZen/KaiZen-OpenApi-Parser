@@ -54,9 +54,11 @@ public class ParameterValidator extends ObjectValidatorBase<Parameter> {
 		checkRequired(parameter);
 		validateStringField(F_style, false, Regexes.STYLE_REGEX);
 		checkAllowReserved(parameter);
-		// TODO Q: Should schema be required in parameter object?
-		validateField(F_schema, false, Schema.class, new SchemaValidator());
-		validateMapField(F_contentMediaTypes, false, false, MediaType.class, new MediaTypeValidator());
+		Overlay<?> schemaOverlay = validateField(F_schema, false, Schema.class, new SchemaValidator());
+		Overlay<?> contentOverlay = validateMapField(F_contentMediaTypes, false, false, MediaType.class,
+				new MediaTypeValidator());
+		// Schema xor content must be present
+		checkSchemaContentXor(schemaOverlay,contentOverlay);
 		validateExtensions(parameter.getExtensions());
 	}
 
@@ -98,7 +100,20 @@ public class ParameterValidator extends ObjectValidatorBase<Parameter> {
 				&& Overlay.getMapOverlay(examples).size() > 0;
 		boolean examplePresent = example != null && example.isPresent();
 		if (examplesPresent && examplePresent) {
-			results.addError("ExmplExclusion|The 'example' and 'exmaples' properties may not both appear", value);
+			results.addError("ExmplExclusion|The 'example' and 'examples' properties may not both appear", value);
+		}
+	}
+
+	private void checkSchemaContentXor(Overlay<?> schemaOverlay, Overlay<?> contentOverlay) {
+		int count = 0;
+		if (schemaOverlay != null && schemaOverlay.isPresent()) {
+			count++;
+		}
+		if (contentOverlay != null && contentOverlay.isPresent()) {
+			count++;
+		}
+		if (count != 1) {
+			results.addError("Exactly one of schema|content must be present", value);
 		}
 	}
 }

@@ -411,6 +411,6 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<nexus.autorelease>false</nexus.autorelease>
 		<nexus.autodrop>true</nexus.autodrop>
-		<jackson-version>2.9.8</jackson-version>
+		<jackson-version>2.9.10.8</jackson-version>
 	</properties>
 </project>
